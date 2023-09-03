@@ -134,9 +134,7 @@ public class TitleManager : MonoBehaviour
     {
         title.SetActive(false);
         start_Btn.SetActive(false);
-        //ServerConnect();
-        //TODO : 추후 서버 접속 후 수정
-        LoginSuccess();
+        ServerConnect();
     }
     
     void ServerConnect()
@@ -174,6 +172,7 @@ public class TitleManager : MonoBehaviour
     
     IEnumerator Login()
     {
+        Debug.Log(loginID.text);
         Login_Save(loginRememberMe);
         loginBtn.interactable = false;
         WWWForm form = new WWWForm();
