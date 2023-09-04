@@ -8,6 +8,7 @@ using UnityEngine.UI;
 using UnityEngine.Audio;
 using UnityEngine.Networking;
 using GoogleMobileAds.Api;
+using Newtonsoft.Json.Linq;
 using Sirenix.OdinInspector;
 using UnityEngine.SceneManagement;
 
@@ -134,9 +135,7 @@ public class TitleManager : MonoBehaviour
     {
         title.SetActive(false);
         start_Btn.SetActive(false);
-        //ServerConnect();
-        //TODO : 추후 서버 접속 후 수정
-        LoginSuccess();
+        ServerConnect();
     }
     
     void ServerConnect()
@@ -176,11 +175,14 @@ public class TitleManager : MonoBehaviour
     {
         Login_Save(loginRememberMe);
         loginBtn.interactable = false;
+        
         WWWForm form = new WWWForm();
         form.AddField("ID", loginID.text);
         form.AddField("PW", loginPW.text);
-        UnityWebRequest request = UnityWebRequest.Post("enddl2560.dothome.co.kr/Yeppi/Login.php", form);
+        
+        UnityWebRequest request = UnityWebRequest.Post("http://enddl2560.dothome.co.kr/Capstone/Login.php", form);
         yield return request.SendWebRequest();
+        
         loginBtn.interactable = true;
 
         if (request.downloadHandler.text.Split('|')[0] == "로그인 완료")
@@ -195,7 +197,7 @@ public class TitleManager : MonoBehaviour
 
         request.Dispose();
     }
-    
+
     void LoginSuccess()
     {
         Debug.Log("로그인 완료");
