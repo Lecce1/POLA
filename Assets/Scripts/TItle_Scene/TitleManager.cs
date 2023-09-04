@@ -124,8 +124,9 @@ public class TitleManager : MonoBehaviour
 
     void Start()
     {
+        PlayerPrefs.DeleteAll();
         Application.targetFrameRate = 144;
-        versionText.text = "버전 : " + Application.version.ToString();
+        versionText.text = "버전 : " + Application.version;
         backStack = new Stack<GameObject>();
         Login_Load(loginRememberMe);
     }
@@ -172,14 +173,16 @@ public class TitleManager : MonoBehaviour
     
     IEnumerator Login()
     {
-        Debug.Log(loginID.text);
         Login_Save(loginRememberMe);
         loginBtn.interactable = false;
+        
         WWWForm form = new WWWForm();
         form.AddField("ID", loginID.text);
         form.AddField("PW", loginPW.text);
-        UnityWebRequest request = UnityWebRequest.Post("enddl2560.dothome.co.kr/Yeppi/Login.php", form);
+        
+        UnityWebRequest request = UnityWebRequest.Post("http://enddl2560.dothome.co.kr/Capstone/Login.php", form);
         yield return request.SendWebRequest();
+        
         loginBtn.interactable = true;
 
         if (request.downloadHandler.text.Split('|')[0] == "로그인 완료")
@@ -194,7 +197,7 @@ public class TitleManager : MonoBehaviour
 
         request.Dispose();
     }
-    
+
     void LoginSuccess()
     {
         Debug.Log("로그인 완료");
