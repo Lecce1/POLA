@@ -2,16 +2,21 @@ using System;
 using System.Collections;
 using System.Collections.Generic;
 using System.Security.Cryptography.X509Certificates;
+using Cinemachine;
 using UnityEditor;
 using UnityEngine;
 
+[RequireComponent(typeof(PlayerStats))]
 public class PlayerController : MonoBehaviour
 {
     [SerializeField] private float xValue = 1.0f;
     [SerializeField] private float jumpPower = 5.0f;
+
+    public PlayerStats stats { get; protected set; }
     private int jumpConunt = 0;
     private int clickNum = 0;
     private Rigidbody rigid;
+    private CinemachineVirtualCamera cam;
     private MeshRenderer _meshRenderer;
     void Start()
     {
@@ -28,22 +33,24 @@ public class PlayerController : MonoBehaviour
 
     private void Moving()
     {
-        if (xValue >= 10.0f)
+        rigid.AddForce(new Vector3(xValue, 0, 0) * Time.deltaTime);
+        if (rigid.velocity.x >= 15)
         {
-            xValue = 10.0f;
-            transform.Translate(xValue * Time.deltaTime, 0, 0, Space.World);
+            var v = rigid.velocity;
+            v.x = 15;
+            rigid.velocity = v;
         }
-        else
-        {
-            transform.Translate(xValue * Time.deltaTime, 0, 0, Space.World);
-            xValue += 0.005f;
-        }
+        Debug.Log(rigid.velocity.x);
+        
     }
 
     public void OnJump()
     {
         if (jumpConunt != 0)
         {
+            var v = rigid.velocity;
+            v.y = 0;
+            rigid.velocity = v;
             rigid.AddForce(Vector3.up * jumpPower, ForceMode.Impulse);
             jumpConunt -= 1;
         }
