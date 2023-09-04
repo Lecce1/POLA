@@ -8,7 +8,6 @@ using UnityEngine.UI;
 using UnityEngine.Audio;
 using UnityEngine.Networking;
 using GoogleMobileAds.Api;
-using Newtonsoft.Json.Linq;
 using Sirenix.OdinInspector;
 using UnityEngine.SceneManagement;
 
@@ -125,8 +124,9 @@ public class TitleManager : MonoBehaviour
 
     void Start()
     {
+        PlayerPrefs.DeleteAll();
         Application.targetFrameRate = 144;
-        versionText.text = "버전 : " + Application.version.ToString();
+        versionText.text = "버전 : " + Application.version;
         backStack = new Stack<GameObject>();
         Login_Load(loginRememberMe);
     }
@@ -173,7 +173,6 @@ public class TitleManager : MonoBehaviour
     
     IEnumerator Login()
     {
-        Debug.Log(loginID.text);
         Login_Save(loginRememberMe);
         loginBtn.interactable = false;
         
