@@ -1,12 +1,10 @@
 using System;
-using System.Collections;
 using System.Collections.Generic;
 using System.Net.Sockets;
 using System.IO;
 using UnityEngine;
 using UnityEngine.UI;
 using UnityEngine.Audio;
-using UnityEngine.Networking;
 using GoogleMobileAds.Api;
 using Sirenix.OdinInspector;
 using UnityEngine.SceneManagement;
@@ -91,10 +89,6 @@ public class TitleManager : MonoBehaviour
     [SerializeField]
     private bool isServer = false;
     [FoldoutGroup("정보")]
-    [Title("마지막 캔버스")]
-    [SerializeField]
-    private string lastCanvas;
-    [FoldoutGroup("정보")]
     [Title("에러 종류")]
     [SerializeField]
     private string errorType;
@@ -124,7 +118,6 @@ public class TitleManager : MonoBehaviour
 
     void Start()
     {
-        PlayerPrefs.DeleteAll();
         Application.targetFrameRate = 144;
         versionText.text = "버전 : " + Application.version;
         backStack = new Stack<GameObject>();
@@ -155,7 +148,10 @@ public class TitleManager : MonoBehaviour
             }
             else if (loginID.text != "" && loginPW.text != "")
             {
-                StartCoroutine(Login());
+                Login_Save(loginRememberMe);
+                loginBtn.interactable = false;
+                StartCoroutine(HttpServerManager.instance.Login(loginID.text, loginPW.text));
+                loginBtn.interactable = true;
             }
 
             loginBtn.interactable = true;
@@ -170,41 +166,14 @@ public class TitleManager : MonoBehaviour
             Invoke("ServerConnect", 1.0f);
         }
     }
-    
-    IEnumerator Login()
-    {
-        Login_Save(loginRememberMe);
-        loginBtn.interactable = false;
-        
-        WWWForm form = new WWWForm();
-        form.AddField("ID", loginID.text);
-        form.AddField("PW", loginPW.text);
-        
-        UnityWebRequest request = UnityWebRequest.Post("http://enddl2560.dothome.co.kr/Capstone/Login.php", form);
-        yield return request.SendWebRequest();
-        
-        loginBtn.interactable = true;
 
-        if (request.downloadHandler.text.Split('|')[0] == "로그인 완료")
-        {
-            nickName = request.downloadHandler.text.Split('|')[1];
-            LoginSuccess();
-        }
-        else
-        {
-            LoginFail();
-        }
-
-        request.Dispose();
-    }
-
-    void LoginSuccess()
+    public void LoginSuccess()
     {
         Debug.Log("로그인 완료");
         SceneManager.LoadScene("Loading");
     }
 
-    void LoginFail()
+    public void LoginFail()
     {
         Debug.Log("로그인 실패");
         login.SetActive(false);
@@ -218,7 +187,9 @@ public class TitleManager : MonoBehaviour
 
     public void LoginBtn()
     {
-        StartCoroutine(Login());
+        loginBtn.interactable = false;
+        StartCoroutine(HttpServerManager.instance.Login(loginID.text, loginPW.text));
+        loginBtn.interactable = true;
     }
 
     public void LoginSignUp()
@@ -230,63 +201,40 @@ public class TitleManager : MonoBehaviour
     
     public void SignUpBtn()
     {
-        StartCoroutine(SignUp());
+        StartCoroutine(HttpServerManager.instance.SignUp(signUpID.text, signUpPW.text, signUpNick.text));
     }
 
-    IEnumerator SignUp()
-    {
-        WWWForm form = new WWWForm();
-        form.AddField("ID", signUpID.text);
-        form.AddField("PW", signUpPW.text);
-        form.AddField("NICK", signUpNick.text);
-        UnityWebRequest request = UnityWebRequest.Post("http://enddl2560.dothome.co.kr/Capstone/SignUp.php", form);
-        yield return request.SendWebRequest();
-
-        if (request.downloadHandler.text == "회원가입 완료")
-        {
-            RegisterSuccess();
-        }
-        else
-        {
-            RegisterFail(request.downloadHandler.text);
-        }
-        request.Dispose();
-    }
-
-    private void RegisterSuccess()
+    public void RegisterSuccess()
     {
         signUp.SetActive(false);
         login.SetActive(true);
         Debug.Log("회원가입 완료");
     }
 
-    private void RegisterFail(string type)
+    public void RegisterFail(string type)
     {
-        Debug.Log("회원가입 실패");
+        Debug.Log($"회원가입 실패 : {type}" );
         signUp.SetActive(false);
         error.SetActive(true);
 
         if (type == "아이디 중복")
         {
-            errorContent.text = "Your ID is already registered. Please try again.";
+            errorContent.text = "이미 존재하는 아이디 입니다.";
         }
         else if (type == "닉네임 중복")
         {
-            errorContent.text = "Your Nickname is already registered. Please try again.";
+            errorContent.text = "이미 존재하는 닉네임 입니다.";
         }
         else if (type == "아이디 조건")
         {
-            errorContent.text = "The ID field must be at least 8 characters";
+            errorContent.text = "비밀번호를 최소 8자 이상 입력해주세요.";
         }
         else if (type == "비밀번호 조건")
         {
-            errorContent.text = "The password field must be at least 9 characters";
+            errorContent.text = "비밀번호를 최소 9자 이상 입력해주세요.";
         }
 
         errorType = "signUp";
-        signUpID.text = null;
-        signUpPW.text = null;
-        signUpNick.text = null;
         backStack.Push(error);
     }
 

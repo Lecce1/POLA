@@ -3,10 +3,7 @@ using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.SceneManagement;
 using UnityEngine.UI;
-//using DG.Tweening;
 using Sirenix.OdinInspector;
-using TMPro;
-using UnityEngine.Serialization;
 
 public class LoadingManager : MonoBehaviour
 {
@@ -30,6 +27,10 @@ public class LoadingManager : MonoBehaviour
     [Title("씬")]
     public string sceneName;
     [FoldoutGroup("기타")]
+    [Title("로딩 이미지")]
+    [SerializeField]
+    private Image loadingIcon;
+    [FoldoutGroup("기타")]
     [Title("로딩 텍스트")]
     [SerializeField]
     private Text loadingText;
@@ -42,9 +43,10 @@ public class LoadingManager : MonoBehaviour
     [SerializeField]
     private int currentProgress;
 
-    private void Start()
+    void Start()
     {
         StartCoroutine(LoadScene());
+        StartCoroutine(Rotate());
         BackGround();
         Tip();
     }
@@ -112,5 +114,12 @@ public class LoadingManager : MonoBehaviour
                 }
             }
         }
+    }
+
+    IEnumerator Rotate()
+    {
+        
+        
+        yield return null;
     }
 }
