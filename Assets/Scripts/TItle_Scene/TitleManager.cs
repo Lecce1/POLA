@@ -239,7 +239,7 @@ public class TitleManager : MonoBehaviour
         form.AddField("ID", signUpID.text);
         form.AddField("PW", signUpPW.text);
         form.AddField("NICK", signUpNick.text);
-        UnityWebRequest request = UnityWebRequest.Post("enddl2560.dothome.co.kr/Yeppi/SignUp.php", form);
+        UnityWebRequest request = UnityWebRequest.Post("http://enddl2560.dothome.co.kr/Capstone/SignUp.php", form);
         yield return request.SendWebRequest();
 
         if (request.downloadHandler.text == "회원가입 완료")
