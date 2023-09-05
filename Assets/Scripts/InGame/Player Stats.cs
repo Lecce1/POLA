@@ -28,7 +28,7 @@ namespace InGame
 
         [FoldoutGroup("일반 스텟")] 
         [Title("패널")] 
-        public float boostGauge = 2;
+        public float boostGauge = 2f;
 
         [FoldoutGroup("색깔 스텟")]
         [Title("패널")]
