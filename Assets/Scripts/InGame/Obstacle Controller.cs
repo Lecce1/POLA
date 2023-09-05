@@ -1,18 +1,15 @@
-using System;
-using System.Collections;
-using System.Collections.Generic;
 using UnityEngine;
 using Random = UnityEngine.Random;
 
 public class ObstacleController : MonoBehaviour
 {
-    private Color[] obstacleColor = { Color.red, Color.blue, Color.black};
-    private MeshRenderer _meshRenderer;
+    private Color[] obstacleColor;
+    private MeshRenderer meshRenderer;
     
-    // Start is called before the first frame update
     void Start()
     {
-        _meshRenderer = gameObject.GetComponent<MeshRenderer>();
-        _meshRenderer.material.color = obstacleColor[Random.Range(0,3)];
+        obstacleColor = GameObject.Find("Player").GetComponent<PlayerController>().playerColors;
+        meshRenderer = gameObject.GetComponent<MeshRenderer>();
+        meshRenderer.material.color = obstacleColor[Random.Range(0,obstacleColor.Length)];
     }
 }

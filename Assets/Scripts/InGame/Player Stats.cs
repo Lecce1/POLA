@@ -1,17 +1,29 @@
 ﻿using UnityEngine;
+using Sirenix.OdinInspector;
 
 namespace InGame
 {
-    [CreateAssetMenu(fileName = "NewPlayerStats", menuName = "My Player/New Player Stats")]
+    [CreateAssetMenu(fileName = "PlayerStats", menuName = "Player/Player Stats")]
     public class PlayerStats : ScriptableObject
     {
-        [Header("General Stats")] 
+        [FoldoutGroup("일반 스텟")]
+        [Title("패널")]
         public float jumpForce = 10f;
+        
+        [FoldoutGroup("일반 스텟")]
+        [Title("패널")]
         public float maxSpeed = 15f;
+        
+        [FoldoutGroup("일반 스텟")]
+        [Title("패널")]
         public int maxJump = 2;
+        
+        [FoldoutGroup("일반 스텟")]
+        [Title("패널")]
         public float speedAccel = 100f;
 
-        [Header("Color Stats")] 
+        [FoldoutGroup("색깔 스텟")]
+        [Title("패널")]
         public int colorIndex = 0;
     }
 }

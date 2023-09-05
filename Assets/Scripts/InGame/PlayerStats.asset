@@ -9,11 +9,11 @@ MonoBehaviour:
   m_GameObject: {fileID: 0}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: aa62a1c4d98e4356ae0e973e4569b1ff, type: 3}
-  m_Name: NewPlayerStats
+  m_Script: {fileID: 11500000, guid: df3decfe555819e479f74f1f05d19551, type: 3}
+  m_Name: PlayerStats
   m_EditorClassIdentifier: 
-  jumpForce: 13
-  maxSpeed: 0
+  jumpForce: 10
+  maxSpeed: 20
   maxJump: 2
-  speedAccel: 500
-  colorIndex: 1
+  speedAccel: 300
+  colorIndex: 0
