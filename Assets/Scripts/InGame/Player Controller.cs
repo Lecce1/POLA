@@ -1,28 +1,25 @@
-using System;
-using System.Collections;
-using System.Collections.Generic;
-using System.Security.Cryptography.X509Certificates;
 using Cinemachine;
-using UnityEditor;
+using InGame;
 using UnityEngine;
 
-[RequireComponent(typeof(PlayerStats))]
 public class PlayerController : MonoBehaviour
 {
-    [SerializeField] private float xValue = 1.0f;
-    [SerializeField] private float jumpPower = 5.0f;
+    public Rigidbody rigid { get; protected set; }
+    
+    public int jumpCount { get; protected set; }
 
-    public PlayerStats stats { get; protected set; }
-    private int jumpConunt = 0;
-    private int clickNum = 0;
-    private Rigidbody rigid;
-    private CinemachineVirtualCamera cam;
+    public Color[] playerColors;
+
+    public PlayerStats stats;
+    
     private MeshRenderer _meshRenderer;
+
     void Start()
     {
         rigid = gameObject.GetComponent<Rigidbody>();
-        _meshRenderer = gameObject.GetComponent<MeshRenderer>(); 
-        jumpConunt = 2;
+        _meshRenderer = gameObject.GetComponent<MeshRenderer>();
+        jumpCount = 0;
+        stats.maxSpeed = 15f;
     }
 
     // Update is called once per frame
@@ -33,60 +30,40 @@ public class PlayerController : MonoBehaviour
 
     private void Moving()
     {
-        rigid.AddForce(new Vector3(xValue, 0, 0) * Time.deltaTime);
-        if (rigid.velocity.x >= 15)
+        rigid.AddForce(new Vector3(stats.speedAccel, 0, 0) * Time.deltaTime, ForceMode.Force);
+        if (rigid.velocity.x >= stats.maxSpeed)
         {
             var v = rigid.velocity;
-            v.x = 15;
+            v.x = stats.maxSpeed;
             rigid.velocity = v;
         }
-        Debug.Log(rigid.velocity.x);
         
     }
 
     public void OnJump()
     {
-        if (jumpConunt != 0)
+        if (jumpCount < stats.maxJump)
         {
             var v = rigid.velocity;
             v.y = 0;
             rigid.velocity = v;
-            rigid.AddForce(Vector3.up * jumpPower, ForceMode.Impulse);
-            jumpConunt -= 1;
+            rigid.AddForce(Vector3.up * stats.jumpForce, ForceMode.Impulse);
+            jumpCount++;
         }
     }
 
     public void OnClick()
     {
-        if (clickNum % 3 == 0)
-        {
-            _meshRenderer.material.color = Color.red;
-        }
-        else if (clickNum % 3 == 1)
-        {
-            _meshRenderer.material.color = Color.blue;
-        }
-        else if (clickNum % 3 == 2)
-        {
-            _meshRenderer.material.color = Color.black;
-        }
-
-        clickNum += 1;
+        var idx = stats.colorIndex;
+        _meshRenderer.material.color = playerColors[idx];
+        stats.colorIndex = (++idx < playerColors.Length) ? idx : 0;
     }
 
     private void OnCollisionEnter(Collision collision)
     {
         if (collision.gameObject.layer == LayerMask.NameToLayer("Ground"))
         {
-            jumpConunt = 2;
-        }
-
-        if (collision.gameObject.tag == "Obstacle" &&
-            collision.gameObject.GetComponent<MeshRenderer>().material.color != _meshRenderer.material.color)
-        {
-            Debug.Log("Die");
-            xValue = 0;
-            Destroy(gameObject, 3);
+            jumpCount = 0;
         }
     }
 
@@ -96,7 +73,7 @@ public class PlayerController : MonoBehaviour
             collisionInfo.gameObject.GetComponent<MeshRenderer>().material.color != _meshRenderer.material.color)
         {
             Debug.Log("Die");
-            xValue = 0;
+            stats.maxSpeed = 0;
             Destroy(gameObject, 3);
         }
     }
