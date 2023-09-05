@@ -3,12 +3,12 @@ using Cinemachine;
 
 public class CameraController : MonoBehaviour
 {
-    [SerializeField] private GameObject player;
+    [SerializeField] private Rigidbody playerRigid;
     [SerializeField] private CinemachineVirtualCamera VCM;
     
     void Start()
     {
-        player = GameObject.Find("Player");
+        playerRigid = GameObject.Find("Player").GetComponent<PlayerController>().rigid;
         VCM = gameObject.GetComponent<CinemachineVirtualCamera>();
         VCM.m_Lens.FieldOfView = 40f;
     }
@@ -20,8 +20,9 @@ public class CameraController : MonoBehaviour
 
     public void PovValue()
     {
-        var speed = player.gameObject.GetComponent<PlayerController>().rigid.velocity.x;
-        var maxSpeed = player.gameObject.GetComponent<PlayerController>().stats.maxSpeed;
+        if (playerRigid == null) return;
+        
+        var speed = playerRigid.velocity.x;
 
         VCM.m_Lens.FieldOfView = speed + 40;
     }

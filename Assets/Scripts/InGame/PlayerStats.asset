@@ -15,5 +15,7 @@ MonoBehaviour:
   jumpForce: 10
   maxSpeed: 20
   maxJump: 2
-  speedAccel: 300
-  colorIndex: 0
+  speedAccel: 500
+  isDead: 1
+  boostGauge: 2
+  colorIndex: 1

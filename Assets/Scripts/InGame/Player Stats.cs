@@ -21,6 +21,14 @@ namespace InGame
         [FoldoutGroup("일반 스텟")]
         [Title("패널")]
         public float speedAccel = 100f;
+        
+        [FoldoutGroup("일반 스텟")]
+        [Title("패널")]
+        public bool isDead = false;
+
+        [FoldoutGroup("일반 스텟")] 
+        [Title("패널")] 
+        public float boostGauge = 2;
 
         [FoldoutGroup("색깔 스텟")]
         [Title("패널")]

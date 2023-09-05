@@ -15,23 +15,55 @@ public class PlayerController : MonoBehaviour
         meshRenderer = GetComponent<MeshRenderer>();
         jumpCount = 0;
         stats.maxSpeed = 20.0f;
+        stats.isDead = false;
     }
     
     void FixedUpdate()
     {
         Moving();
+        Boost();
     }
 
     private void Moving()
     {
-        rigid.AddForce(new Vector3(stats.speedAccel, 0, 0) * Time.deltaTime, ForceMode.Force);
-        
-        if (rigid.velocity.x >= stats.maxSpeed)
+        Debug.Log(rigid.velocity.x);
+        if (stats.isDead)
         {
-            var velocity = rigid.velocity;
-            velocity.x = stats.maxSpeed;
-            rigid.velocity = velocity;
+            rigid.velocity = Vector3.zero;
+            return;
         }
+        
+        if (rigid.velocity.x < stats.maxSpeed)
+        {  
+            rigid.AddForce(Vector3.right * stats.speedAccel * Time.deltaTime, ForceMode.Force);
+        }
+
+        if (transform.position.y < -5) Die();
+    }
+
+    private void Die()
+    {
+        stats.isDead = true;
+        rigid.useGravity = false;
+        Destroy(gameObject, 3);
+    }
+
+    private void Boost()
+    {
+        if (stats.boostGauge > 0 && Input.GetKey(KeyCode.Space))
+        {
+            stats.maxSpeed = 30f;
+            stats.speedAccel = 1500f;
+            stats.boostGauge -= Time.deltaTime;
+        }
+        else
+        {
+            stats.boostGauge += Time.deltaTime;
+            stats.maxSpeed = 20f;
+            stats.speedAccel = 500f;
+        }
+
+        stats.boostGauge = Mathf.Clamp(stats.boostGauge, 0, 2);
     }
 
     public void OnJump()
@@ -46,7 +78,7 @@ public class PlayerController : MonoBehaviour
         }
     }
 
-    public void OnClick()
+    public void OnColorChanged()
     {
         var idx = stats.colorIndex;
         meshRenderer.material.color = playerColors[idx];
@@ -55,9 +87,10 @@ public class PlayerController : MonoBehaviour
 
     private void OnCollisionEnter(Collision collision)
     {
-        if (collision.gameObject.layer == LayerMask.NameToLayer("Ground"))
+        if (Physics.Raycast(transform.position, Vector3.down + Vector3.right * 0.6f, 1f) 
+            && collision.gameObject.layer == LayerMask.NameToLayer("Ground") && !stats.isDead)
         {
-            jumpCount = 0;
+            jumpCount = 0;   
         }
     }
 
@@ -66,9 +99,7 @@ public class PlayerController : MonoBehaviour
         if (collisionInfo.gameObject.CompareTag("Obstacle") &&
             collisionInfo.gameObject.GetComponent<MeshRenderer>().material.color != meshRenderer.material.color)
         {
-            Debug.Log("Die");
-            stats.maxSpeed = 0;
-            Destroy(gameObject, 3);
+            Die();
         }
     }
 }
