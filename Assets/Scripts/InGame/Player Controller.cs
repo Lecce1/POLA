@@ -1,9 +1,6 @@
-using System;
 using System.Collections;
-using System.Diagnostics;
 using InGame;
 using UnityEngine;
-using Debug = UnityEngine.Debug;
 
 public class PlayerController : MonoBehaviour
 {
@@ -56,29 +53,17 @@ public class PlayerController : MonoBehaviour
 
     private void Boost()
     {
-        Debug.Log(stats.boostGauge);
-        if (Input.GetKey(KeyCode.Space))
+        if (stats.boostGauge > 0 && Input.GetKey(KeyCode.Space))
         {
-            pressedBoostImage.fillAmount += Time.deltaTime;
-            if (stats.boostGauge > 0 && pressedBoostImage.fillAmount == 1)
-            {
-                stats.maxSpeed = 30f;
-                stats.speedAccel = 1500f;
-                stats.boostGauge -= Time.deltaTime;
-                boostGaugeImage.fillAmount -= Time.deltaTime;
-            }
-            if (stats.boostGauge == 0)
-            {
-                rigid.velocity = Vector3.zero;
-            }
+            stats.maxSpeed = 30f;
+            stats.speedAccel = 1500f;
+            stats.boostGauge -= Time.deltaTime;
         }
         else
         {
             stats.boostGauge += Time.deltaTime;
             stats.maxSpeed = 20f;
             stats.speedAccel = 500f;
-            boostGaugeImage.fillAmount += Time.deltaTime;
-            pressedBoostImage.fillAmount = 0;
         }
 
         stats.boostGauge = Mathf.Clamp(stats.boostGauge, 0, 2);
@@ -95,7 +80,6 @@ public class PlayerController : MonoBehaviour
             velocity.y = jumpForce;
             rigid.velocity = velocity;
             jumpForce -= Time.deltaTime * jumpForce * inverseJumpLength;
-            Debug.Log(jumpForce < 0);
             yield return null;
         }
     }
@@ -128,7 +112,6 @@ public class PlayerController : MonoBehaviour
         Ray ray = new Ray(transform.position, transform.right);
         RaycastHit hit;
         
-        Gizmos.color = Color.red;
         if (Physics.Raycast(ray, out hit, maxDistance))
         {
             if (hit.transform.CompareTag("Breakable"))
