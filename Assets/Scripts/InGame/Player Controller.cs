@@ -1,13 +1,19 @@
+using System;
+using System.Collections;
+using System.Diagnostics;
 using InGame;
 using UnityEngine;
+using Debug = UnityEngine.Debug;
 
 public class PlayerController : MonoBehaviour
 {
     public Rigidbody rigid { get; protected set; }
     public int jumpCount { get; protected set; }
+    public float jumpForce { get; protected set; }
     public Color[] playerColors;
     public PlayerStats stats;
     private MeshRenderer meshRenderer;
+    private bool isJumping;
 
     void Start()
     {
@@ -16,6 +22,7 @@ public class PlayerController : MonoBehaviour
         jumpCount = 0;
         stats.maxSpeed = 20.0f;
         stats.isDead = false;
+        jumpForce = stats.jumpForce;
     }
     
     void FixedUpdate()
@@ -26,7 +33,6 @@ public class PlayerController : MonoBehaviour
 
     private void Moving()
     {
-        Debug.Log(rigid.velocity.x);
         if (stats.isDead)
         {
             rigid.velocity = Vector3.zero;
@@ -66,16 +72,35 @@ public class PlayerController : MonoBehaviour
         stats.boostGauge = Mathf.Clamp(stats.boostGauge, 0, 2);
     }
 
-    public void OnJump()
+    IEnumerator Jump()
     {
-        if (jumpCount < stats.maxJump)
-        {
+        float pressedJumpStartTime = Time.time;
+        float inverseJumpLength = 1 / stats.jumpLength;
+        
+        while (Time.time - pressedJumpStartTime < stats.jumpLength && isJumping)
+        {  
             var velocity = rigid.velocity;
-            velocity.y = 0;
+            velocity.y = jumpForce;
             rigid.velocity = velocity;
-            rigid.AddForce(Vector3.up * stats.jumpForce, ForceMode.Impulse);
-            jumpCount++;
+            jumpForce -= Time.deltaTime * jumpForce * inverseJumpLength;
+            Debug.Log(jumpForce < 0);
+            yield return null;
         }
+    }
+
+    public void OnJumpButtonDown()
+    {
+        if (jumpCount >= stats.maxJump) return;
+
+        jumpForce = stats.jumpForce;
+        isJumping = true;
+        StartCoroutine(Jump());
+        jumpCount++;
+    }
+
+    public void OnJumpButtonUp()
+    {
+        isJumping = false;
     }
 
     public void OnColorChanged()
@@ -83,6 +108,22 @@ public class PlayerController : MonoBehaviour
         var idx = stats.colorIndex;
         meshRenderer.material.color = playerColors[idx];
         stats.colorIndex = ++idx < playerColors.Length ? idx : 0;
+    }
+    
+    public void OnAttackButtonClicked()
+    {
+        float maxDistance = 30f;
+        Ray ray = new Ray(transform.position, transform.right);
+        RaycastHit hit;
+        
+        Gizmos.color = Color.red;
+        if (Physics.Raycast(ray, out hit, maxDistance))
+        {
+            if (hit.transform.CompareTag("Breakable"))
+            {
+                Destroy(hit.transform.gameObject);
+            }
+        }
     }
 
     private void OnCollisionEnter(Collision collision)

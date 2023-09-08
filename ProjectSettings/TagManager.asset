@@ -6,6 +6,13 @@ TagManager:
   tags:
   - Ground
   - Obstacle
+  - RunningGameObstacle
+  - CannonBall
+  - SpeedPad
+  - JumpPad
+  - BasketBall
+  - Chariot
+  - Breakable
   layers:
   - Default
   - TransparentFX
