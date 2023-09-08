@@ -183,7 +183,7 @@ Camera:
     height: 1
   near clip plane: 0.3
   far clip plane: 1000
-  field of view: 60.12
+  field of view: 57.95492
   orthographic: 0
   orthographic size: 5
   m_Depth: -1
@@ -384,6 +384,8 @@ MonoBehaviour:
   - {r: 0, g: 0, b: 1, a: 1}
   - {r: 0, g: 0, b: 0, a: 1}
   stats: {fileID: 11400000, guid: d908d5b34aef4514ea6af067e624a0aa, type: 2}
+  boostGaugeImage: {fileID: 1831117836}
+  pressedBoostImage: {fileID: 637143907}
 --- !u!54 &200840657
 Rigidbody:
   m_ObjectHideFlags: 0
@@ -774,7 +776,7 @@ MonoBehaviour:
   m_LookAt: {fileID: 200840661}
   m_Follow: {fileID: 200840661}
   m_Lens:
-    FieldOfView: 60.12
+    FieldOfView: 57.95492
     OrthographicSize: 5
     NearClipPlane: 0.3
     FarClipPlane: 1000
@@ -807,6 +809,7 @@ MonoBehaviour:
   playerRigid: {fileID: 0}
   VCM: {fileID: 0}
 --- !u!1 &474267865
+--- !u!1 &637143905
 GameObject:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
@@ -1808,7 +1811,7 @@ Canvas:
   m_OverridePixelPerfect: 0
   m_SortingBucketNormalizedSize: 0
   m_VertexColorAlwaysGammaSpace: 0
-  m_AdditionalShaderChannelsFlag: 0
+  m_AdditionalShaderChannelsFlag: 25
   m_UpdateRectTransformForStandalone: 0
   m_SortingLayerID: 0
   m_SortingOrder: 0
@@ -1826,6 +1829,7 @@ RectTransform:
   m_ConstrainProportionsScale: 0
   m_Children:
   - {fileID: 379176230}
+  - {fileID: 732202158}
   m_Father: {fileID: 0}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0, y: 0}
@@ -2358,9 +2362,9 @@ MeshFilter:
 SceneRoots:
   m_ObjectHideFlags: 0
   m_Roots:
+  - {fileID: 119578277}
   - {fileID: 1092315524}
   - {fileID: 200840661}
+  - {fileID: 1251073297}
   - {fileID: 1358704292}
   - {fileID: 1199007159}
-  - {fileID: 1251073297}
-  - {fileID: 119578277}

@@ -56,17 +56,29 @@ public class PlayerController : MonoBehaviour
 
     private void Boost()
     {
-        if (stats.boostGauge > 0 && Input.GetKey(KeyCode.Space))
+        Debug.Log(stats.boostGauge);
+        if (Input.GetKey(KeyCode.Space))
         {
-            stats.maxSpeed = 30f;
-            stats.speedAccel = 1500f;
-            stats.boostGauge -= Time.deltaTime;
+            pressedBoostImage.fillAmount += Time.deltaTime;
+            if (stats.boostGauge > 0 && pressedBoostImage.fillAmount == 1)
+            {
+                stats.maxSpeed = 30f;
+                stats.speedAccel = 1500f;
+                stats.boostGauge -= Time.deltaTime;
+                boostGaugeImage.fillAmount -= Time.deltaTime;
+            }
+            if (stats.boostGauge == 0)
+            {
+                rigid.velocity = Vector3.zero;
+            }
         }
         else
         {
             stats.boostGauge += Time.deltaTime;
             stats.maxSpeed = 20f;
             stats.speedAccel = 500f;
+            boostGaugeImage.fillAmount += Time.deltaTime;
+            pressedBoostImage.fillAmount = 0;
         }
 
         stats.boostGauge = Mathf.Clamp(stats.boostGauge, 0, 2);
