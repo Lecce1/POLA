@@ -2504,8 +2504,8 @@ MonoBehaviour:
     m_PersistentCalls:
       m_Calls:
       - m_Target: {fileID: 2074499706}
-        m_TargetAssemblyTypeName: Title, Assembly-CSharp
-        m_MethodName: Start_Btn
+        m_TargetAssemblyTypeName: TitleManager, Assembly-CSharp
+        m_MethodName: StartBtn
         m_Mode: 1
         m_Arguments:
           m_ObjectArgument: {fileID: 0}
@@ -6142,8 +6142,6 @@ MonoBehaviour:
   isVibration: 0
   musicValue: 1
   fxValue: 1
-  nickName: 
-  isServer: 0
   errorType: 
   adID: 
 --- !u!1 &2075850609
