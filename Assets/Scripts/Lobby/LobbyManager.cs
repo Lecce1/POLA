@@ -62,7 +62,7 @@ public class LobbyManager : MonoBehaviour
 
     void Start()
     {
-        //Init();
+        Init();
     }
 
     void Init()

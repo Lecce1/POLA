@@ -5,6 +5,9 @@ using UnityEngine.Networking;
 
 public class HttpServerManager : MonoBehaviour
 {
+    [FoldoutGroup("정보")] 
+    [Title("주소")] 
+    private string url = "http://15.164.215.122/Capstone/";
     [FoldoutGroup("타이틀")] 
     [Title("시작 버튼")] 
     public TitleManager titleManager;
@@ -30,12 +33,13 @@ public class HttpServerManager : MonoBehaviour
         form.AddField("ID", id);
         form.AddField("PW", pw);
         
-        UnityWebRequest request = UnityWebRequest.Post("http://enddl2560.dothome.co.kr/Capstone/Login.php", form);
+        UnityWebRequest request = UnityWebRequest.Post(url + "Login.php", form);
         yield return request.SendWebRequest();
 
         if (request.downloadHandler.text.Split('|')[0] == "로그인 완료")
         {
             titleManager.LoginSuccess();
+            DBManager.instance.nickName = request.downloadHandler.text.Split('|')[1];
         }
         else
         {
@@ -51,7 +55,7 @@ public class HttpServerManager : MonoBehaviour
         form.AddField("ID", id);
         form.AddField("PW", pw);
         form.AddField("NICK", nick);
-        UnityWebRequest request = UnityWebRequest.Post("http://enddl2560.dothome.co.kr/Capstone/SignUp.php", form);
+        UnityWebRequest request = UnityWebRequest.Post(url + "SignUp.php", form);
         yield return request.SendWebRequest();
 
         if (request.downloadHandler.text == "회원가입 완료")
