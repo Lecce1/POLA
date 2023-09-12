@@ -1,3 +1,4 @@
+using System;
 using Sirenix.OdinInspector;
 using UnityEngine;
 
@@ -26,5 +27,10 @@ public class DBManager : MonoBehaviour
         {
             Destroy(gameObject);
         }
+    }
+
+    public void Init()
+    {
+        nickName = String.Empty;
     }
 }

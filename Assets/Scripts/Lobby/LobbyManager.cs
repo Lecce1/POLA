@@ -2,6 +2,8 @@ using System.Collections;
 using System.Collections.Generic;
 using Sirenix.OdinInspector;
 using UnityEngine;
+using UnityEngine.Networking;
+using UnityEngine.SceneManagement;
 using UnityEngine.UI;
 
 public class LobbyManager : MonoBehaviour
@@ -128,5 +130,17 @@ public class LobbyManager : MonoBehaviour
                 error.SetActive(false);
                 break;
         }
+    }
+    
+    public void Set_Logout()
+    {
+        PlayerPrefs.DeleteAll();
+        DBManager.instance.Init();
+        SceneManager.LoadScene("Title");
+    }
+    
+    public void Set_DeleteAccount()
+    {
+        StartCoroutine(HttpServerManager.instance.DeleteAccount());
     }
 }

@@ -2,6 +2,7 @@ using System.Collections;
 using Sirenix.OdinInspector;
 using UnityEngine;
 using UnityEngine.Networking;
+using UnityEngine.SceneManagement;
 
 public class HttpServerManager : MonoBehaviour
 {
@@ -67,6 +68,18 @@ public class HttpServerManager : MonoBehaviour
             titleManager.RegisterFail(request.downloadHandler.text);
         }
         
+        request.Dispose();
+    }
+    
+    public IEnumerator DeleteAccount()
+    {
+        WWWForm form = new WWWForm();
+        form.AddField("NICK", DBManager.instance.nickName);
+        UnityWebRequest request = UnityWebRequest.Post(url + "Delete_Account.php", form);
+        yield return request.SendWebRequest();
+        Debug.Log(request.downloadHandler.text);
+        PlayerPrefs.DeleteAll();
+        SceneManager.LoadScene("Title");
         request.Dispose();
     }
 }
