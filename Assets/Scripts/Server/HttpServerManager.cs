@@ -1,3 +1,4 @@
+using System;
 using System.Collections;
 using Sirenix.OdinInspector;
 using UnityEngine;
@@ -33,21 +34,30 @@ public class HttpServerManager : MonoBehaviour
         WWWForm form = new WWWForm();
         form.AddField("ID", id);
         form.AddField("PW", pw);
-        
-        UnityWebRequest request = UnityWebRequest.Post(url + "Login.php", form);
-        yield return request.SendWebRequest();
 
-        if (request.downloadHandler.text.Split('|')[0] == "로그인 완료")
+        using (UnityWebRequest request = UnityWebRequest.Post(url + "Login.php", form))
         {
-            titleManager.LoginSuccess();
-            DBManager.instance.nickName = request.downloadHandler.text.Split('|')[1];
-        }
-        else
-        {
-            titleManager.LoginFail();
-        }
+            yield return request.SendWebRequest();
+            
+            try
+            {
+                if (request.downloadHandler.text.Split('|')[0] == "로그인 완료")
+                {
+                    titleManager.LoginSuccess();
+                    DBManager.instance.nickName = request.downloadHandler.text.Split('|')[1];
+                }
+                else
+                {
+                    titleManager.LoginFail();
+                }
+            }
+            catch (Exception e)
+            {
 
-        request.Dispose();
+            }
+            
+            request.Dispose();
+        }
     }
     
     public IEnumerator SignUp(string id, string pw, string nick)
@@ -56,30 +66,52 @@ public class HttpServerManager : MonoBehaviour
         form.AddField("ID", id);
         form.AddField("PW", pw);
         form.AddField("NICK", nick);
-        UnityWebRequest request = UnityWebRequest.Post(url + "SignUp.php", form);
-        yield return request.SendWebRequest();
-
-        if (request.downloadHandler.text == "회원가입 완료")
-        {
-            titleManager.RegisterSuccess();
-        }
-        else
-        {
-            titleManager.RegisterFail(request.downloadHandler.text);
-        }
         
-        request.Dispose();
+        using (UnityWebRequest request = UnityWebRequest.Post(url + "SignUp.php", form))
+        {
+            yield return request.SendWebRequest();
+            
+            try
+            {
+                if (request.downloadHandler.text == "회원가입 완료")
+                {
+                    titleManager.RegisterSuccess();
+                }
+                else
+                {
+                    titleManager.RegisterFail(request.downloadHandler.text);
+                }
+            }
+            catch (Exception e)
+            {
+
+            }
+            
+            request.Dispose();
+        }
     }
     
     public IEnumerator DeleteAccount()
     {
         WWWForm form = new WWWForm();
         form.AddField("NICK", DBManager.instance.nickName);
-        UnityWebRequest request = UnityWebRequest.Post(url + "Delete_Account.php", form);
-        yield return request.SendWebRequest();
-        Debug.Log(request.downloadHandler.text);
-        PlayerPrefs.DeleteAll();
-        SceneManager.LoadScene("Title");
-        request.Dispose();
+        
+        using (UnityWebRequest request = UnityWebRequest.Post(url + "Delete_Account.php", form))
+        {
+            yield return request.SendWebRequest();
+            
+            try
+            {
+                Debug.Log(request.downloadHandler.text);
+                PlayerPrefs.DeleteAll();
+                SceneManager.LoadScene("Title");
+            }
+            catch (Exception e)
+            {
+
+            }
+            
+            request.Dispose();
+        }
     }
 }

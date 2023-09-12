@@ -98,7 +98,6 @@ public class TitleManager : MonoBehaviour
 
     void Start()
     {
-        PlayerPrefs.DeleteAll();
         Application.targetFrameRate = 144;
         versionText.text = "버전 : " + Application.version;
         backStack = new Stack<GameObject>();
