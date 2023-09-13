@@ -38,7 +38,7 @@ RenderSettings:
   m_ReflectionIntensity: 1
   m_CustomReflection: {fileID: 0}
   m_Sun: {fileID: 0}
-  m_IndirectSpecularColor: {r: 0.44657898, g: 0.4964133, b: 0.5748178, a: 1}
+  m_IndirectSpecularColor: {r: 0.44657844, g: 0.49641222, b: 0.57481676, a: 1}
   m_UseRadianceAmbientProbe: 0
 --- !u!157 &3
 LightmapSettings:
@@ -401,21 +401,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   background: {fileID: 1413338762}
   changeImage:
-  - {fileID: 21300000, guid: 07ded14155792264f91bf665bb3032de, type: 3}
-  - {fileID: 21300000, guid: eb41fcd3865afdd44b10e0efff4093d5, type: 3}
-  - {fileID: 21300000, guid: 4d5f6bbd7bfead44c946b5d627276faf, type: 3}
-  - {fileID: 21300000, guid: a403c02702e11024c855bc567995f620, type: 3}
-  - {fileID: 21300000, guid: 50a08ea74edb7204e9e4737b5ca6d1cf, type: 3}
-  - {fileID: 21300000, guid: f3ab2329e50e4cd4ba194b638a5509a5, type: 3}
-  - {fileID: 21300000, guid: 6f39b8cf9e89a5d4aac5ace1b77b2a66, type: 3}
-  - {fileID: 21300000, guid: abf7073f4f78f604fa89a201cb402a6e, type: 3}
-  - {fileID: 21300000, guid: ddc01d132be8fd449882b6dde74cbdc3, type: 3}
-  - {fileID: 21300000, guid: 876d6af54d258d34ab9a0335eb937197, type: 3}
-  - {fileID: 21300000, guid: 557dc1e01e025d04c93bab9102492f61, type: 3}
-  - {fileID: 21300000, guid: 02ceeeb84ebef2a43bd04aa602c98e22, type: 3}
-  - {fileID: 21300000, guid: 3af04303580f65649922bfc5782fe534, type: 3}
-  - {fileID: 21300000, guid: 11efc23aa8900e94eb73cc0cf4a8d9b3, type: 3}
-  - {fileID: 21300000, guid: 8dfa2f0226c7cf34695c03be9b1ccb90, type: 3}
+  - {fileID: 21300000, guid: 75bcd0b7eff514a1b963792ac5ce380c, type: 3}
   tipText: {fileID: 1607243444}
   tipList:
   - "TIP. \uB3D9\uC77C\uD55C \uCE74\uB4DC \uD68D\uB4DD\uC2DC \uD569\uC131\uC744 \uD1B5\uD558\uC5EC
@@ -649,8 +635,8 @@ MonoBehaviour:
   m_OnCullStateChanged:
     m_PersistentCalls:
       m_Calls: []
-  m_Sprite: {fileID: 21300000, guid: abf7073f4f78f604fa89a201cb402a6e, type: 3}
-  m_Type: 0
+  m_Sprite: {fileID: 21300000, guid: 75bcd0b7eff514a1b963792ac5ce380c, type: 3}
+  m_Type: 1
   m_PreserveAspect: 1
   m_FillCenter: 1
   m_FillMethod: 4
