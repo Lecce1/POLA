@@ -13,6 +13,7 @@ TagManager:
   - BasketBall
   - Chariot
   - Breakable
+  - Collectable
   layers:
   - Default
   - TransparentFX
