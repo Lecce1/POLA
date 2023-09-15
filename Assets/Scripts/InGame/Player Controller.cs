@@ -1,97 +1,83 @@
 using System.Collections;
+using TreeEditor;
 using UnityEngine;
 
 public class PlayerController : MonoBehaviour
 {
-    public float currentSpeed { get; private set; }
+    public Rigidbody rigid;
+    public int jumpCount { get; protected set; }
+    public float jumpForce { get; protected set; }
     public Color[] playerColors;
-    public EffectManager effects { get; private set; }
-    
-    private Rigidbody rigid;
-    private int jumpCount;
-    private PlayerStatsManager stats;
+    public PlayerStats stats;
     private MeshRenderer meshRenderer;
     private bool isJumping;
-    
+
     void Start()
     {
-        stats = GetComponent<PlayerStatsManager>();
         rigid = GetComponent<Rigidbody>();
         meshRenderer = GetComponent<MeshRenderer>();
-        effects = GetComponent<EffectManager>();
-        
         jumpCount = 0;
-        currentSpeed = rigid.velocity.x;
+        stats.maxSpeed = 20.0f;
+        stats.isDead = false;
+        jumpForce = stats.jumpForce;
     }
     
     void FixedUpdate()
     {
         Moving();
-        Boost();
+        OnAttackSlow();
     }
 
     private void Moving()
     {
-        if (stats.current.isDead)
+        if (stats.isDead)
         {
             rigid.velocity = Vector3.zero;
             return;
         }
         
-        if (rigid.velocity.x < stats.current.maxSpeed)
+        if (rigid.velocity.x < stats.maxSpeed)
         {  
-            rigid.AddForce(Vector3.right * stats.current.speedAccel * Time.deltaTime, ForceMode.Force);
+            rigid.AddForce(Vector3.right * stats.speedAccel * Time.deltaTime, ForceMode.Force);
         }
 
-        if (transform.position.y < -5) Die();
-        currentSpeed = rigid.velocity.x;
+        if (transform.position.y < -5)
+        {
+            Die();
+        }
     }
-    
+
     private void Die()
     {
-        stats.current.isDead = true;
+        stats.isDead = true;
         rigid.useGravity = false;
         Destroy(gameObject, 3);
     }
-
-    private void Boost()
-    {
-        if (stats.current.boostGauge > 0 && Input.GetKey(KeyCode.Space))
-        {
-            stats.current.maxSpeed += 10f;
-            stats.current.speedAccel += 500f;
-            stats.current.boostGauge -= Time.deltaTime;
-        }
-        else
-        {
-            stats.current.boostGauge += Time.deltaTime;
-            stats.current.maxSpeed = stats.origin.maxSpeed;
-            stats.current.speedAccel = stats.origin.speedAccel;
-        }
-
-        stats.current.boostGauge = Mathf.Clamp(stats.current.boostGauge, 0, 2);
-    }
+    
 
     IEnumerator Jump()
     {
         float pressedJumpStartTime = Time.time;
-        float inverseJumpLength = 1 / stats.current.jumpLength;
+        float inverseJumpLength = 1 / stats.jumpLength;
         
-        while (Time.time - pressedJumpStartTime < stats.current.jumpLength && isJumping)
+        while (Time.time - pressedJumpStartTime < stats.jumpLength && isJumping)
         {  
             var velocity = rigid.velocity;
-            velocity.y = stats.current.jumpForce;
+            velocity.y = jumpForce;
             rigid.velocity = velocity;
-            stats.current.jumpForce -= Time.deltaTime * stats.current.jumpForce * inverseJumpLength;
+            jumpForce -= Time.deltaTime * jumpForce * inverseJumpLength;
             yield return null;
         }
     }
 
     public void OnJumpButtonDown()
     {
-        if (jumpCount >= stats.current.maxJump) return;
+        if (jumpCount >= stats.maxJump)
+        {
+            return;
+        }
 
-        stats.current.jumpForce = stats.origin.jumpForce;
+        jumpForce = stats.jumpForce;
         isJumping = true;
         StartCoroutine(Jump());
         jumpCount++;
@@ -104,14 +90,14 @@ public class PlayerController : MonoBehaviour
 
     public void OnColorChanged()
     {
-        var idx = stats.current.colorIndex;
+        var idx = stats.colorIndex;
         meshRenderer.material.color = playerColors[idx];
-        stats.current.colorIndex = ++idx < playerColors.Length ? idx : 0;
+        stats.colorIndex = ++idx < playerColors.Length ? idx : 0;
     }
     
     public void OnAttackButtonClicked()
     {
-        float maxDistance = 30f;
+        float maxDistance = 5f;
         Ray ray = new Ray(transform.position, transform.right);
         RaycastHit hit;
         
@@ -122,12 +108,39 @@ public class PlayerController : MonoBehaviour
                 Destroy(hit.transform.gameObject);
             }
         }
+
+        Time.timeScale = 1f;
+    }
+
+    private void OnAttackSlow()
+    {
+        float Distance = 5f;
+        float slowFactor = 0.43f;
+        Ray ray = new Ray(transform.position, transform.right);
+        RaycastHit hit;
+        
+        if (Physics.Raycast(ray, out hit, Distance))
+        {
+            if (hit.collider.CompareTag("Breakable"))
+            {
+                if (hit.transform.position.x - transform.position.x < Distance)
+                {
+                    Time.timeScale = slowFactor;
+                    Time.fixedDeltaTime = Time.timeScale * 0.02f;
+                }
+            }
+            else
+            {
+                Time.timeScale = 1f;
+                Time.fixedDeltaTime = 1f;
+            }
+        }
     }
 
     private void OnCollisionEnter(Collision collision)
     {
         if (Physics.Raycast(transform.position, Vector3.down + Vector3.right * 0.6f, 1f) 
-            && collision.gameObject.layer == LayerMask.NameToLayer("Ground") && !stats.current.isDead)
+            && collision.gameObject.layer == LayerMask.NameToLayer("Ground") && !stats.isDead)
         {
             jumpCount = 0;   
         }

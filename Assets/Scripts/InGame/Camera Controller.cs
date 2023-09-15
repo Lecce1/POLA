@@ -20,8 +20,8 @@ public class CameraController : MonoBehaviour
 
     public void PovValue()
     {
-        var playerSpeed = player.currentSpeed;
-
+        var playerSpeed =  player.rigid.velocity.x;
+        
         VCM.m_Lens.FieldOfView = playerSpeed + 40;
     }
 }
