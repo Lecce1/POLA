@@ -108,10 +108,11 @@ public class TitleManager : MonoBehaviour
     {
         title.SetActive(false);
         start_Btn.SetActive(false);
-        ServerConnect();
+        TCPServerManager.instance.Connect();
+        Login();
     }
     
-    void ServerConnect()
+    void Login()
     {
         try
         {
@@ -134,8 +135,8 @@ public class TitleManager : MonoBehaviour
         {
             errorNetwork.SetActive(true);
 
-            Debug.Log("서버 접속 실패" + e);
-            Invoke("ServerConnect", 1.0f);
+            Debug.Log("로그인 실패" + e);
+            Invoke(nameof(Login), 1.0f);
         }
     }
 

@@ -1,4 +1,3 @@
-using System;
 using System.Collections;
 using Sirenix.OdinInspector;
 using UnityEngine;
@@ -39,21 +38,14 @@ public class HttpServerManager : MonoBehaviour
         {
             yield return request.SendWebRequest();
             
-            try
+            if (request.downloadHandler.text.Split('|')[0] == "로그인 완료")
             {
-                if (request.downloadHandler.text.Split('|')[0] == "로그인 완료")
-                {
-                    titleManager.LoginSuccess();
-                    DBManager.instance.nickName = request.downloadHandler.text.Split('|')[1];
-                }
-                else
-                {
-                    titleManager.LoginFail();
-                }
+                titleManager.LoginSuccess();
+                DBManager.instance.nickName = request.downloadHandler.text.Split('|')[1];
             }
-            catch (Exception e)
+            else
             {
-
+                titleManager.LoginFail();
             }
             
             request.Dispose();
@@ -71,20 +63,13 @@ public class HttpServerManager : MonoBehaviour
         {
             yield return request.SendWebRequest();
             
-            try
+            if (request.downloadHandler.text == "회원가입 완료")
             {
-                if (request.downloadHandler.text == "회원가입 완료")
-                {
-                    titleManager.RegisterSuccess();
-                }
-                else
-                {
-                    titleManager.RegisterFail(request.downloadHandler.text);
-                }
+                titleManager.RegisterSuccess();
             }
-            catch (Exception e)
+            else
             {
-
+                titleManager.RegisterFail(request.downloadHandler.text);
             }
             
             request.Dispose();
@@ -100,16 +85,9 @@ public class HttpServerManager : MonoBehaviour
         {
             yield return request.SendWebRequest();
             
-            try
-            {
-                Debug.Log(request.downloadHandler.text);
-                PlayerPrefs.DeleteAll();
-                SceneManager.LoadScene("Title");
-            }
-            catch (Exception e)
-            {
-
-            }
+            Debug.Log(request.downloadHandler.text);
+            PlayerPrefs.DeleteAll();
+            SceneManager.LoadScene("Title");
             
             request.Dispose();
         }

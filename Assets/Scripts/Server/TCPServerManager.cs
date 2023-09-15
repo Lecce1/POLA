@@ -1,12 +1,22 @@
 using System;
-using System.Collections;
 using System.IO;
+using System.Net;
 using System.Net.Sockets;
+using System.Threading;
 using Sirenix.OdinInspector;
 using UnityEngine;
 
 public class TCPServerManager : MonoBehaviour
 {
+    [FoldoutGroup("정보")]
+    [Title("Server IP")]
+    private string ip = "15.164.215.122";  // 퍼블릭 IPv4 주소
+    [FoldoutGroup("정보")]
+    [Title("Local IP")]
+    private string ip2 = "192.168.200.167";
+    [FoldoutGroup("정보")]
+    [Title("Port")]
+    private string port = "12345";
     [FoldoutGroup("서버")]
     [Title("소켓")]
     private TcpClient socket;
@@ -19,7 +29,7 @@ public class TCPServerManager : MonoBehaviour
     [FoldoutGroup("서버")]
     [Title("쓰기")]
     public StreamReader reader;
-    
+
     public static TCPServerManager instance;
     
     void Awake()
@@ -34,21 +44,21 @@ public class TCPServerManager : MonoBehaviour
             Destroy(gameObject);
         }
     }
-    
-    void ServerConnect()
+
+    public void Connect()
     {
         try
         {
-            socket = new TcpClient("192.168.200.167", 12345);
+            socket = new TcpClient(ip, int.Parse(port));
             stream = socket.GetStream();
             writer = new StreamWriter(stream);
             reader = new StreamReader(stream);
-            Debug.Log("서버 접속 완료");
+            Debug.Log("TCP 서버 접속 완료");
         }
         catch (Exception e)
         {
-            Debug.Log("서버 접속 실패" + e);
-            Invoke("ServerConnect", 1.0f);
+            Debug.Log("TCP 서버 접속 실패" + e);
+            Invoke(nameof(Connect), 1.0f);
         }
     }
 }
