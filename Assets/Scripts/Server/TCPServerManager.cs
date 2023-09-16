@@ -53,12 +53,36 @@ public class TCPServerManager : MonoBehaviour
             stream = socket.GetStream();
             writer = new StreamWriter(stream);
             reader = new StreamReader(stream);
+            Send("Connect", DBManager.instance.nickName);
             Debug.Log("TCP 서버 접속 완료");
+            
+            if (TitleManager.instance.errorNetwork.activeSelf)
+            {
+                TitleManager.instance.errorNetwork.SetActive(false);
+            }
         }
         catch (Exception e)
         {
             Debug.Log("TCP 서버 접속 실패" + e);
+
+            if (!TitleManager.instance.errorNetwork.activeSelf)
+            {
+                TitleManager.instance.errorNetwork.SetActive(true);
+            }
+            
             Invoke(nameof(Connect), 1.0f);
         }
+    }
+
+    public void Send(string type, string data)
+    {
+        switch (type)
+        {
+            case "Connect":
+                writer.WriteLine($"{type}|" + data);
+                break;
+        }
+        
+        writer.Flush();
     }
 }

@@ -1,3 +1,4 @@
+using System;
 using System.Collections;
 using Sirenix.OdinInspector;
 using UnityEngine;
@@ -40,8 +41,9 @@ public class HttpServerManager : MonoBehaviour
             
             if (request.downloadHandler.text.Split('|')[0] == "로그인 완료")
             {
-                titleManager.LoginSuccess();
                 DBManager.instance.nickName = request.downloadHandler.text.Split('|')[1];
+                TCPServerManager.instance.Connect();
+                titleManager.LoginSuccess();
             }
             else
             {

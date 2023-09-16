@@ -95,6 +95,15 @@ public class TitleManager : MonoBehaviour
     
     // 뒤로가기 스택
     private Stack<GameObject> backStack;
+    public static TitleManager instance;
+    
+    void Awake()
+    {
+        if (instance == null)
+        {
+            instance = this;
+        }
+    }
 
     void Start()
     {
@@ -108,7 +117,6 @@ public class TitleManager : MonoBehaviour
     {
         title.SetActive(false);
         start_Btn.SetActive(false);
-        TCPServerManager.instance.Connect();
         Login();
     }
     
