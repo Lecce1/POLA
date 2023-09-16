@@ -5,6 +5,7 @@ using System.Net.Sockets;
 using System.Threading;
 using Sirenix.OdinInspector;
 using UnityEngine;
+using UnityEngine.SceneManagement;
 
 public class TCPServerManager : MonoBehaviour
 {
@@ -56,18 +57,47 @@ public class TCPServerManager : MonoBehaviour
             Send("Connect", DBManager.instance.nickName);
             Debug.Log("TCP 서버 접속 완료");
             
-            if (TitleManager.instance.errorNetwork.activeSelf)
+            Scene scene = SceneManager.GetActiveScene();
+
+            switch (scene.name)
             {
-                TitleManager.instance.errorNetwork.SetActive(false);
+                case "Title":
+                    if (TitleManager.instance.error_Network.activeSelf)
+                    {
+                        TitleManager.instance.error_Network.SetActive(false);
+                    }
+                    break;
+                
+                case "Lobby":
+                    if (LobbyManager.instance.error_Network.activeSelf)
+                    {
+                        LobbyManager.instance.error_Network.SetActive(false);
+                    }
+                    break;
             }
+
         }
         catch (Exception e)
         {
             Debug.Log("TCP 서버 접속 실패" + e);
 
-            if (!TitleManager.instance.errorNetwork.activeSelf)
+            Scene scene = SceneManager.GetActiveScene();
+
+            switch (scene.name)
             {
-                TitleManager.instance.errorNetwork.SetActive(true);
+                case "Title":
+                    if (!TitleManager.instance.error_Network.activeSelf)
+                    {
+                        TitleManager.instance.error_Network.SetActive(true);
+                    }
+                    break;
+                
+                case "Lobby":
+                    if (!LobbyManager.instance.error_Network.activeSelf)
+                    {
+                        LobbyManager.instance.error_Network.SetActive(true);
+                    }
+                    break;
             }
             
             Invoke(nameof(Connect), 1.0f);

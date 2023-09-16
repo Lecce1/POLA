@@ -6232,7 +6232,7 @@ MonoBehaviour:
   signUpNick: {fileID: 246840733}
   error: {fileID: 2066740890}
   errorContent: {fileID: 1912829931}
-  errorNetwork: {fileID: 400664634}
+  error_Network: {fileID: 400664634}
   audioMixer: {fileID: 24100000, guid: fe7e550e177674e8bac853b46a810106, type: 2}
   isPush: 0
   isVibration: 0

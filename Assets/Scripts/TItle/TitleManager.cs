@@ -8,6 +8,7 @@ using UnityEngine.Audio;
 using GoogleMobileAds.Api;
 using Sirenix.OdinInspector;
 using UnityEngine.SceneManagement;
+using UnityEngine.Serialization;
 
 public class TitleManager : MonoBehaviour
 {
@@ -59,7 +60,7 @@ public class TitleManager : MonoBehaviour
     public Text errorContent;
     [FoldoutGroup("에러")]
     [Title("네트워크 패널")]
-    public GameObject errorNetwork;
+    public GameObject error_Network;
     
     [FoldoutGroup("정보")]
     [Title("오디오 믹서")]
@@ -137,11 +138,11 @@ public class TitleManager : MonoBehaviour
             }
 
             loginBtn.interactable = true;
-            errorNetwork.SetActive(false);
+            error_Network.SetActive(false);
         }
         catch (Exception e)
         {
-            errorNetwork.SetActive(true);
+            error_Network.SetActive(true);
 
             Debug.Log("로그인 실패" + e);
             Invoke(nameof(Login), 1.0f);
