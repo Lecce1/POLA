@@ -54,7 +54,7 @@ public class TCPServerManager : MonoBehaviour
     {
         try
         {
-            socket = new TcpClient(ip3, int.Parse(port));
+            socket = new TcpClient(ip, int.Parse(port));
             stream = socket.GetStream();
             writer = new StreamWriter(stream);
             reader = new StreamReader(stream);
