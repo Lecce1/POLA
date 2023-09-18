@@ -4,8 +4,6 @@ using UnityEngine;
 public class Magnetic : Item, ITransparency
 {
     private Collider[] overlaps = new Collider[15];
-    public float duration = 4f;
-    public GameObject player;
 
     public override IEnumerator RunItem()
     {
@@ -27,8 +25,8 @@ public class Magnetic : Item, ITransparency
             yield return null;
         }
 
-        // yield return new WaitForSeconds(duration);
-        // Destroy(gameObject);
+        yield return new WaitForSeconds(duration);
+        Destroy(gameObject);
     }
     
     private void OnTriggerEnter(Collider other)
