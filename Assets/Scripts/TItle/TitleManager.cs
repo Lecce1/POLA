@@ -152,6 +152,7 @@ public class TitleManager : MonoBehaviour
     public void LoginSuccess()
     {
         Debug.Log("로그인 완료");
+        DBManager.instance.nextScene = "Lobby";
         SceneManager.LoadScene("Loading");
     }
 

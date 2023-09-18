@@ -83,6 +83,11 @@ public class LobbyManager : MonoBehaviour
                 backStack.Push(mode);
                 break;
             
+            case "Stage":
+                DBManager.instance.nextScene = "Game";
+                SceneManager.LoadScene("Loading");
+                break;
+            
             case "Set":
                 set.SetActive(true);
                 backStack.Push(set);
