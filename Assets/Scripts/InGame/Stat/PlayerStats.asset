@@ -12,11 +12,11 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: df3decfe555819e479f74f1f05d19551, type: 3}
   m_Name: PlayerStats
   m_EditorClassIdentifier: 
-  jumpForce: 10
-  maxSpeed: 20
+  jumpForce: 4.463524
   maxJump: 2
   jumpLength: 0.5
-  speedAccel: 500
+  maxSpeed: 20
+  acceleration: 500
   isDead: 0
   boostGauge: 2
-  colorIndex: 2
+  colorIndex: 0

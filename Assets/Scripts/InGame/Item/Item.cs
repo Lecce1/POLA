@@ -1,14 +1,15 @@
 using System;
-using System.Collections;
 using Sirenix.OdinInspector;
 using UnityEngine;
-using UnityEngine.UI;
 using Random = UnityEngine.Random;
 
 public class Item : MonoBehaviour
 {
-    protected PlayerController player;
+    [SerializeField]
     private Rigidbody rigid;
+    
+    [FoldoutGroup("종류")] 
+    public string type;
 
     [FoldoutGroup("일반")] 
     public float rotateSpeed;
@@ -31,9 +32,27 @@ public class Item : MonoBehaviour
     [FoldoutGroup("물리")] 
     public bool randomizeDropDirection;
     
+    void Start()
+    {
+        rigid = GetComponent<Rigidbody>();
+        
+        InitializeVelocity();
+        
+        if (!usePhysics)
+        {
+            Destroy(rigid);
+        }
+        else
+        {
+            InitializeVelocity();
+        }
+    }
     
+    void Update()
+    {
+        RotateItem();
+    }
     
-
     void InitializeVelocity()
     {
         var direction = initialVelocity.normalized;
@@ -53,44 +72,19 @@ public class Item : MonoBehaviour
         rigid.velocity = direction;
     }
     
-    void Start()
-    {
-        rigid = GetComponent<Rigidbody>();
-        
-        InitializeVelocity();
-        
-        if (!usePhysics)
-        {
-            Destroy(rigid);
-        }
-        else
-        {
-            InitializeVelocity();
-        }
-    }
-    
-    public virtual void Update()
-    {
-        RotateItem();
-    }
-
     void RotateItem()
     {
         transform.Rotate(Vector3.up, rotateSpeed * Time.deltaTime);
     }
 
-    private IEnumerator DestoryGameObject()
+    void OnTriggerEnter(Collider other)
     {
-        yield return null;
+        if(type == "Magnetic") ItemManager.instance.RunEffect<Magnetic>(duration, isLingering);
         Destroy(gameObject);
     }
+}
 
-    protected virtual void OnTriggerEnter(Collider other)
-    {
-        if (other.CompareTag("Player"))
-        {
-            StartCoroutine(DestoryGameObject());
-            player = other.GetComponent<PlayerController>();
-        }
-    }
+public abstract class Effect
+{
+    public abstract void RunEffect(PlayerController player);
 }

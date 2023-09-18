@@ -13,10 +13,10 @@ MonoBehaviour:
   m_Name: PlayerOriginStats
   m_EditorClassIdentifier: 
   jumpForce: 10
-  maxSpeed: 20
   maxJump: 2
   jumpLength: 0.5
-  speedAccel: 500
+  maxSpeed: 20
+  acceleration: 500
   isDead: 0
   boostGauge: 2
   colorIndex: 2

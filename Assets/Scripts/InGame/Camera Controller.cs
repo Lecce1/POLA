@@ -3,8 +3,10 @@ using Cinemachine;
 
 public class CameraController : MonoBehaviour
 {
-    [SerializeField] private PlayerController player;
-    [SerializeField] private CinemachineVirtualCamera VCM;
+    [SerializeField] 
+    private PlayerController player;
+    [SerializeField] 
+    private CinemachineVirtualCamera VCM;
     
     void Start()
     {

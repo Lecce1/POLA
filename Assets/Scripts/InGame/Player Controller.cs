@@ -4,22 +4,29 @@ using UnityEngine;
 public class PlayerController : MonoBehaviour
 {
     public float currentSpeed { get; private set; }
-    public Color[] playerColors;
-    public EffectManager effects { get; private set; }
-    
-    private Rigidbody rigid;
     private int jumpCount;
-    private PlayerStatsManager stats;
-    private MeshRenderer meshRenderer;
     private bool isJumping;
-    private Transform transform;
+    public Color[] playerColors;
+    PlayerStatsManager stats;
+    MeshRenderer meshRenderer;
+    Rigidbody rigid;
+    Transform transform;
+
+    public static PlayerController instance;
+
+    void Awake()
+    {
+        if (instance == null)
+        {
+            instance = this;
+        }
+    }
     
     void Start()
     {
         stats = GetComponent<PlayerStatsManager>();
         rigid = GetComponent<Rigidbody>();
         meshRenderer = GetComponent<MeshRenderer>();
-        effects = GetComponent<EffectManager>();
         transform = GetComponent<Transform>();
         
         jumpCount = 0;
@@ -32,7 +39,7 @@ public class PlayerController : MonoBehaviour
         Boost();
     }
 
-    private void Moving()
+    void Moving()
     {
         if (stats.current.isDead)
         {
@@ -42,33 +49,37 @@ public class PlayerController : MonoBehaviour
         
         if (rigid.velocity.x < stats.current.maxSpeed)
         {  
-            rigid.AddForce(Vector3.right * stats.current.speedAccel * Time.deltaTime, ForceMode.Force);
+            rigid.AddForce(Vector3.right * stats.current.acceleration * Time.deltaTime, ForceMode.Force);
         }
 
-        if (transform.position.y < -5) Die();
+        if (transform.position.y < -5)
+        {
+            Die();
+        }
+        
         currentSpeed = rigid.velocity.x;
     }
     
-    private void Die()
+    void Die()
     {
         stats.current.isDead = true;
         rigid.useGravity = false;
         Destroy(gameObject, 3);
     }
 
-    private void Boost()
+     void Boost()
     {
         if (stats.current.boostGauge > 0 && Input.GetKey(KeyCode.Space))
         {
             stats.current.maxSpeed += 10f;
-            stats.current.speedAccel += 500f;
+            stats.current.acceleration += 500f;
             stats.current.boostGauge -= Time.deltaTime;
         }
         else
         {
             stats.current.boostGauge += Time.deltaTime;
             stats.current.maxSpeed = stats.origin.maxSpeed;
-            stats.current.speedAccel = stats.origin.speedAccel;
+            stats.current.acceleration = stats.origin.acceleration;
         }
 
         stats.current.boostGauge = Mathf.Clamp(stats.current.boostGauge, 0, 2);
@@ -91,7 +102,8 @@ public class PlayerController : MonoBehaviour
 
     public void OnJumpButtonDown()
     {
-        if (jumpCount >= stats.current.maxJump) return;
+        if (jumpCount >= stats.current.maxJump)
+            return;
 
         stats.current.jumpForce = stats.origin.jumpForce;
         isJumping = true;
@@ -126,7 +138,7 @@ public class PlayerController : MonoBehaviour
         }
     }
 
-    private void OnCollisionEnter(Collision collision)
+    void OnCollisionEnter(Collision collision)
     {
         if (Physics.Raycast(transform.position, Vector3.down + Vector3.right * 0.6f, 1f) 
             && collision.gameObject.layer == LayerMask.NameToLayer("Ground") && !stats.current.isDead)
@@ -135,7 +147,7 @@ public class PlayerController : MonoBehaviour
         }
     }
 
-    private void OnCollisionStay(Collision collisionInfo)
+    void OnCollisionStay(Collision collisionInfo)
     {
         if (collisionInfo.gameObject.CompareTag("Obstacle") &&
             collisionInfo.gameObject.GetComponent<MeshRenderer>().material.color != meshRenderer.material.color)

@@ -38,7 +38,7 @@ RenderSettings:
   m_ReflectionIntensity: 1
   m_CustomReflection: {fileID: 0}
   m_Sun: {fileID: 0}
-  m_IndirectSpecularColor: {r: 0.44657826, g: 0.49641263, b: 0.57481676, a: 1}
+  m_IndirectSpecularColor: {r: 0.44657898, g: 0.4964133, b: 0.5748178, a: 1}
   m_UseRadianceAmbientProbe: 0
 --- !u!157 &3
 LightmapSettings:
@@ -351,25 +351,6 @@ GameObject:
   m_CorrespondingSourceObject: {fileID: 919132149155446097, guid: 8fa0eacd35384a44ba986cfde44774d7, type: 3}
   m_PrefabInstance: {fileID: 1106467808}
   m_PrefabAsset: {fileID: 0}
---- !u!114 &151605169
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 151605168}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 04cf8bb318968cc40860081ff65f6dd7, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  rotateSpeed: 3
-  duration: 2
-  isLingering: 1
-  initialVelocity: {x: 0, y: 12, z: 0}
-  usePhysics: 0
-  dropDirection: {x: 0, y: 0, z: 0}
-  randomizeDropDirection: 0
 --- !u!65 &151605173
 BoxCollider:
   m_ObjectHideFlags: 0
@@ -391,6 +372,54 @@ BoxCollider:
   serializedVersion: 3
   m_Size: {x: 0.6, y: 0.6, z: 0.15387209}
   m_Center: {x: 0, y: 0, z: 0}
+--- !u!114 &151605174
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 151605168}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: b997be14b1fcc9545a8b1285bc3ec9f4, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  rigid: {fileID: 0}
+  type: Magnetic
+  rotateSpeed: 3
+  duration: 2
+  isLingering: 1
+  initialVelocity: {x: 0, y: 12, z: 0}
+  usePhysics: 0
+  dropDirection: {x: 0, y: 0, z: 0}
+  randomizeDropDirection: 0
+--- !u!54 &151605178
+Rigidbody:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 151605168}
+  serializedVersion: 4
+  m_Mass: 1
+  m_Drag: 0
+  m_AngularDrag: 0.05
+  m_CenterOfMass: {x: 0, y: 0, z: 0}
+  m_InertiaTensor: {x: 1, y: 1, z: 1}
+  m_InertiaRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_IncludeLayers:
+    serializedVersion: 2
+    m_Bits: 0
+  m_ExcludeLayers:
+    serializedVersion: 2
+    m_Bits: 0
+  m_ImplicitCom: 1
+  m_ImplicitTensor: 1
+  m_UseGravity: 1
+  m_IsKinematic: 0
+  m_Interpolate: 0
+  m_Constraints: 0
+  m_CollisionDetection: 0
 --- !u!1 &200840655
 GameObject:
   m_ObjectHideFlags: 0
@@ -555,10 +584,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 2ffebe027d944547b42c050dab2c21f9, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  effects:
-  - MagneticEffect
-  effectGauges:
-  - {fileID: 1453701518}
 --- !u!114 &200840663
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -635,10 +660,13 @@ PrefabInstance:
     m_AddedComponents:
     - targetCorrespondingSourceObject: {fileID: 919132149155446097, guid: 8fa0eacd35384a44ba986cfde44774d7, type: 3}
       insertIndex: -1
-      addedObject: {fileID: 1963494719}
+      addedObject: {fileID: 1963494723}
     - targetCorrespondingSourceObject: {fileID: 919132149155446097, guid: 8fa0eacd35384a44ba986cfde44774d7, type: 3}
       insertIndex: -1
-      addedObject: {fileID: 1963494723}
+      addedObject: {fileID: 1963494724}
+    - targetCorrespondingSourceObject: {fileID: 919132149155446097, guid: 8fa0eacd35384a44ba986cfde44774d7, type: 3}
+      insertIndex: -1
+      addedObject: {fileID: 1963494728}
   m_SourcePrefab: {fileID: 100100000, guid: 8fa0eacd35384a44ba986cfde44774d7, type: 3}
 --- !u!1 &343596732
 GameObject:
@@ -924,10 +952,13 @@ PrefabInstance:
     m_AddedComponents:
     - targetCorrespondingSourceObject: {fileID: 919132149155446097, guid: 8fa0eacd35384a44ba986cfde44774d7, type: 3}
       insertIndex: -1
-      addedObject: {fileID: 1470769935}
+      addedObject: {fileID: 1470769939}
     - targetCorrespondingSourceObject: {fileID: 919132149155446097, guid: 8fa0eacd35384a44ba986cfde44774d7, type: 3}
       insertIndex: -1
-      addedObject: {fileID: 1470769939}
+      addedObject: {fileID: 1470769940}
+    - targetCorrespondingSourceObject: {fileID: 919132149155446097, guid: 8fa0eacd35384a44ba986cfde44774d7, type: 3}
+      insertIndex: -1
+      addedObject: {fileID: 1470769944}
   m_SourcePrefab: {fileID: 100100000, guid: 8fa0eacd35384a44ba986cfde44774d7, type: 3}
 --- !u!1 &779141108
 GameObject:
@@ -1752,10 +1783,13 @@ PrefabInstance:
     m_AddedComponents:
     - targetCorrespondingSourceObject: {fileID: 919132149155446097, guid: 8fa0eacd35384a44ba986cfde44774d7, type: 3}
       insertIndex: -1
-      addedObject: {fileID: 151605169}
+      addedObject: {fileID: 151605173}
     - targetCorrespondingSourceObject: {fileID: 919132149155446097, guid: 8fa0eacd35384a44ba986cfde44774d7, type: 3}
       insertIndex: -1
-      addedObject: {fileID: 151605173}
+      addedObject: {fileID: 151605174}
+    - targetCorrespondingSourceObject: {fileID: 919132149155446097, guid: 8fa0eacd35384a44ba986cfde44774d7, type: 3}
+      insertIndex: -1
+      addedObject: {fileID: 151605178}
   m_SourcePrefab: {fileID: 100100000, guid: 8fa0eacd35384a44ba986cfde44774d7, type: 3}
 --- !u!1 &1185907163
 GameObject:
@@ -2144,10 +2178,13 @@ PrefabInstance:
     m_AddedComponents:
     - targetCorrespondingSourceObject: {fileID: 919132149155446097, guid: 8fa0eacd35384a44ba986cfde44774d7, type: 3}
       insertIndex: -1
-      addedObject: {fileID: 1961185214}
+      addedObject: {fileID: 1961185218}
     - targetCorrespondingSourceObject: {fileID: 919132149155446097, guid: 8fa0eacd35384a44ba986cfde44774d7, type: 3}
       insertIndex: -1
-      addedObject: {fileID: 1961185218}
+      addedObject: {fileID: 1961185219}
+    - targetCorrespondingSourceObject: {fileID: 919132149155446097, guid: 8fa0eacd35384a44ba986cfde44774d7, type: 3}
+      insertIndex: -1
+      addedObject: {fileID: 1961185223}
   m_SourcePrefab: {fileID: 100100000, guid: 8fa0eacd35384a44ba986cfde44774d7, type: 3}
 --- !u!1 &1453701516
 GameObject:
@@ -2347,25 +2384,6 @@ GameObject:
   m_CorrespondingSourceObject: {fileID: 919132149155446097, guid: 8fa0eacd35384a44ba986cfde44774d7, type: 3}
   m_PrefabInstance: {fileID: 763490345}
   m_PrefabAsset: {fileID: 0}
---- !u!114 &1470769935
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 1470769934}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 04cf8bb318968cc40860081ff65f6dd7, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  rotateSpeed: 3
-  duration: 2
-  isLingering: 1
-  initialVelocity: {x: 0, y: 12, z: 0}
-  usePhysics: 0
-  dropDirection: {x: 0, y: 0, z: 0}
-  randomizeDropDirection: 0
 --- !u!65 &1470769939
 BoxCollider:
   m_ObjectHideFlags: 0
@@ -2387,6 +2405,54 @@ BoxCollider:
   serializedVersion: 3
   m_Size: {x: 0.6, y: 0.6, z: 0.15387209}
   m_Center: {x: 0, y: 0, z: 0}
+--- !u!114 &1470769940
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1470769934}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: b997be14b1fcc9545a8b1285bc3ec9f4, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  rigid: {fileID: 0}
+  type: Magnetic
+  rotateSpeed: 3
+  duration: 2
+  isLingering: 1
+  initialVelocity: {x: 0, y: 12, z: 0}
+  usePhysics: 0
+  dropDirection: {x: 0, y: 0, z: 0}
+  randomizeDropDirection: 0
+--- !u!54 &1470769944
+Rigidbody:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1470769934}
+  serializedVersion: 4
+  m_Mass: 1
+  m_Drag: 0
+  m_AngularDrag: 0.05
+  m_CenterOfMass: {x: 0, y: 0, z: 0}
+  m_InertiaTensor: {x: 1, y: 1, z: 1}
+  m_InertiaRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_IncludeLayers:
+    serializedVersion: 2
+    m_Bits: 0
+  m_ExcludeLayers:
+    serializedVersion: 2
+    m_Bits: 0
+  m_ImplicitCom: 1
+  m_ImplicitTensor: 1
+  m_UseGravity: 1
+  m_IsKinematic: 0
+  m_Interpolate: 0
+  m_Constraints: 0
+  m_CollisionDetection: 0
 --- !u!1 &1555073552
 GameObject:
   m_ObjectHideFlags: 0
@@ -2609,6 +2675,50 @@ CanvasRenderer:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1563881685}
   m_CullTransparentMesh: 1
+--- !u!1 &1617466509
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 1617466511}
+  - component: {fileID: 1617466510}
+  m_Layer: 0
+  m_Name: ItemManager
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!114 &1617466510
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1617466509}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 2ffebe027d944547b42c050dab2c21f9, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+--- !u!4 &1617466511
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1617466509}
+  serializedVersion: 2
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_ConstrainProportionsScale: 0
+  m_Children: []
+  m_Father: {fileID: 0}
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1 &1716050775
 GameObject:
   m_ObjectHideFlags: 0
@@ -2836,25 +2946,6 @@ GameObject:
   m_CorrespondingSourceObject: {fileID: 919132149155446097, guid: 8fa0eacd35384a44ba986cfde44774d7, type: 3}
   m_PrefabInstance: {fileID: 1383998020}
   m_PrefabAsset: {fileID: 0}
---- !u!114 &1961185214
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 1961185213}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 04cf8bb318968cc40860081ff65f6dd7, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  rotateSpeed: 3
-  duration: 2
-  isLingering: 1
-  initialVelocity: {x: 0, y: 12, z: 0}
-  usePhysics: 0
-  dropDirection: {x: 0, y: 0, z: 0}
-  randomizeDropDirection: 0
 --- !u!65 &1961185218
 BoxCollider:
   m_ObjectHideFlags: 0
@@ -2876,23 +2967,20 @@ BoxCollider:
   serializedVersion: 3
   m_Size: {x: 0.6, y: 0.6, z: 0.15387209}
   m_Center: {x: 0, y: 0, z: 0}
---- !u!1 &1963494718 stripped
-GameObject:
-  m_CorrespondingSourceObject: {fileID: 919132149155446097, guid: 8fa0eacd35384a44ba986cfde44774d7, type: 3}
-  m_PrefabInstance: {fileID: 290301441}
-  m_PrefabAsset: {fileID: 0}
---- !u!114 &1963494719
+--- !u!114 &1961185219
 MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 1963494718}
+  m_GameObject: {fileID: 1961185213}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 04cf8bb318968cc40860081ff65f6dd7, type: 3}
+  m_Script: {fileID: 11500000, guid: b997be14b1fcc9545a8b1285bc3ec9f4, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  rigid: {fileID: 0}
+  type: Magnetic
   rotateSpeed: 3
   duration: 2
   isLingering: 1
@@ -2900,6 +2988,38 @@ MonoBehaviour:
   usePhysics: 0
   dropDirection: {x: 0, y: 0, z: 0}
   randomizeDropDirection: 0
+--- !u!54 &1961185223
+Rigidbody:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1961185213}
+  serializedVersion: 4
+  m_Mass: 1
+  m_Drag: 0
+  m_AngularDrag: 0.05
+  m_CenterOfMass: {x: 0, y: 0, z: 0}
+  m_InertiaTensor: {x: 1, y: 1, z: 1}
+  m_InertiaRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_IncludeLayers:
+    serializedVersion: 2
+    m_Bits: 0
+  m_ExcludeLayers:
+    serializedVersion: 2
+    m_Bits: 0
+  m_ImplicitCom: 1
+  m_ImplicitTensor: 1
+  m_UseGravity: 1
+  m_IsKinematic: 0
+  m_Interpolate: 0
+  m_Constraints: 0
+  m_CollisionDetection: 0
+--- !u!1 &1963494718 stripped
+GameObject:
+  m_CorrespondingSourceObject: {fileID: 919132149155446097, guid: 8fa0eacd35384a44ba986cfde44774d7, type: 3}
+  m_PrefabInstance: {fileID: 290301441}
+  m_PrefabAsset: {fileID: 0}
 --- !u!65 &1963494723
 BoxCollider:
   m_ObjectHideFlags: 0
@@ -2921,6 +3041,54 @@ BoxCollider:
   serializedVersion: 3
   m_Size: {x: 0.6, y: 0.6, z: 0.15387209}
   m_Center: {x: 0, y: 0, z: 0}
+--- !u!114 &1963494724
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1963494718}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: b997be14b1fcc9545a8b1285bc3ec9f4, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  rigid: {fileID: 0}
+  type: Magnetic
+  rotateSpeed: 3
+  duration: 2
+  isLingering: 1
+  initialVelocity: {x: 0, y: 12, z: 0}
+  usePhysics: 0
+  dropDirection: {x: 0, y: 0, z: 0}
+  randomizeDropDirection: 0
+--- !u!54 &1963494728
+Rigidbody:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1963494718}
+  serializedVersion: 4
+  m_Mass: 1
+  m_Drag: 0
+  m_AngularDrag: 0.05
+  m_CenterOfMass: {x: 0, y: 0, z: 0}
+  m_InertiaTensor: {x: 1, y: 1, z: 1}
+  m_InertiaRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_IncludeLayers:
+    serializedVersion: 2
+    m_Bits: 0
+  m_ExcludeLayers:
+    serializedVersion: 2
+    m_Bits: 0
+  m_ImplicitCom: 1
+  m_ImplicitTensor: 1
+  m_UseGravity: 1
+  m_IsKinematic: 0
+  m_Interpolate: 0
+  m_Constraints: 0
+  m_CollisionDetection: 0
 --- !u!1 &2075749144
 GameObject:
   m_ObjectHideFlags: 0
@@ -3040,3 +3208,4 @@ SceneRoots:
   - {fileID: 763490345}
   - {fileID: 290301441}
   - {fileID: 1106467808}
+  - {fileID: 1617466511}

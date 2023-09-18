@@ -15,7 +15,7 @@ public class PlayerStats : ScriptableObject
     [FoldoutGroup("일반/속도")]
     public float maxSpeed = 15f;
     [FoldoutGroup("일반/속도")]
-    public float speedAccel = 100f;
+    public float acceleration = 100f;
         
     [FoldoutGroup("일반/기타")]
     public bool isDead = false;

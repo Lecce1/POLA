@@ -1,10 +1,9 @@
 using UnityEngine;
-using Random = UnityEngine.Random;
 
 public class ObstacleController : MonoBehaviour
 {
-    private Color[] obstacleColor;
-    private MeshRenderer meshRenderer;
+    Color[] obstacleColor;
+    MeshRenderer meshRenderer;
     
     void Start()
     {
