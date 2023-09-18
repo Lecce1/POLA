@@ -1035,6 +1035,7 @@ MonoBehaviour:
   nickName: 
   coin: 0
   crystal: 0
+  nextScene: 
 --- !u!4 &333384827
 Transform:
   m_ObjectHideFlags: 0

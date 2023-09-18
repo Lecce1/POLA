@@ -2,6 +2,7 @@ using System;
 using System.IO;
 using System.Net;
 using System.Net.Sockets;
+using System.Text;
 using System.Threading;
 using Sirenix.OdinInspector;
 using UnityEngine;
@@ -11,10 +12,13 @@ public class TCPServerManager : MonoBehaviour
 {
     [FoldoutGroup("정보")]
     [Title("Server IP")]
-    private string ip = "15.164.215.122";  // 퍼블릭 IPv4 주소
+    private string ip = "15.164.215.122";  // AWS EC2 퍼블릭 IPv4 주소
     [FoldoutGroup("정보")]
     [Title("Local IP")]
-    private string ip2 = "192.168.200.167";
+    private string ip2 = "192.168.200.167"; // 집
+    [FoldoutGroup("정보")]
+    [Title("Local IP2")]
+    private string ip3 = "192.168.0.19"; // 자취방
     [FoldoutGroup("정보")]
     [Title("Port")]
     private string port = "12345";
@@ -46,16 +50,25 @@ public class TCPServerManager : MonoBehaviour
         }
     }
 
+    void Start()
+    {
+        
+    }
+
     public void Connect()
     {
         try
         {
-            socket = new TcpClient(ip, int.Parse(port));
+            socket = new TcpClient(ip3, int.Parse(port));
             stream = socket.GetStream();
             writer = new StreamWriter(stream);
             reader = new StreamReader(stream);
             Send("Connect", DBManager.instance.nickName);
             Debug.Log("TCP 서버 접속 완료");
+            
+            Thread thread = new Thread (new ThreadStart(Receive)); 			
+            thread.IsBackground = true; 			
+            thread.Start();  	
             
             Scene scene = SceneManager.GetActiveScene();
 
@@ -103,16 +116,59 @@ public class TCPServerManager : MonoBehaviour
             Invoke(nameof(Connect), 1.0f);
         }
     }
-
-    public void Send(string type, string data)
-    {
-        switch (type)
+    
+    void Receive() 
+    { 		
+        try 
         {
-            case "Connect":
-                writer.WriteLine($"{type}|" + data);
-                break;
-        }
+            Byte[] bytes = new Byte[1024];    
+            
+            while (true) 
+            {
+                using (NetworkStream stream = socket.GetStream()) 
+                { 					
+                    int length; 					
+                    			    
+                    while ((length = stream.Read(bytes, 0, bytes.Length)) != 0) 
+                    { 						
+                        var data = new byte[length]; 						
+                        Array.Copy(bytes, 0, data, 0, length);
+                        string msg = Encoding.ASCII.GetString(data); 						
+                        Debug.Log("서버 : " + msg); 					
+                    } 				
+                } 			
+            }         
+        }         
+        catch (SocketException socketException) {             
+            Debug.Log("서버 오류 : " + socketException);         
+        }     
+    }  	
+    
+    public void Send(string type, string data)
+    {         
+        if (socket == null) 
+        {
+            return;         
+        }  	
         
-        writer.Flush();
+        try 
+        {
+            NetworkStream stream = socket.GetStream(); 		
+            
+            if (stream.CanWrite) 
+            {          
+                switch (type)
+                {
+                    case "Connect":
+                        string msg = $"{type}|" + data;
+                        byte[] bytes = Encoding.ASCII.GetBytes(msg);
+                        stream.Write(bytes, 0, bytes.Length);
+                        break;
+                }
+            }         
+        } 		
+        catch (SocketException socketException) {             
+            Debug.Log("서버 오류: " + socketException);         
+        }     
     }
 }

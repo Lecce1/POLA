@@ -24,9 +24,6 @@ public class LoadingManager : MonoBehaviour
     private List<string> tipList;
     
     [FoldoutGroup("기타")]
-    [Title("씬")]
-    public string sceneName;
-    [FoldoutGroup("기타")]
     [Title("로딩 이미지")]
     [SerializeField]
     private Image loadingIcon;
@@ -43,10 +40,19 @@ public class LoadingManager : MonoBehaviour
     [SerializeField]
     private int currentProgress;
 
+    public static LoadingManager instance;
+
+    void Awake()
+    {
+        if (instance == null)
+        {
+            instance = this;
+        }
+    }
+
     void Start()
     {
         StartCoroutine(LoadScene());
-        StartCoroutine(Rotate());
         BackGround();
         Tip();
     }
@@ -61,30 +67,24 @@ public class LoadingManager : MonoBehaviour
     {
         tipText.text = tipList[Random.Range(0, tipList.Count)];
     }
-    
-    public void LoadScene(string name)
-    {
-        sceneName = name;
-        SceneManager.LoadScene("Loading_Scene");
-    }
 
     IEnumerator LoadScene()
     {
-        AsyncOperation op = SceneManager.LoadSceneAsync(sceneName);
-        op.allowSceneActivation = false;
+        AsyncOperation operation = SceneManager.LoadSceneAsync(DBManager.instance.nextScene);
+        operation.allowSceneActivation = false;
         float timer = 0.0f;
         float minimumTimer = minimumLoadTime;
 
-        while (!op.isDone)
+        while (!operation.isDone)
         {
             yield return null;
 
             timer += Time.deltaTime;
             minimumTimer -= Time.deltaTime;
 
-            if (op.progress < 0.9f) 
+            if (operation.progress < 0.9f) 
             {
-                currentProgress = Mathf.FloorToInt(op.progress * 100f);
+                currentProgress = Mathf.FloorToInt(operation.progress * 100f);
                 loadingText.text = string.Format("{0}%", currentProgress);
             }
             else
@@ -107,19 +107,12 @@ public class LoadingManager : MonoBehaviour
                 if (minimumTimer >= 0f)
                     continue;
 
-                if (!op.allowSceneActivation)
+                if (!operation.allowSceneActivation)
                 {
-                    op.allowSceneActivation = true;
+                    operation.allowSceneActivation = true;
                     yield break;
                 }
             }
         }
-    }
-
-    IEnumerator Rotate()
-    {
-        
-        
-        yield return null;
     }
 }
