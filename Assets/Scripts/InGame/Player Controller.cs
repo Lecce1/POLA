@@ -51,6 +51,7 @@ public class PlayerController : MonoBehaviour
     {
         stats.isDead = true;
         rigid.useGravity = false;
+        GameManager.instance.Reset();
         Destroy(gameObject, 3);
     }
     

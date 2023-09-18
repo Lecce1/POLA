@@ -33,15 +33,20 @@ public class LobbyManager : MonoBehaviour
     [Title("에러_네트워크")] 
     public GameObject error_Network;
     
-    [FoldoutGroup("정보")] 
+    [FoldoutGroup("DB")] 
     [Title("닉네임")] 
     public Text nickName_Text;
-    [FoldoutGroup("정보")] 
+    [FoldoutGroup("DB")] 
     [Title("코인")] 
     public Text coin_Text;
-    [FoldoutGroup("정보")] 
+    [FoldoutGroup("DB")] 
     [Title("크리스탈")] 
     public Text crystal_Text;
+
+    [FoldoutGroup("기타")] 
+    [Title("경쟁모드 버튼 클릭 여부")] 
+    [SerializeField]
+    private bool isMatching = false;
     
     // 뒤로가기 스택
     private Stack<GameObject> backStack;
@@ -52,11 +57,6 @@ public class LobbyManager : MonoBehaviour
         if (instance == null)
         {
             instance = this;
-            DontDestroyOnLoad(gameObject);
-        }
-        else
-        {
-            Destroy(gameObject);
         }
 
         backStack = new Stack<GameObject>();
@@ -86,6 +86,20 @@ public class LobbyManager : MonoBehaviour
             case "Stage":
                 DBManager.instance.nextScene = "Game";
                 SceneManager.LoadScene("Loading");
+                break;
+            
+            case "PVP":
+                if (isMatching == false)
+                {
+                    isMatching = true;
+                    TCPServerManager.instance.Send("Matching", "True");
+                }
+                else
+                {
+                    isMatching = false;
+                    TCPServerManager.instance.Send("Matching", "false");
+                }
+                
                 break;
             
             case "Set":

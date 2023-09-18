@@ -50,11 +50,6 @@ public class TCPServerManager : MonoBehaviour
         }
     }
 
-    void Start()
-    {
-        
-    }
-
     public void Connect()
     {
         try
@@ -157,14 +152,21 @@ public class TCPServerManager : MonoBehaviour
             
             if (stream.CanWrite) 
             {          
+                string msg = String.Empty;
+                
                 switch (type)
                 {
                     case "Connect":
-                        string msg = $"{type}|" + data;
-                        byte[] bytes = Encoding.ASCII.GetBytes(msg);
-                        stream.Write(bytes, 0, bytes.Length);
+                        msg = $"{DBManager.instance.nickName}|{type}";
+                        break;
+                    
+                    case "Matching":
+                        msg = $"{DBManager.instance.nickName}|{type}|{data}";
                         break;
                 }
+                
+                byte[] bytes = Encoding.ASCII.GetBytes(msg);
+                stream.Write(bytes, 0, bytes.Length);
             }         
         } 		
         catch (SocketException socketException) {             
