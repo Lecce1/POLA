@@ -7,7 +7,7 @@ public class PlayerController : MonoBehaviour
     private int jumpCount;
     private bool isJumping;
     public Color[] playerColors;
-    PlayerStatsManager stats;
+    public PlayerStatsManager stats;
     MeshRenderer meshRenderer;
     Rigidbody rigid;
     Transform transform;
@@ -33,10 +33,10 @@ public class PlayerController : MonoBehaviour
         currentSpeed = rigid.velocity.x;
     }
     
-    void FixedUpdate()
+    void Update()
     {
         Moving();
-        Boost();
+        OnAttackSlow();
     }
 
     void Moving()
@@ -66,24 +66,6 @@ public class PlayerController : MonoBehaviour
         rigid.useGravity = false;
         GameManager.instance.Reset();
         Destroy(gameObject, 3);
-    }
-
-     void Boost()
-    {
-        if (stats.current.boostGauge > 0 && Input.GetKey(KeyCode.Space))
-        {
-            stats.current.maxSpeed += 10f;
-            stats.current.acceleration += 500f;
-            stats.current.boostGauge -= Time.deltaTime;
-        }
-        else
-        {
-            stats.current.boostGauge += Time.deltaTime;
-            stats.current.maxSpeed = stats.origin.maxSpeed;
-            stats.current.acceleration = stats.origin.acceleration;
-        }
-
-        stats.current.boostGauge = Mathf.Clamp(stats.current.boostGauge, 0, 2);
     }
 
     IEnumerator Jump()
@@ -138,7 +120,36 @@ public class PlayerController : MonoBehaviour
             }
         }
     }
-
+    
+    void OnAttackSlow()
+    {
+        float Distance = 5f;
+        float slowFactor = 0.43f;
+        Ray ray = new Ray(transform.position +  new Vector3(1, 0, 0), transform.right);
+        RaycastHit hit;
+        
+        if (Physics.Raycast(ray, out hit, Distance))
+        {
+            if (hit.collider.CompareTag("Breakable"))
+            {
+                if (stats.current.isInvincibility)
+                {
+                    Destroy(hit.transform.gameObject);
+                    return;
+                }
+                if (hit.transform.position.x - transform.position.x < Distance)
+                {
+                    Time.timeScale = slowFactor;
+                    Time.fixedDeltaTime = Time.timeScale * 0.02f;
+                }
+            }
+            else
+            {
+                Time.timeScale = 1f;
+            } 
+        }
+    }
+    
     void OnCollisionEnter(Collision collision)
     {
         if (Physics.Raycast(transform.position, Vector3.down + Vector3.right * 0.6f, 1f) 
@@ -146,11 +157,16 @@ public class PlayerController : MonoBehaviour
         {
             jumpCount = 0;   
         }
+
+        if (collision.gameObject.CompareTag("Breakable") && !stats.current.isInvincibility)
+        {
+            Die();
+        }
     }
 
     void OnCollisionStay(Collision collisionInfo)
     {
-        if (collisionInfo.gameObject.CompareTag("Obstacle") &&
+        if (collisionInfo.gameObject.CompareTag("Obstacle") && !stats.current.isInvincibility &&
             collisionInfo.gameObject.GetComponent<MeshRenderer>().material.color != meshRenderer.material.color)
         {
             Die();

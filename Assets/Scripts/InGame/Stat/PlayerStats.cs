@@ -20,6 +20,8 @@ public class PlayerStats : ScriptableObject
     [FoldoutGroup("일반/기타")]
     public bool isDead = false;
     [FoldoutGroup("일반/기타")]
+    public bool isInvincibility = false;
+    [FoldoutGroup("일반/기타")]
     public float boostGauge = 2;
         
     [FoldoutGroup("색상")]

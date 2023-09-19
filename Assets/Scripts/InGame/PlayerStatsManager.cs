@@ -9,5 +9,6 @@ public class PlayerStatsManager : MonoBehaviour
     {
         current.maxSpeed = origin.maxSpeed;
         current.isDead = false;
+        current.isInvincibility = false;
     }
 }

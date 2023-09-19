@@ -79,7 +79,21 @@ public class Item : MonoBehaviour
 
     void OnTriggerEnter(Collider other)
     {
-        if(type == "Magnetic") ItemManager.instance.RunEffect<Magnetic>(duration, isLingering);
+        switch (type)
+        {
+            case "Magnetic":
+                ItemManager.instance.RunEffect<Magnetic>(duration, isLingering);
+                break;
+            case "Accelation":
+                ItemManager.instance.RunEffect<Accelation>(duration, isLingering);
+                break;
+            case "Rainbow":
+                ItemManager.instance.RunEffect<Rainbow>(duration, isLingering);
+                break;
+            case "Coin":
+                ItemManager.instance.RunEffect<Coin>(duration, isLingering);
+                break;
+        }
         Destroy(gameObject);
     }
 }
@@ -87,4 +101,6 @@ public class Item : MonoBehaviour
 public abstract class Effect
 {
     public abstract void RunEffect(PlayerController player);
+
+    public abstract void RunExit(PlayerController player);
 }

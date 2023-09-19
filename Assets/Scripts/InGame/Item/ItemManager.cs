@@ -45,5 +45,6 @@ public class ItemManager : MonoBehaviour
             type.RunEffect(player);
             yield return null;
         }
+        type.RunExit(player);
     }
 }

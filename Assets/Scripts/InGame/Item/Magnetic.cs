@@ -1,4 +1,6 @@
-﻿using UnityEngine;
+﻿using System;
+using System.Reflection;
+using UnityEngine;
 
 public class Magnetic : Effect
 {
@@ -25,5 +27,10 @@ public class Magnetic : Effect
                     Vector3.MoveTowards(overlaps[i].transform.position, PlayerController.instance.transform.position, 20f * Time.deltaTime);
             }
         }
+    }
+
+    public override void RunExit(PlayerController player)
+    {
+        
     }
 }
