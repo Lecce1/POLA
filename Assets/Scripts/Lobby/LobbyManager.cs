@@ -47,6 +47,9 @@ public class LobbyManager : MonoBehaviour
     [Title("경쟁모드 버튼 클릭 여부")] 
     [SerializeField]
     private bool isMatching = false;
+    [FoldoutGroup("기타")] 
+    [Title("경쟁모드 매칭 텍스트")]
+    public Text matchingText;
     
     // 뒤로가기 스택
     private Stack<GameObject> backStack;
@@ -92,12 +95,14 @@ public class LobbyManager : MonoBehaviour
                 if (isMatching == false)
                 {
                     isMatching = true;
+                    matchingText.text = "매칭 중";
                     TCPServerManager.instance.Send("Matching", "True");
                 }
                 else
                 {
                     isMatching = false;
-                    TCPServerManager.instance.Send("Matching", "false");
+                    matchingText.text = "더 강력한 장비를 획득 하세요";
+                    TCPServerManager.instance.Send("Matching", "False");
                 }
                 
                 break;
