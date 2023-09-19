@@ -1,21 +1,10 @@
-﻿using System;
-using System.Reflection;
-using UnityEngine;
+﻿using UnityEngine;
 
 public class Magnetic : Effect
 {
     private Collider[] overlaps = new Collider[15];
-    public static Magnetic instance;
 
-    void Awake() 
-    {
-        if (instance == null)
-        {
-            instance = this;
-        }
-    }
-
-    public override void RunEffect(PlayerController player)
+    public override void OnStepEffect(PlayerController player)
     {
         var overlap = Physics.OverlapSphereNonAlloc(player.transform.position, 20f, overlaps);
 
@@ -28,9 +17,6 @@ public class Magnetic : Effect
             }
         }
     }
-
-    public override void RunExit(PlayerController player)
-    {
-        
-    }
+    
+    public override void OnExitEffect(PlayerController player) { }
 }

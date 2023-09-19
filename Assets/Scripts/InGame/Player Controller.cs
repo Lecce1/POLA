@@ -28,7 +28,8 @@ public class PlayerController : MonoBehaviour
         rigid = GetComponent<Rigidbody>();
         meshRenderer = GetComponent<MeshRenderer>();
         transform = GetComponent<Transform>();
-        
+
+        Time.timeScale = 1f;
         jumpCount = 0;
         currentSpeed = rigid.velocity.x;
     }
@@ -109,13 +110,15 @@ public class PlayerController : MonoBehaviour
     public void OnAttackButtonClicked()
     {
         float maxDistance = 30f;
-        Ray ray = new Ray(transform.position, transform.right);
+        Ray ray = new Ray(transform.position + Vector3.right, transform.right);
         RaycastHit hit;
         
         if (Physics.Raycast(ray, out hit, maxDistance))
         {
             if (hit.transform.CompareTag("Breakable"))
             {
+                Debug.Log("?");
+                Time.timeScale = 1f;
                 Destroy(hit.transform.gameObject);
             }
         }
@@ -124,8 +127,8 @@ public class PlayerController : MonoBehaviour
     void OnAttackSlow()
     {
         float Distance = 5f;
-        float slowFactor = 0.43f;
-        Ray ray = new Ray(transform.position +  new Vector3(1, 0, 0), transform.right);
+        float slowFactor = 0.5f;
+        Ray ray = new Ray(transform.position +  Vector3.right, transform.right);
         RaycastHit hit;
         
         if (Physics.Raycast(ray, out hit, Distance))
@@ -140,13 +143,8 @@ public class PlayerController : MonoBehaviour
                 if (hit.transform.position.x - transform.position.x < Distance)
                 {
                     Time.timeScale = slowFactor;
-                    Time.fixedDeltaTime = Time.timeScale * 0.02f;
                 }
             }
-            else
-            {
-                Time.timeScale = 1f;
-            } 
         }
     }
     

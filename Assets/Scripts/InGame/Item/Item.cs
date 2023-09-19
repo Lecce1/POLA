@@ -1,4 +1,5 @@
 using System;
+using System.Reflection;
 using Sirenix.OdinInspector;
 using UnityEngine;
 using Random = UnityEngine.Random;
@@ -69,7 +70,7 @@ public class Item : MonoBehaviour
             direction = dropDirection;
         }
 
-        rigid.velocity = direction;
+        rigid.velocity = direction; 
     }
     
     void RotateItem()
@@ -79,20 +80,11 @@ public class Item : MonoBehaviour
 
     void OnTriggerEnter(Collider other)
     {
-        switch (type)
+        Type targetType = Type.GetType(type);
+        if (targetType != null)
         {
-            case "Magnetic":
-                ItemManager.instance.RunEffect<Magnetic>(duration, isLingering);
-                break;
-            case "Accelation":
-                ItemManager.instance.RunEffect<Accelation>(duration, isLingering);
-                break;
-            case "Rainbow":
-                ItemManager.instance.RunEffect<Rainbow>(duration, isLingering);
-                break;
-            case "Coin":
-                ItemManager.instance.RunEffect<Coin>(duration, isLingering);
-                break;
+            MethodInfo method = typeof(ItemManager).GetMethod("RunEffect")!.MakeGenericMethod(targetType);
+            method.Invoke(ItemManager.instance, new object[] { duration, isLingering });
         }
         Destroy(gameObject);
     }
@@ -100,7 +92,7 @@ public class Item : MonoBehaviour
 
 public abstract class Effect
 {
-    public abstract void RunEffect(PlayerController player);
+    public abstract void OnStepEffect(PlayerController player);
 
-    public abstract void RunExit(PlayerController player);
+    public abstract void OnExitEffect(PlayerController player);
 }

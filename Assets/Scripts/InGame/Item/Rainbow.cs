@@ -1,25 +1,11 @@
-using System.Collections;
-using System.Collections.Generic;
-using UnityEngine;
-
 public class Rainbow : Effect
 {
-    public static Rainbow instance;
-
-    void Awake() 
-    {
-        if (instance == null)
-        {
-            instance = this;
-        }
-    }
-
-    public override void RunEffect(PlayerController player)
+    public override void OnStepEffect(PlayerController player)
     {
         player.stats.current.isInvincibility = true;
     }
 
-    public override void RunExit(PlayerController player)
+    public override void OnExitEffect(PlayerController player)
     {
         player.stats.current.isInvincibility = false;
     }
