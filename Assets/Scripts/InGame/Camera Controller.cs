@@ -12,12 +12,12 @@ public class CameraController : MonoBehaviour
     {
         player = GameObject.Find("Player").GetComponent<PlayerController>();
         VCM = gameObject.GetComponent<CinemachineVirtualCamera>();
-        VCM.m_Lens.FieldOfView = 40f;
+        VCM.m_Lens.FieldOfView = 60f;
     }
     
     void Update()
     {
-        PovValue();
+        //PovValue();
     }
 
     public void PovValue()

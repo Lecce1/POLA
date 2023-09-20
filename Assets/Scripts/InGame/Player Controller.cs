@@ -8,6 +8,8 @@ public class PlayerController : MonoBehaviour
     private bool isJumping;
     public Color[] playerColors;
     public PlayerStatsManager stats;
+    public float maxSlopeAngle = 50.0f;
+    public RaycastHit slopeHit;
     MeshRenderer meshRenderer;
     Rigidbody rigid;
     Transform transform;
@@ -38,10 +40,12 @@ public class PlayerController : MonoBehaviour
     {
         Moving();
         OnAttackSlow();
+        OnTimeReturn();
     }
 
     void Moving()
     {
+        SlopeProcess();
         if (stats.current.isDead)
         {
             rigid.velocity = Vector3.zero;
@@ -69,17 +73,32 @@ public class PlayerController : MonoBehaviour
         Destroy(gameObject, 3);
     }
 
+    void SlopeProcess()
+    {
+        if (IsOnSlope())
+        {
+            Vector3 velocity = AdjustDirectionToSlope(Vector3.right);
+            Debug.Log(velocity);
+            var slopeVelocity = velocity.y * Time.deltaTime * currentSpeed;
+            var vel = rigid.velocity;
+            vel.y = slopeVelocity;
+            rigid.velocity = vel;
+        }
+    }
+    
     IEnumerator Jump()
     {
         float pressedJumpStartTime = Time.time;
         float inverseJumpLength = 1 / stats.current.jumpLength;
         
         while (Time.time - pressedJumpStartTime < stats.current.jumpLength && isJumping)
-        {  
+        {
             var velocity = rigid.velocity;
             velocity.y = stats.current.jumpForce;
             rigid.velocity = velocity;
             stats.current.jumpForce -= Time.deltaTime * stats.current.jumpForce * inverseJumpLength;
+            SlopeProcess();
+            Debug.Log(rigid.velocity.y);
             yield return null;
         }
     }
@@ -88,7 +107,7 @@ public class PlayerController : MonoBehaviour
     {
         if (jumpCount >= stats.current.maxJump)
             return;
-
+        
         stats.current.jumpForce = stats.origin.jumpForce;
         isJumping = true;
         StartCoroutine(Jump());
@@ -109,7 +128,7 @@ public class PlayerController : MonoBehaviour
     
     public void OnAttackButtonClicked()
     {
-        float maxDistance = 30f;
+        float maxDistance = 5f;
         Ray ray = new Ray(transform.position + Vector3.right, transform.right);
         RaycastHit hit;
         
@@ -117,8 +136,6 @@ public class PlayerController : MonoBehaviour
         {
             if (hit.transform.CompareTag("Breakable"))
             {
-                Debug.Log("?");
-                Time.timeScale = 1f;
                 Destroy(hit.transform.gameObject);
             }
         }
@@ -143,9 +160,37 @@ public class PlayerController : MonoBehaviour
                 if (hit.transform.position.x - transform.position.x < Distance)
                 {
                     Time.timeScale = slowFactor;
+                    Time.fixedDeltaTime = Time.timeScale * 0.02f;
                 }
             }
         }
+    }
+
+    void OnTimeReturn()
+    {
+        float slowLength = 2f;
+        Time.timeScale += (1f / slowLength) * Time.unscaledDeltaTime;
+        Time.timeScale = Mathf.Clamp(Time.timeScale, 0f, 1f);
+        Time.fixedDeltaTime = Time.timeScale * 0.02f;
+    }
+    
+    bool IsOnSlope()
+    {
+        float maxDistance = 0.5f;
+        Ray ray = new Ray(transform.position + Vector3.up, transform.up);
+
+        if (Physics.Raycast(ray, out slopeHit, maxDistance))
+        {
+            var angle = Vector3.Angle(Vector3.down, slopeHit.normal);
+            return angle != 0f && angle < maxSlopeAngle;
+        }
+
+        return false;
+    }
+    
+    Vector3 AdjustDirectionToSlope(Vector3 direction)
+    {
+        return Vector3.ProjectOnPlane(direction, slopeHit.normal).normalized;
     }
     
     void OnCollisionEnter(Collision collision)

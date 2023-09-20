@@ -9,7 +9,19 @@ public class ItemManager : MonoBehaviour
 
     public static ItemManager instance;
     
-    List<Tuple<Coroutine, Type>> coroutineList = new();
+    List<Pair<Coroutine, Type>> coroutineList = new();
+
+    private class Pair<T, U>
+    {
+        public T First;
+        public U Second;
+
+        public Pair(T first, U second)
+        {
+            this.First = first;
+            this.Second = second;
+        }
+    }
     
     void Awake()
     {
@@ -26,17 +38,17 @@ public class ItemManager : MonoBehaviour
         T effect = new T();
         if (isLingering)
         {
-            int idx = coroutineList.FindIndex(s => s.Item2 == effect.GetType());
+            int idx = coroutineList.FindIndex(s => s.Second == effect.GetType());
             
             if (idx == -1)
             {
                 idx = coroutineList.Count;
-                coroutineList.Add(new Tuple<Coroutine, Type>(StartCoroutine(EffectOnStep(effect, duration, idx)), effect.GetType()));
+                coroutineList.Add(new Pair<Coroutine, Type>(StartCoroutine(EffectOnStep(effect, duration, idx)), effect.GetType()));
             }
             else
             {
-                StopCoroutine(coroutineList[idx].Item1);
-                coroutineList[idx] = new Tuple<Coroutine, Type>(StartCoroutine(EffectOnStep(effect, duration, idx)), effect.GetType());
+                StopCoroutine(coroutineList[idx].First);
+                coroutineList[idx].First = StartCoroutine(EffectOnStep(effect, duration, idx));
             }
         }
         else
@@ -51,7 +63,6 @@ public class ItemManager : MonoBehaviour
         
         while (time + duration > Time.time)
         {
-            Debug.Log(Time.time - time);
             type.OnStepEffect(player);
             yield return null;
         }

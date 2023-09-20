@@ -83,7 +83,7 @@ public class Item : MonoBehaviour
         Type targetType = Type.GetType(type);
         if (targetType != null)
         {
-            MethodInfo method = typeof(ItemManager).GetMethod("RunEffect")!.MakeGenericMethod(targetType);
+            MethodInfo method = typeof(ItemManager).GetMethod(nameof(ItemManager.RunEffect))!.MakeGenericMethod(targetType);
             method.Invoke(ItemManager.instance, new object[] { duration, isLingering });
         }
         Destroy(gameObject);
