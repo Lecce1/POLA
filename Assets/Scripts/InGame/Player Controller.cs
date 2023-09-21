@@ -1,15 +1,17 @@
+using System;
 using System.Collections;
 using UnityEngine;
+using UnityEngine.UIElements;
 
 public class PlayerController : MonoBehaviour
 {
     public float currentSpeed { get; private set; }
     private int jumpCount;
     private bool isJumping;
+    private float maxSlopeAngle = 50.0f;
+    private Collision collisionInfo;
     public Color[] playerColors;
     public PlayerStatsManager stats;
-    public float maxSlopeAngle = 50.0f;
-    public RaycastHit slopeHit;
     MeshRenderer meshRenderer;
     Rigidbody rigid;
     Transform transform;
@@ -35,7 +37,12 @@ public class PlayerController : MonoBehaviour
         jumpCount = 0;
         currentSpeed = rigid.velocity.x;
     }
-    
+
+    private void FixedUpdate()
+    {
+        currentSpeed = rigid.velocity.x;
+    }
+
     void Update()
     {
         Moving();
@@ -45,7 +52,6 @@ public class PlayerController : MonoBehaviour
 
     void Moving()
     {
-        SlopeProcess();
         if (stats.current.isDead)
         {
             rigid.velocity = Vector3.zero;
@@ -61,8 +67,7 @@ public class PlayerController : MonoBehaviour
         {
             Die();
         }
-        
-        currentSpeed = rigid.velocity.x;
+        Debug.Log(currentSpeed);
     }
     
     void Die()
@@ -72,19 +77,6 @@ public class PlayerController : MonoBehaviour
         GameManager.instance.Reset();
         Destroy(gameObject, 3);
     }
-
-    void SlopeProcess()
-    {
-        if (IsOnSlope())
-        {
-            Vector3 velocity = AdjustDirectionToSlope(Vector3.right);
-            Debug.Log(velocity);
-            var slopeVelocity = velocity.y * Time.deltaTime * currentSpeed;
-            var vel = rigid.velocity;
-            vel.y = slopeVelocity;
-            rigid.velocity = vel;
-        }
-    }
     
     IEnumerator Jump()
     {
@@ -93,16 +85,50 @@ public class PlayerController : MonoBehaviour
         
         while (Time.time - pressedJumpStartTime < stats.current.jumpLength && isJumping)
         {
-            var velocity = rigid.velocity;
-            velocity.y = stats.current.jumpForce;
-            rigid.velocity = velocity;
+            if (!SlopeProcess(collisionInfo))
+            {
+                var velocity = rigid.velocity;
+                velocity.y = stats.current.jumpForce;
+                rigid.velocity = velocity;
+                
+            }
             stats.current.jumpForce -= Time.deltaTime * stats.current.jumpForce * inverseJumpLength;
-            SlopeProcess();
-            Debug.Log(rigid.velocity.y);
             yield return null;
         }
     }
 
+    bool SlopeProcess(Collision collisionInfo)
+    {
+        if (collisionInfo == null)
+        {
+            return false;
+        }
+
+        Vector3 tmp;
+        float angle = -1;
+        foreach (var item in collisionInfo.contacts)
+        {
+            if (Vector3.Angle(Vector3.up, item.normal) >= 90)
+            {
+                continue;
+            }
+            
+            tmp = Vector3.ProjectOnPlane(Vector3.right, item.normal).normalized;
+            angle = 90 - Vector3.Angle(Vector3.down, tmp);
+        }
+        
+        if (angle <= maxSlopeAngle && angle > 0)
+        {
+            var velocity = rigid.velocity;
+            velocity.x = currentSpeed;
+            velocity.y = Mathf.Tan(angle * Mathf.Deg2Rad) * velocity.x;
+            rigid.velocity = velocity;
+            Moving();
+            return true;
+        }
+        return false;
+    }
+    
     public void OnJumpButtonDown()
     {
         if (jumpCount >= stats.current.maxJump)
@@ -173,25 +199,8 @@ public class PlayerController : MonoBehaviour
         Time.timeScale = Mathf.Clamp(Time.timeScale, 0f, 1f);
         Time.fixedDeltaTime = Time.timeScale * 0.02f;
     }
-    
-    bool IsOnSlope()
-    {
-        float maxDistance = 0.5f;
-        Ray ray = new Ray(transform.position + Vector3.up, transform.up);
 
-        if (Physics.Raycast(ray, out slopeHit, maxDistance))
-        {
-            var angle = Vector3.Angle(Vector3.down, slopeHit.normal);
-            return angle != 0f && angle < maxSlopeAngle;
-        }
-
-        return false;
-    }
     
-    Vector3 AdjustDirectionToSlope(Vector3 direction)
-    {
-        return Vector3.ProjectOnPlane(direction, slopeHit.normal).normalized;
-    }
     
     void OnCollisionEnter(Collision collision)
     {
@@ -205,6 +214,8 @@ public class PlayerController : MonoBehaviour
         {
             Die();
         }
+
+        collisionInfo = collision;
     }
 
     void OnCollisionStay(Collision collisionInfo)
@@ -214,5 +225,12 @@ public class PlayerController : MonoBehaviour
         {
             Die();
         }
+
+        this.collisionInfo = collisionInfo;
+    }
+
+    private void OnCollisionExit(Collision other)
+    {
+        collisionInfo = null;
     }
 }
