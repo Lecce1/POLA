@@ -2,7 +2,10 @@ using UnityEngine;
 
 public class ObstacleController : MonoBehaviour
 {
+    [SerializeField]
     Color[] obstacleColor;
+    
+    [SerializeField]
     MeshRenderer meshRenderer;
     
     void Start()

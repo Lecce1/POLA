@@ -4,6 +4,9 @@ public class Magnetic : Effect
 {
     private Collider[] overlaps = new Collider[15];
 
+    /// <summary>
+    /// 자석 효과
+    /// </summary>
     public override void OnStepEffect(PlayerController player)
     {
         var overlap = Physics.OverlapSphereNonAlloc(player.transform.position, 20f, overlaps);
@@ -17,6 +20,9 @@ public class Magnetic : Effect
             }
         }
     }
-    
-    public override void OnExitEffect(PlayerController player) { }
+
+    public override void OnExitEffect(PlayerController player)
+    {
+        
+    }
 }

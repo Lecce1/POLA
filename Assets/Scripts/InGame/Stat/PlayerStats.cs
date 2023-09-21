@@ -21,9 +21,7 @@ public class PlayerStats : ScriptableObject
     public bool isDead = false;
     [FoldoutGroup("일반/기타")]
     public bool isInvincibility = false;
-    [FoldoutGroup("일반/기타")]
-    public float boostGauge = 2;
-        
+
     [FoldoutGroup("색상")]
     public int colorIndex = 0;
 }

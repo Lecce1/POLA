@@ -36,7 +36,6 @@ public class Item : MonoBehaviour
     void Start()
     {
         rigid = GetComponent<Rigidbody>();
-        
         InitializeVelocity();
         
         if (!usePhysics)
@@ -54,6 +53,9 @@ public class Item : MonoBehaviour
         RotateItem();
     }
     
+    /// <summary>
+    /// 만약 물리가 존재하면 물리 값을 초기화
+    /// </summary>
     void InitializeVelocity()
     {
         var direction = initialVelocity.normalized;
@@ -69,18 +71,24 @@ public class Item : MonoBehaviour
         {
             direction = dropDirection;
         }
-
         rigid.velocity = direction; 
     }
     
+    /// <summary>
+    /// 아이템 회전 효과
+    /// </summary>
     void RotateItem()
     {
         transform.Rotate(Vector3.up, rotateSpeed * Time.deltaTime);
     }
 
+    /// <summary>
+    /// 먹은 아이템이 무슨 아이템인지 파악 후 아이템 매니저로 넘겨주는 역할
+    /// </summary>
     void OnTriggerEnter(Collider other)
     {
         Type targetType = Type.GetType(type);
+        
         if (targetType != null)
         {
             MethodInfo method = typeof(ItemManager).GetMethod(nameof(ItemManager.RunEffect))!.MakeGenericMethod(targetType);
@@ -90,9 +98,11 @@ public class Item : MonoBehaviour
     }
 }
 
+/// <summary>
+/// 아이템 양식을 담당하는 추상클래스
+/// </summary>
 public abstract class Effect
 {
     public abstract void OnStepEffect(PlayerController player);
-
     public abstract void OnExitEffect(PlayerController player);
 }

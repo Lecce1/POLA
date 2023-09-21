@@ -1,5 +1,8 @@
 public class Accelation : Effect
 {
+    /// <summary>
+    /// 가속 효과
+    /// </summary>
     public override void OnStepEffect(PlayerController player)
     {
         player.stats.current.maxSpeed = 100f;

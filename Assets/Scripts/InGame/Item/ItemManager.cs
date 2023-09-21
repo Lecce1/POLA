@@ -5,12 +5,14 @@ using UnityEngine;
 
 public class ItemManager : MonoBehaviour
 {
+    [SerializeField]
     private PlayerController player;
-
     public static ItemManager instance;
-    
     List<Pair<Coroutine, Type>> coroutineList = new();
 
+    /// <summary>
+    /// 제네릭에 대한 입력값 쌍을 구현
+    /// </summary>
     private class Pair<T, U>
     {
         public T First;
@@ -23,19 +25,27 @@ public class ItemManager : MonoBehaviour
         }
     }
     
+    /// <summary>
+    /// 인스턴스 생성
+    /// </summary>
     void Awake()
     {
+        player = GameObject.Find("Player").GetComponent<PlayerController>();
+        
         if (instance == null)
         {
             instance = this;
         }
-
-        player = GameObject.Find("Player").GetComponent<PlayerController>();
     }
 
+    
+    /// <summary>
+    /// 먹은 아이템이 무엇인지 받아와서 그에 맞는 아이템 효과를 실행
+    /// </summary>
     public void RunEffect<T>(float duration, bool isLingering) where T : Effect, new()
     {
         T effect = new T();
+        
         if (isLingering)
         {
             int idx = coroutineList.FindIndex(s => s.Second == effect.GetType());
@@ -57,6 +67,9 @@ public class ItemManager : MonoBehaviour
         }
     }
 
+    /// <summary>
+    /// 아이템 효과를 지속시간만큼 실행
+    /// </summary>
     IEnumerator EffectOnStep<T>(T type, float duration, int coroutineIndex) where T : Effect
     {
         float time = Time.time;

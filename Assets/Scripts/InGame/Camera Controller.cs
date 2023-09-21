@@ -5,6 +5,7 @@ public class CameraController : MonoBehaviour
 {
     [SerializeField] 
     private PlayerController player;
+    
     [SerializeField] 
     private CinemachineVirtualCamera VCM;
     
