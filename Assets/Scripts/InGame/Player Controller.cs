@@ -1,6 +1,7 @@
 using System.Collections;
 using UnityEngine;
 using Sirenix.OdinInspector;
+using UnityEngine.UI;
 
 public class PlayerController : MonoBehaviour
 {
@@ -202,9 +203,15 @@ public class PlayerController : MonoBehaviour
         
         if (Physics.Raycast(ray, out hit, maxDistance))
         {
+            Debug.Log(hit.collider.GetComponent<MeshRenderer>().material.color);
+            Debug.Log(meshRenderer.material.color);
             if (hit.transform.CompareTag("Breakable"))
             {
-                Destroy(hit.transform.gameObject);
+                if (meshRenderer.material.color == hit.collider.GetComponent<MeshRenderer>().material.color)
+                {
+                    Destroy(hit.transform.gameObject);
+                }
+                
             }
         }
     }
@@ -215,7 +222,7 @@ public class PlayerController : MonoBehaviour
     void OnAttackSlow()
     {
         float Distance = 5f;
-        float slowFactor = 0.5f;
+        float slowFactor = 0.4f;
         Ray ray = new Ray(transform.position +  Vector3.right, transform.right);
         RaycastHit hit;
         
@@ -261,13 +268,15 @@ public class PlayerController : MonoBehaviour
         {
             Die();
         }
+        
+        
 
         collisionInfo = collision;
     }
 
     void OnCollisionStay(Collision collisionInfo)
     {
-        if (collisionInfo.gameObject.CompareTag("Obstacle") && !stats.current.isInvincibility &&
+        if (collisionInfo.gameObject.CompareTag("Obstacle") && !stats.current.isInvincibility && 
             collisionInfo.gameObject.GetComponent<MeshRenderer>().material.color != meshRenderer.material.color)
         {
             Die();

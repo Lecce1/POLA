@@ -16,7 +16,7 @@ public class Magnetic : Effect
             if (overlaps[i].CompareTag("Collectable"))
             {
                 overlaps[i].transform.position =
-                    Vector3.MoveTowards(overlaps[i].transform.position, PlayerController.instance.transform.position, 20f * Time.deltaTime);
+                    Vector3.MoveTowards(overlaps[i].transform.position, PlayerController.instance.transform.position, 30f * Time.deltaTime);
             }
         }
     }
