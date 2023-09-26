@@ -1,64 +1,48 @@
+using Sirenix.OdinInspector;
 using UnityEngine;
-
-public enum ColorOption
-{
-    None,
-    Red,
-    Green,
-    Blue
-}
 
 public class ObstacleController : MonoBehaviour
 {
-    public ColorOption selectedColorOption;
+    private Color[] colorOptions;
+    
+    [FoldoutGroup("색상 정보")]
+    [SerializeField]
+    private bool isRandom;
+    
+    [FoldoutGroup("색상 정보")]
+    [SerializeField]
+    private int colorIndex;
+    
+    [FoldoutGroup("기타")]
+    [SerializeField]
+    private bool isDeadZone;
+    
 
     void Start()
     {
+        colorOptions = PlayerController.instance.GetPlayerColors();
+        
         ApplySelectedColor();
     }
-    
+
     void ApplySelectedColor()
     {
-        Color selectedColor;
-
-        if (selectedColorOption == ColorOption.None)
-        {
-            selectedColor = GetRandomColor();
-        }
-        else
-        {
-            selectedColor = GetColorOption(selectedColorOption);
-        }
-
         Renderer renderer = GetComponent<Renderer>();
-
+        
+        if (isDeadZone)
+        {
+            renderer.material.color = Color.black;
+            return;
+        }
+        
+        if (isRandom)
+        {
+            colorIndex = Random.Range(0, colorOptions.Length);
+        }
+        
         if (renderer != null)
         {
-            renderer.material.color = selectedColor;
+            renderer.material.color = colorOptions[colorIndex];
         }
-    }
-
-    Color GetColorOption(ColorOption option)
-    {
-        switch (option)
-        {
-            case ColorOption.Red:
-                return Color.red;
-            case ColorOption.Green:
-                return Color.green;
-            case ColorOption.Blue:
-                return Color.blue;
-            case ColorOption.None:
-                return GetRandomColor();
-            default:
-                return Color.white;
-        }
-    }
-
-    Color GetRandomColor()
-    {
-        System.Random random = new System.Random();
-        int randomIndex = random.Next(0, 3);
-        return GetColorOption((ColorOption)randomIndex);
     }
 }

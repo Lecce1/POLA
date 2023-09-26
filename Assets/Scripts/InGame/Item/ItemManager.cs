@@ -20,8 +20,8 @@ public class ItemManager : MonoBehaviour
 
         public Pair(T first, U second)
         {
-            this.First = first;
-            this.Second = second;
+            First = first;
+            Second = second;
         }
     }
     
@@ -42,6 +42,8 @@ public class ItemManager : MonoBehaviour
     /// <summary>
     /// 먹은 아이템이 무엇인지 받아와서 그에 맞는 아이템 효과를 실행
     /// </summary>
+    /// <param name="isLingering">잔류형 아이템인지 사용 즉시 효과가 실행되고 끝인지를 나타내는 bool형 파라미터</param>
+    /// <param name="duration">잔류형 아이템이라면 그 시간이 얼마나 지속되는지를 나타내는 float형 파라미터</param>
     public void RunEffect<T>(float duration, bool isLingering) where T : Effect, new()
     {
         T effect = new T();
@@ -70,6 +72,8 @@ public class ItemManager : MonoBehaviour
     /// <summary>
     /// 아이템 효과를 지속시간만큼 실행
     /// </summary>
+    /// <param name="type">아이템의 타입</param>
+    /// <param name="coroutineIndex">코루틴이 저장된 인덱스</param>
     IEnumerator EffectOnStep<T>(T type, float duration, int coroutineIndex) where T : Effect
     {
         float time = Time.time;

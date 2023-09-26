@@ -270,7 +270,7 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 119578274}
   serializedVersion: 2
-  m_LocalRotation: {x: 0.18490568, y: 0.096821636, z: -0.018309264, w: 0.97780377}
+  m_LocalRotation: {x: 0.18490568, y: 0.09682166, z: -0.01830927, w: 0.97780377}
   m_LocalPosition: {x: -17.9, y: 4.8, z: -5}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
@@ -594,12 +594,11 @@ MonoBehaviour:
   maxSlopeAngle: 50
   stats: {fileID: 0}
   playerColors:
-  - {r: 0, g: 0, b: 1, a: 1}
   - {r: 1, g: 0, b: 0, a: 1}
+  - {r: 1, g: 0, b: 1, a: 1}
   - {r: 0, g: 1, b: 0, a: 1}
   meshRenderer: {fileID: 0}
   rigid: {fileID: 0}
-  transform: {fileID: 0}
 --- !u!54 &200840657
 Rigidbody:
   m_ObjectHideFlags: 0
@@ -1045,7 +1044,9 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 49816b77de26ec240a5746bf3ab282d6, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  selectedColorOption: 1
+  isRandom: 0
+  isDeadZone: 0
+  colorIndex: 1
 --- !u!65 &343596735
 BoxCollider:
   m_ObjectHideFlags: 0
@@ -2593,7 +2594,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 0
+  m_IsActive: 1
 --- !u!4 &1185907164
 Transform:
   m_ObjectHideFlags: 0
@@ -2603,7 +2604,7 @@ Transform:
   m_GameObject: {fileID: 1185907163}
   serializedVersion: 2
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 130.5, y: 0, z: 0}
+  m_LocalPosition: {x: 130.5, y: 19.6, z: 0}
   m_LocalScale: {x: 60, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children: []
@@ -2621,7 +2622,9 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 49816b77de26ec240a5746bf3ab282d6, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  selectedColorOption: 0
+  isRandom: 0
+  isDeadZone: 0
+  colorIndex: 2
 --- !u!65 &1185907166
 BoxCollider:
   m_ObjectHideFlags: 0
@@ -3156,7 +3159,9 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 49816b77de26ec240a5746bf3ab282d6, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  selectedColorOption: 0
+  isRandom: 0
+  isDeadZone: 0
+  colorIndex: 1
 --- !u!65 &1423136861
 BoxCollider:
   m_ObjectHideFlags: 0
@@ -3350,7 +3355,9 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 49816b77de26ec240a5746bf3ab282d6, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  selectedColorOption: 2
+  isRandom: 0
+  isDeadZone: 0
+  colorIndex: 0
 --- !u!65 &1459836682
 BoxCollider:
   m_ObjectHideFlags: 0
@@ -3691,7 +3698,9 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 49816b77de26ec240a5746bf3ab282d6, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  selectedColorOption: 1
+  isRandom: 0
+  isDeadZone: 0
+  colorIndex: 2
 --- !u!65 &1598472571
 BoxCollider:
   m_ObjectHideFlags: 0
@@ -4322,7 +4331,9 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 49816b77de26ec240a5746bf3ab282d6, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  selectedColorOption: 0
+  isRandom: 0
+  isDeadZone: 1
+  colorIndex: 0
 --- !u!65 &1859196712
 BoxCollider:
   m_ObjectHideFlags: 0

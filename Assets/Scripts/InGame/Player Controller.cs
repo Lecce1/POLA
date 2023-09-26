@@ -1,7 +1,6 @@
 using System.Collections;
 using UnityEngine;
 using Sirenix.OdinInspector;
-using UnityEngine.UI;
 
 public class PlayerController : MonoBehaviour
 {
@@ -21,8 +20,8 @@ public class PlayerController : MonoBehaviour
     
     [FoldoutGroup("스텟")]
     public PlayerStatsManager stats;
-    
-    [FoldoutGroup("일반")]
+
+    [FoldoutGroup("일반")] 
     public Color[] playerColors;
     
     [SerializeField]
@@ -30,9 +29,6 @@ public class PlayerController : MonoBehaviour
     
     [SerializeField]
     Rigidbody rigid;
-    
-    [SerializeField]
-    Transform transform;
 
     public static PlayerController instance;
 
@@ -52,11 +48,15 @@ public class PlayerController : MonoBehaviour
         stats = GetComponent<PlayerStatsManager>();
         rigid = GetComponent<Rigidbody>();
         meshRenderer = GetComponent<MeshRenderer>();
-        transform = GetComponent<Transform>();
 
         Time.timeScale = 1f;
         jumpCount = 0;
         currentSpeed = rigid.velocity.x;
+    }
+
+    private void Update()
+    {
+        KeyboardControl();
     }
 
     private void FixedUpdate()
@@ -65,6 +65,28 @@ public class PlayerController : MonoBehaviour
         OnAttackSlow();
         OnTimeReturn();
         currentSpeed = rigid.velocity.x;
+    }
+
+    void KeyboardControl()
+    {
+        if (Input.GetKeyDown(KeyCode.UpArrow))
+        {
+            OnJumpButtonDown();
+        }
+        if (Input.GetKeyUp(KeyCode.UpArrow))
+        {
+            OnJumpButtonUp();
+        }
+
+        if (Input.GetKeyDown(KeyCode.LeftControl))
+        {
+            OnColorChanged();
+        }
+
+        if (Input.GetKeyDown(KeyCode.Z))
+        {
+            OnAttackButtonClicked();
+        }
     }
     
     /// <summary>
@@ -122,9 +144,10 @@ public class PlayerController : MonoBehaviour
     }
 
     /// <summary>
-    /// 경사면 충돌에 관한 처리 및 계산
+    /// 플레이어 기준 머리에 경사면을 부딪혔을 때의 충돌에 관한 처리 및 계산
     /// </summary>
-    /// <param name="collisionInfo">플레이어 기준 오브젝트에 머리를 부딪혔을 때</param>
+    /// <param name="collisionInfo">플레이어의 충돌정보</param>
+    /// <returns>충돌 처리를 했다면 true, 처리를 하지 않았다면 false를 반환</returns>
     bool SlopeProcess(Collision collisionInfo)
     {
         if (collisionInfo == null)
@@ -288,5 +311,10 @@ public class PlayerController : MonoBehaviour
     private void OnCollisionExit(Collision other)
     {
         collisionInfo = null;
+    }
+
+    public Color[] GetPlayerColors()
+    {
+        return playerColors;
     }
 }
