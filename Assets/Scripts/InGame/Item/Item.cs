@@ -105,4 +105,5 @@ public abstract class Effect
 {
     public abstract void OnStepEffect(PlayerController player);
     public abstract void OnExitEffect(PlayerController player);
+    public PlayerParticle particle;
 }

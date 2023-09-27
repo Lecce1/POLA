@@ -12,6 +12,9 @@ public class PlayerController : MonoBehaviour
     
     [SerializeField]
     private float maxSlopeAngle = 50.0f;
+
+    [SerializeField] 
+    public bool isGrounded = false; 
     
     private Collision collisionInfo;
     
@@ -120,6 +123,32 @@ public class PlayerController : MonoBehaviour
         rigid.useGravity = false;
         GameManager.instance.Reset();
         Destroy(gameObject, 3);
+        StopAllCoroutines();
+    }
+    
+    /// <summary>
+    /// 점프 버튼을 눌렀을 때
+    /// </summary>
+    public void OnJumpButtonDown()
+    {
+        if (jumpCount >= stats.current.maxJump)
+        {
+            return;
+        }
+        
+        stats.current.jumpForce = stats.origin.jumpForce;
+        isJumping = true;
+        isGrounded = false;
+        StartCoroutine(Jump());
+        jumpCount++;
+    }
+
+    /// <summary>
+    /// 점프 버튼을 뗐을 때
+    /// </summary>
+    public void OnJumpButtonUp()
+    {
+        isJumping = false;
     }
     
     /// <summary>
@@ -178,30 +207,6 @@ public class PlayerController : MonoBehaviour
             return true;
         }
         return false;
-    }
-    
-    /// <summary>
-    /// 점프 버튼을 눌렀을 때
-    /// </summary>
-    public void OnJumpButtonDown()
-    {
-        if (jumpCount >= stats.current.maxJump)
-        {
-            return;
-        }
-        
-        stats.current.jumpForce = stats.origin.jumpForce;
-        isJumping = true;
-        StartCoroutine(Jump());
-        jumpCount++;
-    }
-
-    /// <summary>
-    /// 점프 버튼을 뗐을 때
-    /// </summary>
-    public void OnJumpButtonUp()
-    {
-        isJumping = false;
     }
 
     /// <summary>
@@ -279,20 +284,29 @@ public class PlayerController : MonoBehaviour
         Time.fixedDeltaTime = Time.timeScale * 0.02f;
     }
     
+    public Color[] GetPlayerColors()
+    {
+        return playerColors;
+    }
+    
     void OnCollisionEnter(Collision collision)
     {
+        if (Physics.Raycast(transform.position, Vector3.down * 0.6f, 1f)
+            && collision.gameObject.layer == LayerMask.NameToLayer("Ground") && !stats.current.isDead)
+        {
+            isGrounded = true;
+        }
+        
         if (Physics.Raycast(transform.position, Vector3.down + Vector3.right * 0.6f, 1f) 
             && collision.gameObject.layer == LayerMask.NameToLayer("Ground") && !stats.current.isDead)
         {
-            jumpCount = 0;   
+            jumpCount = 0;
         }
 
         if (collision.gameObject.CompareTag("Breakable") && !stats.current.isInvincibility)
         {
             Die();
         }
-        
-        
 
         collisionInfo = collision;
     }
@@ -311,10 +325,5 @@ public class PlayerController : MonoBehaviour
     private void OnCollisionExit(Collision other)
     {
         collisionInfo = null;
-    }
-
-    public Color[] GetPlayerColors()
-    {
-        return playerColors;
     }
 }

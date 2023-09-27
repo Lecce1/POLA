@@ -1,10 +1,14 @@
+using System.Collections;
 using UnityEngine;
 using UnityEngine.SceneManagement;
+using UnityEngine.UI;
 
 public class GameManager : MonoBehaviour
 {
     public static GameManager instance;
-
+    // public Text timerText;
+    // public int timer = 0;
+    
     /// <summary>
     /// 인스턴스 생성
     /// </summary>
@@ -40,4 +44,20 @@ public class GameManager : MonoBehaviour
     {
         SceneManager.LoadScene("Game");
     }
+
+    // private void Start()
+    // {
+    //     StartCoroutine(TimerCoroution());
+    // }
+    //
+    // IEnumerator TimerCoroution()
+    // {
+    //     timer += 1;
+    //
+    //     timerText.text = (timer / 3600).ToString("D2") + ":" + (timer / 60 % 60).ToString("D2") + ":" + (timer % 60).ToString("D2");
+    //     
+    //     yield return new WaitForSeconds(1f);
+    //
+    //     StartCoroutine(TimerCoroution());
+    // }
 }
