@@ -5,11 +5,15 @@ public class Accelation : Effect
     /// <summary>
     /// 가속 효과
     /// </summary>
+    public override void OnEnterEffect(PlayerController player)
+    {
+        particle = player.GetComponent<PlayerParticle>();
+    }
     public override void OnStepEffect(PlayerController player)
     {
         particle.OnAccelation();
         player.stats.current.maxSpeed = 100f;
-        player.stats.current.acceleration = 5000f;
+        player.stats.current.acceleration = 20000f;
     }
 
     public override void OnExitEffect(PlayerController player)

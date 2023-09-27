@@ -71,7 +71,7 @@ public class Item : MonoBehaviour
         {
             direction = dropDirection;
         }
-        rigid.velocity = direction; 
+        rigid.velocity = direction;
     }
     
     /// <summary>
@@ -103,7 +103,9 @@ public class Item : MonoBehaviour
 /// </summary>
 public abstract class Effect
 {
+    public PlayerParticle particle;
+
+    public abstract void OnEnterEffect(PlayerController player);
     public abstract void OnStepEffect(PlayerController player);
     public abstract void OnExitEffect(PlayerController player);
-    public PlayerParticle particle;
 }

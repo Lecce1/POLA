@@ -3,6 +3,10 @@ public class Rainbow : Effect
     /// <summary>
     /// 무적기
     /// </summary>
+    public override void OnEnterEffect(PlayerController player)
+    {
+        
+    }
     public override void OnStepEffect(PlayerController player)
     {
         player.stats.current.isInvincibility = true;

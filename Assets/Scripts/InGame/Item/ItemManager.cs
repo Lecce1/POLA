@@ -48,19 +48,20 @@ public class ItemManager : MonoBehaviour
     {
         T effect = new T();
         
+        effect.OnEnterEffect(player);
         if (isLingering)
         {
             int idx = coroutineList.FindIndex(s => s.Second == effect.GetType());
             
             if (idx == -1)
             {
-                idx = coroutineList.Count;
-                coroutineList.Add(new Pair<Coroutine, Type>(StartCoroutine(EffectOnStep(effect, duration, idx)), effect.GetType()));
+                Debug.Log(effect);
+                coroutineList.Add(new Pair<Coroutine, Type>(StartCoroutine(EffectOnStep(effect, duration)), effect.GetType()));
             }
             else
             {
                 StopCoroutine(coroutineList[idx].First);
-                coroutineList[idx].First = StartCoroutine(EffectOnStep(effect, duration, idx));
+                coroutineList[idx].First = StartCoroutine(EffectOnStep(effect, duration));
             }
         }
         else
@@ -73,8 +74,7 @@ public class ItemManager : MonoBehaviour
     /// 아이템 효과를 지속시간만큼 실행
     /// </summary>
     /// <param name="type">아이템의 타입</param>
-    /// <param name="coroutineIndex">코루틴이 저장된 인덱스</param>
-    IEnumerator EffectOnStep<T>(T type, float duration, int coroutineIndex) where T : Effect
+    IEnumerator EffectOnStep<T>(T type, float duration) where T : Effect
     {
         float time = Time.time;
         
@@ -85,6 +85,8 @@ public class ItemManager : MonoBehaviour
         }
         
         type.OnExitEffect(player);
-        coroutineList.RemoveAt(coroutineIndex);
+        
+        int idx = coroutineList.FindIndex(s => s.Second == type.GetType());
+        coroutineList.RemoveAt(idx);
     }
 }

@@ -6,8 +6,8 @@ using UnityEngine.UI;
 public class GameManager : MonoBehaviour
 {
     public static GameManager instance;
-    // public Text timerText;
-    // public int timer = 0;
+    public Text timerText;
+    public float timer = 0;
     
     /// <summary>
     /// 인스턴스 생성
@@ -45,19 +45,29 @@ public class GameManager : MonoBehaviour
         SceneManager.LoadScene("Game");
     }
 
-    // private void Start()
-    // {
-    //     StartCoroutine(TimerCoroution());
-    // }
-    //
-    // IEnumerator TimerCoroution()
-    // {
-    //     timer += 1;
-    //
-    //     timerText.text = (timer / 3600).ToString("D2") + ":" + (timer / 60 % 60).ToString("D2") + ":" + (timer % 60).ToString("D2");
-    //     
-    //     yield return new WaitForSeconds(1f);
-    //
-    //     StartCoroutine(TimerCoroution());
-    // }
+    private void Start()
+    {
+        StartCoroutine(TimerCoroutine());
+    }
+    
+    IEnumerator TimerCoroutine()
+    {
+        int min = 0;
+        float sec = 0;
+        
+        while (true)
+        {
+            timer += Time.deltaTime;
+            sec += Time.deltaTime;
+            
+            if (sec >= 60)
+            {
+                min++;
+                sec -= 60;
+            }
+            
+            timerText.text = min + ":" + sec.ToString("00.00");
+            yield return null;
+        }
+    }
 }
