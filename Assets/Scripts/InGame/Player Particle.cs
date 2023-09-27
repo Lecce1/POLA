@@ -29,7 +29,7 @@ public class PlayerParticle : MonoBehaviour
     
     public void WalkParticle()
     {
-        if (player.isGrounded)
+        if (player.isGrounded && !accelationTrails.isPlaying && !landDust.isPlaying)
         {
             Play(walkDust);
         }

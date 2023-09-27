@@ -13,8 +13,10 @@ public class PlayerController : MonoBehaviour
     [SerializeField]
     private float maxSlopeAngle = 50.0f;
 
-    [SerializeField] 
-    public bool isGrounded = false; 
+    [SerializeField]
+    public bool isGrounded = false;
+
+    private PlayerParticle particle;
     
     private Collision collisionInfo;
     
@@ -51,7 +53,8 @@ public class PlayerController : MonoBehaviour
         stats = GetComponent<PlayerStatsManager>();
         rigid = GetComponent<Rigidbody>();
         meshRenderer = GetComponent<MeshRenderer>();
-
+        particle = GetComponent<PlayerParticle>();
+        
         Time.timeScale = 1f;
         jumpCount = 0;
         currentSpeed = rigid.velocity.x;
@@ -295,6 +298,7 @@ public class PlayerController : MonoBehaviour
             && collision.gameObject.layer == LayerMask.NameToLayer("Ground") && !stats.current.isDead)
         {
             isGrounded = true;
+            particle.LandParticle();
         }
         
         if (Physics.Raycast(transform.position, Vector3.down + Vector3.right * 0.6f, 1f) 

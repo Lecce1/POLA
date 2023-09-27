@@ -1,5 +1,4 @@
 using UnityEngine;
-
 public class Accelation : Effect
 {
     /// <summary>
@@ -8,6 +7,7 @@ public class Accelation : Effect
     public override void OnEnterEffect(PlayerController player)
     {
         particle = player.GetComponent<PlayerParticle>();
+        //PP = Camera.GetComponent<PostProcessing>();
     }
     public override void OnStepEffect(PlayerController player)
     {
