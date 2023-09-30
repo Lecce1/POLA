@@ -127,32 +127,20 @@ public class PlayerController : MonoBehaviour
     /// </summary>
     void Die()
     {
-        StartCoroutine(DieAnim());
-    }
-
-    IEnumerator DieAnim()
-    {
-        float startTime = Time.time; // Die 애니메이션 시작 시간 기록
         anim.SetTrigger("Die");
-
-        while (Time.time - startTime < 2f) // 2초 동안 대기
-        {
-            yield return null;
-        }
-
         stats.current.isDead = true;
         rigid.useGravity = false;
         GameManager.instance.Reset();
         Destroy(gameObject, 3);
         StopAllCoroutines();
     }
-    
+
     /// <summary>
     /// 점프 버튼을 눌렀을 때
     /// </summary>
     public void OnJumpButtonDown()
     {
-        if (jumpCount < stats.current.maxJump && !isJumping)
+        if (jumpCount < stats.current.maxJump)
         {
             stats.current.jumpForce = stats.origin.jumpForce;
             isJumping = true;

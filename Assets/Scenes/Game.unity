@@ -273,6 +273,8 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   volume: {fileID: 0}
   dof: {fileID: 0}
+  ca: {fileID: 0}
+  ld: {fileID: 0}
 --- !u!114 &119578280
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -1161,6 +1163,10 @@ PrefabInstance:
       propertyPath: m_Controller
       value: 
       objectReference: {fileID: 9100000, guid: a9820c86eda91304cbcf018f2883dd5a, type: 2}
+    - target: {fileID: 1619602782402398254, guid: 58b01ac65b2114d449e30a28cebd9347, type: 3}
+      propertyPath: m_ApplyRootMotion
+      value: 0
+      objectReference: {fileID: 0}
     - target: {fileID: 2772478308444129024, guid: 58b01ac65b2114d449e30a28cebd9347, type: 3}
       propertyPath: m_Name
       value: Player

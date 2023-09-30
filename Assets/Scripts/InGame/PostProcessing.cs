@@ -5,13 +5,24 @@ using UnityEngine.Rendering.PostProcessing;
 [RequireComponent(typeof(Camera))]
 public class PostProcessing : MonoBehaviour
 {
-    public PostProcessVolume volume;
-    public DepthOfField dof;
+    [SerializeField]
+    private PostProcessVolume volume;
+    
+    [SerializeField]
+    private DepthOfField dof;
 
+    [SerializeField] 
+    private ChromaticAberration ca;
+
+    [SerializeField] 
+    private LensDistortion ld;
+    
     void Start()
     {
         volume = GetComponent<PostProcessVolume>();
         volume.profile.TryGetSettings(out dof);
+        volume.profile.TryGetSettings(out ca);
+        volume.profile.TryGetSettings(out ld);
 
         ItemEaten();
     }
@@ -33,14 +44,31 @@ public class PostProcessing : MonoBehaviour
         }
     }
 
+    IEnumerator AdjustChromaticAberration()
+    {
+        float startTime = Time.time;
+        float duration = 1f;
+
+        while (Time.time - startTime < duration)
+        {
+            if (dof != null)
+            {
+                ca.intensity.value = 1f;
+                ld.intensity.value = -100f;
+                ld.scale.value = 0.9f;
+            }
+            
+            yield return null;
+        }
+    }
 
     IEnumerator ApplyEffects()
     {
-        yield return StartCoroutine(AdjustDepthOfField(1f, 1.2f));
-        ResetEffects();
+        yield return StartCoroutine(AdjustChromaticAberration());
+        ResetCa();
     }
 
-    void ResetEffects()
+    void ResetDof()
     {
         if (dof != null)
         {
@@ -48,6 +76,17 @@ public class PostProcessing : MonoBehaviour
             dof.aperture.value = 2.8f;
         }
     }
+
+    void ResetCa()
+    {
+        if (ca != null)
+        {
+            ca.intensity.value = 0;
+            ld.intensity.value = 0f;
+            ld.scale.value = 1f;
+        }
+    }
+    
     public void ItemEaten()
     {
         StartCoroutine(ApplyEffects());
