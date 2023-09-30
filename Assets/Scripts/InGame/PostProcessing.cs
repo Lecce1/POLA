@@ -19,7 +19,7 @@ public class PostProcessing : MonoBehaviour
     IEnumerator AdjustDepthOfField(float focusDistance, float aperture)
     {
         float startTime = Time.time;
-        float duration = 5.0f;
+        float duration = 0.4f;
 
         while (Time.time - startTime < duration)
         {

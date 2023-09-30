@@ -29,7 +29,7 @@ public class PlayerParticle : MonoBehaviour
     
     public void WalkParticle()
     {
-        if (player.isGrounded && !accelationTrails.isPlaying && !landDust.isPlaying)
+        if (player.isGrounded && !accelationTrails.isPlaying && !landDust.isPlaying && !player.stats.current.isDead)
         {
             Play(walkDust);
         }
@@ -41,10 +41,7 @@ public class PlayerParticle : MonoBehaviour
 
     public void LandParticle()
     {
-        if (Mathf.Abs(player.GetComponent<Rigidbody>().velocity.y) >= landingParticleMinSpeed)
-        {
-            Play(landDust);
-        }
+        Play(landDust);
     }
     
 

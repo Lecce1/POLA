@@ -35,8 +35,12 @@ public class PlayerController : MonoBehaviour
     [SerializeField]
     Rigidbody rigid;
 
+    [SerializeField] 
+    Animator anim;
+    
     public static PlayerController instance;
-
+    private Coroutine jumpCoroutine;
+    
     /// <summary>
     /// 인스턴스 생성
     /// </summary>
@@ -54,6 +58,7 @@ public class PlayerController : MonoBehaviour
         rigid = GetComponent<Rigidbody>();
         meshRenderer = GetComponent<MeshRenderer>();
         particle = GetComponent<PlayerParticle>();
+        anim = GetComponent<Animator>();
         
         Time.timeScale = 1f;
         jumpCount = 0;
@@ -105,9 +110,9 @@ public class PlayerController : MonoBehaviour
             rigid.velocity = Vector3.zero;
             return;
         }
-        
+
         if (rigid.velocity.x < stats.current.maxSpeed)
-        {  
+        {
             rigid.AddForce(Vector3.right * stats.current.acceleration * Time.deltaTime, ForceMode.Force);
         }
 
@@ -122,6 +127,19 @@ public class PlayerController : MonoBehaviour
     /// </summary>
     void Die()
     {
+        StartCoroutine(DieAnim());
+    }
+
+    IEnumerator DieAnim()
+    {
+        float startTime = Time.time; // Die 애니메이션 시작 시간 기록
+        anim.SetTrigger("Die");
+
+        while (Time.time - startTime < 2f) // 2초 동안 대기
+        {
+            yield return null;
+        }
+
         stats.current.isDead = true;
         rigid.useGravity = false;
         GameManager.instance.Reset();
@@ -134,16 +152,16 @@ public class PlayerController : MonoBehaviour
     /// </summary>
     public void OnJumpButtonDown()
     {
-        if (jumpCount >= stats.current.maxJump)
+        if (jumpCount < stats.current.maxJump && !isJumping)
         {
-            return;
+            stats.current.jumpForce = stats.origin.jumpForce;
+            isJumping = true;
+            isGrounded = false;
+            anim.SetTrigger("Jump");
+            anim.SetBool("IsGrounded", false);
+            jumpCoroutine = StartCoroutine(Jump());
+            jumpCount++;
         }
-        
-        stats.current.jumpForce = stats.origin.jumpForce;
-        isJumping = true;
-        isGrounded = false;
-        StartCoroutine(Jump());
-        jumpCount++;
     }
 
     /// <summary>
@@ -151,8 +169,17 @@ public class PlayerController : MonoBehaviour
     /// </summary>
     public void OnJumpButtonUp()
     {
-        isJumping = false;
+        if (isJumping)
+        {
+            isJumping = false;
+            if (jumpCoroutine != null)
+            {
+                StopCoroutine(jumpCoroutine);
+                jumpCoroutine = null;
+            }
+        }
     }
+    
     
     /// <summary>
     /// 점프 기능 구현
@@ -173,6 +200,7 @@ public class PlayerController : MonoBehaviour
             stats.current.jumpForce -= Time.deltaTime * stats.current.jumpForce * inverseJumpLength;
             yield return null;
         }
+        jumpCount--;
     }
 
     /// <summary>
@@ -314,6 +342,7 @@ public class PlayerController : MonoBehaviour
         if (collision.gameObject.layer == LayerMask.NameToLayer("Ground") && !stats.current.isDead)
         {
             isGrounded = true;
+            anim.SetBool("IsGrounded", true);
             particle.LandParticle();
             jumpCount = 0;
         }
