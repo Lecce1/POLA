@@ -89,14 +89,17 @@ public class Item : MonoBehaviour
     /// </summary>
     void OnTriggerEnter(Collider other)
     {
-        Type targetType = Type.GetType(type);
-        
-        if (targetType != null)
+        if (other.CompareTag("Player"))
         {
-            MethodInfo method = typeof(ItemManager).GetMethod(nameof(ItemManager.RunEffect))!.MakeGenericMethod(targetType);
-            method.Invoke(ItemManager.instance, new object[] { duration, isLingering });
+            Type targetType = Type.GetType(type);
+        
+            if (targetType != null)
+            {
+                MethodInfo method = typeof(ItemManager).GetMethod(nameof(ItemManager.RunEffect))!.MakeGenericMethod(targetType);
+                method.Invoke(ItemManager.instance, new object[] { duration, isLingering });
+            }
+            Destroy(gameObject);
         }
-        Destroy(gameObject);
     }
 }
 

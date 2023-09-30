@@ -287,32 +287,36 @@ public class PlayerController : MonoBehaviour
         Time.fixedDeltaTime = Time.timeScale * 0.02f;
     }
     
-    public Color[] GetPlayerColors()
-    {
-        return playerColors;
-    }
-    
     void OnCollisionEnter(Collision collision)
     {
-        if (Physics.Raycast(transform.position, Vector3.down * 0.6f, 1f)
-            && collision.gameObject.layer == LayerMask.NameToLayer("Ground") && !stats.current.isDead)
+        collisionInfo = collision;
+        float currentSlopeAngle = 0f;
+
+        foreach (var item in collision.contacts)
         {
-            isGrounded = true;
-            particle.LandParticle();
+            var maxSlope = Vector3.Angle(Vector3.up, item.normal);
+            if (maxSlope > currentSlopeAngle)
+            {
+                currentSlopeAngle = maxSlope;
+            }
         }
         
-        if (Physics.Raycast(transform.position, Vector3.down + Vector3.right * 0.6f, 1f) 
-            && collision.gameObject.layer == LayerMask.NameToLayer("Ground") && !stats.current.isDead)
-        {
-            jumpCount = 0;
-        }
-
         if (collision.gameObject.CompareTag("Breakable") && !stats.current.isInvincibility)
         {
             Die();
         }
 
-        collisionInfo = collision;
+        if (currentSlopeAngle > maxSlopeAngle)
+        {
+            return;
+        }
+        
+        if (collision.gameObject.layer == LayerMask.NameToLayer("Ground") && !stats.current.isDead)
+        {
+            isGrounded = true;
+            particle.LandParticle();
+            jumpCount = 0;
+        }
     }
 
     void OnCollisionStay(Collision collisionInfo)

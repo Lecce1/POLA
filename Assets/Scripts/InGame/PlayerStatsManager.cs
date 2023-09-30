@@ -11,8 +11,15 @@ public class PlayerStatsManager : MonoBehaviour
 
     private void Start()
     {
+        current.jumpForce = origin.jumpForce;
+        current.maxJump = origin.maxJump;
+        current.jumpLength = origin.jumpLength;
+        
         current.maxSpeed = origin.maxSpeed;
-        current.isDead = false;
-        current.isInvincibility = false;
+        current.acceleration = origin.acceleration;
+        
+        current.isDead = origin.isDead;
+        current.isInvincibility = origin.isInvincibility;
+        current.colorIndex = origin.colorIndex;
     }
 }

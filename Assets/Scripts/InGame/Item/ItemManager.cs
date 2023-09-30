@@ -55,7 +55,6 @@ public class ItemManager : MonoBehaviour
             
             if (idx == -1)
             {
-                Debug.Log(effect);
                 coroutineList.Add(new Pair<Coroutine, Type>(StartCoroutine(EffectOnStep(effect, duration)), effect.GetType()));
             }
             else

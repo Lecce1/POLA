@@ -20,7 +20,7 @@ public class ObstacleController : MonoBehaviour
 
     void Start()
     {
-        colorOptions = PlayerController.instance.GetPlayerColors();
+        colorOptions = PlayerController.instance.playerColors;
         
         ApplySelectedColor();
     }

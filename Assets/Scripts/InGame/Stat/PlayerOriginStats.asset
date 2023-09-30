@@ -14,10 +14,9 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   jumpForce: 15
   maxJump: 2
-  jumpLength: 2
+  jumpLength: 1
   maxSpeed: 30
   acceleration: 750
   isDead: 0
   isInvincibility: 0
-  boostGauge: 2
   colorIndex: 2
