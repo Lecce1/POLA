@@ -12,13 +12,21 @@ public class PlayerController : MonoBehaviour
     
     [SerializeField]
     private float maxSlopeAngle = 50.0f;
-
+    
+    [SerializeField]
+    private int attackCounter = 0;
+    
     [SerializeField]
     public bool isGrounded = false;
+    
+    [SerializeField]
+    private bool isAttacking = false;
 
+    [SerializeField]
     private PlayerParticle particle;
     
     private Collision collisionInfo;
+    private Coroutine jumpCoroutine;
     
     [FoldoutGroup("스텟")]
     public float currentSpeed { get; private set; }
@@ -39,7 +47,6 @@ public class PlayerController : MonoBehaviour
     Animator anim;
     
     public static PlayerController instance;
-    private Coroutine jumpCoroutine;
     
     /// <summary>
     /// 인스턴스 생성
@@ -84,6 +91,7 @@ public class PlayerController : MonoBehaviour
         {
             OnJumpButtonDown();
         }
+        
         if (Input.GetKeyUp(KeyCode.UpArrow))
         {
             OnJumpButtonUp();
@@ -127,6 +135,11 @@ public class PlayerController : MonoBehaviour
     /// </summary>
     void Die()
     {
+        if (stats.current.isDead)
+        {
+            return;
+        }
+        
         anim.SetTrigger("Die");
         stats.current.isDead = true;
         rigid.useGravity = false;
@@ -167,7 +180,6 @@ public class PlayerController : MonoBehaviour
             }
         }
     }
-    
     
     /// <summary>
     /// 점프 기능 구현
@@ -244,6 +256,12 @@ public class PlayerController : MonoBehaviour
     /// </summary>
     public void OnAttackButtonClicked()
     {
+        anim.SetTrigger("Attack");
+        anim.SetInteger("AttackCounter", attackCounter % 2);
+        isAttacking = true;
+        anim.SetBool("IsAttacking", isAttacking);
+        attackCounter++;
+        
         float maxDistance = 5f;
         Ray ray = new Ray(transform.position + Vector3.right, transform.right);
         RaycastHit hit;
@@ -258,7 +276,6 @@ public class PlayerController : MonoBehaviour
                 {
                     Destroy(hit.transform.gameObject);
                 }
-                
             }
         }
     }
@@ -303,6 +320,12 @@ public class PlayerController : MonoBehaviour
         Time.fixedDeltaTime = Time.timeScale * 0.02f;
     }
     
+    public void OnAttackAnimationEnd()
+    {
+        isAttacking = false; // isAttacking을 false로 설정
+        anim.SetBool("IsAttacking", isAttacking); // 애니메이터에 반영
+    }
+
     void OnCollisionEnter(Collision collision)
     {
         collisionInfo = collision;
