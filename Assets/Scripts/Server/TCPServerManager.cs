@@ -14,10 +14,10 @@ public class TCPServerManager : MonoBehaviour
     [Title("Server IP")]
     private string ip = "15.164.215.122";  // AWS EC2 퍼블릭 IPv4 주소
     [FoldoutGroup("정보")]
-    [Title("Local IP")]
+    [Title("집 IP")]
     private string ip2 = "192.168.200.167"; // 집
     [FoldoutGroup("정보")]
-    [Title("Local IP2")]
+    [Title("자취방 IP2")]
     private string ip3 = "192.168.0.19"; // 자취방
     [FoldoutGroup("정보")]
     [Title("Port")]

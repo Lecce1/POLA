@@ -1,9 +1,10 @@
-using System;
 using System.Collections;
 using Sirenix.OdinInspector;
 using UnityEngine;
 using UnityEngine.Networking;
 using UnityEngine.SceneManagement;
+using GooglePlayGames;
+using GooglePlayGames.BasicApi;
 
 public class HttpServerManager : MonoBehaviour
 {
@@ -27,6 +28,12 @@ public class HttpServerManager : MonoBehaviour
         {
             Destroy(gameObject);
         }
+    }
+    
+    void Start()
+    {
+        PlayGamesPlatform.DebugLogEnabled=true;   
+        PlayGamesPlatform.Activate();
     }
     
     public IEnumerator Login(string id, string pw)
