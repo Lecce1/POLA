@@ -1,3 +1,4 @@
+using System;
 using System.Collections;
 using UnityEngine;
 using Sirenix.OdinInspector;
@@ -8,19 +9,16 @@ public class PlayerController : MonoBehaviour
     private int jumpCount;
     
     [SerializeField]
-    private bool isJumping;
-    
-    [SerializeField]
     private float maxSlopeAngle = 50.0f;
     
     [SerializeField]
     private int attackCounter = 0;
     
     [SerializeField]
-    public bool isGrounded = false;
-    
-    [SerializeField]
     private bool isAttacking = false;
+    
+    public bool isGrounded = false;
+    public bool isJumping = false;
 
     [SerializeField]
     private PlayerParticle particle;
@@ -250,7 +248,6 @@ public class PlayerController : MonoBehaviour
         stats.current.colorIndex = ++idx < playerColors.Length ? idx : 0;
     }
     
-    
     /// <summary>
     /// 공격 구현
     /// </summary>
@@ -322,8 +319,8 @@ public class PlayerController : MonoBehaviour
     
     public void OnAttackAnimationEnd()
     {
-        isAttacking = false; // isAttacking을 false로 설정
-        anim.SetBool("IsAttacking", isAttacking); // 애니메이터에 반영
+        isAttacking = false;
+        anim.SetBool("IsAttacking", isAttacking);
     }
 
     void OnCollisionEnter(Collision collision)

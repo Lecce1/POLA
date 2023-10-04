@@ -9,6 +9,7 @@ public class PlayerParticle : MonoBehaviour
     public ParticleSystem accelationTrails;
     public ParticleSystem landDust;
     public ParticleSystem walkDust;
+    public ParticleSystem eatItem;
     
     public void Play(ParticleSystem particle)
     {
@@ -49,11 +50,15 @@ public class PlayerParticle : MonoBehaviour
     {
         Play(accelationTrails);
     }
+
+    public void OnEatItem()
+    {
+        Play(eatItem);
+    }
     
     void Start()
     {
         player = GetComponent<PlayerController>();
-        
     }
     
     void Update() => WalkParticle();
