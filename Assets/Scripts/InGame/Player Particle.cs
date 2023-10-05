@@ -5,7 +5,6 @@ public class PlayerParticle : MonoBehaviour
     [SerializeField]
     private PlayerController player;
     
-    public float landingParticleMinSpeed = 5f;
     public ParticleSystem accelationTrails;
     public ParticleSystem landDust;
     public ParticleSystem walkDust;
@@ -59,6 +58,7 @@ public class PlayerParticle : MonoBehaviour
     void Start()
     {
         player = GetComponent<PlayerController>();
+        Stop(eatItem);
     }
     
     void Update() => WalkParticle();

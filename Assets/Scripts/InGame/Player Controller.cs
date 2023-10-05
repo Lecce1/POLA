@@ -1,4 +1,3 @@
-using System;
 using System.Collections;
 using UnityEngine;
 using Sirenix.OdinInspector;
@@ -21,7 +20,7 @@ public class PlayerController : MonoBehaviour
     public bool isJumping = false;
 
     [SerializeField]
-    private PlayerParticle particle;
+    public PlayerParticle particle;
     
     private Collision collisionInfo;
     private Coroutine jumpCoroutine;
@@ -39,7 +38,7 @@ public class PlayerController : MonoBehaviour
     MeshRenderer meshRenderer;
     
     [SerializeField]
-    Rigidbody rigid;
+    public Rigidbody rigid;
 
     [SerializeField] 
     Animator anim;
@@ -61,7 +60,7 @@ public class PlayerController : MonoBehaviour
     {
         stats = GetComponent<PlayerStatsManager>();
         rigid = GetComponent<Rigidbody>();
-        meshRenderer = GetComponent<MeshRenderer>();
+        meshRenderer = transform.GetChild(0).GetComponent<MeshRenderer>();
         particle = GetComponent<PlayerParticle>();
         anim = GetComponent<Animator>();
         
@@ -143,6 +142,7 @@ public class PlayerController : MonoBehaviour
         rigid.useGravity = false;
         GameManager.instance.Reset();
         Destroy(gameObject, 3);
+        Destroy(gameObject.GetComponent<BoxCollider>());
         StopAllCoroutines();
     }
 
@@ -151,13 +151,12 @@ public class PlayerController : MonoBehaviour
     /// </summary>
     public void OnJumpButtonDown()
     {
-        if (jumpCount < stats.current.maxJump)
+        if (jumpCount < stats.current.maxJump && !stats.current.isDead)
         {
             stats.current.jumpForce = stats.origin.jumpForce;
             isJumping = true;
-            isGrounded = false;
+            
             anim.SetTrigger("Jump");
-            anim.SetBool("IsGrounded", false);
             jumpCoroutine = StartCoroutine(Jump());
             jumpCount++;
         }
@@ -198,7 +197,6 @@ public class PlayerController : MonoBehaviour
             stats.current.jumpForce -= Time.deltaTime * stats.current.jumpForce * inverseJumpLength;
             yield return null;
         }
-        jumpCount--;
     }
 
     /// <summary>
@@ -253,13 +251,18 @@ public class PlayerController : MonoBehaviour
     /// </summary>
     public void OnAttackButtonClicked()
     {
+        if (stats.current.isDead)
+        {
+            return;
+        }
+        
         anim.SetTrigger("Attack");
         anim.SetInteger("AttackCounter", attackCounter % 2);
         isAttacking = true;
         anim.SetBool("IsAttacking", isAttacking);
         attackCounter++;
         
-        float maxDistance = 5f;
+        float maxDistance = 10f;
         Ray ray = new Ray(transform.position + Vector3.right, transform.right);
         RaycastHit hit;
         
@@ -312,7 +315,7 @@ public class PlayerController : MonoBehaviour
     void OnTimeReturn()
     {
         float slowLength = 2f;
-        Time.timeScale += (1f / slowLength) * Time.unscaledDeltaTime;
+        Time.timeScale += 1f / slowLength * Time.unscaledDeltaTime;
         Time.timeScale = Mathf.Clamp(Time.timeScale, 0f, 1f);
         Time.fixedDeltaTime = Time.timeScale * 0.02f;
     }
@@ -326,33 +329,17 @@ public class PlayerController : MonoBehaviour
     void OnCollisionEnter(Collision collision)
     {
         collisionInfo = collision;
-        float currentSlopeAngle = 0f;
-
-        foreach (var item in collision.contacts)
-        {
-            var maxSlope = Vector3.Angle(Vector3.up, item.normal);
-            if (maxSlope > currentSlopeAngle)
-            {
-                currentSlopeAngle = maxSlope;
-            }
-        }
         
         if (collision.gameObject.CompareTag("Breakable") && !stats.current.isInvincibility)
         {
             Die();
         }
 
-        if (currentSlopeAngle > maxSlopeAngle)
-        {
-            return;
-        }
-        
-        if (collision.gameObject.layer == LayerMask.NameToLayer("Ground") && !stats.current.isDead)
+        if (collisionInfo.gameObject.layer == LayerMask.NameToLayer("Ground") && !stats.current.isDead)
         {
             isGrounded = true;
             anim.SetBool("IsGrounded", true);
             particle.LandParticle();
-            jumpCount = 0;
         }
     }
 
@@ -364,11 +351,35 @@ public class PlayerController : MonoBehaviour
             Die();
         }
 
+        float currentSlopeAngle = 0f;
+        foreach (var item in collisionInfo.contacts)
+        {
+            var max = Vector3.Angle(Vector3.up, item.normal);
+            if (max > currentSlopeAngle)
+            {
+                currentSlopeAngle = max;
+            }
+        }
+        
+        if (currentSlopeAngle > maxSlopeAngle)
+        {
+            return;
+        }
+        
+        if (collisionInfo.gameObject.layer == LayerMask.NameToLayer("Ground") && !stats.current.isDead)
+        {
+            jumpCount = 0;
+        }
+        
         this.collisionInfo = collisionInfo;
     }
 
     private void OnCollisionExit(Collision other)
     {
         collisionInfo = null;
+        isGrounded = false;
+        anim.SetBool("IsGrounded", false);
+
+        if (isJumping) jumpCount++;
     }
 }

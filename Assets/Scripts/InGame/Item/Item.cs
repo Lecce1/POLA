@@ -109,7 +109,7 @@ public class Item : MonoBehaviour
 public abstract class Effect
 {
     public PlayerParticle particle;
-    public PostProcessing PP;
+    
     public abstract void OnEnterEffect(PlayerController player);
     public abstract void OnStepEffect(PlayerController player);
     public abstract void OnExitEffect(PlayerController player);

@@ -32,8 +32,8 @@ public class HttpServerManager : MonoBehaviour
     
     void Start()
     {
-        PlayGamesPlatform.DebugLogEnabled=true;   
-        PlayGamesPlatform.Activate();
+        //PlayGamesPlatform.DebugLogEnabled=true;   
+        //PlayGamesPlatform.Activate();
     }
     
     public IEnumerator Login(string id, string pw)

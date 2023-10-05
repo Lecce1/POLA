@@ -47,7 +47,8 @@ public class ItemManager : MonoBehaviour
     public void RunEffect<T>(float duration, bool isLingering) where T : Effect, new()
     {
         T effect = new T();
-        
+
+        player.particle.OnEatItem();
         effect.OnEnterEffect(player);
         if (isLingering)
         {

@@ -2452,11 +2452,11 @@ GameObject:
   m_Component:
   - component: {fileID: 5630781158879552214}
   - component: {fileID: 1619602782402398254}
+  - component: {fileID: 5362930649865497013}
+  - component: {fileID: 1067398024013722980}
   - component: {fileID: -5455098257342514898}
   - component: {fileID: 3245540473513235235}
   - component: {fileID: -851213589498205351}
-  - component: {fileID: 5362930649865497013}
-  - component: {fileID: 1067398024013722980}
   - component: {fileID: 3457163592829585492}
   m_Layer: 0
   m_Name: Player
@@ -2505,6 +2505,47 @@ Animator:
   m_AllowConstantClipSamplingOptimization: 1
   m_KeepAnimatorStateOnDisable: 0
   m_WriteDefaultValuesOnDisable: 0
+--- !u!114 &5362930649865497013
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 2772478308444129024}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 63a280cc92ae6464cad78c3d75428315, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  origin: {fileID: 11400000, guid: bd84863e550b11e41a2663d2a2114f7a, type: 2}
+  current: {fileID: 11400000, guid: d908d5b34aef4514ea6af067e624a0aa, type: 2}
+--- !u!114 &1067398024013722980
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 2772478308444129024}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 7ea316c69690de948a8aa56345978d62, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  jumpCount: 0
+  maxSlopeAngle: 50
+  attackCounter: 0
+  isAttacking: 0
+  isGrounded: 0
+  isJumping: 0
+  particle: {fileID: 0}
+  stats: {fileID: 0}
+  playerColors:
+  - {r: 1, g: 0, b: 0, a: 1}
+  - {r: 0, g: 0.1183064, b: 1, a: 1}
+  - {r: 0, g: 1, b: 0, a: 1}
+  meshRenderer: {fileID: 0}
+  rigid: {fileID: 0}
+  anim: {fileID: 0}
 --- !u!23 &-5455098257342514898
 MeshRenderer:
   m_ObjectHideFlags: 0
@@ -2595,43 +2636,6 @@ Rigidbody:
   m_Interpolate: 0
   m_Constraints: 120
   m_CollisionDetection: 0
---- !u!114 &5362930649865497013
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 2772478308444129024}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 63a280cc92ae6464cad78c3d75428315, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  origin: {fileID: 11400000, guid: bd84863e550b11e41a2663d2a2114f7a, type: 2}
-  current: {fileID: 11400000, guid: d908d5b34aef4514ea6af067e624a0aa, type: 2}
---- !u!114 &1067398024013722980
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 2772478308444129024}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 7ea316c69690de948a8aa56345978d62, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  jumpCount: 0
-  isJumping: 0
-  maxSlopeAngle: 50
-  isGrounded: 0
-  stats: {fileID: 0}
-  playerColors:
-  - {r: 1, g: 0, b: 0, a: 1}
-  - {r: 0, g: 0.1183064, b: 1, a: 1}
-  - {r: 0, g: 1, b: 0, a: 1}
-  meshRenderer: {fileID: 0}
-  rigid: {fileID: 0}
 --- !u!114 &3457163592829585492
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -2645,10 +2649,10 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   player: {fileID: 0}
-  landingParticleMinSpeed: 5
   accelationTrails: {fileID: 0}
   landDust: {fileID: 0}
   walkDust: {fileID: 0}
+  eatItem: {fileID: 0}
 --- !u!1 &2789515363519056932
 GameObject:
   m_ObjectHideFlags: 0

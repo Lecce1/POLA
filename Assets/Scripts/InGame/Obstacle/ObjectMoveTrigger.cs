@@ -1,11 +1,13 @@
 using System;
 using System.Collections;
 using System.Collections.Generic;
+using System.Linq;
 using Sirenix.OdinInspector;
 using UnityEngine;
 using UnityEngine.Serialization;
 using UnityEngine.UIElements.Experimental;
 
+[RequireComponent(typeof(Rigidbody))]
 public class ObjectMoveTrigger : MonoBehaviour
 {
     [Serializable]
@@ -46,69 +48,112 @@ public class ObjectMoveTrigger : MonoBehaviour
     [FoldoutGroup("Rotate Point")] 
     [Title("루프")] 
     public bool isLoopRotate = true;
+
+    [SerializeField] 
+    [Title("리지드바디")] 
+    private Rigidbody rigid;
+
+    [FoldoutGroup("무브")] 
+    private int curIndex = -1;
+    
+    [FoldoutGroup("무브")] 
+    private float invDuration = 0;
+
+    [FoldoutGroup("무브")] 
+    private Vector3 currentPos;
+    
+    [FoldoutGroup("무브")] 
+    private Vector3 nextPos;
+    
+    [FoldoutGroup("무브")] 
+    private MoveData data;
+
+    [FoldoutGroup("무브")] 
+    private float start;
+    
+    [FoldoutGroup("무브")] 
+    private bool wasCirculate = false;
+
+    private Vector3 tmp = Vector3.zero;
     
     // Start is called before the first frame update
     void Start()
     {
-        if (wayPoints.Count > 0)
-        {
-            StartCoroutine(nameof(Move));
-        }
-
+        rigid = GetComponent<Rigidbody>();
+        rigid.isKinematic = false;
+        rigid.useGravity = false;
+        rigid.mass = Mathf.Infinity;
+        rigid.angularDrag = 0;
+        
         if (rotatePoints.Count > 0)
         {
             StartCoroutine(nameof(Rotate));
         }
+
+        if (wayPoints.Count > 0)
+        {
+            SetNextMove();
+            tmp = transform.position;
+        }
+    }
+
+    private void FixedUpdate()
+    {
+        if (wayPoints.Count > 0)
+        {
+            Debug.Log(rigid.velocity);
+            Move();
+        }
     }
     
-    IEnumerator Move()
+    void SetNextMove()
     {
-        int curIndex = 0;
-        int nextIndex = 1 % wayPoints.Count;
+        curIndex = (curIndex + 1) % wayPoints.Count;
+        Debug.LogError(transform.position);
         
-        while (true)
+        data = wayPoints[curIndex];
+        invDuration = 1 / data.duration;
+        currentPos = transform.position;
+        nextPos = data.isRelativePos ? currentPos + wayPoints[curIndex].wayPoint : wayPoints[curIndex].wayPoint;
+        start = Time.time;
+
+        if ((curIndex + 1) % wayPoints.Count == 0)
         {
-            float start = Time.time;
-            var data = wayPoints[curIndex];
-            float invDuration = 1 / data.duration;
-            Vector3 curPos = transform.position;
-            Vector3 nextPos = data.isRelativePos ? curPos + wayPoints[curIndex].wayPoint : wayPoints[curIndex].wayPoint;
-            Vector3 delta = PlayerController.instance.transform.position - transform.position;
-            
-            if (data.duration == 0)
-            {
-                transform.position = nextPos;
-            }
-            
-            while (data.duration + start > Time.time)
-            {
-                var function = EasingFunction.GetEasingFunction(data.ease);
-                float process = function(0, 1, (Time.time - start) * invDuration);
-                transform.position = Vector3.Lerp(curPos, nextPos, process);
+            wasCirculate = true;
+        }
+    }
+    
+    void Move()
+    {
+        if (wasCirculate && !isLoopMove)
+        {
+            return;
+        }
+        
+        if (data.duration + start > Time.time)
+        {
+            var function = EasingFunction.GetEasingFunction(data.ease);
+            float process = function(0, 1, (Time.time - start) * invDuration);
+            var nextFramePos = Vector3.Lerp(currentPos, nextPos, process);
+            var delta = nextFramePos - transform.position;
 
-                var pos = transform.position;
-                
-                if (data.followX)
-                {
-                    pos.x = PlayerController.instance.transform.position.x - delta.x;
-                }
-
-                if (data.followY)
-                {
-                    pos.y = PlayerController.instance.transform.position.y - delta.y;
-                }
-                
-                transform.position = pos;
-                yield return null;
+            if (data.followX)
+            {
+                delta.x = PlayerController.instance.rigid.velocity.x;
             }
 
-            curIndex = nextIndex;
-            nextIndex = (nextIndex + 1) % wayPoints.Count;
-            
-            if (!isLoopMove && nextIndex == 0)
+            if (data.followY)
             {
-                yield break;
+                delta.y = PlayerController.instance.rigid.velocity.y;
             }
+
+            rigid.velocity = delta;
+            Debug.Log("delta: " + delta  + ", " + (transform.position - tmp));
+        }
+        else
+        {
+            SetNextMove();
+            tmp = transform.position;
         }
     }
 
@@ -134,7 +179,8 @@ public class ObjectMoveTrigger : MonoBehaviour
             {
                 var function = EasingFunction.GetEasingFunction(data.ease);
                 float process = function(0, 1, (Time.time - start) * inverseDuration);
-                transform.eulerAngles = Vector3.Lerp(curAngle, nextAngle, process);
+                var delta = Quaternion.Euler(Vector3.Lerp(curAngle, nextAngle, process) - rigid.rotation.eulerAngles);
+                rigid.MoveRotation(rigid.rotation * delta);
 
                 yield return null;
             }

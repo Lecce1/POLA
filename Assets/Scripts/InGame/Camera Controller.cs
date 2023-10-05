@@ -18,13 +18,15 @@ public class CameraController : MonoBehaviour
     
     void Update()
     {
-        //PovValue();
+        SpeedEffect();
     }
 
-    public void PovValue()
+    public void SpeedEffect()
     {
-        var playerSpeed = player.currentSpeed;
+        var playerSpeed = Mathf.Lerp(VCM.m_Lens.FieldOfView - 60f, player.currentSpeed, 0.02f);
 
-        VCM.m_Lens.FieldOfView = playerSpeed + 40;
+        VCM.m_Lens.FieldOfView = (playerSpeed * 0.8f) + 60f;
+
+        
     }
 }
