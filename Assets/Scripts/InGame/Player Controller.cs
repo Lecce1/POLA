@@ -18,7 +18,7 @@ public class PlayerController : MonoBehaviour
     
     public bool isGrounded = false;
     public bool isJumping = false;
-    
+
     [SerializeField]
     public PlayerParticle particle;
     
@@ -36,7 +36,7 @@ public class PlayerController : MonoBehaviour
     
     [SerializeField]
     MeshRenderer meshRenderer;
-    
+
     public Transform rayPosition;
     
     [SerializeField]
@@ -47,6 +47,7 @@ public class PlayerController : MonoBehaviour
     
     public static PlayerController instance;
     
+    WaitForFixedUpdate fixedUpdate = new WaitForFixedUpdate();
     /// <summary>
     /// 인스턴스 생성
     /// </summary>
@@ -143,6 +144,7 @@ public class PlayerController : MonoBehaviour
         stats.current.isDead = true;
         rigid.useGravity = false;
         GameManager.instance.Reset();
+        Destroy(gameObject, 3);
         Destroy(gameObject.GetComponent<BoxCollider>());
         StopAllCoroutines();
     }
@@ -194,9 +196,10 @@ public class PlayerController : MonoBehaviour
                 var velocity = rigid.velocity;
                 velocity.y = stats.current.jumpForce;
                 rigid.velocity = velocity;
+                Debug.Log("?");
             }
             stats.current.jumpForce -= Time.deltaTime * stats.current.jumpForce * inverseJumpLength;
-            yield return null;
+            yield return fixedUpdate;
         }
     }
 
@@ -212,16 +215,11 @@ public class PlayerController : MonoBehaviour
             return false;
         }
 
-        Vector3 tmp;
         float angle = -1;
         
         foreach (var item in collisionInfo.contacts)
         {
-            if (Vector3.Angle(Vector3.up, item.normal) >= 90)
-            {
-                continue;
-            }
-            tmp = Vector3.ProjectOnPlane(Vector3.right, item.normal).normalized;
+            var tmp = Vector3.ProjectOnPlane(Vector3.right, -item.normal).normalized;
             angle = 90 - Vector3.Angle(Vector3.down, tmp);
         }
         
@@ -229,9 +227,8 @@ public class PlayerController : MonoBehaviour
         {
             var velocity = rigid.velocity;
             velocity.x = currentSpeed;
-            velocity.y = Mathf.Tan(angle * Mathf.Deg2Rad) * velocity.x;
+            velocity.y = -Mathf.Tan(angle * Mathf.Deg2Rad) * velocity.x;
             rigid.velocity = velocity;
-            Moving();
             return true;
         }
         return false;
@@ -262,7 +259,7 @@ public class PlayerController : MonoBehaviour
         isAttacking = true;
         anim.SetBool("IsAttacking", isAttacking);
         attackCounter++;
-        
+
         float Distance = 10f;
         float sphereScale = 15f;
         RaycastHit hit;
@@ -326,7 +323,6 @@ public class PlayerController : MonoBehaviour
         isAttacking = false;
         anim.SetBool("IsAttacking", isAttacking);
     }
-    
 
     void OnCollisionEnter(Collision collision)
     {
@@ -347,6 +343,8 @@ public class PlayerController : MonoBehaviour
 
     void OnCollisionStay(Collision collisionInfo)
     {
+        this.collisionInfo = collisionInfo;
+        
         if (collisionInfo.gameObject.CompareTag("Obstacle") && !stats.current.isInvincibility && 
             collisionInfo.gameObject.GetComponent<MeshRenderer>().material.color != meshRenderer.material.color)
         {
@@ -372,8 +370,6 @@ public class PlayerController : MonoBehaviour
         {
             jumpCount = 0;
         }
-        
-        this.collisionInfo = collisionInfo;
     }
 
     private void OnCollisionExit(Collision other)
@@ -382,7 +378,7 @@ public class PlayerController : MonoBehaviour
         isGrounded = false;
         anim.SetBool("IsGrounded", false);
 
-        if (isJumping)
+        if (isJumping && jumpCount == 0)
         {
             jumpCount++;
         }

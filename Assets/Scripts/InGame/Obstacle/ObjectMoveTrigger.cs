@@ -54,27 +54,28 @@ public class ObjectMoveTrigger : MonoBehaviour
     private Rigidbody rigid;
 
     [FoldoutGroup("무브")] 
+    [SerializeField]
     private int curIndex = -1;
-    
-    [FoldoutGroup("무브")] 
-    private float invDuration = 0;
 
     [FoldoutGroup("무브")] 
+    [SerializeField]
     private Vector3 currentPos;
     
     [FoldoutGroup("무브")] 
+    [SerializeField]
     private Vector3 nextPos;
     
     [FoldoutGroup("무브")] 
+    [SerializeField]
     private MoveData data;
 
     [FoldoutGroup("무브")] 
+    [SerializeField]
     private float start;
     
     [FoldoutGroup("무브")] 
+    [SerializeField]
     private bool wasCirculate = false;
-
-    private Vector3 tmp = Vector3.zero;
     
     // Start is called before the first frame update
     void Start()
@@ -93,7 +94,6 @@ public class ObjectMoveTrigger : MonoBehaviour
         if (wayPoints.Count > 0)
         {
             SetNextMove();
-            tmp = transform.position;
         }
     }
 
@@ -101,39 +101,43 @@ public class ObjectMoveTrigger : MonoBehaviour
     {
         if (wayPoints.Count > 0)
         {
-            Debug.Log(rigid.velocity);
             Move();
         }
     }
     
     void SetNextMove()
     {
-        curIndex = (curIndex + 1) % wayPoints.Count;
-        Debug.LogError(transform.position);
+        if (curIndex != -1)
+        {
+            transform.position = nextPos;
+        }
+
+        curIndex++;
+        
+        if (curIndex >= wayPoints.Count)
+        {
+            wasCirculate = true;
+            curIndex = 0;
+        }
         
         data = wayPoints[curIndex];
-        invDuration = 1 / data.duration;
         currentPos = transform.position;
         nextPos = data.isRelativePos ? currentPos + wayPoints[curIndex].wayPoint : wayPoints[curIndex].wayPoint;
         start = Time.time;
-
-        if ((curIndex + 1) % wayPoints.Count == 0)
-        {
-            wasCirculate = true;
-        }
     }
     
     void Move()
     {
         if (wasCirculate && !isLoopMove)
         {
+            rigid.velocity = Vector3.zero;
             return;
         }
         
         if (data.duration + start > Time.time)
         {
             var function = EasingFunction.GetEasingFunction(data.ease);
-            float process = function(0, 1, (Time.time - start) * invDuration);
+            float process = function(0, 1, (Time.time - start) / data.duration);
             var nextFramePos = Vector3.Lerp(currentPos, nextPos, process);
             var delta = nextFramePos - transform.position;
 
@@ -147,13 +151,11 @@ public class ObjectMoveTrigger : MonoBehaviour
                 delta.y = PlayerController.instance.rigid.velocity.y;
             }
 
-            rigid.velocity = delta;
-            Debug.Log("delta: " + delta  + ", " + (transform.position - tmp));
+            rigid.velocity = delta / Time.fixedDeltaTime;
         }
         else
         {
             SetNextMove();
-            tmp = transform.position;
         }
     }
 
