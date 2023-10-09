@@ -18,7 +18,7 @@ public class PlayerController : MonoBehaviour
     
     public bool isGrounded = false;
     public bool isJumping = false;
-
+    
     [SerializeField]
     public PlayerParticle particle;
     
@@ -36,6 +36,8 @@ public class PlayerController : MonoBehaviour
     
     [SerializeField]
     MeshRenderer meshRenderer;
+    
+    public Transform rayPosition;
     
     [SerializeField]
     public Rigidbody rigid;
@@ -141,7 +143,6 @@ public class PlayerController : MonoBehaviour
         stats.current.isDead = true;
         rigid.useGravity = false;
         GameManager.instance.Reset();
-        Destroy(gameObject, 3);
         Destroy(gameObject.GetComponent<BoxCollider>());
         StopAllCoroutines();
     }
@@ -262,11 +263,11 @@ public class PlayerController : MonoBehaviour
         anim.SetBool("IsAttacking", isAttacking);
         attackCounter++;
         
-        float maxDistance = 10f;
-        Ray ray = new Ray(transform.position + Vector3.right, transform.right);
+        float Distance = 10f;
+        float sphereScale = 15f;
         RaycastHit hit;
         
-        if (Physics.Raycast(ray, out hit, maxDistance))
+        if (Physics.SphereCast(transform.position, sphereScale / 2.0f, transform.forward, out hit, Distance))
         {
             Debug.Log(hit.collider.GetComponent<MeshRenderer>().material.color);
             Debug.Log(meshRenderer.material.color);
@@ -286,11 +287,11 @@ public class PlayerController : MonoBehaviour
     void OnAttackSlow()
     {
         float Distance = 5f;
+        float sphereScale = 15f;
         float slowFactor = 0.4f;
-        Ray ray = new Ray(transform.position +  Vector3.right, transform.right);
         RaycastHit hit;
         
-        if (Physics.Raycast(ray, out hit, Distance))
+        if (Physics.SphereCast(transform.position, sphereScale / 2.0f, transform.forward, out hit, Distance))
         {
             if (hit.collider.CompareTag("Breakable"))
             {
@@ -325,6 +326,7 @@ public class PlayerController : MonoBehaviour
         isAttacking = false;
         anim.SetBool("IsAttacking", isAttacking);
     }
+    
 
     void OnCollisionEnter(Collision collision)
     {
@@ -380,6 +382,9 @@ public class PlayerController : MonoBehaviour
         isGrounded = false;
         anim.SetBool("IsGrounded", false);
 
-        if (isJumping) jumpCount++;
+        if (isJumping)
+        {
+            jumpCount++;
+        }
     }
 }
