@@ -1,14 +1,10 @@
 using System;
 using System.Collections.Generic;
-using System.Net.Sockets;
-using System.IO;
 using UnityEngine;
 using UnityEngine.UI;
 using UnityEngine.Audio;
-using GoogleMobileAds.Api;
 using Sirenix.OdinInspector;
 using UnityEngine.SceneManagement;
-using UnityEngine.Serialization;
 
 public class TitleManager : MonoBehaviour
 {
@@ -86,14 +82,6 @@ public class TitleManager : MonoBehaviour
     [SerializeField]
     private string errorType;
 
-    [FoldoutGroup("광고")]
-    [Title("ID")]
-    [SerializeField]
-    private string adID;
-    [FoldoutGroup("광고")]
-    [Title("광고")]
-    private RewardedAd rewardedAd;
-    
     // 뒤로가기 스택
     private Stack<GameObject> backStack;
     public static TitleManager instance;
