@@ -72,9 +72,12 @@ public class LobbyManager : MonoBehaviour
 
     void Init()
     {
-        nickName_Text.text = DBManager.instance.nickName;
-        coin_Text.text = DBManager.instance.coin.ToString();
-        crystal_Text.text = DBManager.instance.crystal.ToString();
+        if (DBManager.instance != null)
+        {
+            nickName_Text.text = DBManager.instance.nickName;
+            coin_Text.text = DBManager.instance.coin.ToString();
+            crystal_Text.text = DBManager.instance.crystal.ToString();
+        }
     }
 
     public void Button(string type)
@@ -87,7 +90,11 @@ public class LobbyManager : MonoBehaviour
                 break;
             
             case "Stage":
-                DBManager.instance.nextScene = "Game";
+                if (DBManager.instance != null)
+                {
+                    DBManager.instance.nextScene = "Game";
+                }
+
                 SceneManager.LoadScene("Loading");
                 break;
             
@@ -96,13 +103,21 @@ public class LobbyManager : MonoBehaviour
                 {
                     isMatching = true;
                     matchingText.text = "매칭 중";
-                    TCPServerManager.instance.Send("Matching", "True");
+
+                    if (TCPServerManager.instance != null)
+                    {
+                        TCPServerManager.instance.Send("Matching", "True");
+                    }
                 }
                 else
                 {
                     isMatching = false;
                     matchingText.text = "더 강력한 장비를 획득 하세요";
-                    TCPServerManager.instance.Send("Matching", "False");
+
+                    if (TCPServerManager.instance != null)
+                    {
+                        TCPServerManager.instance.Send("Matching", "False");
+                    }
                 }
                 
                 break;
