@@ -23,6 +23,9 @@ public class LobbyManager : MonoBehaviour
     [FoldoutGroup("패널")] 
     [Title("에러_네트워크")] 
     public GameObject error_Network;
+    [FoldoutGroup("패널")] 
+    [Title("입장 버튼")] 
+    public GameObject join_Btn;
     
     [FoldoutGroup("DB")] 
     [Title("닉네임")] 
@@ -38,10 +41,7 @@ public class LobbyManager : MonoBehaviour
     [Title("경쟁모드 버튼 클릭 여부")] 
     [SerializeField]
     private bool isMatching = false;
-    [FoldoutGroup("기타")] 
-    [Title("경쟁모드 매칭 텍스트")]
-    public Text matchingText;
-    
+
     // 뒤로가기 스택
     private Stack<GameObject> backStack;
     public static LobbyManager instance;
@@ -69,6 +69,11 @@ public class LobbyManager : MonoBehaviour
             coin_Text.text = DBManager.instance.coin.ToString();
             crystal_Text.text = DBManager.instance.crystal.ToString();
         }
+
+        if (join_Btn.activeSelf == true)
+        {
+            join_Btn.SetActive(false);
+        }
     }
 
     public void Button(string type)
@@ -88,7 +93,6 @@ public class LobbyManager : MonoBehaviour
                 if (isMatching == false)
                 {
                     isMatching = true;
-                    matchingText.text = "매칭 중";
 
                     if (TCPServerManager.instance != null)
                     {
@@ -98,7 +102,6 @@ public class LobbyManager : MonoBehaviour
                 else
                 {
                     isMatching = false;
-                    matchingText.text = "더 강력한 장비를 획득 하세요";
 
                     if (TCPServerManager.instance != null)
                     {
