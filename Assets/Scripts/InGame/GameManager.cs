@@ -1,13 +1,18 @@
 using System.Collections;
+using Sirenix.OdinInspector;
 using UnityEngine;
 using UnityEngine.SceneManagement;
 using UnityEngine.UI;
 
 public class GameManager : MonoBehaviour
 {
-    public static GameManager instance;
+    [FoldoutGroup("일반")] 
     public Text timerText;
+    
+    [FoldoutGroup("일반")] 
     public float timer = 0;
+ 
+    public static GameManager instance;
     
     /// <summary>
     /// 인스턴스 생성

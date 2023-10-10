@@ -1,11 +1,14 @@
 using UnityEngine;
 using Cinemachine;
+using Sirenix.OdinInspector;
 
 public class CameraController : MonoBehaviour
 {
+    [FoldoutGroup("일반")]
     [SerializeField] 
     private PlayerController player;
     
+    [FoldoutGroup("일반")]
     [SerializeField] 
     private CinemachineVirtualCamera VCM;
     

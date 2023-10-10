@@ -1,19 +1,24 @@
 using System.Collections;
+using Sirenix.OdinInspector;
 using UnityEngine;
 using UnityEngine.Rendering.PostProcessing;
 
 [RequireComponent(typeof(Camera))]
 public class PostProcessing : MonoBehaviour
 {
+    [FoldoutGroup("레이어")]
     [SerializeField]
     private PostProcessVolume volume;
     
+    [FoldoutGroup("레이어")]
     [SerializeField]
     private DepthOfField dof;
 
+    [FoldoutGroup("레이어")]
     [SerializeField] 
     private ChromaticAberration ca;
 
+    [FoldoutGroup("레이어")]
     [SerializeField] 
     private LensDistortion ld;
     

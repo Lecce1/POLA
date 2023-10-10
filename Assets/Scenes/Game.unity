@@ -217,8 +217,8 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 119578274}
   serializedVersion: 2
-  m_LocalRotation: {x: 0.0541591, y: 0.38202533, z: -0.022433432, w: 0.92229074}
-  m_LocalPosition: {x: -22.9, y: 3.07, z: -5.999999}
+  m_LocalRotation: {x: 0.054159112, y: 0.38202533, z: -0.022433437, w: 0.92229074}
+  m_LocalPosition: {x: -22.9, y: 4.3450003, z: -5.999999}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children:
@@ -1109,7 +1109,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 5630781158879552214, guid: 58b01ac65b2114d449e30a28cebd9347, type: 3}
       propertyPath: m_LocalPosition.y
-      value: 2.07
+      value: 3.345
       objectReference: {fileID: 0}
     - target: {fileID: 5630781158879552214, guid: 58b01ac65b2114d449e30a28cebd9347, type: 3}
       propertyPath: m_LocalPosition.z
@@ -7027,7 +7027,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 1
+  m_IsActive: 0
 --- !u!4 &1173970177
 Transform:
   m_ObjectHideFlags: 0
@@ -7722,6 +7722,18 @@ MonoBehaviour:
   rotatePoints: []
   isLoopRotate: 1
   rigid: {fileID: 0}
+  curIndex: -1
+  currentPos: {x: 0, y: 0, z: 0}
+  nextPos: {x: 0, y: 0, z: 0}
+  data:
+    wayPoint: {x: 0, y: 0, z: 0}
+    followX: 0
+    followY: 0
+    isRelativePos: 1
+    duration: 0.5
+    ease: 0
+  start: 0
+  wasCirculate: 0
 --- !u!54 &1423136865
 Rigidbody:
   m_ObjectHideFlags: 0
@@ -7968,6 +7980,18 @@ MonoBehaviour:
     ease: 0
   isLoopRotate: 1
   rigid: {fileID: 0}
+  curIndex: -1
+  currentPos: {x: 0, y: 0, z: 0}
+  nextPos: {x: 0, y: 0, z: 0}
+  data:
+    wayPoint: {x: 0, y: 0, z: 0}
+    followX: 0
+    followY: 0
+    isRelativePos: 1
+    duration: 0.5
+    ease: 0
+  start: 0
+  wasCirculate: 0
 --- !u!54 &1459836686
 Rigidbody:
   m_ObjectHideFlags: 0
@@ -8555,6 +8579,18 @@ MonoBehaviour:
   rotatePoints: []
   isLoopRotate: 1
   rigid: {fileID: 0}
+  curIndex: -1
+  currentPos: {x: 0, y: 0, z: 0}
+  nextPos: {x: 0, y: 0, z: 0}
+  data:
+    wayPoint: {x: 0, y: 0, z: 0}
+    followX: 0
+    followY: 0
+    isRelativePos: 1
+    duration: 0.5
+    ease: 0
+  start: 0
+  wasCirculate: 0
 --- !u!54 &1598472575
 Rigidbody:
   m_ObjectHideFlags: 0
