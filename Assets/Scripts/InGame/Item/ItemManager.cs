@@ -37,7 +37,6 @@ public class ItemManager : MonoBehaviour
             instance = this;
         }
     }
-
     
     /// <summary>
     /// 먹은 아이템이 무엇인지 받아와서 그에 맞는 아이템 효과를 실행

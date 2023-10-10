@@ -9,17 +9,8 @@ using UnityEngine.UI;
 public class LobbyManager : MonoBehaviour
 {
     [FoldoutGroup("패널")] 
-    [Title("로비")] 
-    public GameObject lobby;
-    [FoldoutGroup("패널")] 
     [Title("인벤토리")] 
     public GameObject inventory;
-    [FoldoutGroup("패널")] 
-    [Title("모드")] 
-    public GameObject mode;
-    [FoldoutGroup("패널")] 
-    [Title("결과")] 
-    public GameObject result;
     [FoldoutGroup("패널")] 
     [Title("설정")] 
     public GameObject set;
@@ -84,11 +75,6 @@ public class LobbyManager : MonoBehaviour
     {
         switch (type)
         {
-            case "Mode":
-                mode.SetActive(true);
-                backStack.Push(mode);
-                break;
-            
             case "Stage":
                 if (DBManager.instance != null)
                 {
@@ -149,10 +135,6 @@ public class LobbyManager : MonoBehaviour
         
         switch (backStack.Pop().name)
         {
-            case "Mode":
-                mode.SetActive(false);
-                break;
-            
             case "Set":
                 set.SetActive(false);
                 break;

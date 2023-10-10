@@ -1,11 +1,8 @@
 using System;
 using System.Collections;
 using System.Collections.Generic;
-using System.Linq;
 using Sirenix.OdinInspector;
 using UnityEngine;
-using UnityEngine.Serialization;
-using UnityEngine.UIElements.Experimental;
 
 [RequireComponent(typeof(Rigidbody))]
 public class ObjectMoveTrigger : MonoBehaviour
@@ -77,7 +74,6 @@ public class ObjectMoveTrigger : MonoBehaviour
     [SerializeField]
     private bool wasCirculate = false;
     
-    // Start is called before the first frame update
     void Start()
     {
         rigid = GetComponent<Rigidbody>();
@@ -97,7 +93,7 @@ public class ObjectMoveTrigger : MonoBehaviour
         }
     }
 
-    private void FixedUpdate()
+    void FixedUpdate()
     {
         if (wayPoints.Count > 0)
         {

@@ -1,9 +1,7 @@
 using System;
 using System.Reflection;
-using Cinemachine.PostFX;
 using Sirenix.OdinInspector;
 using UnityEngine;
-using UnityEngine.Rendering.PostProcessing;
 using Random = UnityEngine.Random;
 
 public class Item : MonoBehaviour

@@ -6361,7 +6361,6 @@ MonoBehaviour:
   musicValue: 1
   fxValue: 1
   errorType: 
-  adID: 
 --- !u!1 &2075850609
 GameObject:
   m_ObjectHideFlags: 0
