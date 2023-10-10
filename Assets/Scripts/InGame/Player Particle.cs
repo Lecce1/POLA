@@ -1,13 +1,22 @@
+using Sirenix.OdinInspector;
 using UnityEngine;
 
 public class PlayerParticle : MonoBehaviour
 {
+    [FoldoutGroup("일반")]
     [SerializeField]
     private PlayerController player;
     
+    [FoldoutGroup("파티클")] 
     public ParticleSystem accelationTrails;
+    
+    [FoldoutGroup("파티클")]
     public ParticleSystem landDust;
+    
+    [FoldoutGroup("파티클")]
     public ParticleSystem walkDust;
+    
+    [FoldoutGroup("파티클")]
     public ParticleSystem eatItem;
     
     public void Play(ParticleSystem particle)

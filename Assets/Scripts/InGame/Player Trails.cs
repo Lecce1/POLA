@@ -1,13 +1,17 @@
+using Sirenix.OdinInspector;
 using UnityEngine;
 
 [RequireComponent(typeof(TrailRenderer))]
 public class PlayerTrails : MonoBehaviour
 {
+    [FoldoutGroup("일반")] 
     public Transform hand;
     
+    [FoldoutGroup("일반")] 
     [SerializeField]
     private PlayerController player;
     
+    [FoldoutGroup("일반")] 
     [SerializeField]
     private TrailRenderer trail;
     

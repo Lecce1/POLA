@@ -4,26 +4,35 @@ using Sirenix.OdinInspector;
 
 public class PlayerController : MonoBehaviour
 {
+    [FoldoutGroup("변수")]
     [SerializeField]
     private int jumpCount;
     
+    [FoldoutGroup("변수")]
     [SerializeField]
     private float maxSlopeAngle = 50.0f;
     
+    [FoldoutGroup("변수")]
     [SerializeField]
     private int attackCounter = 0;
+
+    [FoldoutGroup("변수")]
+    [SerializeField]
+    private float gravityScale = 9.81f;
     
+    [FoldoutGroup("변수")]
     [SerializeField]
     private bool isAttacking = false;
     
-    public bool isGrounded = false;
-    public bool isJumping = false;
-
+    [FoldoutGroup("변수")]
     [SerializeField]
-    public PlayerParticle particle;
+    private bool isGravityReversed = false;
     
-    private Collision collisionInfo;
-    private Coroutine jumpCoroutine;
+    [FoldoutGroup("변수")]
+    public bool isGrounded = false;
+    
+    [FoldoutGroup("변수")]
+    public bool isJumping = false;
     
     [FoldoutGroup("스텟")]
     public float currentSpeed { get; private set; }
@@ -31,23 +40,31 @@ public class PlayerController : MonoBehaviour
     [FoldoutGroup("스텟")]
     public PlayerStatsManager stats;
 
-    [FoldoutGroup("일반")] 
+    [FoldoutGroup("색깔")] 
     public Color[] playerColors;
     
+    [FoldoutGroup("일반")] 
     [SerializeField]
     MeshRenderer meshRenderer;
 
-    public Transform rayPosition;
-    
-    [SerializeField]
-    public Rigidbody rigid;
-
+    [FoldoutGroup("일반")] 
     [SerializeField] 
     Animator anim;
     
-    public static PlayerController instance;
+    [FoldoutGroup("일반")] 
+    public Transform rayPosition;
     
+    [FoldoutGroup("일반")] 
+    public Rigidbody rigid;
+    
+    [FoldoutGroup("일반")] 
+    public PlayerParticle particle;
+    
+    public static PlayerController instance;
+    private Collision collisionInfo;
+    private Coroutine jumpCoroutine;
     WaitForFixedUpdate fixedUpdate = new WaitForFixedUpdate();
+    
     /// <summary>
     /// 인스턴스 생성
     /// </summary>
@@ -106,6 +123,11 @@ public class PlayerController : MonoBehaviour
         {
             OnAttackButtonClicked();
         }
+
+        if (Input.GetKeyDown(KeyCode.A))
+        {
+            OnReverseGravity();
+        }
     }
     
     /// <summary>
@@ -158,7 +180,6 @@ public class PlayerController : MonoBehaviour
         {
             stats.current.jumpForce = stats.origin.jumpForce;
             isJumping = true;
-            
             anim.SetTrigger("Jump");
             jumpCoroutine = StartCoroutine(Jump());
             jumpCount++;
@@ -188,15 +209,15 @@ public class PlayerController : MonoBehaviour
     {
         float pressedJumpStartTime = Time.time;
         float inverseJumpLength = 1 / stats.current.jumpLength;
-        
+        int direction = isGravityReversed ? -1 : 1;
+
         while (Time.time - pressedJumpStartTime < stats.current.jumpLength && isJumping)
         {
             if (!SlopeProcess(collisionInfo))
             {
                 var velocity = rigid.velocity;
-                velocity.y = stats.current.jumpForce;
+                velocity.y = stats.current.jumpForce * direction;
                 rigid.velocity = velocity;
-                Debug.Log("?");
             }
             stats.current.jumpForce -= Time.deltaTime * stats.current.jumpForce * inverseJumpLength;
             yield return fixedUpdate;
@@ -266,8 +287,6 @@ public class PlayerController : MonoBehaviour
         
         if (Physics.SphereCast(transform.position, sphereScale / 2.0f, transform.forward, out hit, Distance))
         {
-            Debug.Log(hit.collider.GetComponent<MeshRenderer>().material.color);
-            Debug.Log(meshRenderer.material.color);
             if (hit.transform.CompareTag("Breakable"))
             {
                 if (meshRenderer.material.color == hit.collider.GetComponent<MeshRenderer>().material.color)
@@ -318,10 +337,30 @@ public class PlayerController : MonoBehaviour
         Time.fixedDeltaTime = Time.timeScale * 0.02f;
     }
     
+    /// <summary>
+    /// 어택 종료 애니메이션
+    /// </summary>
     public void OnAttackAnimationEnd()
     {
         isAttacking = false;
         anim.SetBool("IsAttacking", isAttacking);
+    }
+    
+    /// <summary>
+    /// 중력 반전
+    /// </summary>
+    public void OnReverseGravity()
+    {
+        if (!isGravityReversed)
+        {
+            isGravityReversed = true;
+            Physics.gravity = new Vector3(0, gravityScale * stats.origin.jumpForce / 3, 0);
+        }
+        else
+        {
+            isGravityReversed = false;
+            Physics.gravity = new Vector3(0, -gravityScale * stats.origin.jumpForce / 3, 0);
+        }
     }
 
     void OnCollisionEnter(Collision collision)

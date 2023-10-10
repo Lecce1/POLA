@@ -8,19 +8,20 @@ using Random = UnityEngine.Random;
 
 public class Item : MonoBehaviour
 {
+    [FoldoutGroup("일반")]
     [SerializeField]
     private Rigidbody rigid;
     
-    [FoldoutGroup("종류")] 
+    [FoldoutGroup("변수")] 
     public string type;
 
-    [FoldoutGroup("일반")] 
+    [FoldoutGroup("변수")] 
     public float rotateSpeed;
     
-    [FoldoutGroup("일반")] 
+    [FoldoutGroup("변수")] 
     public float duration;
     
-    [FoldoutGroup("일반")] 
+    [FoldoutGroup("변수")] 
     public bool isLingering;
     
     [FoldoutGroup("물리")] 
