@@ -21,7 +21,6 @@ public class ObstacleController : MonoBehaviour
     void Start()
     {
         colorOptions = PlayerController.instance.playerColors;
-        
         ApplySelectedColor();
     }
 

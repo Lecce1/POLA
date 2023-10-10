@@ -89,12 +89,12 @@ public class PlayerController : MonoBehaviour
         currentSpeed = rigid.velocity.x;
     }
 
-    private void Update()
+    void Update()
     {
         KeyboardControl();
     }
 
-    private void FixedUpdate()
+    void FixedUpdate()
     {
         Moving();
         OnAttackSlow();
@@ -166,7 +166,6 @@ public class PlayerController : MonoBehaviour
         stats.current.isDead = true;
         rigid.useGravity = false;
         GameManager.instance.Reset();
-        Destroy(gameObject, 3);
         Destroy(gameObject.GetComponent<BoxCollider>());
         StopAllCoroutines();
     }
