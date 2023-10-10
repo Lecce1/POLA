@@ -64,6 +64,7 @@ public class PlayerController : MonoBehaviour
     private Collision collisionInfo;
     private Coroutine jumpCoroutine;
     WaitForFixedUpdate fixedUpdate = new WaitForFixedUpdate();
+    private Vector3 tmp;
     
     /// <summary>
     /// 인스턴스 생성
@@ -87,6 +88,7 @@ public class PlayerController : MonoBehaviour
         Time.timeScale = 1f;
         jumpCount = 0;
         currentSpeed = rigid.velocity.x;
+        tmp = transform.position;
     }
 
     void Update()
@@ -218,7 +220,9 @@ public class PlayerController : MonoBehaviour
                 velocity.y = stats.current.jumpForce * direction;
                 rigid.velocity = velocity;
             }
-            stats.current.jumpForce -= Time.deltaTime * stats.current.jumpForce * inverseJumpLength;
+            Debug.Log("실제 움직인 값: " + (transform.position - tmp) + ", velocity: " + rigid.velocity * Time.fixedDeltaTime);
+            tmp = transform.position;
+            stats.current.jumpForce -= Time.fixedDeltaTime * stats.current.jumpForce * inverseJumpLength;
             yield return fixedUpdate;
         }
     }
@@ -249,11 +253,13 @@ public class PlayerController : MonoBehaviour
             velocity.x = currentSpeed;
             velocity.y = -Mathf.Tan(angle * Mathf.Deg2Rad) * velocity.x;
             rigid.velocity = velocity;
+            rigid.velocity -= Physics.gravity;
+            Moving();
             return true;
         }
         return false;
     }
-
+    
     /// <summary>
     /// 색상 변경
     /// </summary>

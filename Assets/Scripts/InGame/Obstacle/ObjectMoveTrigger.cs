@@ -49,30 +49,8 @@ public class ObjectMoveTrigger : MonoBehaviour
     [SerializeField] 
     [Title("리지드바디")] 
     private Rigidbody rigid;
-
-    [FoldoutGroup("무브")] 
-    [SerializeField]
-    private int curIndex = -1;
-
-    [FoldoutGroup("무브")] 
-    [SerializeField]
-    private Vector3 currentPos;
     
-    [FoldoutGroup("무브")] 
-    [SerializeField]
-    private Vector3 nextPos;
-    
-    [FoldoutGroup("무브")] 
-    [SerializeField]
-    private MoveData data;
-
-    [FoldoutGroup("무브")] 
-    [SerializeField]
-    private float start;
-    
-    [FoldoutGroup("무브")] 
-    [SerializeField]
-    private bool wasCirculate = false;
+    WaitForFixedUpdate fixedUpdate = new WaitForFixedUpdate();
     
     void Start()
     {
@@ -89,72 +67,54 @@ public class ObjectMoveTrigger : MonoBehaviour
 
         if (wayPoints.Count > 0)
         {
-            SetNextMove();
-        }
-    }
-
-    void FixedUpdate()
-    {
-        if (wayPoints.Count > 0)
-        {
-            Move();
+            StartCoroutine(nameof(Move));
         }
     }
     
-    void SetNextMove()
+    IEnumerator Move()
     {
-        if (curIndex != -1)
-        {
-            transform.position = nextPos;
-        }
+        int curIndex = 0;
+        int nextIndex = 1 % wayPoints.Count;
 
-        curIndex++;
-        
-        if (curIndex >= wayPoints.Count)
+        while (true)
         {
-            wasCirculate = true;
-            curIndex = 0;
+            float start = Time.time;
+            var data = wayPoints[curIndex];
+            float invDuration = 1 / data.duration;
+            Vector3 curPos = transform.position;
+            Vector3 nextPos = data.isRelativePos ? curPos + wayPoints[curIndex].wayPoint : wayPoints[curIndex].wayPoint;
+
+            while (data.duration + start > Time.time)
+            {
+                var function = EasingFunction.GetEasingFunction(data.ease);
+                float process = function(0, 1, (Time.time - start) * invDuration);
+                var nextFramePos = Vector3.Lerp(curPos, nextPos, process);
+                var delta = nextFramePos - transform.position;
+
+                if (data.followX)
+                {
+                    delta.x = PlayerController.instance.rigid.velocity.x;
+                }
+
+                if (data.followY)
+                {
+                    delta.y = PlayerController.instance.rigid.velocity.y;
+                }
+
+                rigid.velocity = delta / Time.fixedDeltaTime;
+                yield return fixedUpdate;
+            }
+
+            curIndex = nextIndex;
+            nextIndex = (nextIndex + 1) % wayPoints.Count;
+
+            if (!isLoopMove && nextIndex == 0)
+            {
+                yield break;
+            }
         }
-        
-        data = wayPoints[curIndex];
-        currentPos = transform.position;
-        nextPos = data.isRelativePos ? currentPos + wayPoints[curIndex].wayPoint : wayPoints[curIndex].wayPoint;
-        start = Time.time;
     }
     
-    void Move()
-    {
-        if (wasCirculate && !isLoopMove)
-        {
-            rigid.velocity = Vector3.zero;
-            return;
-        }
-        
-        if (data.duration + start > Time.time)
-        {
-            var function = EasingFunction.GetEasingFunction(data.ease);
-            float process = function(0, 1, (Time.time - start) / data.duration);
-            var nextFramePos = Vector3.Lerp(currentPos, nextPos, process);
-            var delta = nextFramePos - transform.position;
-
-            if (data.followX)
-            {
-                delta.x = PlayerController.instance.rigid.velocity.x;
-            }
-
-            if (data.followY)
-            {
-                delta.y = PlayerController.instance.rigid.velocity.y;
-            }
-
-            rigid.velocity = delta / Time.fixedDeltaTime;
-        }
-        else
-        {
-            SetNextMove();
-        }
-    }
-
     IEnumerator Rotate()
     {
         int curIndex = 0;
