@@ -1,6 +1,7 @@
 using System.Collections;
 using UnityEngine;
 using Sirenix.OdinInspector;
+using UnityEngine.Animations;
 
 public class PlayerController : MonoBehaviour
 {
@@ -34,6 +35,9 @@ public class PlayerController : MonoBehaviour
     [FoldoutGroup("변수")]
     public bool isJumping = false;
     
+    [FoldoutGroup("변수")]
+    public bool isFlip = false;
+    
     [FoldoutGroup("스텟")]
     public float currentSpeed { get; private set; }
     
@@ -48,8 +52,7 @@ public class PlayerController : MonoBehaviour
     MeshRenderer meshRenderer;
 
     [FoldoutGroup("일반")] 
-    [SerializeField] 
-    Animator anim;
+    public Animator anim;
     
     [FoldoutGroup("일반")] 
     public Transform rayPosition;
@@ -167,6 +170,7 @@ public class PlayerController : MonoBehaviour
         anim.SetTrigger("Die");
         stats.current.isDead = true;
         rigid.useGravity = false;
+        isGravityReversed = false;
         GameManager.instance.Reset();
         Destroy(gameObject.GetComponent<BoxCollider>());
         StopAllCoroutines();
@@ -356,6 +360,10 @@ public class PlayerController : MonoBehaviour
     /// </summary>
     public void OnReverseGravity()
     {
+        anim.SetTrigger("Flip");
+        isFlip = true;
+        anim.SetBool("IsFlip", isFlip);
+        
         if (!isGravityReversed)
         {
             isGravityReversed = true;
@@ -366,6 +374,12 @@ public class PlayerController : MonoBehaviour
             isGravityReversed = false;
             Physics.gravity = new Vector3(0, -gravityScale * stats.origin.jumpForce / 3, 0);
         }
+    }
+
+    public void OnFlipAnimationEnd()
+    {
+        isFlip = false;
+        anim.SetBool("IsFlip", isFlip);
     }
 
     void OnCollisionEnter(Collision collision)
