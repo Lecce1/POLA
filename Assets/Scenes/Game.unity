@@ -7027,7 +7027,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 0
+  m_IsActive: 1
 --- !u!4 &1173970177
 Transform:
   m_ObjectHideFlags: 0
@@ -7722,18 +7722,6 @@ MonoBehaviour:
   rotatePoints: []
   isLoopRotate: 1
   rigid: {fileID: 0}
-  curIndex: -1
-  currentPos: {x: 0, y: 0, z: 0}
-  nextPos: {x: 0, y: 0, z: 0}
-  data:
-    wayPoint: {x: 0, y: 0, z: 0}
-    followX: 0
-    followY: 0
-    isRelativePos: 1
-    duration: 0.5
-    ease: 0
-  start: 0
-  wasCirculate: 0
 --- !u!54 &1423136865
 Rigidbody:
   m_ObjectHideFlags: 0
@@ -7980,18 +7968,6 @@ MonoBehaviour:
     ease: 0
   isLoopRotate: 1
   rigid: {fileID: 0}
-  curIndex: -1
-  currentPos: {x: 0, y: 0, z: 0}
-  nextPos: {x: 0, y: 0, z: 0}
-  data:
-    wayPoint: {x: 0, y: 0, z: 0}
-    followX: 0
-    followY: 0
-    isRelativePos: 1
-    duration: 0.5
-    ease: 0
-  start: 0
-  wasCirculate: 0
 --- !u!54 &1459836686
 Rigidbody:
   m_ObjectHideFlags: 0
@@ -8579,18 +8555,6 @@ MonoBehaviour:
   rotatePoints: []
   isLoopRotate: 1
   rigid: {fileID: 0}
-  curIndex: -1
-  currentPos: {x: 0, y: 0, z: 0}
-  nextPos: {x: 0, y: 0, z: 0}
-  data:
-    wayPoint: {x: 0, y: 0, z: 0}
-    followX: 0
-    followY: 0
-    isRelativePos: 1
-    duration: 0.5
-    ease: 0
-  start: 0
-  wasCirculate: 0
 --- !u!54 &1598472575
 Rigidbody:
   m_ObjectHideFlags: 0
@@ -9306,7 +9270,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 5396117991179874174, guid: be3e1564171325a44bf9194458575293, type: 3}
       propertyPath: m_IsActive
-      value: 1
+      value: 0
       objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
@@ -9614,7 +9578,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 5396117991179874174, guid: be3e1564171325a44bf9194458575293, type: 3}
       propertyPath: m_IsActive
-      value: 1
+      value: 0
       objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []

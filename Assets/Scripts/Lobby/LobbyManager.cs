@@ -76,6 +76,18 @@ public class LobbyManager : MonoBehaviour
         }
     }
 
+    public void Join_Btn(bool isOn)
+    {
+        if (isOn == true && join_Btn.activeSelf == false)
+        {
+            join_Btn.SetActive(true);
+        }
+        else if (isOn == false && join_Btn.activeSelf == true)
+        {
+            join_Btn.SetActive(false);
+        }
+    }
+
     public void Button(string type)
     {
         switch (type)
