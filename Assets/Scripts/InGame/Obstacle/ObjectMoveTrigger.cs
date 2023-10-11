@@ -57,6 +57,7 @@ public class ObjectMoveTrigger : MonoBehaviour
         rigid = GetComponent<Rigidbody>();
         rigid.isKinematic = false;
         rigid.useGravity = false;
+        rigid.constraints = RigidbodyConstraints.FreezeRotation;
         rigid.mass = Mathf.Infinity;
         rigid.angularDrag = 0;
         

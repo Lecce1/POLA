@@ -1,7 +1,6 @@
 using System.Collections;
 using UnityEngine;
 using Sirenix.OdinInspector;
-using UnityEngine.Animations;
 
 public class PlayerController : MonoBehaviour
 {
@@ -35,9 +34,6 @@ public class PlayerController : MonoBehaviour
     [FoldoutGroup("변수")]
     public bool isJumping = false;
     
-    [FoldoutGroup("변수")]
-    public bool isFlip = false;
-    
     [FoldoutGroup("스텟")]
     public float currentSpeed { get; private set; }
     
@@ -52,7 +48,8 @@ public class PlayerController : MonoBehaviour
     MeshRenderer meshRenderer;
 
     [FoldoutGroup("일반")] 
-    public Animator anim;
+    [SerializeField] 
+    Animator anim;
     
     [FoldoutGroup("일반")] 
     public Transform rayPosition;
@@ -64,10 +61,9 @@ public class PlayerController : MonoBehaviour
     public PlayerParticle particle;
     
     public static PlayerController instance;
-    private Collision collisionInfo;
     private Coroutine jumpCoroutine;
     WaitForFixedUpdate fixedUpdate = new WaitForFixedUpdate();
-    private Vector3 tmp;
+    private Collision collisionInfo;
     
     /// <summary>
     /// 인스턴스 생성
@@ -87,11 +83,11 @@ public class PlayerController : MonoBehaviour
         meshRenderer = transform.GetChild(0).GetComponent<MeshRenderer>();
         particle = GetComponent<PlayerParticle>();
         anim = GetComponent<Animator>();
+        collisionInfo = null;
         
         Time.timeScale = 1f;
         jumpCount = 0;
         currentSpeed = rigid.velocity.x;
-        tmp = transform.position;
     }
 
     void Update()
@@ -101,6 +97,7 @@ public class PlayerController : MonoBehaviour
 
     void FixedUpdate()
     {
+        SlopeProcess();
         Moving();
         OnAttackSlow();
         OnTimeReturn();
@@ -148,7 +145,7 @@ public class PlayerController : MonoBehaviour
 
         if (rigid.velocity.x < stats.current.maxSpeed)
         {
-            rigid.AddForce(Vector3.right * stats.current.acceleration * Time.deltaTime, ForceMode.Force);
+            rigid.AddForce(Vector3.right * (stats.current.acceleration * Time.deltaTime), ForceMode.Force);
         }
 
         if (transform.position.y < -5)
@@ -170,7 +167,6 @@ public class PlayerController : MonoBehaviour
         anim.SetTrigger("Die");
         stats.current.isDead = true;
         rigid.useGravity = false;
-        isGravityReversed = false;
         GameManager.instance.Reset();
         Destroy(gameObject.GetComponent<BoxCollider>());
         StopAllCoroutines();
@@ -218,29 +214,25 @@ public class PlayerController : MonoBehaviour
 
         while (Time.time - pressedJumpStartTime < stats.current.jumpLength && isJumping)
         {
-            if (!SlopeProcess(collisionInfo))
-            {
-                var velocity = rigid.velocity;
-                velocity.y = stats.current.jumpForce * direction;
-                rigid.velocity = velocity;
-            }
-            Debug.Log("실제 움직인 값: " + (transform.position - tmp) + ", velocity: " + rigid.velocity * Time.fixedDeltaTime);
-            tmp = transform.position;
+            var velocity = rigid.velocity;
+            velocity.y = stats.current.jumpForce * direction;
+            rigid.velocity = velocity;
+            
             stats.current.jumpForce -= Time.fixedDeltaTime * stats.current.jumpForce * inverseJumpLength;
             yield return fixedUpdate;
         }
     }
 
     /// <summary>
-    /// 플레이어 기준 머리에 경사면을 부딪혔을 때의 충돌에 관한 처리 및 계산
+    /// 플레이어가 경사면을 부딪혔을 때의 충돌에 관한 처리 및 계산
     /// </summary>
     /// <param name="collisionInfo">플레이어의 충돌정보</param>
     /// <returns>충돌 처리를 했다면 true, 처리를 하지 않았다면 false를 반환</returns>
-    bool SlopeProcess(Collision collisionInfo)
+    void SlopeProcess()
     {
-        if (collisionInfo == null)
+        if (collisionInfo == null || rigid.velocity.y < 0 || isJumping)
         {
-            return false;
+            return;
         }
 
         float angle = -1;
@@ -248,20 +240,16 @@ public class PlayerController : MonoBehaviour
         foreach (var item in collisionInfo.contacts)
         {
             var tmp = Vector3.ProjectOnPlane(Vector3.right, -item.normal).normalized;
-            angle = 90 - Vector3.Angle(Vector3.down, tmp);
+            angle = 90 - Vector3.Angle(Vector3.up, tmp);
         }
         
         if (angle <= maxSlopeAngle && angle > 0)
         {
             var velocity = rigid.velocity;
             velocity.x = currentSpeed;
-            velocity.y = -Mathf.Tan(angle * Mathf.Deg2Rad) * velocity.x;
+            velocity.y = Mathf.Tan(angle * Mathf.Deg2Rad) * velocity.x;
             rigid.velocity = velocity;
-            rigid.velocity -= Physics.gravity;
-            Moving();
-            return true;
         }
-        return false;
     }
     
     /// <summary>
@@ -360,49 +348,47 @@ public class PlayerController : MonoBehaviour
     /// </summary>
     public void OnReverseGravity()
     {
-        anim.SetTrigger("Flip");
-        isFlip = true;
-        anim.SetBool("IsFlip", isFlip);
-        
+        var velocity = rigid.velocity;
+        velocity.y = 0;
+        rigid.velocity = velocity;
         if (!isGravityReversed)
         {
             isGravityReversed = true;
-            Physics.gravity = new Vector3(0, gravityScale * stats.origin.jumpForce / 3, 0);
         }
         else
         {
             isGravityReversed = false;
-            Physics.gravity = new Vector3(0, -gravityScale * stats.origin.jumpForce / 3, 0);
         }
-    }
 
-    public void OnFlipAnimationEnd()
-    {
-        isFlip = false;
-        anim.SetBool("IsFlip", isFlip);
+        Physics.gravity *= -1;
     }
 
     void OnCollisionEnter(Collision collision)
     {
         collisionInfo = collision;
-        
         if (collision.gameObject.CompareTag("Breakable") && !stats.current.isInvincibility)
         {
             Die();
         }
 
-        if (collisionInfo.gameObject.layer == LayerMask.NameToLayer("Ground") && !stats.current.isDead)
+        if (collision.gameObject.layer == LayerMask.NameToLayer("Ground") && !stats.current.isDead)
         {
             isGrounded = true;
+            isJumping = false;
             anim.SetBool("IsGrounded", true);
             particle.LandParticle();
+        }
+        
+        if (collisionInfo.gameObject.CompareTag("Obstacle") && !stats.current.isInvincibility && 
+            collisionInfo.gameObject.GetComponent<MeshRenderer>().material.color != meshRenderer.material.color)
+        {
+            Die();
         }
     }
 
     void OnCollisionStay(Collision collisionInfo)
     {
         this.collisionInfo = collisionInfo;
-        
         if (collisionInfo.gameObject.CompareTag("Obstacle") && !stats.current.isInvincibility && 
             collisionInfo.gameObject.GetComponent<MeshRenderer>().material.color != meshRenderer.material.color)
         {
