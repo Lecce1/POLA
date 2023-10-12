@@ -17,6 +17,7 @@ TagManager:
   - Floor
   - Rainbow
   - Grappling
+  - Swing
   layers:
   - Default
   - TransparentFX

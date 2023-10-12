@@ -9,14 +9,12 @@ public class Accelation : Effect
     }
     public override void OnStepEffect(PlayerController player)
     {
-        particle.OnAccelation();
         player.stats.current.maxSpeed = 100f;
         player.stats.current.acceleration = 20000f;
     }
 
     public override void OnExitEffect(PlayerController player)
     {
-        particle.Stop(particle.accelationTrails);
         player.stats.current.maxSpeed = player.stats.origin.maxSpeed;
         player.stats.current.acceleration = player.stats.origin.acceleration;
     }

@@ -105,14 +105,15 @@ public class ObjectMoveTrigger : MonoBehaviour
                 rigid.velocity = delta / Time.fixedDeltaTime;
                 yield return fixedUpdate;
             }
-
-            curIndex = nextIndex;
-            nextIndex = (nextIndex + 1) % wayPoints.Count;
-
+            
             if (!isLoopMove && nextIndex == 0)
             {
+                rigid.velocity = Vector3.zero;
                 yield break;
             }
+            
+            curIndex = nextIndex;
+            nextIndex = (nextIndex + 1) % wayPoints.Count;
         }
     }
     
@@ -126,9 +127,10 @@ public class ObjectMoveTrigger : MonoBehaviour
             float start = Time.time;
             var data = rotatePoints[curIndex];
             float inverseDuration = 1 / data.duration;
-            Vector3 curAngle = transform.eulerAngles;
+            Vector3 curAngle = transform.localEulerAngles;
             Vector3 nextAngle = data.isRelativeAngle ? curAngle + data.rotateAmount : data.rotateAmount;
 
+            
             if (data.duration == 0)
             {
                 transform.position = nextAngle;
@@ -138,19 +140,19 @@ public class ObjectMoveTrigger : MonoBehaviour
             {
                 var function = EasingFunction.GetEasingFunction(data.ease);
                 float process = function(0, 1, (Time.time - start) * inverseDuration);
-                var delta = Quaternion.Euler(Vector3.Lerp(curAngle, nextAngle, process) - rigid.rotation.eulerAngles);
-                rigid.MoveRotation(rigid.rotation * delta);
+                var delta = Vector3.Lerp(curAngle, nextAngle, process) - transform.localEulerAngles;
+                transform.Rotate(delta);
 
-                yield return null;
+                yield return fixedUpdate;
             }
-            
-            curIndex = nextIndex;
-            nextIndex = (nextIndex + 1) % rotatePoints.Count;
             
             if (!isLoopRotate && nextIndex == 0)
             {
                 yield break;
             }
+            
+            curIndex = nextIndex;
+            nextIndex = (nextIndex + 1) % rotatePoints.Count;
         }
     }
 }
