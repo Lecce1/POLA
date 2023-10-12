@@ -271,7 +271,7 @@ public class PlayerController : MonoBehaviour
     /// </summary>
     public void OnAttackButtonClicked()
     {
-        if (stats.current.isDead || GetComponent<PlayerGrappling>().grapplePoint == null)
+        if (stats.current.isDead || GetComponent<PlayerGrappling>().grapplePoint == null || GetComponent<PlayerSwing>().swingPoint == null)
         {
             return;
         }

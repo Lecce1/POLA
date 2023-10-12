@@ -8,7 +8,7 @@ public class PlayerGrappling : MonoBehaviour
     
     [FoldoutGroup("변수")]
     [SerializeField]
-    private bool grappling = false;
+    public bool grappling = false;
     
     [FoldoutGroup("일반")]
     [SerializeField]
@@ -126,7 +126,7 @@ public class PlayerGrappling : MonoBehaviour
     /// </summary>
     public void OnGrappleBtnClicked()
     {
-        if (grapplePoint != null && !grappling)
+        if (grapplePoint != null && !grappling && GetComponent<PlayerSwing>().swingPoint == null)
         {
             grapplePoint.tag = "Ground";
             grappling = true;
