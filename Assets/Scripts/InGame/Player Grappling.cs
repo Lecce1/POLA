@@ -1,3 +1,4 @@
+using System.Collections;
 using Sirenix.OdinInspector;
 using UnityEngine;
 
@@ -21,9 +22,15 @@ public class PlayerGrappling : MonoBehaviour
 
     [FoldoutGroup("일반")]
     public Transform grapplePoint;
+
+    [FoldoutGroup("일반")] 
+    public GameObject infoPlane;
+
+    [FoldoutGroup("일반")] 
+    public Coroutine coroutine = null;
     
     [FoldoutGroup("그래플링")]
-    public float maxGrappleDistance = 25f;
+    public float maxGrappleDistance = 45f;
     
     [FoldoutGroup("그래플링")]
     public float overshootYAxis = 2f;
@@ -56,6 +63,12 @@ public class PlayerGrappling : MonoBehaviour
     public void DetectRopes()
     {
         var overlap = Physics.OverlapSphereNonAlloc(player.transform.position, maxGrappleDistance, overlaps);
+        if (overlap == 0)
+        {
+            return;
+        }
+        
+        Transform nearestGrapple = overlaps[0].transform;
 
         for (int i = 0; i < overlap; i++)
         {
@@ -63,10 +76,48 @@ public class PlayerGrappling : MonoBehaviour
             {
                 if (overlaps[i].transform.position.x > player.transform.position.x)
                 {
-                    grapplePoint = overlaps[i].transform;
-                    break;
+                    if ((overlaps[i].transform.position - player.transform.position).magnitude < (nearestGrapple.position - player.transform.position).magnitude)
+                    {
+                        nearestGrapple = overlaps[i].transform;
+                    }
                 }
             }
+        }
+
+        if (nearestGrapple.CompareTag("Grappling"))
+        {
+            if (nearestGrapple != null && nearestGrapple != grapplePoint)
+            {
+                grapplePoint = nearestGrapple;
+                infoPlane.SetActive(false);
+            }
+            
+            if (!infoPlane.activeInHierarchy)
+            {
+                infoPlane.SetActive(true);
+                coroutine = StartCoroutine(ShowInfo());
+            }
+        }
+    }
+
+    
+    /// <summary>
+    /// 그래플링 감지 시 알림을 띄워주는 기능
+    /// </summary>
+    /// <returns></returns>
+    IEnumerator ShowInfo()
+    {
+        float start = Time.time;
+        infoPlane.transform.position = grapplePoint.position;
+        var originPos = infoPlane.transform.position;
+        
+        while (start + 0.5f > Time.time)
+        {
+            var function = EasingFunction.GetEasingFunction(EasingFunction.Ease.EaseOutQuint);
+            float process = function(0, 1, (Time.time - start) * 2);
+
+            infoPlane.transform.position = originPos + Vector3.up * process;
+            yield return null;
         }
     }
 
@@ -113,5 +164,6 @@ public class PlayerGrappling : MonoBehaviour
         grappling = false;
         lr.enabled = false;
         grapplePoint = null;
+        infoPlane.SetActive(false);
     }
 }
