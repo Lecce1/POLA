@@ -52,7 +52,7 @@ public class TCPServerManager : MonoBehaviour
 
     public void Connect()
     {
-        try
+        /*try
         {
             socket = new TcpClient(ip, int.Parse(port));
             stream = socket.GetStream();
@@ -109,7 +109,7 @@ public class TCPServerManager : MonoBehaviour
             }
             
             Invoke(nameof(Connect), 1.0f);
-        }
+        }*/
     }
     
     void Receive() 

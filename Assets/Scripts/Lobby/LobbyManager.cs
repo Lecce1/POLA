@@ -1,16 +1,11 @@
-using System.Collections;
 using System.Collections.Generic;
 using Sirenix.OdinInspector;
 using UnityEngine;
-using UnityEngine.Networking;
 using UnityEngine.SceneManagement;
 using UnityEngine.UI;
 
 public class LobbyManager : MonoBehaviour
 {
-    [FoldoutGroup("패널")] 
-    [Title("인벤토리")] 
-    public GameObject inventory;
     [FoldoutGroup("패널")] 
     [Title("설정")] 
     public GameObject set;
@@ -18,26 +13,16 @@ public class LobbyManager : MonoBehaviour
     [Title("상점")] 
     public GameObject shop;
     [FoldoutGroup("패널")] 
-    [Title("에러")] 
-    public GameObject error;
+    [Title("표지판")] 
+    public GameObject sign;
     [FoldoutGroup("패널")] 
     [Title("에러_네트워크")] 
     public GameObject error_Network;
     [FoldoutGroup("패널")] 
     [Title("입장 버튼")] 
     public GameObject join_Btn;
-    
-    [FoldoutGroup("DB")] 
-    [Title("닉네임")] 
-    public Text nickName_Text;
-    [FoldoutGroup("DB")] 
-    [Title("코인")] 
-    public Text coin_Text;
-    [FoldoutGroup("DB")] 
-    [Title("크리스탈")] 
-    public Text crystal_Text;
 
-    [FoldoutGroup("기타")] 
+    [FoldoutGroup("기타")]
     [Title("경쟁모드 버튼 클릭 여부")] 
     [SerializeField]
     private bool isMatching = false;
@@ -59,22 +44,21 @@ public class LobbyManager : MonoBehaviour
         backStack = new Stack<GameObject>();
     }
 
-    void Start()
+    public void Join_Btn(bool isOn)
     {
-        Init();
-    }
-
-    void Init()
-    {
-        if (DBManager.instance != null)
+        if (isOn == true)
         {
-            nickName_Text.text = DBManager.instance.nickName;
-            coin_Text.text = DBManager.instance.coin.ToString();
-            crystal_Text.text = DBManager.instance.crystal.ToString();
+            isJoinOn = true;
+            join_Btn.GetComponent<Animator>().Play("On");
+        }
+        else if (isOn == false)
+        {
+            isJoinOn = false;
+            join_Btn.GetComponent<Animator>().Play("Off");
         }
     }
-
-    public void Join_Btn(bool isOn)
+    
+    public void Sign_Btn(bool isOn)
     {
         if (isOn == true)
         {
@@ -95,7 +79,7 @@ public class LobbyManager : MonoBehaviour
             case "Stage":
                 if (DBManager.instance != null)
                 {
-                    DBManager.instance.nextScene = "Game";
+                    DBManager.instance.nextScene = "Game 1";
                 }
 
                 SceneManager.LoadScene("Loading");
@@ -132,11 +116,6 @@ public class LobbyManager : MonoBehaviour
                 shop.SetActive(true);
                 backStack.Push(shop);
                 break;
-            
-            case "Inventory":
-                inventory.SetActive(true);
-                backStack.Push(inventory);
-                break;
         }
     }
     
@@ -156,14 +135,6 @@ public class LobbyManager : MonoBehaviour
             
             case "Shop":
                 shop.SetActive(false);
-                break;
-            
-            case "Inventory":
-                inventory.SetActive(false);
-                break;
-            
-            case "Error":
-                error.SetActive(false);
                 break;
         }
     }

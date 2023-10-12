@@ -1036,6 +1036,12 @@ MonoBehaviour:
   coin: 0
   crystal: 0
   nextScene: 
+  lobbyLeftPortal:
+  - {x: 460, y: 0.6, z: 0}
+  - {x: 960, y: 0.6, z: 0}
+  lobbyRightPortal:
+  - {x: 40, y: 0.6, z: 0}
+  - {x: 540, y: 0.6, z: 0}
 --- !u!4 &333384827
 Transform:
   m_ObjectHideFlags: 0
@@ -1067,7 +1073,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 1
+  m_IsActive: 0
 --- !u!108 &371730146
 Light:
   m_ObjectHideFlags: 0

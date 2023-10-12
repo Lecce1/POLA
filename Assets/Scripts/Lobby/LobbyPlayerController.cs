@@ -1,9 +1,14 @@
 using System;
+using System.Diagnostics;
 using UnityEngine;
 using Sirenix.OdinInspector;
+using Debug = UnityEngine.Debug;
 
 public class LobbyPlayerController : MonoBehaviour
 {
+    [Title("플레이어")] 
+    public GameObject player;
+    
     [Title("몸통")] 
     public GameObject body;
     
@@ -13,7 +18,7 @@ public class LobbyPlayerController : MonoBehaviour
     
     [Title("속도")] 
     [SerializeField] 
-    private float speed = 5.0f;
+    private float speed = 10.0f;
     
     [Title("움직임 여부")] 
     [SerializeField] 
@@ -30,20 +35,27 @@ public class LobbyPlayerController : MonoBehaviour
     [Title("충돌 콜라이더")] 
     [SerializeField] 
     private Collider[] collider;
-    
-    [Title("충돌 콜라이더 갯수")] 
-    [SerializeField] 
-    private int colliderCount;
 
     [Title("충돌 콜라이더 이름")] 
     [SerializeField] 
     private string colliderName = String.Empty;
+    
+    public static LobbyPlayerController instance;
+    
+    void Awake()
+    {
+        if (instance == null)
+        {
+            instance = this;
+        }
+    }
 
     void Start()
     {
         anim = GetComponent<Animator>();
         rigidbody = GetComponent<Rigidbody>();
     }
+    
     void Update()
     {
         Move();
@@ -85,27 +97,45 @@ public class LobbyPlayerController : MonoBehaviour
     {
         collider = Physics.OverlapBox(transform.position, new Vector3(1, 1, 1), transform.rotation);
 
-        if (colliderCount != collider.Length)
+        bool isDoor = false;
+        
+        foreach (var temp in collider)
         {
-            switch (collider[0].name)
+            if (temp.name == "Door")
             {
-                case "Stage1":
-                    LobbyManager.instance.Join_Btn(true);
-                    colliderName = collider[0].name;
-                    break;
+                isDoor = true;
                 
-                case "Stage2":
-                    LobbyManager.instance.Join_Btn(true);
-                    colliderName = collider[0].name;
-                    break;
-            }
+                switch (temp.transform.GetComponent<LobbyDoorManager>().name)
+                {
+                    case "Stage1":
+                        if (!temp.transform.GetComponent<LobbyDoorManager>().isLock)
+                        {
+                            LobbyManager.instance.Join_Btn(true);
+                            colliderName = temp.transform.GetComponent<LobbyDoorManager>().name;
+                        }
+                    
+                        break;
+                
+                    case "Stage2":
+                        if (!temp.transform.GetComponent<LobbyDoorManager>().isLock)
+                        {
+                            LobbyManager.instance.Join_Btn(true);
+                            colliderName = temp.transform.GetComponent<LobbyDoorManager>().name;
+                        }
+                    
+                        break;
+                }
+                
 
-            if (colliderName != String.Empty && colliderName != collider[0].name && LobbyManager.instance.isJoinOn == true)
+            }
+        }
+
+        if (!isDoor)
+        {
+            if (colliderName != String.Empty && !collider[0].transform.GetComponent<LobbyDoorManager>() && LobbyManager.instance.isJoinOn == true)
             {
                 LobbyManager.instance.Join_Btn(false);
             }
         }
-        
-        colliderCount = collider.Length;
     }
 }
