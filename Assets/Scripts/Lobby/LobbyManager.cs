@@ -41,6 +41,9 @@ public class LobbyManager : MonoBehaviour
     [Title("경쟁모드 버튼 클릭 여부")] 
     [SerializeField]
     private bool isMatching = false;
+    [FoldoutGroup("기타")] 
+    [Title("입장 버튼 여부")]
+    public bool isJoinOn = false;
 
     // 뒤로가기 스택
     private Stack<GameObject> backStack;
@@ -69,22 +72,19 @@ public class LobbyManager : MonoBehaviour
             coin_Text.text = DBManager.instance.coin.ToString();
             crystal_Text.text = DBManager.instance.crystal.ToString();
         }
-
-        if (join_Btn.activeSelf == true)
-        {
-            join_Btn.SetActive(false);
-        }
     }
 
     public void Join_Btn(bool isOn)
     {
-        if (isOn == true && join_Btn.activeSelf == false)
+        if (isOn == true)
         {
-            join_Btn.SetActive(true);
+            isJoinOn = true;
+            join_Btn.GetComponent<Animator>().Play("On");
         }
-        else if (isOn == false && join_Btn.activeSelf == true)
+        else if (isOn == false)
         {
-            join_Btn.SetActive(false);
+            isJoinOn = false;
+            join_Btn.GetComponent<Animator>().Play("Off");
         }
     }
 
