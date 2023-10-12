@@ -1,3 +1,4 @@
+using System;
 using UnityEngine;
 using Sirenix.OdinInspector;
 
@@ -29,6 +30,14 @@ public class LobbyPlayerController : MonoBehaviour
     [Title("충돌 콜라이더")] 
     [SerializeField] 
     private Collider[] collider;
+    
+    [Title("충돌 콜라이더 갯수")] 
+    [SerializeField] 
+    private int colliderCount;
+
+    [Title("충돌 콜라이더 이름")] 
+    [SerializeField] 
+    private string colliderName = String.Empty;
 
     void Start()
     {
@@ -75,20 +84,28 @@ public class LobbyPlayerController : MonoBehaviour
     void Collider()
     {
         collider = Physics.OverlapBox(transform.position, new Vector3(1, 1, 1), transform.rotation);
-        
-        switch (collider[0].name)
+
+        if (colliderCount != collider.Length)
         {
-            case "Stage1":
-                LobbyManager.instance.Join_Btn(true);
-                break;
+            switch (collider[0].name)
+            {
+                case "Stage1":
+                    LobbyManager.instance.Join_Btn(true);
+                    colliderName = collider[0].name;
+                    break;
                 
-            case "Stage2":
-                LobbyManager.instance.Join_Btn(true);
-                break;
-            
-            default:
+                case "Stage2":
+                    LobbyManager.instance.Join_Btn(true);
+                    colliderName = collider[0].name;
+                    break;
+            }
+
+            if (colliderName != String.Empty && colliderName != collider[0].name && LobbyManager.instance.isJoinOn == true)
+            {
                 LobbyManager.instance.Join_Btn(false);
-                break;
+            }
         }
+        
+        colliderCount = collider.Length;
     }
 }
