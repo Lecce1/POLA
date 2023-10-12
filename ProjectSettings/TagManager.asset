@@ -16,6 +16,7 @@ TagManager:
   - Collectable
   - Floor
   - Rainbow
+  - Grappling
   layers:
   - Default
   - TransparentFX
