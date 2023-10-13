@@ -24,7 +24,7 @@ public class NoteMake : MonoBehaviour
         noteTime.Clear();
         bpm = am.bpm;
         
-        //MakeAmplitude();
+        MakeAmplitude();
 
         if (System.IO.File.Exists(url))
         {
@@ -45,7 +45,8 @@ public class NoteMake : MonoBehaviour
 
     private void FixedUpdate()
     {
-        ampleParent.transform.position += Vector3.left * (10 * Time.fixedDeltaTime);
+        var a = ampleParent.GetComponent<RectTransform>();
+        a.anchoredPosition += Vector2.left * (10 * Time.fixedDeltaTime);
     }
 
     void Update()
@@ -75,19 +76,28 @@ public class NoteMake : MonoBehaviour
         int sampleSize = 1024;
 
         float targetTime = 60 / bpm;
-        int sampleRate = am.audio.clip.samples;
+        int sampleRate = am.audio.clip.frequency;
         
         float[] samples = new float[sampleSize];
 
-        int count = 0;
+        int cnt = 0;
         for (int i = 0; i < am.audio.clip.length * sampleRate; i += (int)(sampleRate * targetTime))
         {
             am.audio.clip.GetData(samples, i);
-            Debug.Log(i);
             float avg = samples.Average();
+            avg += 0.5f;
+            Debug.Log(avg);
             GameObject stick = Instantiate(amplitudeStick, Vector3.zero, Quaternion.identity, ampleParent.transform);
 
-            stick.GetComponent<RectTransform>().rect.Set(count * 10, 0, 10, 300 * avg);
+            var rt = stick.GetComponent<RectTransform>();
+            var pos = rt.anchoredPosition;
+            pos.x = 10 * cnt++;
+            var size = rt.sizeDelta;
+            size.y *= avg;
+            rt.anchoredPosition = pos;
+            rt.sizeDelta = size;
+            
+            stick.GetComponent<RectTransform>().rect.Set(cnt * 10, 0, 10, 300 * avg);
         }
     }
 }
