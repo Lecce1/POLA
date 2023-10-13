@@ -2,6 +2,7 @@ using System;
 using System.Diagnostics;
 using UnityEngine;
 using Sirenix.OdinInspector;
+using UnityEngine.UI;
 using Debug = UnityEngine.Debug;
 
 public class LobbyPlayerController : MonoBehaviour
@@ -35,11 +36,11 @@ public class LobbyPlayerController : MonoBehaviour
     [Title("충돌 콜라이더")] 
     [SerializeField] 
     private Collider[] collider;
-
-    [Title("충돌 콜라이더 이름")] 
-    [SerializeField] 
-    private string colliderName = String.Empty;
     
+    [Title("첫 충돌 여부")] 
+    [SerializeField] 
+    private bool isCollider;
+
     public static LobbyPlayerController instance;
     
     void Awake()
@@ -92,7 +93,7 @@ public class LobbyPlayerController : MonoBehaviour
         isMove = false;
         anim.SetBool("isMove", isMove);
     }
-    
+
     void Collider()
     {
         collider = Physics.OverlapBox(transform.position, new Vector3(1, 1, 1), transform.rotation);
@@ -101,41 +102,53 @@ public class LobbyPlayerController : MonoBehaviour
         
         foreach (var temp in collider)
         {
-            if (temp.name == "Door")
+            if (temp.CompareTag("Door"))
             {
+                isCollider = true;
                 isDoor = true;
                 
                 switch (temp.transform.GetComponent<LobbyDoorManager>().name)
                 {
-                    case "Stage1":
-                        if (!temp.transform.GetComponent<LobbyDoorManager>().isLock)
-                        {
-                            LobbyManager.instance.Join_Btn(true);
-                            colliderName = temp.transform.GetComponent<LobbyDoorManager>().name;
-                        }
-                    
+                    case "Set":
+                        DoorInit("Set", "설정", string.Empty, false);
                         break;
-                
+
+                    case "Shop":
+                        DoorInit("Shop", "상점", string.Empty, false);
+                        break;
+
+                    case "Stage1":
+                        DoorInit("Stage", "입장", "스테이지 1",temp.transform.GetComponent<LobbyDoorManager>().isLock);
+                        break;
+
                     case "Stage2":
-                        if (!temp.transform.GetComponent<LobbyDoorManager>().isLock)
-                        {
-                            LobbyManager.instance.Join_Btn(true);
-                            colliderName = temp.transform.GetComponent<LobbyDoorManager>().name;
-                        }
-                    
+                        DoorInit("Stage", "입장", "스테이지 2", temp.transform.GetComponent<LobbyDoorManager>().isLock);
                         break;
                 }
-                
-
             }
         }
 
-        if (!isDoor)
+        if (isCollider && !isDoor && !collider[0].transform.GetComponent<LobbyDoorManager>())
         {
-            if (colliderName != String.Empty && !collider[0].transform.GetComponent<LobbyDoorManager>() && LobbyManager.instance.isJoinOn == true)
-            {
-                LobbyManager.instance.Join_Btn(false);
-            }
+            LobbyManager.instance.Join_Btn_OnOff(false, false);
+        }
+    }
+    
+    void DoorInit(string name, string btnText, string nameText, bool isLock)
+    {
+        if (!isLock)
+        {
+            LobbyManager.instance.join_Btn.GetComponent<Button>().onClick.RemoveAllListeners();
+            LobbyManager.instance.Join_Btn_OnOff(true, false);
+            LobbyManager.instance.join_Btn.GetComponent<Button>().onClick.AddListener(() => LobbyManager.instance.Button(name));
+            LobbyManager.instance.join_Btn_Text.text = btnText;
+            LobbyManager.instance.stage_Name_Text.text = nameText;
+            LobbyManager.instance.Join_Btn_OnOff(true, false);
+        }
+        else
+        {
+            LobbyManager.instance.stage_Name_Text.text = nameText;
+            LobbyManager.instance.Join_Btn_OnOff(true, true);
         }
     }
 }

@@ -1,4 +1,5 @@
 using System.Collections.Generic;
+using JetBrains.Annotations;
 using Sirenix.OdinInspector;
 using UnityEngine;
 using UnityEngine.SceneManagement;
@@ -22,13 +23,17 @@ public class LobbyManager : MonoBehaviour
     [Title("입장 버튼")] 
     public GameObject join_Btn;
 
+    [FoldoutGroup("텍스트")] 
+    [Title("스테이지 이름 버튼")]
+    public Text stage_Name_Text;
+    [FoldoutGroup("텍스트")] 
+    [Title("입장 버튼")] 
+    public Text join_Btn_Text;
+
     [FoldoutGroup("기타")]
     [Title("경쟁모드 버튼 클릭 여부")] 
     [SerializeField]
     private bool isMatching = false;
-    [FoldoutGroup("기타")] 
-    [Title("입장 버튼 여부")]
-    public bool isJoinOn = false;
 
     // 뒤로가기 스택
     private Stack<GameObject> backStack;
@@ -44,17 +49,25 @@ public class LobbyManager : MonoBehaviour
         backStack = new Stack<GameObject>();
     }
 
-    public void Join_Btn(bool isOn)
+    public void Join_Btn_OnOff(bool isOn, bool onlyStage)
     {
         if (isOn == true)
         {
-            isJoinOn = true;
-            join_Btn.GetComponent<Animator>().Play("On");
+            if (!onlyStage && join_Btn.activeSelf)
+            {
+                join_Btn.GetComponent<Animator>().Play("JoinOn");
+            }
+            
+            stage_Name_Text.GetComponent<Animator>().Play("StageNameOn");
         }
         else if (isOn == false)
         {
-            isJoinOn = false;
-            join_Btn.GetComponent<Animator>().Play("Off");
+            if (!onlyStage && join_Btn.activeSelf)
+            {
+                join_Btn.GetComponent<Animator>().Play("JoinOff");
+            }
+            
+            stage_Name_Text.GetComponent<Animator>().Play("StageNameOff");
         }
     }
     
@@ -62,12 +75,10 @@ public class LobbyManager : MonoBehaviour
     {
         if (isOn == true)
         {
-            isJoinOn = true;
             join_Btn.GetComponent<Animator>().Play("On");
         }
         else if (isOn == false)
         {
-            isJoinOn = false;
             join_Btn.GetComponent<Animator>().Play("Off");
         }
     }
@@ -108,13 +119,29 @@ public class LobbyManager : MonoBehaviour
                 break;
             
             case "Set":
-                set.SetActive(true);
-                backStack.Push(set);
+                if (!set.activeSelf)
+                {
+                    set.SetActive(true);
+                    backStack.Push(set);
+
+                    if (join_Btn.activeSelf)
+                    {
+                        join_Btn.SetActive(false);
+                    }
+                }
                 break;
             
             case "Shop":
-                shop.SetActive(true);
-                backStack.Push(shop);
+                if (!shop.activeSelf)
+                {
+                    shop.SetActive(true);
+                    backStack.Push(shop);
+                    
+                    if (join_Btn.activeSelf)
+                    {
+                        join_Btn.SetActive(false);
+                    }
+                }
                 break;
         }
     }
@@ -130,11 +157,27 @@ public class LobbyManager : MonoBehaviour
         switch (backStack.Pop().name)
         {
             case "Set":
-                set.SetActive(false);
+                if (set.activeSelf)
+                {
+                    set.SetActive(false);
+                    
+                    if (join_Btn.activeSelf == false)
+                    {
+                        join_Btn.SetActive(true);
+                    }
+                }
                 break;
             
             case "Shop":
-                shop.SetActive(false);
+                if (shop.activeSelf)
+                {
+                    shop.SetActive(false);
+
+                    if (join_Btn.activeSelf == false)
+                    {
+                        join_Btn.SetActive(true);
+                    }
+                }
                 break;
         }
     }

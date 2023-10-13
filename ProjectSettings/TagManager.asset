@@ -5,19 +5,13 @@ TagManager:
   serializedVersion: 2
   tags:
   - Ground
-  - Obstacle
-  - RunningGameObstacle
-  - CannonBall
-  - SpeedPad
-  - JumpPad
-  - BasketBall
-  - Chariot
   - Breakable
   - Collectable
   - Floor
   - Rainbow
   - Grappling
   - Swing
+  - Door
   layers:
   - Default
   - TransparentFX
