@@ -4,14 +4,9 @@ using UnityEngine.Events;
 
 public class AudioManager : MonoBehaviour
 {
-    [SerializeField]
-    private float bpm;
-    
-    [SerializeField]
-    private AudioSource audio;
-    
-    [SerializeField]
-    private Intervals[] intervals;
+    public float bpm;
+    public AudioSource audio;
+    public Intervals[] intervals;
 
     private void Update()
     {

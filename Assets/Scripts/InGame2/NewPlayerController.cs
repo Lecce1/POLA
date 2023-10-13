@@ -6,7 +6,7 @@ using UnityEngine.SceneManagement;
 public class NewPlayerController : MonoBehaviour
 {
     private Rigidbody rigid;
-    private float bpm = 155f;
+    private float bpm = 80f;
     private bool isJump = false;
     private float jumpForce = 500f;
     public bool noteWriteMod;
@@ -14,6 +14,7 @@ public class NewPlayerController : MonoBehaviour
     public GameObject note;
     private string notes;
     private string url;
+    public AudioManager am;
     
     // Start is called before the first frame update
     void Start()
@@ -76,13 +77,25 @@ public class NewPlayerController : MonoBehaviour
 
     void Move()
     {
-        if (rigid.velocity.x > bpm * 0.1f - bpm * Time.fixedDeltaTime)
+        foreach (Intervals interval in am.intervals)
         {
-            rigid.velocity = new Vector3(bpm * 0.1f, rigid.velocity.y, 0);
-        }
-        else
-        {
-            rigid.AddForce(Vector3.right * bpm);
+            float sampledTime = (am.audio.timeSamples / (am.audio.clip.frequency * interval.GetIntervalLength(bpm)));
+            
+            float beatsPerMinute = bpm;
+            float secondsPerBeat = 60f / beatsPerMinute;
+            float distancePerMove = 4f;
+            float moveSpeed = distancePerMove / (secondsPerBeat / 4);
+
+            if (rigid.velocity.x > moveSpeed - secondsPerBeat * Time.fixedDeltaTime)
+            {
+                rigid.velocity = new Vector3(moveSpeed, rigid.velocity.y, 0);
+            }
+            else
+            {
+                rigid.AddForce(Vector3.right * moveSpeed);
+            }
+
+            interval.CheckForNewInterval(sampledTime);
         }
     }
     
