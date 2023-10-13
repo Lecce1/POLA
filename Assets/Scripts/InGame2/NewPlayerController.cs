@@ -1,65 +1,32 @@
-using System.Collections.Generic;
-using System.Text;
 using UnityEngine;
 using UnityEngine.SceneManagement;
 
 public class NewPlayerController : MonoBehaviour
 {
     private Rigidbody rigid;
-    private float bpm = 80f;
+    private float bpm;
     private bool isJump = false;
     private float jumpForce = 500f;
-    public bool noteWriteMod;
-    public List<float> noteTime = new();
-    public GameObject note;
-    private string notes;
-    private string url;
     public AudioManager am;
     
-    // Start is called before the first frame update
     void Start()
     {
-        noteTime.Clear();
-
-        if (System.IO.File.Exists(url))
-        {
-            string text = System.IO.File.ReadAllText(url);
-            string[] lines = text.Split('\n');
-            
-            for (int i = 0; i < lines.Length; i++)
-            {
-                noteTime.Add( float.Parse(lines[i]));
-            }
-
-            for (int i = 0; i < noteTime.Count; i++)
-            {
-                Instantiate(note, new Vector3(1f + bpm * 0.005f + (noteTime[i] - 0.1f) * bpm * 0.1f, 0, 0), Quaternion.identity);
-            }
-        }
-        
+        bpm = am.bpm;
         rigid = GetComponent<Rigidbody>();
     }
 
     private void FixedUpdate()
     {
-        if (!noteWriteMod)
-        {
-            Move();
-        }
+        Move();
     }
 
     void Update()
     {
         if (Input.GetKeyDown(KeyCode.Space))
         {
-            if (!isJump && !noteWriteMod)
+            if (!isJump)
             {
                 Jump();
-            }
-
-            if (noteWriteMod)
-            {
-                notes += Time.time + "\n";
             }
         }
 
@@ -67,35 +34,17 @@ public class NewPlayerController : MonoBehaviour
         {
             Attack();
         }
-
-        if (Input.GetKeyDown(KeyCode.E) && noteWriteMod)
-        {
-            notes = notes.TrimEnd('\n');
-            System.IO.File.WriteAllText(url, notes, Encoding.Default);
-        }
     }
 
     void Move()
     {
-        foreach (Intervals interval in am.intervals)
+        if (rigid.velocity.x > bpm / 15f - bpm * Time.fixedDeltaTime)
         {
-            float sampledTime = (am.audio.timeSamples / (am.audio.clip.frequency * interval.GetIntervalLength(bpm)));
-            
-            float beatsPerMinute = bpm;
-            float secondsPerBeat = 60f / beatsPerMinute;
-            float distancePerMove = 4f;
-            float moveSpeed = distancePerMove / (secondsPerBeat / 4);
-
-            if (rigid.velocity.x > moveSpeed - secondsPerBeat * Time.fixedDeltaTime)
-            {
-                rigid.velocity = new Vector3(moveSpeed, rigid.velocity.y, 0);
-            }
-            else
-            {
-                rigid.AddForce(Vector3.right * moveSpeed);
-            }
-
-            interval.CheckForNewInterval(sampledTime);
+            rigid.velocity = new Vector3(bpm / 15f, rigid.velocity.y, 0);
+        }
+        else
+        {
+            rigid.AddForce(Vector3.right * bpm);
         }
     }
     
@@ -107,16 +56,42 @@ public class NewPlayerController : MonoBehaviour
     
     public void Attack()
     {
-        float Distance = 10f;
+        float Distance = 4f;
 
         RaycastHit rayhit;
+
+        char evaluation = 'F';
         
         if (Physics.Raycast(transform.position, transform.forward, out rayhit, Distance))
         {
             if (rayhit.transform.CompareTag("Breakable"))
             {
                 Destroy(rayhit.transform.gameObject);
+
+                float d = rayhit.transform.position.x - transform.position.x;
+
+                if (d < 2f)
+                {
+                    evaluation = 'A';
+                }
+                else if (d < 3f)
+                {
+                    evaluation = 'B';
+                }
+                else if (d < 3.5f)
+                {
+                    evaluation = 'C';
+                }
+                else if (d < 3.75f)
+                {
+                    evaluation = 'D';
+                }
+                else if (d < 3.875f)
+                {
+                    evaluation = 'E';
+                }
             }
+            Debug.Log(evaluation);
         }
     }
 
@@ -141,9 +116,11 @@ public class NewPlayerController : MonoBehaviour
         Gizmos.color = Color.red;
         RaycastHit rayhit;
         
-        if (Physics.Raycast(transform.position, transform.forward, out rayhit, 10f))
+        if (Physics.Raycast(transform.position, transform.forward, out rayhit, 4f))
         {
-            Gizmos.DrawWireSphere(rayhit.transform.position, 0.5f);
+            Gizmos.DrawWireSphere(rayhit.point, 0.5f);
         }
+
+        Gizmos.DrawRay(transform.position, transform.forward * 4f);
     }
 }

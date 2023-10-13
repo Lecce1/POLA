@@ -1,4 +1,6 @@
 using System;
+using System.Collections.Generic;
+using Sirenix.OdinInspector;
 using UnityEngine;
 using UnityEngine.Events;
 
@@ -6,20 +8,22 @@ public class AudioManager : MonoBehaviour
 {
     public float bpm;
     public AudioSource audio;
-    public Intervals[] intervals;
+    
+    [TableList]
+    public List<Intervals> intervals = new ();
 
     private void Update()
     {
         foreach (Intervals interval in intervals)
         {
-            float sampledTime = (audio.timeSamples / (audio.clip.frequency * interval.GetIntervalLength(bpm)));
+            float sampledTime = audio.timeSamples / (audio.clip.frequency * interval.GetIntervalLength(bpm));
             interval.CheckForNewInterval(sampledTime);
         }
     }
 
     void Start()
     {
-        Invoke(nameof(PlayMusic), 1f);
+        Invoke(nameof(PlayMusic), 0f);
     }
 
     void PlayMusic()
