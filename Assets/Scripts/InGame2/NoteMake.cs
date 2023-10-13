@@ -1,5 +1,3 @@
-using System;
-using System.Collections;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
@@ -10,7 +8,7 @@ public class NoteMake : MonoBehaviour
     private string notes;
     public GameObject note;
     public List<float> noteTime = new();
-    private string url = @"C:\Users\LeeMinGyu\Desktop\tmp.txt";
+    private string url = @"C:\Users\kerte\OneDrive\Desktop\tmp.txt";
     public bool noteWriteMod;
     public GameObject amplitudeStick;
     public GameObject ampleParent;
@@ -38,7 +36,7 @@ public class NoteMake : MonoBehaviour
 
             for (int i = 0; i < noteTime.Count; i++)
             {
-                Instantiate(note, new Vector3(noteTime[i] * 4, 0, 0), Quaternion.identity);
+                Instantiate(note, new Vector3(noteTime[i] * 4 + 1f, 0, 0), Quaternion.identity);
             }
         }
     }
