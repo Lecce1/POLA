@@ -24,6 +24,24 @@ public class LobbyDoorManager : MonoBehaviour
     
     void Start()
     {
+        switch (name)
+        {
+            case "Set":
+                Init();
+                break;
+            
+            case "Stage1":
+                StageDoorInit();
+                break;
+            
+            case "Stage2":
+                StageDoorInit();
+                break;
+        }
+    }
+
+    void StageDoorInit()
+    {
         material = transform.GetChild(0).GetComponent<MeshRenderer>();
         
         if (isLock)
@@ -34,5 +52,10 @@ public class LobbyDoorManager : MonoBehaviour
         {
             material.material = null;
         }
+    }
+
+    void Init()
+    {
+        
     }
 }
