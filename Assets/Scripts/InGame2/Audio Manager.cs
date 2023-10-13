@@ -28,7 +28,6 @@ public class AudioManager : MonoBehaviour
 
     void PlayMusic()
     {
-        
         audio.Play();
     }
 }
