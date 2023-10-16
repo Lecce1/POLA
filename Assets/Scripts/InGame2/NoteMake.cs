@@ -1,5 +1,4 @@
 using System.Collections.Generic;
-using System.Linq;
 using System.Text;
 using UnityEngine;
 
@@ -44,7 +43,7 @@ public class NoteMake : MonoBehaviour
     private void FixedUpdate()
     {
         var a = ampleParent.GetComponent<RectTransform>();
-        a.anchoredPosition += Vector2.left * (10 * Time.fixedDeltaTime);
+        a.anchoredPosition += Vector2.left * (bpm / 1.5f * Time.fixedDeltaTime);
     }
 
     void Update()
@@ -71,31 +70,36 @@ public class NoteMake : MonoBehaviour
     
     void MakeAmplitude()
     {
-        int sampleSize = 1024;
-
-        float targetTime = 60 / bpm;
-        int sampleRate = am.audio.clip.frequency;
+        AudioClip clip = am.audio.clip;
+        int numSamples = clip.samples;
+        int quarterBeatPerSamples = (int)(clip.frequency * (15f / bpm));
         
-        float[] samples = new float[sampleSize];
-
+        float[] samples = new float[quarterBeatPerSamples * clip.channels];
+        
         int cnt = 0;
-        for (int i = 0; i < am.audio.clip.length * sampleRate; i += (int)(sampleRate * targetTime))
-        {
-            am.audio.clip.GetData(samples, i);
-            float avg = samples.Average();
-            avg += 0.5f;
-            Debug.Log(avg);
-            GameObject stick = Instantiate(amplitudeStick, Vector3.zero, Quaternion.identity, ampleParent.transform);
 
+        for (int i = 0; i < numSamples; i += quarterBeatPerSamples)
+        {
+            float sum = 0;
+            clip.GetData(samples, i);
+            
+            foreach (var t in samples)
+            {
+                sum += Mathf.Abs(t);
+            }
+            
+            sum /= samples.Length;
+            float y = sum * 200f;
+            GameObject stick = Instantiate(amplitudeStick, ampleParent.transform.position, Quaternion.identity, ampleParent.transform);
+            
             var rt = stick.GetComponent<RectTransform>();
             var pos = rt.anchoredPosition;
-            pos.x = 10 * cnt++;
+            pos.x = cnt++ * 10;
+            
             var size = rt.sizeDelta;
-            size.y *= avg;
+            size.y = y;
             rt.anchoredPosition = pos;
             rt.sizeDelta = size;
-            
-            stick.GetComponent<RectTransform>().rect.Set(cnt * 10, 0, 10, 300 * avg);
         }
     }
 }
