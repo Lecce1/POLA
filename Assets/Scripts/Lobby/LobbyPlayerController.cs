@@ -1,9 +1,7 @@
-using System;
-using System.Diagnostics;
 using UnityEngine;
 using Sirenix.OdinInspector;
 using UnityEngine.UI;
-using Debug = UnityEngine.Debug;
+using UnityEngine.InputSystem;
 
 public class LobbyPlayerController : MonoBehaviour
 {
@@ -42,7 +40,7 @@ public class LobbyPlayerController : MonoBehaviour
     private bool isCollider;
 
     public static LobbyPlayerController instance;
-    
+
     void Awake()
     {
         if (instance == null)
@@ -66,6 +64,37 @@ public class LobbyPlayerController : MonoBehaviour
     void Move()
     {
         rigidbody.AddForce(direction * speed, 0, 0);
+    }
+
+    public void OnMove(InputValue value)
+    {
+        Vector2 vector = value.Get<Vector2>();
+        
+        if (vector.x < 0)
+        {
+            body.transform.rotation = Quaternion.Euler(0, -90, 0);
+            direction = -1;
+            isMove = true;
+            anim.SetBool("isMove", isMove);
+        }
+        else if (vector.x == 0)
+        {
+            direction = 0;
+            isMove = false;
+            anim.SetBool("isMove", isMove);
+        }
+        else if (vector.x > 0)
+        {
+            body.transform.rotation = Quaternion.Euler(0, -270, 0);
+            direction = 1;
+            isMove = true;
+            anim.SetBool("isMove", isMove);
+        }
+    }
+
+    public void OnClick()
+    {
+        Debug.Log("Sex");
     }
 
     public void OnMoveDown(bool isLeft)
