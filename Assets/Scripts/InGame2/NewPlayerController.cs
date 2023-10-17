@@ -1,18 +1,53 @@
+using Sirenix.OdinInspector;
 using UnityEngine;
 using UnityEngine.SceneManagement;
 
 public class NewPlayerController : MonoBehaviour
 {
+    [FoldoutGroup("일반")]
+    [Title("리지드바디")]
+    [SerializeField]
     private Rigidbody rigid;
+    
+    [FoldoutGroup("일반")]
+    [Title("콜라이더")]
+    [SerializeField]
+    private BoxCollider originCollider;
+    
+    [FoldoutGroup("일반")]
+    [SerializeField]
+    private BoxCollider slideCollider;
+    
+    [FoldoutGroup("음악")]
+    [Title("BPM")]
+    [SerializeField]
     private float bpm;
+    
+    [FoldoutGroup("음악")]
+    [Title("오디오")]
+    [SerializeField]
+    public AudioManager audioManager;
+    
+    [FoldoutGroup("변수")]
+    [Title("점프")]
+    [SerializeField]
     private bool isJump = false;
+    
+    [FoldoutGroup("변수")]
+    [SerializeField]
     private float jumpForce = 500f;
-    public AudioManager am;
+    
+    [FoldoutGroup("변수")]
+    [Title("슬라이드")]
+    [SerializeField]
+    private bool isSlide = false;
     
     void Start()
     {
-        bpm = am.bpm;
+        bpm = audioManager.bpm;
         rigid = GetComponent<Rigidbody>();
+        originCollider = GetComponent<BoxCollider>();
+        slideCollider = GetComponentInChildren<BoxCollider>();
     }
 
     private void FixedUpdate()
@@ -22,11 +57,27 @@ public class NewPlayerController : MonoBehaviour
 
     void Update()
     {
-        if (Input.GetKeyDown(KeyCode.Space))
+        if (Input.GetKeyDown(KeyCode.UpArrow))
         {
             if (!isJump)
             {
                 Jump();
+            }
+        }
+
+        if (Input.GetKeyDown(KeyCode.DownArrow))
+        {
+            if (!isSlide)
+            {
+                Slide();
+            }
+        }
+
+        if (Input.GetKeyUp(KeyCode.DownArrow))
+        {
+            if (isSlide)
+            {
+                SlideOut();
             }
         }
 
@@ -36,6 +87,9 @@ public class NewPlayerController : MonoBehaviour
         }
     }
 
+    /// <summary>
+    /// BPM에 따른 움직임
+    /// </summary>
     void Move()
     {
         if (rigid.velocity.x > bpm / 15f - bpm * Time.fixedDeltaTime)
@@ -48,18 +102,60 @@ public class NewPlayerController : MonoBehaviour
         }
     }
     
+    /// <summary>
+    /// 점프 버튼을 눌렀을때
+    /// </summary>
     public void Jump()
     {
         isJump = true;
         rigid.AddForce(Vector3.up * jumpForce);
     }
+
+    /// <summary>
+    /// 점프 버튼을 꾹 눌렀을때
+    /// </summary>
+    public void Rope()
+    {
+        float Distance = 4f;
+        float sphereScale = 15f;
+        RaycastHit hit;
+        
+        if (Physics.SphereCast(transform.position, sphereScale / 2.0f,transform.forward, out hit, Distance))
+        {
+            if (hit.transform.CompareTag("Rope"))
+            {
+                
+            }
+        }
+    }
+
+    /// <summary>
+    /// 슬라이드 버튼을 눌렀을때
+    /// </summary>
+    public void Slide()
+    {
+        isSlide = true;
+        originCollider.enabled = false;
+        slideCollider.enabled = true;
+    }
+
+    /// <summary>
+    /// 슬라이드 버튼을 뗐을때
+    /// </summary>
+    public void SlideOut()
+    {
+        isSlide = false;
+        originCollider.enabled = true;
+        slideCollider.enabled = false;
+    }
     
+    /// <summary>
+    /// 공격 버튼을 눌렀을때
+    /// </summary>
     public void Attack()
     {
         float Distance = 4f;
-
         RaycastHit rayhit;
-
         char evaluation = 'F';
         
         if (Physics.Raycast(transform.position, transform.forward, out rayhit, Distance))
@@ -95,6 +191,9 @@ public class NewPlayerController : MonoBehaviour
         }
     }
 
+    /// <summary>
+    /// 죽었을때
+    /// </summary>
     void Die()
     {
         Debug.Log(Time.time);
