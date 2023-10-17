@@ -14,10 +14,6 @@ public class NewPlayerController : MonoBehaviour
     [SerializeField]
     private BoxCollider originCollider;
     
-    [FoldoutGroup("일반")]
-    [SerializeField]
-    private BoxCollider slideCollider;
-    
     [FoldoutGroup("음악")]
     [Title("BPM")]
     [SerializeField]
@@ -41,13 +37,17 @@ public class NewPlayerController : MonoBehaviour
     [Title("슬라이드")]
     [SerializeField]
     private bool isSlide = false;
+
+    [FoldoutGroup("모드")]
+    [SerializeField]
+    private bool noteEditMod = false;
     
     void Start()
     {
         bpm = audioManager.bpm;
+        noteEditMod = NoteMake.instance.noteEditMod;
         rigid = GetComponent<Rigidbody>();
         originCollider = GetComponent<BoxCollider>();
-        slideCollider = GetComponentInChildren<BoxCollider>();
     }
 
     private void FixedUpdate()
@@ -57,33 +57,36 @@ public class NewPlayerController : MonoBehaviour
 
     void Update()
     {
-        if (Input.GetKeyDown(KeyCode.UpArrow))
+        if (!noteEditMod)
         {
-            if (!isJump)
+            if (Input.GetKeyDown(KeyCode.UpArrow))
             {
-                Jump();
+                if (!isJump)
+                {
+                    Jump();
+                }
             }
-        }
 
-        if (Input.GetKeyDown(KeyCode.DownArrow))
-        {
-            if (!isSlide)
+            if (Input.GetKeyDown(KeyCode.DownArrow))
             {
-                Slide();
+                if (!isSlide)
+                {
+                    Slide();
+                }
             }
-        }
-
-        if (Input.GetKeyUp(KeyCode.DownArrow))
-        {
-            if (isSlide)
+        
+            if (Input.GetKeyUp(KeyCode.DownArrow))
             {
-                SlideOut();
+                if (isSlide)
+                {
+                    SlideOut();
+                }
             }
-        }
 
-        if (Input.GetKeyDown(KeyCode.Z))
-        {
-            Attack();
+            if (Input.GetKeyDown(KeyCode.Z))
+            {
+                Attack();
+            }
         }
     }
 
@@ -92,9 +95,9 @@ public class NewPlayerController : MonoBehaviour
     /// </summary>
     void Move()
     {
-        if (rigid.velocity.x > bpm / 15f - bpm * Time.fixedDeltaTime)
+        if (rigid.velocity.x > bpm / 12f - bpm * Time.fixedDeltaTime)
         {
-            rigid.velocity = new Vector3(bpm / 15f, rigid.velocity.y, 0);
+            rigid.velocity = new Vector3(bpm / 12f, rigid.velocity.y, 0);
         }
         else
         {
@@ -135,8 +138,8 @@ public class NewPlayerController : MonoBehaviour
     public void Slide()
     {
         isSlide = true;
-        originCollider.enabled = false;
-        slideCollider.enabled = true;
+        originCollider.center = new Vector3(0, -0.25f, 0);
+        originCollider.size = new Vector3(1, 0.5f, 1);
     }
 
     /// <summary>
@@ -145,8 +148,8 @@ public class NewPlayerController : MonoBehaviour
     public void SlideOut()
     {
         isSlide = false;
-        originCollider.enabled = true;
-        slideCollider.enabled = false;
+        originCollider.center = new Vector3(0, 0, 0);
+        originCollider.size = new Vector3(1, 1, 1);
     }
     
     /// <summary>
@@ -154,7 +157,7 @@ public class NewPlayerController : MonoBehaviour
     /// </summary>
     public void Attack()
     {
-        float Distance = 4f;
+        float Distance = 5f;
         RaycastHit rayhit;
         char evaluation = 'F';
         

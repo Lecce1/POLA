@@ -4,46 +4,63 @@ using UnityEngine;
 
 public class NoteMake : MonoBehaviour
 {
-    private string notes;
-    public GameObject note;
+    private string noteRecord;
+    public GameObject noteBar;
+    private List<GameObject> bars = new();
     public List<float> noteTime = new();
     private string url = "Assets/Scripts/InGame2/Beats/tmp.txt";
     public bool noteWriteMod;
-    public GameObject amplitudeStick;
-    public GameObject ampleParent;
-    private float count = 0;
+    public bool noteEditMod;
+    public bool insertMod;
+    public int nearestNote;
+    public int curNote;
+    private float beatCount = 0;
     private float bpm;
+    public static NoteMake instance;
+
+    public NewPlayerController player;
+    public GameObject ampStick;
+    public GameObject ampParent;
+    public GameObject ampBar;
+    private RectTransform ampTransform;
     public AudioManager am;
-    
-    // Start is called before the first frame update
+
     void Start()
     {
+        player = GameObject.Find("Player").GetComponent<NewPlayerController>();
+        ampTransform = ampParent.GetComponent<RectTransform>();
+        if (instance == null)
+        {
+            instance = this;
+        }
+        
         noteTime.Clear();
         bpm = am.bpm;
-        
         MakeAmplitude();
+
+        if (noteWriteMod || noteEditMod)
+        {
+            Destroy(player.GetComponent<Collider>());
+            ampBar.SetActive(true);
+        }
 
         if (System.IO.File.Exists(url))
         {
             string text = System.IO.File.ReadAllText(url);
+            
             string[] lines = text.Split('\n');
             
             for (int i = 0; i < lines.Length; i++)
             {
-                noteTime.Add( float.Parse(lines[i]));
-            }
-
-            for (int i = 0; i < noteTime.Count; i++)
-            {
-                Instantiate(note, new Vector3(noteTime[i] * 4 + 0.5f, 0, 0), Quaternion.identity);
+                noteTime.Add(float.Parse(lines[i]));
+                bars.Add(Instantiate(noteBar, new Vector3(noteTime[i] * 5, 0, 0), Quaternion.identity));
             }
         }
     }
 
-    private void FixedUpdate()
+    void FixedUpdate()
     {
-        var a = ampleParent.GetComponent<RectTransform>();
-        a.anchoredPosition += Vector2.left * (bpm / 1.5f * Time.fixedDeltaTime);
+        ampTransform.anchoredPosition += Vector2.left * (bpm / 1.2f * Time.fixedDeltaTime);
     }
 
     void Update()
@@ -52,27 +69,125 @@ public class NoteMake : MonoBehaviour
         {
             if (Input.GetKeyDown(KeyCode.Space))
             {
-                notes += count + "\n";
-            }
-        
-            if (Input.GetKeyDown(KeyCode.E))
-            {
-                notes = notes.TrimEnd('\n');
-                System.IO.File.WriteAllText(url, notes, Encoding.Default);
+                noteRecord += beatCount + "\n";
             }
         }
+
+        if (noteEditMod)
+        {
+            EditNote();
+        }
+    }
+
+    void EditNote()
+    {
+        if (Input.GetKeyDown(KeyCode.A) && player.transform.position.x > 1f)
+        {   
+            player.transform.position -= player.transform.forward * 5f;
+            am.audio.time -= 60 / bpm;
+            ampTransform.anchoredPosition += Vector2.right * 50f;
+            beatCount--;
+        }
+
+        if (Input.GetKeyDown(KeyCode.D))
+        {
+            player.transform.position += player.transform.forward * 5f;
+            am.audio.time += 60 / bpm;
+            ampTransform.anchoredPosition += Vector2.left * 50f;
+            beatCount++;
+        }
+            
+        nearestNote = FindNearestIndex(beatCount);
+
+        if (Input.GetKeyDown(KeyCode.Space))
+        {
+            if (!insertMod)
+            {
+                bars[nearestNote].transform.position = new Vector3(noteTime[nearestNote] * 5, 0, 0);
+                noteTime[nearestNote] = beatCount;
+            }
+            else
+            {
+                bars.Insert(curNote, Instantiate(noteBar, new Vector3(beatCount * 5, 0, 0), Quaternion.identity));
+                noteTime.Insert(curNote, beatCount);
+            }
+        }
+        
+        if (Input.GetKeyDown(KeyCode.X))
+        {
+            if (curNote != -1)
+            {
+                var remove = bars[curNote];
+                bars.RemoveAt(curNote);
+                Destroy(remove);
+                noteTime.RemoveAt(curNote);
+            }
+        }
+        
+        if (Input.GetKeyDown(KeyCode.Alpha1))
+        {
+            insertMod = !insertMod;
+        }
+    }
+
+    int FindNearestIndex(float findKey)
+    {
+        int low = 0;
+        int high = noteTime.Count;
+
+        int cnt = 0;
+        
+        while (low <= high && low < noteTime.Count)
+        {
+            int mid = (low + high) / 2;
+            
+            if (cnt > 100)
+            {
+                Debug.Log("inf loop");
+                break;
+            }
+            
+            if (noteTime[mid] > findKey)
+            {
+                high = mid - 1;
+            }
+            
+            else if (noteTime[mid] == findKey)
+            {
+                break;
+            }
+            
+            else
+            {
+                low = mid + 1;
+            }
+
+            cnt++;
+        }
+
+        if (low >= noteTime.Count)
+        {
+            low = noteTime.Count - 1;
+        }
+
+        curNote = low - 1;
+        if (low != 0 && noteTime[low] - findKey > findKey - noteTime[low - 1])
+        {
+            low--;
+        }
+        return low;
     }
     
     public void BeatCounter()
     {
-        count += 0.25f;
+        beatCount += 0.1f;
     }
     
     void MakeAmplitude()
     {
         AudioClip clip = am.audio.clip;
         int numSamples = clip.samples;
-        int quarterBeatPerSamples = (int)(clip.frequency * (15f / bpm));
+        int quarterBeatPerSamples = (int)(clip.frequency * (12f / bpm));
         
         float[] samples = new float[quarterBeatPerSamples * clip.channels];
         
@@ -90,7 +205,7 @@ public class NoteMake : MonoBehaviour
             
             sum /= samples.Length;
             float y = sum * 200f;
-            GameObject stick = Instantiate(amplitudeStick, ampleParent.transform.position, Quaternion.identity, ampleParent.transform);
+            GameObject stick = Instantiate(ampStick, ampParent.transform.position, Quaternion.identity, ampParent.transform);
             
             var rt = stick.GetComponent<RectTransform>();
             var pos = rt.anchoredPosition;
@@ -100,6 +215,27 @@ public class NoteMake : MonoBehaviour
             size.y = y;
             rt.anchoredPosition = pos;
             rt.sizeDelta = size;
+        }
+    }
+
+    void OnApplicationQuit()
+    {
+        if (noteWriteMod && noteRecord != null)
+        {
+            noteRecord = noteRecord.TrimEnd('\n');
+            System.IO.File.WriteAllText(url, noteRecord, Encoding.Default);
+        }
+
+        if (noteEditMod)
+        {
+            string str = "";
+            foreach (var item in noteTime)
+            {
+                str += item + "\n";
+            }
+            
+            str = str.TrimEnd('\n');
+            System.IO.File.WriteAllText(url, str, Encoding.Default);
         }
     }
 }
