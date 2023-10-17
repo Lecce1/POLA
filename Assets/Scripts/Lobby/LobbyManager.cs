@@ -1,6 +1,7 @@
 using System.Collections.Generic;
 using Sirenix.OdinInspector;
 using UnityEngine;
+using UnityEngine.EventSystems;
 using UnityEngine.SceneManagement;
 using UnityEngine.UI;
 
@@ -29,6 +30,14 @@ public class LobbyManager : MonoBehaviour
     [Title("입장 버튼")] 
     public Text join_Btn_Text;
 
+    [FoldoutGroup("기타")] 
+    [Title("입장 버튼 타입")] 
+    [SerializeField]
+    public string join_Btn_Type;
+    [FoldoutGroup("기타")] 
+    [Title("패널 열림 여부")] 
+    [SerializeField]
+    public bool isPanelOpen = false;
     [FoldoutGroup("기타")]
     [Title("경쟁모드 버튼 클릭 여부")] 
     [SerializeField]
@@ -46,6 +55,26 @@ public class LobbyManager : MonoBehaviour
         }
 
         backStack = new Stack<GameObject>();
+        EventSystem.current.SetSelectedGameObject(join_Btn);
+    }
+    
+    public void DoorInit(string name, string btnText, string nameText, bool isLock)
+    {
+        if (!isLock)
+        {
+            join_Btn_Type = name;
+            join_Btn.GetComponent<Button>().onClick.RemoveAllListeners();
+            Join_Btn_OnOff(true, false);
+            join_Btn.GetComponent<Button>().onClick.AddListener(() => LobbyManager.instance.Button(name));
+            join_Btn_Text.text = btnText;
+            stage_Name_Text.text = nameText;
+            Join_Btn_OnOff(true, false);
+        }
+        else
+        {
+            stage_Name_Text.text = nameText;
+            Join_Btn_OnOff(true, true);
+        }
     }
 
     public void Join_Btn_OnOff(bool isOn, bool onlyStage)
@@ -94,34 +123,13 @@ public class LobbyManager : MonoBehaviour
 
                 SceneManager.LoadScene("Loading");
                 break;
-            
-            case "PVP":
-                if (isMatching == false)
-                {
-                    isMatching = true;
 
-                    if (TCPServerManager.instance != null)
-                    {
-                        TCPServerManager.instance.Send("Matching", "True");
-                    }
-                }
-                else
-                {
-                    isMatching = false;
-
-                    if (TCPServerManager.instance != null)
-                    {
-                        TCPServerManager.instance.Send("Matching", "False");
-                    }
-                }
-                
-                break;
-            
             case "Set":
                 if (!set.activeSelf)
                 {
                     set.SetActive(true);
                     backStack.Push(set);
+                    isPanelOpen = true;
 
                     if (join_Btn.activeSelf)
                     {
@@ -135,11 +143,21 @@ public class LobbyManager : MonoBehaviour
                 {
                     shop.SetActive(true);
                     backStack.Push(shop);
+                    isPanelOpen = true;
                     
                     if (join_Btn.activeSelf)
                     {
                         join_Btn.SetActive(false);
                     }
+                }
+                break;
+            
+            case "Sign":
+                if (!sign.activeSelf)
+                {
+                    sign.SetActive(true);
+                    backStack.Push(sign);
+                    isPanelOpen = true;
                 }
                 break;
         }
@@ -159,6 +177,7 @@ public class LobbyManager : MonoBehaviour
                 if (set.activeSelf)
                 {
                     set.SetActive(false);
+                    isPanelOpen = false;
                     
                     if (join_Btn.activeSelf == false)
                     {
@@ -171,11 +190,20 @@ public class LobbyManager : MonoBehaviour
                 if (shop.activeSelf)
                 {
                     shop.SetActive(false);
+                    isPanelOpen = false;
 
                     if (join_Btn.activeSelf == false)
                     {
                         join_Btn.SetActive(true);
                     }
+                }
+                break;
+            
+            case "Sign":
+                if (sign.activeSelf)
+                {
+                    sign.SetActive(false);
+                    isPanelOpen = false;
                 }
                 break;
         }

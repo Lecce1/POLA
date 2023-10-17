@@ -9,7 +9,7 @@
                     "name": "Move",
                     "type": "Value",
                     "id": "e004b9c0-5b1a-4fff-99b9-fde49838093e",
-                    "expectedControlType": "Vector2",
+                    "expectedControlType": "Button",
                     "processors": "",
                     "interactions": "",
                     "initialStateCheck": true
@@ -108,7 +108,7 @@
                     "id": "d5b61df5-b14f-41f9-a0a2-0ddeb0639118",
                     "expectedControlType": "Button",
                     "processors": "",
-                    "interactions": "",
+                    "interactions": "Tap",
                     "initialStateCheck": true
                 },
                 {
@@ -384,22 +384,22 @@
                 },
                 {
                     "name": "",
-                    "id": "afe3ee25-90b1-4bd3-9fa0-d61a8563baf5",
-                    "path": "<Touchscreen>/touch*/press",
+                    "id": "18d530dd-75ba-4d4f-9a62-630b07ea4f8d",
+                    "path": "<Keyboard>/z",
                     "interactions": "",
                     "processors": "",
-                    "groups": "MOBILE",
+                    "groups": "PC",
                     "action": "Click",
                     "isComposite": false,
                     "isPartOfComposite": false
                 },
                 {
                     "name": "",
-                    "id": "18d530dd-75ba-4d4f-9a62-630b07ea4f8d",
-                    "path": "<Keyboard>/z",
+                    "id": "7cedd78e-357d-4116-bdd9-32215b6a2d1a",
+                    "path": "<XInputController>/buttonEast",
                     "interactions": "",
                     "processors": "",
-                    "groups": "PC",
+                    "groups": "CONSOLE",
                     "action": "Click",
                     "isComposite": false,
                     "isPartOfComposite": false

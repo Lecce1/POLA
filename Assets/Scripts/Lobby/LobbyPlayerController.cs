@@ -38,6 +38,10 @@ public class LobbyPlayerController : MonoBehaviour
     [Title("첫 충돌 여부")] 
     [SerializeField] 
     private bool isCollider;
+    
+    [Title("움직임 가능 여부")] 
+    [SerializeField] 
+    public bool isMoveAvailable = true;
 
     public static LobbyPlayerController instance;
 
@@ -68,33 +72,53 @@ public class LobbyPlayerController : MonoBehaviour
 
     public void OnMove(InputValue value)
     {
-        Vector2 vector = value.Get<Vector2>();
-        
-        if (vector.x < 0)
+        if (isMoveAvailable == true)
         {
-            body.transform.rotation = Quaternion.Euler(0, -90, 0);
-            direction = -1;
-            isMove = true;
-            anim.SetBool("isMove", isMove);
+            Vector2 vector = value.Get<Vector2>();
+        
+            if (vector.x < 0)
+            {
+                body.transform.rotation = Quaternion.Euler(0, -90, 0);
+                direction = -1;
+                isMove = true;
+                anim.SetBool("isMove", isMove);
+            }
+            else if (vector.x == 0)
+            {
+                direction = 0;
+                isMove = false;
+                anim.SetBool("isMove", isMove);
+            }
+            else if (vector.x > 0)
+            {
+                body.transform.rotation = Quaternion.Euler(0, -270, 0);
+                direction = 1;
+                isMove = true;
+                anim.SetBool("isMove", isMove);
+            }
         }
-        else if (vector.x == 0)
+        else
         {
             direction = 0;
             isMove = false;
-            anim.SetBool("isMove", isMove);
-        }
-        else if (vector.x > 0)
-        {
-            body.transform.rotation = Quaternion.Euler(0, -270, 0);
-            direction = 1;
-            isMove = true;
             anim.SetBool("isMove", isMove);
         }
     }
 
     public void OnClick()
     {
-        Debug.Log("Sex");
+        if (LobbyManager.instance.isPanelOpen == false)
+        {
+            LobbyManager.instance.Button(LobbyManager.instance.join_Btn_Type);
+            isMoveAvailable = false;
+            
+        }
+        else
+        {
+            LobbyManager.instance.Back();
+            isMoveAvailable = true;
+        }
+
     }
 
     public void OnMoveDown(bool isLeft)
@@ -139,19 +163,19 @@ public class LobbyPlayerController : MonoBehaviour
                 switch (temp.transform.GetComponent<LobbyDoorManager>().name)
                 {
                     case "Set":
-                        DoorInit("Set", "설정", string.Empty, false);
+                        LobbyManager.instance.DoorInit("Set", "설정", string.Empty, false);
                         break;
 
                     case "Shop":
-                        DoorInit("Shop", "상점", string.Empty, false);
+                        LobbyManager.instance.DoorInit("Shop", "상점", string.Empty, false);
                         break;
 
                     case "Stage1":
-                        DoorInit("Stage", "입장", "스테이지 1",temp.transform.GetComponent<LobbyDoorManager>().isLock);
+                        LobbyManager.instance.DoorInit("Stage", "입장", "스테이지 1",temp.transform.GetComponent<LobbyDoorManager>().isLock);
                         break;
 
                     case "Stage2":
-                        DoorInit("Stage", "입장", "스테이지 2", temp.transform.GetComponent<LobbyDoorManager>().isLock);
+                        LobbyManager.instance.DoorInit("Stage", "입장", "스테이지 2", temp.transform.GetComponent<LobbyDoorManager>().isLock);
                         break;
                 }
             }
@@ -160,24 +184,6 @@ public class LobbyPlayerController : MonoBehaviour
         if (isCollider && !isDoor && !collider[0].transform.GetComponent<LobbyDoorManager>())
         {
             LobbyManager.instance.Join_Btn_OnOff(false, false);
-        }
-    }
-    
-    void DoorInit(string name, string btnText, string nameText, bool isLock)
-    {
-        if (!isLock)
-        {
-            LobbyManager.instance.join_Btn.GetComponent<Button>().onClick.RemoveAllListeners();
-            LobbyManager.instance.Join_Btn_OnOff(true, false);
-            LobbyManager.instance.join_Btn.GetComponent<Button>().onClick.AddListener(() => LobbyManager.instance.Button(name));
-            LobbyManager.instance.join_Btn_Text.text = btnText;
-            LobbyManager.instance.stage_Name_Text.text = nameText;
-            LobbyManager.instance.Join_Btn_OnOff(true, false);
-        }
-        else
-        {
-            LobbyManager.instance.stage_Name_Text.text = nameText;
-            LobbyManager.instance.Join_Btn_OnOff(true, true);
         }
     }
 }
