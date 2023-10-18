@@ -13,6 +13,12 @@ public class NoteMake : MonoBehaviour
     
     [FoldoutGroup("모드")]
     public bool insertMod = false;
+
+    [FoldoutGroup("모드")] 
+    public bool noSave = false;
+
+    [FoldoutGroup("모드")] 
+    private Stack<Task> taskStack = new Stack<Task>();
     
     [FoldoutGroup("노트")]
     [Title("오브젝트")]
@@ -55,7 +61,7 @@ public class NoteMake : MonoBehaviour
     [FoldoutGroup("음악")]
     [Title("카운트")]
     [SerializeField]
-    private float beatCount = 0;
+    public float beatCount = 0;
     
     [FoldoutGroup("일반")]
     [Title("플레이어")]
@@ -75,9 +81,33 @@ public class NoteMake : MonoBehaviour
     [Title("위치")]
     [SerializeField]
     private RectTransform ampTransform;
+    
+    public class Task
+    {
+        public enum task
+        {
+            Deleted = 0,
+            Inserted,
+            Moved,
+        }
+
+        public Task(int idx, float prev, task t)
+        {
+            index = idx;
+            preValue = prev;
+            taskType = t;
+        }
+
+        public float preValue;
+        
+        public int index;
+
+        public task taskType;
+    }
 
     public static NoteMake instance;
-    
+
+    private bool isPressedRewind = false;
     void Start()
     {
         bpm = am.bpm;
@@ -88,7 +118,8 @@ public class NoteMake : MonoBehaviour
         
         if (noteWriteMod || noteEditMod)
         {
-            Destroy(player.GetComponent<Collider>());
+            player.GetComponent<BoxCollider>().isTrigger = true;
+            player.GetComponent<Rigidbody>().useGravity = false;
             ampBar.SetActive(true);
         }
 
@@ -100,7 +131,9 @@ public class NoteMake : MonoBehaviour
             for (int i = 0; i < lines.Length; i++)
             {
                 noteTime.Add(float.Parse(lines[i]));
-                bars.Add(Instantiate(noteBar, new Vector3(noteTime[i] * 5f, 0, 0), Quaternion.identity));
+                var note = Instantiate(noteBar, new Vector3(noteTime[i] * 5f + 11.5f, 0, 0), Quaternion.identity);
+                bars.Add(note);
+                note.transform.GetChild(0).GetComponent<TextMesh>().text = i.ToString();
             }
         }
         
@@ -131,18 +164,29 @@ public class NoteMake : MonoBehaviour
         }
     }
 
+    void Calculate(float d)
+    {
+        var pos = player.transform.position;
+        pos.x += d;
+        player.transform.position = pos;
+    }
+    
     void EditNote()
     {
-        if (Input.GetKeyDown(KeyCode.A) && player.transform.position.x > 1f)
-        {   
-            player.transform.position -= player.transform.forward * 5f;
-            am.audio.time -= 60 / bpm;
-            ampTransform.anchoredPosition += Vector2.right * 50f;
-            beatCount--;
+        if (Input.GetKeyDown(KeyCode.A) && beatCount > 2f && !isPressedRewind)
+        {
+            isPressedRewind = true;
+            Calculate(0.5f);
+            player.transform.position -= player.transform.forward * 10f;
+            am.audio.time -= 120 / bpm;
+            ampTransform.anchoredPosition += Vector2.right * 100f;
+            beatCount -= 2;
         }
 
-        if (Input.GetKeyDown(KeyCode.D))
+        if (Input.GetKeyDown(KeyCode.D) && !isPressedRewind)
         {
+            isPressedRewind = true;
+            Calculate(0.5f);
             player.transform.position += player.transform.forward * 5f;
             am.audio.time += 60 / bpm;
             ampTransform.anchoredPosition += Vector2.left * 50f;
@@ -155,30 +199,71 @@ public class NoteMake : MonoBehaviour
         {
             if (!insertMod)
             {
-                bars[nearestNote].transform.position = new Vector3(noteTime[nearestNote] * 5f, 0, 0);
+                taskStack.Push(new Task(nearestNote, noteTime[nearestNote], Task.task.Moved));
+                bars[nearestNote].transform.position = new Vector3(noteTime[nearestNote] * 5f + 12F, 0, 0);
                 noteTime[nearestNote] = beatCount;
             }
             else
             {
-                bars.Insert(curNote, Instantiate(noteBar, new Vector3(beatCount * 5f, 0, 0), Quaternion.identity));
+                taskStack.Push(new Task(curNote, 0, Task.task.Inserted));
+                bars.Insert(curNote, Instantiate(noteBar, new Vector3(beatCount * 5f + 12f, 0, 0), Quaternion.identity));
                 noteTime.Insert(curNote, beatCount);
             }
         }
         
-        if (Input.GetKeyDown(KeyCode.X))
+        if (Input.GetKeyDown(KeyCode.X) && curNote != -1)
         {
-            if (curNote != -1)
-            {
-                var remove = bars[curNote];
-                bars.RemoveAt(curNote);
-                Destroy(remove);
-                noteTime.RemoveAt(curNote);
-            }
+            taskStack.Push(new Task(curNote, noteTime[nearestNote], Task.task.Deleted));
+            var remove = bars[curNote];
+            bars.RemoveAt(curNote);
+            Destroy(remove);
+            noteTime.RemoveAt(curNote);
         }
         
         if (Input.GetKeyDown(KeyCode.Alpha1))
         {
             insertMod = !insertMod;
+        }
+
+        if (Input.GetKeyDown(KeyCode.Escape))
+        {
+            noSave = !noSave;
+        }
+
+        if (Input.GetKey(KeyCode.LeftShift) && Input.GetKeyDown(KeyCode.Z))
+        {
+            Debug.Log(taskStack.Count);
+            UndoTask();
+        }
+    }
+
+    void UndoTask()
+    {
+        if (taskStack.Count <= 0)
+        {
+            return;
+        }
+
+        Task t = taskStack.Pop();
+
+        switch (t.taskType)
+        {
+            case Task.task.Moved :
+                bars[t.index].transform.position = new Vector3(t.preValue * 5f + 12f, 0, 0);
+                noteTime[t.index] = t.preValue;
+                break;
+            
+            case Task.task.Deleted :
+                bars.Insert(t.index, Instantiate(noteBar, new Vector3(t.preValue * 5f + 12f, 0, 0), Quaternion.identity));
+                noteTime.Insert(t.index, t.preValue);
+                break;
+            
+            case Task.task.Inserted :
+                var remove = bars[t.index];
+                bars.RemoveAt(t.index);
+                Destroy(remove);
+                noteTime.RemoveAt(t.index);
+                break;
         }
     }
 
@@ -197,6 +282,7 @@ public class NoteMake : MonoBehaviour
             }
             else if (noteTime[mid] == findKey)
             {
+                low = mid;
                 break;
             }
             else
@@ -205,11 +291,12 @@ public class NoteMake : MonoBehaviour
             }
         }
 
+        curNote = low - 1;
+        
         if (low >= noteTime.Count)
         {
             low = noteTime.Count - 1;
         }
-        curNote = low - 1;
         
         if (low != 0 && noteTime[low] - findKey > findKey - noteTime[low - 1])
         {
@@ -224,6 +311,7 @@ public class NoteMake : MonoBehaviour
         beatCount++;
         beatCount = Mathf.Round(beatCount);
         beatCount *= 0.1f;
+        isPressedRewind = false;
     }
     
     void MakeAmplitude()
@@ -261,6 +349,11 @@ public class NoteMake : MonoBehaviour
 
     void OnApplicationQuit()
     {
+        if (noSave)
+        {
+            return;
+        }
+        
         if (noteWriteMod && noteRecord != null)
         {
             noteRecord = noteRecord.TrimEnd('\n');
