@@ -59,35 +59,43 @@ public class NewPlayerController : MonoBehaviour
     {
         if (!noteEditMod)
         {
-            if (Input.GetKeyDown(KeyCode.UpArrow))
-            {
-                if (!isJump)
-                {
-                    Jump();
-                }
-            }
+            KeyMapping();
+        }
+    }
 
-            if (Input.GetKeyDown(KeyCode.DownArrow))
+    /// <summary>
+    /// 키보드 입력
+    /// </summary>
+    void KeyMapping()
+    {
+        if (Input.GetKeyDown(KeyCode.UpArrow))
+        {
+            if (!isJump)
             {
-                if (!isSlide)
-                {
-                    Slide();
-                }
-            }
-        
-            if (Input.GetKeyUp(KeyCode.DownArrow))
-            {
-                if (isSlide)
-                {
-                    SlideOut();
-                }
-            }
-
-            if (Input.GetKeyDown(KeyCode.Z))
-            {
-                Attack();
+                Jump();
             }
         }
+
+        if (Input.GetKeyDown(KeyCode.DownArrow))
+        {
+            if (!isSlide)
+            {
+                Slide();
+            }
+        }
+        
+        if (Input.GetKeyUp(KeyCode.DownArrow))
+        {
+            if (isSlide)
+            {
+                SlideOut();
+            }
+        }
+
+        if (Input.GetKeyDown(KeyCode.Z))
+        {
+            Attack();
+        }    
     }
 
     /// <summary>

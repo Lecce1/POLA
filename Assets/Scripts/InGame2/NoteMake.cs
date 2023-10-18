@@ -1,43 +1,91 @@
 using System.Collections.Generic;
 using System.Text;
+using Sirenix.OdinInspector;
 using UnityEngine;
 
 public class NoteMake : MonoBehaviour
 {
-    private string noteRecord;
+    [FoldoutGroup("모드")]
+    public bool noteWriteMod = false;
+    
+    [FoldoutGroup("모드")]
+    public bool noteEditMod = false;
+    
+    [FoldoutGroup("모드")]
+    public bool insertMod = false;
+    
+    [FoldoutGroup("노트")]
+    [Title("오브젝트")]
     public GameObject noteBar;
+    
+    [FoldoutGroup("노트")]
+    [SerializeField]
     private List<GameObject> bars = new();
-    public List<float> noteTime = new();
-    private string url = "Assets/Scripts/InGame2/Beats/tmp.txt";
-    public bool noteWriteMod;
-    public bool noteEditMod;
-    public bool insertMod;
+    
+    [FoldoutGroup("노트")]
+    [Title("위치")]
     public int nearestNote;
+    
+    [FoldoutGroup("노트")]
+    [Title("위치")]
     public int curNote;
-    private float beatCount = 0;
+    
+    [FoldoutGroup("노트")]
+    [Title("기록")]
+    [SerializeField]
+    private string noteRecord;
+    
+    [FoldoutGroup("노트")]
+    public List<float> noteTime = new();
+    
+    [FoldoutGroup("음악")]
+    [Title("경로")]
+    [SerializeField]
+    private string url = "Assets/Scripts/InGame2/Beats/tmp.txt";
+    
+    [FoldoutGroup("음악")]
+    [Title("BPM")]
+    [SerializeField]
     private float bpm;
-    public static NoteMake instance;
-
-    public NewPlayerController player;
-    public GameObject ampStick;
-    public GameObject ampParent;
-    public GameObject ampBar;
-    private RectTransform ampTransform;
+    
+    [FoldoutGroup("음악")]
+    [Title("오디오")]
     public AudioManager am;
+    
+    [FoldoutGroup("음악")]
+    [Title("카운트")]
+    [SerializeField]
+    private float beatCount = 0;
+    
+    [FoldoutGroup("일반")]
+    [Title("플레이어")]
+    public NewPlayerController player;
+    
+    [FoldoutGroup("앰플")]
+    [Title("오브젝트")]
+    public GameObject ampStick;
+    
+    [FoldoutGroup("앰플")]
+    public GameObject ampParent;
+    
+    [FoldoutGroup("앰플")]
+    public GameObject ampBar;
+    
+    [FoldoutGroup("앰플")]
+    [Title("위치")]
+    [SerializeField]
+    private RectTransform ampTransform;
 
+    public static NoteMake instance;
+    
     void Start()
     {
+        bpm = am.bpm;
         player = GameObject.Find("Player").GetComponent<NewPlayerController>();
         ampTransform = ampParent.GetComponent<RectTransform>();
-        if (instance == null)
-        {
-            instance = this;
-        }
-        
         noteTime.Clear();
-        bpm = am.bpm;
         MakeAmplitude();
-
+        
         if (noteWriteMod || noteEditMod)
         {
             Destroy(player.GetComponent<Collider>());
@@ -47,7 +95,6 @@ public class NoteMake : MonoBehaviour
         if (System.IO.File.Exists(url))
         {
             string text = System.IO.File.ReadAllText(url);
-            
             string[] lines = text.Split('\n');
             
             for (int i = 0; i < lines.Length; i++)
@@ -55,6 +102,11 @@ public class NoteMake : MonoBehaviour
                 noteTime.Add(float.Parse(lines[i]));
                 bars.Add(Instantiate(noteBar, new Vector3(noteTime[i] * 5, 0, 0), Quaternion.identity));
             }
+        }
+        
+        if (instance == null)
+        {
+            instance = this;
         }
     }
 
@@ -96,7 +148,6 @@ public class NoteMake : MonoBehaviour
             ampTransform.anchoredPosition += Vector2.left * 50f;
             beatCount++;
         }
-            
         nearestNote = FindNearestIndex(beatCount);
 
         if (Input.GetKeyDown(KeyCode.Space))
@@ -134,7 +185,6 @@ public class NoteMake : MonoBehaviour
     {
         int low = 0;
         int high = noteTime.Count;
-
         int cnt = 0;
         
         while (low <= high && low < noteTime.Count)
@@ -151,17 +201,14 @@ public class NoteMake : MonoBehaviour
             {
                 high = mid - 1;
             }
-            
             else if (noteTime[mid] == findKey)
             {
                 break;
             }
-            
             else
             {
                 low = mid + 1;
             }
-
             cnt++;
         }
 
@@ -169,8 +216,8 @@ public class NoteMake : MonoBehaviour
         {
             low = noteTime.Count - 1;
         }
-
         curNote = low - 1;
+        
         if (low != 0 && noteTime[low] - findKey > findKey - noteTime[low - 1])
         {
             low--;
@@ -180,7 +227,7 @@ public class NoteMake : MonoBehaviour
     
     public void BeatCounter()
     {
-        beatCount += 0.1f;
+        beatCount += Mathf.Round(0.1f * 100) / 100.0f;
     }
     
     void MakeAmplitude()
@@ -188,9 +235,7 @@ public class NoteMake : MonoBehaviour
         AudioClip clip = am.audio.clip;
         int numSamples = clip.samples;
         int quarterBeatPerSamples = (int)(clip.frequency * (12f / bpm));
-        
         float[] samples = new float[quarterBeatPerSamples * clip.channels];
-        
         int cnt = 0;
 
         for (int i = 0; i < numSamples; i += quarterBeatPerSamples)
@@ -229,11 +274,11 @@ public class NoteMake : MonoBehaviour
         if (noteEditMod)
         {
             string str = "";
+            
             foreach (var item in noteTime)
             {
                 str += item + "\n";
             }
-            
             str = str.TrimEnd('\n');
             System.IO.File.WriteAllText(url, str, Encoding.Default);
         }
