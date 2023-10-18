@@ -100,7 +100,7 @@ public class NoteMake : MonoBehaviour
             for (int i = 0; i < lines.Length; i++)
             {
                 noteTime.Add(float.Parse(lines[i]));
-                bars.Add(Instantiate(noteBar, new Vector3(noteTime[i] * 5, 0, 0), Quaternion.identity));
+                bars.Add(Instantiate(noteBar, new Vector3(noteTime[i] * 5f, 0, 0), Quaternion.identity));
             }
         }
         
@@ -148,18 +148,19 @@ public class NoteMake : MonoBehaviour
             ampTransform.anchoredPosition += Vector2.left * 50f;
             beatCount++;
         }
+        
         nearestNote = FindNearestIndex(beatCount);
 
         if (Input.GetKeyDown(KeyCode.Space))
         {
             if (!insertMod)
             {
-                bars[nearestNote].transform.position = new Vector3(noteTime[nearestNote] * 5, 0, 0);
+                bars[nearestNote].transform.position = new Vector3(noteTime[nearestNote] * 5f, 0, 0);
                 noteTime[nearestNote] = beatCount;
             }
             else
             {
-                bars.Insert(curNote, Instantiate(noteBar, new Vector3(beatCount * 5, 0, 0), Quaternion.identity));
+                bars.Insert(curNote, Instantiate(noteBar, new Vector3(beatCount * 5f, 0, 0), Quaternion.identity));
                 noteTime.Insert(curNote, beatCount);
             }
         }
@@ -185,17 +186,10 @@ public class NoteMake : MonoBehaviour
     {
         int low = 0;
         int high = noteTime.Count;
-        int cnt = 0;
         
         while (low <= high && low < noteTime.Count)
         {
             int mid = (low + high) / 2;
-            
-            if (cnt > 100)
-            {
-                Debug.Log("inf loop");
-                break;
-            }
             
             if (noteTime[mid] > findKey)
             {
@@ -209,7 +203,6 @@ public class NoteMake : MonoBehaviour
             {
                 low = mid + 1;
             }
-            cnt++;
         }
 
         if (low >= noteTime.Count)
@@ -227,18 +220,21 @@ public class NoteMake : MonoBehaviour
     
     public void BeatCounter()
     {
-        beatCount += Mathf.Round(0.1f * 100) / 100.0f;
+        beatCount *= 10;
+        beatCount++;
+        beatCount = Mathf.Round(beatCount);
+        beatCount *= 0.1f;
     }
     
     void MakeAmplitude()
     {
         AudioClip clip = am.audio.clip;
         int numSamples = clip.samples;
-        int quarterBeatPerSamples = (int)(clip.frequency * (12f / bpm));
-        float[] samples = new float[quarterBeatPerSamples * clip.channels];
+        int BeatPerSamples = (int)(clip.frequency * (12f / bpm));
+        float[] samples = new float[BeatPerSamples * clip.channels];
         int cnt = 0;
 
-        for (int i = 0; i < numSamples; i += quarterBeatPerSamples)
+        for (int i = 0; i < numSamples; i += BeatPerSamples)
         {
             float sum = 0;
             clip.GetData(samples, i);

@@ -166,16 +166,16 @@ public class NewPlayerController : MonoBehaviour
     public void Attack()
     {
         float Distance = 5f;
-        RaycastHit rayhit;
+        RaycastHit rayHit;
         char evaluation = 'F';
         
-        if (Physics.Raycast(transform.position, transform.forward, out rayhit, Distance))
+        if (Physics.Raycast(transform.position, transform.forward, out rayHit, Distance))
         {
-            if (rayhit.transform.CompareTag("Breakable"))
+            if (rayHit.transform.CompareTag("Breakable"))
             {
-                Destroy(rayhit.transform.gameObject);
+                Destroy(rayHit.transform.gameObject);
 
-                float d = rayhit.transform.position.x - transform.position.x;
+                float d = rayHit.transform.position.x - transform.position.x;
 
                 if (d < 2f)
                 {
@@ -224,11 +224,11 @@ public class NewPlayerController : MonoBehaviour
     private void OnDrawGizmos()
     {
         Gizmos.color = Color.red;
-        RaycastHit rayhit;
+        RaycastHit rayHit;
         
-        if (Physics.Raycast(transform.position, transform.forward, out rayhit, 4f))
+        if (Physics.Raycast(transform.position, transform.forward, out rayHit, 4f))
         {
-            Gizmos.DrawWireSphere(rayhit.point, 0.5f);
+            Gizmos.DrawWireSphere(rayHit.point, 0.5f);
         }
 
         Gizmos.DrawRay(transform.position, transform.forward * 4f);
