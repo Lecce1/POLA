@@ -12,6 +12,7 @@ TagManager:
   - Grappling
   - Swing
   - Door
+  - Rope
   layers:
   - Default
   - TransparentFX

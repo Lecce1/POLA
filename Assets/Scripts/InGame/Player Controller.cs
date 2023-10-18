@@ -56,9 +56,6 @@ public class PlayerController : MonoBehaviour
     Animator anim;
     
     [FoldoutGroup("일반")] 
-    public Transform rayPosition;
-    
-    [FoldoutGroup("일반")] 
     public Rigidbody rigid;
     
     [FoldoutGroup("일반")] 
