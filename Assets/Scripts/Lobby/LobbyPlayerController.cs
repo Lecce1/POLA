@@ -1,7 +1,9 @@
+using System.Runtime.CompilerServices;
 using UnityEngine;
 using Sirenix.OdinInspector;
 using UnityEngine.UI;
 using UnityEngine.InputSystem;
+using UnityEngine.Serialization;
 
 public class LobbyPlayerController : MonoBehaviour
 {
@@ -34,14 +36,13 @@ public class LobbyPlayerController : MonoBehaviour
     [Title("충돌 콜라이더")] 
     [SerializeField] 
     private Collider[] collider;
-    
-    [Title("첫 충돌 여부")] 
-    [SerializeField] 
-    private bool isCollider;
-    
+
     [Title("움직임 가능 여부")] 
     [SerializeField] 
     public bool isMoveAvailable = true;
+    
+    [Title("문 충돌 여부")] 
+    public bool isDoor = false;
 
     public static LobbyPlayerController instance;
 
@@ -107,18 +108,23 @@ public class LobbyPlayerController : MonoBehaviour
 
     public void OnClick()
     {
-        if (LobbyManager.instance.isPanelOpen == false)
+        if (transform.GetComponent<PlayerInput>().currentControlScheme != "MOBILE")
         {
-            LobbyManager.instance.Button(LobbyManager.instance.join_Btn_Type);
-            isMoveAvailable = false;
-            
+            if (!LobbyManager.instance.isPanelOpen && LobbyManager.instance.isJoinBtnOn)
+            {
+                LobbyManager.instance.Button(LobbyManager.instance.join_Btn_Type);
+                isMoveAvailable = false;
+            }
         }
-        else
+    }
+
+    public void OnCancel()
+    {
+        if (LobbyManager.instance.isPanelOpen)
         {
             LobbyManager.instance.Back();
             isMoveAvailable = true;
         }
-
     }
 
     public void OnMoveDown(bool isLeft)
@@ -137,7 +143,6 @@ public class LobbyPlayerController : MonoBehaviour
             isMove = true;
             anim.SetBool("isMove", isMove);
         }
-
     }
 
     public void OnMoveUp()
@@ -151,17 +156,20 @@ public class LobbyPlayerController : MonoBehaviour
     {
         collider = Physics.OverlapBox(transform.position, new Vector3(1, 1, 1), transform.rotation);
 
-        bool isDoor = false;
+        bool isCheck = false;
         
         foreach (var temp in collider)
         {
             if (temp.CompareTag("Door"))
             {
-                isCollider = true;
-                isDoor = true;
+                isCheck = true;
                 
                 switch (temp.transform.GetComponent<LobbyDoorManager>().name)
                 {
+                    case "Sign":
+                        LobbyManager.instance.DoorInit("Sign", "확인", string.Empty, false);
+                        break;
+                    
                     case "Set":
                         LobbyManager.instance.DoorInit("Set", "설정", string.Empty, false);
                         break;
@@ -181,7 +189,16 @@ public class LobbyPlayerController : MonoBehaviour
             }
         }
 
-        if (isCollider && !isDoor && !collider[0].transform.GetComponent<LobbyDoorManager>())
+        if (isCheck)
+        {
+            isDoor = true;
+        }
+        else
+        {
+            isDoor = false;
+        }
+        
+        if (LobbyManager.instance.isJoinBtnOn && !isDoor && !collider[0].transform.GetComponent<LobbyDoorManager>())
         {
             LobbyManager.instance.Join_Btn_OnOff(false, false);
         }

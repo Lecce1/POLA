@@ -35,6 +35,10 @@ public class LobbyManager : MonoBehaviour
     [SerializeField]
     public string join_Btn_Type;
     [FoldoutGroup("기타")] 
+    [Title("입장 버튼 온오프 여부")] 
+    [SerializeField]
+    public bool isJoinBtnOn = false;
+    [FoldoutGroup("기타")] 
     [Title("패널 열림 여부")] 
     [SerializeField]
     public bool isPanelOpen = false;
@@ -57,18 +61,18 @@ public class LobbyManager : MonoBehaviour
         backStack = new Stack<GameObject>();
         EventSystem.current.SetSelectedGameObject(join_Btn);
     }
-    
+
     public void DoorInit(string name, string btnText, string nameText, bool isLock)
     {
         if (!isLock)
         {
             join_Btn_Type = name;
             join_Btn.GetComponent<Button>().onClick.RemoveAllListeners();
-            Join_Btn_OnOff(true, false);
             join_Btn.GetComponent<Button>().onClick.AddListener(() => LobbyManager.instance.Button(name));
             join_Btn_Text.text = btnText;
             stage_Name_Text.text = nameText;
             Join_Btn_OnOff(true, false);
+
         }
         else
         {
@@ -87,6 +91,7 @@ public class LobbyManager : MonoBehaviour
             }
             
             stage_Name_Text.GetComponent<Animator>().Play("StageNameOn");
+            isJoinBtnOn = true;
         }
         else if (isOn == false)
         {
@@ -96,6 +101,7 @@ public class LobbyManager : MonoBehaviour
             }
             
             stage_Name_Text.GetComponent<Animator>().Play("StageNameOff");
+            isJoinBtnOn = false;
         }
     }
     
@@ -158,6 +164,11 @@ public class LobbyManager : MonoBehaviour
                     sign.SetActive(true);
                     backStack.Push(sign);
                     isPanelOpen = true;
+                    
+                    if (join_Btn.activeSelf)
+                    {
+                        join_Btn.SetActive(false);
+                    }
                 }
                 break;
         }
@@ -170,6 +181,8 @@ public class LobbyManager : MonoBehaviour
             Debug.LogError("뒤로가기 패널이 비었습니다.");
             return;
         }
+
+        bool isCheck = false;
         
         switch (backStack.Pop().name)
         {
@@ -177,12 +190,7 @@ public class LobbyManager : MonoBehaviour
                 if (set.activeSelf)
                 {
                     set.SetActive(false);
-                    isPanelOpen = false;
-                    
-                    if (join_Btn.activeSelf == false)
-                    {
-                        join_Btn.SetActive(true);
-                    }
+                    isCheck = true;
                 }
                 break;
             
@@ -190,12 +198,7 @@ public class LobbyManager : MonoBehaviour
                 if (shop.activeSelf)
                 {
                     shop.SetActive(false);
-                    isPanelOpen = false;
-
-                    if (join_Btn.activeSelf == false)
-                    {
-                        join_Btn.SetActive(true);
-                    }
+                    isCheck = true;
                 }
                 break;
             
@@ -203,9 +206,24 @@ public class LobbyManager : MonoBehaviour
                 if (sign.activeSelf)
                 {
                     sign.SetActive(false);
-                    isPanelOpen = false;
+                    isCheck = true;
                 }
                 break;
+        }
+
+        if (isCheck == true)
+        {
+            isPanelOpen = false;
+                    
+            if (join_Btn.activeSelf == false)
+            {
+                join_Btn.SetActive(true);
+                
+                if (!LobbyPlayerController.instance.isDoor)
+                {
+                    Join_Btn_OnOff(false, false);
+                }
+            }
         }
     }
     
