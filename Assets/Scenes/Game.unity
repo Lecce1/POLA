@@ -7162,7 +7162,9 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 63fe58f1e6eb69140872c41bd571d3d8, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  bpm: 0
   audio: {fileID: 1796592177}
+  intervals: []
 --- !u!114 &1653570257
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -8028,7 +8030,7 @@ SceneRoots:
   - {fileID: 2032438597}
   - {fileID: 524343908}
   - {fileID: 1251073297}
+  - {fileID: 1358704292}
   - {fileID: 1199007159}
   - {fileID: 1953392545}
   - {fileID: 1796592178}
-  - {fileID: 1358704292}

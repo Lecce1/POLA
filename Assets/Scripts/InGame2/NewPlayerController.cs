@@ -1,4 +1,3 @@
-using System;
 using Sirenix.OdinInspector;
 using UnityEngine;
 using UnityEngine.SceneManagement;
@@ -92,11 +91,6 @@ public class NewPlayerController : MonoBehaviour
                 SlideOut();
             }
         }
-
-        if (Input.GetKeyDown(KeyCode.Z))
-        {
-            Attack();
-        }    
     }
 
     /// <summary>
@@ -160,11 +154,8 @@ public class NewPlayerController : MonoBehaviour
         originCollider.center = new Vector3(0, 0, 0);
         originCollider.size = new Vector3(1, 1, 1);
     }
-    
-    /// <summary>
-    /// 공격 버튼을 눌렀을때
-    /// </summary>
-    public void Attack()
+
+    public void OnAttack()
     {
         float Distance = 5f;
         RaycastHit rayHit;
@@ -200,6 +191,18 @@ public class NewPlayerController : MonoBehaviour
                 }
             }
             Debug.Log(evaluation);
+        }
+    }
+
+    public void OnCancel()
+    {
+        if (!GameManager.instance.isPanelOpen)
+        {
+            GameManager.instance.Button("Set");
+        }
+        else
+        {
+            GameManager.instance.Back();
         }
     }
 

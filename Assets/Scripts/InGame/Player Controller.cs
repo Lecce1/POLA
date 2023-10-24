@@ -168,7 +168,7 @@ public class PlayerController : MonoBehaviour
         anim.SetTrigger("Die");
         stats.current.isDead = true;
         rigid.useGravity = false;
-        GameManager.instance.Reset();
+        GameManager1.instance.Reset();
         Destroy(gameObject.GetComponent<BoxCollider>());
         StopAllCoroutines();
     }

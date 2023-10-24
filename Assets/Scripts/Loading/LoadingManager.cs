@@ -92,7 +92,6 @@ public class LoadingManager : MonoBehaviour
                 if(currentProgress < 100)
                 {
                     currentProgress = Mathf.FloorToInt(Mathf.Lerp(currentProgress, 100, (minimumLoadTime - minimumTimer) / minimumLoadTime));
-
                     if (minimumTimer >= 0f && currentProgress >= 99)
                     {
                         loadingText.text = string.Format("99%");

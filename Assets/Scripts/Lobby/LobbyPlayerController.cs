@@ -1,9 +1,6 @@
-using System.Runtime.CompilerServices;
 using UnityEngine;
 using Sirenix.OdinInspector;
-using UnityEngine.UI;
 using UnityEngine.InputSystem;
-using UnityEngine.Serialization;
 
 public class LobbyPlayerController : MonoBehaviour
 {

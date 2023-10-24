@@ -4,7 +4,7 @@ using UnityEngine;
 using UnityEngine.UI;
 using UnityEngine.InputSystem;
 
-public class LobbyPlatformManager : MonoBehaviour
+public class PlatformManager : MonoBehaviour
     {
         [Title("키보드 오브젝트")] 
         public List<GameObject> keyboardObjects = new List<GameObject>();

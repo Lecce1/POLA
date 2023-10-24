@@ -4,7 +4,7 @@ using UnityEngine;
 using UnityEngine.SceneManagement;
 using UnityEngine.UI;
 
-public class GameManager : MonoBehaviour
+public class GameManager1 : MonoBehaviour
 {
     [FoldoutGroup("일반")] 
     public Text timerText;
@@ -12,7 +12,7 @@ public class GameManager : MonoBehaviour
     [FoldoutGroup("일반")] 
     public float timer = 0;
  
-    public static GameManager instance;
+    public static GameManager1 instance;
     
     /// <summary>
     /// 인스턴스 생성
