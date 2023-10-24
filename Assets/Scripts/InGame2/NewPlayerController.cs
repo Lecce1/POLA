@@ -1,3 +1,4 @@
+using System;
 using Sirenix.OdinInspector;
 using UnityEngine;
 using UnityEngine.SceneManagement;
@@ -207,7 +208,6 @@ public class NewPlayerController : MonoBehaviour
     /// </summary>
     void Die()
     {
-        Debug.Log(Time.time);
         SceneManager.LoadScene("Game 1");
     }
 
@@ -232,5 +232,10 @@ public class NewPlayerController : MonoBehaviour
         }
 
         Gizmos.DrawRay(transform.position, transform.forward * 4f);
+    }
+
+    private void OnTriggerEnter(Collider other)
+    {
+        Debug.Log(NoteMake.instance.beatCount);
     }
 }

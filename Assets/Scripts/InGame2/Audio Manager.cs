@@ -18,7 +18,8 @@ public class AudioManager : MonoBehaviour
     [Title("인터벌")]
     [TableList]
     public List<Intervals> intervals = new ();
-
+    
+    
     void Update()
     {
         foreach (Intervals interval in intervals)
@@ -30,13 +31,13 @@ public class AudioManager : MonoBehaviour
 
     void Start()
     {
-        Invoke(nameof(PlayMusic), 0f);
+        Invoke(nameof(PlayMusic), 120f / bpm);
     }
 
     /// <summary>
     /// 음악 시작
     /// </summary>
-    void PlayMusic()
+    public void PlayMusic()
     {
         audio.Play();
     }
@@ -49,7 +50,7 @@ public class AudioManager : MonoBehaviour
 public class Intervals
 {
     [SerializeField]
-    private float steps;
+    public float steps;
     [SerializeField]
     private UnityEvent trigger;
     private int lastInterval;
