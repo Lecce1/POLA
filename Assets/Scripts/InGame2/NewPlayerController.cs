@@ -1,6 +1,8 @@
 using Sirenix.OdinInspector;
 using UnityEngine;
+using UnityEngine.EventSystems;
 using UnityEngine.SceneManagement;
+using UnityEngine.UI;
 
 public class NewPlayerController : MonoBehaviour
 {
@@ -191,6 +193,14 @@ public class NewPlayerController : MonoBehaviour
                 }
             }
             Debug.Log(evaluation);
+        }
+    }
+
+    public void OnClick()
+    {
+        if (EventSystem.current.currentSelectedGameObject != null)
+        {
+            EventSystem.current.currentSelectedGameObject.GetComponent<Button>().onClick.Invoke();
         }
     }
 

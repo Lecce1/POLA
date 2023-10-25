@@ -1,6 +1,7 @@
 using System.Collections.Generic;
 using Sirenix.OdinInspector;
 using UnityEngine;
+using UnityEngine.EventSystems;
 using UnityEngine.UI;
 using UnityEngine.InputSystem;
 
@@ -64,6 +65,8 @@ public class PlatformManager : MonoBehaviour
                 gamepadObjects[i].SetActive(true);
                 LayoutRebuilder.ForceRebuildLayoutImmediate(gamepadObjects[i].GetComponentInParent<RectTransform>());
             }
+            
+            Cursor.visible = false;
         }
 
         public void SwitchToKeyboard()
@@ -92,6 +95,8 @@ public class PlatformManager : MonoBehaviour
                 keyboardObjects[i].SetActive(true);
                 LayoutRebuilder.ForceRebuildLayoutImmediate(keyboardObjects[i].GetComponentInParent<RectTransform>());
             }
+            
+            Cursor.visible = true;
         }
         
         public void SwitchToMobile()
