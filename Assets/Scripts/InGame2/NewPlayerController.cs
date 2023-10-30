@@ -1,4 +1,3 @@
-using System;
 using Sirenix.OdinInspector;
 using UnityEngine;
 using UnityEngine.EventSystems;
@@ -33,29 +32,25 @@ public class NewPlayerController : MonoBehaviour
     
     [FoldoutGroup("변수")]
     [SerializeField]
-    private bool isGravityReversed = false;
+    private bool isGravityReversed;
 
     [FoldoutGroup("변수")] 
-    public bool isGrounded = false;
-    
-    [FoldoutGroup("변수")]
-    [SerializeField]
-    private float maxSlopeAngle = 50.0f;
+    public bool isGrounded;
     
     [FoldoutGroup("변수")] 
-    public bool isDead = false;
+    public bool isDead;
     
     [FoldoutGroup("변수")]
     [Title("공격")]
-    public bool isAttacking = false;
+    public bool isAttacking;
     
     [FoldoutGroup("변수")]
     [SerializeField]
-    private int attackCounter = 0;
+    private int attackCounter;
     
     [FoldoutGroup("변수")]
     [Title("점프")]
-    public bool isJump = false;
+    public bool isJump;
     
     [FoldoutGroup("변수")]
     [SerializeField]
@@ -64,15 +59,13 @@ public class NewPlayerController : MonoBehaviour
     [FoldoutGroup("변수")]
     [Title("슬라이드")]
     [SerializeField]
-    private bool isSlide = false;
+    private bool isSlide;
 
     [FoldoutGroup("일반")] 
     public Animator anim;
     
     [FoldoutGroup("일반")] 
     public PlayerParticle particle;
-    
-    WaitForFixedUpdate fixedUpdate = new WaitForFixedUpdate();
     
     void Start()
     {
@@ -85,7 +78,10 @@ public class NewPlayerController : MonoBehaviour
 
     private void FixedUpdate()
     {
-        Move();
+        if (!isDead)
+        {
+            Move();
+        }
     }
 
     void Update()
@@ -136,6 +132,11 @@ public class NewPlayerController : MonoBehaviour
         {
             rigid.AddForce(Vector3.right * bpm);
         }
+
+        if (transform.position.y < -5)
+        {
+            Die();
+        }
     }
     
     /// <summary>
@@ -150,7 +151,7 @@ public class NewPlayerController : MonoBehaviour
         
         isJump = true;
         anim.SetTrigger("Jump");
-        anim.SetBool("IsJump", isJump);
+        anim.SetBool("IsJumping", isJump);
         rigid.AddForce(Vector3.up * jumpForce);
     }
 
@@ -184,7 +185,7 @@ public class NewPlayerController : MonoBehaviour
         
         isSlide = true;
         anim.SetTrigger("Slide");
-        originCollider.center = new Vector3(0, -0.25f, 0);
+        originCollider.center = new Vector3(0, 0.25f, 0);
         originCollider.size = new Vector3(1, 0.5f, 1);
     }
 
@@ -194,7 +195,7 @@ public class NewPlayerController : MonoBehaviour
     public void SlideOut()
     {
         isSlide = false;
-        originCollider.center = new Vector3(0, 0, 0);
+        originCollider.center = new Vector3(0, 0.5f, 0);
         originCollider.size = new Vector3(1, 1, 1);
     }
 
@@ -287,7 +288,7 @@ public class NewPlayerController : MonoBehaviour
         isDead = true;
         rigid.useGravity = false;
         Invoke(nameof(Reset), 2f);
-        Destroy(gameObject.GetComponent<BoxCollider>());
+        Destroy(gameObject.GetComponent<Rigidbody>());
         StopAllCoroutines();
     }
 

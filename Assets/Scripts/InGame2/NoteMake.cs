@@ -106,8 +106,6 @@ public class NoteMake : MonoBehaviour
     }
 
     public static NoteMake instance;
-
-    private bool isPressedRewind = false;
     void Start()
     {
         bpm = am.bpm;
@@ -173,9 +171,8 @@ public class NoteMake : MonoBehaviour
     
     void EditNote()
     {
-        if (Input.GetKeyDown(KeyCode.A) && beatCount > 2f && !isPressedRewind)
+        if (Input.GetKeyDown(KeyCode.A) && beatCount > 2f)
         {
-            isPressedRewind = true;
             Calculate(0.5f);
             player.transform.position -= player.transform.forward * 10f;
             am.audio.time -= 120 / bpm;
@@ -183,9 +180,8 @@ public class NoteMake : MonoBehaviour
             beatCount -= 2;
         }
 
-        if (Input.GetKeyDown(KeyCode.D) && !isPressedRewind)
+        if (Input.GetKeyDown(KeyCode.D))
         {
-            isPressedRewind = true;
             Calculate(0.5f);
             player.transform.position += player.transform.forward * 5f;
             am.audio.time += 60 / bpm;
@@ -232,7 +228,6 @@ public class NoteMake : MonoBehaviour
 
         if (Input.GetKey(KeyCode.LeftShift) && Input.GetKeyDown(KeyCode.Z))
         {
-            Debug.Log(taskStack.Count);
             UndoTask();
         }
     }
@@ -311,7 +306,6 @@ public class NoteMake : MonoBehaviour
         beatCount++;
         beatCount = Mathf.Round(beatCount);
         beatCount *= 0.1f;
-        isPressedRewind = false;
     }
     
     void MakeAmplitude()
