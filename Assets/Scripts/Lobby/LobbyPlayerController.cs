@@ -161,7 +161,7 @@ public class LobbyPlayerController : MonoBehaviour
             {
                 isCheck = true;
                 
-                switch (temp.transform.GetComponent<LobbyDoorManager>().name)
+                switch (temp.transform.GetComponent<DoorManager>().name)
                 {
                     case "Sign":
                         LobbyManager.instance.DoorInit("Sign", "확인", string.Empty, false);
@@ -176,11 +176,13 @@ public class LobbyPlayerController : MonoBehaviour
                         break;
 
                     case "Stage1":
-                        LobbyManager.instance.DoorInit("Stage", "입장", "스테이지 1",temp.transform.GetComponent<LobbyDoorManager>().isLock);
+                        LobbyManager.instance.DoorInit("Stage", "입장", DBManager.instance.stage1_Title, temp.transform.GetComponent<DoorManager>().isLock);
+                        DBManager.instance.currentStageNum = 1;
                         break;
 
                     case "Stage2":
-                        LobbyManager.instance.DoorInit("Stage", "입장", "스테이지 2", temp.transform.GetComponent<LobbyDoorManager>().isLock);
+                        LobbyManager.instance.DoorInit("Stage", "입장", DBManager.instance.stage2_Title, temp.transform.GetComponent<DoorManager>().isLock);
+                        DBManager.instance.currentStageNum = 2;
                         break;
                 }
             }
@@ -195,7 +197,7 @@ public class LobbyPlayerController : MonoBehaviour
             isDoor = false;
         }
         
-        if (LobbyManager.instance.isJoinBtnOn && !isDoor && !collider[0].transform.GetComponent<LobbyDoorManager>())
+        if (LobbyManager.instance.isJoinBtnOn && !isDoor && !collider[0].transform.GetComponent<DoorManager>())
         {
             LobbyManager.instance.Join_Btn_OnOff(false, false);
         }

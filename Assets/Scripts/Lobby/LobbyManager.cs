@@ -72,7 +72,6 @@ public class LobbyManager : MonoBehaviour
             join_Btn_Text.text = btnText;
             stage_Name_Text.text = nameText;
             Join_Btn_OnOff(true, false);
-
         }
         else
         {
@@ -124,7 +123,7 @@ public class LobbyManager : MonoBehaviour
             case "Stage":
                 if (DBManager.instance != null)
                 {
-                    DBManager.instance.nextScene = "Game 1";
+                    DBManager.instance.nextScene = "Track";
                 }
 
                 SceneManager.LoadScene("Loading");
