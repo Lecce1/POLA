@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.UI;
 using Sirenix.OdinInspector;
+using UnityEngine.EventSystems;
 
 public class TrackInfo : SerializedMonoBehaviour
 {
@@ -59,6 +60,9 @@ public class TrackInfo : SerializedMonoBehaviour
     [FoldoutGroup("미션 3")] 
     [Title("성공 내용")]
     public GameObject misson3_Content_Success;
+    
+    [Title("시작 버튼")]
+    public GameObject startBtn;
     
     public static TrackInfo instance;
     
@@ -146,5 +150,7 @@ public class TrackInfo : SerializedMonoBehaviour
 
                 break;
         }
+        
+        TrackManager.instance.btn_Type = "Start";
     }
 }

@@ -27,6 +27,12 @@ public class DBManager : MonoBehaviour
     [FoldoutGroup("게임 DB")] 
     [Title("현재 스테이지")]
     public int currentStageNum;
+    [FoldoutGroup("스테이지 0")] 
+    [Title("좌표")]
+    public Vector3 stage0_Pos = new Vector3(0,0.6f,0);
+    [FoldoutGroup("스테이지 1")] 
+    [Title("좌표")]
+    public Vector3 stage1_Pos = new Vector3(480,0.6f,0);
     [FoldoutGroup("스테이지 1")] 
     [Title("이름")]
     public string stage1_Title = "스테이지 1";
@@ -48,6 +54,9 @@ public class DBManager : MonoBehaviour
     [FoldoutGroup("스테이지 1")] 
     [Title("트랙 6번 이름")]
     public string stage1_Track6_Title = "1_6번 제목";
+    [FoldoutGroup("스테이지 2")] 
+    [Title("좌표")]
+    public Vector3 stage2_Pos = new Vector3(980,0.6f,0);
     [FoldoutGroup("스테이지 2")] 
     [Title("이름")]
     public string stage2_Title = "스테이지 2";

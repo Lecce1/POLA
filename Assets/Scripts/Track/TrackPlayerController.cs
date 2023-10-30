@@ -99,51 +99,14 @@ public class TrackPlayerController : MonoBehaviour
         
         anim.SetBool("isMove", isMove);
     }
-
+    
     public void OnClick()
     {
         if (transform.GetComponent<PlayerInput>().currentControlScheme != "MOBILE")
         {
-            if (!LobbyManager.instance.isPanelOpen && LobbyManager.instance.isJoinBtnOn)
-            {
-                LobbyManager.instance.Button(LobbyManager.instance.join_Btn_Type);
-                isMoveAvailable = false;
-            }
+            TrackManager.instance.Button(TrackManager.instance.btn_Type);
+            isMoveAvailable = false;
         }
-    }
-
-    public void OnCancel()
-    {
-        if (LobbyManager.instance.isPanelOpen)
-        {
-            LobbyManager.instance.Back();
-            isMoveAvailable = true;
-        }
-    }
-
-    public void OnMoveDown(bool isLeft)
-    {
-        if (isLeft == true)
-        {
-            body.transform.rotation = Quaternion.Euler(0, -90, 0);
-            direction = -1;
-            isMove = true;
-            anim.SetBool("isMove", isMove);
-        }
-        else
-        {
-            body.transform.rotation = Quaternion.Euler(0, -270, 0);
-            direction = 1;
-            isMove = true;
-            anim.SetBool("isMove", isMove);
-        }
-    }
-
-    public void OnMoveUp()
-    {
-        direction = 0;
-        isMove = false;
-        anim.SetBool("isMove", isMove);
     }
 
     void Collider()

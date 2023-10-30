@@ -1,9 +1,11 @@
 using System.Collections.Generic;
+using System.Diagnostics;
 using Sirenix.OdinInspector;
 using UnityEngine;
 using UnityEngine.EventSystems;
 using UnityEngine.SceneManagement;
 using UnityEngine.UI;
+using Debug = UnityEngine.Debug;
 
 public class LobbyManager : MonoBehaviour
 {
@@ -59,7 +61,29 @@ public class LobbyManager : MonoBehaviour
         }
 
         backStack = new Stack<GameObject>();
-        EventSystem.current.SetSelectedGameObject(join_Btn);
+    }
+
+    void Start()
+    {
+        Init();
+    }
+
+    void Init()
+    {
+        switch (DBManager.instance.currentStageNum)
+        {
+            case 0:
+                LobbyPlayerController.instance.player.transform.position = DBManager.instance.stage0_Pos;
+                break;
+            
+            case 1:
+                LobbyPlayerController.instance.player.transform.position = DBManager.instance.stage1_Pos;
+                break;
+            
+            case 2:
+                LobbyPlayerController.instance.player.transform.position = DBManager.instance.stage2_Pos;
+                break;
+        }
     }
 
     public void DoorInit(string name, string btnText, string nameText, bool isLock)

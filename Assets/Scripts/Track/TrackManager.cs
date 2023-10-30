@@ -16,6 +16,11 @@ public class TrackManager : MonoBehaviour
     [SerializeField]
     public bool isInfoPanelOn = false;
     
+    [FoldoutGroup("기타")] 
+    [Title("버튼 타입")] 
+    [SerializeField]
+    public string btn_Type;
+    
     public static TrackManager instance;
     
     void Awake()
@@ -58,6 +63,15 @@ public class TrackManager : MonoBehaviour
                 if (DBManager.instance != null)
                 {
                     DBManager.instance.nextScene = "Game 1";
+                }
+
+                SceneManager.LoadScene("Loading");
+                break;
+            
+            case "Back":
+                if (DBManager.instance != null)
+                {
+                    DBManager.instance.nextScene = "Lobby";
                 }
 
                 SceneManager.LoadScene("Loading");
