@@ -76,7 +76,7 @@ public class GameManager : MonoBehaviour
                 
                 if (DBManager.instance != null)
                 {
-                    DBManager.instance.nextScene = "Lobby";
+                    DBManager.instance.nextScene = "Track";
                 }
 
                 SceneManager.LoadScene("Loading");
