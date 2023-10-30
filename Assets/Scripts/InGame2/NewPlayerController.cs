@@ -1,3 +1,4 @@
+using System;
 using Sirenix.OdinInspector;
 using UnityEngine;
 using UnityEngine.EventSystems;
@@ -27,9 +28,34 @@ public class NewPlayerController : MonoBehaviour
     public AudioManager audioManager;
     
     [FoldoutGroup("변수")]
-    [Title("점프")]
     [SerializeField]
-    private bool isJump = false;
+    private Vector3 velocityToSet;
+    
+    [FoldoutGroup("변수")]
+    [SerializeField]
+    private bool isGravityReversed = false;
+
+    [FoldoutGroup("변수")] 
+    public bool isGrounded = false;
+    
+    [FoldoutGroup("변수")]
+    [SerializeField]
+    private float maxSlopeAngle = 50.0f;
+    
+    [FoldoutGroup("변수")] 
+    public bool isDead = false;
+    
+    [FoldoutGroup("변수")]
+    [Title("공격")]
+    public bool isAttacking = false;
+    
+    [FoldoutGroup("변수")]
+    [SerializeField]
+    private int attackCounter = 0;
+    
+    [FoldoutGroup("변수")]
+    [Title("점프")]
+    public bool isJump = false;
     
     [FoldoutGroup("변수")]
     [SerializeField]
@@ -40,16 +66,21 @@ public class NewPlayerController : MonoBehaviour
     [SerializeField]
     private bool isSlide = false;
 
-    [FoldoutGroup("모드")]
-    [SerializeField]
-    private bool noteEditMod = false;
+    [FoldoutGroup("일반")] 
+    public Animator anim;
+    
+    [FoldoutGroup("일반")] 
+    public PlayerParticle particle;
+    
+    WaitForFixedUpdate fixedUpdate = new WaitForFixedUpdate();
     
     void Start()
     {
         bpm = audioManager.bpm;
-        noteEditMod = NoteMake.instance.noteEditMod;
         rigid = GetComponent<Rigidbody>();
         originCollider = GetComponent<BoxCollider>();
+        particle = GetComponent<PlayerParticle>();
+        anim = GetComponent<Animator>(); ;
     }
 
     private void FixedUpdate()
@@ -59,10 +90,7 @@ public class NewPlayerController : MonoBehaviour
 
     void Update()
     {
-        if (!noteEditMod)
-        {
-            KeyMapping();
-        }
+        KeyMapping();
     }
 
     /// <summary>
@@ -74,7 +102,7 @@ public class NewPlayerController : MonoBehaviour
         {
             if (!isJump)
             {
-                Jump();
+                OnJump();
             }
         }
 
@@ -113,9 +141,16 @@ public class NewPlayerController : MonoBehaviour
     /// <summary>
     /// 점프 버튼을 눌렀을때
     /// </summary>
-    public void Jump()
+    public void OnJump()
     {
+        if (isDead && isJump)
+        {
+            return;
+        }
+        
         isJump = true;
+        anim.SetTrigger("Jump");
+        anim.SetBool("IsJump", isJump);
         rigid.AddForce(Vector3.up * jumpForce);
     }
 
@@ -142,7 +177,13 @@ public class NewPlayerController : MonoBehaviour
     /// </summary>
     public void Slide()
     {
+        if (isDead)
+        {
+            return;
+        }
+        
         isSlide = true;
+        anim.SetTrigger("Slide");
         originCollider.center = new Vector3(0, -0.25f, 0);
         originCollider.size = new Vector3(1, 0.5f, 1);
     }
@@ -159,6 +200,17 @@ public class NewPlayerController : MonoBehaviour
 
     public void OnAttack()
     {
+        // if (isDead || GetComponent<PlayerGrappling>().grapplePoint == null || GetComponent<PlayerSwing>().swingPoint == null)
+        // {
+        //     return;
+        // }
+
+        anim.SetTrigger("Attack");
+        anim.SetInteger("AttackCounter", attackCounter % 2);
+        isAttacking = true;
+        anim.SetBool("IsAttacking", isAttacking);
+        attackCounter++;
+        
         float Distance = 5f;
         RaycastHit rayHit;
         char evaluation = 'F';
@@ -175,25 +227,30 @@ public class NewPlayerController : MonoBehaviour
                 {
                     evaluation = 'A';
                 }
-                else if (d < 3f)
+                else if (d < 2.5f)
                 {
                     evaluation = 'B';
                 }
-                else if (d < 3.5f)
+                else if (d < 3.0f)
                 {
                     evaluation = 'C';
                 }
-                else if (d < 3.75f)
+                else if (d <= 3.5f)
                 {
                     evaluation = 'D';
-                }
-                else if (d < 3.875f)
-                {
-                    evaluation = 'E';
                 }
             }
             Debug.Log(evaluation);
         }
+    }
+    
+    /// <summary>
+    /// 어택 종료 애니메이션
+    /// </summary>
+    public void OnAttackAnimationEnd()
+    {
+        isAttacking = false;
+        anim.SetBool("IsAttacking", isAttacking);
     }
 
     public void OnClick()
@@ -221,17 +278,80 @@ public class NewPlayerController : MonoBehaviour
     /// </summary>
     void Die()
     {
+        if (isDead)
+        {
+            return;
+        }
+        
+        anim.SetTrigger("Die");
+        isDead = true;
+        rigid.useGravity = false;
+        Invoke(nameof(Reset), 2f);
+        Destroy(gameObject.GetComponent<BoxCollider>());
+        StopAllCoroutines();
+    }
+
+    private void Reset()
+    {
         SceneManager.LoadScene("Game 1");
     }
 
-    private void OnCollisionEnter(Collision other)
+    /// <summary>
+    /// 중력 반전
+    /// </summary>
+    public void OnReverseGravity()
     {
-        isJump = false;
-
-        if (other.transform.CompareTag("Breakable"))
+        var velocity = rigid.velocity;
+        velocity.y = 0;
+        rigid.velocity = velocity;
+        if (!isGravityReversed)
         {
-            Die();
+            isGravityReversed = true;
         }
+        else
+        {
+            isGravityReversed = false;
+        }
+
+        Physics.gravity *= -1;
+    }
+    
+    /// <summary>
+    /// 타겟 위치로 점프하듯이 날아감
+    /// </summary>
+    /// <param name="targetPosition">타겟위치</param>
+    /// <param name="trajectoryHeight">궤도높이</param>
+    public void JumpToPosition(Vector3 targetPosition, float trajectoryHeight)
+    {
+        velocityToSet = CalculateJumpVelocity(transform.position, targetPosition, trajectoryHeight);
+        Invoke(nameof(SetVelocity), 0.1f);
+    }
+    
+    /// <summary>
+    /// 날아가는 속도
+    /// </summary>
+    private void SetVelocity()
+    {
+        rigid.velocity = velocityToSet;
+    }
+    
+    /// <summary>
+    /// 점프 속도 계산
+    /// </summary>
+    /// <param name="startPoint">시작지점</param>
+    /// <param name="endPoint">도착지점</param>
+    /// <param name="trajectoryHeight">궤도높이</param>
+    /// <returns></returns>
+    public Vector3 CalculateJumpVelocity(Vector3 startPoint, Vector3 endPoint, float trajectoryHeight)
+    {
+        float gravity = Physics.gravity.y;
+        float displacementY = endPoint.y - startPoint.y;
+        
+        Vector3 displacementXZ = new Vector3(endPoint.x - startPoint.x, 0f, endPoint.z - startPoint.z);
+        Vector3 velocityY = Vector3.up * Mathf.Sqrt(-2 * gravity * trajectoryHeight);
+        Vector3 velocityXZ = displacementXZ / (Mathf.Sqrt(-2 * trajectoryHeight / gravity) + Mathf.Sqrt(2 * (displacementY - trajectoryHeight) / gravity));
+
+        return velocityXZ + velocityY;
     }
 
     private void OnDrawGizmos()
@@ -250,5 +370,28 @@ public class NewPlayerController : MonoBehaviour
     private void OnTriggerEnter(Collider other)
     {
         Debug.Log(NoteMake.instance.beatCount);
+    }
+    
+    private void OnCollisionEnter(Collision collision)
+    {
+        if (collision.gameObject.layer == LayerMask.NameToLayer("Ground"))
+        {
+            isJump = false;
+            isGrounded = true;
+            anim.SetBool("IsJumping", isJump);
+            anim.SetBool("IsGrounded", isGrounded);
+            particle.LandParticle();
+        }
+
+        if (collision.transform.CompareTag("Breakable"))
+        {
+            Die();
+        }
+    }
+    
+    private void OnCollisionExit(Collision collision)
+    {
+        isGrounded = false;
+        anim.SetBool("IsGrounded", isGrounded);
     }
 }

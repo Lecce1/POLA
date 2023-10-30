@@ -2,7 +2,7 @@ using System.Collections;
 using Sirenix.OdinInspector;
 using UnityEngine;
 
-public class PlayerSwing : MonoBehaviour
+public class PlayerSwing1 : MonoBehaviour
 {
     private Collider[] overlaps = new Collider[15];
     private Vector3 currentGrapplePosition;

@@ -9,7 +9,7 @@ public class PlayerTrails : MonoBehaviour
     
     [FoldoutGroup("일반")] 
     [SerializeField]
-    private PlayerController player;
+    private NewPlayerController player;
     
     [FoldoutGroup("일반")] 
     [SerializeField]
@@ -18,7 +18,7 @@ public class PlayerTrails : MonoBehaviour
     void Start()
     {
         trail = GetComponent<TrailRenderer>();
-        player = GetComponentInParent<PlayerController>();
+        player = GetComponentInParent<NewPlayerController>();
         
         transform.parent = hand;
         transform.localPosition = Vector3.zero;
@@ -29,7 +29,7 @@ public class PlayerTrails : MonoBehaviour
 
     void Trails()
     {
-        if (player.isJumping || !player.isGrounded)
+        if (player.isJump || !player.isGrounded)
         {
             trail.enabled = true;
         }

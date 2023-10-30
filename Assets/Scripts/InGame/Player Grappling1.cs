@@ -2,7 +2,7 @@ using System.Collections;
 using Sirenix.OdinInspector;
 using UnityEngine;
 
-public class PlayerGrappling : MonoBehaviour
+public class PlayerGrappling1 : MonoBehaviour
 {
     private Collider[] overlaps = new Collider[15];
     
