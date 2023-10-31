@@ -1,5 +1,6 @@
 using UnityEngine;
 using Sirenix.OdinInspector;
+using UnityEngine.EventSystems;
 using UnityEngine.InputSystem;
 using UnityEngine.UI;
 
@@ -116,6 +117,22 @@ public class LobbyPlayerController : MonoBehaviour
             {
                 LobbyManager.instance.Button(LobbyManager.instance.join_Btn_Type);
                 isMoveAvailable = false;
+            }
+            else if (LobbyManager.instance.set.activeSelf)
+            {
+                switch (EventSystem.current.currentSelectedGameObject.name)
+                {
+                    case "Toggle":
+                        if (EventSystem.current.currentSelectedGameObject.GetComponent<Toggle>().isOn)
+                        {
+                            EventSystem.current.currentSelectedGameObject.GetComponent<Toggle>().isOn = false;
+                        }
+                        else if (!EventSystem.current.currentSelectedGameObject.GetComponent<Toggle>().isOn)
+                        {
+                            EventSystem.current.currentSelectedGameObject.GetComponent<Toggle>().isOn = true;
+                        }
+                        break;
+                }
             }
         }
     }
