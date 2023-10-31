@@ -45,6 +45,7 @@ public class LobbyPlayerController : MonoBehaviour
     public static LobbyPlayerController instance;
 
     public ScrollRect scrollRect;
+    public Vector2 scrollVec;
 
     void Awake()
     {
@@ -64,6 +65,7 @@ public class LobbyPlayerController : MonoBehaviour
     {
         Move();
         Collider();
+        scrollRect.content.anchoredPosition = new Vector2(scrollRect.content.anchoredPosition.x - (scrollVec.x * 10), 0);
     }
 
     void Move()
@@ -129,8 +131,7 @@ public class LobbyPlayerController : MonoBehaviour
 
     public void OnScrollWheel(InputValue value)
     {
-        Debug.Log("test");
-        scrollRect.content.anchoredPosition = new Vector2(scrollRect.content.anchoredPosition.x - 3, 0);
+        scrollVec = value.Get<Vector2>();
     }
 
     public void OnMoveDown(bool isLeft)

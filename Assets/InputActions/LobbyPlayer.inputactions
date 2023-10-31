@@ -104,9 +104,9 @@
                 },
                 {
                     "name": "ScrollWheel",
-                    "type": "Button",
-                    "id": "b0bcb22e-3419-4f98-86b0-87ce0e4b3f43",
-                    "expectedControlType": "Button",
+                    "type": "PassThrough",
+                    "id": "214d5e90-802a-4c86-93c5-744d354394c6",
+                    "expectedControlType": "Vector2",
                     "processors": "",
                     "interactions": "",
                     "initialStateCheck": false
@@ -368,9 +368,20 @@
                 },
                 {
                     "name": "",
-                    "id": "2819e3a5-8a85-4683-b528-d42b86e28340",
-                    "path": "<XInputController>/dpad",
-                    "interactions": "Press(pressPoint=1.401298E-45)",
+                    "id": "e1aa955a-bdb4-4493-8989-6a94b821ade7",
+                    "path": "<Mouse>/scroll",
+                    "interactions": "",
+                    "processors": "",
+                    "groups": "PC",
+                    "action": "ScrollWheel",
+                    "isComposite": false,
+                    "isPartOfComposite": false
+                },
+                {
+                    "name": "",
+                    "id": "fb6d158c-14bf-4c0b-8019-f56007e01680",
+                    "path": "<Gamepad>/rightStick",
+                    "interactions": "",
                     "processors": "",
                     "groups": "CONSOLE",
                     "action": "ScrollWheel",
