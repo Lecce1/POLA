@@ -18,7 +18,7 @@ public class PlatformManager : MonoBehaviour
 
         void Start()
         {
-            if (SceneManager.GetActiveScene().name != "Game 1")
+            if (SceneManager.GetActiveScene().name != DBManager.instance.gameSceneName)
             {
                 Switch();
             }
@@ -26,7 +26,7 @@ public class PlatformManager : MonoBehaviour
 
         void Update()
         {
-            if (SceneManager.GetActiveScene().name != "Game 1")
+            if (SceneManager.GetActiveScene().name != DBManager.instance.gameSceneName)
             {
                 Switch();
             }

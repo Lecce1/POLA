@@ -1296,7 +1296,7 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 288578062}
   serializedVersion: 2
-  m_LocalRotation: {x: -0, y: -0, z: 0.0000000037252903, w: 1}
+  m_LocalRotation: {x: -0.0000000037252903, y: -0, z: -0.0000000018626451, w: 1}
   m_LocalPosition: {x: 0, y: 0, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
@@ -6218,6 +6218,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   currentPlatform: 
+  gameSceneName: Game
   nickName: 
   coin: 0
   crystal: 0
@@ -7284,7 +7285,7 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 588745672}
   serializedVersion: 2
-  m_LocalRotation: {x: 0.05673517, y: 0.4517962, z: -0.028805705, w: 0.8898492}
+  m_LocalRotation: {x: 0.056735195, y: 0.45179623, z: -0.02880572, w: 0.8898492}
   m_LocalPosition: {x: -5.0000005, y: 11, z: -5.999999}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
