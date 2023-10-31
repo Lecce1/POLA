@@ -1,5 +1,5 @@
 {
-    "name": "Player",
+    "name": "LobbyPlayer",
     "maps": [
         {
             "name": "Player",
@@ -104,9 +104,9 @@
                 },
                 {
                     "name": "ScrollWheel",
-                    "type": "PassThrough",
+                    "type": "Button",
                     "id": "b0bcb22e-3419-4f98-86b0-87ce0e4b3f43",
-                    "expectedControlType": "Vector2",
+                    "expectedControlType": "Button",
                     "processors": "",
                     "interactions": "",
                     "initialStateCheck": false
@@ -187,17 +187,6 @@
                     "processors": "",
                     "groups": "PC",
                     "action": "Point",
-                    "isComposite": false,
-                    "isPartOfComposite": false
-                },
-                {
-                    "name": "",
-                    "id": "4bf978ff-cbb1-44d5-9920-1359930823e2",
-                    "path": "<Mouse>/scroll",
-                    "interactions": "",
-                    "processors": "",
-                    "groups": "PC",
-                    "action": "ScrollWheel",
                     "isComposite": false,
                     "isPartOfComposite": false
                 },
@@ -302,17 +291,6 @@
                 },
                 {
                     "name": "",
-                    "id": "aafb706f-d031-4ffa-86b5-19f759f5341b",
-                    "path": "<Gamepad>/dpad",
-                    "interactions": "",
-                    "processors": "",
-                    "groups": "CONSOLE",
-                    "action": "Navigate",
-                    "isComposite": false,
-                    "isPartOfComposite": false
-                },
-                {
-                    "name": "",
                     "id": "1e471083-4458-4173-abdd-d3db8f209aea",
                     "path": "<Touchscreen>/touch*/position",
                     "interactions": "",
@@ -385,6 +363,17 @@
                     "processors": "",
                     "groups": "PC",
                     "action": "Cancel",
+                    "isComposite": false,
+                    "isPartOfComposite": false
+                },
+                {
+                    "name": "",
+                    "id": "2819e3a5-8a85-4683-b528-d42b86e28340",
+                    "path": "<XInputController>/dpad",
+                    "interactions": "Press(pressPoint=1.401298E-45)",
+                    "processors": "",
+                    "groups": "CONSOLE",
+                    "action": "ScrollWheel",
                     "isComposite": false,
                     "isPartOfComposite": false
                 }

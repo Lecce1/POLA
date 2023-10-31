@@ -1,6 +1,7 @@
 using UnityEngine;
 using Sirenix.OdinInspector;
 using UnityEngine.InputSystem;
+using UnityEngine.UI;
 
 public class LobbyPlayerController : MonoBehaviour
 {
@@ -42,6 +43,8 @@ public class LobbyPlayerController : MonoBehaviour
     public bool isDoor = false;
 
     public static LobbyPlayerController instance;
+
+    public ScrollRect scrollRect;
 
     void Awake()
     {
@@ -122,6 +125,12 @@ public class LobbyPlayerController : MonoBehaviour
             LobbyManager.instance.Back();
             isMoveAvailable = true;
         }
+    }
+
+    public void OnScrollWheel(InputValue value)
+    {
+        Debug.Log("test");
+        scrollRect.content.anchoredPosition = new Vector2(scrollRect.content.anchoredPosition.x - 3, 0);
     }
 
     public void OnMoveDown(bool isLeft)
