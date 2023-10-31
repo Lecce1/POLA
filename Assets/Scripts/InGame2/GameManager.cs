@@ -18,6 +18,10 @@ public class GameManager : MonoBehaviour
     public GameObject bottomPanel;
     
     [FoldoutGroup("매니저")] 
+    [Title("플랫폼")] 
+    public PlatformManager platformManager;
+    
+    [FoldoutGroup("매니저")] 
     [Title("사운드")] 
     public AudioManager audioManager;
     
@@ -38,6 +42,24 @@ public class GameManager : MonoBehaviour
         }
         
         backStack = new Stack<GameObject>();
+    }
+
+    void Start()
+    {
+        switch (DBManager.instance.currentPlatform)
+        {
+            case "PC":
+                platformManager.SwitchToKeyboard();
+                break;
+            
+            case "CONSOLE":
+                platformManager.SwitchToGamepad();
+                break;
+            
+            case "MOBILE":
+                platformManager.SwitchToMobile();
+                break;
+        }
     }
     
     public void Button(string type)

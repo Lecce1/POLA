@@ -6,6 +6,8 @@ using UnityEngine.Serialization;
 
 public class DBManager : MonoBehaviour
 {
+    [Title("현재 플랫폼")]
+    public string currentPlatform;
     [FoldoutGroup("유저 서버 DB")]
     [Title("닉네임")]
     public string nickName;

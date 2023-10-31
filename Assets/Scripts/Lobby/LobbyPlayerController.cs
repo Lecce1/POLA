@@ -66,7 +66,6 @@ public class LobbyPlayerController : MonoBehaviour
     {
         Move();
         Collider();
-        scrollRect.content.anchoredPosition = new Vector2(scrollRect.content.anchoredPosition.x - (scrollVec.x * 10), 0);
     }
 
     void Move()
@@ -149,6 +148,7 @@ public class LobbyPlayerController : MonoBehaviour
     public void OnScrollWheel(InputValue value)
     {
         scrollVec = value.Get<Vector2>();
+        scrollRect.content.anchoredPosition = new Vector2(scrollRect.content.anchoredPosition.x - (scrollVec.x * 10), 0);
     }
 
     public void OnMoveDown(bool isLeft)

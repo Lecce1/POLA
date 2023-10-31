@@ -1,9 +1,9 @@
 using System.Collections.Generic;
 using Sirenix.OdinInspector;
 using UnityEngine;
-using UnityEngine.EventSystems;
 using UnityEngine.UI;
 using UnityEngine.InputSystem;
+using UnityEngine.SceneManagement;
 
 public class PlatformManager : MonoBehaviour
     {
@@ -18,59 +18,43 @@ public class PlatformManager : MonoBehaviour
 
         void Start()
         {
-            Switch();
+            if (SceneManager.GetActiveScene().name != "Game 1")
+            {
+                Switch();
+            }
         }
 
         void Update()
         {
-            Switch();
+            if (SceneManager.GetActiveScene().name != "Game 1")
+            {
+                Switch();
+            }
         }
 
         void Switch()
         {
-            if (playerInput.currentControlScheme == "PC")
+            if (playerInput.currentControlScheme == "PC" && DBManager.instance.currentPlatform != "PC")
             {
                 SwitchToKeyboard();
             }
-            else if (playerInput.currentControlScheme == "CONSOLE")
+            else if (playerInput.currentControlScheme == "CONSOLE" && DBManager.instance.currentPlatform != "CONSOLE")
             {
                 SwitchToGamepad();
             }
-            else if (playerInput.currentControlScheme == "MOBILE")
+            else if (playerInput.currentControlScheme == "MOBILE" && DBManager.instance.currentPlatform != "MOBILE")
             {
                 SwitchToMobile();
             }
         }
-
-        public void SwitchToGamepad()
-        {
-            for (int i = 0; i < keyboardObjects.Count; i++)
-            {
-                if (keyboardObjects[i] == null)
-                    continue;
-                
-                keyboardObjects[i].SetActive(false);
-            }
-            
-            for (int i = 0; i < mobileObjects.Count; i++)
-            {
-                if (mobileObjects[i] == null)
-                    continue;
-
-                mobileObjects[i].SetActive(false);
-            }
-            
-            for (int i = 0; i < gamepadObjects.Count; i++)
-            {
-                gamepadObjects[i].SetActive(true);
-                LayoutRebuilder.ForceRebuildLayoutImmediate(gamepadObjects[i].GetComponentInParent<RectTransform>());
-            }
-            
-            Cursor.visible = false;
-        }
-
+        
         public void SwitchToKeyboard()
         {
+            if (DBManager.instance != null)
+            {
+                DBManager.instance.currentPlatform = "PC";
+            }
+            
             for (int i = 0; i < gamepadObjects.Count; i++)
             {
                 if (gamepadObjects[i] == null)
@@ -98,9 +82,46 @@ public class PlatformManager : MonoBehaviour
             
             Cursor.visible = true;
         }
-        
+
+        public void SwitchToGamepad()
+        {
+            if (DBManager.instance != null)
+            {
+                DBManager.instance.currentPlatform = "CONSOLE";
+            }
+            
+            for (int i = 0; i < keyboardObjects.Count; i++)
+            {
+                if (keyboardObjects[i] == null)
+                    continue;
+                
+                keyboardObjects[i].SetActive(false);
+            }
+            
+            for (int i = 0; i < mobileObjects.Count; i++)
+            {
+                if (mobileObjects[i] == null)
+                    continue;
+
+                mobileObjects[i].SetActive(false);
+            }
+            
+            for (int i = 0; i < gamepadObjects.Count; i++)
+            {
+                gamepadObjects[i].SetActive(true);
+                LayoutRebuilder.ForceRebuildLayoutImmediate(gamepadObjects[i].GetComponentInParent<RectTransform>());
+            }
+            
+            Cursor.visible = false;
+        }
+
         public void SwitchToMobile()
         {
+            if (DBManager.instance != null)
+            {
+                DBManager.instance.currentPlatform = "MOBILE";
+            }
+            
             for (int i = 0; i < keyboardObjects.Count; i++)
             {
                 if (keyboardObjects[i] == null)

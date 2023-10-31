@@ -1,6 +1,7 @@
 using Sirenix.OdinInspector;
 using UnityEngine;
 using UnityEngine.EventSystems;
+using UnityEngine.InputSystem;
 using UnityEngine.SceneManagement;
 using UnityEngine.UI;
 
@@ -73,7 +74,8 @@ public class NewPlayerController : MonoBehaviour
         rigid = GetComponent<Rigidbody>();
         originCollider = GetComponent<BoxCollider>();
         particle = GetComponent<PlayerParticle>();
-        anim = GetComponent<Animator>(); ;
+        anim = GetComponent<Animator>();
+        //transform.GetComponent<PlayerInput>().SwitchCurrentControlScheme("CONSOLE");
     }
 
     private void FixedUpdate()
@@ -256,7 +258,7 @@ public class NewPlayerController : MonoBehaviour
 
     public void OnClick()
     {
-        if (EventSystem.current.currentSelectedGameObject != null && GameManager.instance.set.activeSelf)
+        if (EventSystem.current.currentSelectedGameObject != null && GameManager.instance.set.activeSelf && GetComponent<PlayerInput>().currentControlScheme != "MOBILE")
         {
             EventSystem.current.currentSelectedGameObject.GetComponent<Button>().onClick.Invoke();
         }

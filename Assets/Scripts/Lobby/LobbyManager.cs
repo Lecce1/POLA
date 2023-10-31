@@ -68,11 +68,6 @@ public class LobbyManager : MonoBehaviour
         Init();
     }
 
-    void Update()
-    {
-        Debug.Log(EventSystem.current.currentSelectedGameObject);
-    }
-
     void Init()
     {
         switch (DBManager.instance.currentStageNum)

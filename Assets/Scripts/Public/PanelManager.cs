@@ -3,9 +3,13 @@ using System.Collections.Generic;
 using Sirenix.OdinInspector;
 using UnityEngine;
 using UnityEngine.EventSystems;
+using UnityEngine.InputSystem;
 
-public class LobbyPanelManager : MonoBehaviour
+public class PanelManager : MonoBehaviour
 {
+    [Title("InputAction")] 
+    public PlayerInput playerInput;
+    
     [Title("패널")] 
     public PanelItem panel = new PanelItem();
     
@@ -18,6 +22,9 @@ public class LobbyPanelManager : MonoBehaviour
 
     void OnEnable()
     {
-        EventSystem.current.SetSelectedGameObject(panel.selectedObject);
+        if (playerInput.currentControlScheme != "MOBILE")
+        {
+            EventSystem.current.SetSelectedGameObject(panel.selectedObject);
+        }
     }
 }
