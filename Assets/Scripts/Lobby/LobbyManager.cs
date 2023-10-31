@@ -127,42 +127,36 @@ public class LobbyManager : MonoBehaviour
             isJoinBtnOn = false;
         }
     }
-    
-    public void Sign_Btn(bool isOn)
-    {
-        if (isOn == true)
-        {
-            join_Btn.GetComponent<Animator>().Play("On");
-        }
-        else if (isOn == false)
-        {
-            join_Btn.GetComponent<Animator>().Play("Off");
-        }
-    }
 
     public void Button(string type)
     {
         switch (type)
         {
             case "Stage":
-                if (DBManager.instance != null)
+                if (join_Btn.GetComponent<Animator>().GetCurrentAnimatorStateInfo(0).normalizedTime >= 0.9f)
                 {
-                    DBManager.instance.nextScene = "Track";
-                }
+                    if (DBManager.instance != null)
+                    {
+                        DBManager.instance.nextScene = "Track";
+                    }
 
-                SceneManager.LoadScene("Loading");
+                    SceneManager.LoadScene("Loading");
+                }
                 break;
 
             case "Set":
                 if (!set.activeSelf)
                 {
-                    set.SetActive(true);
-                    backStack.Push(set);
-                    isPanelOpen = true;
-
-                    if (join_Btn.activeSelf)
+                    if (join_Btn.GetComponent<Animator>().GetCurrentAnimatorStateInfo(0).normalizedTime >= 0.9f)
                     {
-                        join_Btn.SetActive(false);
+                        set.SetActive(true);
+                        backStack.Push(set);
+                        isPanelOpen = true;
+
+                        if (join_Btn.activeSelf)
+                        {
+                            join_Btn.SetActive(false);
+                        }
                     }
                 }
                 break;
@@ -170,13 +164,16 @@ public class LobbyManager : MonoBehaviour
             case "Shop":
                 if (!shop.activeSelf)
                 {
-                    shop.SetActive(true);
-                    backStack.Push(shop);
-                    isPanelOpen = true;
-                    
-                    if (join_Btn.activeSelf)
+                    if (join_Btn.GetComponent<Animator>().GetCurrentAnimatorStateInfo(0).normalizedTime >= 0.9f)
                     {
-                        join_Btn.SetActive(false);
+                        shop.SetActive(true);
+                        backStack.Push(shop);
+                        isPanelOpen = true;
+                    
+                        if (join_Btn.activeSelf)
+                        {
+                            join_Btn.SetActive(false);
+                        }
                     }
                 }
                 break;
@@ -184,13 +181,16 @@ public class LobbyManager : MonoBehaviour
             case "Sign":
                 if (!sign.activeSelf)
                 {
-                    sign.SetActive(true);
-                    backStack.Push(sign);
-                    isPanelOpen = true;
-                    
-                    if (join_Btn.activeSelf)
+                    if (join_Btn.GetComponent<Animator>().GetCurrentAnimatorStateInfo(0).normalizedTime >= 0.9f)
                     {
-                        join_Btn.SetActive(false);
+                        sign.SetActive(true);
+                        backStack.Push(sign);
+                        isPanelOpen = true;
+                    
+                        if (join_Btn.activeSelf)
+                        {
+                            join_Btn.SetActive(false);
+                        }
                     }
                 }
                 break;
@@ -248,17 +248,5 @@ public class LobbyManager : MonoBehaviour
                 }
             }
         }
-    }
-    
-    public void Set_Logout()
-    {
-        PlayerPrefs.DeleteAll();
-        DBManager.instance.Init();
-        SceneManager.LoadScene("Title");
-    }
-    
-    public void Set_DeleteAccount()
-    {
-        StartCoroutine(HttpServerManager.instance.DeleteAccount());
     }
 }

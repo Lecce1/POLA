@@ -152,42 +152,44 @@ public class LobbyPlayerController : MonoBehaviour
     void Collider()
     {
         collider = Physics.OverlapBox(transform.position, new Vector3(1, 1, 1), transform.rotation);
-
         bool isCheck = false;
         
-        foreach (var temp in collider)
+        if (rigidbody.velocity.magnitude <= 10)
         {
-            if (temp.CompareTag("Door"))
+            foreach (var temp in collider)
             {
-                isCheck = true;
-                
-                switch (temp.transform.GetComponent<DoorManager>().name)
+                if (temp.CompareTag("Door"))
                 {
-                    case "Sign":
-                        LobbyManager.instance.DoorInit("Sign", "확인", string.Empty, false);
-                        break;
+                    isCheck = true;
+                
+                    switch (temp.transform.GetComponent<DoorManager>().name)
+                    {
+                        case "Sign":
+                            LobbyManager.instance.DoorInit("Sign", "확인", string.Empty, false);
+                            break;
                     
-                    case "Set":
-                        LobbyManager.instance.DoorInit("Set", "설정", string.Empty, false);
-                        break;
+                        case "Set":
+                            LobbyManager.instance.DoorInit("Set", "설정", string.Empty, false);
+                            break;
 
-                    case "Shop":
-                        LobbyManager.instance.DoorInit("Shop", "상점", string.Empty, false);
-                        break;
+                        case "Shop":
+                            LobbyManager.instance.DoorInit("Shop", "상점", string.Empty, false);
+                            break;
 
-                    case "Stage1":
-                        LobbyManager.instance.DoorInit("Stage", "입장", DBManager.instance.stage1_Title, temp.transform.GetComponent<DoorManager>().isLock);
-                        DBManager.instance.currentStageNum = 1;
-                        break;
+                        case "Stage1":
+                            LobbyManager.instance.DoorInit("Stage", "입장", DBManager.instance.stage1_Title, temp.transform.GetComponent<DoorManager>().isLock);
+                            DBManager.instance.currentStageNum = 1;
+                            break;
 
-                    case "Stage2":
-                        LobbyManager.instance.DoorInit("Stage", "입장", DBManager.instance.stage2_Title, temp.transform.GetComponent<DoorManager>().isLock);
-                        DBManager.instance.currentStageNum = 2;
-                        break;
+                        case "Stage2":
+                            LobbyManager.instance.DoorInit("Stage", "입장", DBManager.instance.stage2_Title, temp.transform.GetComponent<DoorManager>().isLock);
+                            DBManager.instance.currentStageNum = 2;
+                            break;
+                    }
                 }
             }
         }
-
+        
         if (isCheck)
         {
             isDoor = true;

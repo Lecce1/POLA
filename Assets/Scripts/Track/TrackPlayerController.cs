@@ -18,17 +18,14 @@ public class TrackPlayerController : MonoBehaviour
     [SerializeField] 
     private float speed = 20.0f;
     
-    [Title("방향")] 
-    [SerializeField] 
-    private Vector3 playerVector;
+    [Title("방향")]
+    public Vector3 playerVector;
     
-    [Title("움직임 여부")] 
-    [SerializeField] 
-    private bool isMove = false;
+    [Title("움직임 여부")]
+    public bool isMove = false;
 
-    [Title("애니메이터")] 
-    [SerializeField] 
-    private Animator anim;
+    [Title("애니메이터")]
+    public Animator anim;
 
     [Title("RigidBody")] 
     [SerializeField] 
@@ -112,19 +109,21 @@ public class TrackPlayerController : MonoBehaviour
     void Collider()
     {
         collider = Physics.OverlapBox(transform.position, new Vector3(2, 2, 2), transform.rotation);
-
         bool isCheck = false;
         
-        foreach (var temp in collider)
+        if (rigidbody.velocity.magnitude <= 5)
         {
-            if (temp.CompareTag("Door"))
+            foreach (var temp in collider)
             {
-                isCheck = true;
-                TrackInfo.instance.Init(DBManager.instance.currentStageNum, temp.transform.GetComponent<DoorManager>().trackNum);
-                TrackManager.instance.Info_OnOff(true);
+                if (temp.CompareTag("Door"))
+                {
+                    isCheck = true;
+                    TrackInfo.instance.Init(DBManager.instance.currentStageNum, temp.transform.GetComponent<DoorManager>().trackNum);
+                    TrackManager.instance.Info_OnOff(true);
+                }
             }
         }
-
+        
         if (isCheck)
         {
             isDoor = true;

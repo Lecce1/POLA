@@ -60,12 +60,15 @@ public class TrackManager : MonoBehaviour
         switch (type)
         {
             case "Start":
-                if (DBManager.instance != null)
+                if (info.GetComponent<Animator>().GetCurrentAnimatorStateInfo(0).normalizedTime > 0.9f)
                 {
-                    DBManager.instance.nextScene = "Game 1";
-                }
+                    if (DBManager.instance != null)
+                    {
+                        DBManager.instance.nextScene = "Game 1";
+                    }
 
-                SceneManager.LoadScene("Loading");
+                    SceneManager.LoadScene("Loading");
+                }
                 break;
             
             case "Back":
