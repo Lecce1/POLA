@@ -256,7 +256,7 @@ public class NewPlayerController : MonoBehaviour
 
     public void OnClick()
     {
-        if (EventSystem.current.currentSelectedGameObject != null)
+        if (EventSystem.current.currentSelectedGameObject != null && GameManager.instance.set.activeSelf)
         {
             EventSystem.current.currentSelectedGameObject.GetComponent<Button>().onClick.Invoke();
         }

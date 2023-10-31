@@ -17,6 +17,10 @@ public class GameManager : MonoBehaviour
     [Title("하단 패널")] 
     public GameObject bottomPanel;
     
+    [FoldoutGroup("매니저")] 
+    [Title("사운드")] 
+    public AudioManager audioManager;
+    
     [FoldoutGroup("기타")] 
     [Title("패널 열림 여부")] 
     [SerializeField]
@@ -53,6 +57,7 @@ public class GameManager : MonoBehaviour
                         bottomPanel.SetActive(false);
                     }
                     
+                    audioManager.audio.Pause();
                     Time.timeScale = 0;
                     set.SetActive(true);
                     backStack.Push(set);
@@ -112,6 +117,7 @@ public class GameManager : MonoBehaviour
                         bottomPanel.SetActive(true);
                     }
                     
+                    audioManager.audio.UnPause();
                     Time.timeScale = 1;
                 }
                 break;
