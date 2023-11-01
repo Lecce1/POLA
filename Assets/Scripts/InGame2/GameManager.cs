@@ -92,7 +92,7 @@ public class GameManager : MonoBehaviour
                 
                 if (DBManager.instance != null)
                 {
-                    DBManager.instance.nextScene = "Game 1";
+                    DBManager.instance.nextScene = DBManager.instance.gameSceneName;
                 }
 
                 SceneManager.LoadScene("Loading");

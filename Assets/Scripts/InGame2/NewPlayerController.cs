@@ -288,7 +288,7 @@ public class NewPlayerController : MonoBehaviour
 
     private void Reset()
     {
-        SceneManager.LoadScene("Game 1");
+        SceneManager.LoadScene(DBManager.instance.gameSceneName);
     }
 
     /// <summary>

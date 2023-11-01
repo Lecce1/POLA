@@ -145,10 +145,26 @@ public class LobbyPlayerController : MonoBehaviour
         }
     }
 
-    public void OnScrollWheel(InputValue value)
+    /*public void OnScrollWheel(InputValue value)
     {
         scrollVec = value.Get<Vector2>();
         scrollRect.content.anchoredPosition = new Vector2(scrollRect.content.anchoredPosition.x - (scrollVec.x * 10), 0);
+    }*/
+
+    public void OnLeftTab()
+    {
+        if (LobbyManager.instance.set.activeSelf)
+        {
+            LobbyShopManager.instance.Prev();
+        }
+    }
+    
+    public void OnRightTab()
+    {
+        if (LobbyManager.instance.set.activeSelf)
+        {
+            LobbyShopManager.instance.Next();
+        }
     }
 
     public void OnMoveDown(bool isLeft)

@@ -14172,6 +14172,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 86607c325ea95bc4097f9b28752f347e, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  currentPlatform: 
+  gameSceneName: Game
   nickName: 
   coin: 0
   crystal: 0
@@ -54671,6 +54673,7 @@ GameObject:
   m_Component:
   - component: {fileID: 853192230}
   - component: {fileID: 853192231}
+  - component: {fileID: 853192232}
   m_Layer: 5
   m_Name: Shop
   m_TagString: Untagged
@@ -54717,6 +54720,27 @@ MonoBehaviour:
   panel:
     name: Shop
     selectedObject: {fileID: 1042857508}
+--- !u!114 &853192232
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 853192229}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: b4bc7f13f0e61459f9ddd63802257430, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  selectedPanelNum: 0
+  tabList:
+  - {fileID: 384316741}
+  - {fileID: 169674892}
+  panelList:
+  - {fileID: 286456897}
+  - {fileID: 1946624413}
+  selectedColor: {r: 0.9647059, g: 0.65882355, b: 0.078431375, a: 1}
+  unSelectedColor: {r: 1, g: 1, b: 1, a: 1}
 --- !u!1 &861941566
 GameObject:
   m_ObjectHideFlags: 0
@@ -114309,7 +114333,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   m_Actions: {fileID: -944628639613478452, guid: 263b82243dd824b97bee5d4b13878f93, type: 3}
   m_NotificationBehavior: 0
-  m_UIInputModule: {fileID: 0}
+  m_UIInputModule: {fileID: 869002442}
   m_DeviceLostEvent:
     m_PersistentCalls:
       m_Calls: []

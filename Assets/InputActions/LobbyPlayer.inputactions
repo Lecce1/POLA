@@ -13,6 +13,24 @@
                     "processors": "",
                     "interactions": "",
                     "initialStateCheck": true
+                },
+                {
+                    "name": "RightTab",
+                    "type": "Button",
+                    "id": "99d98a8b-abd4-4af3-941d-bbeb38d3cc28",
+                    "expectedControlType": "Button",
+                    "processors": "",
+                    "interactions": "",
+                    "initialStateCheck": true
+                },
+                {
+                    "name": "LeftTab",
+                    "type": "Button",
+                    "id": "e2f3cedb-0a72-4749-b1f6-4ef1e978b3dc",
+                    "expectedControlType": "Button",
+                    "processors": "",
+                    "interactions": "",
+                    "initialStateCheck": true
                 }
             ],
             "bindings": [
@@ -57,6 +75,39 @@
                     "processors": "",
                     "groups": "CONSOLE",
                     "action": "Move",
+                    "isComposite": false,
+                    "isPartOfComposite": false
+                },
+                {
+                    "name": "",
+                    "id": "b9445779-474d-4743-a222-f4ff35a98361",
+                    "path": "<XInputController>/leftShoulder",
+                    "interactions": "",
+                    "processors": "",
+                    "groups": "CONSOLE",
+                    "action": "LeftTab",
+                    "isComposite": false,
+                    "isPartOfComposite": false
+                },
+                {
+                    "name": "",
+                    "id": "c725f429-e088-4057-8ae0-2c457b8b5578",
+                    "path": "<Keyboard>/tab",
+                    "interactions": "",
+                    "processors": "",
+                    "groups": "PC",
+                    "action": "RightTab",
+                    "isComposite": false,
+                    "isPartOfComposite": false
+                },
+                {
+                    "name": "",
+                    "id": "1cf5076f-1dcc-42ec-9bc2-1ddefabb04a9",
+                    "path": "<XInputController>/rightShoulder",
+                    "interactions": "",
+                    "processors": "",
+                    "groups": "CONSOLE",
+                    "action": "RightTab",
                     "isComposite": false,
                     "isPartOfComposite": false
                 }
@@ -110,15 +161,6 @@
                     "processors": "",
                     "interactions": "",
                     "initialStateCheck": false
-                },
-                {
-                    "name": "TabNavigate",
-                    "type": "Value",
-                    "id": "118e78bd-f45b-485e-9d6c-00fb1f3df671",
-                    "expectedControlType": "Button",
-                    "processors": "",
-                    "interactions": "",
-                    "initialStateCheck": true
                 }
             ],
             "bindings": [
@@ -383,50 +425,6 @@
                     "processors": "",
                     "groups": "PC",
                     "action": "ScrollWheel",
-                    "isComposite": false,
-                    "isPartOfComposite": false
-                },
-                {
-                    "name": "",
-                    "id": "fb6d158c-14bf-4c0b-8019-f56007e01680",
-                    "path": "<Gamepad>/rightStick",
-                    "interactions": "",
-                    "processors": "",
-                    "groups": "CONSOLE",
-                    "action": "ScrollWheel",
-                    "isComposite": false,
-                    "isPartOfComposite": false
-                },
-                {
-                    "name": "",
-                    "id": "d0018608-f1b6-4552-8ccb-82ef1117a0e0",
-                    "path": "<Keyboard>/tab",
-                    "interactions": "",
-                    "processors": "",
-                    "groups": "PC",
-                    "action": "TabNavigate",
-                    "isComposite": false,
-                    "isPartOfComposite": false
-                },
-                {
-                    "name": "",
-                    "id": "cbda8381-ce5f-40b0-919e-40d19cc2cd78",
-                    "path": "<XInputController>/leftShoulder",
-                    "interactions": "",
-                    "processors": "",
-                    "groups": "CONSOLE",
-                    "action": "TabNavigate",
-                    "isComposite": false,
-                    "isPartOfComposite": false
-                },
-                {
-                    "name": "",
-                    "id": "1ad5a070-70a0-4eb5-9a88-ca490bfb309b",
-                    "path": "<XInputController>/rightShoulder",
-                    "interactions": "",
-                    "processors": "",
-                    "groups": "CONSOLE",
-                    "action": "TabNavigate",
                     "isComposite": false,
                     "isPartOfComposite": false
                 }
