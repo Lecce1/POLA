@@ -4,6 +4,7 @@ using UnityEngine;
 using UnityEngine.SceneManagement;
 using UnityEngine.UI;
 using Sirenix.OdinInspector;
+using UnityEngine.Serialization;
 
 public class LoadingManager : MonoBehaviour
 {
@@ -19,9 +20,13 @@ public class LoadingManager : MonoBehaviour
     [SerializeField] 
     private Text tipText;
     [FoldoutGroup("팁")]
-    [Title("리스트")]
+    [Title("영어")]
     [SerializeField] 
-    private List<string> tipList;
+    private List<string> englishTipList;
+    [FoldoutGroup("팁")]
+    [Title("한국어")]
+    [SerializeField] 
+    private List<string> koreanTipList;
     
     [FoldoutGroup("기타")]
     [Title("로딩 이미지")]
@@ -65,7 +70,16 @@ public class LoadingManager : MonoBehaviour
 
     void Tip()
     {
-        tipText.text = tipList[Random.Range(0, tipList.Count)];
+        switch (DBManager.instance.language)
+        {
+            case 0:
+                tipText.text = englishTipList[Random.Range(0, englishTipList.Count)];
+                break;
+            
+            case 1:
+                tipText.text = koreanTipList[Random.Range(0, koreanTipList.Count)];
+                break;
+        }
     }
 
     IEnumerator LoadScene()

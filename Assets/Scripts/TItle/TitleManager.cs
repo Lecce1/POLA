@@ -4,6 +4,7 @@ using UnityEngine;
 using UnityEngine.UI;
 using UnityEngine.Audio;
 using Sirenix.OdinInspector;
+using UnityEngine.Localization.Settings;
 using UnityEngine.SceneManagement;
 
 public class TitleManager : MonoBehaviour

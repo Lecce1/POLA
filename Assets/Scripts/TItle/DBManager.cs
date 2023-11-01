@@ -2,10 +2,13 @@ using System;
 using System.Collections.Generic;
 using Sirenix.OdinInspector;
 using UnityEngine;
+using UnityEngine.Localization.Settings;
 using UnityEngine.Serialization;
 
 public class DBManager : MonoBehaviour
 {
+    [Title("언어")] 
+    public int language;
     [Title("현재 플랫폼")]
     public string currentPlatform;
     [Title("게임 씬 이름")]
@@ -84,7 +87,7 @@ public class DBManager : MonoBehaviour
     public string stage2_Track6_Title = "2_6번 제목";
     
     public static DBManager instance;
-    
+
     void Awake()
     {
         if (instance == null)
@@ -98,8 +101,31 @@ public class DBManager : MonoBehaviour
         }
     }
 
+    void Start()
+    {
+        Init();
+    }
+
     public void Init()
     {
+        SystemLanguage systemLanguage = Application.systemLanguage;
+ 
+        switch(systemLanguage)
+        {
+            case SystemLanguage.English:
+                language = 0;
+                break;
+            
+            case SystemLanguage.Korean:
+                language = 1;
+                break;
+        }
+
+        if (language != null)
+        {
+            LocalizationSettings.SelectedLocale = LocalizationSettings.AvailableLocales.Locales[language];
+        }
+        
         nickName = String.Empty;
     }
 }
