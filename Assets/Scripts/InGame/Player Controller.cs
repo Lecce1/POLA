@@ -1,4 +1,4 @@
-using System.Collections;
+﻿using System.Collections;
 using UnityEngine;
 using Sirenix.OdinInspector;
 
@@ -268,10 +268,10 @@ public class PlayerController : MonoBehaviour
     /// </summary>
     public void OnAttackButtonClicked()
     {
-        if (stats.current.isDead || GetComponent<PlayerGrappling1>().grapplePoint == null || GetComponent<PlayerSwing1>().swingPoint == null)
-        {
-            return;
-        }
+        //if (stats.current.isDead || GetComponent<PlayerGrappling1>().grapplePoint == null || GetComponent<PlayerSwing1>().swingPoint == null)
+        //{
+        //    return;
+        //}
            
         anim.SetTrigger("Attack");
         anim.SetInteger("AttackCounter", attackCounter % 2);

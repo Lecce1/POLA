@@ -26,14 +26,6 @@ public class NewPlayerController : MonoBehaviour
     [Title("오디오")]
     [SerializeField]
     public AudioManager audioManager;
-    
-    [FoldoutGroup("변수")]
-    [SerializeField]
-    private Vector3 velocityToSet;
-    
-    [FoldoutGroup("변수")]
-    [SerializeField]
-    private bool isGravityReversed;
 
     [FoldoutGroup("변수")] 
     public bool isGrounded;
@@ -118,6 +110,11 @@ public class NewPlayerController : MonoBehaviour
             {
                 SlideOut();
             }
+        }
+
+        if (Input.GetKeyDown(KeyCode.A))
+        {
+            transform.position += Vector3.up * 10;
         }
     }
 
@@ -290,65 +287,6 @@ public class NewPlayerController : MonoBehaviour
     {
         SceneManager.LoadScene(DBManager.instance.gameSceneName);
     }
-
-    /// <summary>
-    /// 중력 반전
-    /// </summary>
-    public void OnReverseGravity()
-    {
-        var velocity = rigid.velocity;
-        velocity.y = 0;
-        rigid.velocity = velocity;
-        if (!isGravityReversed)
-        {
-            isGravityReversed = true;
-        }
-        else
-        {
-            isGravityReversed = false;
-        }
-
-        Physics.gravity *= -1;
-    }
-    
-    /// <summary>
-    /// 타겟 위치로 점프하듯이 날아감
-    /// </summary>
-    /// <param name="targetPosition">타겟위치</param>
-    /// <param name="trajectoryHeight">궤도높이</param>
-    public void JumpToPosition(Vector3 targetPosition, float trajectoryHeight)
-    {
-        velocityToSet = CalculateJumpVelocity(transform.position, targetPosition, trajectoryHeight);
-        Invoke(nameof(SetVelocity), 0.1f);
-    }
-    
-    /// <summary>
-    /// 날아가는 속도
-    /// </summary>
-    private void SetVelocity()
-    {
-        rigid.velocity = velocityToSet;
-    }
-    
-    /// <summary>
-    /// 점프 속도 계산
-    /// </summary>
-    /// <param name="startPoint">시작지점</param>
-    /// <param name="endPoint">도착지점</param>
-    /// <param name="trajectoryHeight">궤도높이</param>
-    /// <returns></returns>
-    public Vector3 CalculateJumpVelocity(Vector3 startPoint, Vector3 endPoint, float trajectoryHeight)
-    {
-        float gravity = Physics.gravity.y;
-        float displacementY = endPoint.y - startPoint.y;
-        
-        Vector3 displacementXZ = new Vector3(endPoint.x - startPoint.x, 0f, endPoint.z - startPoint.z);
-        Vector3 velocityY = Vector3.up * Mathf.Sqrt(-2 * gravity * trajectoryHeight);
-        Vector3 velocityXZ = displacementXZ / (Mathf.Sqrt(-2 * trajectoryHeight / gravity) + Mathf.Sqrt(2 * (displacementY - trajectoryHeight) / gravity));
-
-        return velocityXZ + velocityY;
-    }
-
     private void OnDrawGizmos()
     {
         Gizmos.color = Color.red;

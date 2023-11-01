@@ -181,17 +181,19 @@ public class MapCreator : MonoBehaviour
         {
             notes.Clear();
             string[] lines = File.ReadAllLines(url);
-            for (int i = 0; i < lines.Length; i++)
+            foreach (var t in lines)
             {
-                string[] splited = lines[i].Split(',');
+                var split = t.Split(',');
                 
-                Note n = new Note();
-                n.noteTime = float.Parse(splited[0]);
-                n.type = Enum.Parse<Note.noteType>(splited[1]);
-                n.attribute = "";
-                for (int j = 2; j < splited.Length; j++)
+                Note n = new Note
                 {
-                    n.attribute += splited[j] + ",";
+                    noteTime = float.Parse(split[0]),
+                    type = Enum.Parse<Note.noteType>(split[1]),
+                    attribute = ""
+                };
+                for (int j = 2; j < split.Length; j++)
+                {
+                    n.attribute += split[j] + ",";
                 }
                 n.attribute = n.attribute.TrimEnd(',').Trim('"');
                 notes.Add(n);
