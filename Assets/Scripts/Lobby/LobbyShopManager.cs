@@ -66,6 +66,20 @@ public class LobbyShopManager : MonoBehaviour
         }
     }
     
+    public void Tab()
+    {
+        if (selectedPanelNum < tabList.Count - 1)
+        {
+            selectedPanelNum++;
+        }
+        else if (selectedPanelNum == tabList.Count - 1)
+        {
+            selectedPanelNum = 0;
+        }
+
+        Change();
+    }
+    
     public void Prev()
     {
         if (selectedPanelNum > 0)
@@ -78,7 +92,7 @@ public class LobbyShopManager : MonoBehaviour
 
     public void Next()
     {
-        if (selectedPanelNum < tabList.Count)
+        if (selectedPanelNum < tabList.Count - 1)
         {
             selectedPanelNum++;
         }

@@ -1,5 +1,7 @@
+using System.Collections.Generic;
 using UnityEngine;
 using Sirenix.OdinInspector;
+using UnityEditor;
 using UnityEngine.EventSystems;
 using UnityEngine.InputSystem;
 using UnityEngine.UI;
@@ -42,11 +44,8 @@ public class LobbyPlayerController : MonoBehaviour
     
     [Title("문 충돌 여부")] 
     public bool isDoor = false;
-
+    
     public static LobbyPlayerController instance;
-
-    public ScrollRect scrollRect;
-    public Vector2 scrollVec;
 
     void Awake()
     {
@@ -131,6 +130,19 @@ public class LobbyPlayerController : MonoBehaviour
                             EventSystem.current.currentSelectedGameObject.GetComponent<Toggle>().isOn = true;
                         }
                         break;
+                    
+                    case "Dropdown":
+                        if (LobbyManager.instance.set_Language_Dropdown.value == 0)
+                        {
+                            LobbyManager.instance.set_Language_Dropdown.value = 1;
+                        }
+                        else
+                        {
+                            LobbyManager.instance.set_Language_Dropdown.value = 0;
+                        }
+                        
+                        LobbyManager.instance.Set_Language();
+                        break;
                 }
             }
         }
@@ -150,6 +162,14 @@ public class LobbyPlayerController : MonoBehaviour
         scrollVec = value.Get<Vector2>();
         scrollRect.content.anchoredPosition = new Vector2(scrollRect.content.anchoredPosition.x - (scrollVec.x * 10), 0);
     }*/
+    
+    public void OnTab()
+    {
+        if (LobbyManager.instance.shop.activeSelf)
+        {
+            LobbyShopManager.instance.Tab();
+        }
+    }
 
     public void OnLeftTab()
     {
@@ -164,6 +184,48 @@ public class LobbyPlayerController : MonoBehaviour
         if (LobbyManager.instance.shop.activeSelf)
         {
             LobbyShopManager.instance.Next();
+        }
+    }
+
+    public void OnLeftControl()
+    {
+        if (transform.GetComponent<PlayerInput>().currentControlScheme != "MOBILE")
+        {
+            if (LobbyManager.instance.set.activeSelf)
+            {
+                switch (EventSystem.current.currentSelectedGameObject.name)
+                {
+                    case "Dropdown":
+                        if (LobbyManager.instance.set_Language_Dropdown.value > 0)
+                        {
+                            LobbyManager.instance.set_Language_Dropdown.value--;
+                        }
+
+                        LobbyManager.instance.Set_Language();
+                        break;
+                }
+            }
+        }
+    }
+    
+    public void OnRightControl()
+    {
+        if (transform.GetComponent<PlayerInput>().currentControlScheme != "MOBILE")
+        {
+            if (LobbyManager.instance.set.activeSelf)
+            {
+                switch (EventSystem.current.currentSelectedGameObject.name)
+                {
+                    case "Dropdown":
+                        if (LobbyManager.instance.set_Language_Dropdown.value < DBManager.instance.supportLanguageNum - 1)
+                        {
+                            LobbyManager.instance.set_Language_Dropdown.value++;
+                        }
+
+                        LobbyManager.instance.Set_Language();
+                        break;
+                }
+            }
         }
     }
 
@@ -208,24 +270,24 @@ public class LobbyPlayerController : MonoBehaviour
                     switch (temp.transform.GetComponent<DoorManager>().name)
                     {
                         case "Sign":
-                            LobbyManager.instance.DoorInit("Sign", "확인", string.Empty, false);
+                            LobbyManager.instance.DoorInit("Sign", "OK", string.Empty, false);
                             break;
                     
                         case "Set":
-                            LobbyManager.instance.DoorInit("Set", "설정", string.Empty, false);
+                            LobbyManager.instance.DoorInit("Set", "Set", string.Empty, false);
                             break;
 
                         case "Shop":
-                            LobbyManager.instance.DoorInit("Shop", "상점", string.Empty, false);
+                            LobbyManager.instance.DoorInit("Shop", "Shop", string.Empty, false);
                             break;
 
                         case "Stage1":
-                            LobbyManager.instance.DoorInit("Stage", "입장", DBManager.instance.stage1_Title, temp.transform.GetComponent<DoorManager>().isLock);
+                            LobbyManager.instance.DoorInit("Stage", "Join", "Stage1_Title", temp.transform.GetComponent<DoorManager>().isLock);
                             DBManager.instance.currentStageNum = 1;
                             break;
 
                         case "Stage2":
-                            LobbyManager.instance.DoorInit("Stage", "입장", DBManager.instance.stage2_Title, temp.transform.GetComponent<DoorManager>().isLock);
+                            LobbyManager.instance.DoorInit("Stage", "Join", "Stage2_Title", temp.transform.GetComponent<DoorManager>().isLock);
                             DBManager.instance.currentStageNum = 2;
                             break;
                     }

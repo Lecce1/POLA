@@ -15,6 +15,15 @@
                     "initialStateCheck": true
                 },
                 {
+                    "name": "LeftTab",
+                    "type": "Button",
+                    "id": "e2f3cedb-0a72-4749-b1f6-4ef1e978b3dc",
+                    "expectedControlType": "Button",
+                    "processors": "",
+                    "interactions": "",
+                    "initialStateCheck": true
+                },
+                {
                     "name": "RightTab",
                     "type": "Button",
                     "id": "99d98a8b-abd4-4af3-941d-bbeb38d3cc28",
@@ -24,9 +33,27 @@
                     "initialStateCheck": true
                 },
                 {
-                    "name": "LeftTab",
+                    "name": "Tab",
                     "type": "Button",
-                    "id": "e2f3cedb-0a72-4749-b1f6-4ef1e978b3dc",
+                    "id": "5b873fd8-28b7-452d-8643-0f38ff0e9c9f",
+                    "expectedControlType": "Button",
+                    "processors": "",
+                    "interactions": "",
+                    "initialStateCheck": true
+                },
+                {
+                    "name": "LeftControl",
+                    "type": "Button",
+                    "id": "4980ff55-7faf-46ea-ac4f-041fb32e04f6",
+                    "expectedControlType": "Button",
+                    "processors": "",
+                    "interactions": "",
+                    "initialStateCheck": true
+                },
+                {
+                    "name": "RightControl",
+                    "type": "Button",
+                    "id": "072aa139-fc73-4d9c-9ee2-c1fc0631f30f",
                     "expectedControlType": "Button",
                     "processors": "",
                     "interactions": "",
@@ -80,6 +107,28 @@
                 },
                 {
                     "name": "",
+                    "id": "1cf5076f-1dcc-42ec-9bc2-1ddefabb04a9",
+                    "path": "<XInputController>/rightShoulder",
+                    "interactions": "",
+                    "processors": "",
+                    "groups": "CONSOLE",
+                    "action": "RightTab",
+                    "isComposite": false,
+                    "isPartOfComposite": false
+                },
+                {
+                    "name": "",
+                    "id": "c725f429-e088-4057-8ae0-2c457b8b5578",
+                    "path": "<Keyboard>/tab",
+                    "interactions": "",
+                    "processors": "",
+                    "groups": "PC",
+                    "action": "Tab",
+                    "isComposite": false,
+                    "isPartOfComposite": false
+                },
+                {
+                    "name": "",
                     "id": "b9445779-474d-4743-a222-f4ff35a98361",
                     "path": "<XInputController>/leftShoulder",
                     "interactions": "",
@@ -91,23 +140,45 @@
                 },
                 {
                     "name": "",
-                    "id": "c725f429-e088-4057-8ae0-2c457b8b5578",
-                    "path": "<Keyboard>/tab",
+                    "id": "4f6bbcc0-07ba-48f9-8754-081295a3b86b",
+                    "path": "<Gamepad>/leftStick/left",
                     "interactions": "",
                     "processors": "",
-                    "groups": "PC",
-                    "action": "RightTab",
+                    "groups": "",
+                    "action": "LeftControl",
                     "isComposite": false,
                     "isPartOfComposite": false
                 },
                 {
                     "name": "",
-                    "id": "1cf5076f-1dcc-42ec-9bc2-1ddefabb04a9",
-                    "path": "<XInputController>/rightShoulder",
+                    "id": "9db230cd-f1a1-4a97-9f0c-169122db3b78",
+                    "path": "<Keyboard>/leftArrow",
                     "interactions": "",
                     "processors": "",
-                    "groups": "CONSOLE",
-                    "action": "RightTab",
+                    "groups": "",
+                    "action": "LeftControl",
+                    "isComposite": false,
+                    "isPartOfComposite": false
+                },
+                {
+                    "name": "",
+                    "id": "bca0b792-70db-4b51-8e0f-e7d7e6b02c7f",
+                    "path": "<Gamepad>/leftStick/right",
+                    "interactions": "",
+                    "processors": "",
+                    "groups": "",
+                    "action": "RightControl",
+                    "isComposite": false,
+                    "isPartOfComposite": false
+                },
+                {
+                    "name": "",
+                    "id": "a4cd3bf4-b328-4120-b35f-beac45819c19",
+                    "path": "<Keyboard>/rightArrow",
+                    "interactions": "",
+                    "processors": "",
+                    "groups": "",
+                    "action": "RightControl",
                     "isComposite": false,
                     "isPartOfComposite": false
                 }

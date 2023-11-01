@@ -1,0 +1,232 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 5b11a58205ec3474ca216360e9fa74a8, type: 3}
+  m_Name: Track Shared Data
+  m_EditorClassIdentifier: 
+  m_TableCollectionName: Track
+  m_TableCollectionNameGuidString: c9d6d64dea349473fbd3b184ee90e679
+  m_Entries:
+  - m_Id: 1931157168128
+    m_Key: Track
+    m_Metadata:
+      m_Items: []
+  - m_Id: 284557303808
+    m_Key: Start
+    m_Metadata:
+      m_Items: []
+  - m_Id: 72204053110784
+    m_Key: Stage2_Track6_Title
+    m_Metadata:
+      m_Items: []
+  - m_Id: 74542243373056
+    m_Key: Stage2_Track6_Mission_2
+    m_Metadata:
+      m_Items: []
+  - m_Id: 74485129535488
+    m_Key: Stage2_Track6_Mission_1
+    m_Metadata:
+      m_Items: []
+  - m_Id: 72149518770176
+    m_Key: Stage2_Track5_Title
+    m_Metadata:
+      m_Items: []
+  - m_Id: 74453529649152
+    m_Key: Stage2_Track5_Mission_3
+    m_Metadata:
+      m_Items: []
+  - m_Id: 74425113239552
+    m_Key: Stage2_Track5_Mission_2
+    m_Metadata:
+      m_Items: []
+  - m_Id: 74388207558656
+    m_Key: Stage2_Track5_Mission_1
+    m_Metadata:
+      m_Items: []
+  - m_Id: 72102181855232
+    m_Key: Stage2_Track4_Title
+    m_Metadata:
+      m_Items: []
+  - m_Id: 74357673025536
+    m_Key: Stage2_Track4_Mission_3
+    m_Metadata:
+      m_Items: []
+  - m_Id: 74333522223104
+    m_Key: Stage2_Track4_Mission_2
+    m_Metadata:
+      m_Items: []
+  - m_Id: 74284054601728
+    m_Key: Stage2_Track4_Mission_1
+    m_Metadata:
+      m_Items: []
+  - m_Id: 72016253149184
+    m_Key: Stage2_Track3_Title
+    m_Metadata:
+      m_Items: []
+  - m_Id: 74251343224832
+    m_Key: Stage2_Track3_Mission_3
+    m_Metadata:
+      m_Items: []
+  - m_Id: 74214592733184
+    m_Key: Stage2_Track3_Mission_2
+    m_Metadata:
+      m_Items: []
+  - m_Id: 74157592141824
+    m_Key: Stage2_Track3_Mission_1
+    m_Metadata:
+      m_Items: []
+  - m_Id: 71971919355904
+    m_Key: Stage2_Track2_Title
+    m_Metadata:
+      m_Items: []
+  - m_Id: 74133227429888
+    m_Key: Stage2_Track2_Mission_3
+    m_Metadata:
+      m_Items: []
+  - m_Id: 74108611059712
+    m_Key: Stage2_Track2_Mission_2
+    m_Metadata:
+      m_Items: []
+  - m_Id: 74054282240000
+    m_Key: Stage2_Track2_Mission_1
+    m_Metadata:
+      m_Items: []
+  - m_Id: 71916382576640
+    m_Key: Stage2_Track1_Title
+    m_Metadata:
+      m_Items: []
+  - m_Id: 74014008532992
+    m_Key: Stage2_Track1_Mission_3
+    m_Metadata:
+      m_Items: []
+  - m_Id: 73984426106880
+    m_Key: Stage2_Track1_Mission_2
+    m_Metadata:
+      m_Items: []
+  - m_Id: 73882986864640
+    m_Key: Stage2_Track1_Mission_1
+    m_Metadata:
+      m_Items: []
+  - m_Id: 71868739477504
+    m_Key: Stage1_Track6_Title
+    m_Metadata:
+      m_Items: []
+  - m_Id: 73857464524800
+    m_Key: Stage1_Track6_Mission_3
+    m_Metadata:
+      m_Items: []
+  - m_Id: 73831908630528
+    m_Key: Stage1_Track6_Mission_2
+    m_Metadata:
+      m_Items: []
+  - m_Id: 73786425597952
+    m_Key: Stage1_Track6_Mission_1
+    m_Metadata:
+      m_Items: []
+  - m_Id: 71813198503936
+    m_Key: Stage1_Track5_Title
+    m_Metadata:
+      m_Items: []
+  - m_Id: 73750698516480
+    m_Key: Stage1_Track5_Mission_3
+    m_Metadata:
+      m_Items: []
+  - m_Id: 73710970068992
+    m_Key: Stage1_Track5_Mission_2
+    m_Metadata:
+      m_Items: []
+  - m_Id: 73644968501248
+    m_Key: Stage1_Track5_Mission_1
+    m_Metadata:
+      m_Items: []
+  - m_Id: 71770005561344
+    m_Key: Stage1_Track4_Title
+    m_Metadata:
+      m_Items: []
+  - m_Id: 73610952695808
+    m_Key: Stage1_Track4_Mission_3
+    m_Metadata:
+      m_Items: []
+  - m_Id: 73586508292096
+    m_Key: Stage1_Track4_Mission_2
+    m_Metadata:
+      m_Items: []
+  - m_Id: 73516568272896
+    m_Key: Stage1_Track4_Mission_1
+    m_Metadata:
+      m_Items: []
+  - m_Id: 71692490629120
+    m_Key: Stage1_Track3_Title
+    m_Metadata:
+      m_Items: []
+  - m_Id: 73488344801280
+    m_Key: Stage1_Track3_Mission_3
+    m_Metadata:
+      m_Items: []
+  - m_Id: 73457034321920
+    m_Key: Stage1_Track3_Mission_2
+    m_Metadata:
+      m_Items: []
+  - m_Id: 73402864885760
+    m_Key: Stage1_Track3_Mission_1
+    m_Metadata:
+      m_Items: []
+  - m_Id: 71599217696768
+    m_Key: Stage1_Track2_Title
+    m_Metadata:
+      m_Items: []
+  - m_Id: 73371445354496
+    m_Key: Stage1_Track2_Mission_3
+    m_Metadata:
+      m_Items: []
+  - m_Id: 73331729489920
+    m_Key: Stage1_Track2_Mission_2
+    m_Metadata:
+      m_Items: []
+  - m_Id: 73214632910848
+    m_Key: Stage1_Track2_Mission_1
+    m_Metadata:
+      m_Items: []
+  - m_Id: 71432708022272
+    m_Key: Stage1_Track1_Title
+    m_Metadata:
+      m_Items: []
+  - m_Id: 73168331988992
+    m_Key: Stage1_Track1_Mission_3
+    m_Metadata:
+      m_Items: []
+  - m_Id: 73125147435008
+    m_Key: Stage1_Track1_Mission_2
+    m_Metadata:
+      m_Items: []
+  - m_Id: 72934084304896
+    m_Key: Stage1_Track1_Mission_1
+    m_Metadata:
+      m_Items: []
+  - m_Id: 74850201755648
+    m_Key: Stage2_Track6_Mission_3
+    m_Metadata:
+      m_Items: []
+  - m_Id: 75220638490624
+    m_Key: Mission
+    m_Metadata:
+      m_Items: []
+  m_Metadata:
+    m_Items: []
+  m_KeyGenerator:
+    rid: 682675805871144968
+  references:
+    version: 2
+    RefIds:
+    - rid: 682675805871144968
+      type: {class: DistributedUIDGenerator, ns: UnityEngine.Localization.Tables, asm: Unity.Localization}
+      data:
+        m_CustomEpoch: 1698835879026

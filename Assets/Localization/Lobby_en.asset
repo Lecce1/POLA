@@ -1,0 +1,103 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: e9620f8c34305754d8cc9a7e49e852d9, type: 3}
+  m_Name: Lobby_en
+  m_EditorClassIdentifier: 
+  m_LocaleId:
+    m_Code: en
+  m_SharedData: {fileID: 11400000, guid: 7f9536f2d7d5a428d929ea22630ad923, type: 2}
+  m_Metadata:
+    m_Items: []
+  m_TableData:
+  - m_Id: 5598339072
+    m_Localized: NOTICE
+    m_Metadata:
+      m_Items: []
+  - m_Id: 252135333888
+    m_Localized: There's nothing here ~
+    m_Metadata:
+      m_Items: []
+  - m_Id: 587071479808
+    m_Localized: CLOSE
+    m_Metadata:
+      m_Items: []
+  - m_Id: 1035014758400
+    m_Localized: Click the blank to close the window
+    m_Metadata:
+      m_Items: []
+  - m_Id: 2121968640000
+    m_Localized: SETTING
+    m_Metadata:
+      m_Items: []
+  - m_Id: 2253032251392
+    m_Localized: MUSIC
+    m_Metadata:
+      m_Items: []
+  - m_Id: 2302361460736
+    m_Localized: SFX
+    m_Metadata:
+      m_Items: []
+  - m_Id: 2434679169024
+    m_Localized: Vibration
+    m_Metadata:
+      m_Items: []
+  - m_Id: 2786082152448
+    m_Localized: CONTROL
+    m_Metadata:
+      m_Items: []
+  - m_Id: 2824879464448
+    m_Localized: MOVE
+    m_Metadata:
+      m_Items: []
+  - m_Id: 2874460332032
+    m_Localized: SELECT
+    m_Metadata:
+      m_Items: []
+  - m_Id: 3939004047360
+    m_Localized: SHOP
+    m_Metadata:
+      m_Items: []
+  - m_Id: 3972558479360
+    m_Localized: CRYSTAL
+    m_Metadata:
+      m_Items: []
+  - m_Id: 4029491961856
+    m_Localized: GOLD
+    m_Metadata:
+      m_Items: []
+  - m_Id: 77113548857344
+    m_Localized: OK
+    m_Metadata:
+      m_Items: []
+  - m_Id: 77733735424000
+    m_Localized: SET
+    m_Metadata:
+      m_Items: []
+  - m_Id: 78105103294464
+    m_Localized: JOIN
+    m_Metadata:
+      m_Items: []
+  - m_Id: 78397525975040
+    m_Localized: STAGE 1
+    m_Metadata:
+      m_Items: []
+  - m_Id: 78589625098240
+    m_Localized: STAGE 2
+    m_Metadata:
+      m_Items: []
+  - m_Id: 87497919946752
+    m_Localized: LANGUAGE
+    m_Metadata:
+      m_Items: []
+  references:
+    version: 2
+    RefIds: []

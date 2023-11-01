@@ -34,58 +34,19 @@ public class DBManager : MonoBehaviour
     [FoldoutGroup("게임 DB")] 
     [Title("현재 스테이지")]
     public int currentStageNum;
-    [FoldoutGroup("스테이지 0")] 
-    [Title("좌표")]
+    [FoldoutGroup("게임 DB")] 
+    [Title("지원 언어 갯수")]
+    public int supportLanguageNum = 2;
+    [FoldoutGroup("스테이지")] 
+    [Title("스테이지 0 좌표")]
     public Vector3 stage0_Pos = new Vector3(0,0.6f,0);
-    [FoldoutGroup("스테이지 1")] 
-    [Title("좌표")]
+    [FoldoutGroup("스테이지")] 
+    [Title("스테이지 1 좌표")]
     public Vector3 stage1_Pos = new Vector3(480,0.6f,0);
-    [FoldoutGroup("스테이지 1")] 
-    [Title("이름")]
-    public string stage1_Title = "스테이지 1";
-    [FoldoutGroup("스테이지 1")] 
-    [Title("트랙 1번 이름")]
-    public string stage1_Track1_Title = "1_1번 제목";
-    [FoldoutGroup("스테이지 1")] 
-    [Title("트랙 2번 이름")]
-    public string stage1_Track2_Title = "1_2번 제목";
-    [FoldoutGroup("스테이지 1")] 
-    [Title("트랙 3번 이름")]
-    public string stage1_Track3_Title = "1_3번 제목";
-    [FoldoutGroup("스테이지 1")] 
-    [Title("트랙 4번 이름")]
-    public string stage1_Track4_Title = "1_4번 제목";
-    [FoldoutGroup("스테이지 1")] 
-    [Title("트랙 5번 이름")]
-    public string stage1_Track5_Title = "1_5번 제목";
-    [FoldoutGroup("스테이지 1")] 
-    [Title("트랙 6번 이름")]
-    public string stage1_Track6_Title = "1_6번 제목";
-    [FoldoutGroup("스테이지 2")] 
-    [Title("좌표")]
+    [FoldoutGroup("스테이지")] 
+    [Title("스테이지 2 좌표")]
     public Vector3 stage2_Pos = new Vector3(980,0.6f,0);
-    [FoldoutGroup("스테이지 2")] 
-    [Title("이름")]
-    public string stage2_Title = "스테이지 2";
-    [FoldoutGroup("스테이지 2")] 
-    [Title("트랙 1번 이름")]
-    public string stage2_Track1_Title = "2_1번 제목";
-    [FoldoutGroup("스테이지 2")] 
-    [Title("트랙 2번 이름")]
-    public string stage2_Track2_Title = "2_2번 제목";
-    [FoldoutGroup("스테이지 2")] 
-    [Title("트랙 3번 이름")]
-    public string stage2_Track3_Title = "2_3번 제목";
-    [FoldoutGroup("스테이지 2")] 
-    [Title("트랙 4번 이름")]
-    public string stage2_Track4_Title = "2_4번 제목";
-    [FoldoutGroup("스테이지 2")] 
-    [Title("트랙 5번 이름")]
-    public string stage2_Track5_Title = "2_5번 제목";
-    [FoldoutGroup("스테이지 2")] 
-    [Title("트랙 6번 이름")]
-    public string stage2_Track6_Title = "2_6번 제목";
-    
+
     public static DBManager instance;
 
     void Awake()

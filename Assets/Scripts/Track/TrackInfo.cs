@@ -4,6 +4,7 @@ using UnityEngine;
 using UnityEngine.UI;
 using Sirenix.OdinInspector;
 using UnityEngine.EventSystems;
+using UnityEngine.Localization.Settings;
 
 public class TrackInfo : SerializedMonoBehaviour
 {
@@ -76,81 +77,11 @@ public class TrackInfo : SerializedMonoBehaviour
 
     public void Init(int stageNum, int trackNum)
     {
-        switch (stageNum)
-        {
-            case 1:
-                switch (trackNum)
-                {
-                    case 1:
-                        track_Title_Text.text = DBManager.instance.stage1_Track1_Title;
-                        track_Num_Text.text = $"트랙 {trackNum}";
-                        break;
-                    
-                    case 2:
-                        track_Title_Text.text = DBManager.instance.stage1_Track2_Title;
-                        track_Num_Text.text = $"트랙 {trackNum}";
-                        break;
-                    
-                    case 3:
-                        track_Title_Text.text = DBManager.instance.stage1_Track3_Title;
-                        track_Num_Text.text = $"트랙 {trackNum}";
-                        break;
-                    
-                    case 4:
-                        track_Title_Text.text = DBManager.instance.stage1_Track4_Title;
-                        track_Num_Text.text = $"트랙 {trackNum}";
-                        break;
-                    
-                    case 5:
-                        track_Title_Text.text = DBManager.instance.stage1_Track5_Title;
-                        track_Num_Text.text = $"트랙 {trackNum}";
-                        break;
-                    
-                    case 6:
-                        track_Title_Text.text = DBManager.instance.stage1_Track6_Title;
-                        track_Num_Text.text = $"트랙 {trackNum}";
-                        break;
-                }
-
-                break;
-            
-            case 2:
-                switch (trackNum)
-                {
-                    case 1:
-                        track_Title_Text.text = DBManager.instance.stage2_Track1_Title;
-                        track_Num_Text.text = $"트랙 {trackNum}";
-                        break;
-                    
-                    case 2:
-                        track_Title_Text.text = DBManager.instance.stage2_Track2_Title;
-                        track_Num_Text.text = $"트랙 {trackNum}";
-                        break;
-                    
-                    case 3:
-                        track_Title_Text.text = DBManager.instance.stage2_Track3_Title;
-                        track_Num_Text.text = $"트랙 {trackNum}";
-                        break;
-                    
-                    case 4:
-                        track_Title_Text.text = DBManager.instance.stage2_Track4_Title;
-                        track_Num_Text.text = $"트랙 {trackNum}";
-                        break;
-                    
-                    case 5:
-                        track_Title_Text.text = DBManager.instance.stage2_Track5_Title;
-                        track_Num_Text.text = $"트랙 {trackNum}";
-                        break;
-                    
-                    case 6:
-                        track_Title_Text.text = DBManager.instance.stage2_Track6_Title;
-                        track_Num_Text.text = $"트랙 {trackNum}";
-                        break;
-                }
-
-                break;
-        }
-        
+        track_Title_Text.text = LocalizationSettings.StringDatabase.GetLocalizedString("Track", $"Stage{stageNum}_Track{trackNum}_Title", LocalizationSettings.SelectedLocale);
+        track_Num_Text.text = trackNum.ToString();
+        misson1_Content_Text.text = LocalizationSettings.StringDatabase.GetLocalizedString("Track", $"Stage{stageNum}_Track{trackNum}_Mission_1", LocalizationSettings.SelectedLocale);
+        misson2_Content_Text.text = LocalizationSettings.StringDatabase.GetLocalizedString("Track", $"Stage{stageNum}_Track{trackNum}_Mission_2", LocalizationSettings.SelectedLocale);
+        misson3_Content_Text.text = LocalizationSettings.StringDatabase.GetLocalizedString("Track", $"Stage{stageNum}_Track{trackNum}_Mission_3", LocalizationSettings.SelectedLocale);
         TrackManager.instance.btn_Type = "Start";
     }
 }

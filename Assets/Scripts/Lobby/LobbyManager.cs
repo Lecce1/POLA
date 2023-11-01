@@ -1,8 +1,8 @@
+using System;
 using System.Collections.Generic;
-using System.Diagnostics;
 using Sirenix.OdinInspector;
 using UnityEngine;
-using UnityEngine.EventSystems;
+using UnityEngine.Localization.Settings;
 using UnityEngine.SceneManagement;
 using UnityEngine.UI;
 using Debug = UnityEngine.Debug;
@@ -33,21 +33,24 @@ public class LobbyManager : MonoBehaviour
     public Text join_Btn_Text;
 
     [FoldoutGroup("기타")] 
-    [Title("입장 버튼 타입")] 
-    [SerializeField]
+    [Title("입장 버튼 타입")]
     public string join_Btn_Type;
     [FoldoutGroup("기타")] 
-    [Title("입장 버튼 온오프 여부")] 
-    [SerializeField]
+    [Title("입장 버튼 온오프 여부")]
     public bool isJoinBtnOn = false;
     [FoldoutGroup("기타")] 
-    [Title("패널 열림 여부")] 
-    [SerializeField]
+    [Title("패널 열림 여부")]
     public bool isPanelOpen = false;
-    [FoldoutGroup("기타")]
-    [Title("경쟁모드 버튼 클릭 여부")] 
-    [SerializeField]
-    private bool isMatching = false;
+    
+    [FoldoutGroup("설정 패널")] 
+    [Title("언어 Dropdown")]
+    public Dropdown set_Language_Dropdown;
+    [FoldoutGroup("설정 패널")] 
+    [Title("언어 왼쪽 화살표")]
+    public GameObject set_Language_LeftArrow;
+    [FoldoutGroup("설정 패널")] 
+    [Title("언어 오른쪽 화살표")]
+    public GameObject set_Language_RightArrow;
 
     // 뒤로가기 스택
     private Stack<GameObject> backStack;
@@ -93,8 +96,13 @@ public class LobbyManager : MonoBehaviour
             join_Btn_Type = name;
             join_Btn.GetComponent<Button>().onClick.RemoveAllListeners();
             join_Btn.GetComponent<Button>().onClick.AddListener(() => LobbyManager.instance.Button(name));
-            join_Btn_Text.text = btnText;
-            stage_Name_Text.text = nameText;
+            join_Btn_Text.text = LocalizationSettings.StringDatabase.GetLocalizedString("Lobby", btnText, LocalizationSettings.SelectedLocale);
+
+            if (nameText != String.Empty)
+            {
+                stage_Name_Text.text = LocalizationSettings.StringDatabase.GetLocalizedString("Lobby", nameText, LocalizationSettings.SelectedLocale);
+            }
+
             Join_Btn_OnOff(true, false);
         }
         else
@@ -152,6 +160,7 @@ public class LobbyManager : MonoBehaviour
                         set.SetActive(true);
                         backStack.Push(set);
                         isPanelOpen = true;
+                        set_Language_Dropdown.value = DBManager.instance.language;
 
                         if (join_Btn.activeSelf)
                         {
@@ -194,6 +203,23 @@ public class LobbyManager : MonoBehaviour
                     }
                 }
                 break;
+        }
+    }
+
+    public void Set_Language()
+    {
+        LocalizationSettings.SelectedLocale = LocalizationSettings.AvailableLocales.Locales[set_Language_Dropdown.value];
+        DBManager.instance.language = set_Language_Dropdown.value;
+
+        if (set_Language_Dropdown.value == 0)
+        {
+            set_Language_LeftArrow.SetActive(false);
+            set_Language_RightArrow.SetActive(true);
+        }
+        else
+        {
+            set_Language_LeftArrow.SetActive(true);
+            set_Language_RightArrow.SetActive(false);
         }
     }
     
