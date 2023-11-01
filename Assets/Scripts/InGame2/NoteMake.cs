@@ -43,7 +43,6 @@ public class NoteMake : MonoBehaviour
     
     [FoldoutGroup("노트")]
     public List<float> noteTime = new();
-    
     [FoldoutGroup("음악")]
     [Title("경로")]
     [SerializeField]
@@ -82,6 +81,9 @@ public class NoteMake : MonoBehaviour
     [SerializeField]
     private RectTransform ampTransform;
     
+    /// <summary>
+    /// 노트 작업 시 작업 기록을 담기 위한 클래스
+    /// </summary>
     public class Task
     {
         public enum task
@@ -106,16 +108,21 @@ public class NoteMake : MonoBehaviour
     }
 
     public static NoteMake instance;
+    
+    /// <summary>
+    /// 초깃값 지정
+    /// 저장된 노트가 있으면 불러옴
+    /// </summary>
     void Start()
     {
         bpm = am.bpm;
         player = GameObject.Find("Player").GetComponent<NewPlayerController>();
         ampTransform = ampParent.GetComponent<RectTransform>();
         noteTime.Clear();
-        MakeAmplitude();
         
         if (noteWriteMod || noteEditMod)
         {
+            MakeAmplitude();
             player.GetComponent<BoxCollider>().isTrigger = true;
             player.GetComponent<Rigidbody>().useGravity = false;
             ampBar.SetActive(true);
@@ -141,11 +148,13 @@ public class NoteMake : MonoBehaviour
         }
     }
 
+    /// <summary>
+    /// UI로 보여지는 음파의 이동
+    /// </summary>
     void FixedUpdate()
     {
         ampTransform.anchoredPosition += Vector2.left * (bpm / 1.2f * Time.fixedDeltaTime);
     }
-
     void Update()
     {
         if (noteWriteMod)
@@ -162,18 +171,44 @@ public class NoteMake : MonoBehaviour
         }
     }
 
-    void Calculate(float d)
+    [FoldoutGroup("노트")]
+    [Button("불러오기", ButtonSizes.Large)]
+    public void Load()
+    {
+        if (System.IO.File.Exists(url))
+        {
+            noteTime.Clear();
+            string text = System.IO.File.ReadAllText(url);
+            string[] lines = text.Split('\n');
+            
+            for (int i = 0; i < lines.Length; i++)
+            {
+                noteTime.Add(float.Parse(lines[i]));
+            }
+        }
+    }
+    
+    /// <summary>
+    /// A, D키로 이동 할 때 생기는 오차를 제거하기 위한 메서드
+    /// </summary>
+    /// <param name="d">오차값</param>
+    void CalculateError(float d)
     {
         var pos = player.transform.position;
         pos.x += d;
         player.transform.position = pos;
     }
     
+    /// <summary>
+    /// NoteEditMod에서 사용하는 메서드
+    /// 각종 기능들(A, D, X, 스페이스바, TAB, ESC, Shift + Z키)을 구현해놓음.
+    /// 각각 되감기, 빨리감기, 지우기, 삽입/수정, 모드 변경, 저장토글, 작업 취소
+    /// </summary>
     void EditNote()
     {
         if (Input.GetKeyDown(KeyCode.A) && beatCount > 2f)
         {
-            Calculate(0.5f);
+            CalculateError(0.5f);
             player.transform.position -= player.transform.forward * 10f;
             am.audio.time -= 120 / bpm;
             ampTransform.anchoredPosition += Vector2.right * 100f;
@@ -182,7 +217,7 @@ public class NoteMake : MonoBehaviour
 
         if (Input.GetKeyDown(KeyCode.D))
         {
-            Calculate(0.5f);
+            CalculateError(0.5f);
             player.transform.position += player.transform.forward * 5f;
             am.audio.time += 60 / bpm;
             ampTransform.anchoredPosition += Vector2.left * 50f;
@@ -216,7 +251,7 @@ public class NoteMake : MonoBehaviour
             noteTime.RemoveAt(curNote);
         }
         
-        if (Input.GetKeyDown(KeyCode.Alpha1))
+        if (Input.GetKeyDown(KeyCode.Tab))
         {
             insertMod = !insertMod;
         }
@@ -232,6 +267,10 @@ public class NoteMake : MonoBehaviour
         }
     }
 
+    /// <summary>
+    /// Shift+Z키를 눌렀을 때 실행취소를 함.
+    /// Task 클래스와 스택을 기반으로 가장 최근에 작업한 내용을 실행취소.
+    /// </summary>
     void UndoTask()
     {
         if (taskStack.Count <= 0)
@@ -262,6 +301,12 @@ public class NoteMake : MonoBehaviour
         }
     }
 
+    /// <summary>
+    /// 내 주변에 가장 가까운 노트의 인덱스가 무엇인지,
+    /// 가장 최근에 지나친 노트가 무엇인지 찾음.
+    /// </summary>
+    /// <param name="findKey">찾고 싶은 값</param>
+    /// <returns>findKey와 가장 가까운 값</returns>
     int FindNearestIndex(float findKey)
     {
         int low = 0;
@@ -300,6 +345,9 @@ public class NoteMake : MonoBehaviour
         return low;
     }
     
+    /// <summary>
+    /// 0.1박자마다 한번 박자를 셈.
+    /// </summary>
     public void BeatCounter()
     {
         beatCount *= 10;
@@ -308,6 +356,9 @@ public class NoteMake : MonoBehaviour
         beatCount *= 0.1f;
     }
     
+    /// <summary>
+    /// UI로 노래의 파형이 어떻게 생겼는지 보여줌.
+    /// </summary>
     void MakeAmplitude()
     {
         AudioClip clip = am.audio.clip;
@@ -341,6 +392,9 @@ public class NoteMake : MonoBehaviour
         }
     }
 
+    /// <summary>
+    /// 게임이 종료될 때 현재까지 기록해둔 박자를 저장하는 기능
+    /// </summary>
     void OnApplicationQuit()
     {
         if (noSave)

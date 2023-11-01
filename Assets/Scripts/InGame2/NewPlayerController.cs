@@ -226,21 +226,13 @@ public class NewPlayerController : MonoBehaviour
 
                 float d = rayHit.transform.position.x - transform.position.x;
 
-                if (d < 2f)
+                if (d < 2.5f)
                 {
                     evaluation = 'A';
                 }
-                else if (d < 2.5f)
-                {
-                    evaluation = 'B';
-                }
-                else if (d < 3.0f)
+                else if (d < 4.0f)
                 {
                     evaluation = 'C';
-                }
-                else if (d <= 3.5f)
-                {
-                    evaluation = 'D';
                 }
             }
             Debug.Log(evaluation);

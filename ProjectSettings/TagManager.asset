@@ -6,13 +6,13 @@ TagManager:
   tags:
   - Ground
   - Breakable
-  - Collectable
   - Floor
-  - Rainbow
   - Grappling
   - Swing
   - Door
   - Rope
+  - Slide
+  - Collectable
   layers:
   - Default
   - TransparentFX
