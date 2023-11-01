@@ -153,7 +153,7 @@ public class LobbyPlayerController : MonoBehaviour
 
     public void OnLeftTab()
     {
-        if (LobbyManager.instance.set.activeSelf)
+        if (LobbyManager.instance.shop.activeSelf)
         {
             LobbyShopManager.instance.Prev();
         }
@@ -161,7 +161,7 @@ public class LobbyPlayerController : MonoBehaviour
     
     public void OnRightTab()
     {
-        if (LobbyManager.instance.set.activeSelf)
+        if (LobbyManager.instance.shop.activeSelf)
         {
             LobbyShopManager.instance.Next();
         }

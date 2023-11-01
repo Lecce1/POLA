@@ -54739,6 +54739,9 @@ MonoBehaviour:
   panelList:
   - {fileID: 286456897}
   - {fileID: 1946624413}
+  selectObjectList:
+  - {fileID: 1042857508}
+  - {fileID: 1052952223}
   selectedColor: {r: 0.9647059, g: 0.65882355, b: 0.078431375, a: 1}
   unSelectedColor: {r: 1, g: 1, b: 1, a: 1}
 --- !u!1 &861941566

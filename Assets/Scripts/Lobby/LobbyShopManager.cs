@@ -1,6 +1,7 @@
 using System.Collections.Generic;
 using Sirenix.OdinInspector;
 using UnityEngine;
+using UnityEngine.EventSystems;
 using UnityEngine.UI;
 
 public class LobbyShopManager : MonoBehaviour
@@ -11,6 +12,8 @@ public class LobbyShopManager : MonoBehaviour
     public List<GameObject> tabList;
     [Title("패널 리스트")] 
     public List<GameObject> panelList;
+    [Title("패널 별 선택 할 오브젝트")] 
+    public List<GameObject> selectObjectList;
     [Title("선택 된 컬러")] 
     [SerializeField]
     private Color selectedColor = new Color(246 / 255f, 168 / 255f, 20 / 255f, 255 / 255f);
@@ -50,6 +53,7 @@ public class LobbyShopManager : MonoBehaviour
                 if (!panelList[i].activeSelf)
                 {
                     panelList[i].SetActive(true);
+                    EventSystem.current.SetSelectedGameObject(selectObjectList[i]);
                 }
             }
             else
@@ -96,6 +100,7 @@ public class LobbyShopManager : MonoBehaviour
                 if (!panelList[i].activeSelf)
                 {
                     panelList[i].SetActive(true);
+                    EventSystem.current.SetSelectedGameObject(selectObjectList[i]);
                 }
             }
             else
