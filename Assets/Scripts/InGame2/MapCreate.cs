@@ -11,22 +11,25 @@ public class MapCreator : MonoBehaviour
     [Serializable]
     private class Note
     {
-        public enum noteType
+        public enum NoteType
         {
-            Hole,
+            Unbreakable,
             Breakable,
             Slope,
-            Slider,
-            Grapple,
-            Rotate
+            Slider
         }
 
+        public bool isUp;
         public float noteTime;
-        public noteType type;
-        public string attribute;
+        public NoteType type;
+        public float attribute;
     }
     
     private string url = "Assets/Scripts/InGame2/Beats/object.csv";
+    
+    [FoldoutGroup("오브젝트")] 
+    [SerializeField]
+    private GameObject unbreakable;
     
     [FoldoutGroup("오브젝트")] 
     [SerializeField]
@@ -39,19 +42,9 @@ public class MapCreator : MonoBehaviour
     [FoldoutGroup("오브젝트")] 
     [SerializeField]
     private GameObject slope;
-    
-    [FoldoutGroup("오브젝트")] 
-    [SerializeField]
-    private GameObject grapple;
 
     [FoldoutGroup("오브젝트")] 
     [Title("설치될 장애물을 모아둔 리스트")]
-    [InfoBox("Attribute에는 float, Vector3, quaternion만 쓸 수 있음.\n" +
-             "사용 양식\n" +
-             "Hole: float(길이)\t\tBreakable: 없음\n" +
-             "Slope: Vector3(도착점)\tSlide: float(길이) \n" +
-             "Rotate: Quaternion(회전)\tgrapple: Vector3(도착점)\n\n" +
-             "string형을 각 형식에 파싱가능하도록 작성")]
     [SerializeField]
     [TableList(ShowPaging = true)]
     private List<Note> notes = new ();
@@ -62,58 +55,52 @@ public class MapCreator : MonoBehaviour
     [FoldoutGroup("기타")] 
     private GameObject createdNoteObject;
     
-    [Button("초기화", ButtonSizes.Large)]
-    public void Reset()
-    {
-        noteMaker = GetComponent<NoteMake>();
-        if (noteMaker.noteTime.Count == 0)
-        {
-            noteMaker.Load();
-        }
-        
-        notes.Clear();
-        
-        for (int i = 0; i < noteMaker.noteTime.Count; i++)
-        {
-            Note n = new()
-            {
-                noteTime = noteMaker.noteTime[i],
-                type = Note.noteType.Breakable,
-                attribute = ""
-            };
-            notes.Add(n);
-        }
-    }
+    [FoldoutGroup("기타")] 
+    [SerializeField]
+    private LayerMask ground;
     
     [Button("생성", ButtonSizes.Large)]
+    [HorizontalGroup("Split1", 0.895f)]
     public void Create()
     {
-        Vector3 lastPos = Vector3.zero;
-
         if (createdNoteObject != null)
         {
             DestroyImmediate(createdNoteObject);
         }
         createdNoteObject = new GameObject();
         createdNoteObject.name = "Created Object";
+        Vector3 progressDirection = Vector3.right;
         for (int i = 0; i < notes.Count; i++)
         {
             Note n = notes[i];
-            Vector3 pos = new Vector3(n.noteTime * 5f + 11.5f, 0, 0);
+            Quaternion q = Quaternion.AngleAxis(0, progressDirection);
+            Vector3 pos = new Vector3(n.noteTime * 4f + 13.5f, 0.5f, 0);
+            
+            if (n.isUp)
+            {
+                Ray ray = new Ray(pos, Vector3.up);
+                
+                if (Physics.Raycast(ray, out RaycastHit hitInfo, Mathf.Infinity, ground))
+                {
+                    pos = hitInfo.point;
+                    q = Quaternion.AngleAxis(180, progressDirection);
+                }
+            }
+            
             GameObject obj = null;
             switch (n.type)
             {
-                case Note.noteType.Breakable:
-                    obj = Instantiate(breakable, pos, Quaternion.identity);
+                case Note.NoteType.Unbreakable:
+                    obj = Instantiate(unbreakable, pos, q);
                     break;
-                case Note.noteType.Slider:
-                    obj = Instantiate(slider, pos, Quaternion.identity);
+                case Note.NoteType.Breakable:
+                    obj = Instantiate(breakable, pos, q);
                     break;
-                case Note.noteType.Slope:
-                    obj = Instantiate(slope, pos, Quaternion.identity);
+                case Note.NoteType.Slider:
+                    obj = Instantiate(slider, pos, q);
                     break;
-                case Note.noteType.Grapple:
-                    obj = Instantiate(grapple, pos, Quaternion.identity);
+                case Note.NoteType.Slope:
+                    obj = Instantiate(slope, pos, q);
                     break;
             }
 
@@ -124,57 +111,60 @@ public class MapCreator : MonoBehaviour
         }
     }
     
+    [Button("초기화", ButtonSizes.Large)]
+    [HorizontalGroup("Split1", 0.1f)]
+    public void Reset()
+    {
+        noteMaker = GetComponent<NoteMake>();
+        if (noteMaker.noteTime.Count == 0)
+        {
+            noteMaker.NoteLoad();
+        }
+        
+        notes.Clear();
+        
+        for (int i = 0; i < noteMaker.noteTime.Count; i++)
+        {
+            Note n = new()
+            {
+                noteTime = noteMaker.noteTime[i],
+                type = Note.NoteType.Breakable,
+                isUp = false,
+                attribute = 0f
+            };
+            notes.Add(n);
+        }
+    }
+    
     [Button("세이브")]
-    [HorizontalGroup("Split", 0.497f)]
+    [HorizontalGroup("Split2")]
     public void Save()
     {
         noteMaker = GetComponent<NoteMake>();
         if (noteMaker.noteTime.Count == 0)
         {
-            noteMaker.Load();
+            noteMaker.NoteLoad();
         }
 
         using StreamWriter sw = new StreamWriter(url);
-        string str = "";
+        string str;
         for (int i = 0; i < noteMaker.noteTime.Count; i++)
         {
             if (i < notes.Count)
             {
                 Note n = notes[i];
-                str = n.noteTime + "," + n.type + ",";
-                if (n.attribute.Trim() == "")
-                {
-                    switch (n.type)
-                    {
-                        case Note.noteType.Slope:
-                            str += "\"(0f, 0f, 5f)\"";
-                            break;
-                        case Note.noteType.Rotate:
-                            str += "\"(0f, 1f, 0f, 90f)\"";
-                            break;
-                        case Note.noteType.Hole:
-                            str += "4f";
-                            break;
-                        case Note.noteType.Slider:
-                            str += "4f";
-                            break;
-                    }
-                }
-                else
-                {
-                    str += "\"" + n.attribute + "\"";
-                }
+                str = n.noteTime + "," + n.type + "," + n.isUp + "," + n.attribute;
             }
             else
             {
-                str = noteMaker.noteTime[i] + "," + Note.noteType.Breakable + "," + 4f;
+                str = noteMaker.noteTime[i] + "," + Note.NoteType.Breakable + ",False,";
             }
             sw.WriteLine(str);
         }
     }
     
     [Button("로드")]
-    [HorizontalGroup("Split", 0.498f)]
+    [HorizontalGroup("Split2")]
     public void Load()
     {
         if (File.Exists(url))
@@ -188,14 +178,13 @@ public class MapCreator : MonoBehaviour
                 Note n = new Note
                 {
                     noteTime = float.Parse(split[0]),
-                    type = Enum.Parse<Note.noteType>(split[1]),
-                    attribute = ""
+                    type = Enum.Parse<Note.NoteType>(split[1]),
+                    isUp = bool.Parse(split[2]),
+                    attribute = 0f
                 };
-                for (int j = 2; j < split.Length; j++)
-                {
-                    n.attribute += split[j] + ",";
-                }
-                n.attribute = n.attribute.TrimEnd(',').Trim('"');
+                
+                n.attribute = split[3] == "" ? 0f : float.Parse(split[3]);
+                
                 notes.Add(n);
             }
         }

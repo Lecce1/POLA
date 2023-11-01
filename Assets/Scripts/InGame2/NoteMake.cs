@@ -16,6 +16,9 @@ public class NoteMake : MonoBehaviour
 
     [FoldoutGroup("모드")] 
     public bool noSave = false;
+    
+    [FoldoutGroup("모드")] 
+    public bool showNote = true;
 
     [FoldoutGroup("모드")] 
     private Stack<Task> taskStack = new Stack<Task>();
@@ -118,7 +121,6 @@ public class NoteMake : MonoBehaviour
         bpm = am.bpm;
         player = GameObject.Find("Player").GetComponent<NewPlayerController>();
         ampTransform = ampParent.GetComponent<RectTransform>();
-        noteTime.Clear();
         
         if (noteWriteMod || noteEditMod)
         {
@@ -128,15 +130,16 @@ public class NoteMake : MonoBehaviour
             ampBar.SetActive(true);
         }
 
-        if (System.IO.File.Exists(url))
+        if (showNote)
         {
-            string text = System.IO.File.ReadAllText(url);
-            string[] lines = text.Split('\n');
-            
-            for (int i = 0; i < lines.Length; i++)
+            if (noteTime.Count == 0)
             {
-                noteTime.Add(float.Parse(lines[i]));
-                var note = Instantiate(noteBar, new Vector3(noteTime[i] * 5f + 11.5f, 0, 0), Quaternion.identity);
+                NoteLoad();
+            }
+            for (int i = 0; i < noteTime.Count; i++)
+            {
+                var note = Instantiate(noteBar, new Vector3(noteTime[i] * 4f + 13.5f, 0, 0), Quaternion.identity);
+                note.name = "note" + i;
                 bars.Add(note);
                 note.transform.GetChild(0).GetComponent<TextMesh>().text = i.ToString();
             }
@@ -173,7 +176,7 @@ public class NoteMake : MonoBehaviour
 
     [FoldoutGroup("노트")]
     [Button("불러오기", ButtonSizes.Large)]
-    public void Load()
+    public void NoteLoad()
     {
         if (System.IO.File.Exists(url))
         {
@@ -231,14 +234,14 @@ public class NoteMake : MonoBehaviour
             if (!insertMod)
             {
                 taskStack.Push(new Task(nearestNote, noteTime[nearestNote], Task.task.Moved));
-                bars[nearestNote].transform.position = new Vector3(noteTime[nearestNote] * 5f + 12F, 0, 0);
+                bars[nearestNote].transform.position = new Vector3(noteTime[nearestNote] * 5f + 13.5f, 0, 0);
                 noteTime[nearestNote] = beatCount;
             }
             else
             {
                 taskStack.Push(new Task(curNote, 0, Task.task.Inserted));
-                bars.Insert(curNote, Instantiate(noteBar, new Vector3(beatCount * 5f + 12f, 0, 0), Quaternion.identity));
-                noteTime.Insert(curNote, beatCount);
+                bars.Insert(curNote + 1, Instantiate(noteBar, new Vector3(beatCount * 5f + 13.5f, 0, 0), Quaternion.identity));
+                noteTime.Insert(curNote + 1, beatCount);
             }
         }
         
@@ -283,12 +286,12 @@ public class NoteMake : MonoBehaviour
         switch (t.taskType)
         {
             case Task.task.Moved :
-                bars[t.index].transform.position = new Vector3(t.preValue * 5f + 12f, 0, 0);
+                bars[t.index].transform.position = new Vector3(t.preValue * 5f + 13.5f, 0, 0);
                 noteTime[t.index] = t.preValue;
                 break;
             
             case Task.task.Deleted :
-                bars.Insert(t.index, Instantiate(noteBar, new Vector3(t.preValue * 5f + 12f, 0, 0), Quaternion.identity));
+                bars.Insert(t.index, Instantiate(noteBar, new Vector3(t.preValue * 5f + 13.5f, 0, 0), Quaternion.identity));
                 noteTime.Insert(t.index, t.preValue);
                 break;
             
@@ -346,14 +349,11 @@ public class NoteMake : MonoBehaviour
     }
     
     /// <summary>
-    /// 0.1박자마다 한번 박자를 셈.
+    /// 1/8박자마다 한번 박자를 셈.
     /// </summary>
     public void BeatCounter()
     {
-        beatCount *= 10;
-        beatCount++;
-        beatCount = Mathf.Round(beatCount);
-        beatCount *= 0.1f;
+        beatCount += 0.125f;
     }
     
     /// <summary>

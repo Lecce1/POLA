@@ -29,7 +29,7 @@ public class PlayerTrails : MonoBehaviour
 
     void Trails()
     {
-        if (player.isJump || !player.isGrounded)
+        if (player.isFlip || !player.isGrounded)
         {
             trail.enabled = true;
         }

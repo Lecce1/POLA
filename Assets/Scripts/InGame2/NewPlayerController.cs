@@ -3,6 +3,7 @@ using UnityEngine;
 using UnityEngine.EventSystems;
 using UnityEngine.InputSystem;
 using UnityEngine.SceneManagement;
+using UnityEngine.Serialization;
 using UnityEngine.UI;
 
 public class NewPlayerController : MonoBehaviour
@@ -41,13 +42,10 @@ public class NewPlayerController : MonoBehaviour
     [SerializeField]
     private int attackCounter;
     
+    [FormerlySerializedAs("isJump")]
     [FoldoutGroup("변수")]
     [Title("점프")]
-    public bool isJump;
-    
-    [FoldoutGroup("변수")]
-    [SerializeField]
-    private float jumpForce = 500f;
+    public bool isFlip;
     
     [FoldoutGroup("변수")]
     [Title("슬라이드")]
@@ -59,6 +57,16 @@ public class NewPlayerController : MonoBehaviour
     
     [FoldoutGroup("일반")] 
     public PlayerParticle particle;
+
+    [FoldoutGroup("일반")] 
+    public GameObject cameraInfo;
+
+    [FoldoutGroup("일반")] 
+    private Ray ray;
+    
+    [FoldoutGroup("일반")] 
+    [SerializeField]
+    private LayerMask ground;
     
     void Start()
     {
@@ -90,9 +98,9 @@ public class NewPlayerController : MonoBehaviour
     {
         if (Input.GetKeyDown(KeyCode.UpArrow))
         {
-            if (!isJump)
+            if (!isFlip)
             {
-                OnJump();
+                OnFlip();
             }
         }
 
@@ -123,13 +131,12 @@ public class NewPlayerController : MonoBehaviour
     /// </summary>
     void Move()
     {
-        if (rigid.velocity.x > bpm / 12f - bpm * Time.fixedDeltaTime)
+        transform.position += transform.forward * (bpm / 15f * Time.fixedDeltaTime);
+        ray = new Ray(transform.position + transform.up, transform.up);
+        
+        if (Physics.Raycast(ray, out RaycastHit hitInfo, Mathf.Infinity, ground))
         {
-            rigid.velocity = new Vector3(bpm / 12f, rigid.velocity.y, 0);
-        }
-        else
-        {
-            rigid.AddForce(Vector3.right * bpm);
+            cameraInfo.transform.position = (hitInfo.point + transform.position) / 2;
         }
 
         if (transform.position.y < -5)
@@ -141,34 +148,14 @@ public class NewPlayerController : MonoBehaviour
     /// <summary>
     /// 점프 버튼을 눌렀을때
     /// </summary>
-    public void OnJump()
+    public void OnFlip()
     {
-        if (isDead && isJump)
-        {
-            return;
-        }
+        Physics.gravity *= -1;
         
-        isJump = true;
-        anim.SetTrigger("Jump");
-        anim.SetBool("IsJumping", isJump);
-        rigid.AddForce(Vector3.up * jumpForce);
-    }
-
-    /// <summary>
-    /// 점프 버튼을 꾹 눌렀을때
-    /// </summary>
-    public void Rope()
-    {
-        float Distance = 4f;
-        float sphereScale = 15f;
-        RaycastHit hit;
-        
-        if (Physics.SphereCast(transform.position, sphereScale / 2.0f,transform.forward, out hit, Distance))
+        if (Physics.Raycast(ray, out RaycastHit hitInfo, Mathf.Infinity, ground))
         {
-            if (hit.transform.CompareTag("Rope"))
-            {
-                
-            }
+            transform.position = hitInfo.point;
+            transform.Rotate(transform.right, 180f);
         }
     }
 
@@ -287,6 +274,7 @@ public class NewPlayerController : MonoBehaviour
     {
         SceneManager.LoadScene(DBManager.instance.gameSceneName);
     }
+    
     private void OnDrawGizmos()
     {
         Gizmos.color = Color.red;
@@ -298,25 +286,27 @@ public class NewPlayerController : MonoBehaviour
         }
 
         Gizmos.DrawRay(transform.position, transform.forward * 4f);
-    }
-
-    private void OnTriggerEnter(Collider other)
-    {
-        Debug.Log(NoteMake.instance.beatCount);
+        Gizmos.color = Color.blue;
+        Gizmos.DrawRay(ray);
     }
     
-    private void OnCollisionEnter(Collision collision)
+    private void OnTriggerEnter(Collider other)
     {
-        if (collision.gameObject.layer == LayerMask.NameToLayer("Ground"))
+        //Debug.Log(other.name + " " + NoteMake.instance.beatCount);
+    }
+    
+    private void OnCollisionStay(Collision collision)
+    {
+        if (collision.gameObject.CompareTag("Ground"))
         {
-            isJump = false;
+            isFlip = false;
             isGrounded = true;
-            anim.SetBool("IsJumping", isJump);
+            anim.SetBool("IsJumping", isFlip);
             anim.SetBool("IsGrounded", isGrounded);
             particle.LandParticle();
         }
 
-        if (collision.transform.CompareTag("Breakable"))
+        if (collision.transform.CompareTag("Obstacle"))
         {
             Die();
         }

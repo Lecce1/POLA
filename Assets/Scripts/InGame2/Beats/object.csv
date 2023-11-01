@@ -1,10 +1,10 @@
-8.3,Hole,4f
-9.3,Breakable,
-9.8,Slope,"(0f, 0f, 5f)"
-10.7,Slider,4f
-11.3,Rotate,"(0f, 1f, 0f, 90f)"
-11.8,Breakable,
-12.3,Breakable,
-13.3,Breakable,
-13.8,Breakable,
-14.7,Breakable,
+8.3,Breakable,FALSE,15.84
+9.3,Unbreakable,FALSE,813.185
+9.8,Breakable,FALSE,0
+10.7,Slope,TRUE,0
+11.3,Breakable,FALSE,0
+11.8,Slider,TRUE,0
+12.3,Breakable,FALSE,0
+13.3,Breakable,FALSE,0
+13.8,Breakable,FALSE,0
+14.7,Breakable,FALSE,0
