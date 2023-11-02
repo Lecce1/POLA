@@ -1,16 +1,10 @@
+using System.Collections;
 using Sirenix.OdinInspector;
 using UnityEngine;
 
 [RequireComponent(typeof(TrailRenderer))]
 public class PlayerTrails : MonoBehaviour
-{
-    [FoldoutGroup("일반")] 
-    public Transform hand;
-    
-    [FoldoutGroup("일반")] 
-    [SerializeField]
-    private NewPlayerController player;
-    
+{ 
     [FoldoutGroup("일반")] 
     [SerializeField]
     private TrailRenderer trail;
@@ -18,24 +12,20 @@ public class PlayerTrails : MonoBehaviour
     void Start()
     {
         trail = GetComponent<TrailRenderer>();
-        player = GetComponentInParent<NewPlayerController>();
-        
-        transform.parent = hand;
         transform.localPosition = Vector3.zero;
         trail.enabled = false;
     }
 
-    void Update() => Trails();
-
-    void Trails()
+    public IEnumerator Trails()
     {
-        if (player.isFlip || !player.isGrounded)
+        trail.enabled = true;
+        float start = Time.time;
+
+        while (Time.time - start < 0.5f)
         {
-            trail.enabled = true;
+            yield return null;
         }
-        else
-        {
-            trail.enabled = false;
-        }
+
+        trail.enabled = false;
     }
 }
