@@ -21,11 +21,15 @@ public class LobbyPortalManager : MonoBehaviour
             if (isLeft)
             {
                 LobbyPlayerController.instance.player.transform.position = DBManager.instance.lobbyRightPortal[stageNum - 1];
+                DBManager.instance.lobbyCurrentStage = stageNum - 1;
             }
             else
             {
                 LobbyPlayerController.instance.player.transform.position = DBManager.instance.lobbyLeftPortal[stageNum];
+                DBManager.instance.lobbyCurrentStage = stageNum + 1;
             }
+            
+            LobbyManager.instance.ChangeSkybox();
         }
     }
 }

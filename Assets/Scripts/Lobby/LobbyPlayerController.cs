@@ -304,6 +304,36 @@ public class LobbyPlayerController : MonoBehaviour
                             LobbyManager.instance.DoorInit("Stage", "Join", "Stage2_Title", temp.transform.GetComponent<DoorManager>().isLock);
                             DBManager.instance.currentStageNum = 2;
                             break;
+                        
+                        case "Stage3":
+                            LobbyManager.instance.DoorInit("Stage", "Join", "Stage3_Title", temp.transform.GetComponent<DoorManager>().isLock);
+                            DBManager.instance.currentStageNum = 3;
+                            break;
+                        
+                        case "Stage4":
+                            LobbyManager.instance.DoorInit("Stage", "Join", "Stage4_Title", temp.transform.GetComponent<DoorManager>().isLock);
+                            DBManager.instance.currentStageNum = 4;
+                            break;
+                        
+                        case "Stage5":
+                            LobbyManager.instance.DoorInit("Stage", "Join", "Stage5_Title", temp.transform.GetComponent<DoorManager>().isLock);
+                            DBManager.instance.currentStageNum = 5;
+                            break;
+                        
+                        case "Stage6":
+                            LobbyManager.instance.DoorInit("Stage", "Join", "Stage6_Title", temp.transform.GetComponent<DoorManager>().isLock);
+                            DBManager.instance.currentStageNum = 6;
+                            break;
+                        
+                        case "Stage7":
+                            LobbyManager.instance.DoorInit("Stage", "Join", "Stage7_Title", temp.transform.GetComponent<DoorManager>().isLock);
+                            DBManager.instance.currentStageNum = 7;
+                            break;
+                        
+                        case "Stage8":
+                            LobbyManager.instance.DoorInit("Stage", "Join", "Stage8_Title", temp.transform.GetComponent<DoorManager>().isLock);
+                            DBManager.instance.currentStageNum = 8;
+                            break;
                     }
                 }
             }

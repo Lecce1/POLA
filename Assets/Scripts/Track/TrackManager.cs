@@ -38,6 +38,9 @@ public class TrackManager : MonoBehaviour
     [Title("언어 오른쪽 화살표")]
     public GameObject set_Language_RightArrow;
     
+    [FoldoutGroup("스카이박스")]
+    public List<Material> stage_Skybox;
+    
     // 뒤로가기 스택
     private Stack<GameObject> backStack;
     public static TrackManager instance;
@@ -59,7 +62,12 @@ public class TrackManager : MonoBehaviour
 
     void Init()
     {
-        
+        ChangeSkybox();
+    }
+    
+    public void ChangeSkybox()
+    {
+        RenderSettings.skybox = stage_Skybox[DBManager.instance.lobbyCurrentStage - 1];
     }
     
     public void Info_OnOff(bool isOn)

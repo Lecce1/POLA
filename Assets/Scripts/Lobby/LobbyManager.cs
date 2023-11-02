@@ -31,6 +31,9 @@ public class LobbyManager : MonoBehaviour
     [FoldoutGroup("텍스트")] 
     [Title("입장 버튼")] 
     public Text join_Btn_Text;
+    
+    [FoldoutGroup("스카이박스")]
+    public List<Material> stage_Skybox;
 
     [FoldoutGroup("기타")] 
     [Title("입장 버튼 타입")]
@@ -73,20 +76,8 @@ public class LobbyManager : MonoBehaviour
 
     void Init()
     {
-        switch (DBManager.instance.currentStageNum)
-        {
-            case 0:
-                LobbyPlayerController.instance.player.transform.position = DBManager.instance.stage0_Pos;
-                break;
-            
-            case 1:
-                LobbyPlayerController.instance.player.transform.position = DBManager.instance.stage1_Pos;
-                break;
-            
-            case 2:
-                LobbyPlayerController.instance.player.transform.position = DBManager.instance.stage2_Pos;
-                break;
-        }
+        LobbyPlayerController.instance.player.transform.position = DBManager.instance.stage_Pos[DBManager.instance.currentStageNum];
+        ChangeSkybox();
     }
 
     public void DoorInit(string name, string btnText, string nameText, bool isLock)
@@ -213,6 +204,11 @@ public class LobbyManager : MonoBehaviour
             set_Language_LeftArrow.SetActive(true);
             set_Language_RightArrow.SetActive(false);
         }
+    }
+
+    public void ChangeSkybox()
+    {
+        RenderSettings.skybox = stage_Skybox[DBManager.instance.lobbyCurrentStage];
     }
     
     public void Back()
