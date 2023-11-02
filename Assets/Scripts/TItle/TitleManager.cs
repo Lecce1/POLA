@@ -107,7 +107,8 @@ public class TitleManager : MonoBehaviour
     {
         title.SetActive(false);
         start_Btn.SetActive(false);
-        Login();
+        //Login();
+        LoginSuccess();
     }
     
     void Login()
@@ -253,6 +254,11 @@ public class TitleManager : MonoBehaviour
         isVibration = PlayerPrefs.GetInt("isVibration");
         audioMixer.SetFloat("FX", Mathf.Log10(fxValue) * 20);
         audioMixer.SetFloat("Music", Mathf.Log10(musicValue) * 20);
+    }
+
+    public void OnClick()
+    {
+        StartBtn();
     }
 
     public void Back()

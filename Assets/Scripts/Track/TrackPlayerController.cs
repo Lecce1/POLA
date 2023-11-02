@@ -1,7 +1,9 @@
 using System.Collections;
 using UnityEngine;
 using Sirenix.OdinInspector;
+using UnityEngine.EventSystems;
 using UnityEngine.InputSystem;
+using UnityEngine.UI;
 
 public class TrackPlayerController : MonoBehaviour
 {
@@ -102,8 +104,106 @@ public class TrackPlayerController : MonoBehaviour
     {
         if (transform.GetComponent<PlayerInput>().currentControlScheme != "MOBILE")
         {
-            TrackManager.instance.Button(TrackManager.instance.btn_Type);
+            if (TrackManager.instance.isInfoPanelOn)
+            {
+                TrackManager.instance.Button(TrackManager.instance.btn_Type);
+                isMoveAvailable = false;
+            }
+            else if (TrackManager.instance.set.activeSelf)
+            {
+                switch (EventSystem.current.currentSelectedGameObject.name)
+                {
+                    case "Toggle":
+                        if (EventSystem.current.currentSelectedGameObject.GetComponent<Toggle>().isOn)
+                        {
+                            EventSystem.current.currentSelectedGameObject.GetComponent<Toggle>().isOn = false;
+                        }
+                        else if (!EventSystem.current.currentSelectedGameObject.GetComponent<Toggle>().isOn)
+                        {
+                            EventSystem.current.currentSelectedGameObject.GetComponent<Toggle>().isOn = true;
+                        }
+
+                        break;
+
+                    case "Dropdown":
+                        if (LobbyManager.instance.set_Language_Dropdown.value == 0)
+                        {
+                            LobbyManager.instance.set_Language_Dropdown.value = 1;
+                        }
+                        else
+                        {
+                            LobbyManager.instance.set_Language_Dropdown.value = 0;
+                        }
+
+                        TrackManager.instance.Set_Language();
+                        break;
+                }
+            }
+        }
+    }
+    
+    public void OnLeftControl()
+    {
+        if (transform.GetComponent<PlayerInput>().currentControlScheme != "MOBILE")
+        {
+            if (TrackManager.instance.set.activeSelf)
+            {
+                switch (EventSystem.current.currentSelectedGameObject.name)
+                {
+                    case "Dropdown":
+                        if (TrackManager.instance.set_Language_Dropdown.value > 0)
+                        {
+                            TrackManager.instance.set_Language_Dropdown.value--;
+                        }
+
+                        TrackManager.instance.Set_Language();
+                        break;
+                }
+            }
+        }
+    }
+    
+    public void OnRightControl()
+    {
+        if (transform.GetComponent<PlayerInput>().currentControlScheme != "MOBILE")
+        {
+            if (TrackManager.instance.set.activeSelf)
+            {
+                switch (EventSystem.current.currentSelectedGameObject.name)
+                {
+                    case "Dropdown":
+                        if (TrackManager.instance.set_Language_Dropdown.value < DBManager.instance.supportLanguageNum - 1)
+                        {
+                            TrackManager.instance.set_Language_Dropdown.value++;
+                        }
+
+                        TrackManager.instance.Set_Language();
+                        break;
+                }
+            }
+        }
+    }
+    
+    public void OnCancel()
+    {
+        if (TrackManager.instance.isPanelOpen)
+        {
+            TrackManager.instance.Back();
+            isMoveAvailable = true;
+        } 
+        else if (GetComponent<PlayerInput>().currentControlScheme == "PC" && !TrackManager.instance.set.activeSelf)
+        {
+            TrackManager.instance.Button("Set");
             isMoveAvailable = false;
+        }
+    }
+    
+    public void OnSet()
+    {
+        if (!TrackManager.instance.set.activeSelf)
+        {
+            isMoveAvailable = false;
+            TrackManager.instance.Button("Set");
         }
     }
 

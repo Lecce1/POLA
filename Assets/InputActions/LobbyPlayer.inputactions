@@ -58,6 +58,15 @@
                     "processors": "",
                     "interactions": "",
                     "initialStateCheck": true
+                },
+                {
+                    "name": "Set",
+                    "type": "Button",
+                    "id": "f8f2333e-d319-4716-ad8e-8a33b2d02598",
+                    "expectedControlType": "Button",
+                    "processors": "",
+                    "interactions": "",
+                    "initialStateCheck": false
                 }
             ],
             "bindings": [
@@ -144,7 +153,7 @@
                     "path": "<Gamepad>/leftStick/left",
                     "interactions": "",
                     "processors": "",
-                    "groups": "",
+                    "groups": "CONSOLE",
                     "action": "LeftControl",
                     "isComposite": false,
                     "isPartOfComposite": false
@@ -155,7 +164,7 @@
                     "path": "<Keyboard>/leftArrow",
                     "interactions": "",
                     "processors": "",
-                    "groups": "",
+                    "groups": "PC",
                     "action": "LeftControl",
                     "isComposite": false,
                     "isPartOfComposite": false
@@ -166,7 +175,7 @@
                     "path": "<Gamepad>/leftStick/right",
                     "interactions": "",
                     "processors": "",
-                    "groups": "",
+                    "groups": "CONSOLE",
                     "action": "RightControl",
                     "isComposite": false,
                     "isPartOfComposite": false
@@ -177,8 +186,19 @@
                     "path": "<Keyboard>/rightArrow",
                     "interactions": "",
                     "processors": "",
-                    "groups": "",
+                    "groups": "PC",
                     "action": "RightControl",
+                    "isComposite": false,
+                    "isPartOfComposite": false
+                },
+                {
+                    "name": "",
+                    "id": "000efd99-4f8d-4a5a-bda2-8d7e3c0cf04a",
+                    "path": "<Gamepad>/start",
+                    "interactions": "Tap",
+                    "processors": "",
+                    "groups": "CONSOLE",
+                    "action": "Set",
                     "isComposite": false,
                     "isPartOfComposite": false
                 }
@@ -479,23 +499,23 @@
                 },
                 {
                     "name": "",
-                    "id": "44986028-09f8-4c87-a4a1-9dd65253a206",
-                    "path": "<Keyboard>/escape",
-                    "interactions": "",
-                    "processors": "",
-                    "groups": "PC",
-                    "action": "Cancel",
-                    "isComposite": false,
-                    "isPartOfComposite": false
-                },
-                {
-                    "name": "",
                     "id": "e1aa955a-bdb4-4493-8989-6a94b821ade7",
                     "path": "<Mouse>/scroll",
                     "interactions": "",
                     "processors": "",
                     "groups": "PC",
                     "action": "ScrollWheel",
+                    "isComposite": false,
+                    "isPartOfComposite": false
+                },
+                {
+                    "name": "",
+                    "id": "44986028-09f8-4c87-a4a1-9dd65253a206",
+                    "path": "<Keyboard>/escape",
+                    "interactions": "Tap",
+                    "processors": "",
+                    "groups": "",
+                    "action": "Cancel",
                     "isComposite": false,
                     "isPartOfComposite": false
                 }

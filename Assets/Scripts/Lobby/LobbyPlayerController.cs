@@ -154,6 +154,11 @@ public class LobbyPlayerController : MonoBehaviour
         {
             LobbyManager.instance.Back();
             isMoveAvailable = true;
+        } 
+        else if (GetComponent<PlayerInput>().currentControlScheme == "PC" && !LobbyManager.instance.set.activeSelf)
+        {
+            LobbyManager.instance.Button("Set");
+            isMoveAvailable = false;
         }
     }
 
@@ -252,6 +257,15 @@ public class LobbyPlayerController : MonoBehaviour
         direction = 0;
         isMove = false;
         anim.SetBool("isMove", isMove);
+    }
+
+    public void OnSet()
+    {
+        if (!LobbyManager.instance.set.activeSelf)
+        {
+            LobbyManager.instance.Button("Set");
+            isMoveAvailable = false;
+        }
     }
 
     void Collider()

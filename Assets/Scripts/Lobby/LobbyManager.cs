@@ -155,18 +155,10 @@ public class LobbyManager : MonoBehaviour
             case "Set":
                 if (!set.activeSelf)
                 {
-                    if (join_Btn.GetComponent<Animator>().GetCurrentAnimatorStateInfo(0).normalizedTime >= 0.9f)
-                    {
-                        set.SetActive(true);
-                        backStack.Push(set);
-                        isPanelOpen = true;
-                        set_Language_Dropdown.value = DBManager.instance.language;
-
-                        if (join_Btn.activeSelf)
-                        {
-                            join_Btn.SetActive(false);
-                        }
-                    }
+                    set.SetActive(true);
+                    backStack.Push(set);
+                    isPanelOpen = true;
+                    set_Language_Dropdown.value = DBManager.instance.language;
                 }
                 break;
             

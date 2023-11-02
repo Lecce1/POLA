@@ -13,6 +13,33 @@
                     "processors": "",
                     "interactions": "",
                     "initialStateCheck": true
+                },
+                {
+                    "name": "LeftControl",
+                    "type": "Button",
+                    "id": "272a1a37-05ab-43ae-833a-fa0ca0c35c89",
+                    "expectedControlType": "Button",
+                    "processors": "",
+                    "interactions": "",
+                    "initialStateCheck": true
+                },
+                {
+                    "name": "RightControl",
+                    "type": "Button",
+                    "id": "fea4f68a-21e2-4733-b83a-b258370a31b1",
+                    "expectedControlType": "Button",
+                    "processors": "",
+                    "interactions": "",
+                    "initialStateCheck": true
+                },
+                {
+                    "name": "Set",
+                    "type": "Button",
+                    "id": "434346e3-925b-4a40-8296-739cf0596777",
+                    "expectedControlType": "Button",
+                    "processors": "",
+                    "interactions": "",
+                    "initialStateCheck": false
                 }
             ],
             "bindings": [
@@ -90,6 +117,61 @@
                     "processors": "",
                     "groups": "MOBILE",
                     "action": "Move",
+                    "isComposite": false,
+                    "isPartOfComposite": false
+                },
+                {
+                    "name": "",
+                    "id": "c7de209f-4859-4309-8414-ecff79fb5b04",
+                    "path": "<Gamepad>/start",
+                    "interactions": "Tap",
+                    "processors": "",
+                    "groups": "CONSOLE",
+                    "action": "Set",
+                    "isComposite": false,
+                    "isPartOfComposite": false
+                },
+                {
+                    "name": "",
+                    "id": "93ac5403-f13a-4efe-a7db-fbe5ad36bc54",
+                    "path": "<Gamepad>/leftStick/right",
+                    "interactions": "",
+                    "processors": "",
+                    "groups": "CONSOLE",
+                    "action": "RightControl",
+                    "isComposite": false,
+                    "isPartOfComposite": false
+                },
+                {
+                    "name": "",
+                    "id": "bf52a832-85a2-4f9f-a316-194c53c22277",
+                    "path": "<Keyboard>/rightArrow",
+                    "interactions": "",
+                    "processors": "",
+                    "groups": "PC",
+                    "action": "RightControl",
+                    "isComposite": false,
+                    "isPartOfComposite": false
+                },
+                {
+                    "name": "",
+                    "id": "451f4cb7-6a1e-49c2-b56f-793a51297edf",
+                    "path": "<Gamepad>/leftStick/left",
+                    "interactions": "",
+                    "processors": "",
+                    "groups": "CONSOLE",
+                    "action": "LeftControl",
+                    "isComposite": false,
+                    "isPartOfComposite": false
+                },
+                {
+                    "name": "",
+                    "id": "9984c567-9e36-4ec5-a2a0-da81988bdf42",
+                    "path": "<Keyboard>/leftArrow",
+                    "interactions": "",
+                    "processors": "",
+                    "groups": "PC",
+                    "action": "LeftControl",
                     "isComposite": false,
                     "isPartOfComposite": false
                 }
@@ -414,7 +496,7 @@
                     "name": "",
                     "id": "44986028-09f8-4c87-a4a1-9dd65253a206",
                     "path": "<Keyboard>/escape",
-                    "interactions": "",
+                    "interactions": "Tap",
                     "processors": "",
                     "groups": "PC",
                     "action": "Cancel",

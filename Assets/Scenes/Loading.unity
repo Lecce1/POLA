@@ -304,7 +304,7 @@ MonoBehaviour:
   m_UiScaleMode: 1
   m_ReferencePixelsPerUnit: 100
   m_ScaleFactor: 1
-  m_ReferenceResolution: {x: 2960, y: 1440}
+  m_ReferenceResolution: {x: 2160, y: 1440}
   m_ScreenMatchMode: 0
   m_MatchWidthOrHeight: 1
   m_PhysicalUnit: 3
@@ -401,7 +401,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   background: {fileID: 1413338762}
   changeImage:
-  - {fileID: 21300000, guid: 75bcd0b7eff514a1b963792ac5ce380c, type: 3}
+  - {fileID: 21300000, guid: 80cfe22bb4ebe4948b80e326f0fb6abd, type: 3}
   tipText: {fileID: 1607243444}
   englishTipList:
   - TIP. English No.1
@@ -627,16 +627,16 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   m_Material: {fileID: 0}
-  m_Color: {r: 0, g: 0, b: 0, a: 1}
+  m_Color: {r: 1, g: 1, b: 1, a: 1}
   m_RaycastTarget: 0
   m_RaycastPadding: {x: 0, y: 0, z: 0, w: 0}
   m_Maskable: 1
   m_OnCullStateChanged:
     m_PersistentCalls:
       m_Calls: []
-  m_Sprite: {fileID: 21300000, guid: 75bcd0b7eff514a1b963792ac5ce380c, type: 3}
-  m_Type: 1
-  m_PreserveAspect: 1
+  m_Sprite: {fileID: 21300000, guid: 80cfe22bb4ebe4948b80e326f0fb6abd, type: 3}
+  m_Type: 0
+  m_PreserveAspect: 0
   m_FillCenter: 1
   m_FillMethod: 4
   m_FillAmount: 1
