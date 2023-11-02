@@ -3,7 +3,6 @@ using UnityEngine;
 using UnityEngine.EventSystems;
 using UnityEngine.InputSystem;
 using UnityEngine.SceneManagement;
-using UnityEngine.Serialization;
 using UnityEngine.UI;
 
 public class NewPlayerController : MonoBehaviour
@@ -30,30 +29,32 @@ public class NewPlayerController : MonoBehaviour
 
     [FoldoutGroup("변수")] 
     public bool isGrounded;
+
+    [FoldoutGroup("변수")] 
+    public int Health;
+    
+    [FoldoutGroup("변수")] 
+    public bool isInvincibility;
     
     [FoldoutGroup("변수")] 
     public bool isDead;
     
-    [FoldoutGroup("변수")]
-    [Title("공격")]
-    public bool isAttacking;
+    [FoldoutGroup("변수")] 
+    public bool isSlide;
     
     [FoldoutGroup("변수")]
     [SerializeField]
     private int attackCounter;
     
-    [FormerlySerializedAs("isJump")]
     [FoldoutGroup("변수")]
     [Title("점프")]
     public bool isFlip;
     
-    [FoldoutGroup("변수")]
-    [Title("슬라이드")]
-    [SerializeField]
-    private bool isSlide;
-
     [FoldoutGroup("일반")] 
     public Animator anim;
+    
+    [FoldoutGroup("일반")] 
+    public PlayerTrails trails;
     
     [FoldoutGroup("일반")] 
     public PlayerParticle particle;
@@ -68,6 +69,9 @@ public class NewPlayerController : MonoBehaviour
     [SerializeField]
     private LayerMask ground;
     
+    [FoldoutGroup("일반")] 
+    public GameObject verdictCube;
+    
     void Start()
     {
         bpm = audioManager.bpm;
@@ -75,6 +79,8 @@ public class NewPlayerController : MonoBehaviour
         originCollider = GetComponent<BoxCollider>();
         particle = GetComponent<PlayerParticle>();
         anim = GetComponent<Animator>();
+        Physics.gravity = new Vector3(0, -9.81f, 0);
+        isInvincibility = false;
         //transform.GetComponent<PlayerInput>().SwitchCurrentControlScheme("CONSOLE");
     }
 
@@ -106,18 +112,12 @@ public class NewPlayerController : MonoBehaviour
 
         if (Input.GetKeyDown(KeyCode.DownArrow))
         {
-            if (!isSlide)
-            {
-                Slide();
-            }
+            Slide();
         }
         
         if (Input.GetKeyUp(KeyCode.DownArrow))
         {
-            if (isSlide)
-            {
-                SlideOut();
-            }
+            SlideOut();
         }
 
         if (Input.GetKeyDown(KeyCode.A))
@@ -132,12 +132,20 @@ public class NewPlayerController : MonoBehaviour
     void Move()
     {
         transform.position += transform.forward * (bpm / 15f * Time.fixedDeltaTime);
-        ray = new Ray(transform.position + transform.up, transform.up);
+        ray = new Ray(transform.position, transform.up);
+        RaycastHit hitInfo1, hitInfo2;
         
-        if (Physics.Raycast(ray, out RaycastHit hitInfo, Mathf.Infinity, ground))
+        if (!Physics.Raycast(new Ray(transform.position + transform.up, transform.up), out hitInfo1, 20, ground))
         {
-            cameraInfo.transform.position = (hitInfo.point + transform.position) / 2;
+            hitInfo1.point = transform.position + transform.up * 20f;
         }
+        
+        if(!Physics.Raycast(new Ray(transform.position + transform.up, -transform.up), out hitInfo2, 20, ground))
+        {
+            hitInfo2.point = transform.position - transform.up * 20f;
+        }
+        
+        cameraInfo.transform.position = (hitInfo1.point + hitInfo2.point) / 2;
 
         if (transform.position.y < -5)
         {
@@ -151,7 +159,7 @@ public class NewPlayerController : MonoBehaviour
     public void OnFlip()
     {
         Physics.gravity *= -1;
-        
+        StartCoroutine(trails.Trails());
         if (Physics.Raycast(ray, out RaycastHit hitInfo, Mathf.Infinity, ground))
         {
             transform.position = hitInfo.point;
@@ -169,9 +177,8 @@ public class NewPlayerController : MonoBehaviour
             return;
         }
         
-        isSlide = true;
-        anim.SetTrigger("Slide");
-        originCollider.center = new Vector3(0, 0.25f, 0);
+        anim.SetBool("isSlide", true);
+        originCollider.center /= 2;
         originCollider.size = new Vector3(1, 0.5f, 1);
     }
 
@@ -180,56 +187,39 @@ public class NewPlayerController : MonoBehaviour
     /// </summary>
     public void SlideOut()
     {
-        isSlide = false;
-        originCollider.center = new Vector3(0, 0.5f, 0);
+        anim.SetBool("isSlide", false);
+        originCollider.center *= 2;
         originCollider.size = new Vector3(1, 1, 1);
     }
 
     public void OnAttack()
     {
-        // if (isDead || GetComponent<PlayerGrappling>().grapplePoint == null || GetComponent<PlayerSwing>().swingPoint == null)
-        // {
-        //     return;
-        // }
-
-        anim.SetTrigger("Attack");
-        anim.SetInteger("AttackCounter", attackCounter % 2);
-        isAttacking = true;
-        anim.SetBool("IsAttacking", isAttacking);
-        attackCounter++;
         
+        anim.SetInteger("AttackCounter", attackCounter++);
+        anim.SetBool("isAttacking", true);
+
+        attackCounter %= 2;
         float Distance = 5f;
         RaycastHit rayHit;
         char evaluation = 'F';
+
+        Vector3 halfExtents = verdictCube.transform.localScale;
+        halfExtents.x *= 2f;
+
+        // if (Physics.BoxCast(transform.position, halfExtents))
+        // {
+        //     
+        // }
+
         
-        if (Physics.Raycast(transform.position, transform.forward, out rayHit, Distance))
-        {
-            if (rayHit.transform.CompareTag("Breakable"))
-            {
-                Destroy(rayHit.transform.gameObject);
-
-                float d = rayHit.transform.position.x - transform.position.x;
-
-                if (d < 2.5f)
-                {
-                    evaluation = 'A';
-                }
-                else if (d < 4.0f)
-                {
-                    evaluation = 'C';
-                }
-            }
-            Debug.Log(evaluation);
-        }
     }
     
     /// <summary>
-    /// 어택 종료 애니메이션
+    /// 어택 애니메이션 종료 시 발생하는 메서드
     /// </summary>
     public void OnAttackAnimationEnd()
     {
-        isAttacking = false;
-        anim.SetBool("IsAttacking", isAttacking);
+        anim.SetBool("isAttacking", false);
     }
 
     public void OnClick()
@@ -252,8 +242,13 @@ public class NewPlayerController : MonoBehaviour
         }
     }
 
+    void ReleaseInvincibility()
+    {
+        isInvincibility = false;
+    }
+
     /// <summary>
-    /// 죽었을때
+    /// 죽었을 때 호출되는 메서드
     /// </summary>
     void Die()
     {
@@ -288,33 +283,21 @@ public class NewPlayerController : MonoBehaviour
         Gizmos.DrawRay(transform.position, transform.forward * 4f);
         Gizmos.color = Color.blue;
         Gizmos.DrawRay(ray);
-    }
-    
-    private void OnTriggerEnter(Collider other)
-    {
-        //Debug.Log(other.name + " " + NoteMake.instance.beatCount);
+        Gizmos.color = Color.green;
+        
     }
     
     private void OnCollisionStay(Collision collision)
     {
-        if (collision.gameObject.CompareTag("Ground"))
+        if (collision.gameObject.CompareTag("Ground") && !isDead)
         {
             isFlip = false;
-            isGrounded = true;
-            anim.SetBool("IsJumping", isFlip);
-            anim.SetBool("IsGrounded", isGrounded);
-            particle.LandParticle();
-        }
-
-        if (collision.transform.CompareTag("Obstacle"))
-        {
-            Die();
+            anim.SetBool("IsGrounded", true);
         }
     }
     
     private void OnCollisionExit(Collision collision)
     {
-        isGrounded = false;
-        anim.SetBool("IsGrounded", isGrounded);
+        anim.SetBool("IsGrounded", false);
     }
 }

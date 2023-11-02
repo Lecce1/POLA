@@ -1,6 +1,7 @@
 using System;
 using System.Collections.Generic;
 using System.IO;
+using System.Linq;
 using Sirenix.OdinInspector;
 using UnityEngine;
 
@@ -44,6 +45,10 @@ public class MapCreator : MonoBehaviour
     private GameObject slope;
 
     [FoldoutGroup("오브젝트")] 
+    [SerializeField]
+    private Material material;
+
+    [FoldoutGroup("오브젝트")] 
     [Title("설치될 장애물을 모아둔 리스트")]
     [SerializeField]
     [TableList(ShowPaging = true)]
@@ -63,10 +68,12 @@ public class MapCreator : MonoBehaviour
     [HorizontalGroup("Split1", 0.895f)]
     public void Create()
     {
+        createdNoteObject = GameObject.Find("Created Object");
         if (createdNoteObject != null)
         {
             DestroyImmediate(createdNoteObject);
         }
+
         createdNoteObject = new GameObject();
         createdNoteObject.name = "Created Object";
         Vector3 progressDirection = Vector3.right;
@@ -93,14 +100,43 @@ public class MapCreator : MonoBehaviour
                 case Note.NoteType.Unbreakable:
                     obj = Instantiate(unbreakable, pos, q);
                     break;
+                
                 case Note.NoteType.Breakable:
                     obj = Instantiate(breakable, pos, q);
                     break;
+                
                 case Note.NoteType.Slider:
-                    obj = Instantiate(slider, pos, q);
+                    if (n.attribute == 0)
+                    {
+                        obj = Instantiate(slider, pos, q);
+                    }
+                    else
+                    {
+                        obj = new GameObject("Slider");
+                        obj.transform.position = pos;
+
+                        for (int j = 0; j < n.attribute / 4; j++)
+                        {
+                            var InObj = Instantiate(slider, pos, q);
+                            pos.x += 1;
+                            InObj.transform.parent = obj.transform;
+                        }
+                    }
                     break;
+                
                 case Note.NoteType.Slope:
-                    obj = Instantiate(slope, pos, q);
+                    obj = new GameObject("Slope");
+                    var InObj1 = Instantiate(slope, pos, q);
+                    var InObj2 = Instantiate(slope, pos + progressDirection * n.attribute, q);
+                    
+                    LineRenderer lr = obj.AddComponent<LineRenderer>();
+                    lr.SetPosition(0, InObj1.transform.position + InObj1.transform.up * 2);
+                    lr.SetPosition(1, InObj2.transform.position + InObj2.transform.up * 2);
+                    lr.materials.Append(material);
+                    lr.startWidth = 0.1f;
+                    lr.endWidth = 0.1f;
+                    InObj1.transform.parent = obj.transform;
+                    InObj2.transform.parent = obj.transform;
                     break;
             }
 
