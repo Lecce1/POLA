@@ -1,8 +1,10 @@
+using System.Linq;
 using Sirenix.OdinInspector;
 using UnityEngine;
 using UnityEngine.EventSystems;
 using UnityEngine.InputSystem;
 using UnityEngine.SceneManagement;
+using UnityEngine.Serialization;
 using UnityEngine.UI;
 
 public class NewPlayerController : MonoBehaviour
@@ -31,7 +33,7 @@ public class NewPlayerController : MonoBehaviour
     public bool isGrounded;
 
     [FoldoutGroup("변수")] 
-    public int Health;
+    public int health;
     
     [FoldoutGroup("변수")] 
     public bool isInvincibility;
@@ -41,6 +43,9 @@ public class NewPlayerController : MonoBehaviour
     
     [FoldoutGroup("변수")] 
     public bool isSlide;
+    
+    [FoldoutGroup("변수")] 
+    public bool wasTouched;
     
     [FoldoutGroup("변수")]
     [SerializeField]
@@ -71,6 +76,12 @@ public class NewPlayerController : MonoBehaviour
     
     [FoldoutGroup("일반")] 
     public GameObject verdictCube;
+
+    [FoldoutGroup("일반")] 
+    public int curEvaluation;
+
+    [FoldoutGroup("일반")] 
+    public GameObject target;
     
     void Start()
     {
@@ -83,7 +94,7 @@ public class NewPlayerController : MonoBehaviour
         isInvincibility = false;
         //transform.GetComponent<PlayerInput>().SwitchCurrentControlScheme("CONSOLE");
     }
-
+    
     private void FixedUpdate()
     {
         if (!isDead)
@@ -146,17 +157,31 @@ public class NewPlayerController : MonoBehaviour
         }
         
         cameraInfo.transform.position = (hitInfo1.point + hitInfo2.point) / 2;
+        // var a = verdictCube.transform.position;
+        // a.y = cameraInfo.transform.position.y * 0.5f;
+        // verdictCube.transform.position = a;
+        
+        var a = verdictCube.transform.localScale;
+        a.y = (hitInfo2.point - hitInfo1.point).magnitude * 0.5f;
+        verdictCube.transform.localScale = a;
+    }
 
-        if (transform.position.y < -5)
+    public void Hurt()
+    {
+        health--;
+        if (health <= 0)
         {
             Die();
+            return;
         }
+        isInvincibility = true;
+        Invoke(nameof(ReleaseInvincibility), 1f);
     }
     
     /// <summary>
     /// 점프 버튼을 눌렀을때
     /// </summary>
-    public void OnFlip()
+    void OnFlip()
     {
         Physics.gravity *= -1;
         StartCoroutine(trails.Trails());
@@ -170,7 +195,7 @@ public class NewPlayerController : MonoBehaviour
     /// <summary>
     /// 슬라이드 버튼을 눌렀을때
     /// </summary>
-    public void Slide()
+    void Slide()
     {
         if (isDead)
         {
@@ -185,7 +210,7 @@ public class NewPlayerController : MonoBehaviour
     /// <summary>
     /// 슬라이드 버튼을 뗐을때
     /// </summary>
-    public void SlideOut()
+    void SlideOut()
     {
         anim.SetBool("isSlide", false);
         originCollider.center *= 2;
@@ -198,20 +223,11 @@ public class NewPlayerController : MonoBehaviour
         anim.SetInteger("AttackCounter", attackCounter++);
         anim.SetBool("isAttacking", true);
 
-        attackCounter %= 2;
-        float Distance = 5f;
-        RaycastHit rayHit;
-        char evaluation = 'F';
-
-        Vector3 halfExtents = verdictCube.transform.localScale;
-        halfExtents.x *= 2f;
-
-        // if (Physics.BoxCast(transform.position, halfExtents))
-        // {
-        //     
-        // }
-
-        
+        if (curEvaluation != 0 && target != null)
+        {
+            Destroy(target);
+        }
+        Debug.Log(curEvaluation);
     }
     
     /// <summary>
@@ -270,22 +286,6 @@ public class NewPlayerController : MonoBehaviour
         SceneManager.LoadScene(DBManager.instance.gameSceneName);
     }
     
-    private void OnDrawGizmos()
-    {
-        Gizmos.color = Color.red;
-        RaycastHit rayHit;
-        
-        if (Physics.Raycast(transform.position, transform.forward, out rayHit, 4f))
-        {
-            Gizmos.DrawWireSphere(rayHit.point, 0.5f);
-        }
-
-        Gizmos.DrawRay(transform.position, transform.forward * 4f);
-        Gizmos.color = Color.blue;
-        Gizmos.DrawRay(ray);
-        Gizmos.color = Color.green;
-        
-    }
     
     private void OnCollisionStay(Collision collision)
     {
