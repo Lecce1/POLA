@@ -29,6 +29,7 @@ public class LobbyPortalManager : MonoBehaviour
                 DBManager.instance.lobbyCurrentStage = stageNum + 1;
             }
             
+            LobbyManager.instance.ChangeGround();
             LobbyManager.instance.ChangeSkybox();
         }
     }

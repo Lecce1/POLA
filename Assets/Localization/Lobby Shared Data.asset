@@ -119,6 +119,22 @@ MonoBehaviour:
     m_Key: Stage8_Title
     m_Metadata:
       m_Items: []
+  - m_Id: 639558562603008
+    m_Key: Exit
+    m_Metadata:
+      m_Items: []
+  - m_Id: 647898898358272
+    m_Key: Exit_Content
+    m_Metadata:
+      m_Items: []
+  - m_Id: 648062413299712
+    m_Key: Yes
+    m_Metadata:
+      m_Items: []
+  - m_Id: 648105933398016
+    m_Key: No
+    m_Metadata:
+      m_Items: []
   m_Metadata:
     m_Items: []
   m_KeyGenerator:

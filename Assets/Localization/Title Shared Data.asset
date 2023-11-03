@@ -55,6 +55,10 @@ MonoBehaviour:
     m_Key: Error_Network
     m_Metadata:
       m_Items: []
+  - m_Id: 757432853716992
+    m_Key: Version
+    m_Metadata:
+      m_Items: []
   m_Metadata:
     m_Items: []
   m_KeyGenerator:

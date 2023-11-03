@@ -1,7 +1,5 @@
-using System.Collections.Generic;
 using UnityEngine;
 using Sirenix.OdinInspector;
-using UnityEditor;
 using UnityEngine.EventSystems;
 using UnityEngine.InputSystem;
 using UnityEngine.UI;
@@ -24,7 +22,7 @@ public class LobbyPlayerController : MonoBehaviour
     
     [Title("움직임 여부")] 
     [SerializeField] 
-    private bool isMove = false;
+    private bool isMove;
 
     [Title("애니메이터")] 
     [SerializeField] 
@@ -43,7 +41,7 @@ public class LobbyPlayerController : MonoBehaviour
     public bool isMoveAvailable = true;
     
     [Title("문 충돌 여부")] 
-    public bool isDoor = false;
+    public bool isDoor;
     
     public static LobbyPlayerController instance;
 
@@ -74,7 +72,7 @@ public class LobbyPlayerController : MonoBehaviour
 
     public void OnMove(InputValue value)
     {
-        if (isMoveAvailable == true)
+        if (isMoveAvailable)
         {
             Vector2 vector = value.Get<Vector2>();
         
@@ -145,6 +143,10 @@ public class LobbyPlayerController : MonoBehaviour
                         break;
                 }
             }
+            else if (LobbyManager.instance.exit.activeSelf)
+            {
+                LobbyManager.instance.Button($"Exit_{EventSystem.current.currentSelectedGameObject.name}");
+            }
         }
     }
 
@@ -152,8 +154,11 @@ public class LobbyPlayerController : MonoBehaviour
     {
         if (LobbyManager.instance.isPanelOpen)
         {
-            LobbyManager.instance.Back();
-            isMoveAvailable = true;
+            if (!LobbyManager.instance.exit.activeSelf)
+            {
+                LobbyManager.instance.Back();
+                isMoveAvailable = true;
+            }
         } 
         else if (GetComponent<PlayerInput>().currentControlScheme == "PC" && !LobbyManager.instance.set.activeSelf)
         {
@@ -166,7 +171,11 @@ public class LobbyPlayerController : MonoBehaviour
     {
         if (!LobbyManager.instance.isPanelOpen)
         {
-            Debug.Log("test");
+            if (!LobbyManager.instance.exit.activeSelf)
+            {
+                LobbyManager.instance.Button("Exit");
+                isMoveAvailable = false;
+            }
         }
     }
 

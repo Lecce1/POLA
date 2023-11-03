@@ -24,6 +24,9 @@ public class LobbyManager : MonoBehaviour
     [FoldoutGroup("패널")] 
     [Title("입장 버튼")] 
     public GameObject join_Btn;
+    [FoldoutGroup("패널")] 
+    [Title("종료")] 
+    public GameObject exit;
 
     [FoldoutGroup("텍스트")] 
     [Title("스테이지 이름 버튼")]
@@ -34,6 +37,9 @@ public class LobbyManager : MonoBehaviour
     
     [FoldoutGroup("스카이박스")]
     public List<Material> stage_Skybox;
+    
+    [FoldoutGroup("땅")]
+    public List<GameObject> stage_Ground;
 
     [FoldoutGroup("기타")] 
     [Title("입장 버튼 타입")]
@@ -77,7 +83,23 @@ public class LobbyManager : MonoBehaviour
     void Init()
     {
         LobbyPlayerController.instance.player.transform.position = DBManager.instance.stage_Pos[DBManager.instance.currentStageNum];
+        ChangeGround();
         ChangeSkybox();
+    }
+
+    public void ChangeGround()
+    {
+        for (int i = 0; i < stage_Ground.Count; i++)
+        {
+            stage_Ground[i].SetActive(false);
+        }
+        
+        stage_Ground[DBManager.instance.lobbyCurrentStage].SetActive(true);
+    }
+    
+    public void ChangeSkybox()
+    {
+        RenderSettings.skybox = stage_Skybox[DBManager.instance.lobbyCurrentStage];
     }
 
     public void DoorInit(string name, string btnText, string nameText, bool isLock)
@@ -92,6 +114,10 @@ public class LobbyManager : MonoBehaviour
             if (nameText != String.Empty)
             {
                 stage_Name_Text.text = LocalizationSettings.StringDatabase.GetLocalizedString("Lobby", nameText, LocalizationSettings.SelectedLocale);
+            }
+            else
+            {
+                stage_Name_Text.text = String.Empty;
             }
 
             Join_Btn_OnOff(true, false);
@@ -186,6 +212,29 @@ public class LobbyManager : MonoBehaviour
                     }
                 }
                 break;
+            
+            case "Exit":
+                if (!exit.activeSelf)
+                {
+                    exit.SetActive(true);
+                    backStack.Push(exit);
+                    isPanelOpen = true;
+                }
+                break;
+            
+            case "Exit_Yes":
+                if (exit.activeSelf)
+                {
+                    Application.Quit();
+                }
+                break;
+            
+            case "Exit_No":
+                if (exit.activeSelf)
+                {
+                    Back();
+                }
+                break;
         }
     }
 
@@ -206,11 +255,6 @@ public class LobbyManager : MonoBehaviour
         }
     }
 
-    public void ChangeSkybox()
-    {
-        RenderSettings.skybox = stage_Skybox[DBManager.instance.lobbyCurrentStage];
-    }
-    
     public void Back()
     {
         if (backStack.Count <= 0)
@@ -227,6 +271,14 @@ public class LobbyManager : MonoBehaviour
                 if (set.activeSelf)
                 {
                     set.SetActive(false);
+                    isCheck = true;
+                }
+                break;
+            
+            case "Exit":
+                if (exit.activeSelf)
+                {
+                    exit.SetActive(false);
                     isCheck = true;
                 }
                 break;

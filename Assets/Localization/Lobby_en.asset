@@ -122,6 +122,22 @@ MonoBehaviour:
     m_Localized: STAGE 8
     m_Metadata:
       m_Items: []
+  - m_Id: 639558562603008
+    m_Localized: EXIT
+    m_Metadata:
+      m_Items: []
+  - m_Id: 647898898358272
+    m_Localized: Are you sure you want to exit?
+    m_Metadata:
+      m_Items: []
+  - m_Id: 648062413299712
+    m_Localized: YES
+    m_Metadata:
+      m_Items: []
+  - m_Id: 648105933398016
+    m_Localized: NO
+    m_Metadata:
+      m_Items: []
   references:
     version: 2
     RefIds: []

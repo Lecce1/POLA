@@ -98,7 +98,7 @@ public class TitleManager : MonoBehaviour
     void Start()
     {
         Application.targetFrameRate = 144;
-        versionText.text = "버전 : " + Application.version;
+        versionText.text = Application.version;
         backStack = new Stack<GameObject>();
         Login_Load(loginRememberMe);
     }
@@ -142,7 +142,18 @@ public class TitleManager : MonoBehaviour
     public void LoginSuccess()
     {
         Debug.Log("로그인 완료");
-        DBManager.instance.nextScene = "Lobby";
+
+        switch (DBManager.instance.isTutorial)
+        {
+            case false:
+                DBManager.instance.nextScene = "Tutorial";
+                break;
+            
+            case true:
+                DBManager.instance.nextScene = "Lobby";
+                break;
+        }
+        
         SceneManager.LoadScene("Loading");
     }
 
