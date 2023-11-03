@@ -1,8 +1,10 @@
+using System.Linq;
 using Sirenix.OdinInspector;
 using UnityEngine;
 using UnityEngine.EventSystems;
 using UnityEngine.InputSystem;
 using UnityEngine.SceneManagement;
+using UnityEngine.Serialization;
 using UnityEngine.UI;
 
 public class NewPlayerController : MonoBehaviour
@@ -41,9 +43,6 @@ public class NewPlayerController : MonoBehaviour
     
     [FoldoutGroup("변수")] 
     public bool isSlide;
-    
-    [FoldoutGroup("변수")] 
-    public bool isUp;
     
     [FoldoutGroup("변수")] 
     public bool wasTouched;
@@ -116,29 +115,28 @@ public class NewPlayerController : MonoBehaviour
     {
         if (Input.GetKeyDown(KeyCode.UpArrow))
         {
-            UpTask();
+            if (!isFlip)
+            {
+                OnFlip();
+            }
         }
-
 
         if (Input.GetKeyDown(KeyCode.DownArrow))
         {
-            DownTask();
+            Slide();
         }
-    }
-
-    void UpTask()
-    {
-        if (!isUp)
-        {
-            
-        }
-    }
-
-    void DownTask()
-    {
         
+        if (Input.GetKeyUp(KeyCode.DownArrow))
+        {
+            SlideOut();
+        }
+
+        if (Input.GetKeyDown(KeyCode.A))
+        {
+            transform.position += Vector3.up * 10;
+        }
     }
-    
+
     /// <summary>
     /// BPM에 따른 움직임
     /// </summary>
@@ -170,6 +168,7 @@ public class NewPlayerController : MonoBehaviour
 
     public void Hurt()
     {
+        Debug.Log(health);
         health--;
         if (health <= 0)
         {
