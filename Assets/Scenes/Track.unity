@@ -38,7 +38,7 @@ RenderSettings:
   m_ReflectionIntensity: 1
   m_CustomReflection: {fileID: 0}
   m_Sun: {fileID: 0}
-  m_IndirectSpecularColor: {r: 0.39582413, g: 0.50809145, b: 0.42268574, a: 1}
+  m_IndirectSpecularColor: {r: 0.3963431, g: 0.5094424, b: 0.4239127, a: 1}
   m_UseRadianceAmbientProbe: 0
 --- !u!157 &3
 LightmapSettings:
@@ -945,7 +945,7 @@ MonoBehaviour:
   player: {fileID: 53264092}
   body: {fileID: 469708058}
   direction: 0
-  speed: 30
+  speed: 15
   playerVector: {x: 0, y: 0, z: 0}
   isMove: 0
   anim: {fileID: 53264095}
@@ -22882,14 +22882,26 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 86607c325ea95bc4097f9b28752f347e, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  language: 0
-  currentPlatform: 
-  gameSceneName: Game
-  lobbyCurrentStage: 0
   nickName: 
   coin: 0
   crystal: 0
   nextScene: 
+  currentStageNum: 1
+  supportLanguageNum: 2
+  isTutorial: 0
+  language: 0
+  currentPlatform: 
+  gameSceneName: Game
+  lobbyCurrentStage: 0
+  stage_Pos:
+  - {x: 0, y: 0.6, z: 0}
+  - {x: 480, y: 0.6, z: 0}
+  - {x: 980, y: 0.6, z: 0}
+  - {x: 1480, y: 0.6, z: 0}
+  - {x: 1980, y: 0.6, z: 0}
+  - {x: 2480, y: 0.6, z: 0}
+  - {x: 2980, y: 0.6, z: 0}
+  - {x: 3480, y: 0.6, z: 0}
   lobbyLeftPortal:
   - {x: 460, y: 0.6, z: 0}
   - {x: 960, y: 0.6, z: 0}
@@ -22908,17 +22920,6 @@ MonoBehaviour:
   - {x: 2540, y: 0.6, z: 0}
   - {x: 3040, y: 0.6, z: 0}
   - {x: 3540, y: 0.6, z: 0}
-  currentStageNum: 1
-  supportLanguageNum: 2
-  stage_Pos:
-  - {x: 0, y: 0.6, z: 0}
-  - {x: 480, y: 0.6, z: 0}
-  - {x: 980, y: 0.6, z: 0}
-  - {x: 1480, y: 0.6, z: 0}
-  - {x: 1980, y: 0.6, z: 0}
-  - {x: 2480, y: 0.6, z: 0}
-  - {x: 2980, y: 0.6, z: 0}
-  - {x: 3480, y: 0.6, z: 0}
 --- !u!1 &2139994239
 GameObject:
   m_ObjectHideFlags: 0
