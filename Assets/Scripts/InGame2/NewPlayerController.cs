@@ -284,19 +284,4 @@ public class NewPlayerController : MonoBehaviour
     {
         SceneManager.LoadScene(DBManager.instance.gameSceneName);
     }
-    
-    
-    private void OnCollisionStay(Collision collision)
-    {
-        if (collision.gameObject.CompareTag("Ground") && !isDead)
-        {
-            isFlip = false;
-            anim.SetBool("IsGrounded", true);
-        }
-    }
-    
-    private void OnCollisionExit(Collision collision)
-    {
-        anim.SetBool("IsGrounded", false);
-    }
 }
