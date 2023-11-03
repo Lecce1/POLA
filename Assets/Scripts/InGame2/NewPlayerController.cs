@@ -221,7 +221,6 @@ public class NewPlayerController : MonoBehaviour
 
     public void OnAttack()
     {
-        
         anim.SetInteger("AttackCounter", attackCounter++);
         anim.SetBool("isAttacking", true);
 
@@ -229,7 +228,6 @@ public class NewPlayerController : MonoBehaviour
         {
             Destroy(target);
         }
-        Debug.Log(curEvaluation);
     }
     
     /// <summary>

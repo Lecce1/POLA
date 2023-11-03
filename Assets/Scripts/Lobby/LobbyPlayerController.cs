@@ -162,6 +162,14 @@ public class LobbyPlayerController : MonoBehaviour
         }
     }
 
+    public void OnClose()
+    {
+        if (!LobbyManager.instance.isPanelOpen)
+        {
+            Debug.Log("test");
+        }
+    }
+
     /*public void OnScrollWheel(InputValue value)
     {
         scrollVec = value.Get<Vector2>();

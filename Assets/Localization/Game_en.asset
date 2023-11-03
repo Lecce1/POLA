@@ -50,6 +50,10 @@ MonoBehaviour:
     m_Localized: STOP
     m_Metadata:
       m_Items: []
+  - m_Id: 548880067321856
+    m_Localized: FLIP
+    m_Metadata:
+      m_Items: []
   references:
     version: 2
     RefIds: []

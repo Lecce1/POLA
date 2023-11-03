@@ -47,6 +47,10 @@ MonoBehaviour:
     m_Key: Stop
     m_Metadata:
       m_Items: []
+  - m_Id: 548880067321856
+    m_Key: Flip
+    m_Metadata:
+      m_Items: []
   m_Metadata:
     m_Items: []
   m_KeyGenerator:
