@@ -1,5 +1,3 @@
-using System.Collections;
-using System.Collections.Generic;
 using Cinemachine;
 using UnityEngine;
 
@@ -9,15 +7,12 @@ public class CameraManager : MonoBehaviour
     public NewPlayerController player;
     private CinemachineTransposer transposer;
     public Vector3 offsetNormal;
-    private float defaultLength;
     
-    // Start is called before the first frame update
     void Start()
     {
         transposer = transform.GetComponent<CinemachineVirtualCamera>().GetCinemachineComponent<CinemachineTransposer>();
         offsetNormal = transposer.m_FollowOffset;
         offsetNormal = offsetNormal.normalized;
-        defaultLength = transposer.m_FollowOffset.x / offsetNormal.x;
     }
 
     // Update is called once per frame

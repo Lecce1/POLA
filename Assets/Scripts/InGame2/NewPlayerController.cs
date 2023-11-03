@@ -81,7 +81,6 @@ public class NewPlayerController : MonoBehaviour
         anim = GetComponent<Animator>();
         Physics.gravity = new Vector3(0, -9.81f, 0);
         isInvincibility = false;
-        //transform.GetComponent<PlayerInput>().SwitchCurrentControlScheme("CONSOLE");
     }
     
     private void FixedUpdate()
@@ -103,15 +102,16 @@ public class NewPlayerController : MonoBehaviour
     public void Hurt()
     {
         health--;
+        Debug.LogError(health);
+        
         if (health <= 0)
         {
             Die();
             return;
         }
+        
         isInvincibility = true;
         Invoke(nameof(ReleaseInvincibility), 1f);
-        
-        
     }
     
     /// <summary>
@@ -122,12 +122,14 @@ public class NewPlayerController : MonoBehaviour
         Physics.gravity *= -1;
         StartCoroutine(trails.Trails());
         Ray ray = new Ray(transform.position, transform.up);
+        
         if (Physics.Raycast(ray, out RaycastHit hitInfo, Mathf.Infinity, ground))
         {
             if (target != null && target.CompareTag("Unbreakable"))
             {
                 wasTouched = true;
             }
+            
             transform.position = hitInfo.point;
             transform.Rotate(transform.right, 180f);
         }
@@ -169,11 +171,12 @@ public class NewPlayerController : MonoBehaviour
         {
             anim.SetInteger("AttackCounter", attackCounter++);
             anim.SetBool("isAttacking", true);
-
             attackCounter %= 2;
             Destroy(target);
         }
 
+        Debug.Log(curEvaluation);
+        
         if (target.CompareTag("Slide"))
         {
             Slide();

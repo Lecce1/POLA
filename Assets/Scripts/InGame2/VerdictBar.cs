@@ -2,9 +2,10 @@ using UnityEngine;
 
 public class VerdictBar : MonoBehaviour
 {
+    [SerializeField]
     private NewPlayerController player;
 
-    private void Start()
+    void Start()
     {
         player = transform.parent.parent.GetComponent<NewPlayerController>();
     }
@@ -19,13 +20,14 @@ public class VerdictBar : MonoBehaviour
     {
         player.curEvaluation--;
 
-        if (player.curEvaluation == 0)
+        if (player.curEvaluation <= 0)
         {
             if (!player.wasTouched && !player.isInvincibility)
             {
                 player.Hurt();
                 player.target = null;
             }
+            
             player.wasTouched = false;
         }
     }

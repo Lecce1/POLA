@@ -104,9 +104,7 @@ public class NoteMake : MonoBehaviour
         }
 
         public float preValue;
-        
         public int index;
-
         public task taskType;
     }
 
@@ -136,6 +134,7 @@ public class NoteMake : MonoBehaviour
             {
                 NoteLoad();
             }
+            
             for (int i = 0; i < noteTime.Count; i++)
             {
                 var note = Instantiate(noteBar, new Vector3(noteTime[i] * 4f + 13.5f, 0, 0), Quaternion.identity);
@@ -158,6 +157,7 @@ public class NoteMake : MonoBehaviour
     {
         ampTransform.anchoredPosition += Vector2.left * (bpm / 1.2f * Time.fixedDeltaTime);
     }
+    
     void Update()
     {
         if (noteWriteMod)
@@ -345,6 +345,7 @@ public class NoteMake : MonoBehaviour
         {
             low--;
         }
+        
         return low;
     }
     
@@ -380,11 +381,9 @@ public class NoteMake : MonoBehaviour
             sum /= samples.Length;
             float y = sum * 200f;
             GameObject stick = Instantiate(ampStick, ampParent.transform.position, Quaternion.identity, ampParent.transform);
-            
             var rt = stick.GetComponent<RectTransform>();
             var pos = rt.anchoredPosition;
             pos.x = cnt++ * 10;
-            
             var size = rt.sizeDelta;
             size.y = y;
             rt.anchoredPosition = pos;
@@ -416,6 +415,7 @@ public class NoteMake : MonoBehaviour
             {
                 str += item + "\n";
             }
+            
             str = str.TrimEnd('\n');
             System.IO.File.WriteAllText(url, str, Encoding.Default);
         }

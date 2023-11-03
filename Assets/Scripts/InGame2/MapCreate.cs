@@ -66,9 +66,11 @@ public class MapCreator : MonoBehaviour
     
     [Button("생성", ButtonSizes.Large)]
     [HorizontalGroup("Split1", 0.895f)]
+    
     public void Create()
     {
         createdNoteObject = GameObject.Find("Created Object");
+        
         if (createdNoteObject != null)
         {
             DestroyImmediate(createdNoteObject);
@@ -77,6 +79,7 @@ public class MapCreator : MonoBehaviour
         createdNoteObject = new GameObject();
         createdNoteObject.name = "Created Object";
         Vector3 progressDirection = Vector3.right;
+        
         for (int i = 0; i < notes.Count; i++)
         {
             Note n = notes[i];
@@ -95,6 +98,7 @@ public class MapCreator : MonoBehaviour
             }
             
             GameObject obj = null;
+            
             switch (n.type)
             {
                 case Note.NoteType.Unbreakable:
@@ -128,7 +132,6 @@ public class MapCreator : MonoBehaviour
                     obj = new GameObject("Slope");
                     var InObj1 = Instantiate(slope, pos, q);
                     var InObj2 = Instantiate(slope, pos + progressDirection * n.attribute, q);
-                    
                     LineRenderer lr = obj.AddComponent<LineRenderer>();
                     lr.SetPosition(0, InObj1.transform.position + InObj1.transform.up * 2);
                     lr.SetPosition(1, InObj2.transform.position + InObj2.transform.up * 2);
@@ -153,6 +156,7 @@ public class MapCreator : MonoBehaviour
     public void Reset()
     {
         noteMaker = GetComponent<NoteMake>();
+        
         if (noteMaker.noteTime.Count == 0)
         {
             noteMaker.NoteLoad();
@@ -169,6 +173,7 @@ public class MapCreator : MonoBehaviour
                 isUp = false,
                 attribute = 0f
             };
+            
             notes.Add(n);
         }
     }
@@ -185,6 +190,7 @@ public class MapCreator : MonoBehaviour
 
         using StreamWriter sw = new StreamWriter(url);
         string str;
+        
         for (int i = 0; i < noteMaker.noteTime.Count; i++)
         {
             if (i < notes.Count)
@@ -196,6 +202,7 @@ public class MapCreator : MonoBehaviour
             {
                 str = noteMaker.noteTime[i] + "," + Note.NoteType.Breakable + ",False,";
             }
+            
             sw.WriteLine(str);
         }
     }
@@ -208,6 +215,7 @@ public class MapCreator : MonoBehaviour
         {
             notes.Clear();
             string[] lines = File.ReadAllLines(url);
+            
             foreach (var t in lines)
             {
                 var split = t.Split(',');
@@ -221,7 +229,6 @@ public class MapCreator : MonoBehaviour
                 };
                 
                 n.attribute = split[3] == "" ? 0f : float.Parse(split[3]);
-                
                 notes.Add(n);
             }
         }
