@@ -1,10 +1,8 @@
-using System.Linq;
 using Sirenix.OdinInspector;
 using UnityEngine;
 using UnityEngine.EventSystems;
 using UnityEngine.InputSystem;
 using UnityEngine.SceneManagement;
-using UnityEngine.Serialization;
 using UnityEngine.UI;
 
 public class NewPlayerController : MonoBehaviour
@@ -63,19 +61,10 @@ public class NewPlayerController : MonoBehaviour
     
     [FoldoutGroup("일반")] 
     public PlayerParticle particle;
-
-    [FoldoutGroup("일반")] 
-    public GameObject cameraInfo;
-
-    [FoldoutGroup("일반")] 
-    private Ray ray;
     
     [FoldoutGroup("일반")] 
     [SerializeField]
-    private LayerMask ground;
-    
-    [FoldoutGroup("일반")] 
-    public GameObject verdictCube;
+    public LayerMask ground;
 
     [FoldoutGroup("일반")] 
     public int curEvaluation;
@@ -103,72 +92,16 @@ public class NewPlayerController : MonoBehaviour
         }
     }
 
-    void Update()
-    {
-        KeyMapping();
-    }
-
-    /// <summary>
-    /// 키보드 입력
-    /// </summary>
-    void KeyMapping()
-    {
-        if (Input.GetKeyDown(KeyCode.UpArrow))
-        {
-            if (!isFlip)
-            {
-                OnFlip();
-            }
-        }
-
-        if (Input.GetKeyDown(KeyCode.DownArrow))
-        {
-            Slide();
-        }
-        
-        if (Input.GetKeyUp(KeyCode.DownArrow))
-        {
-            SlideOut();
-        }
-
-        if (Input.GetKeyDown(KeyCode.A))
-        {
-            transform.position += Vector3.up * 10;
-        }
-    }
-
     /// <summary>
     /// BPM에 따른 움직임
     /// </summary>
     void Move()
     {
         transform.position += transform.forward * (bpm / 15f * Time.fixedDeltaTime);
-        ray = new Ray(transform.position, transform.up);
-        RaycastHit hitInfo1, hitInfo2;
-        
-        if (!Physics.Raycast(new Ray(transform.position + transform.up, transform.up), out hitInfo1, 20, ground))
-        {
-            hitInfo1.point = transform.position + transform.up * 20f;
-        }
-        
-        if(!Physics.Raycast(new Ray(transform.position + transform.up, -transform.up), out hitInfo2, 20, ground))
-        {
-            hitInfo2.point = transform.position - transform.up * 20f;
-        }
-        
-        cameraInfo.transform.position = (hitInfo1.point + hitInfo2.point) / 2;
-        // var a = verdictCube.transform.position;
-        // a.y = cameraInfo.transform.position.y * 0.5f;
-        // verdictCube.transform.position = a;
-        
-        var a = verdictCube.transform.localScale;
-        a.y = (hitInfo2.point - hitInfo1.point).magnitude * 0.5f;
-        verdictCube.transform.localScale = a;
     }
 
     public void Hurt()
     {
-        Debug.Log(health);
         health--;
         if (health <= 0)
         {
@@ -177,17 +110,24 @@ public class NewPlayerController : MonoBehaviour
         }
         isInvincibility = true;
         Invoke(nameof(ReleaseInvincibility), 1f);
+        
+        
     }
     
     /// <summary>
-    /// 점프 버튼을 눌렀을때
+    /// 플립 버튼을 눌렀을때
     /// </summary>
     void OnFlip()
     {
         Physics.gravity *= -1;
         StartCoroutine(trails.Trails());
+        Ray ray = new Ray(transform.position, transform.up);
         if (Physics.Raycast(ray, out RaycastHit hitInfo, Mathf.Infinity, ground))
         {
+            if (target != null && target.CompareTag("Unbreakable"))
+            {
+                wasTouched = true;
+            }
             transform.position = hitInfo.point;
             transform.Rotate(transform.right, 180f);
         }
@@ -211,7 +151,7 @@ public class NewPlayerController : MonoBehaviour
     /// <summary>
     /// 슬라이드 버튼을 뗐을때
     /// </summary>
-    void SlideOut()
+    void AttackUp()
     {
         anim.SetBool("isSlide", false);
         originCollider.center *= 2;
@@ -220,13 +160,27 @@ public class NewPlayerController : MonoBehaviour
 
     public void OnAttack()
     {
-        anim.SetInteger("AttackCounter", attackCounter++);
-        anim.SetBool("isAttacking", true);
-
-        if (curEvaluation != 0 && target != null)
+        if (curEvaluation == 0 || target == null)
         {
+            return;
+        }
+        
+        if (target.CompareTag("Breakable"))
+        {
+            anim.SetInteger("AttackCounter", attackCounter++);
+            anim.SetBool("isAttacking", true);
+
+            attackCounter %= 2;
             Destroy(target);
         }
+
+        if (target.CompareTag("Slide"))
+        {
+            Slide();
+        }
+        
+        wasTouched = true;
+        curEvaluation = 0;
     }
     
     /// <summary>

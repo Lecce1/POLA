@@ -51,7 +51,7 @@ public class MapCreator : MonoBehaviour
     [FoldoutGroup("오브젝트")] 
     [Title("설치될 장애물을 모아둔 리스트")]
     [SerializeField]
-    [TableList(ShowPaging = true)]
+    [TableList(ShowPaging = true, ShowIndexLabels = true)]
     private List<Note> notes = new ();
 
     [FoldoutGroup("기타")] 
@@ -115,7 +115,7 @@ public class MapCreator : MonoBehaviour
                         obj = new GameObject("Slider");
                         obj.transform.position = pos;
 
-                        for (int j = 0; j < n.attribute / 4; j++)
+                        for (int j = 0; j < n.attribute; j++)
                         {
                             var InObj = Instantiate(slider, pos, q);
                             pos.x += 1;
@@ -142,6 +142,7 @@ public class MapCreator : MonoBehaviour
 
             if (obj != null)
             {
+                obj.name += " " + i;
                 obj.transform.parent = createdNoteObject.transform;
             }
         }

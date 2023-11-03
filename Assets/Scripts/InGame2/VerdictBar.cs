@@ -12,21 +12,21 @@ public class VerdictBar : MonoBehaviour
     private void OnTriggerEnter(Collider other)
     {
         player.curEvaluation++;
-        if (other.gameObject.CompareTag("Breakable"))
-        {
-            player.target = other.gameObject;
-        }
-        
+        player.target = other.gameObject;
     }
 
     private void OnTriggerExit(Collider other)
     {
         player.curEvaluation--;
 
-        if (player.curEvaluation == 0 && !player.wasTouched && !player.isInvincibility)
+        if (player.curEvaluation == 0)
         {
-            player.Hurt();
-            player.target = null;
+            if (!player.wasTouched && !player.isInvincibility)
+            {
+                player.Hurt();
+                player.target = null;
+            }
+            player.wasTouched = false;
         }
     }
 }

@@ -7,10 +7,11 @@ TagManager:
   - Ground
   - Breakable
   - Floor
-  - Grappling
-  - Swing
   - Door
   - Collectable
+  - Unbreakable
+  - Slope
+  - Slide
   - Obstacle
   layers:
   - Default
