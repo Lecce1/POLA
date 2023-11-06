@@ -16,8 +16,8 @@ public class TitleManager : MonoBehaviour
     [Title("시작 버튼")]
     public GameObject start_Btn;
     [FoldoutGroup("타이틀")]
-    [Title("Touch To Start 애니메이션")]
-    public Animation start_Btn_Anim;
+    [Title("Fade")]
+    public GameObject fade;
     [FoldoutGroup("타이틀")]
     [Title("버전")]
     [SerializeField]
@@ -88,8 +88,9 @@ public class TitleManager : MonoBehaviour
 
     // 뒤로가기 스택
     private Stack<GameObject> backStack;
-    public static TitleManager instance;
     
+    public static TitleManager instance;
+
     void Awake()
     {
         if (instance == null)
@@ -108,10 +109,8 @@ public class TitleManager : MonoBehaviour
 
     public void StartBtn()
     {
-        start_Btn.SetActive(false);
-        start_Btn_Anim.Play("Delay");
-        //Login();
-        Invoke("LoginSuccess", 2.0f);
+        start_Btn.GetComponent<Button>().interactable = false;
+        fade.GetComponent<Animation>().Play("FadeOut");
     }
     
     void Login()

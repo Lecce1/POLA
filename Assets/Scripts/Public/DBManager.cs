@@ -38,18 +38,6 @@ public class DBManager : MonoBehaviour
     [FoldoutGroup("게임 DB")] 
     [Title("게임 씬 이름")]
     public string gameSceneName = "Game";
-    [FoldoutGroup("게임 DB")] 
-    [Title("로비 씬 현재 스테이지")]
-    public int lobbyCurrentStage = 0;
-    [FoldoutGroup("스테이지")] 
-    [Title("스테이지 좌표 리스트")]
-    public List<Vector3> stage_Pos = new List<Vector3>{new Vector3(0,0.6f,0), new Vector3(480,0.6f,0), new Vector3(980,0.6f,0), new Vector3(1480,0.6f,0), new Vector3(1980,0.6f,0), new Vector3(2480,0.6f,0), new Vector3(2980,0.6f,0), new Vector3(3480,0.6f,0)};
-    [FoldoutGroup("스테이지")]
-    [Title("로비 왼쪽 포탈")]
-    public List<Vector3> lobbyLeftPortal = new List<Vector3>{new Vector3(460,0.6f,0), new Vector3(960,0.6f,0), new Vector3(1460,0.6f,0), new Vector3(1960,0.6f,0), new Vector3(2460,0.6f,0), new Vector3(2960,0.6f,0),new Vector3(3460,0.6f,0) ,new Vector3(3960,0.6f,0)};
-    [FoldoutGroup("스테이지")]
-    [Title("로비 오른쪽 포탈")]
-    public List<Vector3> lobbyRightPortal = new List<Vector3>{new Vector3(40,0.6f,0), new Vector3(540,0.6f,0), new Vector3(1040,0.6f,0), new Vector3(1540,0.6f,0), new Vector3(2040,0.6f,0), new Vector3(2540,0.6f,0), new Vector3(3040,0.6f,0), new Vector3(3540,0.6f,0)};
     
     public static DBManager instance;
 

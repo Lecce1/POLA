@@ -16,32 +16,16 @@ public class PlatformManager : MonoBehaviour
         public List<GameObject> mobileObjects = new List<GameObject>();
         [Title("PlayerInput")] 
         public PlayerInput playerInput;
-
-        void Start()
+        
+        void Update()
         {
             if (SceneManager.GetActiveScene().name != DBManager.instance.gameSceneName)
             {
-                Init();
+                Switch();
             }
         }
 
-        void Init()
-        {
-            if (playerInput.currentControlScheme == "PC")
-            {
-                SwitchToKeyboard();
-            }
-            else if (playerInput.currentControlScheme == "CONSOLE")
-            { 
-                SwitchToGamepad();
-            }
-            else if (playerInput.currentControlScheme == "MOBILE")
-            {
-                SwitchToMobile();
-            }
-        }
-
-        public void Switch()
+        void Switch()
         {
             if (playerInput.currentControlScheme == "PC" && DBManager.instance.currentPlatform != "PC")
             {

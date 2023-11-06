@@ -62,12 +62,12 @@ public class TrackManager : MonoBehaviour
 
     void Init()
     {
-        ChangeSkybox();
+        //ChangeSkybox();
     }
     
     public void ChangeSkybox()
     {
-        RenderSettings.skybox = stage_Skybox[DBManager.instance.lobbyCurrentStage - 1];
+        RenderSettings.skybox = stage_Skybox[0];
     }
     
     public void Info_OnOff(bool isOn)

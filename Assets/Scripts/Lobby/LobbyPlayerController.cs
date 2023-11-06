@@ -146,6 +146,7 @@ public class LobbyPlayerController : MonoBehaviour
             else if (LobbyManager.instance.exit.activeSelf)
             {
                 LobbyManager.instance.Button($"Exit_{EventSystem.current.currentSelectedGameObject.name}");
+                isMoveAvailable = true;
             }
         }
     }
@@ -280,6 +281,7 @@ public class LobbyPlayerController : MonoBehaviour
     {
         if (!LobbyManager.instance.set.activeSelf)
         {
+            LobbyManager.instance.isSetBtn = true;
             LobbyManager.instance.Button("Set");
             isMoveAvailable = false;
         }
@@ -301,55 +303,20 @@ public class LobbyPlayerController : MonoBehaviour
                     switch (temp.transform.GetComponent<DoorManager>().name)
                     {
                         case "Sign":
-                            LobbyManager.instance.DoorInit("Sign", "OK", string.Empty, false);
+                            LobbyManager.instance.DoorInit("Sign", "OK");
                             break;
                     
                         case "Set":
-                            LobbyManager.instance.DoorInit("Set", "Set", string.Empty, false);
+                            LobbyManager.instance.DoorInit("Set", "Set");
                             break;
 
                         case "Shop":
-                            LobbyManager.instance.DoorInit("Shop", "Shop", string.Empty, false);
+                            LobbyManager.instance.DoorInit("Shop", "Shop");
                             break;
 
-                        case "Stage1":
-                            LobbyManager.instance.DoorInit("Stage", "Join", "Stage1_Title", temp.transform.GetComponent<DoorManager>().isLock);
+                        case "Stage":
+                            LobbyManager.instance.DoorInit("Stage", "Join");
                             DBManager.instance.currentStageNum = 1;
-                            break;
-
-                        case "Stage2":
-                            LobbyManager.instance.DoorInit("Stage", "Join", "Stage2_Title", temp.transform.GetComponent<DoorManager>().isLock);
-                            DBManager.instance.currentStageNum = 2;
-                            break;
-                        
-                        case "Stage3":
-                            LobbyManager.instance.DoorInit("Stage", "Join", "Stage3_Title", temp.transform.GetComponent<DoorManager>().isLock);
-                            DBManager.instance.currentStageNum = 3;
-                            break;
-                        
-                        case "Stage4":
-                            LobbyManager.instance.DoorInit("Stage", "Join", "Stage4_Title", temp.transform.GetComponent<DoorManager>().isLock);
-                            DBManager.instance.currentStageNum = 4;
-                            break;
-                        
-                        case "Stage5":
-                            LobbyManager.instance.DoorInit("Stage", "Join", "Stage5_Title", temp.transform.GetComponent<DoorManager>().isLock);
-                            DBManager.instance.currentStageNum = 5;
-                            break;
-                        
-                        case "Stage6":
-                            LobbyManager.instance.DoorInit("Stage", "Join", "Stage6_Title", temp.transform.GetComponent<DoorManager>().isLock);
-                            DBManager.instance.currentStageNum = 6;
-                            break;
-                        
-                        case "Stage7":
-                            LobbyManager.instance.DoorInit("Stage", "Join", "Stage7_Title", temp.transform.GetComponent<DoorManager>().isLock);
-                            DBManager.instance.currentStageNum = 7;
-                            break;
-                        
-                        case "Stage8":
-                            LobbyManager.instance.DoorInit("Stage", "Join", "Stage8_Title", temp.transform.GetComponent<DoorManager>().isLock);
-                            DBManager.instance.currentStageNum = 8;
                             break;
                     }
                 }

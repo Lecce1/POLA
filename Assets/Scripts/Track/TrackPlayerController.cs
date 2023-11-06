@@ -219,7 +219,7 @@ public class TrackPlayerController : MonoBehaviour
                 if (temp.CompareTag("Door"))
                 {
                     isCheck = true;
-                    TrackInfo.instance.Init(DBManager.instance.currentStageNum, temp.transform.GetComponent<DoorManager>().trackNum);
+                    TrackInfo.instance.Init(temp.transform.GetComponent<DoorManager>().stageNum, temp.transform.GetComponent<DoorManager>().trackNum);
                     TrackManager.instance.Info_OnOff(true);
                 }
             }

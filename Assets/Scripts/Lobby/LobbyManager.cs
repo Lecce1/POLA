@@ -29,9 +29,6 @@ public class LobbyManager : MonoBehaviour
     public GameObject exit;
 
     [FoldoutGroup("텍스트")] 
-    [Title("스테이지 이름 버튼")]
-    public Text stage_Name_Text;
-    [FoldoutGroup("텍스트")] 
     [Title("입장 버튼")] 
     public Text join_Btn_Text;
     
@@ -50,6 +47,9 @@ public class LobbyManager : MonoBehaviour
     [FoldoutGroup("기타")] 
     [Title("패널 열림 여부")]
     public bool isPanelOpen = false;
+    [FoldoutGroup("기타")] 
+    [Title("설정 버튼 / 패드 여부")]
+    public bool isSetBtn = false;
     
     [FoldoutGroup("설정 패널")] 
     [Title("언어 Dropdown")]
@@ -82,51 +82,16 @@ public class LobbyManager : MonoBehaviour
 
     void Init()
     {
-        LobbyPlayerController.instance.player.transform.position = DBManager.instance.stage_Pos[DBManager.instance.currentStageNum];
-        ChangeGround();
-        ChangeSkybox();
+        LobbyPlayerController.instance.player.transform.position = new Vector3(0, 0.6f, 0);
     }
 
-    public void ChangeGround()
+    public void DoorInit(string name, string btnText)
     {
-        for (int i = 0; i < stage_Ground.Count; i++)
-        {
-            stage_Ground[i].SetActive(false);
-        }
-        
-        stage_Ground[DBManager.instance.lobbyCurrentStage].SetActive(true);
-    }
-    
-    public void ChangeSkybox()
-    {
-        RenderSettings.skybox = stage_Skybox[DBManager.instance.lobbyCurrentStage];
-    }
-
-    public void DoorInit(string name, string btnText, string nameText, bool isLock)
-    {
-        if (!isLock)
-        {
-            join_Btn_Type = name;
-            join_Btn.GetComponent<Button>().onClick.RemoveAllListeners();
-            join_Btn.GetComponent<Button>().onClick.AddListener(() => LobbyManager.instance.Button(name));
-            join_Btn_Text.text = LocalizationSettings.StringDatabase.GetLocalizedString("Lobby", btnText, LocalizationSettings.SelectedLocale);
-
-            if (nameText != String.Empty)
-            {
-                stage_Name_Text.text = LocalizationSettings.StringDatabase.GetLocalizedString("Lobby", nameText, LocalizationSettings.SelectedLocale);
-            }
-            else
-            {
-                stage_Name_Text.text = String.Empty;
-            }
-
-            Join_Btn_OnOff(true, false);
-        }
-        else
-        {
-            stage_Name_Text.text = nameText;
-            Join_Btn_OnOff(true, true);
-        }
+        join_Btn_Type = name;
+        join_Btn.GetComponent<Button>().onClick.RemoveAllListeners();
+        join_Btn.GetComponent<Button>().onClick.AddListener(() => LobbyManager.instance.Button(name));
+        join_Btn_Text.text = LocalizationSettings.StringDatabase.GetLocalizedString("Lobby", btnText, LocalizationSettings.SelectedLocale);
+        Join_Btn_OnOff(true, false);
     }
 
     public void Join_Btn_OnOff(bool isOn, bool onlyStage)
@@ -138,7 +103,6 @@ public class LobbyManager : MonoBehaviour
                 join_Btn.GetComponent<Animator>().Play("JoinOn");
             }
             
-            stage_Name_Text.GetComponent<Animator>().Play("StageNameOn");
             isJoinBtnOn = true;
         }
         else if (isOn == false)
@@ -148,7 +112,6 @@ public class LobbyManager : MonoBehaviour
                 join_Btn.GetComponent<Animator>().Play("JoinOff");
             }
             
-            stage_Name_Text.GetComponent<Animator>().Play("StageNameOff");
             isJoinBtnOn = false;
         }
     }
@@ -172,10 +135,18 @@ public class LobbyManager : MonoBehaviour
             case "Set":
                 if (!set.activeSelf)
                 {
-                    set.SetActive(true);
-                    backStack.Push(set);
-                    isPanelOpen = true;
-                    set_Language_Dropdown.value = DBManager.instance.language;
+                    if (join_Btn.GetComponent<Animator>().GetCurrentAnimatorStateInfo(0).normalizedTime >= 0.9f)
+                    {
+                        set.SetActive(true);
+                        backStack.Push(set);
+                        isPanelOpen = true;
+                        set_Language_Dropdown.value = DBManager.instance.language;
+                        
+                        if (join_Btn.activeSelf)
+                        {
+                            join_Btn.SetActive(false);
+                        }
+                    }
                 }
                 break;
             
@@ -255,6 +226,12 @@ public class LobbyManager : MonoBehaviour
         }
     }
 
+    public void SetBtn()
+    {
+        isSetBtn = true;
+        Button("Set");
+    }
+
     public void Back()
     {
         if (backStack.Count <= 0)
@@ -308,10 +285,12 @@ public class LobbyManager : MonoBehaviour
             {
                 join_Btn.SetActive(true);
                 
-                if (!LobbyPlayerController.instance.isDoor)
+                if (!LobbyPlayerController.instance.isDoor && isSetBtn == false)
                 {
                     Join_Btn_OnOff(false, false);
                 }
+
+                isSetBtn = false;
             }
         }
     }
