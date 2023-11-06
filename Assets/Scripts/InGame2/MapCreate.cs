@@ -106,7 +106,7 @@ public class MapCreator : MonoBehaviour
 
                         for (int j = 0; j < n.length * 4; j++)
                         {
-                            Vector3 forwardVector = q * Vector3.forward;
+                            Vector3 forwardVector = q * Vector3.right;
                             GameObject inObj = Instantiate(normalNotes[n.objectType], pos + forwardVector * j, q);
                             inObj.transform.parent = obj.transform;
                         }

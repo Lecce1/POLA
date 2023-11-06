@@ -111,7 +111,7 @@ public class PlanarReflectionsProbe : MonoBehaviour
         {
             return;
         }
-        else if (_probe == null) 
+        if (_probe == null) 
         {
             InitializeProbe();
         }
@@ -121,7 +121,7 @@ public class PlanarReflectionsProbe : MonoBehaviour
         UpdateProbeTransform(cam, normal);
         CalculateObliqueProjection(normal);
         _probe.Render();
-        string texName = "_PlanarReflectionsTex" + targetTextureID.ToString();
+        string texName = "_PlanarReflectionsTex" + targetTextureID;
         _probe.targetTexture.SetGlobalShaderProperty(texName);
     }
 

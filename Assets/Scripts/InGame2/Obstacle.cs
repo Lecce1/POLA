@@ -1,4 +1,5 @@
 using UnityEngine;
+using UnityEngine.Serialization;
 
 public class Obstacle : MonoBehaviour
 {
@@ -10,7 +11,7 @@ public class Obstacle : MonoBehaviour
     public int greatScore = 50;
     public int comboCount = 1;
     public int damage = 1;
-    public bool isInteracted = false;
+    public bool wasInteracted = false;
 }
 
 public enum NoteType
