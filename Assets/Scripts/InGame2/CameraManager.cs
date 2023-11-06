@@ -15,7 +15,6 @@ public class CameraManager : MonoBehaviour
         offsetNormal = offsetNormal.normalized;
     }
 
-    // Update is called once per frame
     void FixedUpdate()
     {
         RaycastHit hitInfo1, hitInfo2;
@@ -33,6 +32,6 @@ public class CameraManager : MonoBehaviour
         cameraInfo.transform.position = (hitInfo1.point + hitInfo2.point) / 2;
         float distance = (hitInfo1.point - hitInfo2.point).magnitude;
 
-        transposer.m_FollowOffset = offsetNormal * distance * 1.5f;
+        transposer.m_FollowOffset = Vector3.Lerp(transposer.m_FollowOffset, offsetNormal * (distance * 1.5f), 0.125f);
     }
 }

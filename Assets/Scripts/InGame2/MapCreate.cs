@@ -4,6 +4,7 @@ using System.IO;
 using System.Linq;
 using Sirenix.OdinInspector;
 using UnityEngine;
+using UnityEngine.Serialization;
 
 
 [RequireComponent(typeof(NoteMake))]
@@ -12,41 +13,31 @@ public class MapCreator : MonoBehaviour
     [Serializable]
     private class Note
     {
-        public enum NoteType
-        {
-            Unbreakable,
-            Breakable,
-            Slope,
-            Slider
-        }
-
+        public NoteType noteType;
         public bool isUp;
         public float noteTime;
         public NoteType type;
-        public float attribute;
+        public float length;
+        public int objectType;
     }
     
     private string url = "Assets/Scripts/InGame2/Beats/object.csv";
     
     [FoldoutGroup("오브젝트")] 
     [SerializeField]
-    private GameObject unbreakable;
-    
-    [FoldoutGroup("오브젝트")] 
-    [SerializeField]
-    private GameObject breakable;
-    
-    [FoldoutGroup("오브젝트")] 
-    [SerializeField]
-    private GameObject slider;
+    private GameObject[] normalNotes;
 
     [FoldoutGroup("오브젝트")] 
     [SerializeField]
-    private GameObject slope;
-
+    private GameObject[] moveNotes;
+    
     [FoldoutGroup("오브젝트")] 
     [SerializeField]
-    private Material material;
+    private GameObject[] Walls;
+    
+    [FoldoutGroup("오브젝트")] 
+    [SerializeField]
+    private GameObject heart;
 
     [FoldoutGroup("오브젝트")] 
     [Title("설치될 장애물을 모아둔 리스트")]
@@ -56,9 +47,6 @@ public class MapCreator : MonoBehaviour
 
     [FoldoutGroup("기타")] 
     private NoteMake noteMaker;
-
-    [FoldoutGroup("기타")] 
-    private GameObject createdNoteObject;
     
     [FoldoutGroup("기타")] 
     [SerializeField]
@@ -66,10 +54,9 @@ public class MapCreator : MonoBehaviour
     
     [Button("생성", ButtonSizes.Large)]
     [HorizontalGroup("Split1", 0.895f)]
-    
     public void Create()
     {
-        createdNoteObject = GameObject.Find("Created Object");
+        GameObject createdNoteObject = GameObject.Find("Created Object");
         
         if (createdNoteObject != null)
         {
@@ -98,55 +85,82 @@ public class MapCreator : MonoBehaviour
             }
             
             GameObject obj = null;
+            Obstacle obstacle = null;
             
             switch (n.type)
             {
-                case Note.NoteType.Unbreakable:
-                    obj = Instantiate(unbreakable, pos, q);
-                    break;
-                
-                case Note.NoteType.Breakable:
-                    obj = Instantiate(breakable, pos, q);
-                    break;
-                
-                case Note.NoteType.Slider:
-                    if (n.attribute == 0)
+                case NoteType.NormalNote:
+                    obj = n.length == 0 ? Instantiate(normalNotes[n.objectType], pos, q) : new GameObject();
+                    obstacle = obj.AddComponent<Obstacle>();
+                    obstacle.type = NoteType.NormalNote;
+                    obstacle.canDestroy = true;
+                    
+                    if (n.length == 0)
                     {
-                        obj = Instantiate(slider, pos, q);
+                        obstacle.perfectScore = 100;
+                        obstacle.greatScore = 50;
                     }
                     else
                     {
-                        obj = new GameObject("Slider");
-                        obj.transform.position = pos;
+                        obstacle.perfectScore = 200;
+                        obstacle.greatScore = 100;
 
-                        for (int j = 0; j < n.attribute; j++)
+                        for (int j = 0; j < n.length * 4; j++)
                         {
-                            var InObj = Instantiate(slider, pos, q);
-                            pos.x += 1;
-                            InObj.transform.parent = obj.transform;
+                            Vector3 forwardVector = q * Vector3.forward;
+                            GameObject inObj = Instantiate(normalNotes[n.objectType], pos + forwardVector * j, q);
+                            inObj.transform.parent = obj.transform;
                         }
                     }
+                    
                     break;
                 
-                case Note.NoteType.Slope:
-                    obj = new GameObject("Slope");
-                    var InObj1 = Instantiate(slope, pos, q);
-                    var InObj2 = Instantiate(slope, pos + progressDirection * n.attribute, q);
-                    LineRenderer lr = obj.AddComponent<LineRenderer>();
-                    lr.SetPosition(0, InObj1.transform.position + InObj1.transform.up * 2);
-                    lr.SetPosition(1, InObj2.transform.position + InObj2.transform.up * 2);
-                    lr.materials.Append(material);
-                    lr.startWidth = 0.1f;
-                    lr.endWidth = 0.1f;
-                    InObj1.transform.parent = obj.transform;
-                    InObj2.transform.parent = obj.transform;
+                case NoteType.MoveNote:
+                    obj = Instantiate(moveNotes[n.objectType], pos, q);
+                    obstacle = obj.AddComponent<Obstacle>();
+                    obstacle.type = NoteType.MoveNote;
+                    obstacle.canDestroy = true;
+                    obstacle.perfectScore = 150;
+                    obstacle.greatScore = 100;
+                    break;
+                
+                case NoteType.Wall:
+                    obj = n.length == 0 ? obj = Instantiate(Walls[n.objectType], pos, q) : new GameObject();
+                    obstacle = obj.AddComponent<Obstacle>();
+                    obstacle.canDestroy = false;
+                    obstacle.type = NoteType.Wall;
+                    
+                    if (n.length == 0)
+                    {
+                        obstacle.canDestroy = false;
+                        obstacle.perfectScore = 100;
+                    }
+                    else
+                    {
+                        obj.name = "LongWall";
+                        obstacle.perfectScore = 200;
+                        
+                        for (int j = 0; j < n.length * 4; j++)
+                        {
+                            Vector3 forwardVector = q * Vector3.forward;
+                            GameObject inObj = Instantiate(Walls[n.objectType], pos + forwardVector * j, q);
+                            inObj.transform.parent = obj.transform;
+                        }
+                    }
+                    
+                    break;
+                
+                case NoteType.Heart:
+                    obj = Instantiate(heart, pos, q);
                     break;
             }
 
-            if (obj != null)
+            if (obj != null && obstacle != null)
             {
                 obj.name += " " + i;
                 obj.transform.parent = createdNoteObject.transform;
+                obstacle.beatLength = n.length;
+                obstacle.isUp = n.isUp;
             }
         }
     }
@@ -169,9 +183,10 @@ public class MapCreator : MonoBehaviour
             Note n = new()
             {
                 noteTime = noteMaker.noteTime[i],
-                type = Note.NoteType.Breakable,
+                type = NoteType.NormalNote,
                 isUp = false,
-                attribute = 0f
+                length = 0f,
+                objectType = 0
             };
             
             notes.Add(n);
@@ -196,11 +211,11 @@ public class MapCreator : MonoBehaviour
             if (i < notes.Count)
             {
                 Note n = notes[i];
-                str = n.noteTime + "," + n.type + "," + n.isUp + "," + n.attribute;
+                str = n.noteTime + "," + n.type + "," + n.isUp + "," + n.length + "," + n.objectType;
             }
             else
             {
-                str = noteMaker.noteTime[i] + "," + Note.NoteType.Breakable + ",False,";
+                str = noteMaker.noteTime[i] + "," + NoteType.NormalNote + ",False," + 0 + "," + 0;
             }
             
             sw.WriteLine(str);
@@ -223,12 +238,11 @@ public class MapCreator : MonoBehaviour
                 Note n = new Note
                 {
                     noteTime = float.Parse(split[0]),
-                    type = Enum.Parse<Note.NoteType>(split[1]),
+                    type = Enum.Parse<NoteType>(split[1]),
                     isUp = bool.Parse(split[2]),
-                    attribute = 0f
+                    length = float.Parse(split[3]),
+                    objectType = int.Parse(split[4])
                 };
-                
-                n.attribute = split[3] == "" ? 0f : float.Parse(split[3]);
                 notes.Add(n);
             }
         }

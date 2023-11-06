@@ -40,18 +40,11 @@ public class NewPlayerController : MonoBehaviour
     public bool isDead;
     
     [FoldoutGroup("변수")] 
-    public bool isSlide;
-    
-    [FoldoutGroup("변수")] 
     public bool wasTouched;
     
     [FoldoutGroup("변수")]
     [SerializeField]
     private int attackCounter;
-    
-    [FoldoutGroup("변수")]
-    [Title("점프")]
-    public bool isFlip;
     
     [FoldoutGroup("일반")] 
     public Animator anim;
@@ -60,15 +53,8 @@ public class NewPlayerController : MonoBehaviour
     public PlayerTrails trails;
     
     [FoldoutGroup("일반")] 
-    public PlayerParticle particle;
-    
-    [FoldoutGroup("일반")] 
     [SerializeField]
     public LayerMask ground;
-
-    [FoldoutGroup("일반")] 
-    public int curEvaluation;
-
     [FoldoutGroup("일반")] 
     public GameObject target;
     
@@ -77,7 +63,6 @@ public class NewPlayerController : MonoBehaviour
         bpm = audioManager.bpm;
         rigid = GetComponent<Rigidbody>();
         originCollider = GetComponent<BoxCollider>();
-        particle = GetComponent<PlayerParticle>();
         anim = GetComponent<Animator>();
         Physics.gravity = new Vector3(0, -9.81f, 0);
         isInvincibility = false;
@@ -136,21 +121,6 @@ public class NewPlayerController : MonoBehaviour
     }
 
     /// <summary>
-    /// 슬라이드 버튼을 눌렀을때
-    /// </summary>
-    void Slide()
-    {
-        if (isDead)
-        {
-            return;
-        }
-        
-        anim.SetBool("isSlide", true);
-        originCollider.center /= 2;
-        originCollider.size = new Vector3(1, 0.5f, 1);
-    }
-
-    /// <summary>
     /// 슬라이드 버튼을 뗐을때
     /// </summary>
     void AttackUp()
@@ -160,12 +130,19 @@ public class NewPlayerController : MonoBehaviour
         originCollider.size = new Vector3(1, 1, 1);
     }
 
+    void GetColliderInVerdictBar()
+    {
+        
+    }
+
+    void GetColliderInPlayer()
+    {
+        
+    }
+    
     public void OnAttack()
     {
-        if (curEvaluation == 0 || target == null)
-        {
-            return;
-        }
+        
         
         if (target.CompareTag("Breakable"))
         {
@@ -174,16 +151,8 @@ public class NewPlayerController : MonoBehaviour
             attackCounter %= 2;
             Destroy(target);
         }
-
-        Debug.Log(curEvaluation);
-        
-        if (target.CompareTag("Slide"))
-        {
-            Slide();
-        }
         
         wasTouched = true;
-        curEvaluation = 0;
     }
     
     /// <summary>

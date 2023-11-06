@@ -7,9 +7,9 @@
             "actions": [
                 {
                     "name": "Attack",
-                    "type": "PassThrough",
+                    "type": "Value",
                     "id": "749093a6-66ea-401a-a9f2-c51f4171e339",
-                    "expectedControlType": "Button",
+                    "expectedControlType": "",
                     "processors": "",
                     "interactions": "",
                     "initialStateCheck": true
