@@ -1,5 +1,6 @@
 using System.Collections.Generic;
 using Sirenix.OdinInspector;
+using UnityEditor;
 using UnityEngine;
 using UnityEngine.UI;
 using UnityEngine.InputSystem;
@@ -20,26 +21,34 @@ public class PlatformManager : MonoBehaviour
         {
             if (SceneManager.GetActiveScene().name != DBManager.instance.gameSceneName)
             {
-                Switch();
+                Init();
             }
         }
 
-        void Update()
+        void Init()
         {
-            if (SceneManager.GetActiveScene().name != DBManager.instance.gameSceneName)
+            if (playerInput.currentControlScheme == "PC")
             {
-                Switch();
+                SwitchToKeyboard();
+            }
+            else if (playerInput.currentControlScheme == "CONSOLE")
+            { 
+                SwitchToGamepad();
+            }
+            else if (playerInput.currentControlScheme == "MOBILE")
+            {
+                SwitchToMobile();
             }
         }
 
-        void Switch()
+        public void Switch()
         {
             if (playerInput.currentControlScheme == "PC" && DBManager.instance.currentPlatform != "PC")
             {
                 SwitchToKeyboard();
             }
             else if (playerInput.currentControlScheme == "CONSOLE" && DBManager.instance.currentPlatform != "CONSOLE")
-            {
+            { 
                 SwitchToGamepad();
             }
             else if (playerInput.currentControlScheme == "MOBILE" && DBManager.instance.currentPlatform != "MOBILE")

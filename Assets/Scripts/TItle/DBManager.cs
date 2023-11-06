@@ -31,6 +31,7 @@ public class DBManager : MonoBehaviour
     [FoldoutGroup("게임 DB")] 
     [Title("언어")] 
     public int language;
+
     [FoldoutGroup("게임 DB")] 
     [Title("현재 플랫폼")]
     public string currentPlatform;
