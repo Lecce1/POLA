@@ -16,6 +16,9 @@ public class TitleManager : MonoBehaviour
     [Title("시작 버튼")]
     public GameObject start_Btn;
     [FoldoutGroup("타이틀")]
+    [Title("Touch To Start 애니메이션")]
+    public Animation start_Btn_Anim;
+    [FoldoutGroup("타이틀")]
     [Title("버전")]
     [SerializeField]
     private Text versionText;
@@ -105,10 +108,10 @@ public class TitleManager : MonoBehaviour
 
     public void StartBtn()
     {
-        title.SetActive(false);
         start_Btn.SetActive(false);
+        start_Btn_Anim.Play("Delay");
         //Login();
-        LoginSuccess();
+        Invoke("LoginSuccess", 2.0f);
     }
     
     void Login()
