@@ -209,19 +209,16 @@ public class TrackPlayerController : MonoBehaviour
 
     void Collider()
     {
-        collider = Physics.OverlapBox(transform.position, new Vector3(2, 2, 2), transform.rotation);
+        collider = Physics.OverlapBox(transform.position, new Vector3(0.2f, 0.2f, 0.2f), transform.rotation);
         bool isCheck = false;
         
-        if (rigidbody.velocity.magnitude <= 5)
+        foreach (var temp in collider)
         {
-            foreach (var temp in collider)
+            if (temp.CompareTag("Door"))
             {
-                if (temp.CompareTag("Door"))
-                {
-                    isCheck = true;
-                    TrackInfo.instance.Init(temp.transform.GetComponent<DoorManager>().stageNum, temp.transform.GetComponent<DoorManager>().trackNum);
-                    TrackManager.instance.Info_OnOff(true);
-                }
+                isCheck = true;
+                TrackInfo.instance.Init(temp.transform.GetComponent<DoorManager>().stageNum, temp.transform.GetComponent<DoorManager>().trackNum);
+                TrackManager.instance.Info_OnOff(true);
             }
         }
         

@@ -38,7 +38,7 @@ RenderSettings:
   m_ReflectionIntensity: 1
   m_CustomReflection: {fileID: 0}
   m_Sun: {fileID: 0}
-  m_IndirectSpecularColor: {r: 0.395741, g: 0.50779593, b: 0.4227704, a: 1}
+  m_IndirectSpecularColor: {r: 0.39684835, g: 0.5087627, b: 0.42322317, a: 1}
   m_UseRadianceAmbientProbe: 0
 --- !u!157 &3
 LightmapSettings:
@@ -9117,7 +9117,7 @@ Transform:
   m_GameObject: {fileID: 768822267}
   serializedVersion: 2
   m_LocalRotation: {x: 0.2164396, y: 0, z: 0, w: 0.97629607}
-  m_LocalPosition: {x: 0, y: 7, z: -10}
+  m_LocalPosition: {x: -8.5, y: 12, z: -10}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children: []
@@ -25151,6 +25151,7 @@ GameObject:
   - component: {fileID: 7063777146838886236}
   - component: {fileID: 488494360366458479}
   - component: {fileID: 2296678347289894579}
+  - component: {fileID: 7063777146838886237}
   m_Layer: 0
   m_Name: Track_3
   m_TagString: Door
@@ -27015,6 +27016,27 @@ MonoBehaviour:
   stageNum: 1
   trackNum: 3
   name: Track_3
+--- !u!65 &7063777146838886237
+BoxCollider:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 618624140842277942}
+  m_Material: {fileID: 0}
+  m_IncludeLayers:
+    serializedVersion: 2
+    m_Bits: 0
+  m_ExcludeLayers:
+    serializedVersion: 2
+    m_Bits: 0
+  m_LayerOverridePriority: 0
+  m_IsTrigger: 0
+  m_ProvidesContacts: 0
+  m_Enabled: 1
+  serializedVersion: 3
+  m_Size: {x: 0.1278526, y: 0.14897293, z: 0.0057436186}
+  m_Center: {x: -0.000000014901161, y: 0.000000003725291, z: 1.15988996e-23}
 --- !u!222 &7100576632846774319
 CanvasRenderer:
   m_ObjectHideFlags: 0
@@ -27051,6 +27073,7 @@ GameObject:
   - component: {fileID: 7251850816859076589}
   - component: {fileID: 497827341620603735}
   - component: {fileID: 28240028680746393}
+  - component: {fileID: 7251850816859076590}
   m_Layer: 0
   m_Name: Track_1
   m_TagString: Door
@@ -27073,6 +27096,27 @@ MonoBehaviour:
   stageNum: 1
   trackNum: 1
   name: Track_1
+--- !u!65 &7251850816859076590
+BoxCollider:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 7251850816859076588}
+  m_Material: {fileID: 0}
+  m_IncludeLayers:
+    serializedVersion: 2
+    m_Bits: 0
+  m_ExcludeLayers:
+    serializedVersion: 2
+    m_Bits: 0
+  m_LayerOverridePriority: 0
+  m_IsTrigger: 0
+  m_ProvidesContacts: 0
+  m_Enabled: 1
+  serializedVersion: 3
+  m_Size: {x: 0.1278526, y: 0.14897293, z: 0.0057436186}
+  m_Center: {x: 0, y: 0.000000003725291, z: 1.15988996e-23}
 --- !u!33 &7346602618089984761
 MeshFilter:
   m_ObjectHideFlags: 0
@@ -27576,6 +27620,7 @@ GameObject:
   - component: {fileID: 8781016460423496670}
   - component: {fileID: 4271027188217400034}
   - component: {fileID: 3786286818121595319}
+  - component: {fileID: 8781016460423496671}
   m_Layer: 0
   m_Name: Track_2
   m_TagString: Door
@@ -27598,6 +27643,27 @@ MonoBehaviour:
   stageNum: 1
   trackNum: 2
   name: Track_2
+--- !u!65 &8781016460423496671
+BoxCollider:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 8781016460423496669}
+  m_Material: {fileID: 0}
+  m_IncludeLayers:
+    serializedVersion: 2
+    m_Bits: 0
+  m_ExcludeLayers:
+    serializedVersion: 2
+    m_Bits: 0
+  m_LayerOverridePriority: 0
+  m_IsTrigger: 0
+  m_ProvidesContacts: 0
+  m_Enabled: 1
+  serializedVersion: 3
+  m_Size: {x: 0.1278526, y: 0.14897293, z: 0.0057436186}
+  m_Center: {x: -0.000000007450581, y: 0.0000000074505815, z: 1.15988996e-23}
 --- !u!224 &9097384919941005364
 RectTransform:
   m_ObjectHideFlags: 0
