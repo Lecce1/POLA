@@ -7219,7 +7219,7 @@ MonoBehaviour:
           m_CallState: 2
         - m_Target: {fileID: 2257059355786232031}
           m_TargetAssemblyTypeName: NewPlayerController, Assembly-CSharp
-          m_MethodName: OnAttack
+          m_MethodName: OnInteract
           m_Mode: 1
           m_Arguments:
             m_ObjectArgument: {fileID: 0}

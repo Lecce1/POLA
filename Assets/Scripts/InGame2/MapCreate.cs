@@ -13,10 +13,9 @@ public class MapCreator : MonoBehaviour
     [Serializable]
     private class Note
     {
-        public NoteType noteType;
+        public NoteType type;
         public bool isUp;
         public float noteTime;
-        public NoteType type;
         public float length;
         public int objectType;
     }

@@ -1,8 +1,10 @@
+using System;
 using Sirenix.OdinInspector;
 using UnityEngine;
 using UnityEngine.EventSystems;
 using UnityEngine.InputSystem;
 using UnityEngine.SceneManagement;
+using UnityEngine.Serialization;
 using UnityEngine.UI;
 
 public class NewPlayerController : MonoBehaviour
@@ -29,6 +31,9 @@ public class NewPlayerController : MonoBehaviour
 
     [FoldoutGroup("변수")] 
     public bool isGrounded;
+    
+    [FoldoutGroup("변수")] 
+    public float groundGap;
 
     [FoldoutGroup("변수")] 
     public int health;
@@ -40,11 +45,35 @@ public class NewPlayerController : MonoBehaviour
     public bool isDead;
     
     [FoldoutGroup("변수")] 
-    public bool wasTouched;
+    public int score;
     
     [FoldoutGroup("변수")]
     [SerializeField]
     private int attackCounter;
+
+    [FoldoutGroup("변수")] 
+    [SerializeField] 
+    private GameObject camInfo;
+    
+    [FoldoutGroup("판정")] 
+    [SerializeField] 
+    private VerdictBar perfectVerdict;
+    
+    [FoldoutGroup("판정")] 
+    [SerializeField] 
+    private VerdictBar greatVerdict;
+    
+    [FoldoutGroup("판정")] 
+    [SerializeField]
+    private VerdictBar allVerdict;
+
+    [FoldoutGroup("일반")] 
+    [SerializeField]
+    private GameObject verdictObject;
+    
+    [FoldoutGroup("일반")] 
+    [SerializeField]
+    private Vector3 verdictOriginPos;
     
     [FoldoutGroup("일반")] 
     public Animator anim;
@@ -55,6 +84,7 @@ public class NewPlayerController : MonoBehaviour
     [FoldoutGroup("일반")] 
     [SerializeField]
     public LayerMask ground;
+    
     [FoldoutGroup("일반")] 
     public GameObject target;
     
@@ -66,6 +96,11 @@ public class NewPlayerController : MonoBehaviour
         anim = GetComponent<Animator>();
         Physics.gravity = new Vector3(0, -9.81f, 0);
         isInvincibility = false;
+        score = 0;
+        verdictOriginPos = verdictObject.transform.position;
+        
+        PlayerInput input = GetComponent<PlayerInput>();
+        input.actions.FindAction("Interact").canceled += OnInteractUp;
     }
     
     private void FixedUpdate()
@@ -74,6 +109,25 @@ public class NewPlayerController : MonoBehaviour
         {
             Move();
         }
+        
+        RaycastHit hitInfo1, hitInfo2;
+        
+        if (!Physics.Raycast(new Ray(transform.position + transform.up, transform.up), out hitInfo1, 10, ground))
+        {
+            hitInfo1.point = transform.position + transform.up * 10f;
+        }
+        
+        if(!Physics.Raycast(new Ray(transform.position + transform.up, -transform.up), out hitInfo2, 10, ground))
+        {
+            hitInfo2.point = transform.position - transform.up * 10f;
+        }
+        
+        camInfo.transform.position = (hitInfo1.point + hitInfo2.point) / 2;
+        groundGap = (hitInfo1.point - hitInfo2.point).magnitude;
+        var scale = verdictObject.transform.localScale;
+        scale.y = groundGap;
+        verdictObject.transform.localScale = scale;
+        verdictObject.transform.position = transform.position + transform.rotation * Vector3.forward + Vector3.up * (groundGap / 2);
     }
 
     /// <summary>
@@ -84,9 +138,9 @@ public class NewPlayerController : MonoBehaviour
         transform.position += transform.forward * (bpm / 15f * Time.fixedDeltaTime);
     }
 
-    public void Hurt()
+    public void Hurt(int damage)
     {
-        health--;
+        health -= damage;
         Debug.LogError(health);
         
         if (health <= 0)
@@ -96,63 +150,63 @@ public class NewPlayerController : MonoBehaviour
         }
         
         isInvincibility = true;
-        Invoke(nameof(ReleaseInvincibility), 1f);
+        Invoke(nameof(ReleaseInvincibility), 0.5f);
     }
     
     /// <summary>
     /// 플립 버튼을 눌렀을때
     /// </summary>
-    void OnFlip()
+    public void OnFlip()
     {
-        Physics.gravity *= -1;
-        StartCoroutine(trails.Trails());
         Ray ray = new Ray(transform.position, transform.up);
         
         if (Physics.Raycast(ray, out RaycastHit hitInfo, Mathf.Infinity, ground))
         {
-            if (target != null && target.CompareTag("Unbreakable"))
-            {
-                wasTouched = true;
-            }
-            
+            Physics.gravity *= -1;
+            StartCoroutine(trails.Trails());
             transform.position = hitInfo.point;
             transform.Rotate(transform.right, 180f);
         }
     }
 
     /// <summary>
-    /// 슬라이드 버튼을 뗐을때
+    /// 상호작용 버튼을 뗐을때
     /// </summary>
-    void AttackUp()
+    void OnInteractUp(InputAction.CallbackContext context)
     {
-        anim.SetBool("isSlide", false);
-        originCollider.center *= 2;
-        originCollider.size = new Vector3(1, 1, 1);
-    }
-
-    void GetColliderInVerdictBar()
-    {
-        
-    }
-
-    void GetColliderInPlayer()
-    {
-        
+        Debug.Log("뗐다");
     }
     
-    public void OnAttack()
+    public void OnInteract()
     {
-        
-        
-        if (target.CompareTag("Breakable"))
+        if (allVerdict.contact != null)
         {
-            anim.SetInteger("AttackCounter", attackCounter++);
-            anim.SetBool("isAttacking", true);
-            attackCounter %= 2;
-            Destroy(target);
+            target = allVerdict.contact.gameObject;
         }
-        
-        wasTouched = true;
+        else
+        {
+            return;
+        }
+
+        Obstacle targetInfo = target.GetComponent<Obstacle>();
+
+        switch (targetInfo.type)
+        {
+            case NoteType.MoveNote:
+                break;
+            
+            case NoteType.NormalNote:
+                Attack();
+                break;
+        }
+    }
+
+    public void Attack()
+    {
+        anim.SetInteger("AttackCounter", attackCounter++);
+        anim.SetBool("isAttacking", true);
+        attackCounter %= 2;
+        Destroy(target);
     }
     
     /// <summary>
@@ -209,5 +263,42 @@ public class NewPlayerController : MonoBehaviour
     private void Reset()
     {
         SceneManager.LoadScene(DBManager.instance.gameSceneName);
+    }
+
+    private void OnTriggerEnter(Collider other)
+    {
+        Obstacle obstacleInfo = other.GetComponent<Obstacle>();
+        
+        if (obstacleInfo != null)
+        {
+            switch (obstacleInfo.type)
+            {
+                case NoteType.Heart:
+                    if (health < 3)
+                    {
+                        health++;
+                    }
+                    
+                    Destroy(other.gameObject);
+                    break;
+                
+                case NoteType.Wall:
+                    if (!obstacleInfo.isInteracted)
+                    {
+                        Hurt(obstacleInfo.damage);
+                        obstacleInfo.isInteracted = true;
+                    }
+                    break;
+            }
+        }
+    }
+
+    private void OnTriggerExit(Collider other)
+    {
+        Obstacle obstacleInfo = other.GetComponent<Obstacle>();
+        if (obstacleInfo != null && obstacleInfo.type == NoteType.Wall && !obstacleInfo.isInteracted)
+        {
+            score += obstacleInfo.perfectScore;
+        }
     }
 }

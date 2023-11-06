@@ -5,14 +5,9 @@ TagManager:
   serializedVersion: 2
   tags:
   - Ground
-  - Breakable
   - Floor
   - Door
   - Collectable
-  - Unbreakable
-  - Slope
-  - Slide
-  - Obstacle
   layers:
   - Default
   - TransparentFX

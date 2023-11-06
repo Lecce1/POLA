@@ -6,10 +6,10 @@
             "id": "912f1264-e1db-4055-95f6-f8e767234f0e",
             "actions": [
                 {
-                    "name": "Attack",
-                    "type": "Value",
+                    "name": "Interact",
+                    "type": "Button",
                     "id": "749093a6-66ea-401a-a9f2-c51f4171e339",
-                    "expectedControlType": "",
+                    "expectedControlType": "Button",
                     "processors": "",
                     "interactions": "",
                     "initialStateCheck": true
@@ -32,7 +32,7 @@
                     "interactions": "",
                     "processors": "",
                     "groups": "PC",
-                    "action": "Attack",
+                    "action": "Interact",
                     "isComposite": false,
                     "isPartOfComposite": false
                 },
@@ -40,10 +40,10 @@
                     "name": "",
                     "id": "ce122243-ea26-4882-b6ad-068b6cddc774",
                     "path": "<XInputController>/buttonSouth",
-                    "interactions": "Tap",
+                    "interactions": "",
                     "processors": "",
                     "groups": "CONSOLE",
-                    "action": "Attack",
+                    "action": "Interact",
                     "isComposite": false,
                     "isPartOfComposite": false
                 },
@@ -51,10 +51,10 @@
                     "name": "",
                     "id": "01d88451-e56f-4b16-ad6c-a613f72272d2",
                     "path": "<Keyboard>/z",
-                    "interactions": "Tap",
+                    "interactions": "",
                     "processors": "",
                     "groups": "PC",
-                    "action": "Attack",
+                    "action": "Interact",
                     "isComposite": false,
                     "isPartOfComposite": false
                 },
@@ -65,7 +65,7 @@
                     "interactions": "",
                     "processors": "",
                     "groups": "MOBILE",
-                    "action": "Attack",
+                    "action": "Interact",
                     "isComposite": false,
                     "isPartOfComposite": false
                 },
@@ -85,6 +85,17 @@
                     "id": "c91376c2-5836-4129-ac6b-47d5550a8b4f",
                     "path": "<Keyboard>/x",
                     "interactions": "Tap",
+                    "processors": "",
+                    "groups": "PC",
+                    "action": "Flip",
+                    "isComposite": false,
+                    "isPartOfComposite": false
+                },
+                {
+                    "name": "",
+                    "id": "640d3151-56a8-4a40-94e3-65771b7e9329",
+                    "path": "<Mouse>/rightButton",
+                    "interactions": "",
                     "processors": "",
                     "groups": "PC",
                     "action": "Flip",

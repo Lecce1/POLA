@@ -10,6 +10,7 @@ public class Obstacle : MonoBehaviour
     public int greatScore = 50;
     public int comboCount = 1;
     public int damage = 1;
+    public bool isInteracted = false;
 }
 
 public enum NoteType
