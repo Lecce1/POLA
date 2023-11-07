@@ -62,7 +62,7 @@ public class PlanarReflectionsProbe : MonoBehaviour
         _probeSkybox.material = null;
     }
 
-    private void FinalizeProbe() 
+    private void FinalizeProbe () 
     {
         CleanupRenderTextures();
         if (_probe == null) 

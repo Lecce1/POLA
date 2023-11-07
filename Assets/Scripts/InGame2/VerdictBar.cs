@@ -1,10 +1,9 @@
+using System;
 using UnityEngine;
 
 public class VerdictBar : MonoBehaviour
 {
     public Collider contact;
-    public delegate void OnTriggerExitEvent(Collider other);
-    public event OnTriggerExitEvent onTriggerExitEvent;
 
     private void Start()
     {
@@ -23,10 +22,6 @@ public class VerdictBar : MonoBehaviour
 
     private void OnTriggerExit(Collider other)
     {
-        if (onTriggerExitEvent != null)
-        {
-            onTriggerExitEvent(other);
-        }
         contact = null;
     }
 }
