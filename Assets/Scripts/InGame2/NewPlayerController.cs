@@ -1,5 +1,4 @@
 using System.Collections;
-using System.Collections.Generic;
 using Sirenix.OdinInspector;
 using UnityEngine;
 using UnityEngine.EventSystems;
@@ -42,6 +41,21 @@ public class NewPlayerController : MonoBehaviour
     
     [FoldoutGroup("변수")] 
     public int score;
+
+    [FoldoutGroup("변수")]
+    [SerializeField]
+    private int Combo;
+    
+    [FoldoutGroup("변수")]
+    public int combo
+    {
+        get { return Combo; }
+        set
+        {
+            Combo = value;
+            Debug.Log("Combo: " + Combo);
+        }
+    }
     
     [FoldoutGroup("변수")]
     [SerializeField]
@@ -50,10 +64,6 @@ public class NewPlayerController : MonoBehaviour
     [FoldoutGroup("변수")] 
     [SerializeField] 
     private GameObject camInfo;
-    
-    [FoldoutGroup("판정")] 
-    [SerializeField] 
-    private VerdictBar playerVerdict;
     
     [FoldoutGroup("판정")] 
     [SerializeField] 
@@ -79,6 +89,9 @@ public class NewPlayerController : MonoBehaviour
     
     [FoldoutGroup("일반")] 
     public GameObject target;
+
+    [FoldoutGroup("일반")] 
+    private GameObject lastPassedObject;
     
     void Start()
     {
@@ -89,6 +102,7 @@ public class NewPlayerController : MonoBehaviour
         score = 0;
         PlayerInput input = GetComponent<PlayerInput>();
         input.actions.FindAction("Interact").canceled += OnInteractUp;
+        greatVerdict.onTriggerExitEvent += HandleGreatVerdictExit;
     }
     
     private void FixedUpdate()
@@ -122,12 +136,33 @@ public class NewPlayerController : MonoBehaviour
     void SetTransform(GameObject obj, float y)
     {
         var scale = obj.transform.localScale;
-        scale.y = groundGap;
+        scale.y = y;
         obj.transform.localScale = scale;
-        obj.transform.position = transform.position + transform.forward + transform.up * (groundGap / 2);
+        obj.transform.position = transform.position + transform.forward + transform.up * (y / 2);
         obj.transform.rotation = transform.rotation;
     }
 
+    void HandleGreatVerdictExit(Collider other)
+    {
+        lastPassedObject = other.gameObject;
+        Obstacle obstacleInfo = GetObstacle(lastPassedObject);
+        if (obstacleInfo != null)
+        {
+            if (obstacleInfo.wasInteracted == false && obstacleInfo.type == NoteType.NormalNote)
+            {
+                if (obstacleInfo.isUp == isUp  && !obstacleInfo.wasInteracted)
+                {
+                    Debug.Log("누르지 않고 그냥 지나침");
+                    Hurt(obstacleInfo, obstacleInfo.damage);
+                }
+                else if (obstacleInfo.isUp != isUp  && !obstacleInfo.wasInteracted)
+                {
+                    ComboReset();
+                }
+            } 
+        }
+    }
+    
     /// <summary>
     /// BPM에 따른 움직임
     /// </summary>
@@ -136,13 +171,15 @@ public class NewPlayerController : MonoBehaviour
         transform.position += transform.forward * (bpm / 15f * Time.fixedDeltaTime);
     }
 
-    public void Hurt(int damage)
+    public void Hurt(Obstacle info, int damage)
     {
         if (isInvincibility)
         {
             return;
         }
-        
+
+        info.wasInteracted = true;
+        ComboReset();
         health -= damage;
         Debug.LogError(health);
         
@@ -194,12 +231,7 @@ public class NewPlayerController : MonoBehaviour
             return;
         }
 
-        Obstacle targetInfo = target.transform.parent.GetComponent<Obstacle>();
-
-        if (targetInfo == null)
-        {
-            targetInfo = target.transform.parent.parent.GetComponent<Obstacle>();
-        }
+        Obstacle targetInfo = GetObstacle(target);
 
         if (targetInfo == null || targetInfo.wasInteracted || targetInfo.isUp != isUp)
         {
@@ -214,15 +246,16 @@ public class NewPlayerController : MonoBehaviour
         {
             curScore = targetInfo.greatScore;
         }
-
-        score += curScore;
-
-        if (curScore == 0)
+        else
         {
-            Hurt(targetInfo.damage);
-            targetInfo.wasInteracted = true;
+            Debug.Log("제대로 못누름");
+            Hurt(targetInfo, targetInfo.damage);
             return;
         }
+        
+        score += curScore;
+        targetInfo.wasInteracted = true;
+
         switch (targetInfo.type)
         {
             case NoteType.MoveNote:
@@ -242,27 +275,59 @@ public class NewPlayerController : MonoBehaviour
 
     IEnumerator LongNoteProcess(Obstacle obstacle)
     {
+        int length = obstacle.transform.childCount;
+        WaitForSeconds time = new WaitForSeconds(bpm / 240f);
         while (isLongInteract)
         {
-            yield return null;
+            score += obstacle.perfectScore;
+            combo++;
+            Debug.Log(score);
+            yield return time;
+
+            if (lastPassedObject.transform.parent.gameObject == obstacle.transform.GetChild(length - 1).gameObject && isLongInteract)
+            {
+                isLongInteract = false;
+                Debug.Log("마지막 노트를 지났는데도 안뗐음");
+                Hurt(obstacle, obstacle.damage);
+                yield break;
+            }
         }
         
-        int length = obstacle.transform.childCount;
-        
-        if (obstacle.transform.GetChild(length - 1).gameObject == perfectVerdict.contact.transform.parent.gameObject && perfectVerdict.contact != null)
+        if (perfectVerdict.contact != null && obstacle.transform.GetChild(length - 1).gameObject == perfectVerdict.contact.transform.parent.gameObject)
         {
             score += obstacle.perfectScore;
         }
-        else if (obstacle.transform.GetChild(length - 1).gameObject == greatVerdict.contact.transform.parent.gameObject && perfectVerdict.contact != null)
+        else if (greatVerdict.contact != null && obstacle.transform.GetChild(length - 1).gameObject == greatVerdict.contact.transform.parent.gameObject)
         {
             score += obstacle.greatScore;
         }
         else
         {
-            Hurt(obstacle.damage);
-            obstacle.wasInteracted = true;
+            Debug.Log("마지막 노트에서 제대로 못 뗐음");
+            Hurt(obstacle, obstacle.damage);
         }
-        // 무적이 풀린 후 공격버튼 누를 때 인식 안되게 되어있는가?
+    }
+    
+    public Obstacle GetObstacle(GameObject obj)
+    {
+        while (obj.transform != obj.transform.parent)
+        {
+            Obstacle obstacle = obj.GetComponent<Obstacle>();
+            
+            if (obstacle != null)
+            {
+                return obstacle;
+            }
+            
+            obj = obj.transform.parent.gameObject;
+        }
+
+        return null;
+    }
+
+    public void ComboReset()
+    {
+        combo = 0;
     }
 
     public void Attack()
@@ -331,7 +396,7 @@ public class NewPlayerController : MonoBehaviour
 
     private void OnTriggerEnter(Collider other)
     {
-        Obstacle obstacleInfo = other.GetComponent<Obstacle>();
+        Obstacle obstacleInfo = GetObstacle(other.gameObject);
         
         if (obstacleInfo != null && obstacleInfo.isUp == isUp && obstacleInfo.type == NoteType.Heart)
         {
@@ -346,18 +411,18 @@ public class NewPlayerController : MonoBehaviour
 
     private void OnTriggerStay(Collider other)
     {
-        Obstacle obstacleInfo = other.GetComponent<Obstacle>();
+        Obstacle obstacleInfo = GetObstacle(other.gameObject);
 
         if (obstacleInfo != null && obstacleInfo.isUp == isUp && obstacleInfo.type == NoteType.Wall && !obstacleInfo.wasInteracted)
         {
-            Hurt(obstacleInfo.damage);
-            obstacleInfo.wasInteracted = true;
+            Debug.Log("벽에 맞음");
+            Hurt(obstacleInfo, obstacleInfo.damage);
         }
     }
 
     private void OnTriggerExit(Collider other)
     {
-        Obstacle obstacleInfo = other.GetComponent<Obstacle>();
+        Obstacle obstacleInfo = GetObstacle(other.gameObject);
         if (obstacleInfo != null && obstacleInfo.type == NoteType.Wall && !obstacleInfo.wasInteracted)
         {
             score += obstacleInfo.perfectScore;
