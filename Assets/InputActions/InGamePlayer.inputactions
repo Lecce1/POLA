@@ -6,18 +6,18 @@
             "id": "912f1264-e1db-4055-95f6-f8e767234f0e",
             "actions": [
                 {
-                    "name": "InteractDown",
+                    "name": "InteractUp",
                     "type": "Button",
-                    "id": "749093a6-66ea-401a-a9f2-c51f4171e339",
+                    "id": "97ecb114-7cee-4a24-b6d8-8c31f3da5340",
                     "expectedControlType": "Button",
                     "processors": "",
                     "interactions": "",
                     "initialStateCheck": true
                 },
                 {
-                    "name": "InteractUp",
+                    "name": "InteractDown",
                     "type": "Button",
-                    "id": "97ecb114-7cee-4a24-b6d8-8c31f3da5340",
+                    "id": "749093a6-66ea-401a-a9f2-c51f4171e339",
                     "expectedControlType": "Button",
                     "processors": "",
                     "interactions": "",
@@ -27,8 +27,41 @@
             "bindings": [
                 {
                     "name": "",
-                    "id": "bc38f147-9efa-4dc8-8c75-36fd06190458",
+                    "id": "640d3151-56a8-4a40-94e3-65771b7e9329",
                     "path": "<Mouse>/leftButton",
+                    "interactions": "",
+                    "processors": "",
+                    "groups": "PC",
+                    "action": "InteractUp",
+                    "isComposite": false,
+                    "isPartOfComposite": false
+                },
+                {
+                    "name": "",
+                    "id": "8ec76ab0-6122-414e-bfc1-3d428ac257db",
+                    "path": "<Gamepad>/leftStick/up",
+                    "interactions": "",
+                    "processors": "",
+                    "groups": "CONSOLE",
+                    "action": "InteractUp",
+                    "isComposite": false,
+                    "isPartOfComposite": false
+                },
+                {
+                    "name": "",
+                    "id": "c91376c2-5836-4129-ac6b-47d5550a8b4f",
+                    "path": "<Keyboard>/upArrow",
+                    "interactions": "",
+                    "processors": "",
+                    "groups": "PC",
+                    "action": "InteractUp",
+                    "isComposite": false,
+                    "isPartOfComposite": false
+                },
+                {
+                    "name": "",
+                    "id": "bc38f147-9efa-4dc8-8c75-36fd06190458",
+                    "path": "<Mouse>/rightButton",
                     "interactions": "",
                     "processors": "",
                     "groups": "PC",
@@ -39,7 +72,7 @@
                 {
                     "name": "",
                     "id": "ce122243-ea26-4882-b6ad-068b6cddc774",
-                    "path": "<XInputController>/buttonSouth",
+                    "path": "<Gamepad>/leftStick/down",
                     "interactions": "",
                     "processors": "",
                     "groups": "CONSOLE",
@@ -50,7 +83,7 @@
                 {
                     "name": "",
                     "id": "01d88451-e56f-4b16-ad6c-a613f72272d2",
-                    "path": "<Keyboard>/z",
+                    "path": "<Keyboard>/downArrow",
                     "interactions": "",
                     "processors": "",
                     "groups": "PC",
@@ -66,39 +99,6 @@
                     "processors": "",
                     "groups": "MOBILE",
                     "action": "InteractDown",
-                    "isComposite": false,
-                    "isPartOfComposite": false
-                },
-                {
-                    "name": "",
-                    "id": "640d3151-56a8-4a40-94e3-65771b7e9329",
-                    "path": "<Mouse>/rightButton",
-                    "interactions": "",
-                    "processors": "",
-                    "groups": "PC",
-                    "action": "InteractUp",
-                    "isComposite": false,
-                    "isPartOfComposite": false
-                },
-                {
-                    "name": "",
-                    "id": "8ec76ab0-6122-414e-bfc1-3d428ac257db",
-                    "path": "<XInputController>/buttonEast",
-                    "interactions": "",
-                    "processors": "",
-                    "groups": "CONSOLE",
-                    "action": "InteractUp",
-                    "isComposite": false,
-                    "isPartOfComposite": false
-                },
-                {
-                    "name": "",
-                    "id": "c91376c2-5836-4129-ac6b-47d5550a8b4f",
-                    "path": "<Keyboard>/x",
-                    "interactions": "",
-                    "processors": "",
-                    "groups": "PC",
-                    "action": "InteractUp",
                     "isComposite": false,
                     "isPartOfComposite": false
                 }

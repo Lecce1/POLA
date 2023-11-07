@@ -1,7 +1,12 @@
+using System.Collections;
 using System.Collections.Generic;
+using Cinemachine;
 using Sirenix.OdinInspector;
 using UnityEngine;
+using UnityEngine.InputSystem;
 using UnityEngine.SceneManagement;
+using UnityEngine.Serialization;
+using UnityEngine.UI;
 
 public class GameManager : MonoBehaviour
 {
@@ -17,6 +22,14 @@ public class GameManager : MonoBehaviour
     [Title("하단 패널")] 
     public GameObject bottomPanel;
     
+    [FoldoutGroup("패널")] 
+    [Title("카운트다운 패널")] 
+    public GameObject countDownPanel;
+    
+    [FoldoutGroup("텍스트")] 
+    [Title("플레이어 상태")] 
+    public Text playerStateText;
+    
     [FoldoutGroup("매니저")] 
     [Title("플랫폼")] 
     public PlatformManager platformManager;
@@ -25,14 +38,23 @@ public class GameManager : MonoBehaviour
     [Title("사운드")] 
     public AudioManager audioManager;
     
+    [FoldoutGroup("매니저")] 
+    [Title("카메라 매니저")] 
+    public CameraManager cameraManager;
+    
     [FoldoutGroup("기타")] 
     [Title("패널 열림 여부")] 
     [SerializeField]
     public bool isPanelOpen = false;
     
+    [FoldoutGroup("플레이어")] 
+    [Title("플레이어")] 
+    public NewPlayerController player;
+    
     // 뒤로가기 스택
     private Stack<GameObject> backStack;
     public static GameManager instance;
+    private WaitForSeconds wait = new (1f);
 
     void Awake()
     {
@@ -60,8 +82,15 @@ public class GameManager : MonoBehaviour
                 platformManager.SwitchToMobile();
                 break;
         }
+        
+        StartCoroutine(CountDown());
     }
-    
+
+    private void LateUpdate()
+    {
+        playerStateText.text = "Score: " + player.score + "\nCombo: " + player.combo + "\n Health: " + player.health;
+    }
+
     public void Button(string type)
     {
         switch (type)
@@ -84,6 +113,7 @@ public class GameManager : MonoBehaviour
                     set.SetActive(true);
                     backStack.Push(set);
                     isPanelOpen = true;
+                    countDownPanel.SetActive(false);
                 }
                 break;
             
@@ -138,8 +168,11 @@ public class GameManager : MonoBehaviour
                     {
                         bottomPanel.SetActive(true);
                     }
-                    
-                    audioManager.audio.UnPause();
+
+                    if (!player.isDead)
+                    {
+                        StartCoroutine(CountDown());
+                    }
                     Time.timeScale = 1;
                 }
                 break;
@@ -148,6 +181,41 @@ public class GameManager : MonoBehaviour
         if (isCheck)
         {
             isPanelOpen = false;
+        }
+    }
+    
+    IEnumerator CountDown()
+    {
+        countDownPanel.gameObject.SetActive(true);
+        audioManager.audio.Pause();
+        player.enabled = false;
+        player.GetComponent<PlayerInput>().enabled = false;
+        player.GetComponent<Animator>().enabled = false;
+        cameraManager.GetComponent<CameraManager>().enabled = false;
+        Text countText = countDownPanel.transform.GetChild(0).GetComponent<Text>();
+        
+        int i = 3;
+        while (i > 0)
+        {
+            countText.text = i.ToString();
+            i--;
+            yield return wait;
+        }
+
+        countText.text = "GO!";
+        audioManager.audio.UnPause();
+        player.enabled = true;
+        player.GetComponent<Animator>().enabled = true;
+        player.GetComponent<PlayerInput>().enabled = true;
+        cameraManager.GetComponent<CameraManager>().enabled = true;
+        Invoke(nameof(CountDownDisable), 0.5f);
+    }
+
+    private void CountDownDisable()
+    {
+        if (player.enabled)
+        {
+            countDownPanel.gameObject.SetActive(false);
         }
     }
 }

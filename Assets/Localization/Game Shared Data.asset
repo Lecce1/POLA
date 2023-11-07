@@ -40,7 +40,7 @@ MonoBehaviour:
     m_Metadata:
       m_Items: []
   - m_Id: 1432026603520
-    m_Key: Attack
+    m_Key: Down
     m_Metadata:
       m_Items: []
   - m_Id: 1532949946368
@@ -48,7 +48,7 @@ MonoBehaviour:
     m_Metadata:
       m_Items: []
   - m_Id: 548880067321856
-    m_Key: Flip
+    m_Key: Up
     m_Metadata:
       m_Items: []
   m_Metadata:

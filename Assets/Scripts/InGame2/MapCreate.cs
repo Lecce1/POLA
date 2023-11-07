@@ -70,7 +70,7 @@ public class MapCreator : MonoBehaviour
         {
             Note n = notes[i];
             Quaternion q = Quaternion.AngleAxis(0, progressDirection);
-            Vector3 pos = new Vector3(n.noteTime * 4f + 1f, 0.5f, 0);
+            Vector3 pos = new Vector3(n.noteTime * 4f, 0.5f, 0);
             
             if (n.isUp)
             {
@@ -124,7 +124,7 @@ public class MapCreator : MonoBehaviour
                     break;
                 
                 case NoteType.Wall:
-                    obj = n.length == 0 ? obj = Instantiate(Walls[n.objectType], pos, q) : new GameObject();
+                    obj = n.length == 0 ? Instantiate(Walls[n.objectType], pos, q) : new GameObject();
                     obstacle = obj.AddComponent<Obstacle>();
                     obstacle.canDestroy = false;
                     obstacle.type = NoteType.Wall;

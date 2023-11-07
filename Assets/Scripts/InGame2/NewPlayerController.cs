@@ -1,4 +1,3 @@
-using System;
 using System.Collections;
 using Sirenix.OdinInspector;
 using UnityEngine;
@@ -97,10 +96,6 @@ public class NewPlayerController : MonoBehaviour
 
     [FoldoutGroup("일반")] 
     private GameObject lastPassedObject;
-
-    [FoldoutGroup("일반")] 
-    [SerializeField]
-    private Text tmpText;
     
     void Start()
     {
@@ -114,12 +109,6 @@ public class NewPlayerController : MonoBehaviour
         input.actions.FindAction("InteractUp").canceled += OnInteractKeyUp;
         greatVerdict.onTriggerExitEvent += HandleGreatVerdictExit;
     }
-
-    private void LateUpdate()
-    {
-        tmpText.text = "Score: " + score + "\nCombo: " + combo + "\n Health: " + health;
-    }
-
     private void FixedUpdate()
     {
         if (!isDead)
@@ -312,43 +301,46 @@ public class NewPlayerController : MonoBehaviour
             return;
         }
         
-        score += curScore;
-        targetInfo.wasInteracted = true;
-
         switch (targetInfo.type)
         {
             case NoteType.MoveNote:
                 break;
             
             case NoteType.NormalNote:
+                targetInfo.wasInteracted = true;
+                
                 if (targetInfo.beatLength != 0)
                 {
                     isLongInteract = true;
                     StartCoroutine(LongNoteProcess(targetInfo));
                     return;
                 }
+                
                 Attack();
                 break;
         }
+        score += curScore;
+        combo++;
     }
 
     IEnumerator LongNoteProcess(Obstacle obstacle)
     {
         int length = obstacle.transform.childCount;
-        WaitForSeconds time = new WaitForSeconds(bpm / 240f);
+        WaitForSeconds time = new WaitForSeconds(15f / bpm);
+        
         while (isLongInteract)
         {
             score += obstacle.perfectScore;
             combo++;
-            yield return time;
-
-            if (lastPassedObject.transform.parent.gameObject == obstacle.transform.GetChild(length - 1).gameObject && isLongInteract)
+            
+            if (lastPassedObject != null && lastPassedObject.transform.parent.gameObject == obstacle.transform.GetChild(length - 1).gameObject && isLongInteract)
             {
                 isLongInteract = false;
-                Debug.Log("마지막 노트를 지났는데도 안뗐음");
+                Debug.Log("롱노트를 지나갔는데도 안뗐음");
                 Hurt(obstacle, obstacle.damage);
                 yield break;
             }
+            yield return time;
         }
     }
     
@@ -381,7 +373,6 @@ public class NewPlayerController : MonoBehaviour
 
     public void Attack()
     {
-        combo++;
         anim.SetInteger("AttackCounter", attackCounter++);
         anim.SetBool("isAttacking", true);
         attackCounter %= 2;
@@ -434,6 +425,7 @@ public class NewPlayerController : MonoBehaviour
         
         anim.SetTrigger("Die");
         isDead = true;
+        audioManager.audio.Stop();
         Invoke(nameof(Reset), 2f);
         Destroy(gameObject.GetComponent<Rigidbody>());
         StopAllCoroutines();
