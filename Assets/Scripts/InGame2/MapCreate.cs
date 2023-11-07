@@ -70,7 +70,7 @@ public class MapCreator : MonoBehaviour
         {
             Note n = notes[i];
             Quaternion q = Quaternion.AngleAxis(0, progressDirection);
-            Vector3 pos = new Vector3(n.noteTime * 4f + 13.5f, 0.5f, 0);
+            Vector3 pos = new Vector3(n.noteTime * 4f + 1f, 0.5f, 0);
             
             if (n.isUp)
             {
@@ -141,7 +141,7 @@ public class MapCreator : MonoBehaviour
                         
                         for (int j = 0; j < n.length * 4; j++)
                         {
-                            Vector3 forwardVector = q * Vector3.forward;
+                            Vector3 forwardVector = q * progressDirection;
                             GameObject inObj = Instantiate(Walls[n.objectType], pos + forwardVector * j, q);
                             inObj.transform.parent = obj.transform;
                         }

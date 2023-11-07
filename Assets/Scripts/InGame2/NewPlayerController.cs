@@ -1,3 +1,4 @@
+using System;
 using System.Collections;
 using Sirenix.OdinInspector;
 using UnityEngine;
@@ -76,6 +77,10 @@ public class NewPlayerController : MonoBehaviour
     [FoldoutGroup("판정")] 
     [SerializeField]
     private VerdictBar allVerdict;
+
+    [FoldoutGroup("판정")] 
+    [SerializeField] 
+    private VerdictBar playerVerdict;
     
     [FoldoutGroup("일반")] 
     public Animator anim;
@@ -92,6 +97,10 @@ public class NewPlayerController : MonoBehaviour
 
     [FoldoutGroup("일반")] 
     private GameObject lastPassedObject;
+
+    [FoldoutGroup("일반")] 
+    [SerializeField]
+    private Text tmpText;
     
     void Start()
     {
@@ -101,10 +110,16 @@ public class NewPlayerController : MonoBehaviour
         isInvincibility = false;
         score = 0;
         PlayerInput input = GetComponent<PlayerInput>();
-        input.actions.FindAction("Interact").canceled += OnInteractUp;
+        input.actions.FindAction("InteractDown").canceled += OnInteractKeyUp;
+        input.actions.FindAction("InteractUp").canceled += OnInteractKeyUp;
         greatVerdict.onTriggerExitEvent += HandleGreatVerdictExit;
     }
-    
+
+    private void LateUpdate()
+    {
+        tmpText.text = "Score: " + score + "\nCombo: " + combo + "\n Health: " + health;
+    }
+
     private void FixedUpdate()
     {
         if (!isDead)
@@ -126,11 +141,15 @@ public class NewPlayerController : MonoBehaviour
         
         camInfo.transform.position = (hitInfo1.point + hitInfo2.point) / 2;
         groundGap = (hitInfo1.point - hitInfo2.point).magnitude;
-        var scale = perfectVerdict.gameObject.transform.localScale;
-        scale.y = groundGap;
+        
         SetTransform(perfectVerdict.gameObject, groundGap);
         SetTransform(greatVerdict.gameObject, groundGap);
         SetTransform(allVerdict.gameObject, groundGap);
+        
+        var scale = perfectVerdict.gameObject.transform.localScale;
+        scale.y = groundGap;
+        playerVerdict.transform.localScale = scale;
+        playerVerdict.transform.position = transform.position + transform.up * groundGap / 2;
     }
 
     void SetTransform(GameObject obj, float y)
@@ -146,6 +165,7 @@ public class NewPlayerController : MonoBehaviour
     {
         lastPassedObject = other.gameObject;
         Obstacle obstacleInfo = GetObstacle(lastPassedObject);
+        
         if (obstacleInfo != null)
         {
             if (obstacleInfo.wasInteracted == false && obstacleInfo.type == NoteType.NormalNote)
@@ -157,7 +177,7 @@ public class NewPlayerController : MonoBehaviour
                 }
                 else if (obstacleInfo.isUp != isUp  && !obstacleInfo.wasInteracted)
                 {
-                    ComboReset();
+                    ComboReset(obstacleInfo);
                 }
             } 
         }
@@ -179,7 +199,7 @@ public class NewPlayerController : MonoBehaviour
         }
 
         info.wasInteracted = true;
-        ComboReset();
+        ComboReset(info);
         health -= damage;
         Debug.LogError(health);
         
@@ -213,18 +233,57 @@ public class NewPlayerController : MonoBehaviour
     /// <summary>
     /// 상호작용 버튼을 뗐을때
     /// </summary>
-    void OnInteractUp(InputAction.CallbackContext context)
+    void OnInteractKeyUp(InputAction.CallbackContext context)
     {
+        Obstacle obstacle = GetObstacle(lastPassedObject);
+        if (obstacle != null && obstacle.beatLength != 0 && isLongInteract)
+        {
+            int length = obstacle.gameObject.transform.childCount;
+            int i = isUp ? 1 : 0;
+            if (perfectVerdict.contact[i] != null && obstacle.transform.GetChild(length - 1).gameObject == perfectVerdict.contact[i].transform.parent.gameObject)
+            {
+                score += obstacle.perfectScore;
+            }
+            else if (greatVerdict.contact[i] != null && obstacle.transform.GetChild(length - 1).gameObject == greatVerdict.contact[i].transform.parent.gameObject)
+            {
+                score += obstacle.greatScore;
+            }
+            else
+            {
+                Debug.Log("롱노트 마지막에 제대로 못 뗐음");
+                Hurt(obstacle, obstacle.damage);
+            }
+        }
+        
         isLongInteract = false;
     }
+
+    public void OnInteractUp()
+    {
+        if (!isUp)
+        {
+            OnFlip();
+        } 
+        Interact();
+    }
     
-    public void OnInteract()
+    public void OnInteractDown()
+    {
+        if (isUp)
+        {
+            OnFlip();
+        }
+        Interact();
+    }
+
+    public void Interact()
     {
         int curScore = 0;
+        int i = isUp ? 1 : 0; 
         
-        if (allVerdict.contact != null)
+        if (allVerdict.contact[i] != null)
         {
-            target = allVerdict.contact.gameObject;
+            target = allVerdict.contact[i].gameObject;
         }
         else
         {
@@ -232,17 +291,17 @@ public class NewPlayerController : MonoBehaviour
         }
 
         Obstacle targetInfo = GetObstacle(target);
-
+        
         if (targetInfo == null || targetInfo.wasInteracted || targetInfo.isUp != isUp)
         {
             return;
         }
         
-        if (perfectVerdict.contact != null && perfectVerdict.contact.gameObject == target)
+        if (perfectVerdict.contact[i] != null && perfectVerdict.contact[i].gameObject == target)
         {
             curScore = targetInfo.perfectScore;
         }
-        else if (greatVerdict.contact != null && greatVerdict.contact.gameObject == target)
+        else if (greatVerdict.contact[i] != null && greatVerdict.contact[i].gameObject == target)
         {
             curScore = targetInfo.greatScore;
         }
@@ -281,7 +340,6 @@ public class NewPlayerController : MonoBehaviour
         {
             score += obstacle.perfectScore;
             combo++;
-            Debug.Log(score);
             yield return time;
 
             if (lastPassedObject.transform.parent.gameObject == obstacle.transform.GetChild(length - 1).gameObject && isLongInteract)
@@ -292,25 +350,15 @@ public class NewPlayerController : MonoBehaviour
                 yield break;
             }
         }
-        
-        if (perfectVerdict.contact != null && obstacle.transform.GetChild(length - 1).gameObject == perfectVerdict.contact.transform.parent.gameObject)
-        {
-            score += obstacle.perfectScore;
-        }
-        else if (greatVerdict.contact != null && obstacle.transform.GetChild(length - 1).gameObject == greatVerdict.contact.transform.parent.gameObject)
-        {
-            score += obstacle.greatScore;
-        }
-        else
-        {
-            Debug.Log("마지막 노트에서 제대로 못 뗐음");
-            Hurt(obstacle, obstacle.damage);
-        }
     }
     
-    public Obstacle GetObstacle(GameObject obj)
+    public static Obstacle GetObstacle(GameObject obj)
     {
-        while (obj.transform != obj.transform.parent)
+        if (obj == null)
+        {
+            return null;
+        }
+        while (obj.transform != obj.transform.root)
         {
             Obstacle obstacle = obj.GetComponent<Obstacle>();
             
@@ -325,13 +373,15 @@ public class NewPlayerController : MonoBehaviour
         return null;
     }
 
-    public void ComboReset()
+    void ComboReset(Obstacle obstacle)
     {
+        obstacle.wasInteracted = true;
         combo = 0;
     }
 
     public void Attack()
     {
+        combo++;
         anim.SetInteger("AttackCounter", attackCounter++);
         anim.SetBool("isAttacking", true);
         attackCounter %= 2;
@@ -411,9 +461,18 @@ public class NewPlayerController : MonoBehaviour
 
     private void OnTriggerStay(Collider other)
     {
-        Obstacle obstacleInfo = GetObstacle(other.gameObject);
+        int i = isUp ? 1 : 0;
 
-        if (obstacleInfo != null && obstacleInfo.isUp == isUp && obstacleInfo.type == NoteType.Wall && !obstacleInfo.wasInteracted)
+        GameObject targetObj = null;
+        
+        if (playerVerdict.contact[i] != null)
+        {
+            targetObj = playerVerdict.contact[i].gameObject;
+        }
+        
+        Obstacle obstacleInfo = GetObstacle(targetObj);
+
+        if (obstacleInfo != null && obstacleInfo.type == NoteType.Wall && !obstacleInfo.wasInteracted)
         {
             Debug.Log("벽에 맞음");
             Hurt(obstacleInfo, obstacleInfo.damage);
@@ -423,10 +482,22 @@ public class NewPlayerController : MonoBehaviour
     private void OnTriggerExit(Collider other)
     {
         Obstacle obstacleInfo = GetObstacle(other.gameObject);
-        if (obstacleInfo != null && obstacleInfo.type == NoteType.Wall && !obstacleInfo.wasInteracted)
+        
+        if (obstacleInfo != null && obstacleInfo.type == NoteType.Wall)
         {
-            score += obstacleInfo.perfectScore;
-            Debug.Log(score);
+            if (obstacleInfo.beatLength == 0)
+            {
+                score += obstacleInfo.perfectScore;
+            }
+            else
+            {
+                int length = obstacleInfo.gameObject.transform.childCount;
+                
+                if (other.transform.parent == obstacleInfo.gameObject.transform.GetChild(length - 1))
+                {
+                    score += obstacleInfo.perfectScore;
+                }
+            }
         }
     }
 }
