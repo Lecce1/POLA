@@ -15,52 +15,7 @@
                     "initialStateCheck": true
                 }
             ],
-            "bindings": [
-                {
-                    "name": "",
-                    "id": "5759348b-4e65-4e3a-8ac4-088ea4b894e7",
-                    "path": "<Mouse>/leftButton",
-                    "interactions": "",
-                    "processors": "",
-                    "groups": "PC",
-                    "action": "Click",
-                    "isComposite": false,
-                    "isPartOfComposite": false
-                },
-                {
-                    "name": "",
-                    "id": "411e7a4d-e3fc-41d9-a7dd-e45ed01d3698",
-                    "path": "<XInputController>/buttonSouth",
-                    "interactions": "Tap",
-                    "processors": "",
-                    "groups": "CONSOLE",
-                    "action": "Click",
-                    "isComposite": false,
-                    "isPartOfComposite": false
-                },
-                {
-                    "name": "",
-                    "id": "75eb98e1-528a-401a-9ee6-7cabccf4da02",
-                    "path": "<Keyboard>/z",
-                    "interactions": "Tap",
-                    "processors": "",
-                    "groups": "PC",
-                    "action": "Click",
-                    "isComposite": false,
-                    "isPartOfComposite": false
-                },
-                {
-                    "name": "",
-                    "id": "65f923ff-eedc-4451-907f-cd019329473c",
-                    "path": "<Touchscreen>/touch*/press",
-                    "interactions": "",
-                    "processors": "",
-                    "groups": "MOBILE",
-                    "action": "Click",
-                    "isComposite": false,
-                    "isPartOfComposite": false
-                }
-            ]
+            "bindings": []
         }
     ],
     "controlSchemes": [

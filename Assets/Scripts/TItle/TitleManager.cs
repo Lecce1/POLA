@@ -4,25 +4,14 @@ using UnityEngine;
 using UnityEngine.UI;
 using UnityEngine.Audio;
 using Sirenix.OdinInspector;
-using UnityEngine.Localization.Settings;
 using UnityEngine.SceneManagement;
 
 public class TitleManager : MonoBehaviour
 {
     [FoldoutGroup("타이틀")]
-    [Title("패널")]
-    public GameObject title;
-    [FoldoutGroup("타이틀")]
-    [Title("시작 버튼")]
-    public GameObject start_Btn;
-    [FoldoutGroup("타이틀")]
     [Title("Fade")]
     public GameObject fade;
-    [FoldoutGroup("타이틀")]
-    [Title("버전")]
-    [SerializeField]
-    private Text versionText;
-    
+
     [FoldoutGroup("로그인")]
     [Title("패널")]
     public GameObject login;
@@ -99,20 +88,21 @@ public class TitleManager : MonoBehaviour
         }
     }
 
+    void Update()
+    {
+        if (Input.anyKey)
+        {
+            fade.GetComponent<Animation>().Play("FadeOut");
+        }
+    }
+
     void Start()
     {
         Application.targetFrameRate = 144;
-        versionText.text = Application.version;
         backStack = new Stack<GameObject>();
         Login_Load(loginRememberMe);
     }
 
-    public void StartBtn()
-    {
-        start_Btn.GetComponent<Button>().interactable = false;
-        fade.GetComponent<Animation>().Play("FadeOut");
-    }
-    
     void Login()
     {
         try
@@ -267,11 +257,6 @@ public class TitleManager : MonoBehaviour
         isVibration = PlayerPrefs.GetInt("isVibration");
         audioMixer.SetFloat("FX", Mathf.Log10(fxValue) * 20);
         audioMixer.SetFloat("Music", Mathf.Log10(musicValue) * 20);
-    }
-
-    public void OnClick()
-    {
-        StartBtn();
     }
 
     public void Back()

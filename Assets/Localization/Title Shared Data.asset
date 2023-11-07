@@ -55,8 +55,12 @@ MonoBehaviour:
     m_Key: Error_Network
     m_Metadata:
       m_Items: []
-  - m_Id: 757432853716992
-    m_Key: Version
+  - m_Id: 2349479528226816
+    m_Key: Start_Keyboard & Gamepad
+    m_Metadata:
+      m_Items: []
+  - m_Id: 2349564001509376
+    m_Key: Start_Mobile
     m_Metadata:
       m_Items: []
   m_Metadata:

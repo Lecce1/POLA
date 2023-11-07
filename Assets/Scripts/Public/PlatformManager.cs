@@ -64,7 +64,6 @@ public class PlatformManager : MonoBehaviour
         
         public void SwitchToKeyboard()
         {
-            Debug.Log("keyboard");
             if (DBManager.instance != null)
             {
                 DBManager.instance.currentPlatform = "PC";
@@ -100,7 +99,6 @@ public class PlatformManager : MonoBehaviour
 
         public void SwitchToGamepad()
         {
-            Debug.Log("gamepad");
             if (DBManager.instance != null)
             {
                 DBManager.instance.currentPlatform = "CONSOLE";
@@ -133,7 +131,6 @@ public class PlatformManager : MonoBehaviour
 
         public void SwitchToMobile()
         {
-            Debug.Log("mobile");
             if (DBManager.instance != null)
             {
                 DBManager.instance.currentPlatform = "MOBILE";

@@ -58,8 +58,12 @@ MonoBehaviour:
     m_Localized: Please check your network status.
     m_Metadata:
       m_Items: []
-  - m_Id: 757432853716992
-    m_Localized: 'Version :'
+  - m_Id: 2349479528226816
+    m_Localized: Press any key
+    m_Metadata:
+      m_Items: []
+  - m_Id: 2349564001509376
+    m_Localized: Press screen to start
     m_Metadata:
       m_Items: []
   references:
