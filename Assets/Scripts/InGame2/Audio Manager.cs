@@ -29,18 +29,7 @@ public class AudioManager : MonoBehaviour
         }
     }
 
-    /// <summary>
-    /// 3박자 쉬고 노래 시작
-    /// </summary>
     void Start()
-    {
-        Invoke(nameof(PlayMusic), 180f / bpm);
-    }
-
-    /// <summary>
-    /// 음악 시작
-    /// </summary>
-    public void PlayMusic()
     {
         audio.Play();
     }

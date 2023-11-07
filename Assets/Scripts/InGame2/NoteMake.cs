@@ -137,7 +137,7 @@ public class NoteMake : MonoBehaviour
             
             for (int i = 0; i < noteTime.Count; i++)
             {
-                var note = Instantiate(noteBar, new Vector3(noteTime[i] * 4f + 13.5f, 0, 0), Quaternion.identity);
+                var note = Instantiate(noteBar, new Vector3(noteTime[i] * 4f + 1f, 0, 0), Quaternion.identity);
                 note.name = "note" + i;
                 bars.Add(note);
                 note.transform.GetChild(0).GetComponent<TextMesh>().text = i.ToString();
@@ -234,13 +234,13 @@ public class NoteMake : MonoBehaviour
             if (!insertMod)
             {
                 taskStack.Push(new Task(nearestNote, noteTime[nearestNote], Task.task.Moved));
-                bars[nearestNote].transform.position = new Vector3(noteTime[nearestNote] * 5f + 13.5f, 0, 0);
+                bars[nearestNote].transform.position = new Vector3(noteTime[nearestNote] * 5f + 1f, 0, 0);
                 noteTime[nearestNote] = beatCount;
             }
             else
             {
                 taskStack.Push(new Task(curNote, 0, Task.task.Inserted));
-                bars.Insert(curNote + 1, Instantiate(noteBar, new Vector3(beatCount * 5f + 13.5f, 0, 0), Quaternion.identity));
+                bars.Insert(curNote + 1, Instantiate(noteBar, new Vector3(beatCount * 5f + 1f, 0, 0), Quaternion.identity));
                 noteTime.Insert(curNote + 1, beatCount);
             }
         }
@@ -286,12 +286,12 @@ public class NoteMake : MonoBehaviour
         switch (t.taskType)
         {
             case Task.task.Moved :
-                bars[t.index].transform.position = new Vector3(t.preValue * 5f + 13.5f, 0, 0);
+                bars[t.index].transform.position = new Vector3(t.preValue * 5f + 1f, 0, 0);
                 noteTime[t.index] = t.preValue;
                 break;
             
             case Task.task.Deleted :
-                bars.Insert(t.index, Instantiate(noteBar, new Vector3(t.preValue * 5f + 13.5f, 0, 0), Quaternion.identity));
+                bars.Insert(t.index, Instantiate(noteBar, new Vector3(t.preValue * 5f + 1f, 0, 0), Quaternion.identity));
                 noteTime.Insert(t.index, t.preValue);
                 break;
             

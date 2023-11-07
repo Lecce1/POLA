@@ -2,23 +2,33 @@ using UnityEngine;
 
 public class VerdictBar : MonoBehaviour
 {
-    public Collider contact;
+    public Collider[] contact;
     public delegate void OnTriggerExitEvent(Collider other);
     public event OnTriggerExitEvent onTriggerExitEvent;
 
     private void Start()
     {
-        contact = null;
+        contact = new Collider[2];
     }
 
     private void OnTriggerEnter(Collider other)
     {
-        contact = other;
+        Obstacle obstacle = NewPlayerController.GetObstacle(other.gameObject);
+        if (obstacle != null)
+        {
+            int i = obstacle.isUp ? 1 : 0;
+            contact[i] = other;
+        }
     }
 
     private void OnTriggerStay(Collider other)
     {
-        contact = other;
+        Obstacle obstacle = NewPlayerController.GetObstacle(other.gameObject);
+        if (obstacle != null)
+        {
+            int i = obstacle.isUp ? 1 : 0;
+            contact[i] = other;
+        }
     }
 
     private void OnTriggerExit(Collider other)
@@ -27,6 +37,12 @@ public class VerdictBar : MonoBehaviour
         {
             onTriggerExitEvent(other);
         }
-        contact = null;
+        
+        Obstacle obstacle = NewPlayerController.GetObstacle(other.gameObject);
+        if (obstacle != null)
+        {
+            int i = obstacle.isUp ? 1 : 0;
+            contact[i] = null;
+        }
     }
 }
