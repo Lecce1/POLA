@@ -50,7 +50,7 @@ public class LobbyManager : MonoBehaviour
     [FoldoutGroup("기타")] 
     [Title("설정 버튼 / 패드 여부")]
     public bool isSetBtn = false;
-    
+
     [FoldoutGroup("설정 패널")] 
     [Title("언어 Dropdown")]
     public Dropdown set_Language_Dropdown;

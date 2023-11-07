@@ -38,6 +38,9 @@ public class DBManager : MonoBehaviour
     [FoldoutGroup("게임 DB")] 
     [Title("게임 씬 이름")]
     public string gameSceneName = "Game";
+    [FoldoutGroup("게임 DB")] 
+    [Title("시네머신 여부")]
+    public bool isCinemachine;
     
     public static DBManager instance;
 
