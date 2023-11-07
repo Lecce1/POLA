@@ -38,7 +38,7 @@ RenderSettings:
   m_ReflectionIntensity: 1
   m_CustomReflection: {fileID: 0}
   m_Sun: {fileID: 0}
-  m_IndirectSpecularColor: {r: 0.37780496, g: 0.29092816, b: 0.32680136, a: 1}
+  m_IndirectSpecularColor: {r: 0.3776038, g: 0.29118896, b: 0.32745016, a: 1}
   m_UseRadianceAmbientProbe: 0
 --- !u!157 &3
 LightmapSettings:
@@ -1148,6 +1148,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: de179b0b305374c7091a7b3ff5fe0078, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  stageNum: 0
   trackNum: 0
   name: Set
 --- !u!1 &49973186
@@ -37432,6 +37433,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: de179b0b305374c7091a7b3ff5fe0078, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  stageNum: 0
   trackNum: 0
   name: Stage
 --- !u!1 &492332997
@@ -62620,6 +62622,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: de179b0b305374c7091a7b3ff5fe0078, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  stageNum: 0
   trackNum: 0
   name: Shop
 --- !u!1 &961416781
@@ -66479,6 +66482,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: de179b0b305374c7091a7b3ff5fe0078, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  stageNum: 0
   trackNum: 0
   name: Sign
 --- !u!1 &1240984032
@@ -72004,7 +72008,7 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1259144069}
   serializedVersion: 2
-  m_LocalRotation: {x: 0.02497661, y: 0.00000004311456, z: -0.0000000010771914, w: 0.999688}
+  m_LocalRotation: {x: 0.024976615, y: 0.00000007682993, z: -0.0000000019195503, w: 0.999688}
   m_LocalPosition: {x: -0.0000011920929, y: 2.6, z: -9.999999}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
@@ -72114,7 +72118,7 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1268460639}
   serializedVersion: 2
-  m_LocalRotation: {x: 0.000000014901161, y: 5.4857097e-10, z: -2.7428504e-11, w: 1}
+  m_LocalRotation: {x: -0, y: -3.439027e-11, z: 1.7197355e-12, w: 1}
   m_LocalPosition: {x: 0, y: 0, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
@@ -107064,6 +107068,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: de179b0b305374c7091a7b3ff5fe0078, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  stageNum: 0
   trackNum: 0
   name: Genre
 --- !u!1 &1857882044
