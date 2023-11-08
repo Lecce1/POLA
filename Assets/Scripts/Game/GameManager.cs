@@ -10,20 +10,23 @@ using UnityEngine.UI;
 public class GameManager : MonoBehaviour
 {
     [FoldoutGroup("패널")] 
+    [Title("판정 캔버스")] 
+    public GameObject verdictCanvas;
+    [FoldoutGroup("패널")] 
     [Title("설정")] 
     public GameObject set;
-    
     [FoldoutGroup("패널")] 
     [Title("상단 패널")] 
     public GameObject topPanel;
-    
     [FoldoutGroup("패널")] 
     [Title("하단 패널")] 
     public GameObject bottomPanel;
-    
     [FoldoutGroup("패널")] 
     [Title("카운트다운 패널")] 
     public GameObject countDownPanel;
+    [FoldoutGroup("패널")] 
+    [Title("판정 프리팹")] 
+    public GameObject verdictPrefab;
     
     [FoldoutGroup("텍스트")] 
     [Title("플레이어 상태")] 
@@ -32,16 +35,14 @@ public class GameManager : MonoBehaviour
     [FoldoutGroup("매니저")] 
     [Title("플랫폼")] 
     public PlatformManager platformManager;
-    
     [FoldoutGroup("매니저")] 
     [Title("사운드")] 
     public AudioManager audioManager;
-
+    
     [FoldoutGroup("기타")] 
     [Title("패널 열림 여부")] 
     [SerializeField]
     public bool isPanelOpen = false;
-    
     [FoldoutGroup("기타")] 
     [Title("카운트 다운 여부")] 
     [SerializeField]
@@ -50,14 +51,17 @@ public class GameManager : MonoBehaviour
     [FoldoutGroup("플레이어")] 
     [Title("플레이어")] 
     public PlayerController playerController;
-    
+
     [FoldoutGroup("정보")] 
-    [Title("점수")] 
+    [Title("판정 이미지")] 
+    [SerializeField]
+    private Sprite[] verdictImage = new Sprite[4];
+    [FoldoutGroup("정보")] 
+    [Title("스코어")] 
     [SerializeField]
     private int score;
-    
     [FoldoutGroup("정보")] 
-    [Title("콤보")] 
+    [Title("스코어")] 
     public int Score
     {
         get { return score; }
@@ -67,12 +71,10 @@ public class GameManager : MonoBehaviour
             StatUpdate();
         }
     }
-    
     [FoldoutGroup("정보")] 
     [Title("콤보")]
     [SerializeField]
     private int combo;
-    
     [FoldoutGroup("정보")] 
     [Title("콤보")] 
     public int Combo
@@ -84,14 +86,29 @@ public class GameManager : MonoBehaviour
             StatUpdate();
         }
     }
+    [FoldoutGroup("정보")] 
+    [Title("Perfect 갯수")] 
+    [SerializeField]
+    private int perfectCount;
+    [FoldoutGroup("정보")] 
+    [Title("Great 갯수")] 
+    [SerializeField]
+    private int greatCount;
+    [FoldoutGroup("정보")] 
+    [Title("Good 갯수")] 
+    [SerializeField]
+    private int goodCount;
+    [FoldoutGroup("정보")] 
+    [Title("Good 갯수")] 
+    [SerializeField]
+    private int missCount;
     
     // 뒤로가기 스택
     private Stack<GameObject> backStack;
     public static GameManager instance;
     private WaitForSeconds waitForSeconds = new WaitForSeconds(1f);
 
-    public float firstTime;
-    public float currentTime;
+    public GameObject cameraInfo;
 
     void Awake()
     {
@@ -134,6 +151,36 @@ public class GameManager : MonoBehaviour
     public void StatUpdate()
     {
         playerStateText.text = "Score: " + score + "\nCombo: " + combo + "\n Health: " + playerController.health;
+    }
+
+    public void ShowVerdict(int idx)
+    {
+        switch (idx)
+        {
+            case 0:
+                perfectCount++;
+                break;
+                
+            case 1:
+                greatCount++;
+                break;
+            
+            case 2:
+                goodCount++;
+                break;
+            
+            case 3:
+                missCount++;
+                break;
+        }
+        
+        GameObject verdictPrefab = Instantiate(this.verdictPrefab);
+        verdictPrefab.GetComponent<Image>().sprite = verdictImage[idx];
+        verdictPrefab.transform.SetParent(verdictCanvas.transform);
+        verdictPrefab.GetComponent<RectTransform>().localScale = new Vector3(1, 1, 1);
+        var screenPos = Camera.main.WorldToScreenPoint(cameraInfo.transform.position - new Vector3(0, 1f, 0));
+        RectTransformUtility.ScreenPointToLocalPointInRectangle(verdictCanvas.GetComponent<RectTransform>(), screenPos, Camera.main, out var localPos);
+        verdictPrefab.transform.localPosition = localPos;
     }
 
     public void Button(string type)
@@ -244,8 +291,6 @@ public class GameManager : MonoBehaviour
         isCountDown = false;
         playerController.GetComponent<Animator>().SetBool("isCountDown", isCountDown);
         audioManager.audio.Play();
-        firstTime = (float)AudioSettings.dspTime;
-        currentTime = (float)AudioSettings.dspTime - firstTime;
         playerController.GetComponent<PlayerInput>().enabled = true;
         Invoke(nameof(CountDownDisable), 0.5f);
     }

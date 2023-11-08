@@ -45,23 +45,10 @@ public class PlayerController : MonoBehaviour
     [FoldoutGroup("변수")] 
     [SerializeField] 
     private GameObject camInfo;
-    
-    [FoldoutGroup("판정")] 
-    [SerializeField] 
-    private VerdictBar perfectVerdict;
-    
-    [FoldoutGroup("판정")] 
-    [SerializeField] 
-    private VerdictBar greatVerdict;
-    
-    [FoldoutGroup("판정")] 
-    [SerializeField] 
-    private VerdictBar goodVerdict;
-    
-    [FoldoutGroup("판정")] 
-    [SerializeField]
-    private VerdictBar allVerdict;
 
+    [FoldoutGroup("변수")] 
+    [SerializeField] 
+    private GameObject verdictBar;
     [FoldoutGroup("판정")] 
     [SerializeField] 
     private VerdictBar playerVerdict;
@@ -74,9 +61,6 @@ public class PlayerController : MonoBehaviour
     
     [FoldoutGroup("일반")]
     public LayerMask ground;
-    
-    [FoldoutGroup("일반")] 
-    public GameObject target;
 
     [FoldoutGroup("일반")] 
     [SerializeField]
@@ -93,7 +77,7 @@ public class PlayerController : MonoBehaviour
         PlayerInput input = GetComponent<PlayerInput>();
         input.actions.FindAction("Up").canceled += OnKeyUp;
         input.actions.FindAction("Down").canceled += OnKeyUp;
-        goodVerdict.onTriggerExitEvent += HandleGoodVerdictExit;
+        verdictBar.transform.GetChild(2).GetComponent<VerdictBar>().onTriggerExitEvent += HandleGoodVerdictExit;
         longNoteTime = new WaitForSeconds(15f / bpm);
     }
     
@@ -123,11 +107,8 @@ public class PlayerController : MonoBehaviour
         
         camInfo.transform.position = (hitInfo1.point + hitInfo2.point) / 2;
         groundGap = (hitInfo1.point - hitInfo2.point).magnitude;
-        SetTransform(perfectVerdict.gameObject, groundGap);
-        SetTransform(greatVerdict.gameObject, groundGap);
-        SetTransform(goodVerdict.gameObject, groundGap);
-        SetTransform(allVerdict.gameObject, groundGap);
-        var scale = perfectVerdict.gameObject.transform.localScale;
+        SetTransform(verdictBar, groundGap);
+        var scale = verdictBar.gameObject.transform.localScale;
         scale.y = groundGap;
         playerVerdict.transform.localScale = scale;
         playerVerdict.transform.position = transform.position + transform.up * groundGap / 2;
@@ -172,7 +153,7 @@ public class PlayerController : MonoBehaviour
         transform.position += transform.forward * (bpm / 15f * Time.fixedDeltaTime);
     }
 
-    public void Hurt(Obstacle info)
+    void Hurt(Obstacle info)
     {
         if (isInvincibility)
         {
@@ -181,6 +162,7 @@ public class PlayerController : MonoBehaviour
 
         info.wasInteracted = true;
         ComboReset(info);
+        GameManager.instance.ShowVerdict(3);
         health -= info.damage;
         GameManager.instance.StatUpdate();
 
@@ -195,7 +177,7 @@ public class PlayerController : MonoBehaviour
     }
     
     /// <summary>
-    /// 플립 버튼을 눌렀을때
+    /// 플립이 될 때
     /// </summary>
     public void OnFlip()
     {
@@ -221,27 +203,43 @@ public class PlayerController : MonoBehaviour
         if (obstacle != null && obstacle.beatLength != 0 && isLongInteract)
         {
             int length = obstacle.gameObject.transform.childCount;
-            int i = isUp ? 1 : 0;
+            int evaluation = GetVerdict(obstacle.transform.GetChild(length - 1).GetChild(0).gameObject);
+
+            if (evaluation != -1)
+            {
+                GameManager.instance.ShowVerdict(evaluation);
+            }
             
-            if (perfectVerdict.collider[i].contact[0] != null && obstacle.transform.GetChild(length - 1).gameObject == perfectVerdict.collider[i].contact[0].transform.parent.gameObject)
+            if (evaluation is -1 or 3)
             {
-                GameManager.instance.Score += obstacle.perfectScore;
-            }
-            else if (greatVerdict.collider[i].contact[0] != null && obstacle.transform.GetChild(length - 1).gameObject == greatVerdict.collider[i].contact[0].transform.parent.gameObject)
-            {
-                GameManager.instance.Score += obstacle.greatScore;
-            }
-            else if (goodVerdict.collider[i].contact[0] != null && obstacle.transform.GetChild(length - 1).gameObject == goodVerdict.collider[i].contact[0].transform.parent.gameObject)
-            {
-                GameManager.instance.Score += obstacle.goodScore;
+                Debug.Log(evaluation);
+                Hurt(obstacle);
             }
             else
             {
-                Hurt(obstacle);
+                GameManager.instance.Score += obstacle.scoreList[evaluation];
+                GameManager.instance.Combo++;
             }
         }
         
         isLongInteract = false;
+    }
+
+    int GetVerdict(GameObject targetObject)
+    {
+        int idx = isUp ? 1 : 0;
+
+        for (int i = 0; i < 4; i++)
+        {
+            VerdictBar bar = verdictBar.transform.GetChild(i).GetComponent<VerdictBar>();
+            
+            if (bar.collider[idx].contact[0] != null && targetObject == bar.collider[idx].contact[0].gameObject)
+            {
+                return i;
+            }
+        }
+
+        return -1;
     }
 
     public void OnUp()
@@ -276,12 +274,12 @@ public class PlayerController : MonoBehaviour
 
     public void Interact()
     {
-        int curScore = 0;
+        GameObject target;
         int i = isUp ? 1 : 0; 
         
-        if (allVerdict.collider[i].contact[0] != null)
+        if (verdictBar.transform.GetChild(3).GetComponent<VerdictBar>().collider[i].contact[0] != null)
         {
-            target = allVerdict.collider[i].contact[0].gameObject;
+            target = verdictBar.transform.GetChild(3).GetComponent<VerdictBar>().collider[i].contact[0].gameObject;
         }
         else
         {
@@ -294,23 +292,11 @@ public class PlayerController : MonoBehaviour
         {
             return;
         }
-        
-        if (perfectVerdict.collider[i].contact[0] != null && perfectVerdict.collider[i].contact[0].gameObject == target)
-        {
-            curScore = targetInfo.perfectScore;
-            Debug.Log("Perfect");
-        }
-        else if (greatVerdict.collider[i].contact[0] != null && greatVerdict.collider[i].contact[0].gameObject == target)
-        {
-            curScore = targetInfo.greatScore;
-            Debug.Log("Great");
-        }
-        else if (goodVerdict.collider[i].contact[0] != null && goodVerdict.collider[i].contact[0].gameObject == target)
-        {
-            curScore = targetInfo.goodScore;
-            Debug.Log("Good");
-        }
-        else
+
+        int evaluation = GetVerdict(target);
+        GameManager.instance.ShowVerdict(evaluation);
+
+        if (evaluation == 3)
         {
             Hurt(targetInfo);
             return;
@@ -331,11 +317,11 @@ public class PlayerController : MonoBehaviour
                     return;
                 }
                 
-                Attack();
+                Attack(target);
                 break;
         }
         
-        GameManager.instance.Score += curScore;
+        GameManager.instance.Score += targetInfo.scoreList[evaluation];
         GameManager.instance.Combo++;
     }
 
@@ -345,7 +331,7 @@ public class PlayerController : MonoBehaviour
 
         while (isLongInteract)
         {
-            GameManager.instance.Score += obstacle.perfectScore;
+            GameManager.instance.Score += obstacle.scoreList[0];
             GameManager.instance.Combo++;
             
             if (lastPassedObject != null && lastPassedObject.transform.parent.gameObject == obstacle.transform.GetChild(length - 1).gameObject && isLongInteract)
@@ -387,7 +373,7 @@ public class PlayerController : MonoBehaviour
         GameManager.instance.Combo = 0;
     }
 
-    public void Attack()
+    public void Attack(GameObject target)
     {
         anim.SetInteger("AttackCounter", attackCounter++);
         anim.SetBool("isAttacking", true);
@@ -451,11 +437,6 @@ public class PlayerController : MonoBehaviour
         Destroy(gameObject.GetComponent<Rigidbody>());
         StopAllCoroutines();
     }
-
-    public void Test()
-    {
-        Debug.Log(transform.position);    
-    }
     
     void Reset()
     {
@@ -503,7 +484,7 @@ public class PlayerController : MonoBehaviour
         {
             if (obstacleInfo.beatLength == 0)
             {
-                GameManager.instance.Score += obstacleInfo.perfectScore;
+                GameManager.instance.Score += obstacleInfo.scoreList[0];
             }
             else
             {
@@ -511,7 +492,7 @@ public class PlayerController : MonoBehaviour
                 
                 if (other.transform.parent == obstacleInfo.gameObject.transform.GetChild(length - 1))
                 {
-                    GameManager.instance.Score += obstacleInfo.perfectScore;
+                    GameManager.instance.Score += obstacleInfo.scoreList[0];
                 }
             }
         }
