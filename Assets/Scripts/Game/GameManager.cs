@@ -4,6 +4,7 @@ using Sirenix.OdinInspector;
 using UnityEngine;
 using UnityEngine.InputSystem;
 using UnityEngine.SceneManagement;
+using UnityEngine.Serialization;
 using UnityEngine.UI;
 
 public class GameManager : MonoBehaviour
@@ -35,19 +36,20 @@ public class GameManager : MonoBehaviour
     [FoldoutGroup("매니저")] 
     [Title("사운드")] 
     public AudioManager audioManager;
-    
-    [FoldoutGroup("매니저")] 
-    [Title("카메라 매니저")] 
-    public CameraManager cameraManager;
-    
+
     [FoldoutGroup("기타")] 
     [Title("패널 열림 여부")] 
     [SerializeField]
     public bool isPanelOpen = false;
     
+    [FoldoutGroup("기타")] 
+    [Title("카운트 다운 여부")] 
+    [SerializeField]
+    public bool isCountDown = false;
+    
     [FoldoutGroup("플레이어")] 
     [Title("플레이어")] 
-    public PlayerController player;
+    public PlayerController playerController;
     
     [FoldoutGroup("정보")] 
     [Title("점수")] 
@@ -128,7 +130,7 @@ public class GameManager : MonoBehaviour
 
     public void StatUpdate()
     {
-        playerStateText.text = "Score: " + score + "\nCombo: " + combo + "\n Health: " + player.health;
+        playerStateText.text = "Score: " + score + "\nCombo: " + combo + "\n Health: " + playerController.health;
     }
 
     public void Button(string type)
@@ -203,7 +205,7 @@ public class GameManager : MonoBehaviour
                         bottomPanel.SetActive(true);
                     }
 
-                    if (!player.isDead)
+                    if (!playerController.isDead)
                     {
                         StartCoroutine(CountDown());
                     }
@@ -220,34 +222,32 @@ public class GameManager : MonoBehaviour
     
     IEnumerator CountDown()
     {
+        isCountDown = true;
+        playerController.GetComponent<Animator>().SetBool("isCountDown", isCountDown);
         countDownPanel.gameObject.SetActive(true);
         audioManager.audio.Pause();
-        player.enabled = false;
-        player.GetComponent<PlayerInput>().enabled = false;
-        player.GetComponent<Animator>().enabled = false;
-        cameraManager.GetComponent<CameraManager>().enabled = false;
-        Text countText = countDownPanel.transform.GetChild(0).GetComponent<Text>();
-        
+        playerController.GetComponent<PlayerInput>().enabled = false;
+
         int i = 3;
+        
         while (i > 0)
         {
-            countText.text = i.ToString();
+            countDownPanel.transform.GetChild(0).GetComponent<Text>().text = i.ToString();
             i--;
             yield return waitForSeconds;
         }
 
-        countText.text = "GO!";
+        countDownPanel.transform.GetChild(0).GetComponent<Text>().text = "GO!";
+        isCountDown = false;
+        playerController.GetComponent<Animator>().SetBool("isCountDown", isCountDown);
         audioManager.audio.UnPause();
-        player.enabled = true;
-        player.GetComponent<Animator>().enabled = true;
-        player.GetComponent<PlayerInput>().enabled = true;
-        cameraManager.GetComponent<CameraManager>().enabled = true;
+        playerController.GetComponent<PlayerInput>().enabled = true;
         Invoke(nameof(CountDownDisable), 0.5f);
     }
 
     private void CountDownDisable()
     {
-        if (player.enabled)
+        if (playerController.enabled)
         {
             countDownPanel.gameObject.SetActive(false);
         }
