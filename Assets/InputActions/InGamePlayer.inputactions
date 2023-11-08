@@ -39,7 +39,7 @@
                 {
                     "name": "",
                     "id": "8ec76ab0-6122-414e-bfc1-3d428ac257db",
-                    "path": "<Gamepad>/leftStick/up",
+                    "path": "<XInputController>/leftShoulder",
                     "interactions": "",
                     "processors": "",
                     "groups": "CONSOLE",
@@ -50,7 +50,7 @@
                 {
                     "name": "",
                     "id": "c91376c2-5836-4129-ac6b-47d5550a8b4f",
-                    "path": "<Keyboard>/upArrow",
+                    "path": "<Keyboard>/f",
                     "interactions": "",
                     "processors": "",
                     "groups": "PC",
@@ -72,7 +72,7 @@
                 {
                     "name": "",
                     "id": "ce122243-ea26-4882-b6ad-068b6cddc774",
-                    "path": "<Gamepad>/leftStick/down",
+                    "path": "<XInputController>/rightShoulder",
                     "interactions": "",
                     "processors": "",
                     "groups": "CONSOLE",
@@ -83,7 +83,7 @@
                 {
                     "name": "",
                     "id": "01d88451-e56f-4b16-ad6c-a613f72272d2",
-                    "path": "<Keyboard>/downArrow",
+                    "path": "<Keyboard>/j",
                     "interactions": "",
                     "processors": "",
                     "groups": "PC",

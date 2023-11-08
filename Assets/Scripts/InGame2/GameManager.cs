@@ -1,11 +1,9 @@
 using System.Collections;
 using System.Collections.Generic;
-using Cinemachine;
 using Sirenix.OdinInspector;
 using UnityEngine;
 using UnityEngine.InputSystem;
 using UnityEngine.SceneManagement;
-using UnityEngine.Serialization;
 using UnityEngine.UI;
 
 public class GameManager : MonoBehaviour
@@ -54,7 +52,7 @@ public class GameManager : MonoBehaviour
     // 뒤로가기 스택
     private Stack<GameObject> backStack;
     public static GameManager instance;
-    private WaitForSeconds wait = new (1f);
+    private WaitForSeconds waitForSeconds = new WaitForSeconds(1f);
 
     void Awake()
     {
@@ -86,7 +84,7 @@ public class GameManager : MonoBehaviour
         StartCoroutine(CountDown());
     }
 
-    private void LateUpdate()
+    void StatUpdate()
     {
         playerStateText.text = "Score: " + player.score + "\nCombo: " + player.combo + "\n Health: " + player.health;
     }
@@ -199,7 +197,7 @@ public class GameManager : MonoBehaviour
         {
             countText.text = i.ToString();
             i--;
-            yield return wait;
+            yield return waitForSeconds;
         }
 
         countText.text = "GO!";

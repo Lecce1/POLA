@@ -14,6 +14,7 @@ public class VerdictBar : MonoBehaviour
     private void OnTriggerEnter(Collider other)
     {
         Obstacle obstacle = NewPlayerController.GetObstacle(other.gameObject);
+        
         if (obstacle != null)
         {
             int i = obstacle.isUp ? 1 : 0;
@@ -24,6 +25,7 @@ public class VerdictBar : MonoBehaviour
     private void OnTriggerStay(Collider other)
     {
         Obstacle obstacle = NewPlayerController.GetObstacle(other.gameObject);
+        
         if (obstacle != null)
         {
             int i = obstacle.isUp ? 1 : 0;
@@ -39,6 +41,7 @@ public class VerdictBar : MonoBehaviour
         }
         
         Obstacle obstacle = NewPlayerController.GetObstacle(other.gameObject);
+        
         if (obstacle != null)
         {
             int i = obstacle.isUp ? 1 : 0;
