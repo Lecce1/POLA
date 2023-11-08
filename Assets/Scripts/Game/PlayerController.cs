@@ -452,6 +452,11 @@ public class PlayerController : MonoBehaviour
         StopAllCoroutines();
     }
 
+    public void Test()
+    {
+        Debug.Log(transform.position);    
+    }
+    
     void Reset()
     {
         SceneManager.LoadScene(DBManager.instance.gameSceneName);

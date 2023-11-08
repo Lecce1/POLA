@@ -90,6 +90,9 @@ public class GameManager : MonoBehaviour
     public static GameManager instance;
     private WaitForSeconds waitForSeconds = new WaitForSeconds(1f);
 
+    public float firstTime;
+    public float currentTime;
+
     void Awake()
     {
         if (instance == null)
@@ -240,7 +243,9 @@ public class GameManager : MonoBehaviour
         countDownPanel.transform.GetChild(0).GetComponent<Text>().text = "GO!";
         isCountDown = false;
         playerController.GetComponent<Animator>().SetBool("isCountDown", isCountDown);
-        audioManager.audio.UnPause();
+        audioManager.audio.Play();
+        firstTime = (float)AudioSettings.dspTime;
+        currentTime = (float)AudioSettings.dspTime - firstTime;
         playerController.GetComponent<PlayerInput>().enabled = true;
         Invoke(nameof(CountDownDisable), 0.5f);
     }

@@ -28,11 +28,6 @@ public class AudioManager : MonoBehaviour
             interval.CheckForNewInterval(sampledTime);
         }
     }
-
-    void Start()
-    {
-        audio.Play();
-    }
 }
 
 /// <summary>

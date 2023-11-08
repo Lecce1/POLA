@@ -20,7 +20,7 @@ public class MapCreator : MonoBehaviour
         public int objectType;
     }
     
-    private string url = "Assets/Scripts/InGame2/Beats/object.csv";
+    private string url = "Assets/Scripts/Game/Beats/object.csv";
     
     [FoldoutGroup("오브젝트")] 
     [SerializeField]
@@ -70,7 +70,7 @@ public class MapCreator : MonoBehaviour
         {
             Note n = notes[i];
             Quaternion q = Quaternion.AngleAxis(0, progressDirection);
-            Vector3 pos = new Vector3(n.noteTime * 4f, 0.5f, 0);
+            Vector3 pos = new Vector3(n.noteTime * 4f + 2.1f, 0.5f, 0);
             
             if (n.isUp)
             {
