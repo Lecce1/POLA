@@ -1,39 +1,57 @@
+using System;
 using UnityEngine;
 
 public class VerdictBar : MonoBehaviour
 {
-    public Collider[] contact;
     public delegate void OnTriggerExitEvent(Collider other);
     public event OnTriggerExitEvent onTriggerExitEvent;
 
-    private void Start()
+    public Array[] collider = new Array[2];
+    [Serializable]
+    public class Array
     {
-        contact = new Collider[2];
+        public Collider[] contact = new Collider[2];
     }
 
-    private void OnTriggerEnter(Collider other)
-    {
-        Obstacle obstacle = PlayerController.GetObstacle(other.gameObject);
-        
-        if (obstacle != null)
-        {
-            int i = obstacle.isUp ? 1 : 0;
-            contact[i] = other;
-        }
-    }
-
-    private void OnTriggerStay(Collider other)
+    void OnTriggerEnter(Collider other)
     {
         Obstacle obstacle = PlayerController.GetObstacle(other.gameObject);
         
         if (obstacle != null)
         {
             int i = obstacle.isUp ? 1 : 0;
-            contact[i] = other;
+
+            if (collider[i].contact[0] == null)
+            {
+                collider[i].contact[0] = other;
+            }
+            else
+            {
+                collider[i].contact[1] = other;
+            }
         }
     }
 
-    private void OnTriggerExit(Collider other)
+    void OnTriggerStay(Collider other)
+    {
+        Obstacle obstacle = PlayerController.GetObstacle(other.gameObject);
+        
+        if (obstacle != null)
+        {
+            int i = obstacle.isUp ? 1 : 0;
+            
+            if (collider[i].contact[0] == null)
+            {
+                collider[i].contact[0] = other;
+            }
+            else if(collider[i].contact[0] != other)
+            {
+                collider[i].contact[1] = other;
+            }
+        }
+    }
+
+    void OnTriggerExit(Collider other)
     {
         if (onTriggerExitEvent != null)
         {
@@ -45,7 +63,19 @@ public class VerdictBar : MonoBehaviour
         if (obstacle != null)
         {
             int i = obstacle.isUp ? 1 : 0;
-            contact[i] = null;
+            
+            Debug.Log(collider[i]);
+            Debug.Log(collider[i].contact[1]);
+
+            if (collider[i].contact[1] != null)
+            {
+                collider[i].contact[0] = collider[i].contact[1];
+                collider[i].contact[1] = null;
+            }
+            else
+            {
+                collider[i].contact[0] = null;
+            }
         }
     }
 }

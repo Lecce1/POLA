@@ -223,15 +223,15 @@ public class PlayerController : MonoBehaviour
             int length = obstacle.gameObject.transform.childCount;
             int i = isUp ? 1 : 0;
             
-            if (perfectVerdict.contact[i] != null && obstacle.transform.GetChild(length - 1).gameObject == perfectVerdict.contact[i].transform.parent.gameObject)
+            if (perfectVerdict.collider[i].contact[0] != null && obstacle.transform.GetChild(length - 1).gameObject == perfectVerdict.collider[i].contact[0].transform.parent.gameObject)
             {
                 GameManager.instance.Score += obstacle.perfectScore;
             }
-            else if (greatVerdict.contact[i] != null && obstacle.transform.GetChild(length - 1).gameObject == greatVerdict.contact[i].transform.parent.gameObject)
+            else if (greatVerdict.collider[i].contact[0] != null && obstacle.transform.GetChild(length - 1).gameObject == greatVerdict.collider[i].contact[0].transform.parent.gameObject)
             {
                 GameManager.instance.Score += obstacle.greatScore;
             }
-            else if (goodVerdict.contact[i] != null && obstacle.transform.GetChild(length - 1).gameObject == goodVerdict.contact[i].transform.parent.gameObject)
+            else if (goodVerdict.collider[i].contact[0] != null && obstacle.transform.GetChild(length - 1).gameObject == goodVerdict.collider[i].contact[0].transform.parent.gameObject)
             {
                 GameManager.instance.Score += obstacle.goodScore;
             }
@@ -279,9 +279,9 @@ public class PlayerController : MonoBehaviour
         int curScore = 0;
         int i = isUp ? 1 : 0; 
         
-        if (allVerdict.contact[i] != null)
+        if (allVerdict.collider[i].contact[0] != null)
         {
-            target = allVerdict.contact[i].gameObject;
+            target = allVerdict.collider[i].contact[0].gameObject;
         }
         else
         {
@@ -295,17 +295,17 @@ public class PlayerController : MonoBehaviour
             return;
         }
         
-        if (perfectVerdict.contact[i] != null && perfectVerdict.contact[i].gameObject == target)
+        if (perfectVerdict.collider[i].contact[0] != null && perfectVerdict.collider[i].contact[0].gameObject == target)
         {
             curScore = targetInfo.perfectScore;
             Debug.Log("Perfect");
         }
-        else if (greatVerdict.contact[i] != null && greatVerdict.contact[i].gameObject == target)
+        else if (greatVerdict.collider[i].contact[0] != null && greatVerdict.collider[i].contact[0].gameObject == target)
         {
             curScore = targetInfo.greatScore;
             Debug.Log("Great");
         }
-        else if (goodVerdict.contact[i] != null && goodVerdict.contact[i].gameObject == target)
+        else if (goodVerdict.collider[i].contact[0] != null && goodVerdict.collider[i].contact[0].gameObject == target)
         {
             curScore = targetInfo.goodScore;
             Debug.Log("Good");
@@ -477,9 +477,9 @@ public class PlayerController : MonoBehaviour
         int i = isUp ? 1 : 0;
         GameObject targetObj = null;
         
-        if (playerVerdict.contact[i] != null)
+        if (playerVerdict.collider[i].contact[0] != null)
         {
-            targetObj = playerVerdict.contact[i].gameObject;
+            targetObj = playerVerdict.collider[i].contact[0].gameObject;
         }
         
         Obstacle obstacleInfo = GetObstacle(targetObj);
