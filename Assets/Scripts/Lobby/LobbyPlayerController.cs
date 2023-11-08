@@ -289,7 +289,7 @@ public class LobbyPlayerController : MonoBehaviour
 
     void Collider()
     {
-        collider = Physics.OverlapBox(transform.position, new Vector3(1, 1, 1), transform.rotation);
+        collider = Physics.OverlapBox(transform.position, new Vector3(1, 3, 1), transform.rotation);
         bool isCheck = false;
         
         if (rigidbody.velocity.magnitude <= 10)
@@ -302,10 +302,6 @@ public class LobbyPlayerController : MonoBehaviour
                 
                     switch (temp.transform.GetComponent<DoorManager>().name)
                     {
-                        case "Sign":
-                            LobbyManager.instance.DoorInit("Sign", "OK");
-                            break;
-                    
                         case "Set":
                             LobbyManager.instance.DoorInit("Set", "Set");
                             break;

@@ -42,11 +42,11 @@ public class HttpServerManager : MonoBehaviour
             {
                 DBManager.instance.nickName = request.downloadHandler.text.Split('|')[1];
                 TCPServerManager.instance.Connect();
-                titleManager.LoginSuccess();
+                //titleManager.LoginSuccess();
             }
             else
             {
-                titleManager.LoginFail();
+                //titleManager.LoginFail();
             }
             
             request.Dispose();
@@ -66,11 +66,11 @@ public class HttpServerManager : MonoBehaviour
             
             if (request.downloadHandler.text == "회원가입 완료")
             {
-                titleManager.RegisterSuccess();
+                //titleManager.RegisterSuccess();
             }
             else
             {
-                titleManager.RegisterFail(request.downloadHandler.text);
+                //titleManager.RegisterFail(request.downloadHandler.text);
             }
             
             request.Dispose();

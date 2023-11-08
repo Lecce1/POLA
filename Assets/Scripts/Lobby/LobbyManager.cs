@@ -82,7 +82,7 @@ public class LobbyManager : MonoBehaviour
 
     void Init()
     {
-        LobbyPlayerController.instance.player.transform.position = new Vector3(0, 0.6f, 0);
+        LobbyPlayerController.instance.player.transform.position = new Vector3(0, 0.6f, 1000);
     }
 
     public void DoorInit(string name, string btnText)
