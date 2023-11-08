@@ -4,6 +4,7 @@ using Sirenix.OdinInspector;
 using UnityEngine;
 using UnityEngine.Localization.Settings;
 using UnityEngine.SceneManagement;
+using UnityEngine.Serialization;
 using UnityEngine.UI;
 using Debug = UnityEngine.Debug;
 
@@ -19,9 +20,6 @@ public class LobbyManager : MonoBehaviour
     [Title("표지판")] 
     public GameObject sign;
     [FoldoutGroup("패널")] 
-    [Title("에러_네트워크")] 
-    public GameObject error_Network;
-    [FoldoutGroup("패널")] 
     [Title("입장 버튼")] 
     public GameObject join_Btn;
     [FoldoutGroup("패널")] 
@@ -34,9 +32,6 @@ public class LobbyManager : MonoBehaviour
     
     [FoldoutGroup("스카이박스")]
     public List<Material> stage_Skybox;
-    
-    [FoldoutGroup("땅")]
-    public List<GameObject> stage_Ground;
 
     [FoldoutGroup("기타")] 
     [Title("입장 버튼 타입")]
@@ -61,9 +56,29 @@ public class LobbyManager : MonoBehaviour
     [Title("언어 오른쪽 화살표")]
     public GameObject set_Language_RightArrow;
 
+    [FoldoutGroup("정보")] 
+    [Title("MoveRoute 클래스 리스트")]
+    public MoveRoute[] moveRoute = new MoveRoute[3];
+    [FoldoutGroup("정보")] 
+    [Title("현재 땅")]
+    public int currentGround;
+    [FoldoutGroup("정보")] 
+    [Title("현재 루트 인덱스")]
+    public int currentRouteIdx;
+    [FoldoutGroup("정보")] 
+    [Title("플레이어 이동 오프셋")]
+    public Vector3 offset = Vector3.up * 0.6f;
+    
     // 뒤로가기 스택
     private Stack<GameObject> backStack;
     public static LobbyManager instance;
+
+    [Serializable]
+    public class MoveRoute
+    {
+        public List<GameObject> routeList;
+        public int defaultRouteIdx;
+    }
     
     void Awake()
     {
@@ -82,7 +97,8 @@ public class LobbyManager : MonoBehaviour
 
     void Init()
     {
-        LobbyPlayerController.instance.player.transform.position = new Vector3(0, 0.6f, 1000);
+        LobbyPlayerController.instance.player.transform.position =
+            moveRoute[currentGround].routeList[moveRoute[currentGround].defaultRouteIdx].transform.position + offset;
     }
 
     public void DoorInit(string name, string btnText)
@@ -120,15 +136,12 @@ public class LobbyManager : MonoBehaviour
     {
         switch (type)
         {
-            case "Stage":
+            case "Move":
                 if (join_Btn.GetComponent<Animator>().GetCurrentAnimatorStateInfo(0).normalizedTime >= 0.9f)
                 {
-                    if (DBManager.instance != null)
-                    {
-                        DBManager.instance.nextScene = "Track";
-                    }
-
-                    SceneManager.LoadScene("Loading");
+                    currentGround = 1;
+                    currentRouteIdx = moveRoute[currentGround].defaultRouteIdx;
+                    LobbyPlayerController.instance.transform.position = moveRoute[currentGround].routeList[moveRoute[currentGround].defaultRouteIdx].transform.position + offset;
                 }
                 break;
 

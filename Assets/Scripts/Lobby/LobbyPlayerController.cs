@@ -11,11 +11,7 @@ public class LobbyPlayerController : MonoBehaviour
     
     [Title("몸통")] 
     public GameObject body;
-    
-    [Title("방향")] 
-    [SerializeField] 
-    private int direction;
-    
+
     [Title("속도")] 
     [SerializeField] 
     private float speed = 10.0f;
@@ -67,41 +63,59 @@ public class LobbyPlayerController : MonoBehaviour
 
     void Move()
     {
-        rigidbody.AddForce(direction * speed, 0, 0);
+        transform.position = Vector3.MoveTowards(transform.position,
+            LobbyManager.instance.moveRoute[LobbyManager.instance.currentGround].routeList[LobbyManager.instance.currentRouteIdx].transform.position + LobbyManager.instance.offset,
+            Time.deltaTime * speed);
+                
+        if (transform.position.x == LobbyManager.instance.moveRoute[LobbyManager.instance.currentGround].routeList[LobbyManager.instance.currentRouteIdx]
+                .transform.position.x)
+        {
+            if (LobbyManager.instance.currentRouteIdx == LobbyManager.instance.moveRoute[LobbyManager.instance.currentGround].defaultRouteIdx)
+            {
+                body.transform.rotation = Quaternion.Euler(0, 180, 0);
+            }
+            else
+            {
+                body.transform.rotation = Quaternion.Euler(0, 0, 0);
+            }
+
+            isMove = false;
+            anim.SetBool("isMove", isMove);
+        }
     }
 
     public void OnMove(InputValue value)
     {
-        if (isMoveAvailable)
+        if (isMoveAvailable && isMove == false)
         {
             Vector2 vector = value.Get<Vector2>();
         
             if (vector.x < 0)
             {
                 body.transform.rotation = Quaternion.Euler(0, -90, 0);
-                direction = -1;
                 isMove = true;
                 anim.SetBool("isMove", isMove);
-            }
-            else if (vector.x == 0)
-            {
-                direction = 0;
-                isMove = false;
-                anim.SetBool("isMove", isMove);
+                
+                if (LobbyManager.instance.currentRouteIdx - 1 >= 0)
+                {
+                    LobbyManager.instance.currentRouteIdx--;
+                }
+                
+                Move();
             }
             else if (vector.x > 0)
             {
-                body.transform.rotation = Quaternion.Euler(0, -270, 0);
-                direction = 1;
+                body.transform.rotation = Quaternion.Euler(0, 90, 0);
                 isMove = true;
                 anim.SetBool("isMove", isMove);
+
+                if (LobbyManager.instance.currentRouteIdx + 1 < LobbyManager.instance.moveRoute[LobbyManager.instance.currentGround].routeList.Count)
+                {
+                    LobbyManager.instance.currentRouteIdx++;
+                }
+
+                Move();
             }
-        }
-        else
-        {
-            direction = 0;
-            isMove = false;
-            anim.SetBool("isMove", isMove);
         }
     }
 
@@ -112,7 +126,11 @@ public class LobbyPlayerController : MonoBehaviour
             if (!LobbyManager.instance.isPanelOpen && LobbyManager.instance.isJoinBtnOn)
             {
                 LobbyManager.instance.Button(LobbyManager.instance.join_Btn_Type);
-                isMoveAvailable = false;
+
+                if (LobbyManager.instance.join_Btn_Type != "Move")
+                {
+                    isMoveAvailable = false;
+                }
             }
             else if (LobbyManager.instance.set.activeSelf)
             {
@@ -257,14 +275,12 @@ public class LobbyPlayerController : MonoBehaviour
         if (isLeft == true)
         {
             body.transform.rotation = Quaternion.Euler(0, -90, 0);
-            direction = -1;
             isMove = true;
             anim.SetBool("isMove", isMove);
         }
         else
         {
             body.transform.rotation = Quaternion.Euler(0, -270, 0);
-            direction = 1;
             isMove = true;
             anim.SetBool("isMove", isMove);
         }
@@ -272,7 +288,6 @@ public class LobbyPlayerController : MonoBehaviour
 
     public void OnMoveUp()
     {
-        direction = 0;
         isMove = false;
         anim.SetBool("isMove", isMove);
     }
@@ -311,8 +326,7 @@ public class LobbyPlayerController : MonoBehaviour
                             break;
 
                         case "Stage":
-                            LobbyManager.instance.DoorInit("Stage", "Join");
-                            DBManager.instance.currentStageNum = 1;
+                            LobbyManager.instance.DoorInit("Move", "Join");
                             break;
                     }
                 }

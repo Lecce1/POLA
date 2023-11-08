@@ -95,6 +95,7 @@ public class TitleManager : MonoBehaviour
             title_Press_Text.SetActive(false);
             playerController.enabled = true;
             playerInput.enabled = true;
+            LobbyManager.instance.currentGround = 0;
             StartCoroutine(FadeOut());
         }
     }
