@@ -6,7 +6,7 @@ using UnityEngine.InputSystem;
 using UnityEngine.SceneManagement;
 using UnityEngine.UI;
 
-public class NewPlayerController : MonoBehaviour
+public class PlayerController : MonoBehaviour
 {
     [FoldoutGroup("음악")]
     [Title("BPM")]
@@ -15,7 +15,6 @@ public class NewPlayerController : MonoBehaviour
     
     [FoldoutGroup("음악")]
     [Title("오디오")]
-    [SerializeField]
     public AudioManager audioManager;
 
     [FoldoutGroup("변수")] 
@@ -38,25 +37,7 @@ public class NewPlayerController : MonoBehaviour
     
     [FoldoutGroup("변수")] 
     public bool isLongInteract;
-    
-    [FoldoutGroup("변수")] 
-    public int score;
 
-    [FoldoutGroup("변수")]
-    [SerializeField]
-    private int Combo;
-    
-    [FoldoutGroup("변수")]
-    public int combo
-    {
-        get { return Combo; }
-        set
-        {
-            Combo = value;
-            Debug.Log("Combo: " + Combo);
-        }
-    }
-    
     [FoldoutGroup("변수")]
     [SerializeField]
     private int attackCounter;
@@ -87,29 +68,32 @@ public class NewPlayerController : MonoBehaviour
     [FoldoutGroup("일반")] 
     public PlayerTrails trails;
     
-    [FoldoutGroup("일반")] 
-    [SerializeField]
+    [FoldoutGroup("일반")]
     public LayerMask ground;
     
     [FoldoutGroup("일반")] 
     public GameObject target;
 
     [FoldoutGroup("일반")] 
+    [SerializeField]
     private GameObject lastPassedObject;
-    
+
+    private WaitForSeconds longNoteTime;
+
     void Start()
     {
         bpm = audioManager.bpm;
         anim = GetComponent<Animator>();
         Physics.gravity = new Vector3(0, -9.81f, 0);
         isInvincibility = false;
-        score = 0;
         PlayerInput input = GetComponent<PlayerInput>();
-        input.actions.FindAction("InteractDown").canceled += OnInteractKeyUp;
-        input.actions.FindAction("InteractUp").canceled += OnInteractKeyUp;
+        input.actions.FindAction("Up").canceled += OnKeyUp;
+        input.actions.FindAction("Down").canceled += OnKeyUp;
         greatVerdict.onTriggerExitEvent += HandleGreatVerdictExit;
+        longNoteTime = new WaitForSeconds(15f / bpm);
     }
-    private void FixedUpdate()
+    
+    void FixedUpdate()
     {
         if (!isDead)
         {
@@ -130,11 +114,9 @@ public class NewPlayerController : MonoBehaviour
         
         camInfo.transform.position = (hitInfo1.point + hitInfo2.point) / 2;
         groundGap = (hitInfo1.point - hitInfo2.point).magnitude;
-        
         SetTransform(perfectVerdict.gameObject, groundGap);
         SetTransform(greatVerdict.gameObject, groundGap);
         SetTransform(allVerdict.gameObject, groundGap);
-        
         var scale = perfectVerdict.gameObject.transform.localScale;
         scale.y = groundGap;
         playerVerdict.transform.localScale = scale;
@@ -162,7 +144,7 @@ public class NewPlayerController : MonoBehaviour
                 if (obstacleInfo.isUp == isUp  && !obstacleInfo.wasInteracted)
                 {
                     Debug.Log("누르지 않고 그냥 지나침");
-                    Hurt(obstacleInfo, obstacleInfo.damage);
+                    Hurt(obstacleInfo);
                 }
                 else if (obstacleInfo.isUp != isUp  && !obstacleInfo.wasInteracted)
                 {
@@ -180,7 +162,7 @@ public class NewPlayerController : MonoBehaviour
         transform.position += transform.forward * (bpm / 15f * Time.fixedDeltaTime);
     }
 
-    public void Hurt(Obstacle info, int damage)
+    public void Hurt(Obstacle info)
     {
         if (isInvincibility)
         {
@@ -189,9 +171,9 @@ public class NewPlayerController : MonoBehaviour
 
         info.wasInteracted = true;
         ComboReset(info);
-        health -= damage;
-        Debug.LogError(health);
-        
+        health -= info.damage;
+        GameManager.instance.StatUpdate();
+
         if (health <= 0)
         {
             Die();
@@ -222,46 +204,49 @@ public class NewPlayerController : MonoBehaviour
     /// <summary>
     /// 상호작용 버튼을 뗐을때
     /// </summary>
-    void OnInteractKeyUp(InputAction.CallbackContext context)
+    void OnKeyUp(InputAction.CallbackContext context)
     {
         Obstacle obstacle = GetObstacle(lastPassedObject);
+        
         if (obstacle != null && obstacle.beatLength != 0 && isLongInteract)
         {
             int length = obstacle.gameObject.transform.childCount;
             int i = isUp ? 1 : 0;
+            
             if (perfectVerdict.contact[i] != null && obstacle.transform.GetChild(length - 1).gameObject == perfectVerdict.contact[i].transform.parent.gameObject)
             {
-                score += obstacle.perfectScore;
+                GameManager.instance.Score += obstacle.perfectScore;
             }
             else if (greatVerdict.contact[i] != null && obstacle.transform.GetChild(length - 1).gameObject == greatVerdict.contact[i].transform.parent.gameObject)
             {
-                score += obstacle.greatScore;
+                GameManager.instance.Score += obstacle.greatScore;
             }
             else
             {
-                Debug.Log("롱노트 마지막에 제대로 못 뗐음");
-                Hurt(obstacle, obstacle.damage);
+                Hurt(obstacle);
             }
         }
         
         isLongInteract = false;
     }
 
-    public void OnInteractUp()
+    public void OnUp()
     {
         if (!isUp)
         {
             OnFlip();
         } 
+        
         Interact();
     }
     
-    public void OnInteractDown()
+    public void OnDown()
     {
         if (isUp)
         {
             OnFlip();
         }
+        
         Interact();
     }
 
@@ -296,8 +281,7 @@ public class NewPlayerController : MonoBehaviour
         }
         else
         {
-            Debug.Log("제대로 못누름");
-            Hurt(targetInfo, targetInfo.damage);
+            Hurt(targetInfo);
             return;
         }
         
@@ -319,28 +303,28 @@ public class NewPlayerController : MonoBehaviour
                 Attack();
                 break;
         }
-        score += curScore;
-        combo++;
+        
+        GameManager.instance.Score += curScore;
+        GameManager.instance.Combo++;
     }
 
     IEnumerator LongNoteProcess(Obstacle obstacle)
     {
         int length = obstacle.transform.childCount;
-        WaitForSeconds time = new WaitForSeconds(15f / bpm);
-        
+
         while (isLongInteract)
         {
-            score += obstacle.perfectScore;
-            combo++;
+            GameManager.instance.Score += obstacle.perfectScore;
+            GameManager.instance.Combo++;
             
             if (lastPassedObject != null && lastPassedObject.transform.parent.gameObject == obstacle.transform.GetChild(length - 1).gameObject && isLongInteract)
             {
                 isLongInteract = false;
-                Debug.Log("롱노트를 지나갔는데도 안뗐음");
-                Hurt(obstacle, obstacle.damage);
+                Hurt(obstacle);
                 yield break;
             }
-            yield return time;
+            
+            yield return longNoteTime;
         }
     }
     
@@ -350,6 +334,7 @@ public class NewPlayerController : MonoBehaviour
         {
             return null;
         }
+        
         while (obj.transform != obj.transform.root)
         {
             Obstacle obstacle = obj.GetComponent<Obstacle>();
@@ -368,7 +353,7 @@ public class NewPlayerController : MonoBehaviour
     void ComboReset(Obstacle obstacle)
     {
         obstacle.wasInteracted = true;
-        combo = 0;
+        GameManager.instance.Combo = 0;
     }
 
     public void Attack()
@@ -377,7 +362,11 @@ public class NewPlayerController : MonoBehaviour
         anim.SetBool("isAttacking", true);
         attackCounter %= 2;
         Destroy(target);
-        target = null;
+
+        if (target != null)
+        {
+            target = null;
+        }
     }
     
     /// <summary>
@@ -425,18 +414,19 @@ public class NewPlayerController : MonoBehaviour
         
         anim.SetTrigger("Die");
         isDead = true;
+        GetComponent<PlayerInput>().enabled = false;
         audioManager.audio.Stop();
         Invoke(nameof(Reset), 2f);
         Destroy(gameObject.GetComponent<Rigidbody>());
         StopAllCoroutines();
     }
 
-    private void Reset()
+    void Reset()
     {
         SceneManager.LoadScene(DBManager.instance.gameSceneName);
     }
 
-    private void OnTriggerEnter(Collider other)
+    void OnTriggerEnter(Collider other)
     {
         Obstacle obstacleInfo = GetObstacle(other.gameObject);
         
@@ -451,10 +441,9 @@ public class NewPlayerController : MonoBehaviour
         }
     }
 
-    private void OnTriggerStay(Collider other)
+    void OnTriggerStay(Collider other)
     {
         int i = isUp ? 1 : 0;
-
         GameObject targetObj = null;
         
         if (playerVerdict.contact[i] != null)
@@ -466,12 +455,11 @@ public class NewPlayerController : MonoBehaviour
 
         if (obstacleInfo != null && obstacleInfo.type == NoteType.Wall && !obstacleInfo.wasInteracted)
         {
-            Debug.Log("벽에 맞음");
-            Hurt(obstacleInfo, obstacleInfo.damage);
+            Hurt(obstacleInfo);
         }
     }
 
-    private void OnTriggerExit(Collider other)
+    void OnTriggerExit(Collider other)
     {
         Obstacle obstacleInfo = GetObstacle(other.gameObject);
         
@@ -479,7 +467,7 @@ public class NewPlayerController : MonoBehaviour
         {
             if (obstacleInfo.beatLength == 0)
             {
-                score += obstacleInfo.perfectScore;
+                GameManager.instance.Score += obstacleInfo.perfectScore;
             }
             else
             {
@@ -487,7 +475,7 @@ public class NewPlayerController : MonoBehaviour
                 
                 if (other.transform.parent == obstacleInfo.gameObject.transform.GetChild(length - 1))
                 {
-                    score += obstacleInfo.perfectScore;
+                    GameManager.instance.Score += obstacleInfo.perfectScore;
                 }
             }
         }

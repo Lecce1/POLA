@@ -12201,6 +12201,8 @@ MonoBehaviour:
   cameraManager: {fileID: 288578068}
   isPanelOpen: 0
   player: {fileID: 2257059355786232031}
+  score: 0
+  combo: 0
 --- !u!1 &300759899
 GameObject:
   m_ObjectHideFlags: 0
@@ -19639,7 +19641,7 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 588745672}
   serializedVersion: 2
-  m_LocalRotation: {x: -0.0043393723, y: 0.023736876, z: 0.00010303314, w: 0.99970883}
+  m_LocalRotation: {x: -0.0043393723, y: 0.023736883, z: 0.00010303318, w: 0.99970883}
   m_LocalPosition: {x: 2, y: 4, z: -10}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
@@ -66139,12 +66141,10 @@ MonoBehaviour:
   isGrounded: 0
   isUp: 0
   groundGap: 0
-  health: 3
+  health: 1
   isInvincibility: 0
   isDead: 0
   isLongInteract: 0
-  score: 0
-  Combo: 0
   attackCounter: 0
   camInfo: {fileID: 457495187}
   perfectVerdict: {fileID: 898833160}
@@ -66157,6 +66157,7 @@ MonoBehaviour:
     serializedVersion: 2
     m_Bits: 64
   target: {fileID: 0}
+  lastPassedObject: {fileID: 0}
 --- !u!4 &2263251406171693151
 Transform:
   m_ObjectHideFlags: 0
@@ -76892,9 +76893,9 @@ SceneRoots:
   - {fileID: 75228787}
   - {fileID: 1636338770}
   - {fileID: 109767690}
+  - {fileID: 299855514}
   - {fileID: 1783933448}
   - {fileID: 278038865}
-  - {fileID: 299855514}
   - {fileID: 1988459656}
   - {fileID: 302251148}
   - {fileID: 1197242666}

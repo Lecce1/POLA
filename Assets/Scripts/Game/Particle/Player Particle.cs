@@ -5,7 +5,7 @@ public class PlayerParticle : MonoBehaviour
 {
     [FoldoutGroup("일반")]
     [SerializeField]
-    private NewPlayerController player;
+    private PlayerController player;
 
     [FoldoutGroup("파티클")]
     public ParticleSystem landDust;
@@ -50,7 +50,7 @@ public class PlayerParticle : MonoBehaviour
     
     void Start()
     {
-        player = GetComponent<NewPlayerController>();
+        player = GetComponent<PlayerController>();
     }
     
     void Update() => WalkParticle();

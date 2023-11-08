@@ -413,7 +413,7 @@ MonoBehaviour:
   - "TIP. \uD55C\uAD6D\uC5B4 3\uBC88"
   loadingIcon: {fileID: 5631733331237232121}
   loadingText: {fileID: 26182809}
-  minimumLoadTime: 5
+  minimumLoadTime: 3
   currentProgress: 0
 --- !u!1 &851119800
 GameObject:

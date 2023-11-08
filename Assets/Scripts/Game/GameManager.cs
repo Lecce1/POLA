@@ -47,7 +47,41 @@ public class GameManager : MonoBehaviour
     
     [FoldoutGroup("플레이어")] 
     [Title("플레이어")] 
-    public NewPlayerController player;
+    public PlayerController player;
+    
+    [FoldoutGroup("정보")] 
+    [Title("점수")] 
+    [SerializeField]
+    private int score;
+    
+    [FoldoutGroup("정보")] 
+    [Title("콤보")] 
+    public int Score
+    {
+        get { return score; }
+        set
+        {
+            score = value;
+            StatUpdate();
+        }
+    }
+    
+    [FoldoutGroup("정보")] 
+    [Title("콤보")]
+    [SerializeField]
+    private int combo;
+    
+    [FoldoutGroup("정보")] 
+    [Title("콤보")] 
+    public int Combo
+    {
+        get { return combo; }
+        set
+        {
+            combo = value;
+            StatUpdate();
+        }
+    }
     
     // 뒤로가기 스택
     private Stack<GameObject> backStack;
@@ -82,11 +116,19 @@ public class GameManager : MonoBehaviour
         }
         
         StartCoroutine(CountDown());
+        Init();
     }
 
-    void StatUpdate()
+    void Init()
     {
-        playerStateText.text = "Score: " + player.score + "\nCombo: " + player.combo + "\n Health: " + player.health;
+        score = 0;
+        combo = 0;
+        StatUpdate();
+    }
+
+    public void StatUpdate()
+    {
+        playerStateText.text = "Score: " + score + "\nCombo: " + combo + "\n Health: " + player.health;
     }
 
     public void Button(string type)
@@ -117,13 +159,7 @@ public class GameManager : MonoBehaviour
             
             case "Stage":
                 Time.timeScale = 1;
-                
-                if (DBManager.instance != null)
-                {
-                    DBManager.instance.nextScene = DBManager.instance.gameSceneName;
-                }
-
-                SceneManager.LoadScene("Loading");
+                SceneManager.LoadScene(DBManager.instance.gameSceneName);
                 break;
             
             case "Back":

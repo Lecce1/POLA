@@ -3,7 +3,7 @@ using UnityEngine;
 
 public class CameraManager : MonoBehaviour
 {
-    public NewPlayerController player;
+    public PlayerController player;
     private CinemachineTransposer transposer;
     public Vector3 offsetNormal;
     

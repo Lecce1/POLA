@@ -6,7 +6,7 @@
             "id": "912f1264-e1db-4055-95f6-f8e767234f0e",
             "actions": [
                 {
-                    "name": "InteractUp",
+                    "name": "Up",
                     "type": "Button",
                     "id": "97ecb114-7cee-4a24-b6d8-8c31f3da5340",
                     "expectedControlType": "Button",
@@ -15,7 +15,7 @@
                     "initialStateCheck": true
                 },
                 {
-                    "name": "InteractDown",
+                    "name": "Down",
                     "type": "Button",
                     "id": "749093a6-66ea-401a-a9f2-c51f4171e339",
                     "expectedControlType": "Button",
@@ -32,7 +32,7 @@
                     "interactions": "",
                     "processors": "",
                     "groups": "PC",
-                    "action": "InteractUp",
+                    "action": "Up",
                     "isComposite": false,
                     "isPartOfComposite": false
                 },
@@ -43,7 +43,7 @@
                     "interactions": "",
                     "processors": "",
                     "groups": "CONSOLE",
-                    "action": "InteractUp",
+                    "action": "Up",
                     "isComposite": false,
                     "isPartOfComposite": false
                 },
@@ -54,7 +54,7 @@
                     "interactions": "",
                     "processors": "",
                     "groups": "PC",
-                    "action": "InteractUp",
+                    "action": "Up",
                     "isComposite": false,
                     "isPartOfComposite": false
                 },
@@ -65,7 +65,7 @@
                     "interactions": "",
                     "processors": "",
                     "groups": "PC",
-                    "action": "InteractDown",
+                    "action": "Down",
                     "isComposite": false,
                     "isPartOfComposite": false
                 },
@@ -76,7 +76,7 @@
                     "interactions": "",
                     "processors": "",
                     "groups": "CONSOLE",
-                    "action": "InteractDown",
+                    "action": "Down",
                     "isComposite": false,
                     "isPartOfComposite": false
                 },
@@ -87,7 +87,7 @@
                     "interactions": "",
                     "processors": "",
                     "groups": "PC",
-                    "action": "InteractDown",
+                    "action": "Down",
                     "isComposite": false,
                     "isPartOfComposite": false
                 },
@@ -98,7 +98,7 @@
                     "interactions": "",
                     "processors": "",
                     "groups": "MOBILE",
-                    "action": "InteractDown",
+                    "action": "Down",
                     "isComposite": false,
                     "isPartOfComposite": false
                 }

@@ -67,7 +67,7 @@ public class NoteMake : MonoBehaviour
     
     [FoldoutGroup("일반")]
     [Title("플레이어")]
-    public NewPlayerController player;
+    public PlayerController player;
     
     [FoldoutGroup("앰플")]
     [Title("오브젝트")]
@@ -117,7 +117,7 @@ public class NoteMake : MonoBehaviour
     void Start()
     {
         bpm = am.bpm;
-        player = GameObject.Find("Player").GetComponent<NewPlayerController>();
+        player = GameObject.Find("Player").GetComponent<PlayerController>();
         ampTransform = ampParent.GetComponent<RectTransform>();
         
         if (noteWriteMod || noteEditMod)
