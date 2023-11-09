@@ -27,17 +27,6 @@
             "bindings": [
                 {
                     "name": "",
-                    "id": "640d3151-56a8-4a40-94e3-65771b7e9329",
-                    "path": "<Mouse>/leftButton",
-                    "interactions": "",
-                    "processors": "",
-                    "groups": "PC",
-                    "action": "Up",
-                    "isComposite": false,
-                    "isPartOfComposite": false
-                },
-                {
-                    "name": "",
                     "id": "8ec76ab0-6122-414e-bfc1-3d428ac257db",
                     "path": "<XInputController>/leftShoulder",
                     "interactions": "",
@@ -60,17 +49,6 @@
                 },
                 {
                     "name": "",
-                    "id": "bc38f147-9efa-4dc8-8c75-36fd06190458",
-                    "path": "<Mouse>/rightButton",
-                    "interactions": "",
-                    "processors": "",
-                    "groups": "PC",
-                    "action": "Down",
-                    "isComposite": false,
-                    "isPartOfComposite": false
-                },
-                {
-                    "name": "",
                     "id": "ce122243-ea26-4882-b6ad-068b6cddc774",
                     "path": "<XInputController>/rightShoulder",
                     "interactions": "",
@@ -87,17 +65,6 @@
                     "interactions": "",
                     "processors": "",
                     "groups": "PC",
-                    "action": "Down",
-                    "isComposite": false,
-                    "isPartOfComposite": false
-                },
-                {
-                    "name": "",
-                    "id": "9a316317-e609-4d11-856e-0196dece38b2",
-                    "path": "<Touchscreen>/touch*/press",
-                    "interactions": "",
-                    "processors": "",
-                    "groups": "MOBILE",
                     "action": "Down",
                     "isComposite": false,
                     "isPartOfComposite": false
@@ -359,7 +326,7 @@
                 },
                 {
                     "name": "",
-                    "id": "7a5a3046-64f4-4455-b568-34d48e190659",
+                    "id": "4e0ad4c8-dfe2-4663-895e-4be2b166deb4",
                     "path": "<Touchscreen>/touch*/press",
                     "interactions": "",
                     "processors": "",

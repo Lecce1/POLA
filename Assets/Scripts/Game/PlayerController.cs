@@ -134,7 +134,6 @@ public class PlayerController : MonoBehaviour
             {
                 if (obstacleInfo.isUp == isUp  && !obstacleInfo.wasInteracted)
                 {
-                    Debug.Log("누르지 않고 그냥 지나침");
                     Hurt(obstacleInfo);
                 }
                 else if (obstacleInfo.isUp != isUp  && !obstacleInfo.wasInteracted)
@@ -193,9 +192,10 @@ public class PlayerController : MonoBehaviour
         }
     }
     
-    public void OnKeyUp_Mobile()
+    public void OnKeyUp()
     {
         Obstacle obstacle = GetObstacle(lastPassedObject);
+        Debug.Log("!");
         
         if (obstacle != null && obstacle.beatLength != 0 && isLongInteract)
         {
@@ -228,7 +228,6 @@ public class PlayerController : MonoBehaviour
     void OnKeyUp(InputAction.CallbackContext context)
     {
         Obstacle obstacle = GetObstacle(lastPassedObject);
-        
         if (obstacle != null && obstacle.beatLength != 0 && isLongInteract)
         {
             int length = obstacle.gameObject.transform.childCount;
@@ -273,6 +272,7 @@ public class PlayerController : MonoBehaviour
 
     public void OnUp()
     {
+        Debug.Log("up");
         if (GameManager.instance.isCountDown)
         {
             return;
@@ -288,6 +288,7 @@ public class PlayerController : MonoBehaviour
     
     public void OnDown()
     {
+        Debug.Log("down");
         if (GameManager.instance.isCountDown)
         {
             return;
@@ -305,6 +306,8 @@ public class PlayerController : MonoBehaviour
     {
         GameObject target;
         int i = isUp ? 1 : 0; 
+        
+        Debug.Log("?");
         
         if (verdictBar.transform.GetChild(3).GetComponent<VerdictBar>().collider[i].contact[0] != null)
         {
