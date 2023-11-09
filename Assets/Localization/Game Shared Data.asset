@@ -60,7 +60,11 @@ MonoBehaviour:
     m_Metadata:
       m_Items: []
   - m_Id: 2873679851085824
-    m_Key: Press
+    m_Key: Press_Home
+    m_Metadata:
+      m_Items: []
+  - m_Id: 2914935968358400
+    m_Key: Press_Retry
     m_Metadata:
       m_Items: []
   m_Metadata:

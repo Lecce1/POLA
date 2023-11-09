@@ -446,14 +446,9 @@ public class PlayerController : MonoBehaviour
         isDead = true;
         GetComponent<PlayerInput>().enabled = false;
         audioManager.audio.Stop();
-        Invoke(nameof(Reset), 2f);
         Destroy(gameObject.GetComponent<Rigidbody>());
         StopAllCoroutines();
-    }
-    
-    void Reset()
-    {
-        SceneManager.LoadScene(DBManager.instance.gameSceneName);
+        GameManager.instance.Finish();
     }
 
     void OnTriggerEnter(Collider other)

@@ -1,11 +1,9 @@
 using System;
-using System.Collections;
 using System.Collections.Generic;
 using Sirenix.OdinInspector;
 using UnityEngine;
 using UnityEngine.Localization.Settings;
 using UnityEngine.SceneManagement;
-using UnityEngine.Serialization;
 using UnityEngine.UI;
 using Debug = UnityEngine.Debug;
 
@@ -18,14 +16,14 @@ public class LobbyManager : MonoBehaviour
     [Title("상점")] 
     public GameObject shop;
     [FoldoutGroup("패널")] 
-    [Title("표지판")] 
-    public GameObject sign;
-    [FoldoutGroup("패널")] 
     [Title("입장 버튼")] 
     public GameObject join_Btn;
     [FoldoutGroup("패널")] 
     [Title("스테이지 정보")] 
     public GameObject info;
+    [FoldoutGroup("패널")] 
+    [Title("키 바인딩")] 
+    public GameObject keyBinding;
     [FoldoutGroup("패널")] 
     [Title("종료")] 
     public GameObject exit;
@@ -120,18 +118,18 @@ public class LobbyManager : MonoBehaviour
 
     public void Join_Btn_OnOff(bool isOn, bool onlyStage)
     {
-        if (isOn == true)
+        if (isOn)
         {
-            if (!onlyStage && join_Btn.activeSelf)
+            if (!onlyStage && join_Btn.activeSelf && DBManager.instance.currentPlatform == "MOBILE")
             {
                 join_Btn.GetComponent<Animator>().Play("JoinOn");
             }
             
             isJoinBtnOn = true;
         }
-        else if (isOn == false)
+        else if (!isOn)
         {
-            if (!onlyStage && join_Btn.activeSelf)
+            if (!onlyStage && join_Btn.activeSelf && DBManager.instance.currentPlatform == "MOBILE")
             {
                 join_Btn.GetComponent<Animator>().Play("JoinOff");
             }
@@ -194,6 +192,11 @@ public class LobbyManager : MonoBehaviour
                         {
                             join_Btn.SetActive(false);
                         }
+
+                        if (keyBinding.activeSelf)
+                        {
+                            keyBinding.SetActive(false);
+                        }
                     }
                 }
                 break;
@@ -211,33 +214,26 @@ public class LobbyManager : MonoBehaviour
                         {
                             join_Btn.SetActive(false);
                         }
-                    }
-                }
-                break;
-            
-            case "Sign":
-                if (!sign.activeSelf)
-                {
-                    if (join_Btn.GetComponent<Animator>().GetCurrentAnimatorStateInfo(0).normalizedTime >= 0.9f)
-                    {
-                        sign.SetActive(true);
-                        backStack.Push(sign);
-                        isPanelOpen = true;
-                    
-                        if (join_Btn.activeSelf)
+                        
+                        if (keyBinding.activeSelf)
                         {
-                            join_Btn.SetActive(false);
+                            keyBinding.SetActive(false);
                         }
                     }
                 }
                 break;
-            
+
             case "Exit":
                 if (!exit.activeSelf)
                 {
                     exit.SetActive(true);
                     backStack.Push(exit);
                     isPanelOpen = true;
+                    
+                    if (keyBinding.activeSelf)
+                    {
+                        keyBinding.SetActive(false);
+                    }
                 }
                 break;
             
@@ -315,14 +311,6 @@ public class LobbyManager : MonoBehaviour
                     isCheck = true;
                 }
                 break;
-            
-            case "Sign":
-                if (sign.activeSelf)
-                {
-                    sign.SetActive(false);
-                    isCheck = true;
-                }
-                break;
         }
 
         if (isCheck == true)
@@ -339,6 +327,11 @@ public class LobbyManager : MonoBehaviour
                 }
 
                 isSetBtn = false;
+            }
+            
+            if (!keyBinding.activeSelf)
+            {
+                keyBinding.SetActive(true);
             }
         }
     }

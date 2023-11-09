@@ -66,6 +66,10 @@ MonoBehaviour:
     m_Localized: Press any key to go home
     m_Metadata:
       m_Items: []
+  - m_Id: 2914935968358400
+    m_Localized: Press any key to retry
+    m_Metadata:
+      m_Items: []
   references:
     version: 2
     RefIds: []

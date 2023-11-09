@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using Sirenix.OdinInspector;
 using UnityEngine;
 using UnityEngine.InputSystem;
+using UnityEngine.Localization.Settings;
 using UnityEngine.SceneManagement;
 using UnityEngine.UI;
 
@@ -87,6 +88,9 @@ public class GameManager : MonoBehaviour
     [Title("패널")] 
     public GameObject resultPanel;
     [FoldoutGroup("결과 창")] 
+    [Title("성공 실패 텍스트")] 
+    public Text clearText;
+    [FoldoutGroup("결과 창")] 
     [Title("Perfect 텍스트")] 
     public Text perfectText;
     [FoldoutGroup("결과 창")] 
@@ -104,6 +108,9 @@ public class GameManager : MonoBehaviour
     [FoldoutGroup("결과 창")] 
     [Title("Combo 텍스트")] 
     public Text comboText;
+    [FoldoutGroup("결과 창")] 
+    [Title("Press 텍스트")] 
+    public Text pressText;
     
     // 뒤로가기 스택
     private Stack<GameObject> backStack;
@@ -213,7 +220,7 @@ public class GameManager : MonoBehaviour
                 
                 if (DBManager.instance != null)
                 {
-                    DBManager.instance.nextScene = "Track";
+                    DBManager.instance.nextScene = "Lobby";
                 }
 
                 SceneManager.LoadScene("Loading");
@@ -272,11 +279,19 @@ public class GameManager : MonoBehaviour
         audioManager.audio.Pause();
         playerController.GetComponent<PlayerInput>().enabled = false;
 
-        int i = 3;
+        int i = 4;
         
         while (i > 0)
         {
-            countDownPanel.transform.GetChild(0).GetComponent<Text>().text = i.ToString();
+            if (i == 4)
+            {
+                countDownPanel.transform.GetChild(0).GetComponent<Text>().text = "Ready";
+            }
+            else
+            {
+                countDownPanel.transform.GetChild(0).GetComponent<Text>().text = i.ToString();
+            }
+
             i--;
             yield return waitForSeconds;
         }
@@ -301,6 +316,18 @@ public class GameManager : MonoBehaviour
     {
         isCountDown = true;
         playerController.GetComponent<Animator>().SetBool("isCountDown", isCountDown);
+
+        if (playerController.isDead)
+        {
+            clearText.text = LocalizationSettings.StringDatabase.GetLocalizedString("Game", "Fail", LocalizationSettings.SelectedLocale);
+            pressText.text = LocalizationSettings.StringDatabase.GetLocalizedString("Game", "Press_Retry", LocalizationSettings.SelectedLocale);
+        }
+        else
+        {
+            clearText.text = LocalizationSettings.StringDatabase.GetLocalizedString("Game", "Success", LocalizationSettings.SelectedLocale);
+            pressText.text = LocalizationSettings.StringDatabase.GetLocalizedString("Game", "Press_Home", LocalizationSettings.SelectedLocale);
+        }
+        
         perfectText.text = perfectCount.ToString();
         greatText.text = greatCount.ToString();
         goodText.text = goodCount.ToString();
@@ -323,9 +350,15 @@ public class GameManager : MonoBehaviour
         {
             if (Input.anyKey)
             {
-                Debug.Log("test");
-                DBManager.instance.nextScene = "Lobby";
-                SceneManager.LoadScene("Loading");
+                if (playerController.isDead)
+                {
+                    SceneManager.LoadScene(DBManager.instance.gameSceneName);
+                }
+                else
+                {
+                    DBManager.instance.nextScene = "Lobby";
+                    SceneManager.LoadScene("Loading");
+                }
             }
             
             yield return null;

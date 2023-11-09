@@ -18,52 +18,8 @@ MonoBehaviour:
   m_Metadata:
     m_Items: []
   m_TableData:
-  - m_Id: 37823176704
-    m_Localized: ID
-    m_Metadata:
-      m_Items: []
-  - m_Id: 863006351360
-    m_Localized: PW
-    m_Metadata:
-      m_Items: []
-  - m_Id: 938919059456
-    m_Localized: Remember Me
-    m_Metadata:
-      m_Items: []
-  - m_Id: 1024361226240
-    m_Localized: Sign Up
-    m_Metadata:
-      m_Items: []
-  - m_Id: 1113972531200
-    m_Localized: Login
-    m_Metadata:
-      m_Items: []
-  - m_Id: 2204831309824
-    m_Localized: NickName
-    m_Metadata:
-      m_Items: []
-  - m_Id: 2884006567936
-    m_Localized: Join
-    m_Metadata:
-      m_Items: []
-  - m_Id: 3190677299200
-    m_Localized: Error
-    m_Metadata:
-      m_Items: []
-  - m_Id: 3225884286976
-    m_Localized: OK
-    m_Metadata:
-      m_Items: []
-  - m_Id: 4087172030464
-    m_Localized: Please check your network status.
-    m_Metadata:
-      m_Items: []
   - m_Id: 2349479528226816
     m_Localized: Press any key
-    m_Metadata:
-      m_Items: []
-  - m_Id: 2349564001509376
-    m_Localized: Press screen to start
     m_Metadata:
       m_Items: []
   references:

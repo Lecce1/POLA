@@ -35,7 +35,7 @@ MonoBehaviour:
     m_Metadata:
       m_Items: []
   - m_Id: 2121968640000
-    m_Localized: SETTING
+    m_Localized: SETTINGS
     m_Metadata:
       m_Items: []
   - m_Id: 2253032251392
@@ -136,6 +136,14 @@ MonoBehaviour:
       m_Items: []
   - m_Id: 648105933398016
     m_Localized: NO
+    m_Metadata:
+      m_Items: []
+  - m_Id: 2951786208944128
+    m_Localized: PLAY
+    m_Metadata:
+      m_Items: []
+  - m_Id: 2951876277428224
+    m_Localized: LATENCY
     m_Metadata:
       m_Items: []
   references:

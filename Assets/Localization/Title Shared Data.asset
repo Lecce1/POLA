@@ -15,52 +15,8 @@ MonoBehaviour:
   m_TableCollectionName: Title
   m_TableCollectionNameGuidString: 0d99b396652514859901bff858396f49
   m_Entries:
-  - m_Id: 37823176704
-    m_Key: ID
-    m_Metadata:
-      m_Items: []
-  - m_Id: 863006351360
-    m_Key: PW
-    m_Metadata:
-      m_Items: []
-  - m_Id: 938919059456
-    m_Key: Remember Me
-    m_Metadata:
-      m_Items: []
-  - m_Id: 1024361226240
-    m_Key: Sign Up
-    m_Metadata:
-      m_Items: []
-  - m_Id: 1113972531200
-    m_Key: Login
-    m_Metadata:
-      m_Items: []
-  - m_Id: 2204831309824
-    m_Key: NickName
-    m_Metadata:
-      m_Items: []
-  - m_Id: 2884006567936
-    m_Key: Join
-    m_Metadata:
-      m_Items: []
-  - m_Id: 3190677299200
-    m_Key: Error
-    m_Metadata:
-      m_Items: []
-  - m_Id: 3225884286976
-    m_Key: OK
-    m_Metadata:
-      m_Items: []
-  - m_Id: 4087172030464
-    m_Key: Error_Network
-    m_Metadata:
-      m_Items: []
   - m_Id: 2349479528226816
     m_Key: Start_Keyboard & Gamepad
-    m_Metadata:
-      m_Items: []
-  - m_Id: 2349564001509376
-    m_Key: Start_Mobile
     m_Metadata:
       m_Items: []
   m_Metadata:
