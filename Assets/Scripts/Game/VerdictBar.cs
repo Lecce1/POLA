@@ -17,7 +17,7 @@ public class VerdictBar : MonoBehaviour
     {
         Obstacle obstacle = PlayerController.GetObstacle(other.gameObject);
         
-        if (obstacle != null)
+        if (obstacle != null && !obstacle.wasInteracted)
         {
             int i = obstacle.isUp ? 1 : 0;
 
@@ -36,11 +36,11 @@ public class VerdictBar : MonoBehaviour
     {
         Obstacle obstacle = PlayerController.GetObstacle(other.gameObject);
         
-        if (obstacle != null)
+        if (obstacle != null && !obstacle.wasInteracted)
         {
             int i = obstacle.isUp ? 1 : 0;
             
-            if (collider[i].contact[0] == null)
+            if (collider[i].contact[0] == null )
             {
                 collider[i].contact[0] = other;
             }

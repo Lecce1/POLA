@@ -159,7 +159,15 @@ public class PlayerController : MonoBehaviour
             return;
         }
 
+        int i = isUp ? 1 : 0;
         info.wasInteracted = true;
+        for (int idx = 0; idx < 4; idx++)
+        {
+            verdictBar.transform.GetChild(idx).GetComponent<VerdictBar>().collider[i].contact[0] =
+                verdictBar.transform.GetChild(idx).GetComponent<VerdictBar>().collider[i].contact[1];
+            Debug.Log("test");
+        }
+
         ComboReset(info);
         GameManager.instance.ShowVerdict(3);
         health -= info.damage;
@@ -312,6 +320,12 @@ public class PlayerController : MonoBehaviour
             
             case NoteType.NormalNote:
                 targetInfo.wasInteracted = true;
+                
+                for (int idx = 0; idx < 4; idx++)
+                {
+                    verdictBar.transform.GetChild(idx).GetComponent<VerdictBar>().collider[i].contact[0] =
+                        verdictBar.transform.GetChild(idx).GetComponent<VerdictBar>().collider[i].contact[1];
+                }
                 
                 if (targetInfo.beatLength != 0)
                 {

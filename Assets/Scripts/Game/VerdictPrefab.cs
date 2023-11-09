@@ -8,6 +8,7 @@ public class VerdictPrefab : MonoBehaviour
     {
         Invoke("Destroy", 0.5f);
     }
+    
     void Update()
     {
         alpha -= Time.deltaTime * 2;
