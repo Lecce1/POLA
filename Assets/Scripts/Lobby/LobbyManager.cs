@@ -176,8 +176,8 @@ public class LobbyManager : MonoBehaviour
             case "Stage":
                 if (join_Btn.GetComponent<Animator>().GetCurrentAnimatorStateInfo(0).normalizedTime >= 0.9f)
                 {
+                    StartCoroutine(FadeManager.instance.FadeIn());
                     DBManager.instance.nextScene = DBManager.instance.gameSceneName;
-                    SceneManager.LoadScene("Loading");
                 }
                 break;
 

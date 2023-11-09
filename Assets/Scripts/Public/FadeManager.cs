@@ -1,5 +1,6 @@
 using System.Collections;
 using UnityEngine;
+using UnityEngine.SceneManagement;
 using UnityEngine.UI;
 
 public class FadeManager : MonoBehaviour
@@ -30,6 +31,11 @@ public class FadeManager : MonoBehaviour
             count += 0.01f;
             fade.color = new Color(0, 0, 0, count);
             yield return null;
+        }
+
+        if (DBManager.instance.nextScene == DBManager.instance.gameSceneName)
+        {
+            SceneManager.LoadScene("Loading");
         }
     }
     

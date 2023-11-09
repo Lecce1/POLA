@@ -341,7 +341,7 @@ public class LobbyPlayerController : MonoBehaviour
                         
                         case "Stage":
                             TrackInfo.instance.Init(DBManager.instance.currentChapter, temp.transform.GetComponent<DoorManager>().stageNum);
-                            LobbyManager.instance.Info_OnOff(true);
+                            //LobbyManager.instance.Info_OnOff(true);
                             LobbyManager.instance.DoorInit("Stage", "Join");
                             DBManager.instance.currentStage = temp.GetComponent<DoorManager>().stageNum;
                             break;

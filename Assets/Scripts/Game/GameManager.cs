@@ -297,10 +297,6 @@ public class GameManager : MonoBehaviour
         }
 
         countDownPanel.transform.GetChild(0).GetComponent<Text>().text = "GO!";
-        isCountDown = false;
-        playerController.GetComponent<Animator>().SetBool("isCountDown", isCountDown);
-        audioManager.audio.Play();
-        playerController.GetComponent<PlayerInput>().enabled = true;
         Invoke(nameof(CountDownDisable), 0.5f);
     }
 
@@ -309,6 +305,10 @@ public class GameManager : MonoBehaviour
         if (playerController.enabled)
         {
             countDownPanel.gameObject.SetActive(false);
+            isCountDown = false;
+            playerController.GetComponent<Animator>().SetBool("isCountDown", isCountDown);
+            audioManager.audio.Play();
+            playerController.GetComponent<PlayerInput>().enabled = true;
         }
     }
 
