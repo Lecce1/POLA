@@ -1,11 +1,9 @@
-using System;
 using System.Collections;
 using System.Collections.Generic;
 using Cinemachine;
 using UnityEngine;
 using Sirenix.OdinInspector;
 using UnityEngine.InputSystem;
-using UnityEngine.UI;
 
 public class TitleManager : MonoBehaviour
 {
@@ -17,8 +15,6 @@ public class TitleManager : MonoBehaviour
     public CinemachineDollyCart dollyCart;
     [Title("SmoothPath")]
     public CinemachineSmoothPath smoothPath;
-    [Title("Fade")]
-    public Image fade;
     [Title("PlayerController")]
     public LobbyPlayerController playerController;
     [Title("PlayerInput")]
@@ -96,8 +92,14 @@ public class TitleManager : MonoBehaviour
             playerController.enabled = true;
             playerInput.enabled = true;
             LobbyManager.instance.currentGround = 0;
-            StartCoroutine(FadeOut());
+            StartCoroutine(FadeManager.instance.FadeOut());
+            Invoke("Destroy", 3.0f);
         }
+    }
+
+    void Destroy()
+    {
+        Destroy(gameObject);
     }
 
     public IEnumerator Cinemachine()
@@ -111,38 +113,12 @@ public class TitleManager : MonoBehaviour
             if ((smoothPath.PathLength - dollyCart.m_Position < 50) && isFade == false)
             {
                 isFade = true;
-                StartCoroutine("FadeIn");
+                StartCoroutine(FadeManager.instance.FadeIn());
             }
             yield return null;
         }
 
         DBManager.instance.isCinemachine = true;
         Invoke("Init", 2.0f);
-    }
-
-    IEnumerator FadeIn()
-    {
-        float count = 0;
-        
-        while (fade.color.a < 1)
-        {
-            count += 0.01f;
-            fade.color = new Color(0, 0, 0, count);
-            yield return null;
-        }
-    }
-    
-    IEnumerator FadeOut()
-    {
-        float count = 1;
-        
-        while (fade.color.a > 0)
-        {
-            count -= 0.01f;
-            fade.color = new Color(0, 0, 0, count);
-            yield return null;
-        }
-        
-        Destroy(gameObject);
     }
 }

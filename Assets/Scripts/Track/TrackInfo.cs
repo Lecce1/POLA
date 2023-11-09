@@ -82,6 +82,5 @@ public class TrackInfo : SerializedMonoBehaviour
         misson1_Content_Text.text = LocalizationSettings.StringDatabase.GetLocalizedString("Track", $"Stage{stageNum}_Track{trackNum}_Mission_1", LocalizationSettings.SelectedLocale);
         misson2_Content_Text.text = LocalizationSettings.StringDatabase.GetLocalizedString("Track", $"Stage{stageNum}_Track{trackNum}_Mission_2", LocalizationSettings.SelectedLocale);
         misson3_Content_Text.text = LocalizationSettings.StringDatabase.GetLocalizedString("Track", $"Stage{stageNum}_Track{trackNum}_Mission_3", LocalizationSettings.SelectedLocale);
-        TrackManager.instance.btn_Type = "Start";
     }
 }

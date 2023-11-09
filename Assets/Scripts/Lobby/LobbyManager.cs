@@ -1,4 +1,5 @@
 using System;
+using System.Collections;
 using System.Collections.Generic;
 using Sirenix.OdinInspector;
 using UnityEngine;
@@ -23,6 +24,9 @@ public class LobbyManager : MonoBehaviour
     [Title("입장 버튼")] 
     public GameObject join_Btn;
     [FoldoutGroup("패널")] 
+    [Title("스테이지 정보")] 
+    public GameObject info;
+    [FoldoutGroup("패널")] 
     [Title("종료")] 
     public GameObject exit;
 
@@ -32,19 +36,6 @@ public class LobbyManager : MonoBehaviour
     
     [FoldoutGroup("스카이박스")]
     public List<Material> stage_Skybox;
-
-    [FoldoutGroup("기타")] 
-    [Title("입장 버튼 타입")]
-    public string join_Btn_Type;
-    [FoldoutGroup("기타")] 
-    [Title("입장 버튼 온오프 여부")]
-    public bool isJoinBtnOn = false;
-    [FoldoutGroup("기타")] 
-    [Title("패널 열림 여부")]
-    public bool isPanelOpen = false;
-    [FoldoutGroup("기타")] 
-    [Title("설정 버튼 / 패드 여부")]
-    public bool isSetBtn = false;
 
     [FoldoutGroup("설정 패널")] 
     [Title("언어 Dropdown")]
@@ -68,6 +59,23 @@ public class LobbyManager : MonoBehaviour
     [FoldoutGroup("정보")] 
     [Title("플레이어 이동 오프셋")]
     public Vector3 offset = Vector3.up * 0.6f;
+    
+    [FoldoutGroup("기타")] 
+    [Title("입장 버튼 타입")]
+    public string join_Btn_Type;
+    [FoldoutGroup("기타")] 
+    [Title("입장 버튼 온오프 여부")]
+    public bool isJoinBtnOn = false;
+    [FoldoutGroup("기타")] 
+    [Title("패널 열림 여부")]
+    public bool isPanelOpen = false;
+    [FoldoutGroup("기타")] 
+    [Title("Info 패널 온오프 여부")] 
+    [SerializeField]
+    public bool isInfoPanelOn = false;
+    [FoldoutGroup("기타")] 
+    [Title("설정 버튼 / 패드 여부")]
+    public bool isSetBtn = false;
     
     // 뒤로가기 스택
     private Stack<GameObject> backStack;
@@ -131,6 +139,20 @@ public class LobbyManager : MonoBehaviour
             isJoinBtnOn = false;
         }
     }
+    
+    public void Info_OnOff(bool isOn)
+    {
+        if (isOn == true)
+        {
+            info.GetComponent<Animator>().Play("InfoOn");
+            isInfoPanelOn = true;
+        }
+        else if (isOn == false)
+        {
+            info.GetComponent<Animator>().Play("InfoOff");
+            isInfoPanelOn = false;
+        }
+    }
 
     public void Button(string type)
     {
@@ -139,9 +161,22 @@ public class LobbyManager : MonoBehaviour
             case "Move":
                 if (join_Btn.GetComponent<Animator>().GetCurrentAnimatorStateInfo(0).normalizedTime >= 0.9f)
                 {
-                    currentGround = 1;
+                    currentGround++;
                     currentRouteIdx = moveRoute[currentGround].defaultRouteIdx;
                     LobbyPlayerController.instance.transform.position = moveRoute[currentGround].routeList[moveRoute[currentGround].defaultRouteIdx].transform.position + offset;
+
+                    if (currentGround == 2)
+                    {
+                        RenderSettings.skybox = stage_Skybox[DBManager.instance.currentChapterNum];
+                    }
+                }
+                break;
+            
+            case "Stage":
+                if (join_Btn.GetComponent<Animator>().GetCurrentAnimatorStateInfo(0).normalizedTime >= 0.9f)
+                {
+                    DBManager.instance.nextScene = DBManager.instance.gameSceneName;
+                    SceneManager.LoadScene("Loading");
                 }
                 break;
 

@@ -118,6 +118,39 @@ public class LobbyPlayerController : MonoBehaviour
             }
         }
     }
+    
+    public void OnMove(bool isLeft)
+    {
+        if (isMoveAvailable && isMove == false)
+        {
+            if (isLeft == true)
+            {
+                body.transform.rotation = Quaternion.Euler(0, -90, 0);
+                isMove = true;
+                anim.SetBool("isMove", isMove);
+                
+                if (LobbyManager.instance.currentRouteIdx - 1 >= 0)
+                {
+                    LobbyManager.instance.currentRouteIdx--;
+                }
+                
+                Move();
+            }
+            else
+            {
+                body.transform.rotation = Quaternion.Euler(0, 90, 0);
+                isMove = true;
+                anim.SetBool("isMove", isMove);
+
+                if (LobbyManager.instance.currentRouteIdx + 1 < LobbyManager.instance.moveRoute[LobbyManager.instance.currentGround].routeList.Count)
+                {
+                    LobbyManager.instance.currentRouteIdx++;
+                }
+
+                Move();
+            }
+        }
+    }
 
     public void OnClick()
     {
@@ -198,12 +231,6 @@ public class LobbyPlayerController : MonoBehaviour
         }
     }
 
-    /*public void OnScrollWheel(InputValue value)
-    {
-        scrollVec = value.Get<Vector2>();
-        scrollRect.content.anchoredPosition = new Vector2(scrollRect.content.anchoredPosition.x - (scrollVec.x * 10), 0);
-    }*/
-    
     public void OnTab()
     {
         if (LobbyManager.instance.shop.activeSelf)
@@ -270,28 +297,6 @@ public class LobbyPlayerController : MonoBehaviour
         }
     }
 
-    public void OnMoveDown(bool isLeft)
-    {
-        if (isLeft == true)
-        {
-            body.transform.rotation = Quaternion.Euler(0, -90, 0);
-            isMove = true;
-            anim.SetBool("isMove", isMove);
-        }
-        else
-        {
-            body.transform.rotation = Quaternion.Euler(0, -270, 0);
-            isMove = true;
-            anim.SetBool("isMove", isMove);
-        }
-    }
-
-    public void OnMoveUp()
-    {
-        isMove = false;
-        anim.SetBool("isMove", isMove);
-    }
-
     public void OnSet()
     {
         if (!LobbyManager.instance.set.activeSelf)
@@ -325,8 +330,20 @@ public class LobbyPlayerController : MonoBehaviour
                             LobbyManager.instance.DoorInit("Shop", "Shop");
                             break;
 
-                        case "Stage":
+                        case "Story":
                             LobbyManager.instance.DoorInit("Move", "Join");
+                            break;
+                        
+                        case "Chapter":
+                            LobbyManager.instance.DoorInit("Move", "Join");
+                            DBManager.instance.currentChapterNum = temp.GetComponent<DoorManager>().chapterNum;
+                            break;
+                        
+                        case "Stage":
+                            TrackInfo.instance.Init(DBManager.instance.currentChapterNum, temp.transform.GetComponent<DoorManager>().stageNum);
+                            LobbyManager.instance.Info_OnOff(true);
+                            LobbyManager.instance.DoorInit("Stage", "Join");
+                            DBManager.instance.currentStageNum = temp.GetComponent<DoorManager>().stageNum;
                             break;
                     }
                 }

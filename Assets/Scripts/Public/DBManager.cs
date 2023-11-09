@@ -20,6 +20,9 @@ public class DBManager : MonoBehaviour
     [Title("이동 할 씬")]
     public string nextScene;
     [FoldoutGroup("게임 DB")] 
+    [Title("현재 챕터")]
+    public int currentChapterNum;
+    [FoldoutGroup("게임 DB")] 
     [Title("현재 스테이지")]
     public int currentStageNum;
     [FoldoutGroup("게임 DB")] 
