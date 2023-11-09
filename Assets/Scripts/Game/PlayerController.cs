@@ -192,6 +192,35 @@ public class PlayerController : MonoBehaviour
             transform.Rotate(transform.right, 180f);
         }
     }
+    
+    public void OnKeyUp_Mobile()
+    {
+        Obstacle obstacle = GetObstacle(lastPassedObject);
+        
+        if (obstacle != null && obstacle.beatLength != 0 && isLongInteract)
+        {
+            int length = obstacle.gameObject.transform.childCount;
+            int evaluation = GetVerdict(obstacle.transform.GetChild(length - 1).GetChild(0).gameObject);
+
+            if (evaluation != -1)
+            {
+                GameManager.instance.ShowVerdict(evaluation);
+            }
+            
+            if (evaluation is -1 or 3)
+            {
+                Debug.Log(evaluation);
+                Hurt(obstacle);
+            }
+            else
+            {
+                GameManager.instance.Score += obstacle.scoreList[evaluation];
+                GameManager.instance.Combo++;
+            }
+        }
+        
+        isLongInteract = false;
+    }
 
     /// <summary>
     /// 상호작용 버튼을 뗐을때
