@@ -3,7 +3,6 @@ using Sirenix.OdinInspector;
 using UnityEngine;
 using UnityEngine.EventSystems;
 using UnityEngine.InputSystem;
-using UnityEngine.SceneManagement;
 using UnityEngine.UI;
 
 public class PlayerController : MonoBehaviour
@@ -163,9 +162,13 @@ public class PlayerController : MonoBehaviour
         info.wasInteracted = true;
         for (int idx = 0; idx < 4; idx++)
         {
-            verdictBar.transform.GetChild(idx).GetComponent<VerdictBar>().collider[i].contact[0] =
-                verdictBar.transform.GetChild(idx).GetComponent<VerdictBar>().collider[i].contact[1];
-            Debug.Log("test");
+            VerdictBar bar = verdictBar.transform.GetChild(idx).GetComponent<VerdictBar>();
+            
+            if (bar.collider[i].contact[1] != null)
+            {
+                bar.collider[i].contact[0] = bar.collider[i].contact[1];
+                bar.collider[i].contact[1] = null;
+            }
         }
 
         ComboReset(info);
@@ -323,8 +326,13 @@ public class PlayerController : MonoBehaviour
                 
                 for (int idx = 0; idx < 4; idx++)
                 {
-                    verdictBar.transform.GetChild(idx).GetComponent<VerdictBar>().collider[i].contact[0] =
-                        verdictBar.transform.GetChild(idx).GetComponent<VerdictBar>().collider[i].contact[1];
+                    VerdictBar bar = verdictBar.transform.GetChild(idx).GetComponent<VerdictBar>();
+            
+                    if (bar.collider[i].contact[1] != null)
+                    {
+                        bar.collider[i].contact[0] = bar.collider[i].contact[1];
+                        bar.collider[i].contact[1] = null;
+                    }
                 }
                 
                 if (targetInfo.beatLength != 0)

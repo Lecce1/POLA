@@ -19,6 +19,7 @@ public class VerdictBar : MonoBehaviour
         
         if (obstacle != null && !obstacle.wasInteracted)
         {
+            Debug.Log("?");
             int i = obstacle.isUp ? 1 : 0;
 
             if (collider[i].contact[0] == null)
@@ -32,24 +33,24 @@ public class VerdictBar : MonoBehaviour
         }
     }
 
-    void OnTriggerStay(Collider other)
-    {
-        Obstacle obstacle = PlayerController.GetObstacle(other.gameObject);
-        
-        if (obstacle != null && !obstacle.wasInteracted)
-        {
-            int i = obstacle.isUp ? 1 : 0;
-            
-            if (collider[i].contact[0] == null )
-            {
-                collider[i].contact[0] = other;
-            }
-            else if(collider[i].contact[0] != other)
-            {
-                collider[i].contact[1] = other;
-            }
-        }
-    }
+    // void OnTriggerStay(Collider other)
+    // {
+    //     Obstacle obstacle = PlayerController.GetObstacle(other.gameObject);
+    //     
+    //     if (obstacle != null && !obstacle.wasInteracted)
+    //     {
+    //         int i = obstacle.isUp ? 1 : 0;
+    //         
+    //         if (collider[i].contact[0] == null )
+    //         {
+    //             collider[i].contact[0] = other;
+    //         }
+    //         else if(collider[i].contact[0] != other)
+    //         {
+    //             collider[i].contact[1] = other;
+    //         }
+    //     }
+    // }
 
     void OnTriggerExit(Collider other)
     {
