@@ -34,6 +34,10 @@ public class MapCreator : MonoBehaviour
     [FoldoutGroup("오브젝트")] 
     [SerializeField]
     private GameObject heart;
+    [FormerlySerializedAs("indexPlain")]
+    [FoldoutGroup("오브젝트")] 
+    [SerializeField]
+    private GameObject indexObject;
     [FoldoutGroup("오브젝트")] 
     [Title("설치될 장애물을 모아둔 리스트")]
     [SerializeField]
@@ -45,8 +49,12 @@ public class MapCreator : MonoBehaviour
     [FoldoutGroup("기타")] 
     [SerializeField]
     private LayerMask ground;
+    [FormerlySerializedAs("offset")] 
     [FoldoutGroup("기타")] 
-    public float offset;
+    public float defaultOffset;
+    [FoldoutGroup("기타")] 
+    [Title("토글 온오프")]
+    private bool toggleIndex;
     
     [Button("생성", ButtonSizes.Large)]
     [HorizontalGroup("Split1", 0.895f)]
@@ -67,7 +75,7 @@ public class MapCreator : MonoBehaviour
         {
             Note n = notes[i];
             Quaternion q = Quaternion.AngleAxis(0, progressDirection);
-            Vector3 pos = new Vector3(n.noteTime * 4f + offset, 0.5f, 0);
+            Vector3 pos = new Vector3(n.noteTime * 4f + defaultOffset, 0.5f, 0);
             
             if (n.isUp)
             {
@@ -246,5 +254,36 @@ public class MapCreator : MonoBehaviour
         {
             Debug.LogError("불러올 파일이 존재하지 않음.");
         }
+    }
+    
+    [Button("인덱싱")]
+    public void Indexing()
+    {
+        GameObject createdObject = GameObject.Find("Created Object");
+        GameObject indexGroup = GameObject.Find("Index Group");
+        
+        toggleIndex = !toggleIndex;
+        
+        if (indexGroup != null)
+        {
+            DestroyImmediate(indexGroup);
+            return;
+        }
+
+        indexGroup = new GameObject { name = "Index Group" };
+        
+        if (toggleIndex)
+        {
+            int i = 1;
+            
+            foreach (Transform item in createdObject.transform)
+            {
+                Vector3 pos = item.position;
+                var index = Instantiate(indexObject, pos, Quaternion.identity);
+                index.GetComponent<TextMesh>().text = i++.ToString();
+                index.transform.parent = indexGroup.transform;
+            }
+        }
+        
     }
 }
