@@ -51,6 +51,18 @@ MonoBehaviour:
     m_Key: Up
     m_Metadata:
       m_Items: []
+  - m_Id: 2869231644893184
+    m_Key: Success
+    m_Metadata:
+      m_Items: []
+  - m_Id: 2869280005218304
+    m_Key: Fail
+    m_Metadata:
+      m_Items: []
+  - m_Id: 2873679851085824
+    m_Key: Press
+    m_Metadata:
+      m_Items: []
   m_Metadata:
     m_Items: []
   m_KeyGenerator:

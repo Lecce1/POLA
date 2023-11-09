@@ -163,7 +163,6 @@ public class PlayerController : MonoBehaviour
         ComboReset(info);
         GameManager.instance.ShowVerdict(3);
         health -= info.damage;
-        GameManager.instance.StatUpdate();
 
         if (health <= 0)
         {
@@ -221,8 +220,8 @@ public class PlayerController : MonoBehaviour
             }
             else
             {
-                GameManager.instance.Score += obstacle.scoreList[evaluation];
-                GameManager.instance.Combo++;
+                GameManager.instance.score += obstacle.scoreList[evaluation];
+                GameManager.instance.combo++;
             }
         }
         
@@ -325,8 +324,8 @@ public class PlayerController : MonoBehaviour
                 break;
         }
         
-        GameManager.instance.Score += targetInfo.scoreList[evaluation];
-        GameManager.instance.Combo++;
+        GameManager.instance.score += targetInfo.scoreList[evaluation];
+        GameManager.instance.combo++;
     }
 
     IEnumerator LongNoteProcess(Obstacle obstacle)
@@ -335,8 +334,8 @@ public class PlayerController : MonoBehaviour
 
         while (isLongInteract)
         {
-            GameManager.instance.Score += obstacle.scoreList[0];
-            GameManager.instance.Combo++;
+            GameManager.instance.score += obstacle.scoreList[0];
+            GameManager.instance.combo++;
             
             if (lastPassedObject != null && lastPassedObject.transform.parent.gameObject == obstacle.transform.GetChild(length - 1).gameObject && isLongInteract)
             {
@@ -374,7 +373,7 @@ public class PlayerController : MonoBehaviour
     void ComboReset(Obstacle obstacle)
     {
         obstacle.wasInteracted = true;
-        GameManager.instance.Combo = 0;
+        GameManager.instance.combo = 0;
     }
 
     public void Attack(GameObject target)
@@ -382,6 +381,13 @@ public class PlayerController : MonoBehaviour
         anim.SetInteger("AttackCounter", attackCounter++);
         anim.SetBool("isAttacking", true);
         attackCounter %= 2;
+        
+        if (target.transform.parent.gameObject.name == GameManager.instance.noteFolder.transform.GetChild(GameManager.instance.noteFolder.transform.childCount - 1).gameObject.name && health > 0 && !GameManager.instance.isResultPanel)
+        {
+            GameManager.instance.isResultPanel = true;
+            GameManager.instance.Invoke("Finish", 2.0f);
+        }
+        
         Destroy(target);
 
         if (target != null)
@@ -408,13 +414,16 @@ public class PlayerController : MonoBehaviour
 
     public void OnCancel()
     {
-        if (!GameManager.instance.isPanelOpen)
+        if (!GameManager.instance.isResultPanel)
         {
-            GameManager.instance.Button("Set");
-        }
-        else
-        {
-            GameManager.instance.Back();
+            if (!GameManager.instance.isPanelOpen)
+            {
+                GameManager.instance.Button("Set");
+            }
+            else
+            {
+                GameManager.instance.Back();
+            }
         }
     }
 
@@ -488,7 +497,7 @@ public class PlayerController : MonoBehaviour
         {
             if (obstacleInfo.beatLength == 0)
             {
-                GameManager.instance.Score += obstacleInfo.scoreList[0];
+                GameManager.instance.score += obstacleInfo.scoreList[0];
             }
             else
             {
@@ -496,9 +505,15 @@ public class PlayerController : MonoBehaviour
                 
                 if (other.transform.parent == obstacleInfo.gameObject.transform.GetChild(length - 1))
                 {
-                    GameManager.instance.Score += obstacleInfo.scoreList[0];
+                    GameManager.instance.score += obstacleInfo.scoreList[0];
                 }
             }
+        }
+        
+        if (other.transform.parent.gameObject.name == GameManager.instance.noteFolder.transform.GetChild(GameManager.instance.noteFolder.transform.childCount - 1).gameObject.name && health > 0 && !GameManager.instance.isResultPanel)
+        {
+            GameManager.instance.isResultPanel = true;
+            GameManager.instance.Invoke("Finish", 2.0f);
         }
     }
 }

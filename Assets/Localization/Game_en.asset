@@ -54,6 +54,18 @@ MonoBehaviour:
     m_Localized: Up
     m_Metadata:
       m_Items: []
+  - m_Id: 2869231644893184
+    m_Localized: SUCCESS
+    m_Metadata:
+      m_Items: []
+  - m_Id: 2869280005218304
+    m_Localized: FAIL
+    m_Metadata:
+      m_Items: []
+  - m_Id: 2873679851085824
+    m_Localized: Press any key to go home
+    m_Metadata:
+      m_Items: []
   references:
     version: 2
     RefIds: []

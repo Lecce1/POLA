@@ -4,7 +4,6 @@ using Sirenix.OdinInspector;
 using UnityEngine;
 using UnityEngine.InputSystem;
 using UnityEngine.SceneManagement;
-using UnityEngine.Serialization;
 using UnityEngine.UI;
 
 public class GameManager : MonoBehaviour
@@ -27,10 +26,12 @@ public class GameManager : MonoBehaviour
     [FoldoutGroup("패널")] 
     [Title("판정 프리팹")] 
     public GameObject verdictPrefab;
-    
-    [FoldoutGroup("텍스트")] 
-    [Title("플레이어 상태")] 
-    public Text playerStateText;
+    [FoldoutGroup("패널")] 
+    [Title("노트 폴더")] 
+    public GameObject noteFolder;
+    [FoldoutGroup("패널")] 
+    [Title("카메라 인포")] 
+    public GameObject cameraInfo;
     
     [FoldoutGroup("매니저")] 
     [Title("플랫폼")] 
@@ -58,34 +59,10 @@ public class GameManager : MonoBehaviour
     private Sprite[] verdictImage = new Sprite[4];
     [FoldoutGroup("정보")] 
     [Title("스코어")] 
-    [SerializeField]
-    private int score;
-    [FoldoutGroup("정보")] 
-    [Title("스코어")] 
-    public int Score
-    {
-        get { return score; }
-        set
-        {
-            score = value;
-            StatUpdate();
-        }
-    }
+    public int score;
     [FoldoutGroup("정보")] 
     [Title("콤보")]
-    [SerializeField]
-    private int combo;
-    [FoldoutGroup("정보")] 
-    [Title("콤보")] 
-    public int Combo
-    {
-        get { return combo; }
-        set
-        {
-            combo = value;
-            StatUpdate();
-        }
-    }
+    public int combo;
     [FoldoutGroup("정보")] 
     [Title("Perfect 갯수")] 
     [SerializeField]
@@ -103,12 +80,35 @@ public class GameManager : MonoBehaviour
     [SerializeField]
     private int missCount;
     
+    [FoldoutGroup("결과 창")] 
+    [Title("활성화 여부")] 
+    public bool isResultPanel;
+    [FoldoutGroup("결과 창")] 
+    [Title("패널")] 
+    public GameObject resultPanel;
+    [FoldoutGroup("결과 창")] 
+    [Title("Perfect 텍스트")] 
+    public Text perfectText;
+    [FoldoutGroup("결과 창")] 
+    [Title("Great 텍스트")] 
+    public Text greatText;
+    [FoldoutGroup("결과 창")] 
+    [Title("Good 텍스트")] 
+    public Text goodText;
+    [FoldoutGroup("결과 창")] 
+    [Title("Miss 텍스트")] 
+    public Text missText;
+    [FoldoutGroup("결과 창")] 
+    [Title("Score 텍스트")] 
+    public Text scoreText;
+    [FoldoutGroup("결과 창")] 
+    [Title("Combo 텍스트")] 
+    public Text comboText;
+    
     // 뒤로가기 스택
     private Stack<GameObject> backStack;
     public static GameManager instance;
     private WaitForSeconds waitForSeconds = new WaitForSeconds(1f);
-
-    public GameObject cameraInfo;
 
     void Awake()
     {
@@ -145,12 +145,6 @@ public class GameManager : MonoBehaviour
     {
         score = 0;
         combo = 0;
-        StatUpdate();
-    }
-
-    public void StatUpdate()
-    {
-        playerStateText.text = "Score: " + score + "\nCombo: " + combo + "\n Health: " + playerController.health;
     }
 
     public void ShowVerdict(int idx)
@@ -295,11 +289,46 @@ public class GameManager : MonoBehaviour
         Invoke(nameof(CountDownDisable), 0.5f);
     }
 
-    private void CountDownDisable()
+    void CountDownDisable()
     {
         if (playerController.enabled)
         {
             countDownPanel.gameObject.SetActive(false);
+        }
+    }
+
+    public void Finish()
+    {
+        isCountDown = true;
+        playerController.GetComponent<Animator>().SetBool("isCountDown", isCountDown);
+        perfectText.text = perfectCount.ToString();
+        greatText.text = greatCount.ToString();
+        goodText.text = goodCount.ToString();
+        missText.text = missCount.ToString();
+        scoreText.text = score.ToString();
+        comboText.text = combo.ToString();
+        
+        if (bottomPanel.activeSelf)
+        {
+            bottomPanel.SetActive(false);
+        }
+        
+        resultPanel.GetComponent<Animation>().Play();
+        StartCoroutine(Finish_Check());
+    }
+
+    IEnumerator Finish_Check()
+    {
+        while (true)
+        {
+            if (Input.anyKey)
+            {
+                Debug.Log("test");
+                DBManager.instance.nextScene = "Lobby";
+                SceneManager.LoadScene("Loading");
+            }
+            
+            yield return null;
         }
     }
 }
