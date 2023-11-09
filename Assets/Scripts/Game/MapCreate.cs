@@ -25,19 +25,15 @@ public class MapCreator : MonoBehaviour
     [FoldoutGroup("오브젝트")] 
     [SerializeField]
     private GameObject[] normalNotes;
-
     [FoldoutGroup("오브젝트")] 
     [SerializeField]
     private GameObject[] moveNotes;
-    
     [FoldoutGroup("오브젝트")] 
     [SerializeField]
     private GameObject[] Walls;
-    
     [FoldoutGroup("오브젝트")] 
     [SerializeField]
     private GameObject heart;
-
     [FoldoutGroup("오브젝트")] 
     [Title("설치될 장애물을 모아둔 리스트")]
     [SerializeField]
@@ -46,10 +42,11 @@ public class MapCreator : MonoBehaviour
 
     [FoldoutGroup("기타")] 
     private NoteMake noteMaker;
-    
     [FoldoutGroup("기타")] 
     [SerializeField]
     private LayerMask ground;
+    [FoldoutGroup("기타")] 
+    public float offset;
     
     [Button("생성", ButtonSizes.Large)]
     [HorizontalGroup("Split1", 0.895f)]
@@ -70,7 +67,7 @@ public class MapCreator : MonoBehaviour
         {
             Note n = notes[i];
             Quaternion q = Quaternion.AngleAxis(0, progressDirection);
-            Vector3 pos = new Vector3(n.noteTime * 4f + 2.1f, 0.5f, 0);
+            Vector3 pos = new Vector3(n.noteTime * 4f + offset, 0.5f, 0);
             
             if (n.isUp)
             {
