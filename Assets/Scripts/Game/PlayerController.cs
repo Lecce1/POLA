@@ -194,32 +194,7 @@ public class PlayerController : MonoBehaviour
     
     public void OnKeyUp()
     {
-        Obstacle obstacle = GetObstacle(lastPassedObject);
-        Debug.Log("!");
-        
-        if (obstacle != null && obstacle.beatLength != 0 && isLongInteract)
-        {
-            int length = obstacle.gameObject.transform.childCount;
-            int evaluation = GetVerdict(obstacle.transform.GetChild(length - 1).GetChild(0).gameObject);
-
-            if (evaluation != -1)
-            {
-                GameManager.instance.ShowVerdict(evaluation);
-            }
-            
-            if (evaluation is -1 or 3)
-            {
-                Debug.Log(evaluation);
-                Hurt(obstacle);
-            }
-            else
-            {
-                GameManager.instance.Score += obstacle.scoreList[evaluation];
-                GameManager.instance.Combo++;
-            }
-        }
-        
-        isLongInteract = false;
+        OnKeyUp(new InputAction.CallbackContext());
     }
 
     /// <summary>
@@ -228,6 +203,7 @@ public class PlayerController : MonoBehaviour
     void OnKeyUp(InputAction.CallbackContext context)
     {
         Obstacle obstacle = GetObstacle(lastPassedObject);
+        
         if (obstacle != null && obstacle.beatLength != 0 && isLongInteract)
         {
             int length = obstacle.gameObject.transform.childCount;
@@ -272,7 +248,6 @@ public class PlayerController : MonoBehaviour
 
     public void OnUp()
     {
-        Debug.Log("up");
         if (GameManager.instance.isCountDown)
         {
             return;
@@ -288,7 +263,6 @@ public class PlayerController : MonoBehaviour
     
     public void OnDown()
     {
-        Debug.Log("down");
         if (GameManager.instance.isCountDown)
         {
             return;
@@ -306,8 +280,6 @@ public class PlayerController : MonoBehaviour
     {
         GameObject target;
         int i = isUp ? 1 : 0; 
-        
-        Debug.Log("?");
         
         if (verdictBar.transform.GetChild(3).GetComponent<VerdictBar>().collider[i].contact[0] != null)
         {
