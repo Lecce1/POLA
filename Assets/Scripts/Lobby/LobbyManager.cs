@@ -49,12 +49,6 @@ public class LobbyManager : MonoBehaviour
     [Title("MoveRoute 클래스 리스트")]
     public MoveRoute[] moveRoute = new MoveRoute[3];
     [FoldoutGroup("정보")] 
-    [Title("현재 땅")]
-    public int currentGround;
-    [FoldoutGroup("정보")] 
-    [Title("현재 루트 인덱스")]
-    public int currentRouteIdx;
-    [FoldoutGroup("정보")] 
     [Title("플레이어 이동 오프셋")]
     public Vector3 offset = Vector3.up * 0.6f;
     
@@ -103,8 +97,12 @@ public class LobbyManager : MonoBehaviour
 
     void Init()
     {
-        LobbyPlayerController.instance.player.transform.position =
-            moveRoute[currentGround].routeList[moveRoute[currentGround].defaultRouteIdx].transform.position + offset;
+        LobbyPlayerController.instance.player.transform.position = moveRoute[DBManager.instance.currentGround].routeList[DBManager.instance.currentRouteIdx].transform.position + offset;
+        
+        if (DBManager.instance.currentGround == 2)
+        {
+            RenderSettings.skybox = stage_Skybox[DBManager.instance.currentChapter];
+        }
     }
 
     public void DoorInit(string name, string btnText)
@@ -118,6 +116,11 @@ public class LobbyManager : MonoBehaviour
 
     public void Join_Btn_OnOff(bool isOn, bool onlyStage)
     {
+        if (DBManager.instance.currentPlatform != "MOBILE" && join_Btn.GetComponent<RectTransform>().anchoredPosition.y == 0)
+        {
+            join_Btn.GetComponent<Animator>().Play("JoinOff");
+        }
+        
         if (isOn)
         {
             if (!onlyStage && join_Btn.activeSelf && DBManager.instance.currentPlatform == "MOBILE")
@@ -159,13 +162,13 @@ public class LobbyManager : MonoBehaviour
             case "Move":
                 if (join_Btn.GetComponent<Animator>().GetCurrentAnimatorStateInfo(0).normalizedTime >= 0.9f)
                 {
-                    currentGround++;
-                    currentRouteIdx = moveRoute[currentGround].defaultRouteIdx;
-                    LobbyPlayerController.instance.transform.position = moveRoute[currentGround].routeList[moveRoute[currentGround].defaultRouteIdx].transform.position + offset;
+                    DBManager.instance.currentGround++;
+                    DBManager.instance.currentRouteIdx = moveRoute[DBManager.instance.currentGround].defaultRouteIdx;
+                    LobbyPlayerController.instance.transform.position = moveRoute[DBManager.instance.currentGround].routeList[moveRoute[DBManager.instance.currentGround].defaultRouteIdx].transform.position + offset;
 
-                    if (currentGround == 2)
+                    if (DBManager.instance.currentGround == 2)
                     {
-                        RenderSettings.skybox = stage_Skybox[DBManager.instance.currentChapterNum];
+                        RenderSettings.skybox = stage_Skybox[DBManager.instance.currentChapter];
                     }
                 }
                 break;

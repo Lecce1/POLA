@@ -4,6 +4,7 @@ using UnityEngine.UI;
 
 public class FadeManager : MonoBehaviour
 {
+    [SerializeField]
     private Image fade;
     public static FadeManager instance;
 
@@ -35,12 +36,15 @@ public class FadeManager : MonoBehaviour
     public IEnumerator FadeOut()
     {
         float count = 1;
-        
-        while (fade.color.a > 0)
+
+        if (fade != null)
         {
-            count -= 0.01f;
-            fade.color = new Color(0, 0, 0, count);
-            yield return null;
+            while (fade.color.a > 0)
+            {
+                count -= 0.01f;
+                fade.color = new Color(0, 0, 0, count);
+                yield return null;
+            }
         }
     }
 }

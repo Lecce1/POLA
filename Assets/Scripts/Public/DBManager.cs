@@ -10,21 +10,24 @@ public class DBManager : MonoBehaviour
     [FoldoutGroup("유저 서버 DB")]
     [Title("닉네임")]
     public string nickName;
-    [FoldoutGroup("유저 서버 DB")]
-    [Title("코인")]
-    public int coin;
-    [FoldoutGroup("유저 서버 DB")]
-    [Title("크리스탈")]
-    public int crystal;
     [FoldoutGroup("게임 DB")]
     [Title("이동 할 씬")]
     public string nextScene;
     [FoldoutGroup("게임 DB")] 
+    [Title("현재 땅")]
+    public int currentGround;
+    [FoldoutGroup("게임 DB")] 
+    [Title("현재 루트 인덱스")]
+    public int currentRouteIdx;
+    [FoldoutGroup("게임 DB")] 
     [Title("현재 챕터")]
-    public int currentChapterNum;
+    public int currentChapter;
     [FoldoutGroup("게임 DB")] 
     [Title("현재 스테이지")]
-    public int currentStageNum;
+    public int currentStage;
+    [FoldoutGroup("게임 DB")] 
+    [Title("현재 플랫폼")]
+    public string currentPlatform;
     [FoldoutGroup("게임 DB")] 
     [Title("지원 언어 갯수")]
     public int supportLanguageNum = 2;
@@ -34,10 +37,6 @@ public class DBManager : MonoBehaviour
     [FoldoutGroup("게임 DB")] 
     [Title("언어")] 
     public int language;
-
-    [FoldoutGroup("게임 DB")] 
-    [Title("현재 플랫폼")]
-    public string currentPlatform;
     [FoldoutGroup("게임 DB")] 
     [Title("게임 씬 이름")]
     public string gameSceneName = "Game";

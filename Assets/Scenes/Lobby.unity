@@ -38,7 +38,7 @@ RenderSettings:
   m_ReflectionIntensity: 1
   m_CustomReflection: {fileID: 0}
   m_Sun: {fileID: 0}
-  m_IndirectSpecularColor: {r: 0.39696655, g: 0.5094225, b: 0.4239074, a: 1}
+  m_IndirectSpecularColor: {r: 0.3971561, g: 0.5090248, b: 0.4233854, a: 1}
   m_UseRadianceAmbientProbe: 0
 --- !u!157 &3
 LightmapSettings:
@@ -1512,15 +1512,15 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   nickName: 
-  coin: 0
-  crystal: 0
   nextScene: 
-  currentChapterNum: 0
-  currentStageNum: 0
+  currentGround: 0
+  currentRouteIdx: 2
+  currentChapter: 0
+  currentStage: 0
+  currentPlatform: 
   supportLanguageNum: 2
   isTutorial: 1
   language: 0
-  currentPlatform: 
   gameSceneName: Game
   isCinemachine: 1
 --- !u!1 &50033373
@@ -33976,7 +33976,7 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0, y: 0}
   m_AnchorMax: {x: 0, y: 0}
-  m_AnchoredPosition: {x: 113.83885, y: 0}
+  m_AnchoredPosition: {x: 98.483406, y: 0}
   m_SizeDelta: {x: 0, y: 0}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!114 &347786979
@@ -54684,7 +54684,7 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 575790304}
   serializedVersion: 2
-  m_LocalRotation: {x: -0, y: -2.1441182e-15, z: -3.4643648e-18, w: 1}
+  m_LocalRotation: {x: -0, y: -1.0463852e-14, z: -1.690339e-17, w: 1}
   m_LocalPosition: {x: 0, y: 0, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
@@ -56188,7 +56188,7 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0, y: 0}
   m_AnchorMax: {x: 0, y: 0}
-  m_AnchoredPosition: {x: 147.58293, y: 0}
+  m_AnchoredPosition: {x: 93.83886, y: 0}
   m_SizeDelta: {x: 0, y: 0}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!114 &654544718
@@ -56373,7 +56373,7 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0, y: 0}
   m_AnchorMax: {x: 0, y: 0}
-  m_AnchoredPosition: {x: 115.54502, y: 0}
+  m_AnchoredPosition: {x: 89.099525, y: 0}
   m_SizeDelta: {x: 0, y: 0}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!114 &655933088
@@ -72779,7 +72779,7 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0, y: 0}
   m_AnchorMax: {x: 0, y: 0}
-  m_AnchoredPosition: {x: 78.246445, y: 0}
+  m_AnchoredPosition: {x: 62.89099, y: 0}
   m_SizeDelta: {x: 0, y: 0}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!114 &953984615
@@ -73553,7 +73553,7 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0, y: 0}
   m_AnchorMax: {x: 0, y: 0}
-  m_AnchoredPosition: {x: 67.8199, y: 0}
+  m_AnchoredPosition: {x: 40.947865, y: 0}
   m_SizeDelta: {x: 0, y: 0}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!114 &978979548
@@ -78014,7 +78014,7 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0, y: 0}
   m_AnchorMax: {x: 0, y: 0}
-  m_AnchoredPosition: {x: 291.13745, y: 0}
+  m_AnchoredPosition: {x: 233.98103, y: 0}
   m_SizeDelta: {x: 0, y: 0}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!114 &1148286082
@@ -103518,7 +103518,7 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0, y: 0}
   m_AnchorMax: {x: 0, y: 0}
-  m_AnchoredPosition: {x: 95.97156, y: 0}
+  m_AnchoredPosition: {x: 120.7109, y: 0}
   m_SizeDelta: {x: 0, y: 0}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!114 &1412945683
@@ -105277,7 +105277,7 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1473644558}
   serializedVersion: 2
-  m_LocalRotation: {x: -0.0008076914, y: -3.3608963e-11, z: -2.7145685e-14, w: 0.9999997}
+  m_LocalRotation: {x: -0.0008076914, y: -3.360682e-11, z: -2.7143952e-14, w: 0.9999997}
   m_LocalPosition: {x: 0, y: 0, z: -300}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
@@ -120831,7 +120831,6 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   set: {fileID: 538388911}
   shop: {fileID: 853192229}
-  sign: {fileID: 2057356781}
   join_Btn: {fileID: 1870501722}
   info: {fileID: 708122601}
   keyBinding: {fileID: 358804344}
@@ -120878,8 +120877,6 @@ MonoBehaviour:
     - {fileID: 2119258850}
     - {fileID: 396323571}
     defaultRouteIdx: 3
-  currentGround: 0
-  currentRouteIdx: 2
   offset: {x: 0, y: 0.6, z: 0}
   join_Btn_Type: 
   isJoinBtnOn: 0
@@ -129198,6 +129195,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: fc431ce9d1b334e31bcf745cef5169db, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  fade: {fileID: 0}
 --- !u!1 &1958674300
 GameObject:
   m_ObjectHideFlags: 0

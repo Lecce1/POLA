@@ -25,7 +25,7 @@ public class TitleManager : MonoBehaviour
     public List<GameObject> lobbyObject;
     [Title("버튼 클릭 여부")]
     public bool isPress;
-    
+
     [FoldoutGroup("폴라로이드")] 
     [Title("폴라로이드")]
     public GameObject polaroid;
@@ -91,7 +91,6 @@ public class TitleManager : MonoBehaviour
             title_Press_Text.SetActive(false);
             playerController.enabled = true;
             playerInput.enabled = true;
-            LobbyManager.instance.currentGround = 0;
             StartCoroutine(FadeManager.instance.FadeOut());
             Invoke("Destroy", 3.0f);
         }

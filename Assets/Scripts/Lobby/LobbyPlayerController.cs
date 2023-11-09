@@ -64,13 +64,13 @@ public class LobbyPlayerController : MonoBehaviour
     void Move()
     {
         transform.position = Vector3.MoveTowards(transform.position,
-            LobbyManager.instance.moveRoute[LobbyManager.instance.currentGround].routeList[LobbyManager.instance.currentRouteIdx].transform.position + LobbyManager.instance.offset,
+            LobbyManager.instance.moveRoute[DBManager.instance.currentGround].routeList[DBManager.instance.currentRouteIdx].transform.position + LobbyManager.instance.offset,
             Time.deltaTime * speed);
                 
-        if (transform.position.x == LobbyManager.instance.moveRoute[LobbyManager.instance.currentGround].routeList[LobbyManager.instance.currentRouteIdx]
+        if (transform.position.x == LobbyManager.instance.moveRoute[DBManager.instance.currentGround].routeList[DBManager.instance.currentRouteIdx]
                 .transform.position.x)
         {
-            if (LobbyManager.instance.currentRouteIdx == LobbyManager.instance.moveRoute[LobbyManager.instance.currentGround].defaultRouteIdx)
+            if (DBManager.instance.currentRouteIdx == LobbyManager.instance.moveRoute[DBManager.instance.currentGround].defaultRouteIdx)
             {
                 body.transform.rotation = Quaternion.Euler(0, 180, 0);
             }
@@ -96,9 +96,9 @@ public class LobbyPlayerController : MonoBehaviour
                 isMove = true;
                 anim.SetBool("isMove", isMove);
                 
-                if (LobbyManager.instance.currentRouteIdx - 1 >= 0)
+                if (DBManager.instance.currentRouteIdx - 1 >= 0)
                 {
-                    LobbyManager.instance.currentRouteIdx--;
+                    DBManager.instance.currentRouteIdx--;
                 }
                 
                 Move();
@@ -109,9 +109,9 @@ public class LobbyPlayerController : MonoBehaviour
                 isMove = true;
                 anim.SetBool("isMove", isMove);
 
-                if (LobbyManager.instance.currentRouteIdx + 1 < LobbyManager.instance.moveRoute[LobbyManager.instance.currentGround].routeList.Count)
+                if (DBManager.instance.currentRouteIdx + 1 < LobbyManager.instance.moveRoute[DBManager.instance.currentGround].routeList.Count)
                 {
-                    LobbyManager.instance.currentRouteIdx++;
+                    DBManager.instance.currentRouteIdx++;
                 }
 
                 Move();
@@ -129,9 +129,9 @@ public class LobbyPlayerController : MonoBehaviour
                 isMove = true;
                 anim.SetBool("isMove", isMove);
                 
-                if (LobbyManager.instance.currentRouteIdx - 1 >= 0)
+                if (DBManager.instance.currentRouteIdx - 1 >= 0)
                 {
-                    LobbyManager.instance.currentRouteIdx--;
+                    DBManager.instance.currentRouteIdx--;
                 }
                 
                 Move();
@@ -142,9 +142,9 @@ public class LobbyPlayerController : MonoBehaviour
                 isMove = true;
                 anim.SetBool("isMove", isMove);
 
-                if (LobbyManager.instance.currentRouteIdx + 1 < LobbyManager.instance.moveRoute[LobbyManager.instance.currentGround].routeList.Count)
+                if (DBManager.instance.currentRouteIdx + 1 < LobbyManager.instance.moveRoute[DBManager.instance.currentGround].routeList.Count)
                 {
-                    LobbyManager.instance.currentRouteIdx++;
+                    DBManager.instance.currentRouteIdx++;
                 }
 
                 Move();
@@ -336,14 +336,14 @@ public class LobbyPlayerController : MonoBehaviour
                         
                         case "Chapter":
                             LobbyManager.instance.DoorInit("Move", "Join");
-                            DBManager.instance.currentChapterNum = temp.GetComponent<DoorManager>().chapterNum;
+                            DBManager.instance.currentChapter = temp.GetComponent<DoorManager>().chapterNum;
                             break;
                         
                         case "Stage":
-                            TrackInfo.instance.Init(DBManager.instance.currentChapterNum, temp.transform.GetComponent<DoorManager>().stageNum);
+                            TrackInfo.instance.Init(DBManager.instance.currentChapter, temp.transform.GetComponent<DoorManager>().stageNum);
                             LobbyManager.instance.Info_OnOff(true);
                             LobbyManager.instance.DoorInit("Stage", "Join");
-                            DBManager.instance.currentStageNum = temp.GetComponent<DoorManager>().stageNum;
+                            DBManager.instance.currentStage = temp.GetComponent<DoorManager>().stageNum;
                             break;
                     }
                 }
