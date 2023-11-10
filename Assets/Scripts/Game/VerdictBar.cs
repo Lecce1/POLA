@@ -19,7 +19,6 @@ public class VerdictBar : MonoBehaviour
         
         if (obstacle != null && !obstacle.wasInteracted)
         {
-            Debug.Log("?");
             int i = obstacle.isUp ? 1 : 0;
 
             if (collider[i].contact[0] == null)

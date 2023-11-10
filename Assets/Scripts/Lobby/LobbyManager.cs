@@ -173,6 +173,33 @@ public class LobbyManager : MonoBehaviour
                 }
                 break;
             
+            case "Back":
+                DBManager.instance.currentGround--;
+
+                if (DBManager.instance.currentGround == 1)
+                {
+                    if (DBManager.instance.currentChapter <= 4)
+                    {
+                        DBManager.instance.currentRouteIdx = DBManager.instance.currentChapter - 1;
+                    }
+                    else
+                    {
+                        DBManager.instance.currentRouteIdx = DBManager.instance.currentChapter;
+                    }
+                }
+                else if (DBManager.instance.currentGround == 0)
+                {
+                    DBManager.instance.currentRouteIdx = 3;
+                }
+
+                LobbyPlayerController.instance.transform.position = moveRoute[DBManager.instance.currentGround].routeList[DBManager.instance.currentRouteIdx].transform.position + offset;
+
+                if (DBManager.instance.currentGround != 2)
+                {
+                    RenderSettings.skybox = stage_Skybox[1];
+                }
+                break;
+            
             case "Stage":
                 StartCoroutine(FadeManager.instance.FadeIn());
                 DBManager.instance.nextScene = DBManager.instance.gameSceneName;

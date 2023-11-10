@@ -53,6 +53,9 @@ public class LobbyPlayerController : MonoBehaviour
     {
         anim = GetComponent<Animator>();
         rigidbody = GetComponent<Rigidbody>();
+        transform.position =
+            LobbyManager.instance.moveRoute[DBManager.instance.currentGround]
+                .routeList[DBManager.instance.currentRouteIdx].transform.position + LobbyManager.instance.offset;
     }
     
     void Update()
@@ -160,7 +163,7 @@ public class LobbyPlayerController : MonoBehaviour
             {
                 LobbyManager.instance.Button(LobbyManager.instance.join_Btn_Type);
 
-                if (LobbyManager.instance.join_Btn_Type != "Move")
+                if (LobbyManager.instance.join_Btn_Type != "Move" && LobbyManager.instance.join_Btn_Type != "Back")
                 {
                     isMoveAvailable = false;
                 }
@@ -335,9 +338,12 @@ public class LobbyPlayerController : MonoBehaviour
                         
                         case "Stage":
                             TrackInfo.instance.Init(DBManager.instance.currentChapter, temp.transform.GetComponent<DoorManager>().stageNum);
-                            //LobbyManager.instance.Info_OnOff(true);
                             LobbyManager.instance.DoorInit("Stage", "Join");
                             DBManager.instance.currentStage = temp.GetComponent<DoorManager>().stageNum;
+                            break;
+                        
+                        case "Back":
+                            LobbyManager.instance.DoorInit("Back", "Join");
                             break;
                     }
                 }
