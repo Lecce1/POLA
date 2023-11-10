@@ -26,6 +26,13 @@ public class FadeManager : MonoBehaviour
     {
         float count = 0;
         
+        if (fade == null)
+        {
+            fade = GetComponent<Image>();
+        }
+
+        fade.color = new Color(0, 0, 0, 0);
+        
         while (fade.color.a < 1)
         {
             count += 0.01f;
@@ -37,12 +44,19 @@ public class FadeManager : MonoBehaviour
         {
             SceneManager.LoadScene("Loading");
         }
-    }
-    
+    }                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                            
+
     public IEnumerator FadeOut()
     {
         float count = 1;
+        
+        if (fade == null)
+        {
+            fade = GetComponent<Image>();
+        }
 
+        fade.color = new Color(0, 0, 0, 1);
+        
         if (fade != null)
         {
             while (fade.color.a > 0)

@@ -34,6 +34,7 @@ public class TitleManager : MonoBehaviour
     public GameObject polaroid_Card;
     
     public static TitleManager instance;
+    public FadeManager fadeManager;
 
     void Awake()
     {
@@ -91,7 +92,7 @@ public class TitleManager : MonoBehaviour
             title_Press_Text.SetActive(false);
             playerController.enabled = true;
             playerInput.enabled = true;
-            StartCoroutine(FadeManager.instance.FadeOut());
+            StartCoroutine(fadeManager.FadeOut());
             Invoke("Destroy", 3.0f);
         }
     }
