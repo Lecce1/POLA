@@ -58,24 +58,6 @@
                     "processors": "",
                     "interactions": "",
                     "initialStateCheck": true
-                },
-                {
-                    "name": "Set",
-                    "type": "Button",
-                    "id": "f8f2333e-d319-4716-ad8e-8a33b2d02598",
-                    "expectedControlType": "Button",
-                    "processors": "",
-                    "interactions": "",
-                    "initialStateCheck": true
-                },
-                {
-                    "name": "Close",
-                    "type": "Button",
-                    "id": "8d337bbe-5bab-4fb8-a149-62a1b0a2fbf6",
-                    "expectedControlType": "Button",
-                    "processors": "",
-                    "interactions": "",
-                    "initialStateCheck": true
                 }
             ],
             "bindings": [
@@ -197,39 +179,6 @@
                     "processors": "",
                     "groups": "PC",
                     "action": "RightControl",
-                    "isComposite": false,
-                    "isPartOfComposite": false
-                },
-                {
-                    "name": "",
-                    "id": "000efd99-4f8d-4a5a-bda2-8d7e3c0cf04a",
-                    "path": "<Gamepad>/start",
-                    "interactions": "Tap",
-                    "processors": "",
-                    "groups": "CONSOLE",
-                    "action": "Set",
-                    "isComposite": false,
-                    "isPartOfComposite": false
-                },
-                {
-                    "name": "",
-                    "id": "6832a276-9d10-4498-8589-385647359587",
-                    "path": "<XInputController>/buttonEast",
-                    "interactions": "Tap",
-                    "processors": "",
-                    "groups": "CONSOLE",
-                    "action": "Close",
-                    "isComposite": false,
-                    "isPartOfComposite": false
-                },
-                {
-                    "name": "",
-                    "id": "607d7e5e-247f-462f-8bf2-311035202db3",
-                    "path": "<Keyboard>/escape",
-                    "interactions": "Tap",
-                    "processors": "",
-                    "groups": "PC",
-                    "action": "Close",
                     "isComposite": false,
                     "isPartOfComposite": false
                 }
@@ -521,6 +470,17 @@
                     "name": "",
                     "id": "d58a2974-b036-4d0f-b946-889a03da562d",
                     "path": "<XInputController>/buttonEast",
+                    "interactions": "Tap",
+                    "processors": "",
+                    "groups": "CONSOLE",
+                    "action": "Cancel",
+                    "isComposite": false,
+                    "isPartOfComposite": false
+                },
+                {
+                    "name": "",
+                    "id": "2993ec24-5353-4dbf-85d6-9a089fffb08d",
+                    "path": "<Gamepad>/start",
                     "interactions": "Tap",
                     "processors": "",
                     "groups": "CONSOLE",

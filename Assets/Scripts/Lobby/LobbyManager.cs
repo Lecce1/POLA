@@ -25,6 +25,9 @@ public class LobbyManager : MonoBehaviour
     [Title("키 바인딩")] 
     public GameObject keyBinding;
     [FoldoutGroup("패널")] 
+    [Title("ESC")] 
+    public GameObject esc;
+    [FoldoutGroup("패널")] 
     [Title("종료")] 
     public GameObject exit;
 
@@ -160,46 +163,61 @@ public class LobbyManager : MonoBehaviour
         switch (type)
         {
             case "Move":
-                if (join_Btn.GetComponent<Animator>().GetCurrentAnimatorStateInfo(0).normalizedTime >= 0.9f)
-                {
-                    DBManager.instance.currentGround++;
-                    DBManager.instance.currentRouteIdx = moveRoute[DBManager.instance.currentGround].defaultRouteIdx;
-                    LobbyPlayerController.instance.transform.position = moveRoute[DBManager.instance.currentGround].routeList[moveRoute[DBManager.instance.currentGround].defaultRouteIdx].transform.position + offset;
+                DBManager.instance.currentGround++;
+                DBManager.instance.currentRouteIdx = moveRoute[DBManager.instance.currentGround].defaultRouteIdx;
+                LobbyPlayerController.instance.transform.position = moveRoute[DBManager.instance.currentGround].routeList[moveRoute[DBManager.instance.currentGround].defaultRouteIdx].transform.position + offset;
 
-                    if (DBManager.instance.currentGround == 2)
-                    {
-                        RenderSettings.skybox = stage_Skybox[DBManager.instance.currentChapter];
-                    }
+                if (DBManager.instance.currentGround == 2)
+                {
+                    RenderSettings.skybox = stage_Skybox[DBManager.instance.currentChapter];
                 }
                 break;
             
             case "Stage":
-                if (join_Btn.GetComponent<Animator>().GetCurrentAnimatorStateInfo(0).normalizedTime >= 0.9f)
+                StartCoroutine(FadeManager.instance.FadeIn());
+                DBManager.instance.nextScene = DBManager.instance.gameSceneName;
+                break;
+            
+            case "Esc":
+                if (!esc.activeSelf)
                 {
-                    StartCoroutine(FadeManager.instance.FadeIn());
-                    DBManager.instance.nextScene = DBManager.instance.gameSceneName;
+                    esc.SetActive(true);
+                    backStack.Push(esc);
+                    isPanelOpen = true;
+
+                    if (join_Btn.activeSelf)
+                    {
+                        join_Btn.SetActive(false);
+                    }
+
+                    if (keyBinding.activeSelf)
+                    {
+                        keyBinding.SetActive(false);
+                    }
                 }
                 break;
 
-            case "Set":
+            case "Set": //if (join_Btn.GetComponent<Animator>().GetCurrentAnimatorStateInfo(0).normalizedTime >= 0.9f)
                 if (!set.activeSelf)
                 {
-                    if (join_Btn.GetComponent<Animator>().GetCurrentAnimatorStateInfo(0).normalizedTime >= 0.9f)
+                    if (esc.activeSelf)
                     {
-                        set.SetActive(true);
-                        backStack.Push(set);
-                        isPanelOpen = true;
-                        set_Language_Dropdown.value = DBManager.instance.language;
+                        esc.SetActive(false);
+                    }
                         
-                        if (join_Btn.activeSelf)
-                        {
-                            join_Btn.SetActive(false);
-                        }
+                    set.SetActive(true);
+                    backStack.Push(set);
+                    isPanelOpen = true;
+                    set_Language_Dropdown.value = DBManager.instance.language;
+                        
+                    if (join_Btn.activeSelf)
+                    {
+                        join_Btn.SetActive(false);
+                    }
 
-                        if (keyBinding.activeSelf)
-                        {
-                            keyBinding.SetActive(false);
-                        }
+                    if (keyBinding.activeSelf)
+                    {
+                        keyBinding.SetActive(false);
                     }
                 }
                 break;
@@ -207,21 +225,18 @@ public class LobbyManager : MonoBehaviour
             case "Shop":
                 if (!shop.activeSelf)
                 {
-                    if (join_Btn.GetComponent<Animator>().GetCurrentAnimatorStateInfo(0).normalizedTime >= 0.9f)
-                    {
-                        shop.SetActive(true);
-                        backStack.Push(shop);
-                        isPanelOpen = true;
+                    shop.SetActive(true);
+                    backStack.Push(shop);
+                    isPanelOpen = true;
                     
-                        if (join_Btn.activeSelf)
-                        {
-                            join_Btn.SetActive(false);
-                        }
+                    if (join_Btn.activeSelf)
+                    {
+                        join_Btn.SetActive(false);
+                    }
                         
-                        if (keyBinding.activeSelf)
-                        {
-                            keyBinding.SetActive(false);
-                        }
+                    if (keyBinding.activeSelf)
+                    {
+                        keyBinding.SetActive(false);
                     }
                 }
                 break;
@@ -229,6 +244,11 @@ public class LobbyManager : MonoBehaviour
             case "Exit":
                 if (!exit.activeSelf)
                 {
+                    if (esc.activeSelf)
+                    {
+                        esc.SetActive(false);
+                    }
+                    
                     exit.SetActive(true);
                     backStack.Push(exit);
                     isPanelOpen = true;
@@ -291,6 +311,14 @@ public class LobbyManager : MonoBehaviour
         
         switch (backStack.Pop().name)
         {
+            case "Esc":
+                if (esc.activeSelf)
+                {
+                    esc.SetActive(false);
+                    isCheck = true;
+                }
+                break;
+            
             case "Set":
                 if (set.activeSelf)
                 {

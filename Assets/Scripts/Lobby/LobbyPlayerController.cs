@@ -194,6 +194,19 @@ public class LobbyPlayerController : MonoBehaviour
                         break;
                 }
             }
+            else if (LobbyManager.instance.esc.activeSelf)
+            {
+                switch (EventSystem.current.currentSelectedGameObject.name)
+                {
+                    case "Set":
+                        LobbyManager.instance.Button("Set");
+                        break;
+                    
+                    case "Back":
+                        LobbyManager.instance.Button("Exit");
+                        break;
+                }
+            }
             else if (LobbyManager.instance.exit.activeSelf)
             {
                 LobbyManager.instance.Button($"Exit_{EventSystem.current.currentSelectedGameObject.name}");
@@ -211,21 +224,12 @@ public class LobbyPlayerController : MonoBehaviour
                 LobbyManager.instance.Back();
                 isMoveAvailable = true;
             }
-        } 
-        else if (GetComponent<PlayerInput>().currentControlScheme == "PC" && !LobbyManager.instance.set.activeSelf)
-        {
-            LobbyManager.instance.Button("Set");
-            isMoveAvailable = false;
         }
-    }
-
-    public void OnClose()
-    {
-        if (!LobbyManager.instance.isPanelOpen)
+        else if (!LobbyManager.instance.isPanelOpen)
         {
-            if (!LobbyManager.instance.exit.activeSelf)
+            if (!LobbyManager.instance.esc.activeSelf)
             {
-                LobbyManager.instance.Button("Exit");
+                LobbyManager.instance.Button("Esc");
                 isMoveAvailable = false;
             }
         }
@@ -294,16 +298,6 @@ public class LobbyPlayerController : MonoBehaviour
                         break;
                 }
             }
-        }
-    }
-
-    public void OnSet()
-    {
-        if (!LobbyManager.instance.set.activeSelf)
-        {
-            LobbyManager.instance.isSetBtn = true;
-            LobbyManager.instance.Button("Set");
-            isMoveAvailable = false;
         }
     }
 
