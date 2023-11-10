@@ -77,7 +77,7 @@ public class GameManager : MonoBehaviour
     [SerializeField]
     private int goodCount;
     [FoldoutGroup("정보")] 
-    [Title("Good 갯수")] 
+    [Title("Miss 갯수")] 
     [SerializeField]
     private int missCount;
     
@@ -340,7 +340,7 @@ public class GameManager : MonoBehaviour
             bottomPanel.SetActive(false);
         }
         
-        resultPanel.GetComponent<Animation>().Play();
+        resultPanel.GetComponent<Animator>().Play("Result");
         StartCoroutine(Finish_Check());
     }
 
@@ -348,16 +348,26 @@ public class GameManager : MonoBehaviour
     {
         while (true)
         {
-            if (Input.anyKey)
+            if (resultPanel.GetComponent<Animator>().GetCurrentAnimatorStateInfo(0).normalizedTime < 1f)
             {
-                if (playerController.isDead)
+                if (Input.anyKey)
                 {
-                    SceneManager.LoadScene(DBManager.instance.gameSceneName);
+                    resultPanel.GetComponent<Animator>().speed = 5f;
                 }
-                else
+            }
+            else
+            {
+                if (Input.anyKey)
                 {
-                    DBManager.instance.nextScene = "Lobby";
-                    SceneManager.LoadScene("Loading");
+                    if (playerController.isDead)
+                    {
+                        SceneManager.LoadScene(DBManager.instance.gameSceneName);
+                    }
+                    else
+                    {
+                        DBManager.instance.nextScene = "Lobby";
+                        SceneManager.LoadScene("Loading");
+                    }
                 }
             }
             

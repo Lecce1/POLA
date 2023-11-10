@@ -158,7 +158,7 @@ public class LobbyManager : MonoBehaviour
         }
     }
 
-    public void Button(string type)
+    public void Button(string type)  //if (join_Btn.GetComponent<Animator>().GetCurrentAnimatorStateInfo(0).normalizedTime >= 0.9f)
     {
         switch (type)
         {
@@ -197,7 +197,7 @@ public class LobbyManager : MonoBehaviour
                 }
                 break;
 
-            case "Set": //if (join_Btn.GetComponent<Animator>().GetCurrentAnimatorStateInfo(0).normalizedTime >= 0.9f)
+            case "Set":
                 if (!set.activeSelf)
                 {
                     if (esc.activeSelf)
