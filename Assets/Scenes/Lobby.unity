@@ -38,7 +38,7 @@ RenderSettings:
   m_ReflectionIntensity: 1
   m_CustomReflection: {fileID: 0}
   m_Sun: {fileID: 0}
-  m_IndirectSpecularColor: {r: 0.39648685, g: 0.50873834, b: 0.4229661, a: 1}
+  m_IndirectSpecularColor: {r: 0.39687136, g: 0.50975317, b: 0.42385724, a: 1}
   m_UseRadianceAmbientProbe: 0
 --- !u!157 &3
 LightmapSettings:
@@ -734,6 +734,7 @@ MonoBehaviour:
   chapterNum: 3
   stageNum: 0
   name: Chapter
+  isLock: 0
 --- !u!1 &29152975
 GameObject:
   m_ObjectHideFlags: 0
@@ -3768,6 +3769,7 @@ MonoBehaviour:
   chapterNum: 0
   stageNum: 0
   name: Back
+  isLock: 0
 --- !u!1 &120988576
 GameObject:
   m_ObjectHideFlags: 0
@@ -10684,6 +10686,7 @@ MonoBehaviour:
   chapterNum: 0
   stageNum: 0
   name: Shop
+  isLock: 0
 --- !u!1 &174736107
 GameObject:
   m_ObjectHideFlags: 0
@@ -17459,6 +17462,7 @@ MonoBehaviour:
   chapterNum: 6
   stageNum: 0
   name: Chapter
+  isLock: 0
 --- !u!1 &251710293
 GameObject:
   m_ObjectHideFlags: 0
@@ -41504,6 +41508,7 @@ MonoBehaviour:
   chapterNum: 0
   stageNum: 6
   name: Stage
+  isLock: 0
 --- !u!1 &435980012
 GameObject:
   m_ObjectHideFlags: 0
@@ -42101,6 +42106,7 @@ MonoBehaviour:
   chapterNum: 2
   stageNum: 0
   name: Chapter
+  isLock: 0
 --- !u!1 &456466087
 GameObject:
   m_ObjectHideFlags: 0
@@ -48471,6 +48477,7 @@ MonoBehaviour:
   chapterNum: 4
   stageNum: 0
   name: Chapter
+  isLock: 0
 --- !u!1 &512096594
 GameObject:
   m_ObjectHideFlags: 0
@@ -55467,7 +55474,7 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 575790304}
   serializedVersion: 2
-  m_LocalRotation: {x: -0, y: -6.7271536e-13, z: -1.0866924e-15, w: 1}
+  m_LocalRotation: {x: -0, y: -7.0031134e-13, z: -1.1312684e-15, w: 1}
   m_LocalPosition: {x: 0, y: 0, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
@@ -56332,6 +56339,7 @@ MonoBehaviour:
   chapterNum: 0
   stageNum: 0
   name: Genre
+  isLock: 0
 --- !u!1 &625239651
 GameObject:
   m_ObjectHideFlags: 0
@@ -59222,6 +59230,7 @@ MonoBehaviour:
   chapterNum: 7
   stageNum: 0
   name: Chapter
+  isLock: 0
 --- !u!1 &736376411
 GameObject:
   m_ObjectHideFlags: 0
@@ -68366,6 +68375,7 @@ MonoBehaviour:
   chapterNum: 1
   stageNum: 0
   name: Chapter
+  isLock: 0
 --- !u!1 &913557038
 GameObject:
   m_ObjectHideFlags: 0
@@ -81210,6 +81220,7 @@ MonoBehaviour:
   chapterNum: 0
   stageNum: 1
   name: Stage
+  isLock: 0
 --- !u!1 &1215165863
 GameObject:
   m_ObjectHideFlags: 0
@@ -106513,6 +106524,7 @@ MonoBehaviour:
   chapterNum: 5
   stageNum: 0
   name: Chapter
+  isLock: 0
 --- !u!1 &1445014257
 GameObject:
   m_ObjectHideFlags: 0
@@ -107594,7 +107606,7 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1473644558}
   serializedVersion: 2
-  m_LocalRotation: {x: -0.0008076914, y: -3.3645912e-11, z: -2.7175527e-14, w: 0.9999997}
+  m_LocalRotation: {x: -0.0008076914, y: -3.364995e-11, z: -2.717879e-14, w: 0.9999997}
   m_LocalPosition: {x: 0, y: 0, z: -300}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
@@ -114307,6 +114319,7 @@ MonoBehaviour:
   chapterNum: 0
   stageNum: 5
   name: Stage
+  isLock: 0
 --- !u!1 &1569494618
 GameObject:
   m_ObjectHideFlags: 0
@@ -116305,6 +116318,7 @@ MonoBehaviour:
   chapterNum: 0
   stageNum: 2
   name: Stage
+  isLock: 0
 --- !u!1 &1654366589
 GameObject:
   m_ObjectHideFlags: 0
@@ -122028,6 +122042,7 @@ MonoBehaviour:
   chapterNum: 0
   stageNum: 4
   name: Stage
+  isLock: 0
 --- !u!1 &1696488553
 GameObject:
   m_ObjectHideFlags: 0
@@ -122742,6 +122757,7 @@ MonoBehaviour:
   chapterNum: 0
   stageNum: 3
   name: Stage
+  isLock: 0
 --- !u!1 &1743140521
 GameObject:
   m_ObjectHideFlags: 0
@@ -130252,6 +130268,7 @@ MonoBehaviour:
   chapterNum: 8
   stageNum: 0
   name: Chapter
+  isLock: 0
 --- !u!1 &1875057827
 GameObject:
   m_ObjectHideFlags: 0
@@ -132469,6 +132486,7 @@ MonoBehaviour:
   chapterNum: 0
   stageNum: 0
   name: Set
+  isLock: 0
 --- !u!1 &1988945644
 GameObject:
   m_ObjectHideFlags: 0
@@ -135325,6 +135343,7 @@ MonoBehaviour:
   chapterNum: 0
   stageNum: 0
   name: Back
+  isLock: 0
 --- !u!1 &2102796087
 GameObject:
   m_ObjectHideFlags: 0
@@ -140143,6 +140162,7 @@ MonoBehaviour:
   chapterNum: 0
   stageNum: 0
   name: Story
+  isLock: 0
 --- !u!65 &3469287837027835513
 BoxCollider:
   m_ObjectHideFlags: 0

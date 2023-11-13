@@ -133,8 +133,8 @@ public class DBManager : MonoBehaviour
 
             if (localData != null)
             {
-                
                 isTutorial = localData.isTutorial;
+                chapter = localData.chapter;
                 musicValue = localData.soundValue;
                 sfxValue = localData.sfxValue;
                 isVibration = localData.isVibration;
@@ -155,6 +155,7 @@ public class DBManager : MonoBehaviour
     {
         LocalData localData = new LocalData();
         localData.isTutorial = isTutorial;
+        localData.chapter = chapter;
         localData.soundValue = musicValue;
         localData.sfxValue = sfxValue;
         localData.isVibration = isVibration;
