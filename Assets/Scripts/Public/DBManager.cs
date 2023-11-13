@@ -8,6 +8,7 @@ using UnityEngine.Serialization;
 [Serializable]
 public class LocalData
 {
+    public int chapter = 1;
     public float soundValue;
     public float sfxValue;
     public int supportLanguageNum = 2;
@@ -22,6 +23,9 @@ public class DBManager : MonoBehaviour
     [FoldoutGroup("유저 서버 DB")]
     [Title("닉네임")]
     public string nickName;
+    [FoldoutGroup("게임 DB")]
+    [Title("챕터 값")]
+    public int chapter = 1;
     [FoldoutGroup("게임 DB")]
     [Title("이동 할 씬")]
     public string nextScene;
@@ -43,13 +47,17 @@ public class DBManager : MonoBehaviour
     [FoldoutGroup("게임 DB")] 
     [Title("튜토리얼 여부")] 
     public bool isTutorial;
-
-    [FoldoutGroup("게임 DB")] 
-    [Title("게임 씬 이름")]
-    public string gameSceneName = "Game";
     [FoldoutGroup("게임 DB")] 
     [Title("시네머신 여부")]
     public bool isCinemachine;
+
+    [FoldoutGroup("게임 DB")] 
+    [Title("JSON 불러오기 여부")]
+    public bool isJsonLoad = false;
+    [FoldoutGroup("게임 DB")] 
+    [Title("게임 씬 이름")]
+    public string gameSceneName = "Game";
+
     
     [FoldoutGroup("설정 DB")] 
     [Title("설정 음악 값")]
@@ -125,6 +133,7 @@ public class DBManager : MonoBehaviour
 
             if (localData != null)
             {
+                
                 isTutorial = localData.isTutorial;
                 musicValue = localData.soundValue;
                 sfxValue = localData.sfxValue;
@@ -138,6 +147,8 @@ public class DBManager : MonoBehaviour
                 }
             }
         }
+
+        isJsonLoad = true;
     }
 
     void JsonSave() 

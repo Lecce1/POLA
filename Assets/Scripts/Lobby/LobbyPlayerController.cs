@@ -331,7 +331,12 @@ public class LobbyPlayerController : MonoBehaviour
                             break;
                         
                         case "Chapter":
-                            LobbyManager.instance.DoorInit("Move", "Join");
+                            if (temp.GetComponent<DoorManager>().isLock == false)
+                            {
+                                LobbyManager.instance.DoorInit("Move", "Join");
+
+                            }
+                            
                             DBManager.instance.currentChapter = temp.GetComponent<DoorManager>().chapterNum;
                             break;
                         
