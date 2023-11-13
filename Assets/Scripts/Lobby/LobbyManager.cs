@@ -4,6 +4,7 @@ using Sirenix.OdinInspector;
 using UnityEngine;
 using UnityEngine.Localization.Settings;
 using UnityEngine.SceneManagement;
+using UnityEngine.Serialization;
 using UnityEngine.UI;
 using Debug = UnityEngine.Debug;
 
@@ -37,7 +38,16 @@ public class LobbyManager : MonoBehaviour
     
     [FoldoutGroup("스카이박스")]
     public List<Material> stage_Skybox;
-
+    
+    [FoldoutGroup("설정 패널")] 
+    [Title("음악 Slider")]
+    public Slider set_Music_Slider;
+    [FoldoutGroup("설정 패널")] 
+    [Title("효과음 Slider")]
+    public Slider set_Sfx_Slider;
+    [FoldoutGroup("설정 패널")] 
+    [Title("진동 Toggle")]
+    public Toggle set_Vibration_Toggle;
     [FoldoutGroup("설정 패널")] 
     [Title("언어 Dropdown")]
     public Dropdown set_Language_Dropdown;
@@ -231,11 +241,16 @@ public class LobbyManager : MonoBehaviour
                     {
                         esc.SetActive(false);
                     }
-                        
+
+                    set_Music_Slider.value = DBManager.instance.musicValue;
+                    set_Sfx_Slider.value = DBManager.instance.sfxValue;
+                    set_Vibration_Toggle.isOn = DBManager.instance.isVibration;
+                    set_Language_Dropdown.value = DBManager.instance.language;
+                    Set_Change("Language");
                     set.SetActive(true);
                     backStack.Push(set);
                     isPanelOpen = true;
-                    set_Language_Dropdown.value = DBManager.instance.language;
+
                         
                     if (join_Btn.activeSelf)
                     {
@@ -302,21 +317,34 @@ public class LobbyManager : MonoBehaviour
                 break;
         }
     }
-
-    public void Set_Language()
+    
+    public void Set_Change(string type)
     {
-        LocalizationSettings.SelectedLocale = LocalizationSettings.AvailableLocales.Locales[set_Language_Dropdown.value];
-        DBManager.instance.language = set_Language_Dropdown.value;
+        switch (type)
+        {
+            case "Music":
+                DBManager.instance.musicValue = set_Music_Slider.value;
+                break;
+            
+            case "Sfx":
+                DBManager.instance.sfxValue = set_Sfx_Slider.value;
+                break;
+            
+            case "Language":
+                LocalizationSettings.SelectedLocale = LocalizationSettings.AvailableLocales.Locales[set_Language_Dropdown.value];
+                DBManager.instance.language = set_Language_Dropdown.value;
 
-        if (set_Language_Dropdown.value == 0)
-        {
-            set_Language_LeftArrow.SetActive(false);
-            set_Language_RightArrow.SetActive(true);
-        }
-        else
-        {
-            set_Language_LeftArrow.SetActive(true);
-            set_Language_RightArrow.SetActive(false);
+                if (set_Language_Dropdown.value == 0)
+                {
+                    set_Language_LeftArrow.SetActive(false);
+                    set_Language_RightArrow.SetActive(true);
+                }
+                else
+                {
+                    set_Language_LeftArrow.SetActive(true);
+                    set_Language_RightArrow.SetActive(false);
+                }
+                break;
         }
     }
 

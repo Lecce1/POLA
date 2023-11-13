@@ -173,10 +173,12 @@ public class LobbyPlayerController : MonoBehaviour
                         if (EventSystem.current.currentSelectedGameObject.GetComponent<Toggle>().isOn)
                         {
                             EventSystem.current.currentSelectedGameObject.GetComponent<Toggle>().isOn = false;
+                            DBManager.instance.isVibration = false;
                         }
                         else if (!EventSystem.current.currentSelectedGameObject.GetComponent<Toggle>().isOn)
                         {
                             EventSystem.current.currentSelectedGameObject.GetComponent<Toggle>().isOn = true;
+                            DBManager.instance.isVibration = true;
                         }
                         break;
                     
@@ -190,7 +192,7 @@ public class LobbyPlayerController : MonoBehaviour
                             LobbyManager.instance.set_Language_Dropdown.value = 0;
                         }
                         
-                        LobbyManager.instance.Set_Language();
+                        LobbyManager.instance.Set_Change("Language");
                         break;
                 }
             }
@@ -273,7 +275,7 @@ public class LobbyPlayerController : MonoBehaviour
                             LobbyManager.instance.set_Language_Dropdown.value--;
                         }
 
-                        LobbyManager.instance.Set_Language();
+                        LobbyManager.instance.Set_Change("Language");
                         break;
                 }
             }
@@ -294,7 +296,7 @@ public class LobbyPlayerController : MonoBehaviour
                             LobbyManager.instance.set_Language_Dropdown.value++;
                         }
 
-                        LobbyManager.instance.Set_Language();
+                        LobbyManager.instance.Set_Change("Language");
                         break;
                 }
             }

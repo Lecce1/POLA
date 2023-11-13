@@ -1,9 +1,21 @@
 using System;
-using System.Collections.Generic;
+using System.IO;
 using Sirenix.OdinInspector;
 using UnityEngine;
 using UnityEngine.Localization.Settings;
 using UnityEngine.Serialization;
+
+[Serializable]
+public class LocalData
+{
+    public float soundValue;
+    public float sfxValue;
+    public int supportLanguageNum = 2;
+    public bool isVibration;
+    public int language;
+    public bool isTutorial;
+}
+
 
 public class DBManager : MonoBehaviour
 {
@@ -29,14 +41,9 @@ public class DBManager : MonoBehaviour
     [Title("현재 플랫폼")]
     public string currentPlatform;
     [FoldoutGroup("게임 DB")] 
-    [Title("지원 언어 갯수")]
-    public int supportLanguageNum = 2;
-    [FoldoutGroup("게임 DB")] 
     [Title("튜토리얼 여부")] 
     public bool isTutorial;
-    [FoldoutGroup("게임 DB")] 
-    [Title("언어")] 
-    public int language;
+
     [FoldoutGroup("게임 DB")] 
     [Title("게임 씬 이름")]
     public string gameSceneName = "Game";
@@ -44,8 +51,27 @@ public class DBManager : MonoBehaviour
     [Title("시네머신 여부")]
     public bool isCinemachine;
     
+    [FoldoutGroup("설정 DB")] 
+    [Title("설정 음악 값")]
+    public float musicValue = 1;
+    [FoldoutGroup("설정 DB")] 
+    [Title("설정 효과음 값")]
+    public float sfxValue = 1;
+    [FoldoutGroup("설정 DB")]
+    [Title("설정 진동 여부")]
+    public bool isVibration = true;
+    [FoldoutGroup("설정 DB")] 
+    [Title("언어")] 
+    public int language;
+    [FoldoutGroup("설정 DB")] 
+    [Title("지원 언어 갯수")]
+    public int supportLanguageNum = 2;
+    [FoldoutGroup("설정 DB")] 
+    [Title("json 주소")]
+    public string jsonPath;
+    
     public static DBManager instance;
-
+    
     void Awake()
     {
         if (instance == null)
@@ -64,26 +90,71 @@ public class DBManager : MonoBehaviour
         Init();
     }
 
-    public void Init()
+    void Init()
     {
-        SystemLanguage systemLanguage = Application.systemLanguage;
- 
-        switch(systemLanguage)
-        {
-            case SystemLanguage.English:
-                language = 0;
-                break;
-            
-            case SystemLanguage.Korean:
-                language = 1;
-                break;
-        }
-
-        if (language != null)
-        {
-            LocalizationSettings.SelectedLocale = LocalizationSettings.AvailableLocales.Locales[language];
-        }
-        
+        jsonPath = Path.Combine(Application.dataPath, "database.json");
+        JsonLoad();
         nickName = String.Empty;
+    }
+    
+    void JsonLoad() 
+    {
+        LocalData localData = new LocalData();
+        
+        if (!File.Exists(jsonPath)) 
+        {
+            JsonSave();
+            SystemLanguage systemLanguage = Application.systemLanguage;
+ 
+            switch(systemLanguage)
+            {
+                case SystemLanguage.English:
+                    language = 0;
+                    break;
+            
+                case SystemLanguage.Korean:
+                    language = 1;
+                    break;
+            }
+            
+            LocalizationSettings.SelectedLocale = LocalizationSettings.AvailableLocales.Locales[language];
+        } 
+        else 
+        {
+            localData = JsonUtility.FromJson<LocalData>(File.ReadAllText(jsonPath));
+
+            if (localData != null)
+            {
+                isTutorial = localData.isTutorial;
+                musicValue = localData.soundValue;
+                sfxValue = localData.sfxValue;
+                isVibration = localData.isVibration;
+                language = localData.language;
+                supportLanguageNum = localData.supportLanguageNum;
+                
+                if (language != null)
+                {
+                    LocalizationSettings.SelectedLocale = LocalizationSettings.AvailableLocales.Locales[language];
+                }
+            }
+        }
+    }
+
+    void JsonSave() 
+    {
+        LocalData localData = new LocalData();
+        localData.isTutorial = isTutorial;
+        localData.soundValue = musicValue;
+        localData.sfxValue = sfxValue;
+        localData.isVibration = isVibration;
+        localData.language = language;
+        localData.supportLanguageNum = supportLanguageNum;
+        string json = JsonUtility.ToJson(localData, true);
+        File.WriteAllText(jsonPath, json);
+    }
+
+    void OnApplicationQuit()
+    {
+        JsonSave();
     }
 }
