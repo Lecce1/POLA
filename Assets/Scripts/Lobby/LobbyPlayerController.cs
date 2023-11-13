@@ -53,9 +53,6 @@ public class LobbyPlayerController : MonoBehaviour
     {
         anim = GetComponent<Animator>();
         rigidbody = GetComponent<Rigidbody>();
-        transform.position =
-            LobbyManager.instance.moveRoute[DBManager.instance.currentGround]
-                .routeList[DBManager.instance.currentRouteIdx].transform.position + LobbyManager.instance.offset;
     }
     
     void Update()
