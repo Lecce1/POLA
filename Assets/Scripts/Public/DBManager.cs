@@ -110,7 +110,6 @@ public class DBManager : MonoBehaviour
         
         if (!File.Exists(jsonPath)) 
         {
-            JsonSave();
             SystemLanguage systemLanguage = Application.systemLanguage;
  
             switch(systemLanguage)
@@ -125,6 +124,8 @@ public class DBManager : MonoBehaviour
             }
             
             LocalizationSettings.SelectedLocale = LocalizationSettings.AvailableLocales.Locales[language];
+            
+            JsonSave();
         } 
         else 
         {
@@ -156,6 +157,20 @@ public class DBManager : MonoBehaviour
         localData.isVibration = isVibration;
         localData.language = language;
         localData.supportLanguageNum = supportLanguageNum;
+        string json = JsonUtility.ToJson(localData, true);
+        File.WriteAllText(jsonPath, json);
+    }
+
+    public void Test()
+    {
+        LocalData localData = new LocalData();
+        localData.isTutorial = true;
+        localData.chapter = 1;
+        localData.soundValue = 1;
+        localData.sfxValue = 1;
+        localData.isVibration = true;
+        localData.language = 1;
+        localData.supportLanguageNum = 1;
         string json = JsonUtility.ToJson(localData, true);
         File.WriteAllText(jsonPath, json);
     }

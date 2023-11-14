@@ -84,6 +84,16 @@ public class LobbyPlayerController : MonoBehaviour
         }
     }
 
+    public void OnDpadLeft()
+    {
+        OnMove(true);
+    }
+    
+    public void OnDpadRight()
+    {
+        OnMove(false);
+    }
+
     public void OnMove(InputValue value)
     {
         if (isMoveAvailable && isMove == false)
