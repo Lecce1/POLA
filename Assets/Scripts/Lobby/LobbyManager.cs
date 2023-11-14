@@ -87,8 +87,6 @@ public class LobbyManager : MonoBehaviour
     // 뒤로가기 스택
     private Stack<GameObject> backStack;
     public static LobbyManager instance;
-    
-
 
     [Serializable]
     public class MoveRoute
@@ -370,10 +368,16 @@ public class LobbyManager : MonoBehaviour
         {
             case "Music":
                 DBManager.instance.musicValue = set_Music_Slider.value;
+                LobbyAudioManager.instance.audioMixer.SetFloat("Music", DBManager.instance.musicValue - 0.5f);
                 break;
             
             case "Sfx":
                 DBManager.instance.sfxValue = set_Sfx_Slider.value;
+                LobbyAudioManager.instance.audioMixer.SetFloat("FX", DBManager.instance.sfxValue - 0.5f);
+                break;
+            
+            case "Vibration":
+                DBManager.instance.isVibration = set_Vibration_Toggle.isOn;
                 break;
             
             case "Language":

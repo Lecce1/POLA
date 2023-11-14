@@ -428,7 +428,7 @@ public class PlayerController : MonoBehaviour
 
     public void OnClick()
     {
-        if (EventSystem.current.currentSelectedGameObject != null && GameManager.instance.set.activeSelf && GetComponent<PlayerInput>().currentControlScheme != "MOBILE")
+        if (EventSystem.current.currentSelectedGameObject != null && GameManager.instance.esc.activeSelf && GetComponent<PlayerInput>().currentControlScheme != "MOBILE")
         {
             EventSystem.current.currentSelectedGameObject.GetComponent<Button>().onClick.Invoke();
         }
@@ -440,7 +440,7 @@ public class PlayerController : MonoBehaviour
         {
             if (!GameManager.instance.isPanelOpen)
             {
-                GameManager.instance.Button("Set");
+                GameManager.instance.Button("Esc");
             }
             else
             {

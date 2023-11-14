@@ -5,6 +5,7 @@ using UnityEngine;
 using UnityEngine.InputSystem;
 using UnityEngine.Localization.Settings;
 using UnityEngine.SceneManagement;
+using UnityEngine.Serialization;
 using UnityEngine.UI;
 
 public class GameManager : MonoBehaviour
@@ -12,6 +13,9 @@ public class GameManager : MonoBehaviour
     [FoldoutGroup("패널")] 
     [Title("판정 캔버스")] 
     public GameObject verdictCanvas;
+    [FoldoutGroup("패널")] 
+    [Title("일시정지")] 
+    public GameObject esc;
     [FoldoutGroup("패널")] 
     [Title("설정")] 
     public GameObject set;
@@ -33,6 +37,16 @@ public class GameManager : MonoBehaviour
     [FoldoutGroup("패널")] 
     [Title("카메라 인포")] 
     public GameObject cameraInfo;
+    
+    [FoldoutGroup("설정 패널")] 
+    [Title("음악 Slider")]
+    public Slider set_Music_Slider;
+    [FoldoutGroup("설정 패널")] 
+    [Title("효과음 Slider")]
+    public Slider set_Sfx_Slider;
+    [FoldoutGroup("설정 패널")] 
+    [Title("진동 Toggle")]
+    public Toggle set_Vibration_Toggle;
     
     [FoldoutGroup("매니저")] 
     [Title("플랫폼")] 
@@ -188,8 +202,8 @@ public class GameManager : MonoBehaviour
     {
         switch (type)
         {
-            case "Set":
-                if (!set.activeSelf)
+            case "Esc":
+                if (!esc.activeSelf)
                 {
                     if (topPanel.activeSelf)
                     {
@@ -203,10 +217,31 @@ public class GameManager : MonoBehaviour
                     
                     audioManager.audio.Pause();
                     Time.timeScale = 0;
-                    set.SetActive(true);
-                    backStack.Push(set);
+                    esc.SetActive(true);
+                    backStack.Push(esc);
                     isPanelOpen = true;
                     countDownPanel.SetActive(false);
+                }
+                break;
+            
+            case "Set":
+                if (!set.activeSelf)
+                {
+                    if (esc.activeSelf)
+                    {
+                        esc.SetActive(false);
+                    }
+
+                    set_Music_Slider.value = DBManager.instance.musicValue;
+                    set_Sfx_Slider.value = DBManager.instance.sfxValue;
+                    set_Vibration_Toggle.isOn = DBManager.instance.isVibration;
+                    set.SetActive(true);
+                    backStack.Push(set);
+
+                    if (bottomPanel.activeSelf)
+                    {
+                        bottomPanel.SetActive(false);
+                    }
                 }
                 break;
             
@@ -228,6 +263,33 @@ public class GameManager : MonoBehaviour
         }
     }
     
+    public void Set_Change(string type)
+    {
+        switch (type)
+        {
+            case "Music":
+                DBManager.instance.musicValue = set_Music_Slider.value;
+                AudioManager.instance.audioMixer.SetFloat("Music", DBManager.instance.musicValue - 0.5f);
+                break;
+            
+            case "Vibration":
+                if (set_Vibration_Toggle.isOn)
+                {
+                    DBManager.instance.isVibration = true;
+                }
+                else if (!set_Vibration_Toggle.isOn)
+                {
+                    DBManager.instance.isVibration = false;
+                }
+                break;
+            
+            case "Sfx":
+                DBManager.instance.sfxValue = set_Sfx_Slider.value;
+                AudioManager.instance.audioMixer.SetFloat("FX", DBManager.instance.sfxValue - 0.5f);
+                break;
+        }
+    }
+    
     public void Back()
     {
         if (backStack.Count <= 0)
@@ -240,6 +302,31 @@ public class GameManager : MonoBehaviour
 
         switch (backStack.Pop().name)
         {
+            case "Esc":
+                if (esc.activeSelf)
+                {
+                    esc.SetActive(false);
+                    isCheck = true;
+                    
+                    if (!topPanel.activeSelf)
+                    {
+                        topPanel.SetActive(true);
+                    }
+                    
+                    if (!bottomPanel.activeSelf)
+                    {
+                        bottomPanel.SetActive(true);
+                    }
+
+                    if (!playerController.isDead)
+                    {
+                        StartCoroutine(CountDown());
+                    }
+                    
+                    Time.timeScale = 1;
+                }
+                break;
+            
             case "Set":
                 if (set.activeSelf)
                 {
@@ -260,6 +347,7 @@ public class GameManager : MonoBehaviour
                     {
                         StartCoroutine(CountDown());
                     }
+                    
                     Time.timeScale = 1;
                 }
                 break;
@@ -277,7 +365,7 @@ public class GameManager : MonoBehaviour
         {
             audioManager.audio.clip.LoadAudioData();
         }
-        
+
         isCountDown = true;
         playerController.GetComponent<Animator>().SetBool("isCountDown", isCountDown);
         countDownPanel.gameObject.SetActive(true);

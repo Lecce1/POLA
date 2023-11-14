@@ -2,10 +2,15 @@ using System;
 using System.Collections.Generic;
 using Sirenix.OdinInspector;
 using UnityEngine;
+using UnityEngine.Audio;
 using UnityEngine.Events;
 
 public class AudioManager : MonoBehaviour
 {
+    [FoldoutGroup("음악")]
+    [Title("오디오 믹서")]
+    public AudioMixer audioMixer;
+    
     [FoldoutGroup("음악")]
     [Title("BPM")]
     public float bpm;
@@ -18,7 +23,22 @@ public class AudioManager : MonoBehaviour
     [Title("인터벌")]
     [TableList]
     public List<Intervals> intervals = new ();
-    
+
+    public static AudioManager instance;
+
+    void Awake()
+    {
+        if (instance == null)
+        {
+            instance = this;
+        }
+    }
+
+    void Start()
+    {
+        audioMixer.SetFloat("Music", (DBManager.instance.musicValue - 0.5f) * 10);
+        audioMixer.SetFloat("FX", (DBManager.instance.sfxValue - 0.5f) * 10);
+    }
     
     void Update()
     {

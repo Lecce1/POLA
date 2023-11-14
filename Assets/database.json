@@ -1,9 +1,9 @@
 {
     "chapter": 5,
     "soundValue": 1.0,
-    "sfxValue": 1.0,
+    "sfxValue": 0.04201272130012512,
     "supportLanguageNum": 2,
-    "isVibration": true,
+    "isVibration": false,
     "language": 1,
     "isTutorial": true
 }

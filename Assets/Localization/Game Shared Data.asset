@@ -67,6 +67,10 @@ MonoBehaviour:
     m_Key: Press_Retry
     m_Metadata:
       m_Items: []
+  - m_Id: 4592443101011968
+    m_Key: Settings
+    m_Metadata:
+      m_Items: []
   m_Metadata:
     m_Items: []
   m_KeyGenerator:
