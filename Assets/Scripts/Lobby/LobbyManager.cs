@@ -80,13 +80,15 @@ public class LobbyManager : MonoBehaviour
     [FoldoutGroup("기타")] 
     [Title("설정 버튼 / 패드 여부")]
     public bool isSetBtn;
+    [FoldoutGroup("기타")] 
+    [Title("Virtual Camera")]
+    public CinemachineVirtualCamera virtualCamera;
     
     // 뒤로가기 스택
     private Stack<GameObject> backStack;
     public static LobbyManager instance;
     
-    [Title("Virtual Camera")]
-    public CinemachineVirtualCamera virtualCamera;
+
 
     [Serializable]
     public class MoveRoute
@@ -321,29 +323,42 @@ public class LobbyManager : MonoBehaviour
             info.GetComponent<Animator>().Play("InfoOn");
             isInfoPanelOn = true;
             LobbyPlayerController.instance.isMoveAvailable = false;
-            Debug.Log("test");
-            //StartCoroutine("VirtualCameraOffset");
+            StartCoroutine("VirtualCameraOffset", true);
         }
         else if (!isOn)
         {
             info.GetComponent<Animator>().Play("InfoOff");
             isInfoPanelOn = false;
             LobbyPlayerController.instance.isMoveAvailable = true;
-            virtualCamera.GetCinemachineComponent<CinemachineTransposer>().m_FollowOffset = new Vector3(0, 1.5f, -7);
+            StartCoroutine("VirtualCameraOffset", false);
         }
     }
 
-    IEnumerator VirtualCameraOffset()
+    IEnumerator VirtualCameraOffset(bool isOn)
     {
-        float temp = -7f;
-        
-        while (virtualCamera.GetCinemachineComponent<CinemachineTransposer>().m_FollowOffset.z < -4)
+        if (isOn)
         {
-            temp -= Time.deltaTime;
-            virtualCamera.GetCinemachineComponent<CinemachineTransposer>().m_FollowOffset = new Vector3(0, 1.5f, temp);
-        }
+            float temp = -7f;
         
-        yield return null;
+            while (virtualCamera.GetCinemachineComponent<CinemachineTransposer>().m_FollowOffset.z < -4)
+            {
+                temp += Time.deltaTime * 3;
+                virtualCamera.GetCinemachineComponent<CinemachineTransposer>().m_FollowOffset = new Vector3(0, 1.5f, temp);
+                yield return null;
+            }
+        }
+        else if (!isOn)
+        {
+            float temp = -4f;
+        
+            while (virtualCamera.GetCinemachineComponent<CinemachineTransposer>().m_FollowOffset.z > -7)
+            {
+                temp -= Time.deltaTime * 3;
+                virtualCamera.GetCinemachineComponent<CinemachineTransposer>().m_FollowOffset = new Vector3(0, 1.5f, temp);
+                yield return null;
+            }
+        }
+
     }
 
     public void Set_Change(string type)
