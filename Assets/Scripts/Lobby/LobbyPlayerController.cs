@@ -100,6 +100,11 @@ public class LobbyPlayerController : MonoBehaviour
                 {
                     DBManager.instance.currentRouteIdx--;
                 }
+                else
+                {
+                    DBManager.instance.currentRouteIdx = LobbyManager.instance.moveRoute[DBManager.instance.currentGround].routeList.Count - 1;
+                    transform.position = LobbyManager.instance.moveRoute[DBManager.instance.currentGround].routeList[DBManager.instance.currentRouteIdx].transform.position + LobbyManager.instance.offset;
+                }
                 
                 Move();
             }
@@ -112,6 +117,11 @@ public class LobbyPlayerController : MonoBehaviour
                 if (DBManager.instance.currentRouteIdx + 1 < LobbyManager.instance.moveRoute[DBManager.instance.currentGround].routeList.Count)
                 {
                     DBManager.instance.currentRouteIdx++;
+                }
+                else
+                {
+                    DBManager.instance.currentRouteIdx = 0;
+                    transform.position = LobbyManager.instance.moveRoute[DBManager.instance.currentGround].routeList[DBManager.instance.currentRouteIdx].transform.position + LobbyManager.instance.offset;
                 }
 
                 Move();
@@ -133,6 +143,11 @@ public class LobbyPlayerController : MonoBehaviour
                 {
                     DBManager.instance.currentRouteIdx--;
                 }
+                else
+                {
+                    DBManager.instance.currentRouteIdx = LobbyManager.instance.moveRoute[DBManager.instance.currentGround].routeList.Count - 1;
+                    transform.position = LobbyManager.instance.moveRoute[DBManager.instance.currentGround].routeList[DBManager.instance.currentRouteIdx].transform.position + LobbyManager.instance.offset;
+                }
                 
                 Move();
             }
@@ -145,6 +160,11 @@ public class LobbyPlayerController : MonoBehaviour
                 if (DBManager.instance.currentRouteIdx + 1 < LobbyManager.instance.moveRoute[DBManager.instance.currentGround].routeList.Count)
                 {
                     DBManager.instance.currentRouteIdx++;
+                }
+                else
+                {
+                    DBManager.instance.currentRouteIdx = 0;
+                    transform.position = LobbyManager.instance.moveRoute[DBManager.instance.currentGround].routeList[DBManager.instance.currentRouteIdx].transform.position + LobbyManager.instance.offset;
                 }
 
                 Move();
@@ -382,7 +402,7 @@ public class LobbyPlayerController : MonoBehaviour
         
         if (LobbyManager.instance.isJoinBtnOn && !isDoor && !collider[0].transform.GetComponent<DoorManager>())
         {
-            LobbyManager.instance.Join_Btn_OnOff(false);
+            LobbyManager.instance.Join_Btn_OnOff(false, false);
         }
     }
 }

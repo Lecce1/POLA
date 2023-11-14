@@ -128,10 +128,10 @@ public class LobbyManager : MonoBehaviour
         join_Btn.GetComponent<Button>().onClick.RemoveAllListeners();
         join_Btn.GetComponent<Button>().onClick.AddListener(() => LobbyManager.instance.Button(type));
         join_Btn_Text.text = LocalizationSettings.StringDatabase.GetLocalizedString("Lobby", btnText, LocalizationSettings.SelectedLocale);
-        Join_Btn_OnOff(true);
+        Join_Btn_OnOff(true, false);
     }
 
-    public void Join_Btn_OnOff(bool isOn)
+    public void Join_Btn_OnOff(bool isOn, bool isInfo)
     {
         if (DBManager.instance.currentPlatform != "MOBILE" && join_Btn.GetComponent<RectTransform>().anchoredPosition.y == 0)
         {
@@ -153,8 +153,11 @@ public class LobbyManager : MonoBehaviour
             {
                 join_Btn.GetComponent<Animator>().Play("JoinOff");
             }
-            
-            isJoinBtnOn = false;
+
+            if (!isInfo)
+            {
+                isJoinBtnOn = false;
+            }
         }
     }
 
@@ -204,7 +207,7 @@ public class LobbyManager : MonoBehaviour
                 if (!info.GetComponent<Animator>().GetCurrentAnimatorStateInfo(0).IsName("InfoOff") || info.GetComponent<Animator>().GetCurrentAnimatorStateInfo(0).normalizedTime > 0.9f)
                 {
                     Info_OnOff(true);
-                    Join_Btn_OnOff(false);
+                    Join_Btn_OnOff(false, true);
                 }
                 break;
             
@@ -446,7 +449,7 @@ public class LobbyManager : MonoBehaviour
                 
                 if (!LobbyPlayerController.instance.isDoor && isSetBtn == false)
                 {
-                    Join_Btn_OnOff(false);
+                    Join_Btn_OnOff(false, false);
                 }
 
                 isSetBtn = false;

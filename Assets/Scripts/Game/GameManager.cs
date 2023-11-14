@@ -273,6 +273,11 @@ public class GameManager : MonoBehaviour
     
     IEnumerator CountDown()
     {
+        if (audioManager.audio.clip.loadState == AudioDataLoadState.Unloaded)
+        {
+            audioManager.audio.clip.LoadAudioData();
+        }
+        
         isCountDown = true;
         playerController.GetComponent<Animator>().SetBool("isCountDown", isCountDown);
         countDownPanel.gameObject.SetActive(true);
