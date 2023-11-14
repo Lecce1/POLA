@@ -202,7 +202,7 @@ public class LobbyManager : MonoBehaviour
                 break;
             
             case "Stage":
-                if (!info.GetComponent<Animator>().GetCurrentAnimatorStateInfo(0).IsName("InfoOff") || info.GetComponent<Animator>().GetCurrentAnimatorStateInfo(0).normalizedTime > 0.9f)
+                if (!info.GetComponent<Animator>().GetCurrentAnimatorStateInfo(0).IsName("InfoOff") || info.GetComponent<Animator>().GetCurrentAnimatorStateInfo(0).normalizedTime >= 1f)
                 {
                     Info_OnOff(true);
                     Join_Btn_OnOff(false, true);

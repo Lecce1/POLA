@@ -258,7 +258,7 @@ public class LobbyPlayerController : MonoBehaviour
         {
             if (LobbyManager.instance.info.GetComponent<Animator>().GetCurrentAnimatorStateInfo(0).IsName("InfoOn"))
             {
-                if (LobbyManager.instance.info.GetComponent<Animator>().GetCurrentAnimatorStateInfo(0).normalizedTime > 0.9f)
+                if (LobbyManager.instance.info.GetComponent<Animator>().GetCurrentAnimatorStateInfo(0).normalizedTime >= 1f)
                 {
                     LobbyManager.instance.Info_OnOff(false);
                 }
