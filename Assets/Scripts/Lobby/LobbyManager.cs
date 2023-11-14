@@ -124,10 +124,10 @@ public class LobbyManager : MonoBehaviour
         join_Btn.GetComponent<Button>().onClick.RemoveAllListeners();
         join_Btn.GetComponent<Button>().onClick.AddListener(() => LobbyManager.instance.Button(name));
         join_Btn_Text.text = LocalizationSettings.StringDatabase.GetLocalizedString("Lobby", btnText, LocalizationSettings.SelectedLocale);
-        Join_Btn_OnOff(true, false);
+        Join_Btn_OnOff(true);
     }
 
-    public void Join_Btn_OnOff(bool isOn, bool onlyStage)
+    public void Join_Btn_OnOff(bool isOn)
     {
         if (DBManager.instance.currentPlatform != "MOBILE" && join_Btn.GetComponent<RectTransform>().anchoredPosition.y == 0)
         {
@@ -136,7 +136,7 @@ public class LobbyManager : MonoBehaviour
         
         if (isOn)
         {
-            if (!onlyStage && join_Btn.activeSelf && DBManager.instance.currentPlatform == "MOBILE")
+            if (join_Btn.activeSelf && DBManager.instance.currentPlatform == "MOBILE")
             {
                 join_Btn.GetComponent<Animator>().Play("JoinOn");
             }
@@ -145,7 +145,7 @@ public class LobbyManager : MonoBehaviour
         }
         else if (!isOn)
         {
-            if (!onlyStage && join_Btn.activeSelf && DBManager.instance.currentPlatform == "MOBILE")
+            if (join_Btn.activeSelf && DBManager.instance.currentPlatform == "MOBILE")
             {
                 join_Btn.GetComponent<Animator>().Play("JoinOff");
             }
@@ -200,6 +200,7 @@ public class LobbyManager : MonoBehaviour
                 if (!info.GetComponent<Animator>().GetCurrentAnimatorStateInfo(0).IsName("InfoOff") || info.GetComponent<Animator>().GetCurrentAnimatorStateInfo(0).normalizedTime > 0.9f)
                 {
                     Info_OnOff(true);
+                    Join_Btn_OnOff(false);
                 }
                 break;
             
@@ -412,7 +413,7 @@ public class LobbyManager : MonoBehaviour
                 
                 if (!LobbyPlayerController.instance.isDoor && isSetBtn == false)
                 {
-                    Join_Btn_OnOff(false, false);
+                    Join_Btn_OnOff(false);
                 }
 
                 isSetBtn = false;

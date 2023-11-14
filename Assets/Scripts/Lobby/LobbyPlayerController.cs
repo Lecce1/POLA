@@ -355,9 +355,12 @@ public class LobbyPlayerController : MonoBehaviour
                             break;
                         
                         case "Stage":
-                            TrackInfo.instance.Init(DBManager.instance.currentChapter, temp.transform.GetComponent<DoorManager>().stageNum);
-                            LobbyManager.instance.DoorInit("Stage", "Join");
-                            DBManager.instance.currentStage = temp.GetComponent<DoorManager>().stageNum;
+                            if (LobbyManager.instance.isInfoPanelOn == false)
+                            {
+                                TrackInfo.instance.Init(DBManager.instance.currentChapter, temp.transform.GetComponent<DoorManager>().stageNum);
+                                LobbyManager.instance.DoorInit("Stage", "Join");
+                                DBManager.instance.currentStage = temp.GetComponent<DoorManager>().stageNum;
+                            }
                             break;
                         
                         case "Back":
@@ -379,7 +382,7 @@ public class LobbyPlayerController : MonoBehaviour
         
         if (LobbyManager.instance.isJoinBtnOn && !isDoor && !collider[0].transform.GetComponent<DoorManager>())
         {
-            LobbyManager.instance.Join_Btn_OnOff(false, false);
+            LobbyManager.instance.Join_Btn_OnOff(false);
         }
     }
 }
