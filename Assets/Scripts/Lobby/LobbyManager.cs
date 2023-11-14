@@ -153,20 +153,6 @@ public class LobbyManager : MonoBehaviour
             isJoinBtnOn = false;
         }
     }
-    
-    public void Info_OnOff(bool isOn)
-    {
-        if (isOn == true)
-        {
-            info.GetComponent<Animator>().Play("InfoOn");
-            isInfoPanelOn = true;
-        }
-        else if (isOn == false)
-        {
-            info.GetComponent<Animator>().Play("InfoOff");
-            isInfoPanelOn = false;
-        }
-    }
 
     public void Button(string type)  //if (join_Btn.GetComponent<Animator>().GetCurrentAnimatorStateInfo(0).normalizedTime >= 0.9f)
     {
@@ -211,6 +197,13 @@ public class LobbyManager : MonoBehaviour
                 break;
             
             case "Stage":
+                if (!info.GetComponent<Animator>().GetCurrentAnimatorStateInfo(0).IsName("InfoOff") || info.GetComponent<Animator>().GetCurrentAnimatorStateInfo(0).normalizedTime > 0.9f)
+                {
+                    Info_OnOff(true);
+                }
+                break;
+            
+            case "Info_Yes":
                 StartCoroutine(FadeManager.instance.FadeIn());
                 DBManager.instance.nextScene = DBManager.instance.gameSceneName;
                 break;
@@ -318,6 +311,22 @@ public class LobbyManager : MonoBehaviour
         }
     }
     
+    public void Info_OnOff(bool isOn)
+    {
+        if (isOn == true)
+        {
+            info.GetComponent<Animator>().Play("InfoOn");
+            isInfoPanelOn = true;
+            LobbyPlayerController.instance.isMoveAvailable = false;
+        }
+        else if (isOn == false)
+        {
+            info.GetComponent<Animator>().Play("InfoOff");
+            isInfoPanelOn = false;
+            LobbyPlayerController.instance.isMoveAvailable = true;
+        }
+    }
+    
     public void Set_Change(string type)
     {
         switch (type)
@@ -346,12 +355,6 @@ public class LobbyManager : MonoBehaviour
                 }
                 break;
         }
-    }
-
-    public void SetBtn()
-    {
-        isSetBtn = true;
-        Button("Set");
     }
 
     public void Back()

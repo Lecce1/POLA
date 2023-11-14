@@ -158,11 +158,18 @@ public class LobbyPlayerController : MonoBehaviour
         {
             if (!LobbyManager.instance.isPanelOpen && LobbyManager.instance.isJoinBtnOn)
             {
-                LobbyManager.instance.Button(LobbyManager.instance.join_Btn_Type);
-
-                if (LobbyManager.instance.join_Btn_Type != "Move" && LobbyManager.instance.join_Btn_Type != "Back")
+                if (LobbyManager.instance.info.GetComponent<Animator>().GetCurrentAnimatorStateInfo(0).IsName("InfoOn") && LobbyManager.instance.info.GetComponent<Animator>().GetCurrentAnimatorStateInfo(0).normalizedTime >= 0.9f)
                 {
-                    isMoveAvailable = false;
+                    LobbyManager.instance.Button($"Info_Yes");
+                }
+                else
+                {
+                    LobbyManager.instance.Button(LobbyManager.instance.join_Btn_Type);
+
+                    if (LobbyManager.instance.join_Btn_Type != "Move" && LobbyManager.instance.join_Btn_Type != "Back")
+                    {
+                        isMoveAvailable = false;
+                    }
                 }
             }
             else if (LobbyManager.instance.set.activeSelf)
@@ -229,7 +236,14 @@ public class LobbyPlayerController : MonoBehaviour
         }
         else if (!LobbyManager.instance.isPanelOpen)
         {
-            if (!LobbyManager.instance.esc.activeSelf)
+            if (LobbyManager.instance.info.GetComponent<Animator>().GetCurrentAnimatorStateInfo(0).IsName("InfoOn"))
+            {
+                if (LobbyManager.instance.info.GetComponent<Animator>().GetCurrentAnimatorStateInfo(0).normalizedTime > 0.9f)
+                {
+                    LobbyManager.instance.Info_OnOff(false);
+                }
+            }
+            else if (!LobbyManager.instance.esc.activeSelf)
             {
                 LobbyManager.instance.Button("Esc");
                 isMoveAvailable = false;
