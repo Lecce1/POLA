@@ -245,7 +245,7 @@ public class GameManager : MonoBehaviour
                 }
                 break;
             
-            case "Stage":
+            case "Restart":
                 Time.timeScale = 1;
                 SceneManager.LoadScene(DBManager.instance.gameSceneName);
                 break;
@@ -257,7 +257,7 @@ public class GameManager : MonoBehaviour
                 {
                     DBManager.instance.nextScene = "Lobby";
                 }
-
+                
                 SceneManager.LoadScene("Loading");
                 break;
         }
@@ -441,14 +441,14 @@ public class GameManager : MonoBehaviour
     {
         while (true)
         {
-            if (resultPanel.GetComponent<Animator>().GetCurrentAnimatorStateInfo(0).normalizedTime < 1f)
+            if (resultPanel.GetComponent<Animator>().GetCurrentAnimatorStateInfo(0).IsName("Result") && resultPanel.GetComponent<Animator>().GetCurrentAnimatorStateInfo(0).normalizedTime < 1f)
             {
                 if (Input.anyKey)
                 {
                     resultPanel.GetComponent<Animator>().speed = 5f;
                 }
             }
-            else
+            else if(resultPanel.GetComponent<Animator>().GetCurrentAnimatorStateInfo(0).IsName("Result") && resultPanel.GetComponent<Animator>().GetCurrentAnimatorStateInfo(0).normalizedTime >= 1f)
             {
                 if (Input.anyKey)
                 {
