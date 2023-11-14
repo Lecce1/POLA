@@ -428,9 +428,30 @@ public class PlayerController : MonoBehaviour
 
     public void OnClick()
     {
-        if (EventSystem.current.currentSelectedGameObject != null && GameManager.instance.esc.activeSelf && GetComponent<PlayerInput>().currentControlScheme != "MOBILE")
+        if (EventSystem.current.currentSelectedGameObject != null && (GameManager.instance.esc.activeSelf || GameManager.instance.set.activeSelf) && GetComponent<PlayerInput>().currentControlScheme != "MOBILE")
         {
-            EventSystem.current.currentSelectedGameObject.GetComponent<Button>().onClick.Invoke();
+            if (GameManager.instance.set.activeSelf)
+            {
+                switch (EventSystem.current.currentSelectedGameObject.name)
+                {
+                    case "Toggle":
+                        if (EventSystem.current.currentSelectedGameObject.GetComponent<Toggle>().isOn)
+                        {
+                            EventSystem.current.currentSelectedGameObject.GetComponent<Toggle>().isOn = false;
+                            DBManager.instance.isVibration = false;
+                        }
+                        else if (!EventSystem.current.currentSelectedGameObject.GetComponent<Toggle>().isOn)
+                        {
+                            EventSystem.current.currentSelectedGameObject.GetComponent<Toggle>().isOn = true;
+                            DBManager.instance.isVibration = true;
+                        }
+                        break;
+                }
+            }
+            else
+            {
+                EventSystem.current.currentSelectedGameObject.GetComponent<Button>().onClick.Invoke();
+            }
         }
     }
 
