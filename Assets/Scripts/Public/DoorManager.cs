@@ -18,7 +18,7 @@ public class DoorManager : MonoBehaviour
     
     [FoldoutGroup("정보")] 
     [Title("문 이름")]
-    public string name;
+    public new string name;
     
     [FoldoutGroup("정보")] 
     [Title("잠금 여부")]

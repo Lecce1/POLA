@@ -12,16 +12,16 @@ public class TCPServerManager : MonoBehaviour
 {
     [FoldoutGroup("정보")]
     [Title("Server IP")]
-    private string ip = "15.164.215.122";  // AWS EC2 퍼블릭 IPv4 주소
+    //private string ip = "15.164.215.122";  // AWS EC2 퍼블릭 IPv4 주소
     [FoldoutGroup("정보")]
     [Title("집 IP")]
-    private string ip2 = "192.168.200.167"; // 집
+    //private string ip2 = "192.168.200.167"; // 집
     [FoldoutGroup("정보")]
     [Title("자취방 IP2")]
-    private string ip3 = "192.168.0.19"; // 자취방
+    //private string ip3 = "192.168.0.19"; // 자취방
     [FoldoutGroup("정보")]
     [Title("Port")]
-    private string port = "12345";
+    //private string port = "12345";
     [FoldoutGroup("서버")]
     [Title("소켓")]
     private TcpClient socket;

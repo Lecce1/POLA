@@ -12,7 +12,7 @@ public class AudioManager : MonoBehaviour
     
     [FoldoutGroup("음악")]
     [Title("오디오")]
-    public AudioSource audio;
+    public new AudioSource audio;
     
     [FoldoutGroup("음악")]
     [Title("인터벌")]

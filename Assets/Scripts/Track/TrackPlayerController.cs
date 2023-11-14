@@ -32,11 +32,11 @@ public class TrackPlayerController : MonoBehaviour
 
     [Title("RigidBody")] 
     [SerializeField] 
-    private Rigidbody rigidbody;
+    private new Rigidbody rigidbody;
     
     [Title("충돌 콜라이더")] 
     [SerializeField] 
-    private Collider[] collider;
+    private new Collider[] collider;
 
     [Title("움직임 가능 여부")] 
     [SerializeField] 

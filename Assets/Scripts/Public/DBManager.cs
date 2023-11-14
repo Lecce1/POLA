@@ -140,11 +140,7 @@ public class DBManager : MonoBehaviour
                 isVibration = localData.isVibration;
                 language = localData.language;
                 supportLanguageNum = localData.supportLanguageNum;
-                
-                if (language != null)
-                {
-                    LocalizationSettings.SelectedLocale = LocalizationSettings.AvailableLocales.Locales[language];
-                }
+                LocalizationSettings.SelectedLocale = LocalizationSettings.AvailableLocales.Locales[language];
             }
         }
 

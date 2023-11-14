@@ -1,12 +1,11 @@
 using System;
+using System.Collections;
 using System.Collections.Generic;
+using Cinemachine;
 using Sirenix.OdinInspector;
 using UnityEngine;
 using UnityEngine.Localization.Settings;
-using UnityEngine.SceneManagement;
-using UnityEngine.Serialization;
 using UnityEngine.UI;
-using Debug = UnityEngine.Debug;
 
 public class LobbyManager : MonoBehaviour
 {
@@ -70,21 +69,24 @@ public class LobbyManager : MonoBehaviour
     public string join_Btn_Type;
     [FoldoutGroup("기타")] 
     [Title("입장 버튼 온오프 여부")]
-    public bool isJoinBtnOn = false;
+    public bool isJoinBtnOn;
     [FoldoutGroup("기타")] 
     [Title("패널 열림 여부")]
-    public bool isPanelOpen = false;
+    public bool isPanelOpen;
     [FoldoutGroup("기타")] 
     [Title("Info 패널 온오프 여부")] 
     [SerializeField]
-    public bool isInfoPanelOn = false;
+    public bool isInfoPanelOn;
     [FoldoutGroup("기타")] 
     [Title("설정 버튼 / 패드 여부")]
-    public bool isSetBtn = false;
+    public bool isSetBtn;
     
     // 뒤로가기 스택
     private Stack<GameObject> backStack;
     public static LobbyManager instance;
+    
+    [Title("Virtual Camera")]
+    public CinemachineVirtualCamera virtualCamera;
 
     [Serializable]
     public class MoveRoute
@@ -118,11 +120,11 @@ public class LobbyManager : MonoBehaviour
         }
     }
 
-    public void DoorInit(string name, string btnText)
+    public void DoorInit(string type, string btnText)
     {
-        join_Btn_Type = name;
+        join_Btn_Type = type;
         join_Btn.GetComponent<Button>().onClick.RemoveAllListeners();
-        join_Btn.GetComponent<Button>().onClick.AddListener(() => LobbyManager.instance.Button(name));
+        join_Btn.GetComponent<Button>().onClick.AddListener(() => LobbyManager.instance.Button(type));
         join_Btn_Text.text = LocalizationSettings.StringDatabase.GetLocalizedString("Lobby", btnText, LocalizationSettings.SelectedLocale);
         Join_Btn_OnOff(true);
     }
@@ -314,20 +316,36 @@ public class LobbyManager : MonoBehaviour
     
     public void Info_OnOff(bool isOn)
     {
-        if (isOn == true)
+        if (isOn)
         {
             info.GetComponent<Animator>().Play("InfoOn");
             isInfoPanelOn = true;
             LobbyPlayerController.instance.isMoveAvailable = false;
+            Debug.Log("test");
+            //StartCoroutine("VirtualCameraOffset");
         }
-        else if (isOn == false)
+        else if (!isOn)
         {
             info.GetComponent<Animator>().Play("InfoOff");
             isInfoPanelOn = false;
             LobbyPlayerController.instance.isMoveAvailable = true;
+            virtualCamera.GetCinemachineComponent<CinemachineTransposer>().m_FollowOffset = new Vector3(0, 1.5f, -7);
         }
     }
-    
+
+    IEnumerator VirtualCameraOffset()
+    {
+        float temp = -7f;
+        
+        while (virtualCamera.GetCinemachineComponent<CinemachineTransposer>().m_FollowOffset.z < -4)
+        {
+            temp -= Time.deltaTime;
+            virtualCamera.GetCinemachineComponent<CinemachineTransposer>().m_FollowOffset = new Vector3(0, 1.5f, temp);
+        }
+        
+        yield return null;
+    }
+
     public void Set_Change(string type)
     {
         switch (type)
@@ -403,7 +421,7 @@ public class LobbyManager : MonoBehaviour
                 break;
         }
 
-        if (isCheck == true)
+        if (isCheck)
         {
             isPanelOpen = false;
                     

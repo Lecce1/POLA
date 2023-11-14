@@ -6,7 +6,7 @@ public class VerdictBar : MonoBehaviour
     public delegate void OnTriggerExitEvent(Collider other);
     public event OnTriggerExitEvent onTriggerExitEvent;
 
-    public Array[] collider = new Array[2];
+    public new Array[] collider = new Array[2];
     [Serializable]
     public class Array
     {
