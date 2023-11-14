@@ -1,4 +1,5 @@
 using System;
+using System.Collections;
 using System.Collections.Generic;
 using Sirenix.OdinInspector;
 using UnityEngine;
@@ -36,10 +37,20 @@ public class AudioManager : MonoBehaviour
 
     void Start()
     {
-        audioMixer.SetFloat("Music", (DBManager.instance.musicValue - 0.5f) * 10);
-        audioMixer.SetFloat("FX", (DBManager.instance.sfxValue - 0.5f) * 10);
+        StartCoroutine("Init");
     }
-    
+
+    IEnumerator Init()
+    {
+        while (!DBManager.instance.isJsonLoad)
+        {
+            yield return null;
+        }
+        
+        audioMixer.SetFloat("Music", 140 * DBManager.instance.musicValue - 71);
+        audioMixer.SetFloat("FX", 140 * DBManager.instance.sfxValue - 71);
+    }
+
     void Update()
     {
         foreach (Intervals interval in intervals)

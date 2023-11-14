@@ -57,7 +57,6 @@ public class DBManager : MonoBehaviour
     [FoldoutGroup("게임 DB")] 
     [Title("게임 씬 이름")]
     public string gameSceneName = "Game";
-
     
     [FoldoutGroup("설정 DB")] 
     [Title("설정 음악 값")]

@@ -269,7 +269,7 @@ public class GameManager : MonoBehaviour
         {
             case "Music":
                 DBManager.instance.musicValue = set_Music_Slider.value;
-                AudioManager.instance.audioMixer.SetFloat("Music", DBManager.instance.musicValue - 0.5f);
+                AudioManager.instance.audioMixer.SetFloat("Music", 140 * DBManager.instance.musicValue - 71);
                 break;
             
             case "Vibration":
@@ -285,7 +285,7 @@ public class GameManager : MonoBehaviour
             
             case "Sfx":
                 DBManager.instance.sfxValue = set_Sfx_Slider.value;
-                AudioManager.instance.audioMixer.SetFloat("FX", DBManager.instance.sfxValue - 0.5f);
+                AudioManager.instance.audioMixer.SetFloat("FX", 140 * DBManager.instance.sfxValue - 71);
                 break;
         }
     }
