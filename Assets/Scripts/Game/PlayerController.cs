@@ -323,6 +323,7 @@ public class PlayerController : MonoBehaviour
         if (evaluation == 3)
         {
             Hurt(targetInfo, true);
+            return;
         }
         
         switch (targetInfo.type)
@@ -356,9 +357,11 @@ public class PlayerController : MonoBehaviour
                     playerVerdict.contacts[i].Dequeue();
                 }
                 
-                
                 Attack(target);
                 break;
+            
+            default: 
+                return;
         }
         
         GameManager.instance.score += targetInfo.scoreList[evaluation];
