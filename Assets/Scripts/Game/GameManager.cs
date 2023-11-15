@@ -58,11 +58,11 @@ public class GameManager : MonoBehaviour
     [FoldoutGroup("기타")] 
     [Title("패널 열림 여부")] 
     [SerializeField]
-    public bool isPanelOpen = false;
+    public bool isPanelOpen;
     [FoldoutGroup("기타")] 
     [Title("카운트 다운 여부")] 
     [SerializeField]
-    public bool isCountDown = false;
+    public bool isCountDown;
     
     [FoldoutGroup("플레이어")] 
     [Title("플레이어")] 
@@ -74,7 +74,7 @@ public class GameManager : MonoBehaviour
     private Sprite[] verdictImage = new Sprite[4];
     [FoldoutGroup("정보")] 
     [Title("스코어")] 
-    public int score;
+    public float score;
     [FoldoutGroup("정보")] 
     [Title("콤보")]
     public int combo;
@@ -102,8 +102,8 @@ public class GameManager : MonoBehaviour
     [Title("패널")] 
     public GameObject resultPanel;
     [FoldoutGroup("결과 창")] 
-    [Title("성공 실패 텍스트")] 
-    public Text clearText;
+    [Title("랭크 텍스트")] 
+    public Text rankText;
     [FoldoutGroup("결과 창")] 
     [Title("Perfect 텍스트")] 
     public Text perfectText;
@@ -116,9 +116,6 @@ public class GameManager : MonoBehaviour
     [FoldoutGroup("결과 창")] 
     [Title("Miss 텍스트")] 
     public Text missText;
-    [FoldoutGroup("결과 창")] 
-    [Title("Score 텍스트")] 
-    public Text scoreText;
     [FoldoutGroup("결과 창")] 
     [Title("Combo 텍스트")] 
     public Text comboText;
@@ -409,15 +406,44 @@ public class GameManager : MonoBehaviour
     {
         isCountDown = true;
         playerController.GetComponent<Animator>().SetBool("isCountDown", isCountDown);
+        score = ((perfectCount + greatCount * 0.3f + goodCount * 0.1f + missCount) / noteFolder.transform.childCount) * 100;
 
         if (playerController.isDead)
         {
-            clearText.text = LocalizationSettings.StringDatabase.GetLocalizedString("Game", "Fail", LocalizationSettings.SelectedLocale);
+            rankText.text = "F";
             pressText.text = LocalizationSettings.StringDatabase.GetLocalizedString("Game", "Press_Retry", LocalizationSettings.SelectedLocale);
         }
         else
         {
-            clearText.text = LocalizationSettings.StringDatabase.GetLocalizedString("Game", "Success", LocalizationSettings.SelectedLocale);
+            if (score >= 96 && score <= 100)
+            {
+                rankText.text = "S";
+            }
+            else if (score >= 90 && score <= 95)
+            {
+                rankText.text = "S";
+            }
+            else if (score >= 80 && score <= 89)
+            {
+                rankText.text = "A";
+            }
+            else if (score >= 70 && score <= 79)
+            {
+                rankText.text = "B";
+            }
+            else if (score >= 60 && score <= 69)
+            {
+                rankText.text = "C";
+            }
+            else if (score >= 50 && score <= 59)
+            {
+                rankText.text = "D";
+            }
+            else
+            {
+                rankText.text = "F";
+            }
+            
             pressText.text = LocalizationSettings.StringDatabase.GetLocalizedString("Game", "Press_Home", LocalizationSettings.SelectedLocale);
         }
         
@@ -425,7 +451,6 @@ public class GameManager : MonoBehaviour
         greatText.text = greatCount.ToString();
         goodText.text = goodCount.ToString();
         missText.text = missCount.ToString();
-        scoreText.text = score.ToString();
         comboText.text = combo.ToString();
         
         if (bottomPanel.activeSelf)
@@ -433,6 +458,7 @@ public class GameManager : MonoBehaviour
             bottomPanel.SetActive(false);
         }
         
+        resultPanel.SetActive(true);
         resultPanel.GetComponent<Animator>().Play("Result");
         StartCoroutine(Finish_Check());
     }
