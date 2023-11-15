@@ -1,6 +1,5 @@
 using System.Collections;
 using Sirenix.OdinInspector;
-using UnityEditor.Localization.Plugins.XLIFF.V12;
 using UnityEngine;
 using UnityEngine.EventSystems;
 using UnityEngine.InputSystem;
@@ -151,7 +150,6 @@ public class PlayerController : MonoBehaviour
         
         if (isMiss)
         {
-            Debug.Log(1);
             GameManager.instance.ShowVerdict(3);
         }
         health -= info.damage;
@@ -227,7 +225,6 @@ public class PlayerController : MonoBehaviour
         }
         else
         {
-            Debug.Log("2");
             GameManager.instance.ShowVerdict(evaluation);
         }
 
@@ -419,13 +416,13 @@ public class PlayerController : MonoBehaviour
         {
             VerdictBar bar = verdictBar.transform.GetChild(idx).GetComponent<VerdictBar>();
             
-            while (bar.contacts[i].Count != 0 && obstacle == GetObstacle(bar.contacts[i].Peek().gameObject))
+            while (bar.contacts[i].Count != 0 && bar.contacts[i].Peek() != null && obstacle == GetObstacle(bar.contacts[i].Peek().gameObject))
             {
                 bar.contacts[i].Dequeue();
             }
         }
 
-        if (playerVerdict.contacts[i].Count != 0 && obstacle == GetObstacle(playerVerdict.contacts[i].Peek().gameObject))
+        if (playerVerdict.contacts[i].Count != 0 && playerVerdict.contacts[i].Peek() != null && obstacle == GetObstacle(playerVerdict.contacts[i].Peek().gameObject))
         {
             playerVerdict.contacts[i].Dequeue();
         }
