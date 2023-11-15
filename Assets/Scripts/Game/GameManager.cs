@@ -1,3 +1,4 @@
+using System;
 using System.Collections;
 using System.Collections.Generic;
 using Sirenix.OdinInspector;
@@ -5,7 +6,6 @@ using UnityEngine;
 using UnityEngine.InputSystem;
 using UnityEngine.Localization.Settings;
 using UnityEngine.SceneManagement;
-using UnityEngine.Serialization;
 using UnityEngine.UI;
 
 public class GameManager : MonoBehaviour
@@ -127,6 +127,16 @@ public class GameManager : MonoBehaviour
     private Stack<GameObject> backStack;
     public static GameManager instance;
     private WaitForSeconds waitForSeconds = new WaitForSeconds(1f);
+    
+    public new Stage[] chapter = new Stage[8];
+    
+    [Serializable]
+    public class Stage
+    {
+        public GameObject[] stage = new GameObject[6];
+        public AudioClip[] audio = new AudioClip[6];
+        public Material[] skybox = new Material[6];
+    }
 
     void Awake()
     {
@@ -139,6 +149,11 @@ public class GameManager : MonoBehaviour
     }
 
     void Start()
+    {
+        Init();
+    }
+
+    void Init()
     {
         switch (DBManager.instance.currentPlatform)
         {
@@ -154,15 +169,15 @@ public class GameManager : MonoBehaviour
                 platformManager.SwitchToMobile();
                 break;
         }
-        
-        StartCoroutine(CountDown());
-        Init();
-    }
 
-    void Init()
-    {
+        RenderSettings.skybox = chapter[DBManager.instance.currentChapter - 1].skybox[DBManager.instance.currentStage - 1];
+        audioManager.audio.clip = chapter[DBManager.instance.currentChapter - 1].audio[DBManager.instance.currentStage - 1];
+        GameObject temp = Instantiate(chapter[DBManager.instance.currentChapter - 1].stage[DBManager.instance.currentStage - 1]);
+        noteFolder = temp;
+        temp.transform.position = Vector3.zero;
         score = 0;
         combo = 0;
+        StartCoroutine(CountDown());
     }
 
     public void ShowVerdict(int idx)
