@@ -1,4 +1,4 @@
-using System;
+using System.Collections.Generic;
 using UnityEngine;
 
 public class VerdictBar : MonoBehaviour
@@ -6,11 +6,33 @@ public class VerdictBar : MonoBehaviour
     public delegate void OnTriggerExitEvent(Collider other);
     public event OnTriggerExitEvent onTriggerExitEvent;
 
-    public new Array[] collider = new Array[2];
-    [Serializable]
-    public class Array
+    public Queue<Collider>[] contacts = new Queue<Collider>[2];
+    public List<Collider> tmp1 = new List<Collider> ();
+    
+    public List<Collider> tmp2 = new List<Collider> ();
+
+    private void Start()
     {
-        public Collider[] contact = new Collider[2];
+        contacts[0] = new Queue<Collider>();
+        contacts[1] = new Queue<Collider>();
+
+        tmp1 = new List<Collider>();
+        tmp2 = new List<Collider>();
+    }
+
+    private void Update()
+    {
+        tmp1.Clear();
+        tmp2.Clear();
+        
+        foreach (var item in contacts[0])
+        {
+            tmp1.Add(item);
+        }
+        foreach (var item in contacts[1])
+        {
+            tmp2.Add(item);
+        }
     }
 
     void OnTriggerEnter(Collider other)
@@ -20,36 +42,9 @@ public class VerdictBar : MonoBehaviour
         if (obstacle != null && !obstacle.wasInteracted)
         {
             int i = obstacle.isUp ? 1 : 0;
-
-            if (collider[i].contact[0] == null)
-            {
-                collider[i].contact[0] = other;
-            }
-            else
-            {
-                collider[i].contact[1] = other;
-            }
+            contacts[i].Enqueue(other);
         }
     }
-
-    // void OnTriggerStay(Collider other)
-    // {
-    //     Obstacle obstacle = PlayerController.GetObstacle(other.gameObject);
-    //     
-    //     if (obstacle != null && !obstacle.wasInteracted)
-    //     {
-    //         int i = obstacle.isUp ? 1 : 0;
-    //         
-    //         if (collider[i].contact[0] == null )
-    //         {
-    //             collider[i].contact[0] = other;
-    //         }
-    //         else if(collider[i].contact[0] != other)
-    //         {
-    //             collider[i].contact[1] = other;
-    //         }
-    //     }
-    // }
 
     void OnTriggerExit(Collider other)
     {
@@ -57,21 +52,15 @@ public class VerdictBar : MonoBehaviour
         {
             onTriggerExitEvent(other);
         }
-        
+
         Obstacle obstacle = PlayerController.GetObstacle(other.gameObject);
         
         if (obstacle != null)
         {
             int i = obstacle.isUp ? 1 : 0;
-
-            if (collider[i].contact[1] != null)
+            if (contacts[i].Count != 0 && contacts[i].Peek().gameObject != null && obstacle == PlayerController.GetObstacle(contacts[i].Peek().gameObject))
             {
-                collider[i].contact[0] = collider[i].contact[1];
-                collider[i].contact[1] = null;
-            }
-            else
-            {
-                collider[i].contact[0] = null;
+                contacts[i].Dequeue();
             }
         }
     }

@@ -1,5 +1,6 @@
 using System.Collections;
 using Sirenix.OdinInspector;
+using UnityEditor.Localization.Plugins.XLIFF.V12;
 using UnityEngine;
 using UnityEngine.EventSystems;
 using UnityEngine.InputSystem;
@@ -11,41 +12,32 @@ public class PlayerController : MonoBehaviour
     [Title("BPM")]
     [SerializeField]
     private float bpm;
-    
     [FoldoutGroup("음악")]
     [Title("오디오")]
     public AudioManager audioManager;
 
     [FoldoutGroup("변수")] 
     public bool isGrounded;
-    
     [FoldoutGroup("변수")] 
     public bool isUp;
-    
     [FoldoutGroup("변수")] 
     public float groundGap;
-
     [FoldoutGroup("변수")] 
     public int health;
-    
     [FoldoutGroup("변수")] 
     public bool isInvincibility;
-    
     [FoldoutGroup("변수")] 
     public bool isDead;
-    
     [FoldoutGroup("변수")] 
     public bool isLongInteract;
-
     [FoldoutGroup("변수")]
     [SerializeField]
     private int attackCounter;
-
     [FoldoutGroup("변수")] 
     [SerializeField] 
     private GameObject camInfo;
 
-    [FoldoutGroup("변수")] 
+    [FoldoutGroup("판정")] 
     [SerializeField] 
     private GameObject verdictBar;
     [FoldoutGroup("판정")] 
@@ -54,18 +46,16 @@ public class PlayerController : MonoBehaviour
     
     [FoldoutGroup("일반")] 
     public Animator anim;
-    
     [FoldoutGroup("일반")] 
     public PlayerTrails trails;
-    
     [FoldoutGroup("일반")]
     public LayerMask ground;
-
     [FoldoutGroup("일반")] 
     [SerializeField]
     private GameObject lastPassedObject;
 
     private WaitForSeconds longNoteTime;
+    private InputAction.CallbackContext callback = new ();
 
     void Start()
     {
@@ -77,7 +67,7 @@ public class PlayerController : MonoBehaviour
         input.actions.FindAction("Up").canceled += OnKeyUp;
         input.actions.FindAction("Down").canceled += OnKeyUp;
         verdictBar.transform.GetChild(2).GetComponent<VerdictBar>().onTriggerExitEvent += HandleGoodVerdictExit;
-        longNoteTime = new WaitForSeconds(15f / bpm);
+        longNoteTime = new WaitForSeconds(30f / bpm);
     }
     
     void FixedUpdate()
@@ -118,8 +108,7 @@ public class PlayerController : MonoBehaviour
         var scale = obj.transform.localScale;
         scale.y = y;
         obj.transform.localScale = scale;
-        obj.transform.position = transform.position + (transform.forward * 0.5f) + transform.up * (y / 2);
-        obj.transform.rotation = transform.rotation;
+        obj.transform.position = transform.position + transform.forward + transform.up * (y / 2);
     }
 
     void HandleGoodVerdictExit(Collider other)
@@ -129,13 +118,13 @@ public class PlayerController : MonoBehaviour
         
         if (obstacleInfo != null)
         {
-            if (obstacleInfo.wasInteracted == false && obstacleInfo.type == NoteType.NormalNote)
+            if (!obstacleInfo.wasInteracted && obstacleInfo.type == NoteType.NormalNote && !isLongInteract)
             {
-                if (obstacleInfo.isUp == isUp  && !obstacleInfo.wasInteracted)
+                if (obstacleInfo.isUp == isUp)
                 {
-                    Hurt(obstacleInfo);
+                    Hurt(obstacleInfo, true);
                 }
-                else if (obstacleInfo.isUp != isUp  && !obstacleInfo.wasInteracted)
+                else
                 {
                     ComboReset(obstacleInfo);
                 }
@@ -148,31 +137,23 @@ public class PlayerController : MonoBehaviour
     /// </summary>
     void Move()
     {
-        transform.position += transform.forward * (bpm / 15f * Time.fixedDeltaTime);
+        transform.position += transform.forward * (bpm / 7.5f * Time.fixedDeltaTime);
     }
 
-    void Hurt(Obstacle info)
+    void Hurt(Obstacle info, bool isMiss)
     {
+        ComboReset(info);
+        
         if (isInvincibility)
         {
             return;
         }
-
-        int i = isUp ? 1 : 0;
-        info.wasInteracted = true;
-        for (int idx = 0; idx < 4; idx++)
+        
+        if (isMiss)
         {
-            VerdictBar bar = verdictBar.transform.GetChild(idx).GetComponent<VerdictBar>();
-            
-            if (bar.collider[i].contact[1] != null)
-            {
-                bar.collider[i].contact[0] = bar.collider[i].contact[1];
-                bar.collider[i].contact[1] = null;
-            }
+            Debug.Log(1);
+            GameManager.instance.ShowVerdict(3);
         }
-
-        ComboReset(info);
-        GameManager.instance.ShowVerdict(3);
         health -= info.damage;
 
         if (health <= 0)
@@ -183,6 +164,7 @@ public class PlayerController : MonoBehaviour
         
         isInvincibility = true;
         Invoke(nameof(ReleaseInvincibility), 0.5f);
+        
     }
     
     /// <summary>
@@ -204,7 +186,7 @@ public class PlayerController : MonoBehaviour
     
     public void OnKeyUp()
     {
-        OnKeyUp(new InputAction.CallbackContext());
+        OnKeyUp(callback);
     }
 
     /// <summary>
@@ -212,42 +194,70 @@ public class PlayerController : MonoBehaviour
     /// </summary>
     void OnKeyUp(InputAction.CallbackContext context)
     {
-        Obstacle obstacle = GetObstacle(lastPassedObject);
+        isLongInteract = false;
+        int i = isUp ? 1 : 0;
+        GameObject target;
         
-        if (obstacle != null && obstacle.beatLength != 0 && isLongInteract)
+        if (verdictBar.transform.GetChild(3).GetComponent<VerdictBar>().contacts[i].Count != 0)
         {
-            int length = obstacle.gameObject.transform.childCount;
-            int evaluation = GetVerdict(obstacle.transform.GetChild(length - 1).GetChild(0).gameObject);
+            target = verdictBar.transform.GetChild(3).GetComponent<VerdictBar>().contacts[i].Peek().gameObject;
+        }
+        else
+        {
+            return;
+        }
 
-            if (evaluation != -1)
-            {
-                GameManager.instance.ShowVerdict(evaluation);
-            }
-            
-            if (evaluation is -1 or 3)
-            {
-                Debug.Log(evaluation);
-                Hurt(obstacle);
-            }
-            else
-            {
-                GameManager.instance.score += obstacle.scoreList[evaluation];
-                GameManager.instance.combo++;
-            }
+        Obstacle targetInfo = GetObstacle(target);
+        
+        if (targetInfo == null || targetInfo.isUp != isUp || !isLongInteract)
+        {
+            return;
+        }
+
+        int evaluation = GetVerdict(targetInfo.transform.GetChild(targetInfo.transform.childCount - 1).GetChild(0).gameObject);
+
+        if (evaluation == -1)
+        {
+            evaluation = 3;
         }
         
-        isLongInteract = false;
+        if (evaluation == 3)
+        {
+            Hurt(targetInfo, true);
+        }
+        else
+        {
+            Debug.Log("2");
+            GameManager.instance.ShowVerdict(evaluation);
+        }
+
+        targetInfo.wasInteracted = true;
+                
+        for (int idx = 0; idx < 4; idx++)
+        {
+            VerdictBar bar = verdictBar.transform.GetChild(idx).GetComponent<VerdictBar>();
+            
+            if (bar.contacts[i].Count != 0)
+            {
+                bar.contacts[i].Dequeue();
+            }
+        }
+                
+        if (playerVerdict.contacts[i].Count != 0 && targetInfo == GetObstacle(playerVerdict.contacts[i].Peek().gameObject))
+        {
+            playerVerdict.contacts[i].Dequeue();
+        }
     }
 
-    int GetVerdict(GameObject targetObject)
+    int GetVerdict(GameObject target)
     {
         int idx = isUp ? 1 : 0;
 
         for (int i = 0; i < 4; i++)
         {
             VerdictBar bar = verdictBar.transform.GetChild(i).GetComponent<VerdictBar>();
-            
-            if (bar.collider[idx].contact[0] != null && targetObject == bar.collider[idx].contact[0].gameObject)
+
+            if (bar.contacts[idx].Count != 0 && target == bar.contacts[idx].Peek().gameObject)
             {
                 return i;
             }
@@ -288,12 +298,13 @@ public class PlayerController : MonoBehaviour
 
     public void Interact()
     {
+        int i = isUp ? 1 : 0;
+
         GameObject target;
-        int i = isUp ? 1 : 0; 
         
-        if (verdictBar.transform.GetChild(3).GetComponent<VerdictBar>().collider[i].contact[0] != null)
+        if (verdictBar.transform.GetChild(3).GetComponent<VerdictBar>().contacts[i].Count != 0)
         {
-            target = verdictBar.transform.GetChild(3).GetComponent<VerdictBar>().collider[i].contact[0].gameObject;
+            target = verdictBar.transform.GetChild(3).GetComponent<VerdictBar>().contacts[i].Peek().gameObject;
         }
         else
         {
@@ -308,12 +319,10 @@ public class PlayerController : MonoBehaviour
         }
 
         int evaluation = GetVerdict(target);
-        GameManager.instance.ShowVerdict(evaluation);
 
         if (evaluation == 3)
         {
-            Hurt(targetInfo);
-            return;
+            Hurt(targetInfo, true);
         }
         
         switch (targetInfo.type)
@@ -322,25 +331,31 @@ public class PlayerController : MonoBehaviour
                 break;
             
             case NoteType.NormalNote:
-                targetInfo.wasInteracted = true;
-                
-                for (int idx = 0; idx < 4; idx++)
-                {
-                    VerdictBar bar = verdictBar.transform.GetChild(idx).GetComponent<VerdictBar>();
-            
-                    if (bar.collider[i].contact[1] != null)
-                    {
-                        bar.collider[i].contact[0] = bar.collider[i].contact[1];
-                        bar.collider[i].contact[1] = null;
-                    }
-                }
-                
                 if (targetInfo.beatLength != 0)
                 {
                     isLongInteract = true;
                     StartCoroutine(LongNoteProcess(targetInfo));
                     return;
                 }
+                
+                targetInfo.wasInteracted = true;
+                GameManager.instance.ShowVerdict(evaluation);
+                
+                for (int idx = 0; idx < 4; idx++)
+                {
+                    VerdictBar bar = verdictBar.transform.GetChild(idx).GetComponent<VerdictBar>();
+            
+                    if (bar.contacts[i].Count != 0)
+                    {
+                        bar.contacts[i].Dequeue();
+                    }
+                }
+                
+                if (playerVerdict.contacts[i].Count != 0 && targetInfo == GetObstacle(playerVerdict.contacts[i].Peek().gameObject))
+                {
+                    playerVerdict.contacts[i].Dequeue();
+                }
+                
                 
                 Attack(target);
                 break;
@@ -362,7 +377,7 @@ public class PlayerController : MonoBehaviour
             if (lastPassedObject != null && lastPassedObject.transform.parent.gameObject == obstacle.transform.GetChild(length - 1).gameObject && isLongInteract)
             {
                 isLongInteract = false;
-                Hurt(obstacle);
+                Hurt(obstacle, true);
                 yield break;
             }
             
@@ -395,6 +410,23 @@ public class PlayerController : MonoBehaviour
     void ComboReset(Obstacle obstacle)
     {
         obstacle.wasInteracted = true;
+        int i = obstacle.isUp ? 1 : 0;
+        
+        for (int idx = 0; idx < 4; idx++)
+        {
+            VerdictBar bar = verdictBar.transform.GetChild(idx).GetComponent<VerdictBar>();
+            
+            while (bar.contacts[i].Count != 0 && obstacle == GetObstacle(bar.contacts[i].Peek().gameObject))
+            {
+                bar.contacts[i].Dequeue();
+            }
+        }
+
+        if (playerVerdict.contacts[i].Count != 0 && obstacle == GetObstacle(playerVerdict.contacts[i].Peek().gameObject))
+        {
+            playerVerdict.contacts[i].Dequeue();
+        }
+        
         GameManager.instance.combo = 0;
     }
 
@@ -498,14 +530,19 @@ public class PlayerController : MonoBehaviour
     {
         Obstacle obstacleInfo = GetObstacle(other.gameObject);
         
-        if (obstacleInfo != null && obstacleInfo.isUp == isUp && obstacleInfo.type == NoteType.Heart)
+        if (obstacleInfo != null)
         {
-            if (health < 3)
+            int i = isUp ? 1 : 0;
+
+            if (obstacleInfo.type == NoteType.Wall && !obstacleInfo.wasInteracted && isUp == obstacleInfo.isUp)
+            {
+                Hurt(obstacleInfo, false);
+            }
+            else if (obstacleInfo.type == NoteType.Heart)
             {
                 health++;
+                Destroy(obstacleInfo.gameObject);
             }
-
-            Destroy(other.gameObject);
         }
     }
 
@@ -514,16 +551,16 @@ public class PlayerController : MonoBehaviour
         int i = isUp ? 1 : 0;
         GameObject targetObj = null;
         
-        if (playerVerdict.collider[i].contact[0] != null)
+        if (playerVerdict.contacts[i].Count != 0 && playerVerdict.contacts[i].Peek() != null)
         {
-            targetObj = playerVerdict.collider[i].contact[0].gameObject;
+            targetObj = playerVerdict.contacts[i].Peek().gameObject;
         }
         
         Obstacle obstacleInfo = GetObstacle(targetObj);
 
         if (obstacleInfo != null && obstacleInfo.type == NoteType.Wall && !obstacleInfo.wasInteracted)
         {
-            Hurt(obstacleInfo);
+            Hurt(obstacleInfo, false);
         }
     }
 

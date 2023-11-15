@@ -1,7 +1,6 @@
 using System;
 using System.Collections.Generic;
 using System.IO;
-using System.Linq;
 using Sirenix.OdinInspector;
 using UnityEngine;
 using UnityEngine.Serialization;
@@ -75,7 +74,7 @@ public class MapCreator : MonoBehaviour
         {
             Note n = notes[i];
             Quaternion q = Quaternion.AngleAxis(0, progressDirection);
-            Vector3 pos = new Vector3(n.noteTime * 4f + defaultOffset, 0.5f, 0);
+            Vector3 pos = new Vector3(n.noteTime * 8f + defaultOffset, 0.5f, 0);
             
             if (n.isUp)
             {
@@ -109,7 +108,7 @@ public class MapCreator : MonoBehaviour
                         obstacle.perfectScore = 200;
                         obstacle.greatScore = 100;
 
-                        for (int j = 0; j < n.length * 4; j++)
+                        for (int j = 0; j < n.length * 8; j++)
                         {
                             Vector3 forwardVector = q * Vector3.right;
                             GameObject inObj = Instantiate(normalNotes[n.objectType], pos + forwardVector * j, q);
@@ -144,7 +143,7 @@ public class MapCreator : MonoBehaviour
                         obj.name = "LongWall";
                         obstacle.perfectScore = 200;
                         
-                        for (int j = 0; j < n.length * 4; j++)
+                        for (int j = 0; j < n.length * 8; j++)
                         {
                             Vector3 forwardVector = q * progressDirection;
                             GameObject inObj = Instantiate(Walls[n.objectType], pos + forwardVector * j, q);
