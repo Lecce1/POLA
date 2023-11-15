@@ -173,6 +173,7 @@ public class DBManager : MonoBehaviour
         localData.supportLanguageNum = 1;
         string json = JsonUtility.ToJson(localData, true);
         File.WriteAllText(jsonPath, json);
+        Application.Quit();
     }
 
     void OnApplicationQuit()

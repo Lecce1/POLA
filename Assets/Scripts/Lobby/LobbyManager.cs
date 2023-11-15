@@ -117,9 +117,32 @@ public class LobbyManager : MonoBehaviour
     {
         LobbyPlayerController.instance.player.transform.position = moveRoute[DBManager.instance.currentGround].routeList[DBManager.instance.currentRouteIdx].transform.position + offset;
         
-        if (DBManager.instance.currentGround == 2)
+        if (DBManager.instance.currentGround == 0 || DBManager.instance.currentGround == 1)
+        {
+            RenderSettings.skybox = stage_Skybox[0];
+
+            if (LobbyAudioManager.instance.audio.clip != bgm[0])
+            {
+                if (LobbyAudioManager.instance.audio.isPlaying)
+                {
+                    LobbyAudioManager.instance.audio.Stop();
+                }
+                        
+                LobbyAudioManager.instance.audio.clip = bgm[0];
+                LobbyAudioManager.instance.audio.Play();
+            }
+        }
+        else if (DBManager.instance.currentGround == 2)
         {
             RenderSettings.skybox = stage_Skybox[DBManager.instance.currentChapter];
+            
+            if (LobbyAudioManager.instance.audio.isPlaying)
+            {
+                LobbyAudioManager.instance.audio.Stop();
+            }
+                    
+            LobbyAudioManager.instance.audio.clip = bgm[DBManager.instance.currentChapter];
+            LobbyAudioManager.instance.audio.Play();
         }
     }
 
