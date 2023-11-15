@@ -136,6 +136,7 @@ public class GameManager : MonoBehaviour
         public GameObject[] stage = new GameObject[6];
         public AudioClip[] audio = new AudioClip[6];
         public Material[] skybox = new Material[6];
+        public int[] bpm = new int[6];
     }
 
     void Awake()
@@ -172,6 +173,7 @@ public class GameManager : MonoBehaviour
 
         RenderSettings.skybox = chapter[DBManager.instance.currentChapter - 1].skybox[DBManager.instance.currentStage - 1];
         audioManager.audio.clip = chapter[DBManager.instance.currentChapter - 1].audio[DBManager.instance.currentStage - 1];
+        audioManager.bpm = chapter[DBManager.instance.currentChapter - 1].bpm[DBManager.instance.currentStage - 1];
         GameObject temp = Instantiate(chapter[DBManager.instance.currentChapter - 1].stage[DBManager.instance.currentStage - 1]);
         noteFolder = temp;
         temp.transform.position = Vector3.zero;
