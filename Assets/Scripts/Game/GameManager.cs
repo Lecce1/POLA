@@ -123,13 +123,14 @@ public class GameManager : MonoBehaviour
     [Title("Press 텍스트")] 
     public Text pressText;
     
+    [FoldoutGroup("트랙 별 DB")] 
+    public Stage[] chapter = new Stage[8];
+    
     // 뒤로가기 스택
     private Stack<GameObject> backStack;
     public static GameManager instance;
     private WaitForSeconds waitForSeconds = new WaitForSeconds(1f);
-    
-    public new Stage[] chapter = new Stage[8];
-    
+
     [Serializable]
     public class Stage
     {

@@ -84,6 +84,9 @@ public class LobbyManager : MonoBehaviour
     [Title("Virtual Camera")]
     public CinemachineVirtualCamera virtualCamera;
     
+    [FoldoutGroup("챕터 별 BGM")] 
+    public AudioClip[] bgm = new AudioClip[9];
+
     // 뒤로가기 스택
     private Stack<GameObject> backStack;
     public static LobbyManager instance;
@@ -168,9 +171,32 @@ public class LobbyManager : MonoBehaviour
                 DBManager.instance.currentRouteIdx = moveRoute[DBManager.instance.currentGround].defaultRouteIdx;
                 LobbyPlayerController.instance.transform.position = moveRoute[DBManager.instance.currentGround].routeList[moveRoute[DBManager.instance.currentGround].defaultRouteIdx].transform.position + offset;
 
-                if (DBManager.instance.currentGround == 2)
+                if (DBManager.instance.currentGround == 1)
+                {
+                    RenderSettings.skybox = stage_Skybox[0];
+
+                    if (LobbyAudioManager.instance.audio.clip != bgm[0])
+                    {
+                        if (LobbyAudioManager.instance.audio.isPlaying)
+                        {
+                            LobbyAudioManager.instance.audio.Stop();
+                        }
+                        
+                        LobbyAudioManager.instance.audio.clip = bgm[0];
+                        LobbyAudioManager.instance.audio.Play();
+                    }
+                }
+                else if (DBManager.instance.currentGround == 2)
                 {
                     RenderSettings.skybox = stage_Skybox[DBManager.instance.currentChapter];
+                    
+                    if (LobbyAudioManager.instance.audio.isPlaying)
+                    {
+                        LobbyAudioManager.instance.audio.Stop();
+                    }
+                    
+                    LobbyAudioManager.instance.audio.clip = bgm[DBManager.instance.currentChapter];
+                    LobbyAudioManager.instance.audio.Play();
                 }
                 break;
             
@@ -195,9 +221,20 @@ public class LobbyManager : MonoBehaviour
 
                 LobbyPlayerController.instance.transform.position = moveRoute[DBManager.instance.currentGround].routeList[DBManager.instance.currentRouteIdx].transform.position + offset;
 
-                if (DBManager.instance.currentGround != 2)
+                if (DBManager.instance.currentGround == 1)
                 {
-                    RenderSettings.skybox = stage_Skybox[1];
+                    RenderSettings.skybox = stage_Skybox[0];
+                    
+                    if (LobbyAudioManager.instance.audio.isPlaying)
+                    {
+                        LobbyAudioManager.instance.audio.Stop();
+                    }
+
+                    if (LobbyAudioManager.instance.audio.clip != bgm[0])
+                    {
+                        LobbyAudioManager.instance.audio.clip = bgm[0];
+                        LobbyAudioManager.instance.audio.Play();
+                    }
                 }
                 break;
             
