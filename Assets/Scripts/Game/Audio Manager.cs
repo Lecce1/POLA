@@ -47,8 +47,8 @@ public class AudioManager : MonoBehaviour
             yield return null;
         }
         
-        audioMixer.SetFloat("Music", 140 * DBManager.instance.musicValue - 71);
-        audioMixer.SetFloat("FX", 140 * DBManager.instance.sfxValue - 71);
+        audioMixer.SetFloat("Music", DBManager.instance.musicValue * 80 - 80);
+        audioMixer.SetFloat("FX", DBManager.instance.sfxValue * 80 - 80);
     }
 
     void Update()
