@@ -66,7 +66,7 @@ public class PlayerController : MonoBehaviour
         input.actions.FindAction("Up").canceled += OnKeyUp;
         input.actions.FindAction("Down").canceled += OnKeyUp;
         verdictBar.transform.GetChild(2).GetComponent<VerdictBar>().onTriggerExitEvent += HandleGoodVerdictExit;
-        longNoteTime = new WaitForSeconds(30f / bpm);
+        longNoteTime = new WaitForSeconds(15f / bpm);
     }
     
     void FixedUpdate()
@@ -192,13 +192,14 @@ public class PlayerController : MonoBehaviour
     /// </summary>
     void OnKeyUp(InputAction.CallbackContext context)
     {
-        isLongInteract = false;
         int i = isUp ? 1 : 0;
         GameObject target;
+
+        VerdictBar allVerdict = verdictBar.transform.GetChild(3).GetComponent<VerdictBar>();
         
-        if (verdictBar.transform.GetChild(3).GetComponent<VerdictBar>().contacts[i].Count != 0)
+        if (allVerdict.contacts[i].Count != 0 && allVerdict.contacts[i].Peek() != null)
         {
-            target = verdictBar.transform.GetChild(3).GetComponent<VerdictBar>().contacts[i].Peek().gameObject;
+            target = allVerdict.contacts[i].Peek().gameObject;
         }
         else
         {
@@ -212,8 +213,10 @@ public class PlayerController : MonoBehaviour
             return;
         }
 
-        int evaluation = GetVerdict(targetInfo.transform.GetChild(targetInfo.transform.childCount - 1).GetChild(0).gameObject);
-
+        
+        isLongInteract = false;
+        int evaluation = GetVerdict(targetInfo.transform.GetChild(targetInfo.transform.childCount - 1).GetChild(0).gameObject, targetInfo);
+        
         if (evaluation == -1)
         {
             evaluation = 3;
@@ -246,7 +249,7 @@ public class PlayerController : MonoBehaviour
         }
     }
 
-    int GetVerdict(GameObject target)
+    int GetVerdict(GameObject target, Obstacle targetInfo)
     {
         int idx = isUp ? 1 : 0;
 
@@ -254,9 +257,19 @@ public class PlayerController : MonoBehaviour
         {
             VerdictBar bar = verdictBar.transform.GetChild(i).GetComponent<VerdictBar>();
 
-            if (bar.contacts[idx].Count != 0 && target == bar.contacts[idx].Peek().gameObject)
+            foreach (var item in bar.contacts[idx])
             {
-                return i;
+                if (targetInfo == GetObstacle(item.gameObject))
+                {
+                    if (bar.contacts[idx].Count != 0 && item.gameObject == target)
+                    {
+                        return i;
+                    }
+                }
+                else
+                {
+                    break;
+                }
             }
         }
 
@@ -315,7 +328,7 @@ public class PlayerController : MonoBehaviour
             return;
         }
 
-        int evaluation = GetVerdict(target);
+        int evaluation = GetVerdict(target, targetInfo);
 
         if (evaluation == 3)
         {
@@ -371,6 +384,7 @@ public class PlayerController : MonoBehaviour
 
         while (isLongInteract)
         {
+            GameManager.instance.ShowVerdict(0);
             GameManager.instance.score += obstacle.scoreList[0];
             GameManager.instance.combo++;
             
