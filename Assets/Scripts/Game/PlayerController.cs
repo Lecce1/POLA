@@ -248,6 +248,12 @@ public class PlayerController : MonoBehaviour
         {
             playerVerdict.contacts[i].Dequeue();
         }
+        
+        if (target.transform.parent.gameObject.name == GameManager.instance.noteFolder.transform.GetChild(GameManager.instance.noteFolder.transform.childCount - 1).GetChild(0).gameObject.name && health > 0 && !GameManager.instance.isResultPanel)
+        {
+            GameManager.instance.isResultPanel = true;
+            GameManager.instance.Invoke("Finish", 2.0f);
+        }
     }
 
     int GetVerdict(GameObject target, Obstacle targetInfo)
@@ -624,7 +630,7 @@ public class PlayerController : MonoBehaviour
             }
         }
         
-        if (other.transform.parent.gameObject.name == GameManager.instance.noteFolder.transform.GetChild(GameManager.instance.noteFolder.transform.childCount - 1).gameObject.name && health > 0 && !GameManager.instance.isResultPanel)
+        if (GetObstacle(other.gameObject) == GetObstacle(GameManager.instance.noteFolder.transform.GetChild(GameManager.instance.noteFolder.transform.childCount - 1).gameObject) && health > 0 && !GameManager.instance.isResultPanel)
         {
             GameManager.instance.isResultPanel = true;
             GameManager.instance.Invoke("Finish", 2.0f);
