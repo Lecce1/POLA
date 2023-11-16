@@ -131,6 +131,8 @@ public class GameManager : MonoBehaviour
     public static GameManager instance;
     private WaitForSeconds waitForSeconds = new WaitForSeconds(1f);
 
+    private int noteCount = 0;
+
     [Serializable]
     public class Stage
     {
@@ -180,6 +182,19 @@ public class GameManager : MonoBehaviour
         temp.transform.position = Vector3.zero;
         score = 0;
         combo = 0;
+        
+        for (int i = 0; i < noteFolder.transform.childCount; i++)
+        {
+            if (noteFolder.transform.GetChild(i).childCount == 1)
+            {
+                noteCount++;
+            }
+            else if (noteFolder.transform.GetChild(i).childCount > 1)
+            {
+                noteCount += noteFolder.transform.GetChild(i).childCount;
+            }
+        }
+        Debug.Log(noteCount);
         StartCoroutine(CountDown());
     }
 
@@ -424,7 +439,8 @@ public class GameManager : MonoBehaviour
     {
         isCountDown = true;
         playerController.GetComponent<Animator>().SetBool("isCountDown", isCountDown);
-        score = ((perfectCount + greatCount * 0.3f + goodCount * 0.1f + missCount) / noteFolder.transform.childCount) * 100;
+        
+        score = ((perfectCount + greatCount * 0.3f + goodCount * 0.1f + missCount) / noteCount) * 100;
 
         if (playerController.isDead)
         {
@@ -434,7 +450,7 @@ public class GameManager : MonoBehaviour
         {
             if (score >= 96 && score <= 100)
             {
-                rankText.text = "S";
+                rankText.text = "S+";
             }
             else if (score >= 90 && score <= 95)
             {

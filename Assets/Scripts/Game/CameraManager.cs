@@ -1,18 +1,9 @@
-using Cinemachine;
 using UnityEngine;
 
 public class CameraManager : MonoBehaviour
 {
-    public PlayerController player;
-    private CinemachineTransposer transposer;
-    public Vector3 offsetNormal;
-    
-    void Start()
-    {
-        transposer = transform.GetComponent<CinemachineVirtualCamera>().GetCinemachineComponent<CinemachineTransposer>();
-        offsetNormal = transposer.m_FollowOffset;
-        offsetNormal = offsetNormal.normalized;
-    }
+    public GameObject cameraInfo;
+    public Vector3 offset;
 
     void FixedUpdate()
     {
@@ -20,7 +11,7 @@ public class CameraManager : MonoBehaviour
         {
             return;
         }
-        
-        transposer.m_FollowOffset = Vector3.Lerp(transposer.m_FollowOffset, offsetNormal * (player.groundGap * 1.5f), 0.03125f);
+
+        transform.position = cameraInfo.transform.position + offset;
     }
 }
