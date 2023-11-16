@@ -85,6 +85,15 @@
                     "initialStateCheck": false
                 },
                 {
+                    "name": "Point",
+                    "type": "PassThrough",
+                    "id": "45c2503c-ac29-44c5-9b2b-49d0fa92344b",
+                    "expectedControlType": "Vector2",
+                    "processors": "",
+                    "interactions": "",
+                    "initialStateCheck": true
+                },
+                {
                     "name": "Click",
                     "type": "PassThrough",
                     "id": "4ae8745a-5fb6-407f-8164-9c49806dbfaf",
@@ -332,6 +341,39 @@
                     "processors": "",
                     "groups": "MOBILE",
                     "action": "Click",
+                    "isComposite": false,
+                    "isPartOfComposite": false
+                },
+                {
+                    "name": "",
+                    "id": "a9c0e3f3-d0f0-45c4-88bb-e80944e253b8",
+                    "path": "<Mouse>/position",
+                    "interactions": "",
+                    "processors": "",
+                    "groups": "PC",
+                    "action": "Point",
+                    "isComposite": false,
+                    "isPartOfComposite": false
+                },
+                {
+                    "name": "",
+                    "id": "e1c7a1a5-ef99-43a7-9565-946c697252b6",
+                    "path": "<Pen>/position",
+                    "interactions": "",
+                    "processors": "",
+                    "groups": "PC",
+                    "action": "Point",
+                    "isComposite": false,
+                    "isPartOfComposite": false
+                },
+                {
+                    "name": "",
+                    "id": "94041fd1-28b2-4934-92eb-5dd8eaeaae8d",
+                    "path": "<Touchscreen>/touch*/position",
+                    "interactions": "",
+                    "processors": "",
+                    "groups": "MOBILE",
+                    "action": "Point",
                     "isComposite": false,
                     "isPartOfComposite": false
                 }

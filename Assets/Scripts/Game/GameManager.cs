@@ -429,7 +429,6 @@ public class GameManager : MonoBehaviour
         if (playerController.isDead)
         {
             rankText.text = "F";
-            pressText.text = LocalizationSettings.StringDatabase.GetLocalizedString("Game", "Press_Retry", LocalizationSettings.SelectedLocale);
         }
         else
         {
@@ -478,6 +477,16 @@ public class GameManager : MonoBehaviour
         
         resultPanel.SetActive(true);
         resultPanel.GetComponent<Animator>().Play("Result");
+
+        if (playerController.isDead)
+        {
+            pressText.text = LocalizationSettings.StringDatabase.GetLocalizedString("Game", "Press_Retry", LocalizationSettings.SelectedLocale);
+        }
+        else
+        {
+            pressText.text = LocalizationSettings.StringDatabase.GetLocalizedString("Game", "Press_Home", LocalizationSettings.SelectedLocale);
+        }
+
         StartCoroutine(Finish_Check());
     }
 

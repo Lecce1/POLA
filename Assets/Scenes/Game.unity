@@ -1259,7 +1259,7 @@ MonoBehaviour:
   m_MoveRepeatRate: 0.1
   m_XRTrackingOrigin: {fileID: 0}
   m_ActionsAsset: {fileID: -944628639613478452, guid: 0d3f0ae3a759844ea96b7d4ae88d8c3d, type: 3}
-  m_PointAction: {fileID: 0}
+  m_PointAction: {fileID: -5735494349306431021, guid: 0d3f0ae3a759844ea96b7d4ae88d8c3d, type: 3}
   m_MoveAction: {fileID: 1426924835}
   m_SubmitAction: {fileID: 0}
   m_CancelAction: {fileID: 1969586175}
@@ -13115,7 +13115,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 1
+  m_IsActive: 0
 --- !u!224 &743544586
 RectTransform:
   m_ObjectHideFlags: 0
