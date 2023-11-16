@@ -67,6 +67,7 @@ public class PlayerController : MonoBehaviour
         input.actions.FindAction("Down").canceled += OnKeyUp;
         verdictBar.transform.GetChild(2).GetComponent<VerdictBar>().onTriggerExitEvent += HandleGoodVerdictExit;
         longNoteTime = new WaitForSeconds(15f / bpm);
+        Vibration.Init();
     }
     
     void FixedUpdate()
@@ -384,6 +385,18 @@ public class PlayerController : MonoBehaviour
 
         while (isLongInteract)
         {
+            if (DBManager.instance.isVibration)
+            {
+                if(Application.platform == RuntimePlatform.Android)
+                {
+                    Vibration.VibrateAndroid(100);
+                }
+                else if(Application.platform == RuntimePlatform.IPhonePlayer)
+                {
+                    Vibration.VibrateIOS(ImpactFeedbackStyle.Light);
+                }
+            }
+
             GameManager.instance.ShowVerdict(0);
             GameManager.instance.score += obstacle.scoreList[0];
             GameManager.instance.combo++;
@@ -446,6 +459,18 @@ public class PlayerController : MonoBehaviour
 
     public void Attack(GameObject target)
     {
+        if (DBManager.instance.isVibration)
+        {
+            if(Application.platform == RuntimePlatform.Android)
+            {
+                Vibration.VibrateAndroid(100);
+            }
+            else if(Application.platform == RuntimePlatform.IPhonePlayer)
+            {
+                Vibration.VibrateIOS(ImpactFeedbackStyle.Light);
+            }
+        }
+        
         anim.SetInteger("AttackCounter", attackCounter++);
         anim.SetBool("isAttacking", true);
         attackCounter %= 2;

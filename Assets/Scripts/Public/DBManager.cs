@@ -138,13 +138,6 @@ public class DBManager : MonoBehaviour
         }
 
         isJsonLoad = true;
-        Debug.Log($"isTutorial : {isTutorial}");
-        Debug.Log($"chapter : {chapter}");
-        Debug.Log($"musicValue : {musicValue}");
-        Debug.Log($"sfxValue : {sfxValue}");
-        Debug.Log($"isVibration : {isVibration}");
-        Debug.Log($"language : {language}");
-        Debug.Log($"supportLanguageNum : {supportLanguageNum}");
     }
 
     void JsonSave() 
