@@ -110,11 +110,16 @@ public class LobbyManager : MonoBehaviour
 
     void Start()
     {
-        Init();
+        StartCoroutine("Init");
     }
 
-    void Init()
+    IEnumerator Init()
     {
+        while (!DBManager.instance.isJsonLoad)
+        {
+            yield return null;
+        }
+        
         LobbyPlayerController.instance.player.transform.position = moveRoute[DBManager.instance.currentGround].routeList[DBManager.instance.currentRouteIdx].transform.position + offset;
         
         if (DBManager.instance.currentGround == 0 || DBManager.instance.currentGround == 1)

@@ -99,7 +99,15 @@ public class DBManager : MonoBehaviour
 
     void Init()
     {
-        jsonPath = Path.Combine(Application.dataPath, "database.json");
+        if(Application.platform == RuntimePlatform.Android || Application.platform == RuntimePlatform.IPhonePlayer)
+        {
+            jsonPath = Path.Combine(Application.persistentDataPath, "database.json");
+        }
+        else 
+        {
+            jsonPath = Path.Combine(Application.dataPath, "database.json"); 
+        }
+
         JsonLoad();
         nickName = String.Empty;
     }
@@ -110,22 +118,7 @@ public class DBManager : MonoBehaviour
         
         if (!File.Exists(jsonPath)) 
         {
-            SystemLanguage systemLanguage = Application.systemLanguage;
- 
-            switch(systemLanguage)
-            {
-                case SystemLanguage.English:
-                    language = 0;
-                    break;
-            
-                case SystemLanguage.Korean:
-                    language = 1;
-                    break;
-            }
-            
-            LocalizationSettings.SelectedLocale = LocalizationSettings.AvailableLocales.Locales[language];
-            
-            JsonSave();
+            Reset();
         } 
         else 
         {
@@ -145,6 +138,13 @@ public class DBManager : MonoBehaviour
         }
 
         isJsonLoad = true;
+        Debug.Log($"isTutorial : {isTutorial}");
+        Debug.Log($"chapter : {chapter}");
+        Debug.Log($"musicValue : {musicValue}");
+        Debug.Log($"sfxValue : {sfxValue}");
+        Debug.Log($"isVibration : {isVibration}");
+        Debug.Log($"language : {language}");
+        Debug.Log($"supportLanguageNum : {supportLanguageNum}");
     }
 
     void JsonSave() 
@@ -161,19 +161,29 @@ public class DBManager : MonoBehaviour
         File.WriteAllText(jsonPath, json);
     }
 
-    public void Test()
+    void Reset()
     {
-        LocalData localData = new LocalData();
-        localData.isTutorial = true;
-        localData.chapter = 1;
-        localData.soundValue = 1;
-        localData.sfxValue = 1;
-        localData.isVibration = true;
-        localData.language = 1;
-        localData.supportLanguageNum = 1;
-        string json = JsonUtility.ToJson(localData, true);
-        File.WriteAllText(jsonPath, json);
-        Application.Quit();
+        isTutorial = true;
+        chapter = 1;
+        musicValue = 1;
+        sfxValue = 1;
+        isVibration = true;
+        SystemLanguage systemLanguage = Application.systemLanguage;
+ 
+        switch(systemLanguage)
+        {
+            case SystemLanguage.English:
+                language = 0;
+                break;
+            
+            case SystemLanguage.Korean:
+                language = 1;
+                break;
+        }
+
+        supportLanguageNum = language;
+        LocalizationSettings.SelectedLocale = LocalizationSettings.AvailableLocales.Locales[language];
+        JsonSave();
     }
 
     void OnApplicationQuit()
