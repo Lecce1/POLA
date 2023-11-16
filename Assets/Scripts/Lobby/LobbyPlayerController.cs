@@ -378,7 +378,10 @@ public class LobbyPlayerController : MonoBehaviour
                             if (temp.GetComponent<DoorManager>().isLock == false)
                             {
                                 LobbyManager.instance.DoorInit("Move", "Join");
-
+                            }
+                            else
+                            {
+                                LobbyManager.instance.Join_Btn_OnOff(false, false);
                             }
                             
                             DBManager.instance.currentChapter = temp.GetComponent<DoorManager>().chapterNum;
