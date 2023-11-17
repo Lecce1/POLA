@@ -6,6 +6,7 @@ using UnityEngine;
 using UnityEngine.InputSystem;
 using UnityEngine.Localization.Settings;
 using UnityEngine.SceneManagement;
+using UnityEngine.Serialization;
 using UnityEngine.UI;
 
 public class GameManager : MonoBehaviour
@@ -77,7 +78,7 @@ public class GameManager : MonoBehaviour
     public float score;
     [FoldoutGroup("정보")] 
     [Title("콤보")]
-    public int combo;
+    public int maxCombo;
     [FoldoutGroup("정보")] 
     [Title("Perfect 갯수")] 
     [SerializeField]
@@ -181,7 +182,7 @@ public class GameManager : MonoBehaviour
         noteFolder = temp;
         temp.transform.position = Vector3.zero;
         score = 0;
-        combo = 0;
+        maxCombo = 0;
         
         for (int i = 0; i < noteFolder.transform.childCount; i++)
         {
@@ -194,6 +195,8 @@ public class GameManager : MonoBehaviour
                 noteCount += noteFolder.transform.GetChild(i).childCount;
             }
         }
+        
+        playerController.Init();
 
         StartCoroutine(CountDown());
     }
@@ -439,7 +442,6 @@ public class GameManager : MonoBehaviour
     {
         isCountDown = true;
         playerController.GetComponent<Animator>().SetBool("isCountDown", isCountDown);
-        
         score = ((perfectCount + greatCount * 0.3f + goodCount * 0.1f + missCount) / noteCount) * 100;
 
         if (playerController.isDead)
@@ -484,7 +486,7 @@ public class GameManager : MonoBehaviour
         greatText.text = greatCount.ToString();
         goodText.text = goodCount.ToString();
         missText.text = missCount.ToString();
-        comboText.text = combo.ToString();
+        comboText.text = maxCombo.ToString();
         
         if (bottomPanel.activeSelf)
         {

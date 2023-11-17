@@ -59,20 +59,6 @@ public class PlayerController : MonoBehaviour
 
     private WaitForSeconds longNoteTime;
     private InputAction.CallbackContext callback = new ();
-
-    void Start()
-    {
-        bpm = audioManager.bpm;
-        anim = GetComponent<Animator>();
-        Physics.gravity = new Vector3(0, -9.81f, 0);
-        isInvincibility = false;
-        PlayerInput input = GetComponent<PlayerInput>();
-        input.actions.FindAction("Up").canceled += OnKeyUp;
-        input.actions.FindAction("Down").canceled += OnKeyUp;
-        verdictBarList[2].onTriggerExitEvent += HandleGoodVerdictExit;
-        longNoteTime = new WaitForSeconds(7.5f / bpm);
-        Vibration.Init();
-    }
     
     void FixedUpdate()
     {
@@ -107,6 +93,19 @@ public class PlayerController : MonoBehaviour
         playerVerdict.transform.position = transform.position + transform.up * groundGap / 2;
     }
 
+    public void Init()
+    {
+        bpm = audioManager.bpm;
+        anim = GetComponent<Animator>();
+        isInvincibility = false;
+        PlayerInput input = GetComponent<PlayerInput>();
+        input.actions.FindAction("Up").canceled += OnKeyUp;
+        input.actions.FindAction("Down").canceled += OnKeyUp;
+        verdictBarList[2].onTriggerExitEvent += HandleGoodVerdictExit;
+        longNoteTime = new WaitForSeconds(7.5f / bpm);
+        Vibration.Init();
+    }
+    
     void SetTransform(GameObject obj, float y)
     {
         var scale = obj.transform.localScale;
@@ -233,7 +232,7 @@ public class PlayerController : MonoBehaviour
         if (targetInfo.transform.GetChild(targetInfo.transform.childCount - 1).GetChild(0).gameObject == verdictBarList[2].contacts[i].Peek().gameObject || targetInfo.transform.GetChild(targetInfo.transform.childCount - 2).GetChild(0).gameObject ==
             verdictBarList[2].contacts[i].Peek().gameObject)
         {
-            GameManager.instance.combo += verdictBarList[2].contacts[i].Count;
+            GameManager.instance.maxCombo += verdictBarList[2].contacts[i].Count;
 
             for (int j = 0; j < verdictBarList[2].contacts[i].Count; j++)
             {
@@ -384,7 +383,7 @@ public class PlayerController : MonoBehaviour
                 return;
         }
         
-        GameManager.instance.combo++;
+        GameManager.instance.maxCombo++;
     }
 
     IEnumerator LongNoteProcess(Obstacle obstacle, GameObject firstTarget)
@@ -408,7 +407,7 @@ public class PlayerController : MonoBehaviour
 
             if (target != verdictBarList[2].contacts[i].Peek().gameObject)
             {
-                GameManager.instance.combo++;
+                GameManager.instance.maxCombo++;
                 GameManager.instance.ShowVerdict(0);
                 target = verdictBarList[2].contacts[i].Peek().gameObject;
             }
@@ -470,7 +469,7 @@ public class PlayerController : MonoBehaviour
             playerVerdict.contacts[i].Dequeue();
         }
         
-        GameManager.instance.combo = 0;
+        GameManager.instance.maxCombo = 0;
     }
 
     public void Attack(GameObject target)
