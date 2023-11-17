@@ -194,7 +194,7 @@ public class GameManager : MonoBehaviour
                 noteCount += noteFolder.transform.GetChild(i).childCount;
             }
         }
-        Debug.Log(noteCount);
+
         StartCoroutine(CountDown());
     }
 
