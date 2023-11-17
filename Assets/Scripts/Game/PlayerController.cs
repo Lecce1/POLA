@@ -408,7 +408,6 @@ public class PlayerController : MonoBehaviour
 
             if (target != verdictBarList[2].contacts[i].Peek().gameObject)
             {
-                Debug.Log("test");
                 GameManager.instance.combo++;
                 GameManager.instance.ShowVerdict(0);
                 target = verdictBarList[2].contacts[i].Peek().gameObject;
@@ -488,7 +487,7 @@ public class PlayerController : MonoBehaviour
             }
         }
         
-        CameraManager.instance.VibrateForTime(0.2f);
+        CameraManager.instance.VibrateForTime(0.1f);
         
         anim.SetInteger("AttackCounter", attackCounter++);
         anim.SetBool("isAttacking", true);

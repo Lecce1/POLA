@@ -1,19 +1,26 @@
+using System.Collections;
 using Sirenix.OdinInspector;
 using UnityEngine;
+using UnityEngine.Serialization;
 
 public class CameraManager : MonoBehaviour
 {
-    public GameObject cameraInfo;
+    [FoldoutGroup("카메라")]
+    [Title("타겟")]
+    public GameObject target;
+    [FoldoutGroup("카메라")]
+    [Title("오프셋")]
     public Vector3 offset;
     
     [FoldoutGroup("카메라 흔들림")]
     [Title("횟수")]
     [SerializeField]
-    private float ShakeAmount;
+    private float shakeAmount = 0.1f;
+
     [FoldoutGroup("카메라 흔들림")]
     [Title("시간")]
     [SerializeField]
-    private float ShakeTime;
+    private float shakeTime;
 
     public static CameraManager instance;
 
@@ -25,19 +32,6 @@ public class CameraManager : MonoBehaviour
         }
     }
 
-    void Update()
-    {
-        if (ShakeTime > 0)
-        {
-            transform.position = Random.insideUnitSphere * ShakeAmount + transform.position;
-            ShakeTime -= Time.deltaTime;
-        }
-        else
-        {
-            ShakeTime = 0.0f;
-        }
-    }
-    
     void FixedUpdate()
     {
         if (GameManager.instance.isCountDown)
@@ -45,11 +39,23 @@ public class CameraManager : MonoBehaviour
             return;
         }
 
-        transform.position = cameraInfo.transform.position + offset;
+        transform.position = target.transform.position + offset;
     }
     
     public void VibrateForTime(float time)
     {
-        ShakeTime = time;
+        shakeTime = time;
+        StartCoroutine("Vibrate");
+    }
+
+    IEnumerator Vibrate()
+    {
+        while (shakeTime > 0)
+        {
+            transform.position = Random.insideUnitSphere * shakeAmount + transform.position;
+            shakeTime -= Time.deltaTime;
+
+            yield return null;
+        }
     }
 }
