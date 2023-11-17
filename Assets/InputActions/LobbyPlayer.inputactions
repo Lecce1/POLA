@@ -15,6 +15,15 @@
                     "initialStateCheck": true
                 },
                 {
+                    "name": "Join",
+                    "type": "PassThrough",
+                    "id": "75d61911-3acf-40c7-983a-c3cf10dd4ff6",
+                    "expectedControlType": "Button",
+                    "processors": "",
+                    "interactions": "",
+                    "initialStateCheck": true
+                },
+                {
                     "name": "LeftTab",
                     "type": "Button",
                     "id": "e2f3cedb-0a72-4749-b1f6-4ef1e978b3dc",
@@ -219,6 +228,28 @@
                     "processors": "",
                     "groups": "CONSOLE",
                     "action": "DpadRight",
+                    "isComposite": false,
+                    "isPartOfComposite": false
+                },
+                {
+                    "name": "",
+                    "id": "b023c292-d376-4068-a7b6-ae8838bf6faf",
+                    "path": "<Keyboard>/upArrow",
+                    "interactions": "Tap",
+                    "processors": "",
+                    "groups": "PC",
+                    "action": "Join",
+                    "isComposite": false,
+                    "isPartOfComposite": false
+                },
+                {
+                    "name": "",
+                    "id": "6c1acbfe-faf0-4f81-a4fd-2868edf1637d",
+                    "path": "<XInputController>/buttonSouth",
+                    "interactions": "Tap",
+                    "processors": "",
+                    "groups": "CONSOLE",
+                    "action": "Join",
                     "isComposite": false,
                     "isPartOfComposite": false
                 }
@@ -487,7 +518,7 @@
                 {
                     "name": "",
                     "id": "75eb98e1-528a-401a-9ee6-7cabccf4da02",
-                    "path": "<Keyboard>/z",
+                    "path": "<Keyboard>/a",
                     "interactions": "Tap",
                     "processors": "",
                     "groups": "PC",

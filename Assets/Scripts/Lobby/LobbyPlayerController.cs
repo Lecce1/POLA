@@ -99,7 +99,7 @@ public class LobbyPlayerController : MonoBehaviour
         if (isMoveAvailable && isMove == false)
         {
             Vector2 vector = value.Get<Vector2>();
-        
+
             if (vector.x < 0)
             {
                 body.transform.rotation = Quaternion.Euler(0, -90, 0);
@@ -182,6 +182,19 @@ public class LobbyPlayerController : MonoBehaviour
         }
     }
 
+    public void OnJoin()
+    {
+        if (!LobbyManager.instance.isPanelOpen && LobbyManager.instance.isJoinBtnOn)
+        {
+            LobbyManager.instance.Button(LobbyManager.instance.join_Btn_Type);
+
+            if (LobbyManager.instance.join_Btn_Type != "Move" && LobbyManager.instance.join_Btn_Type != "Back")
+            {
+                isMoveAvailable = false;
+            }
+        }
+    }
+
     public void OnClick()
     {
         if (transform.GetComponent<PlayerInput>().currentControlScheme != "MOBILE")
@@ -191,15 +204,6 @@ public class LobbyPlayerController : MonoBehaviour
                 if (LobbyManager.instance.info.GetComponent<Animator>().GetCurrentAnimatorStateInfo(0).IsName("InfoOn") && LobbyManager.instance.info.GetComponent<Animator>().GetCurrentAnimatorStateInfo(0).normalizedTime >= 0.9f)
                 {
                     LobbyManager.instance.Button($"Info_Yes");
-                }
-                else
-                {
-                    LobbyManager.instance.Button(LobbyManager.instance.join_Btn_Type);
-
-                    if (LobbyManager.instance.join_Btn_Type != "Move" && LobbyManager.instance.join_Btn_Type != "Back")
-                    {
-                        isMoveAvailable = false;
-                    }
                 }
             }
             else if (LobbyManager.instance.set.activeSelf)
