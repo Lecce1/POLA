@@ -139,7 +139,7 @@ public class LobbyPlayerController : MonoBehaviour
     {
         if (isMoveAvailable && isMove == false)
         {
-            if (isLeft == true)
+            if (isLeft)
             {
                 body.transform.rotation = Quaternion.Euler(0, -90, 0);
                 isMove = true;
@@ -155,7 +155,7 @@ public class LobbyPlayerController : MonoBehaviour
                     transform.position = LobbyManager.instance.moveRoute[DBManager.instance.currentGround].routeList[DBManager.instance.currentRouteIdx].transform.position + LobbyManager.instance.offset;
                 }
                 
-                Move();
+                StartCoroutine("Move");
             }
             else
             {
@@ -173,7 +173,7 @@ public class LobbyPlayerController : MonoBehaviour
                     transform.position = LobbyManager.instance.moveRoute[DBManager.instance.currentGround].routeList[DBManager.instance.currentRouteIdx].transform.position + LobbyManager.instance.offset;
                 }
 
-                Move();
+                StartCoroutine("Move");
             }
         }
     }
