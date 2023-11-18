@@ -1,37 +1,11 @@
 using System.Collections;
-using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.SceneManagement;
 using UnityEngine.UI;
 using Sirenix.OdinInspector;
-using UnityEngine.Serialization;
 
 public class LoadingManager : MonoBehaviour
 {
-    [FoldoutGroup("배경화면")]
-    [Title("배경화면")]
-    public Image background;
-    [FoldoutGroup("배경화면")]
-    [Title("리스트")]
-    public List<Sprite> changeImage = new List<Sprite>();
-    
-    [FoldoutGroup("팁")]
-    [Title("텍스트")]
-    [SerializeField] 
-    private Text tipText;
-    [FoldoutGroup("팁")]
-    [Title("영어")]
-    [SerializeField] 
-    private List<string> englishTipList;
-    [FoldoutGroup("팁")]
-    [Title("한국어")]
-    [SerializeField] 
-    private List<string> koreanTipList;
-    
-    [FoldoutGroup("기타")]
-    [Title("로딩 이미지")]
-    [SerializeField]
-    private Image loadingIcon;
     [FoldoutGroup("기타")]
     [Title("로딩 텍스트")]
     [SerializeField]
@@ -58,28 +32,6 @@ public class LoadingManager : MonoBehaviour
     void Start()
     {
         StartCoroutine(LoadScene());
-        BackGround();
-        Tip();
-    }
-
-    void BackGround()
-    {
-        int num = Random.Range(0, changeImage.Count);
-        background.sprite = changeImage[num];
-    }
-
-    void Tip()
-    {
-        switch (DBManager.instance.language)
-        {
-            case 0:
-                tipText.text = englishTipList[Random.Range(0, englishTipList.Count)];
-                break;
-            
-            case 1:
-                tipText.text = koreanTipList[Random.Range(0, koreanTipList.Count)];
-                break;
-        }
     }
 
     IEnumerator LoadScene()
@@ -106,6 +58,7 @@ public class LoadingManager : MonoBehaviour
                 if(currentProgress < 100)
                 {
                     currentProgress = Mathf.FloorToInt(Mathf.Lerp(currentProgress, 100, (minimumLoadTime - minimumTimer) / minimumLoadTime));
+                    
                     if (minimumTimer >= 0f && currentProgress >= 99)
                     {
                         loadingText.text = string.Format("99%");
