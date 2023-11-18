@@ -464,22 +464,22 @@ public class LobbyManager : MonoBehaviour
     {
         if (isOn)
         {
-            float temp = -7f;
+            float temp = -4.5f;
         
-            while (virtualCamera.GetCinemachineComponent<CinemachineTransposer>().m_FollowOffset.z < -4)
+            while (virtualCamera.GetCinemachineComponent<CinemachineTransposer>().m_FollowOffset.z < -3.5f)
             {
-                temp += Time.deltaTime * 3;
+                temp += Time.deltaTime;
                 virtualCamera.GetCinemachineComponent<CinemachineTransposer>().m_FollowOffset = new Vector3(0, 1.5f, temp);
                 yield return null;
             }
         }
         else if (!isOn)
         {
-            float temp = -4f;
+            float temp = -3.5f;
         
-            while (virtualCamera.GetCinemachineComponent<CinemachineTransposer>().m_FollowOffset.z > -7)
+            while (virtualCamera.GetCinemachineComponent<CinemachineTransposer>().m_FollowOffset.z > -4.5f)
             {
-                temp -= Time.deltaTime * 3;
+                temp -= Time.deltaTime;
                 virtualCamera.GetCinemachineComponent<CinemachineTransposer>().m_FollowOffset = new Vector3(0, 1.5f, temp);
                 yield return null;
             }
