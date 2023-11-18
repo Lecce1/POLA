@@ -39,6 +39,15 @@ public class AudioManager : MonoBehaviour
     {
         StartCoroutine("Init");
     }
+    
+    void Update()
+    {
+        foreach (Intervals interval in intervals)
+        {
+            float sampledTime = audio.timeSamples / (audio.clip.frequency * interval.GetIntervalLength(bpm));
+            interval.CheckForNewInterval(sampledTime);
+        }
+    }
 
     IEnumerator Init()
     {
@@ -51,12 +60,12 @@ public class AudioManager : MonoBehaviour
         audioMixer.SetFloat("FX", DBManager.instance.sfxValue * 80 - 80);
     }
 
-    void Update()
+    public IEnumerator Progress()
     {
-        foreach (Intervals interval in intervals)
+        while (audio.time < audio.clip.length)
         {
-            float sampledTime = audio.timeSamples / (audio.clip.frequency * interval.GetIntervalLength(bpm));
-            interval.CheckForNewInterval(sampledTime);
+            GameManager.instance.progress.value = audio.time / audio.clip.length;
+            yield return null;
         }
     }
 }

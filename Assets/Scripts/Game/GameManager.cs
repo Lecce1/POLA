@@ -38,7 +38,13 @@ public class GameManager : MonoBehaviour
     [FoldoutGroup("패널")] 
     [Title("카메라 인포")] 
     public GameObject cameraInfo;
-    
+    [FoldoutGroup("패널")] 
+    [Title("진행률 슬라이더")] 
+    public Slider progress;
+    [FoldoutGroup("패널")] 
+    [Title("HP 리스트")]
+    public List<Image> hpList;
+
     [FoldoutGroup("설정 패널")] 
     [Title("음악 Slider")]
     public Slider set_Music_Slider;
@@ -434,6 +440,7 @@ public class GameManager : MonoBehaviour
             isCountDown = false;
             playerController.GetComponent<Animator>().SetBool("isCountDown", isCountDown);
             audioManager.audio.Play();
+            StartCoroutine(audioManager.Progress());
             playerController.GetComponent<PlayerInput>().enabled = true;
         }
     }
