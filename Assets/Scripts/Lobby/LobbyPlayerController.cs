@@ -1,3 +1,4 @@
+using System.Collections;
 using UnityEngine;
 using Sirenix.OdinInspector;
 using UnityEngine.EventSystems;
@@ -38,7 +39,7 @@ public class LobbyPlayerController : MonoBehaviour
     
     [Title("문 충돌 여부")] 
     public bool isDoor;
-    
+
     public static LobbyPlayerController instance;
 
     void Awake()
@@ -53,45 +54,40 @@ public class LobbyPlayerController : MonoBehaviour
     {
         anim = GetComponent<Animator>();
         rigidbody = GetComponent<Rigidbody>();
+        StartCoroutine("Move");
     }
     
     void Update()
     {
-        Move();
         Collider();
     }
 
-    void Move()
+    IEnumerator Move()
     {
-        transform.position = Vector3.MoveTowards(transform.position,
-            LobbyManager.instance.moveRoute[DBManager.instance.currentGround].routeList[DBManager.instance.currentRouteIdx].transform.position + LobbyManager.instance.offset,
-            Time.deltaTime * speed);
-                
-        if (transform.position.x == LobbyManager.instance.moveRoute[DBManager.instance.currentGround].routeList[DBManager.instance.currentRouteIdx]
-                .transform.position.x)
+        while (transform.position.x != LobbyManager.instance.moveRoute[DBManager.instance.currentGround]
+                   .routeList[DBManager.instance.currentRouteIdx]
+                   .transform.position.x || transform.position.z != LobbyManager.instance.moveRoute[DBManager.instance.currentGround]
+                   .routeList[DBManager.instance.currentRouteIdx]
+                   .transform.position.z)
         {
-            if (DBManager.instance.currentRouteIdx == LobbyManager.instance.moveRoute[DBManager.instance.currentGround].defaultRouteIdx)
-            {
-                body.transform.rotation = Quaternion.Euler(0, 180, 0);
-            }
-            else
-            {
-                body.transform.rotation = Quaternion.Euler(0, 0, 0);
-            }
-
-            isMove = false;
-            anim.SetBool("isMove", isMove);
+            transform.position = Vector3.MoveTowards(transform.position,
+                LobbyManager.instance.moveRoute[DBManager.instance.currentGround].routeList[DBManager.instance.currentRouteIdx].transform.position + LobbyManager.instance.offset,
+                Time.deltaTime * speed);
+            yield return null;
+        } 
+        
+        if (DBManager.instance.currentRouteIdx ==
+            LobbyManager.instance.moveRoute[DBManager.instance.currentGround].defaultRouteIdx)
+        {
+            body.transform.rotation = Quaternion.Euler(0, 180, 0);
         }
-    }
+        else
+        {
+            body.transform.rotation = Quaternion.Euler(0, 0, 0);
+        }
 
-    public void OnDpadLeft()
-    {
-        OnMove(true);
-    }
-    
-    public void OnDpadRight()
-    {
-        OnMove(false);
+        isMove = false;
+        anim.SetBool("isMove", isMove);
     }
 
     public void OnMove(InputValue value)
@@ -116,7 +112,7 @@ public class LobbyPlayerController : MonoBehaviour
                     transform.position = LobbyManager.instance.moveRoute[DBManager.instance.currentGround].routeList[DBManager.instance.currentRouteIdx].transform.position + LobbyManager.instance.offset;
                 }
                 
-                Move();
+                StartCoroutine("Move");
             }
             else if (vector.x > 0)
             {
@@ -134,7 +130,7 @@ public class LobbyPlayerController : MonoBehaviour
                     transform.position = LobbyManager.instance.moveRoute[DBManager.instance.currentGround].routeList[DBManager.instance.currentRouteIdx].transform.position + LobbyManager.instance.offset;
                 }
 
-                Move();
+                StartCoroutine("Move");
             }
         }
     }
@@ -180,6 +176,16 @@ public class LobbyPlayerController : MonoBehaviour
                 Move();
             }
         }
+    }
+    
+    public void OnDpadLeft()
+    {
+        OnMove(true);
+    }
+    
+    public void OnDpadRight()
+    {
+        OnMove(false);
     }
 
     public void OnJoin()

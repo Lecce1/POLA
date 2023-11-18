@@ -35,7 +35,11 @@ public class LobbyManager : MonoBehaviour
     [Title("입장 버튼")] 
     public Text join_Btn_Text;
     
-    [FoldoutGroup("스카이박스")]
+    [FoldoutGroup("땅")]
+    [Title("땅 리스트")] 
+    public List<GameObject> ground;
+    [FoldoutGroup("땅")]
+    [Title("스카이박스 리스트")] 
     public List<Material> stage_Skybox;
     
     [FoldoutGroup("설정 패널")] 
@@ -119,6 +123,24 @@ public class LobbyManager : MonoBehaviour
         {
             yield return null;
         }
+
+        for (int i = 0; i < ground.Count; i++)
+        {
+            if (i == DBManager.instance.currentGround)
+            {
+                if (!ground[i].activeSelf)
+                {
+                    ground[i].SetActive(true);
+                }
+            }
+            else
+            {
+                if (ground[i].activeSelf)
+                {
+                    ground[i].SetActive(false);
+                }
+            }
+        }
         
         LobbyPlayerController.instance.player.transform.position = moveRoute[DBManager.instance.currentGround].routeList[DBManager.instance.currentRouteIdx].transform.position + offset;
         
@@ -196,9 +218,25 @@ public class LobbyManager : MonoBehaviour
         {
             case "Move":
                 DBManager.instance.currentGround++;
-                DBManager.instance.currentRouteIdx = moveRoute[DBManager.instance.currentGround].defaultRouteIdx;
-                LobbyPlayerController.instance.transform.position = moveRoute[DBManager.instance.currentGround].routeList[moveRoute[DBManager.instance.currentGround].defaultRouteIdx].transform.position + offset;
-
+                
+                for (int i = 0; i < ground.Count; i++)
+                {
+                    if (i == DBManager.instance.currentGround)
+                    {
+                        if (!ground[i].activeSelf)
+                        {
+                            ground[i].SetActive(true);
+                        }
+                    }
+                    else
+                    {
+                        if (ground[i].activeSelf)
+                        {
+                            ground[i].SetActive(false);
+                        }
+                    }
+                }
+                
                 if (DBManager.instance.currentGround == 1)
                 {
                     RenderSettings.skybox = stage_Skybox[0];
@@ -226,10 +264,32 @@ public class LobbyManager : MonoBehaviour
                     LobbyAudioManager.instance.audio.clip = bgm[DBManager.instance.currentChapter];
                     LobbyAudioManager.instance.audio.Play();
                 }
+                
+                DBManager.instance.currentRouteIdx = moveRoute[DBManager.instance.currentGround].defaultRouteIdx;
+                LobbyPlayerController.instance.transform.position = moveRoute[DBManager.instance.currentGround].routeList[moveRoute[DBManager.instance.currentGround].defaultRouteIdx].transform.position + offset;
+                LobbyPlayerController.instance.StartCoroutine("Move");
                 break;
             
             case "Back":
                 DBManager.instance.currentGround--;
+                
+                for (int i = 0; i < ground.Count; i++)
+                {
+                    if (i == DBManager.instance.currentGround)
+                    {
+                        if (!ground[i].activeSelf)
+                        {
+                            ground[i].SetActive(true);
+                        }
+                    }
+                    else
+                    {
+                        if (ground[i].activeSelf)
+                        {
+                            ground[i].SetActive(false);
+                        }
+                    }
+                }
 
                 if (DBManager.instance.currentGround == 1)
                 {
