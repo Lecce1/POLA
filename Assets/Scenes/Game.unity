@@ -38,7 +38,7 @@ RenderSettings:
   m_ReflectionIntensity: 1
   m_CustomReflection: {fileID: 0}
   m_Sun: {fileID: 0}
-  m_IndirectSpecularColor: {r: 0.4439372, g: 0.49315345, b: 0.5721989, a: 1}
+  m_IndirectSpecularColor: {r: 0.44657826, g: 0.49641263, b: 0.57481676, a: 1}
   m_UseRadianceAmbientProbe: 0
 --- !u!157 &3
 LightmapSettings:
@@ -594,7 +594,7 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0, y: 1}
   m_AnchorMax: {x: 0, y: 1}
-  m_AnchoredPosition: {x: 85.924164, y: -75}
+  m_AnchoredPosition: {x: 85.92407, y: -75}
   m_SizeDelta: {x: 171.84833, y: 150}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!114 &27924192
@@ -3414,7 +3414,7 @@ MonoBehaviour:
     - {fileID: 2100000, guid: ae544d1ad47294e3c97453387ed2e5af, type: 2}
     bpm: 78000000720000008000000050000000450000005d000000
   - stage:
-    - {fileID: 5621962651847486710, guid: 399d3bd6543c337499eb9f4b840f87ea, type: 3}
+    - {fileID: 6800966848418259429, guid: 5a2badb467abd8a4583215f84b7dd445, type: 3}
     - {fileID: 0}
     - {fileID: 0}
     - {fileID: 0}
@@ -3736,8 +3736,8 @@ MonoBehaviour:
   nextScene: 
   currentGround: 0
   currentRouteIdx: 0
-  currentChapter: 1
-  currentStage: 4
+  currentChapter: 2
+  currentStage: 1
   currentPlatform: 
   isTutorial: 1
   isCinemachine: 1
@@ -4851,7 +4851,7 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0, y: 0}
   m_AnchorMax: {x: 0, y: 0}
-  m_AnchoredPosition: {x: 397.07172, y: 0}
+  m_AnchoredPosition: {x: 426.1875, y: 0}
   m_SizeDelta: {x: 0, y: 0}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!114 &397725063
@@ -6473,7 +6473,7 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0, y: 0}
   m_AnchorMax: {x: 0, y: 0}
-  m_AnchoredPosition: {x: 38.34553, y: 0}
+  m_AnchoredPosition: {x: 38.8125, y: 0}
   m_SizeDelta: {x: 0, y: 0}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!114 &587312614
@@ -7185,7 +7185,7 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0, y: 0}
   m_AnchorMax: {x: 0, y: 0}
-  m_AnchoredPosition: {x: 19.370424, y: 0}
+  m_AnchoredPosition: {x: 19.6875, y: 0}
   m_SizeDelta: {x: 0, y: 0}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!114 &634375870
@@ -8173,7 +8173,7 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0, y: 0}
   m_AnchorMax: {x: 0, y: 0}
-  m_AnchoredPosition: {x: 123.57245, y: 0}
+  m_AnchoredPosition: {x: 124.625, y: 0}
   m_SizeDelta: {x: 0, y: 0}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!114 &729095505
@@ -8714,7 +8714,7 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0, y: 0}
   m_AnchorMax: {x: 0, y: 0}
-  m_AnchoredPosition: {x: 217.17421, y: 0}
+  m_AnchoredPosition: {x: 231.875, y: 0}
   m_SizeDelta: {x: 0, y: 0}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!114 &767548096
@@ -11945,7 +11945,7 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0, y: 0}
   m_AnchorMax: {x: 0, y: 0}
-  m_AnchoredPosition: {x: 85.62224, y: 0}
+  m_AnchoredPosition: {x: 86.375, y: 0}
   m_SizeDelta: {x: 0, y: 0}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!114 &1031910512
@@ -16490,7 +16490,7 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0, y: 0}
   m_AnchorMax: {x: 0, y: 0}
-  m_AnchoredPosition: {x: 56.251823, y: 0}
+  m_AnchoredPosition: {x: 56.6875, y: 0}
   m_SizeDelta: {x: 0, y: 0}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!114 &1523931692
@@ -18937,17 +18937,17 @@ MonoBehaviour:
   - type: 0
     isUp: 0
     noteTime: 0
-    length: 5
+    length: 0
     objectType: 0
   - type: 0
     isUp: 0
-    noteTime: 7
+    noteTime: 5
     length: 5
     objectType: 0
   - type: 0
     isUp: 0
     noteTime: 15
-    length: 3
+    length: 5
     objectType: 0
   ground:
     serializedVersion: 2
@@ -20546,7 +20546,7 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0, y: 0}
   m_AnchorMax: {x: 0, y: 0}
-  m_AnchoredPosition: {x: 82.459724, y: 0}
+  m_AnchoredPosition: {x: 96.5, y: 0}
   m_SizeDelta: {x: 0, y: 0}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!114 &1928064482
@@ -22694,7 +22694,7 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0, y: 0}
   m_AnchorMax: {x: 0, y: 0}
-  m_AnchoredPosition: {x: 17.789165, y: 0}
+  m_AnchoredPosition: {x: 18, y: 0}
   m_SizeDelta: {x: 0, y: 0}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!114 &2108431739
@@ -29483,27 +29483,18 @@ MonoBehaviour:
   bpm: 0
   audioManager: {fileID: 278038863}
   isGrounded: 0
-  isUp: 0
   groundGap: 0
   health: 3
   isInvincibility: 0
   isDead: 0
-  isLongInteract: 0
   attackCounter: 0
   camInfo: {fileID: 457495187}
-  verdictBar: {fileID: 1822196553}
-  verdictBarList:
-  - {fileID: 898833162}
-  - {fileID: 1405829210}
-  - {fileID: 1575672451}
-  - {fileID: 1894352121}
-  playerVerdict: {fileID: 328561465}
   anim: {fileID: 0}
   trails: {fileID: 5291969180266313047}
+  verdict: {fileID: 0}
   ground:
     serializedVersion: 2
     m_Bits: 64
-  lastPassedObject: {fileID: 0}
 --- !u!4 &2263251406171693151
 Transform:
   m_ObjectHideFlags: 0
@@ -30038,6 +30029,7 @@ GameObject:
   m_Component:
   - component: {fileID: 5531861239884809655}
   - component: {fileID: 2257059355786232031}
+  - component: {fileID: 8560905408293964858}
   - component: {fileID: 3250433607045033781}
   - component: {fileID: 1484059197333581647}
   - component: {fileID: 3938972737872289359}
@@ -39660,6 +39652,29 @@ MonoBehaviour:
   m_DefaultActionMap: Player
   m_SplitScreenIndex: -1
   m_Camera: {fileID: 0}
+--- !u!114 &8560905408293964858
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 2636929640549425249}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 179ca03c72e55ab4db358c6ce4da07ee, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  verdictBar: {fileID: 1822196553}
+  lastPassedObject: {fileID: 0}
+  groundGap: 0
+  isUp: 0
+  isLongInteract: 0
+  verdictBarList:
+  - {fileID: 898833162}
+  - {fileID: 1405829210}
+  - {fileID: 1575672451}
+  - {fileID: 1894352121}
+  playerVerdict: {fileID: 328561465}
 --- !u!4 &8566045473357380929
 Transform:
   m_ObjectHideFlags: 0

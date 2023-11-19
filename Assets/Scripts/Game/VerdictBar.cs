@@ -37,7 +37,7 @@ public class VerdictBar : MonoBehaviour
 
     void OnTriggerEnter(Collider other)
     {
-        Obstacle obstacle = PlayerController.GetObstacle(other.gameObject);
+        Obstacle obstacle = Verdict.GetObstacle(other.gameObject);
         
         if (obstacle != null && !obstacle.wasInteracted)
         {
@@ -53,12 +53,12 @@ public class VerdictBar : MonoBehaviour
             onTriggerExitEvent(other);
         }
 
-        Obstacle obstacle = PlayerController.GetObstacle(other.gameObject);
+        Obstacle obstacle = Verdict.GetObstacle(other.gameObject);
         
         if (obstacle != null)
         {
             int i = obstacle.isUp ? 1 : 0;
-            if (contacts[i].Count != 0 && contacts[i].Peek().gameObject != null && obstacle == PlayerController.GetObstacle(contacts[i].Peek().gameObject))
+            if (contacts[i].Count != 0 && contacts[i].Peek().gameObject != null && obstacle == Verdict.GetObstacle(contacts[i].Peek().gameObject))
             {
                 contacts[i].Dequeue();
             }
