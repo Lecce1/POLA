@@ -203,7 +203,6 @@ public class GameManager : MonoBehaviour
         }
         
         playerController.Init();
-
         StartCoroutine(CountDown());
     }
 
@@ -400,6 +399,8 @@ public class GameManager : MonoBehaviour
     
     IEnumerator CountDown()
     {
+        Debug.Log("test");
+        
         if (audioManager.audio.clip.loadState == AudioDataLoadState.Unloaded)
         {
             audioManager.audio.clip.LoadAudioData();

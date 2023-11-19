@@ -103,7 +103,6 @@ public class PlayerController : MonoBehaviour
         input.actions.FindAction("Down").canceled += OnKeyUp;
         verdictBarList[2].onTriggerExitEvent += HandleGoodVerdictExit;
         longNoteTime = new WaitForSeconds(7.5f / bpm);
-        Vibration.Init();
     }
     
     void SetTransform(GameObject obj, float y)
@@ -399,11 +398,11 @@ public class PlayerController : MonoBehaviour
             {
                 if(Application.platform == RuntimePlatform.Android)
                 {
-                    Vibration.VibrateAndroid(100);
+                    
                 }
                 else if(Application.platform == RuntimePlatform.IPhonePlayer)
                 {
-                    Vibration.VibrateIOS(ImpactFeedbackStyle.Light);
+                    
                 }
             }
 
@@ -480,11 +479,11 @@ public class PlayerController : MonoBehaviour
         {
             if(Application.platform == RuntimePlatform.Android)
             {
-                Vibration.VibrateAndroid(100);
+                
             }
             else if(Application.platform == RuntimePlatform.IPhonePlayer)
             {
-                Vibration.VibrateIOS(ImpactFeedbackStyle.Light);
+                
             }
         }
         
