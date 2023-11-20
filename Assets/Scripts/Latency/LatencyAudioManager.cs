@@ -12,7 +12,6 @@ public class LatencyAudioManager : MonoBehaviour
     [FoldoutGroup("음악")]
     [Title("BPM")]
     public int bpm;
-    [FormerlySerializedAs("audio")]
     [FoldoutGroup("음악")]
     [Title("박자")]
     public AudioSource audioSource;
@@ -52,5 +51,11 @@ public class LatencyAudioManager : MonoBehaviour
     public void PlayBeatRepeatedly()
     {
         audioSource.Play();
+    }
+
+    public void StopAudio()
+    {
+        audioSource.Stop();
+        audioBGM.Stop();
     }
 }

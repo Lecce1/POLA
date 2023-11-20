@@ -22,13 +22,12 @@ public class LatencyManager : MonoBehaviour
     [FoldoutGroup("플레이어")] 
     [SerializeField]
     private LobbyPlayerController playerController;
-    
-    [FoldoutGroup("변수")]
-    [SerializeField]
-    private int currentIndex;
     [FoldoutGroup("변수")]
     [SerializeField]
     private bool isCountDown;
+    [FoldoutGroup("변수")] 
+    [Title("종료 여부")] 
+    public bool isDone = false;
     
     public static LatencyManager instance;
     private WaitForSeconds waitForSeconds = new WaitForSeconds(1f);
@@ -43,7 +42,6 @@ public class LatencyManager : MonoBehaviour
 
     private void Start()
     {
-        currentIndex = 0;
         for (int i = 1; i <= 10; i++)
         {
             var obj = Instantiate(latencyNote, latencyFolder.transform, true);
@@ -69,14 +67,7 @@ public class LatencyManager : MonoBehaviour
         
         while (i > 0)
         {
-            if (i == 4)
-            {
-                countDownPanel.transform.GetChild(0).GetComponent<Text>().text = "Ready";
-            }
-            else
-            {
-                countDownPanel.transform.GetChild(0).GetComponent<Text>().text = i.ToString();
-            }
+            countDownPanel.transform.GetChild(0).GetComponent<Text>().text = i == 4 ? "Ready" : i.ToString();
 
             i--;
             yield return waitForSeconds;
@@ -95,5 +86,11 @@ public class LatencyManager : MonoBehaviour
             playerController.GetComponent<Animator>().SetBool("isCountDown", isCountDown);
             playerController.GetComponent<PlayerInput>().enabled = true;
         }
+    }
+
+    public void ShowEndWindow()
+    {
+        isDone = true;
+        Debug.Log(DBManager.instance.latency);
     }
 }

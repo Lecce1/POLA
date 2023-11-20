@@ -22,6 +22,11 @@ public class LatencyPlayerController : MonoBehaviour
     [Title("누른 횟수")]
     [SerializeField]
     private int count = 0;
+    [FoldoutGroup("변수")]
+    [Title("누른 시점")]
+    [SerializeField]
+    private float inputTime = 0;
+    
 
     private WaitForSeconds second = new (1f);
 
@@ -29,20 +34,43 @@ public class LatencyPlayerController : MonoBehaviour
     {
         Physics.gravity = new Vector3(0, -9.81f, 0);
         bpm = LatencyAudioManager.instance.bpm;
+        latency = 0;
     }
-
+    
     void FixedUpdate()
     {
-        transform.position += transform.forward * (bpm / 7.5f * Time.fixedDeltaTime);
+        if (!LatencyManager.instance.isDone)
+        {
+            transform.position += transform.forward * (bpm / 7.5f * Time.fixedDeltaTime);
+        }
     }
 
     void OnDown()
     {
+        if (LatencyManager.instance.isDone)
+        {
+            return;
+        }
+
+        if (count == 0)
+        {
+            inputTime = Time.time;
+        }
+        
+        int latencyDelta = latency;
         LatencyManager.instance.latencyNoteList[count % 10].transform.position += Vector3.forward * 80;
-        latency = 500 * ++count - (int)(Time.time * 1000);
+        latency = (int)(60000f / bpm) * ++count - (int)(Time.time * 1000);
+        latencyDelta -= latency;
+        Debug.Log(latencyDelta);
         latencySum += latency;
         latencyAvg = latencySum / count;
         DBManager.instance.latency = latencyAvg;
-        //transform.position += transform.forward * 7500 / (latency * bpm);
+        transform.position -= transform.forward * (latencyDelta * bpm / 7500f);
+
+        if (count > 20)
+        {
+            LatencyManager.instance.ShowEndWindow();
+            LatencyAudioManager.instance.StopAudio();
+        }
     }
 }

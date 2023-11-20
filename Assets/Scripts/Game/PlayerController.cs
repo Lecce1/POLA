@@ -28,6 +28,9 @@ public class PlayerController : MonoBehaviour
     [FoldoutGroup("변수")]
     [SerializeField]
     private int attackCounter;
+    [FoldoutGroup("변수")] 
+    [SerializeField]
+    private bool isLoaded = false;
     
     [FoldoutGroup("오브젝트")] 
     [SerializeField] 
@@ -48,6 +51,11 @@ public class PlayerController : MonoBehaviour
     
     void FixedUpdate()
     {
+        if (!isLoaded)
+        {
+            return;
+        }
+        
         if (GameManager.instance.isCountDown)
         {
             return;
@@ -86,7 +94,9 @@ public class PlayerController : MonoBehaviour
         input.actions.FindAction("Up").canceled += OnKeyUp;
         input.actions.FindAction("Down").canceled += OnKeyUp;
         longNoteTime = new WaitForSeconds(7.5f / bpm);
-        transform.position = transform.forward * Mathf.Floor(DBManager.instance.latency / 1000f * (60f / bpm)) / 100f;
+        Debug.Log(bpm / 7500f * DBManager.instance.latency);
+        transform.position = transform.forward * (DBManager.instance.latency * bpm / 7500f);
+        isLoaded = true;
     }
     
     /// <summary>
@@ -224,7 +234,6 @@ public class PlayerController : MonoBehaviour
         if (evaluation == 3)
         {
             Hurt(targetInfo, true);
-            verdict.DequeueUsedCollider(targetInfo);
             return;
         }
         

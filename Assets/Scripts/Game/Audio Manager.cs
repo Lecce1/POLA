@@ -11,19 +11,21 @@ public class AudioManager : MonoBehaviour
     [FoldoutGroup("음악")]
     [Title("오디오 믹서")]
     public AudioMixer audioMixer;
-    
     [FoldoutGroup("음악")]
     [Title("BPM")]
     public float bpm;
-    
     [FoldoutGroup("음악")]
     [Title("오디오")]
     public new AudioSource audio;
-    
     [FoldoutGroup("음악")]
     [Title("인터벌")]
     [TableList]
     public List<Intervals> intervals = new ();
+
+    [FoldoutGroup("변수")] 
+    [Title("로딩")] 
+    [SerializeField]
+    private bool isLoaded = false;
 
     public static AudioManager instance;
 
@@ -42,6 +44,11 @@ public class AudioManager : MonoBehaviour
     
     void Update()
     {
+        if (!isLoaded)
+        {
+            return;
+        }
+        
         foreach (Intervals interval in intervals)
         {
             float sampledTime = audio.timeSamples / (audio.clip.frequency * interval.GetIntervalLength(bpm));
@@ -58,6 +65,7 @@ public class AudioManager : MonoBehaviour
         
         audioMixer.SetFloat("Music", DBManager.instance.musicValue * 80 - 80);
         audioMixer.SetFloat("FX", DBManager.instance.sfxValue * 80 - 80);
+        isLoaded = true;
     }
 
     public IEnumerator Progress()

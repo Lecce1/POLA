@@ -167,11 +167,16 @@ public class GameManager : MonoBehaviour
 
     void Start()
     {
-        Init();
+        StartCoroutine("Init");
     }
 
-    void Init()
+    IEnumerator Init()
     {
+        while (!DBManager.instance.isJsonLoad)
+        {
+            yield return null;
+        }
+        
         switch (DBManager.instance.currentPlatform)
         {
             case "PC":
@@ -234,9 +239,8 @@ public class GameManager : MonoBehaviour
                 break;
         }
         
-        GameObject verdictPrefab = Instantiate(this.verdictPrefab);
+        GameObject verdictPrefab = Instantiate(this.verdictPrefab, verdictCanvas.transform, true);
         verdictPrefab.GetComponent<Image>().sprite = verdictImage[idx];
-        verdictPrefab.transform.SetParent(verdictCanvas.transform);
         verdictPrefab.GetComponent<RectTransform>().localScale = new Vector3(1, 1, 1);
         var screenPos = Camera.main.WorldToScreenPoint(cameraInfo.transform.position - new Vector3(0, 1f, 0));
         RectTransformUtility.ScreenPointToLocalPointInRectangle(verdictCanvas.GetComponent<RectTransform>(), screenPos, Camera.main, out var localPos);
@@ -406,8 +410,6 @@ public class GameManager : MonoBehaviour
     
     IEnumerator CountDown()
     {
-        Debug.Log("test");
-        
         if (audioManager.audio.clip.loadState == AudioDataLoadState.Unloaded)
         {
             audioManager.audio.clip.LoadAudioData();
