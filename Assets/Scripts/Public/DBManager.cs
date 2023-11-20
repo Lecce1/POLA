@@ -1,10 +1,9 @@
 using System;
-using System.Collections.Generic;
 using System.IO;
+using System.Linq;
 using Sirenix.OdinInspector;
 using UnityEngine;
 using UnityEngine.Localization.Settings;
-using UnityEngine.Serialization;
 
 [Serializable]
 class LocalData
@@ -17,12 +16,13 @@ class LocalData
     public int language;
     public bool isTutorial;
     public int latency;
+    public StageArray[] stageArray = new StageArray[8];
 }
 
 [Serializable]
 public class StageArray
 {
-    public Stage[] stage;
+    public Stage[] stage = new Stage[6];
 }
 
 [Serializable]
@@ -30,6 +30,12 @@ public class Stage
 {
     public string name;
     public int starCount;
+    public string rank;
+    public int score;
+    public int perfect;
+    public int great;
+    public int good;
+    public int miss;
     public int bpm;
     public AudioClip audio;
 }
@@ -156,6 +162,23 @@ public class DBManager : MonoBehaviour
                 supportLanguageNum = localData.supportLanguageNum;
                 latency = localData.latency;
                 LocalizationSettings.SelectedLocale = LocalizationSettings.AvailableLocales.Locales[language];
+
+                for (int i = 1; i < localData.stageArray.Length; i++)
+                {
+                    for (int j = 0; j < localData.stageArray[i].stage.Length; j++)
+                    {
+                        if (localData.stageArray[i] != null)
+                        {   
+                            stageArray[i].stage[j].starCount = localData.stageArray[i].stage[j].starCount;
+                            stageArray[i].stage[j].rank = localData.stageArray[i].stage[j].rank;
+                            stageArray[i].stage[j].score =localData.stageArray[i].stage[j].score;
+                            stageArray[i].stage[j].perfect= localData.stageArray[i].stage[j].perfect;
+                            stageArray[i].stage[j].great= localData.stageArray[i].stage[j].great;
+                            stageArray[i].stage[j].good = localData.stageArray[i].stage[j].good;
+                            stageArray[i].stage[j].miss = localData.stageArray[i].stage[j].miss;
+                        }
+                    }
+                }
             }
         }
 
@@ -173,6 +196,31 @@ public class DBManager : MonoBehaviour
         localData.language = language;
         localData.supportLanguageNum = supportLanguageNum;
         localData.latency = latency;
+
+        for (int i = 1; i < localData.stageArray.Length; i++)
+        {
+            localData.stageArray[i] = new StageArray();
+            
+            for (int j = 0; j < 6; j++)
+            {
+                localData.stageArray[i].stage[j] = new Stage();
+            }
+            
+            for (int j = 0; j < localData.stageArray[i].stage.Length; j++)
+            {
+                if (localData.stageArray[i] != null)
+                {
+                    localData.stageArray[i].stage[j].starCount = stageArray[i].stage[j].starCount;
+                    localData.stageArray[i].stage[j].rank = stageArray[i].stage[j].rank;
+                    localData.stageArray[i].stage[j].score = stageArray[i].stage[j].score;
+                    localData.stageArray[i].stage[j].perfect = stageArray[i].stage[j].perfect;
+                    localData.stageArray[i].stage[j].great = stageArray[i].stage[j].great;
+                    localData.stageArray[i].stage[j].good = stageArray[i].stage[j].good;
+                    localData.stageArray[i].stage[j].miss = stageArray[i].stage[j].miss;
+                }
+            }
+        }
+        
         string json = JsonUtility.ToJson(localData, true);
         File.WriteAllText(jsonPath, json);
     }

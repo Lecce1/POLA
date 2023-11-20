@@ -460,6 +460,8 @@ public class LobbyManager : MonoBehaviour
     {
         if (isOn)
         {
+            TrackInfo.instance.Init();
+            
             if (LobbyAudioManager.instance.bgmAudio.isPlaying)
             {
                 LobbyAudioManager.instance.bgmAudio.Stop();

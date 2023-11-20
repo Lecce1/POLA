@@ -56,11 +56,6 @@ public class LobbyPlayerController : MonoBehaviour
         rigidbody = GetComponent<Rigidbody>();
         StartCoroutine("Move");
     }
-    
-    void Update()
-    {
-        Collider();
-    }
 
     IEnumerator Move()
     {
@@ -88,6 +83,7 @@ public class LobbyPlayerController : MonoBehaviour
 
         isMove = false;
         anim.SetBool("isMove", isMove);
+        Collider();
     }
 
     public void OnMove(InputValue value)
@@ -400,9 +396,8 @@ public class LobbyPlayerController : MonoBehaviour
                         case "Stage":
                             if (LobbyManager.instance.isInfoPanelOn == false)
                             {
-                                TrackInfo.instance.Init(DBManager.instance.currentChapter, temp.transform.GetComponent<DoorManager>().stageNum);
-                                LobbyManager.instance.DoorInit("Stage", "Join");
                                 DBManager.instance.currentStage = temp.GetComponent<DoorManager>().stageNum;
+                                LobbyManager.instance.DoorInit("Stage", "Join");
                             }
                             break;
                         

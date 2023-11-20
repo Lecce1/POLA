@@ -24,343 +24,199 @@ MonoBehaviour:
     m_Metadata:
       m_Items: []
   - m_Id: 72204053110784
-    m_Key: Stage2_Track6_Title
-    m_Metadata:
-      m_Items: []
-  - m_Id: 74542243373056
-    m_Key: Stage2_Track6_Mission_2
-    m_Metadata:
-      m_Items: []
-  - m_Id: 74485129535488
-    m_Key: Stage2_Track6_Mission_1
+    m_Key: Chapter2_Stage6_Title
     m_Metadata:
       m_Items: []
   - m_Id: 72149518770176
-    m_Key: Stage2_Track5_Title
-    m_Metadata:
-      m_Items: []
-  - m_Id: 74453529649152
-    m_Key: Stage2_Track5_Mission_3
-    m_Metadata:
-      m_Items: []
-  - m_Id: 74425113239552
-    m_Key: Stage2_Track5_Mission_2
-    m_Metadata:
-      m_Items: []
-  - m_Id: 74388207558656
-    m_Key: Stage2_Track5_Mission_1
+    m_Key: Chapter2_Stage5_Title
     m_Metadata:
       m_Items: []
   - m_Id: 72102181855232
-    m_Key: Stage2_Track4_Title
-    m_Metadata:
-      m_Items: []
-  - m_Id: 74357673025536
-    m_Key: Stage2_Track4_Mission_3
-    m_Metadata:
-      m_Items: []
-  - m_Id: 74333522223104
-    m_Key: Stage2_Track4_Mission_2
-    m_Metadata:
-      m_Items: []
-  - m_Id: 74284054601728
-    m_Key: Stage2_Track4_Mission_1
+    m_Key: Chapter2_Stage4_Title
     m_Metadata:
       m_Items: []
   - m_Id: 72016253149184
-    m_Key: Stage2_Track3_Title
-    m_Metadata:
-      m_Items: []
-  - m_Id: 74251343224832
-    m_Key: Stage2_Track3_Mission_3
-    m_Metadata:
-      m_Items: []
-  - m_Id: 74214592733184
-    m_Key: Stage2_Track3_Mission_2
-    m_Metadata:
-      m_Items: []
-  - m_Id: 74157592141824
-    m_Key: Stage2_Track3_Mission_1
+    m_Key: Chapter2_Stage3_Title
     m_Metadata:
       m_Items: []
   - m_Id: 71971919355904
-    m_Key: Stage2_Track2_Title
-    m_Metadata:
-      m_Items: []
-  - m_Id: 74133227429888
-    m_Key: Stage2_Track2_Mission_3
-    m_Metadata:
-      m_Items: []
-  - m_Id: 74108611059712
-    m_Key: Stage2_Track2_Mission_2
-    m_Metadata:
-      m_Items: []
-  - m_Id: 74054282240000
-    m_Key: Stage2_Track2_Mission_1
+    m_Key: Chapter2_Stage2_Title
     m_Metadata:
       m_Items: []
   - m_Id: 71916382576640
-    m_Key: Stage2_Track1_Title
-    m_Metadata:
-      m_Items: []
-  - m_Id: 74014008532992
-    m_Key: Stage2_Track1_Mission_3
-    m_Metadata:
-      m_Items: []
-  - m_Id: 73984426106880
-    m_Key: Stage2_Track1_Mission_2
-    m_Metadata:
-      m_Items: []
-  - m_Id: 73882986864640
-    m_Key: Stage2_Track1_Mission_1
+    m_Key: Chapter2_Stage1_Title
     m_Metadata:
       m_Items: []
   - m_Id: 71868739477504
-    m_Key: Stage1_Track6_Title
-    m_Metadata:
-      m_Items: []
-  - m_Id: 73857464524800
-    m_Key: Stage1_Track6_Mission_3
-    m_Metadata:
-      m_Items: []
-  - m_Id: 73831908630528
-    m_Key: Stage1_Track6_Mission_2
-    m_Metadata:
-      m_Items: []
-  - m_Id: 73786425597952
-    m_Key: Stage1_Track6_Mission_1
+    m_Key: Chapter_Stage6_Title
     m_Metadata:
       m_Items: []
   - m_Id: 71813198503936
-    m_Key: Stage1_Track5_Title
-    m_Metadata:
-      m_Items: []
-  - m_Id: 73750698516480
-    m_Key: Stage1_Track5_Mission_3
-    m_Metadata:
-      m_Items: []
-  - m_Id: 73710970068992
-    m_Key: Stage1_Track5_Mission_2
-    m_Metadata:
-      m_Items: []
-  - m_Id: 73644968501248
-    m_Key: Stage1_Track5_Mission_1
+    m_Key: Chapter1_Stage5_Title
     m_Metadata:
       m_Items: []
   - m_Id: 71770005561344
-    m_Key: Stage1_Track4_Title
-    m_Metadata:
-      m_Items: []
-  - m_Id: 73610952695808
-    m_Key: Stage1_Track4_Mission_3
-    m_Metadata:
-      m_Items: []
-  - m_Id: 73586508292096
-    m_Key: Stage1_Track4_Mission_2
-    m_Metadata:
-      m_Items: []
-  - m_Id: 73516568272896
-    m_Key: Stage1_Track4_Mission_1
+    m_Key: Chapter1_Stage4_Title
     m_Metadata:
       m_Items: []
   - m_Id: 71692490629120
-    m_Key: Stage1_Track3_Title
-    m_Metadata:
-      m_Items: []
-  - m_Id: 73488344801280
-    m_Key: Stage1_Track3_Mission_3
-    m_Metadata:
-      m_Items: []
-  - m_Id: 73457034321920
-    m_Key: Stage1_Track3_Mission_2
-    m_Metadata:
-      m_Items: []
-  - m_Id: 73402864885760
-    m_Key: Stage1_Track3_Mission_1
+    m_Key: Chapter1_Stage3_Title
     m_Metadata:
       m_Items: []
   - m_Id: 71599217696768
-    m_Key: Stage1_Track2_Title
-    m_Metadata:
-      m_Items: []
-  - m_Id: 73371445354496
-    m_Key: Stage1_Track2_Mission_3
-    m_Metadata:
-      m_Items: []
-  - m_Id: 73331729489920
-    m_Key: Stage1_Track2_Mission_2
-    m_Metadata:
-      m_Items: []
-  - m_Id: 73214632910848
-    m_Key: Stage1_Track2_Mission_1
+    m_Key: Chapter1_Stage2_Title
     m_Metadata:
       m_Items: []
   - m_Id: 71432708022272
-    m_Key: Stage1_Track1_Title
-    m_Metadata:
-      m_Items: []
-  - m_Id: 73168331988992
-    m_Key: Stage1_Track1_Mission_3
-    m_Metadata:
-      m_Items: []
-  - m_Id: 73125147435008
-    m_Key: Stage1_Track1_Mission_2
-    m_Metadata:
-      m_Items: []
-  - m_Id: 72934084304896
-    m_Key: Stage1_Track1_Mission_1
-    m_Metadata:
-      m_Items: []
-  - m_Id: 74850201755648
-    m_Key: Stage2_Track6_Mission_3
+    m_Key: Chapter1_Stage1_Title
     m_Metadata:
       m_Items: []
   - m_Id: 75220638490624
-    m_Key: Mission
+    m_Key: Score
     m_Metadata:
       m_Items: []
   - m_Id: 618676439998464
-    m_Key: Stage3_Track1_Title
+    m_Key: Chapter3_Stage1_Title
     m_Metadata:
       m_Items: []
   - m_Id: 619243434401792
-    m_Key: Stage3_Track2_Title
+    m_Key: Chapter3_Stage2_Title
     m_Metadata:
       m_Items: []
   - m_Id: 619294953037824
-    m_Key: Stage3_Track3_Title
+    m_Key: Chapter3_Stage3_Title
     m_Metadata:
       m_Items: []
   - m_Id: 619363324387328
-    m_Key: Stage3_Track4_Title
+    m_Key: Chapter3_Stage4_Title
     m_Metadata:
       m_Items: []
   - m_Id: 619402033618944
-    m_Key: Stage3_Track5_Title
+    m_Key: Chapter3_Stage5_Title
     m_Metadata:
       m_Items: []
   - m_Id: 619454856683520
-    m_Key: Stage3_Track6_Title
+    m_Key: Chapter3_Stage6_Title
     m_Metadata:
       m_Items: []
   - m_Id: 619506408873984
-    m_Key: Stage4_Track1_Title
+    m_Key: Chapter4_Stage1_Title
     m_Metadata:
       m_Items: []
   - m_Id: 619633177518080
-    m_Key: Stage4_Track2_Title
+    m_Key: Chapter4_Stage2_Title
     m_Metadata:
       m_Items: []
   - m_Id: 619686273212416
-    m_Key: Stage4_Track3_Title
+    m_Key: Chapter4_Stage3_Title
     m_Metadata:
       m_Items: []
   - m_Id: 619931438669824
-    m_Key: Stage4_Track4_Title
+    m_Key: Chapter4_Stage4_Title
     m_Metadata:
       m_Items: []
   - m_Id: 619969099325440
-    m_Key: Stage4_Track5_Title
+    m_Key: Chapter4_Stage5_Title
     m_Metadata:
       m_Items: []
   - m_Id: 620006348939264
-    m_Key: Stage4_Track6_Title
+    m_Key: Chapter4_Stage6_Title
     m_Metadata:
       m_Items: []
   - m_Id: 620050087141376
-    m_Key: Stage5_Track1_Title
+    m_Key: Chapter5_Stage1_Title
     m_Metadata:
       m_Items: []
   - m_Id: 620110975852544
-    m_Key: Stage5_Track2_Title
+    m_Key: Chapter5_Stage2_Title
     m_Metadata:
       m_Items: []
   - m_Id: 620146841346048
-    m_Key: Stage5_Track3_Title
+    m_Key: Chapter5_Stage3_Title
     m_Metadata:
       m_Items: []
   - m_Id: 620185651240960
-    m_Key: Stage5_Track4_Title
+    m_Key: Chapter5_Stage4_Title
     m_Metadata:
       m_Items: []
   - m_Id: 620186720788480
-    m_Key: Stage5_Track5_Title
+    m_Key: Chapter5_Stage5_Title
     m_Metadata:
       m_Items: []
   - m_Id: 620264072142848
-    m_Key: Stage5_Track6_Title
+    m_Key: Chapter5_Stage6_Title
     m_Metadata:
       m_Items: []
   - m_Id: 620306048737280
-    m_Key: Stage6_Track1_Title
+    m_Key: Chapter6_Stage1_Title
     m_Metadata:
       m_Items: []
   - m_Id: 620350978121728
-    m_Key: Stage6_Track2_Title
+    m_Key: Chapter6_Stage2_Title
     m_Metadata:
       m_Items: []
   - m_Id: 620398277287936
-    m_Key: Stage6_Track3_Title
+    m_Key: Chapter6_Stage3_Title
     m_Metadata:
       m_Items: []
   - m_Id: 620438987202560
-    m_Key: Stage6_Track4_Title
+    m_Key: Chapter6_Stage4_Title
     m_Metadata:
       m_Items: []
   - m_Id: 620657816625152
-    m_Key: Stage6_Track5_Title
+    m_Key: Chapter6_Stage5_Title
     m_Metadata:
       m_Items: []
   - m_Id: 620688699285504
-    m_Key: Stage6_Track6_Title
+    m_Key: Chapter6_Stage6_Title
     m_Metadata:
       m_Items: []
   - m_Id: 620723117744128
-    m_Key: Stage7_Track1_Title
+    m_Key: Chapter7_Stage1_Title
     m_Metadata:
       m_Items: []
   - m_Id: 620779640184832
-    m_Key: Stage7_Track2_Title
+    m_Key: Chapter7_Stage2_Title
     m_Metadata:
       m_Items: []
   - m_Id: 620813949591552
-    m_Key: Stage7_Track3_Title
+    m_Key: Chapter7_Stage3_Title
     m_Metadata:
       m_Items: []
   - m_Id: 620846111514624
-    m_Key: Stage7_Track4_Title
+    m_Key: Chapter7_Stage4_Title
     m_Metadata:
       m_Items: []
   - m_Id: 620896724180992
-    m_Key: Stage7_Track5_Title
+    m_Key: Chapter7_Stage5_Title
     m_Metadata:
       m_Items: []
   - m_Id: 620932740669440
-    m_Key: Stage7_Track6_Title
+    m_Key: Chapter7_Stage6_Title
     m_Metadata:
       m_Items: []
   - m_Id: 620977435172864
-    m_Key: Stage8_Track1_Title
+    m_Key: Chapter8_Stage1_Title
     m_Metadata:
       m_Items: []
   - m_Id: 621046033014784
-    m_Key: Stage8_Track2_Title
+    m_Key: Chapter8_Stage2_Title
     m_Metadata:
       m_Items: []
   - m_Id: 621079235125248
-    m_Key: Stage8_Track3_Title
+    m_Key: Chapter8_Stage3_Title
     m_Metadata:
       m_Items: []
   - m_Id: 621112768585728
-    m_Key: Stage8_Track4_Title
+    m_Key: Chapter8_Stage4_Title
     m_Metadata:
       m_Items: []
   - m_Id: 621157987377152
-    m_Key: Stage8_Track5_Title
+    m_Key: Chapter8_Stage5_Title
     m_Metadata:
       m_Items: []
   - m_Id: 621195702558720
-    m_Key: Stage8_Track6_Title
+    m_Key: Chapter8_Stage6_Title
     m_Metadata:
       m_Items: []
   m_Metadata:
