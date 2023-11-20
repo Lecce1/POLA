@@ -97,10 +97,16 @@ public class GameManager : MonoBehaviour
     [Title("Good 갯수")] 
     [SerializeField]
     private int goodCount;
+
     [FoldoutGroup("정보")] 
     [Title("Miss 갯수")] 
     [SerializeField]
     private int missCount;
+    
+    [FoldoutGroup("정보")] 
+    [Title("Latency 값")] 
+    [SerializeField]
+    private int latency;
     
     [FoldoutGroup("결과 창")] 
     [Title("활성화 여부")] 
@@ -189,6 +195,7 @@ public class GameManager : MonoBehaviour
         temp.transform.position = Vector3.zero;
         score = 0;
         maxCombo = 0;
+        latency = DBManager.instance.latency;
         
         for (int i = 0; i < noteFolder.transform.childCount; i++)
         {

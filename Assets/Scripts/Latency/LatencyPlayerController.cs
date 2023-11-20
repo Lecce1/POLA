@@ -38,11 +38,11 @@ public class LatencyPlayerController : MonoBehaviour
 
     void OnDown()
     {
-        Debug.Log(count % 10);
         LatencyManager.instance.latencyNoteList[count % 10].transform.position += Vector3.forward * 80;
         latency = 500 * ++count - (int)(Time.time * 1000);
         latencySum += latency;
         latencyAvg = latencySum / count;
+        DBManager.instance.latency = latencyAvg;
         //transform.position += transform.forward * 7500 / (latency * bpm);
     }
 }

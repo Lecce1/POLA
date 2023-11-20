@@ -15,6 +15,7 @@ public class LocalData
     public bool isVibration;
     public int language;
     public bool isTutorial;
+    public int latency = 0;
 }
 
 
@@ -50,6 +51,9 @@ public class DBManager : MonoBehaviour
     [FoldoutGroup("게임 DB")] 
     [Title("시네머신 여부")]
     public bool isCinemachine;
+    [FoldoutGroup("게임 DB")] 
+    [Title("레이턴시 값")]
+    public int latency;
 
     [FoldoutGroup("게임 DB")] 
     [Title("JSON 불러오기 여부")]
@@ -133,6 +137,7 @@ public class DBManager : MonoBehaviour
                 isVibration = localData.isVibration;
                 language = localData.language;
                 supportLanguageNum = localData.supportLanguageNum;
+                latency = localData.latency;
                 LocalizationSettings.SelectedLocale = LocalizationSettings.AvailableLocales.Locales[language];
             }
         }
@@ -150,6 +155,7 @@ public class DBManager : MonoBehaviour
         localData.isVibration = isVibration;
         localData.language = language;
         localData.supportLanguageNum = supportLanguageNum;
+        localData.latency = latency;
         string json = JsonUtility.ToJson(localData, true);
         File.WriteAllText(jsonPath, json);
     }
@@ -161,6 +167,7 @@ public class DBManager : MonoBehaviour
         musicValue = 1;
         sfxValue = 1;
         isVibration = true;
+        latency = 0;
         SystemLanguage systemLanguage = Application.systemLanguage;
  
         switch(systemLanguage)

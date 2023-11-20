@@ -86,6 +86,7 @@ public class PlayerController : MonoBehaviour
         input.actions.FindAction("Up").canceled += OnKeyUp;
         input.actions.FindAction("Down").canceled += OnKeyUp;
         longNoteTime = new WaitForSeconds(7.5f / bpm);
+        transform.position = transform.forward * Mathf.Floor(DBManager.instance.latency / 1000f * (60f / bpm)) / 100f;
     }
     
     /// <summary>
