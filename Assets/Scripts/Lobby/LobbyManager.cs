@@ -42,6 +42,10 @@ public class LobbyManager : MonoBehaviour
     [Title("스카이박스 리스트")] 
     public List<Material> stage_Skybox;
     
+    [FoldoutGroup("스테이지 문")]
+    [Title("문 리스트")] 
+    public List<DoorManager> doorList;
+    
     [FoldoutGroup("설정 패널")] 
     [Title("음악 Slider")]
     public Slider set_Music_Slider;
@@ -148,28 +152,33 @@ public class LobbyManager : MonoBehaviour
         {
             RenderSettings.skybox = stage_Skybox[0];
 
-            if (LobbyAudioManager.instance.audio.clip != bgm[0])
+            if (LobbyAudioManager.instance.bgmAudio.clip != bgm[0])
             {
-                if (LobbyAudioManager.instance.audio.isPlaying)
+                if (LobbyAudioManager.instance.bgmAudio.isPlaying)
                 {
-                    LobbyAudioManager.instance.audio.Stop();
+                    LobbyAudioManager.instance.bgmAudio.Stop();
                 }
                         
-                LobbyAudioManager.instance.audio.clip = bgm[0];
-                LobbyAudioManager.instance.audio.Play();
+                LobbyAudioManager.instance.bgmAudio.clip = bgm[0];
+                LobbyAudioManager.instance.bgmAudio.Play();
             }
         }
         else if (DBManager.instance.currentGround == 2)
         {
+            for (int i = 0; i < doorList.Count; i++)
+            {
+                doorList[i].Stage_Init();
+            }
+            
             RenderSettings.skybox = stage_Skybox[DBManager.instance.currentChapter];
             
-            if (LobbyAudioManager.instance.audio.isPlaying)
+            if (LobbyAudioManager.instance.bgmAudio.isPlaying)
             {
-                LobbyAudioManager.instance.audio.Stop();
+                LobbyAudioManager.instance.bgmAudio.Stop();
             }
                     
-            LobbyAudioManager.instance.audio.clip = bgm[DBManager.instance.currentChapter];
-            LobbyAudioManager.instance.audio.Play();
+            LobbyAudioManager.instance.bgmAudio.clip = bgm[DBManager.instance.currentChapter];
+            LobbyAudioManager.instance.bgmAudio.Play();
         }
     }
 
@@ -241,28 +250,33 @@ public class LobbyManager : MonoBehaviour
                 {
                     RenderSettings.skybox = stage_Skybox[0];
 
-                    if (LobbyAudioManager.instance.audio.clip != bgm[0])
+                    if (LobbyAudioManager.instance.bgmAudio.clip != bgm[0])
                     {
-                        if (LobbyAudioManager.instance.audio.isPlaying)
+                        if (LobbyAudioManager.instance.bgmAudio.isPlaying)
                         {
-                            LobbyAudioManager.instance.audio.Stop();
+                            LobbyAudioManager.instance.bgmAudio.Stop();
                         }
                         
-                        LobbyAudioManager.instance.audio.clip = bgm[0];
-                        LobbyAudioManager.instance.audio.Play();
+                        LobbyAudioManager.instance.bgmAudio.clip = bgm[0];
+                        LobbyAudioManager.instance.bgmAudio.Play();
                     }
                 }
                 else if (DBManager.instance.currentGround == 2)
                 {
-                    RenderSettings.skybox = stage_Skybox[DBManager.instance.currentChapter];
-                    
-                    if (LobbyAudioManager.instance.audio.isPlaying)
+                    for (int i = 0; i < doorList.Count; i++)
                     {
-                        LobbyAudioManager.instance.audio.Stop();
+                        doorList[i].Stage_Init();
                     }
                     
-                    LobbyAudioManager.instance.audio.clip = bgm[DBManager.instance.currentChapter];
-                    LobbyAudioManager.instance.audio.Play();
+                    RenderSettings.skybox = stage_Skybox[DBManager.instance.currentChapter];
+                    
+                    if (LobbyAudioManager.instance.bgmAudio.isPlaying)
+                    {
+                        LobbyAudioManager.instance.bgmAudio.Stop();
+                    }
+                    
+                    LobbyAudioManager.instance.bgmAudio.clip = bgm[DBManager.instance.currentChapter];
+                    LobbyAudioManager.instance.bgmAudio.Play();
                 }
                 
                 DBManager.instance.currentRouteIdx = moveRoute[DBManager.instance.currentGround].defaultRouteIdx;
@@ -313,15 +327,15 @@ public class LobbyManager : MonoBehaviour
                 {
                     RenderSettings.skybox = stage_Skybox[0];
                     
-                    if (LobbyAudioManager.instance.audio.isPlaying)
+                    if (LobbyAudioManager.instance.bgmAudio.isPlaying)
                     {
-                        LobbyAudioManager.instance.audio.Stop();
+                        LobbyAudioManager.instance.bgmAudio.Stop();
                     }
 
-                    if (LobbyAudioManager.instance.audio.clip != bgm[0])
+                    if (LobbyAudioManager.instance.bgmAudio.clip != bgm[0])
                     {
-                        LobbyAudioManager.instance.audio.clip = bgm[0];
-                        LobbyAudioManager.instance.audio.Play();
+                        LobbyAudioManager.instance.bgmAudio.clip = bgm[0];
+                        LobbyAudioManager.instance.bgmAudio.Play();
                     }
                 }
                 break;
@@ -446,6 +460,13 @@ public class LobbyManager : MonoBehaviour
     {
         if (isOn)
         {
+            if (LobbyAudioManager.instance.bgmAudio.isPlaying)
+            {
+                LobbyAudioManager.instance.bgmAudio.Stop();
+            }
+            
+            LobbyAudioManager.instance.bgmAudio.clip = DBManager.instance.stageArray[DBManager.instance.currentChapter].stage[DBManager.instance.currentStage - 1].audio;
+            LobbyAudioManager.instance.bgmAudio.Play();
             info.GetComponent<Animator>().Play("InfoOn");
             isInfoPanelOn = true;
             LobbyPlayerController.instance.isMoveAvailable = false;
@@ -453,6 +474,13 @@ public class LobbyManager : MonoBehaviour
         }
         else if (!isOn)
         {
+            if (LobbyAudioManager.instance.bgmAudio.isPlaying)
+            {
+                LobbyAudioManager.instance.bgmAudio.Stop();
+            }
+            
+            LobbyAudioManager.instance.bgmAudio.clip = bgm[DBManager.instance.currentChapter];
+            LobbyAudioManager.instance.bgmAudio.Play();
             info.GetComponent<Animator>().Play("InfoOff");
             isInfoPanelOn = false;
             LobbyPlayerController.instance.isMoveAvailable = true;

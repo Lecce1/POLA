@@ -2,12 +2,19 @@ using System.Collections;
 using Sirenix.OdinInspector;
 using UnityEngine;
 using UnityEngine.Audio;
+using UnityEngine.Serialization;
 
 public class LobbyAudioManager : MonoBehaviour
 {
-    [FoldoutGroup("음악")]
-    [Title("오디오")]
-    public new AudioSource audio;
+    [FoldoutGroup("오디오 소스")]
+    [Title("BGM")]
+    public AudioSource bgmAudio;
+    [FoldoutGroup("오디오 소스")]
+    [Title("UI")]
+    public AudioSource uiAudio;
+    [FoldoutGroup("오디오 소스")]
+    [Title("Effect")]
+    public AudioSource effectAudio;
     
     [FoldoutGroup("음악")]
     [Title("오디오 믹서")]

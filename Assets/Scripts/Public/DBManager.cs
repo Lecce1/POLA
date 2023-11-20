@@ -1,4 +1,5 @@
 using System;
+using System.Collections.Generic;
 using System.IO;
 using Sirenix.OdinInspector;
 using UnityEngine;
@@ -6,7 +7,7 @@ using UnityEngine.Localization.Settings;
 using UnityEngine.Serialization;
 
 [Serializable]
-public class LocalData
+class LocalData
 {
     public int chapter = 1;
     public float soundValue;
@@ -15,9 +16,23 @@ public class LocalData
     public bool isVibration;
     public int language;
     public bool isTutorial;
-    public int latency = 0;
+    public int latency;
 }
 
+[Serializable]
+public class StageArray
+{
+    public Stage[] stage;
+}
+
+[Serializable]
+public class Stage
+{
+    public string name;
+    public int starCount;
+    public int bpm;
+    public AudioClip audio;
+}
 
 public class DBManager : MonoBehaviour
 {
@@ -54,13 +69,15 @@ public class DBManager : MonoBehaviour
     [FoldoutGroup("게임 DB")] 
     [Title("레이턴시 값")]
     public int latency;
-
     [FoldoutGroup("게임 DB")] 
     [Title("JSON 불러오기 여부")]
     public bool isJsonLoad = false;
     [FoldoutGroup("게임 DB")] 
     [Title("게임 씬 이름")]
     public string gameSceneName = "Game";
+    [FoldoutGroup("게임 DB")] 
+    [Title("스테이지 별 DB")]
+    public StageArray[] stageArray = new StageArray[8];
     
     [FoldoutGroup("설정 DB")] 
     [Title("설정 음악 값")]
