@@ -8,6 +8,11 @@ public class LatencyPlayerController : MonoBehaviour
     [Title("BPM")]
     [SerializeField]
     private float bpm;
+    
+    [FoldoutGroup("애니메이터")]
+    [SerializeField]
+    private Animator playerAnimator;
+    
     [FoldoutGroup("변수")]
     [Title("레이턴시")]
     [SerializeField]
@@ -21,14 +26,15 @@ public class LatencyPlayerController : MonoBehaviour
     [FoldoutGroup("변수")]
     [Title("누른 횟수")]
     [SerializeField]
-    private int count = 0;
+    private int count = -1;
     [FoldoutGroup("변수")]
     [Title("시작 시점")]
     [SerializeField]
-    private float startTime = 0;
+    private int startTime = 0;
 
     void Start()
     {
+        playerAnimator.SetBool("isCountDown", true);
         Physics.gravity = new Vector3(0, -9.81f, 0);
         bpm = LatencyAudioManager.instance.bpm;
         latency = 0;
@@ -46,30 +52,35 @@ public class LatencyPlayerController : MonoBehaviour
     {
         if (LatencyManager.instance.isDone)
         {
+            if (count > 20)
+            {
+                LatencyManager.instance.ShowEndPanel(latencyAvg);
+                Debug.Log("home");
+            }
             return;
         }
-
-        int latencyDelta = latency;
         
-        if (!LatencyManager.instance.isStart && count == 0)
+        if (!LatencyManager.instance.isStart && count == -1)
         {
+            playerAnimator.SetBool("isCountDown", false);
             LatencyManager.instance.LatencyStart();
-            startTime = Time.time;
-            latencyDelta = (int)-startTime * 1000;
+            startTime = (int)(Time.time * 1000);
+            count++;
+            return;
         }
         
-        
+        int latencyDelta = latency;
         LatencyManager.instance.latencyNoteList[count % 10].transform.position += Vector3.forward * 80;
-        latency = (int)startTime + (int)(60000f / bpm) * ++count - (int)(Time.time * 1000);
+        count++;
+        latency = (int)(Time.time * 1000) - startTime - (int)(60000f / bpm) * count;
         latencyDelta -= latency;
-        Debug.Log(latencyDelta);
         latencySum += latency;
-        latencyAvg = latencySum / count;
-        transform.position -= transform.forward * (latencyDelta * bpm / 7500f);
-
+        transform.position += transform.forward * (latencyDelta * bpm / 7500f);
+        
         if (count > 20)
         {
-            LatencyManager.instance.ShowEndWindow();
+            playerAnimator.SetBool("isCountDown", true);
+            latencyAvg = latencySum / count;
             LatencyAudioManager.instance.StopAudio();
         }
     }
