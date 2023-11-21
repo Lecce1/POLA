@@ -10,8 +10,7 @@ public class LatencyManager : MonoBehaviour
 {
     [FoldoutGroup("패널")] 
     [Title("시작 패널")]
-    [SerializeField]
-    private GameObject startPanel;
+    public GameObject startPanel;
     [FoldoutGroup("패널")] 
     [Title("결과 패널")]
     public GameObject result;

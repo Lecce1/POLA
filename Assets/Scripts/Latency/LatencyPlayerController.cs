@@ -57,15 +57,17 @@ public class LatencyPlayerController : MonoBehaviour
 
     public void OnDown()
     {
-        if (!LatencyManager.instance.isFinish && count > 20)
+        if (LatencyManager.instance.startPanel.activeSelf)
         {
-            LatencyManager.instance.Finish(latencyAvg);
             return;
         }
-
-        if (count == -1)
+        
+        if (!LatencyManager.instance.isFinish && count >= 20)
         {
-            count++;
+            animator.SetBool("isReady", true);
+            latencyAvg = latencySum / count;
+            LatencyAudioManager.instance.audioBGM.Pause();
+            LatencyManager.instance.Finish(latencyAvg);
             return;
         }
         
@@ -76,13 +78,6 @@ public class LatencyPlayerController : MonoBehaviour
         latencyDelta -= latency;
         latencySum += latency;
         transform.position += transform.forward * (latencyDelta * bpm / 7500f);
-        
-        if (count > 20)
-        {
-            animator.SetBool("isReady", true);
-            latencyAvg = latencySum / count;
-            LatencyAudioManager.instance.audioBGM.Pause();
-        }
     }
     
     public void OnClick()

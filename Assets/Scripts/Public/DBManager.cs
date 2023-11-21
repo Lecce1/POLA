@@ -4,12 +4,13 @@ using System.Linq;
 using Sirenix.OdinInspector;
 using UnityEngine;
 using UnityEngine.Localization.Settings;
+using UnityEngine.Serialization;
 
 [Serializable]
 class LocalData
 {
     public int chapter = 1;
-    public float soundValue;
+    public float musicValue;
     public float sfxValue;
     public int supportLanguageNum = 2;
     public bool isVibration;
@@ -157,7 +158,7 @@ public class DBManager : MonoBehaviour
             {
                 isTutorial = localData.isTutorial;
                 chapter = localData.chapter;
-                musicValue = localData.soundValue;
+                musicValue = localData.musicValue;
                 sfxValue = localData.sfxValue;
                 isVibration = localData.isVibration;
                 language = localData.language;
@@ -191,7 +192,7 @@ public class DBManager : MonoBehaviour
         LocalData localData = new LocalData();
         localData.isTutorial = isTutorial;
         localData.chapter = chapter;
-        localData.soundValue = musicValue;
+        localData.musicValue = musicValue;
         localData.sfxValue = sfxValue;
         localData.isVibration = isVibration;
         localData.language = language;
