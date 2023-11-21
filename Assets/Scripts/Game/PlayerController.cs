@@ -109,7 +109,7 @@ public class PlayerController : MonoBehaviour
     public void Hurt(Obstacle info, bool isMiss)
     {
         verdict.ComboReset(info);
-        GameManager.instance.hpList[health - 1].enabled = false;
+
         if (isInvincibility)
         {
             return;
@@ -119,7 +119,20 @@ public class PlayerController : MonoBehaviour
         {
             GameManager.instance.ShowVerdict(3);
         }
+        
         health -= info.damage;
+        
+        for (int i = 0; i < 3; i++)
+        {
+            if (i <= health - 1)
+            {
+                GameManager.instance.hpList[i].enabled = true;
+            }
+            else
+            {
+                GameManager.instance.hpList[i].enabled = false;
+            }
+        }
 
         if (health <= 0)
         {

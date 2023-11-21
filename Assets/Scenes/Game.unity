@@ -1194,508 +1194,6 @@ Transform:
   - {fileID: 1642399550}
   m_Father: {fileID: 0}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
---- !u!1 &75968169
-GameObject:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  serializedVersion: 6
-  m_Component:
-  - component: {fileID: 75968171}
-  - component: {fileID: 75968170}
-  m_Layer: 0
-  m_Name: DBManager
-  m_TagString: Untagged
-  m_Icon: {fileID: 0}
-  m_NavMeshLayer: 0
-  m_StaticEditorFlags: 0
-  m_IsActive: 1
---- !u!114 &75968170
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 75968169}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 86607c325ea95bc4097f9b28752f347e, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  nickName: 
-  chapter: 1
-  nextScene: 
-  currentGround: 0
-  currentRouteIdx: 2
-  currentChapter: 1
-  currentStage: 2
-  currentPlatform: 
-  isTutorial: 1
-  isCinemachine: 1
-  latency: 0
-  isJsonLoad: 0
-  gameSceneName: Game
-  stageArray:
-  - stage:
-    - name: "\uD29C\uD1A0\uB9AC\uC5BC"
-      starCount: 0
-      rank: 
-      score: 0
-      perfect: 0
-      great: 0
-      good: 0
-      miss: 0
-      bpm: 0
-      audio: {fileID: 8300000, guid: 3af82e794237f455893ec1eb45d5fc16, type: 3}
-  - stage:
-    - name: "\uB611\uAC19\uC740 \uC77C\uC0C1"
-      starCount: 0
-      rank: 
-      score: 0
-      perfect: 0
-      great: 0
-      good: 0
-      miss: 0
-      bpm: 120
-      audio: {fileID: 8300000, guid: 1cda5fb48dae7964fa2ec2c9ea082c15, type: 3}
-    - name: "\uC815\uC6D0"
-      starCount: 0
-      rank: 
-      score: 0
-      perfect: 0
-      great: 0
-      good: 0
-      miss: 0
-      bpm: 114
-      audio: {fileID: 8300000, guid: ce18281ac937bd44ba50f4c884b99451, type: 3}
-    - name: "\uACBD\uACC4\uC2EC \uB9CE\uC740 \uB3D9\uBB3C\uB4E4"
-      starCount: 0
-      rank: 
-      score: 0
-      perfect: 0
-      great: 0
-      good: 0
-      miss: 0
-      bpm: 128
-      audio: {fileID: 8300000, guid: 6b22b4e3030c6524c9f6e9338aa038ca, type: 3}
-    - name: "\uC694\uB9AC\uB97C \uD574\uC8FC\uC790"
-      starCount: 0
-      rank: 
-      score: 0
-      perfect: 0
-      great: 0
-      good: 0
-      miss: 0
-      bpm: 80
-      audio: {fileID: 8300000, guid: e2acaddab7df0cc4ab9d0a6bf52ee7cd, type: 3}
-    - name: "\uD568\uAED8 \uB180\uC790"
-      starCount: 0
-      rank: 
-      score: 0
-      perfect: 0
-      great: 0
-      good: 0
-      miss: 0
-      bpm: 69
-      audio: {fileID: 8300000, guid: b675263843f3ca243a6e80c98f9700d0, type: 3}
-    - name: "\uC990\uAC70\uC6B4 \uC77C\uC0C1"
-      starCount: 0
-      rank: 
-      score: 0
-      perfect: 0
-      great: 0
-      good: 0
-      miss: 0
-      bpm: 93
-      audio: {fileID: 8300000, guid: 763621f68877b7147acda66ab9e5a1e8, type: 3}
-  - stage:
-    - name: 
-      starCount: 0
-      rank: 
-      score: 0
-      perfect: 0
-      great: 0
-      good: 0
-      miss: 0
-      bpm: 0
-      audio: {fileID: 0}
-    - name: 
-      starCount: 0
-      rank: 
-      score: 0
-      perfect: 0
-      great: 0
-      good: 0
-      miss: 0
-      bpm: 0
-      audio: {fileID: 0}
-    - name: 
-      starCount: 0
-      rank: 
-      score: 0
-      perfect: 0
-      great: 0
-      good: 0
-      miss: 0
-      bpm: 0
-      audio: {fileID: 0}
-    - name: 
-      starCount: 0
-      rank: 
-      score: 0
-      perfect: 0
-      great: 0
-      good: 0
-      miss: 0
-      bpm: 0
-      audio: {fileID: 0}
-    - name: 
-      starCount: 0
-      rank: 
-      score: 0
-      perfect: 0
-      great: 0
-      good: 0
-      miss: 0
-      bpm: 0
-      audio: {fileID: 0}
-    - name: 
-      starCount: 0
-      rank: 
-      score: 0
-      perfect: 0
-      great: 0
-      good: 0
-      miss: 0
-      bpm: 0
-      audio: {fileID: 0}
-  - stage:
-    - name: 
-      starCount: 0
-      rank: 
-      score: 0
-      perfect: 0
-      great: 0
-      good: 0
-      miss: 0
-      bpm: 0
-      audio: {fileID: 0}
-    - name: 
-      starCount: 0
-      rank: 
-      score: 0
-      perfect: 0
-      great: 0
-      good: 0
-      miss: 0
-      bpm: 0
-      audio: {fileID: 0}
-    - name: 
-      starCount: 0
-      rank: 
-      score: 0
-      perfect: 0
-      great: 0
-      good: 0
-      miss: 0
-      bpm: 0
-      audio: {fileID: 0}
-    - name: 
-      starCount: 0
-      rank: 
-      score: 0
-      perfect: 0
-      great: 0
-      good: 0
-      miss: 0
-      bpm: 0
-      audio: {fileID: 0}
-    - name: 
-      starCount: 0
-      rank: 
-      score: 0
-      perfect: 0
-      great: 0
-      good: 0
-      miss: 0
-      bpm: 0
-      audio: {fileID: 0}
-    - name: 
-      starCount: 0
-      rank: 
-      score: 0
-      perfect: 0
-      great: 0
-      good: 0
-      miss: 0
-      bpm: 0
-      audio: {fileID: 0}
-  - stage:
-    - name: 
-      starCount: 0
-      rank: 
-      score: 0
-      perfect: 0
-      great: 0
-      good: 0
-      miss: 0
-      bpm: 0
-      audio: {fileID: 0}
-    - name: 
-      starCount: 0
-      rank: 
-      score: 0
-      perfect: 0
-      great: 0
-      good: 0
-      miss: 0
-      bpm: 0
-      audio: {fileID: 0}
-    - name: 
-      starCount: 0
-      rank: 
-      score: 0
-      perfect: 0
-      great: 0
-      good: 0
-      miss: 0
-      bpm: 0
-      audio: {fileID: 0}
-    - name: 
-      starCount: 0
-      rank: 
-      score: 0
-      perfect: 0
-      great: 0
-      good: 0
-      miss: 0
-      bpm: 0
-      audio: {fileID: 0}
-    - name: 
-      starCount: 0
-      rank: 
-      score: 0
-      perfect: 0
-      great: 0
-      good: 0
-      miss: 0
-      bpm: 0
-      audio: {fileID: 0}
-    - name: 
-      starCount: 0
-      rank: 
-      score: 0
-      perfect: 0
-      great: 0
-      good: 0
-      miss: 0
-      bpm: 0
-      audio: {fileID: 0}
-  - stage:
-    - name: 
-      starCount: 0
-      rank: 
-      score: 0
-      perfect: 0
-      great: 0
-      good: 0
-      miss: 0
-      bpm: 0
-      audio: {fileID: 0}
-    - name: 
-      starCount: 0
-      rank: 
-      score: 0
-      perfect: 0
-      great: 0
-      good: 0
-      miss: 0
-      bpm: 0
-      audio: {fileID: 0}
-    - name: 
-      starCount: 0
-      rank: 
-      score: 0
-      perfect: 0
-      great: 0
-      good: 0
-      miss: 0
-      bpm: 0
-      audio: {fileID: 0}
-    - name: 
-      starCount: 0
-      rank: 
-      score: 0
-      perfect: 0
-      great: 0
-      good: 0
-      miss: 0
-      bpm: 0
-      audio: {fileID: 0}
-    - name: 
-      starCount: 0
-      rank: 
-      score: 0
-      perfect: 0
-      great: 0
-      good: 0
-      miss: 0
-      bpm: 0
-      audio: {fileID: 0}
-    - name: 
-      starCount: 0
-      rank: 
-      score: 0
-      perfect: 0
-      great: 0
-      good: 0
-      miss: 0
-      bpm: 0
-      audio: {fileID: 0}
-  - stage:
-    - name: 
-      starCount: 0
-      rank: 
-      score: 0
-      perfect: 0
-      great: 0
-      good: 0
-      miss: 0
-      bpm: 0
-      audio: {fileID: 0}
-    - name: 
-      starCount: 0
-      rank: 
-      score: 0
-      perfect: 0
-      great: 0
-      good: 0
-      miss: 0
-      bpm: 0
-      audio: {fileID: 0}
-    - name: 
-      starCount: 0
-      rank: 
-      score: 0
-      perfect: 0
-      great: 0
-      good: 0
-      miss: 0
-      bpm: 0
-      audio: {fileID: 0}
-    - name: 
-      starCount: 0
-      rank: 
-      score: 0
-      perfect: 0
-      great: 0
-      good: 0
-      miss: 0
-      bpm: 0
-      audio: {fileID: 0}
-    - name: 
-      starCount: 0
-      rank: 
-      score: 0
-      perfect: 0
-      great: 0
-      good: 0
-      miss: 0
-      bpm: 0
-      audio: {fileID: 0}
-    - name: 
-      starCount: 0
-      rank: 
-      score: 0
-      perfect: 0
-      great: 0
-      good: 0
-      miss: 0
-      bpm: 0
-      audio: {fileID: 0}
-  - stage:
-    - name: 
-      starCount: 0
-      rank: 
-      score: 0
-      perfect: 0
-      great: 0
-      good: 0
-      miss: 0
-      bpm: 0
-      audio: {fileID: 0}
-    - name: 
-      starCount: 0
-      rank: 
-      score: 0
-      perfect: 0
-      great: 0
-      good: 0
-      miss: 0
-      bpm: 0
-      audio: {fileID: 0}
-    - name: 
-      starCount: 0
-      rank: 
-      score: 0
-      perfect: 0
-      great: 0
-      good: 0
-      miss: 0
-      bpm: 0
-      audio: {fileID: 0}
-    - name: 
-      starCount: 0
-      rank: 
-      score: 0
-      perfect: 0
-      great: 0
-      good: 0
-      miss: 0
-      bpm: 0
-      audio: {fileID: 0}
-    - name: 
-      starCount: 0
-      rank: 
-      score: 0
-      perfect: 0
-      great: 0
-      good: 0
-      miss: 0
-      bpm: 0
-      audio: {fileID: 0}
-    - name: 
-      starCount: 0
-      rank: 
-      score: 0
-      perfect: 0
-      great: 0
-      good: 0
-      miss: 0
-      bpm: 0
-      audio: {fileID: 0}
-  musicValue: 1
-  sfxValue: 1
-  isVibration: 1
-  language: 0
-  supportLanguageNum: 2
-  jsonPath: 
---- !u!4 &75968171
-Transform:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 75968169}
-  serializedVersion: 2
-  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 0, y: 0, z: 0}
-  m_LocalScale: {x: 1, y: 1, z: 1}
-  m_ConstrainProportionsScale: 0
-  m_Children: []
-  m_Father: {fileID: 0}
-  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1 &91497970
 GameObject:
   m_ObjectHideFlags: 0
@@ -5293,7 +4791,7 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0, y: 0}
   m_AnchorMax: {x: 0, y: 0}
-  m_AnchoredPosition: {x: 397.07172, y: 0}
+  m_AnchoredPosition: {x: 413.27963, y: 0}
   m_SizeDelta: {x: 0, y: 0}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!114 &397725063
@@ -8615,7 +8113,7 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0, y: 0}
   m_AnchorMax: {x: 0, y: 0}
-  m_AnchoredPosition: {x: 123.57245, y: 0}
+  m_AnchoredPosition: {x: 133.45534, y: 0}
   m_SizeDelta: {x: 0, y: 0}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!114 &729095505
@@ -9156,7 +8654,7 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0, y: 0}
   m_AnchorMax: {x: 0, y: 0}
-  m_AnchoredPosition: {x: 217.17421, y: 0}
+  m_AnchoredPosition: {x: 212.03513, y: 0}
   m_SizeDelta: {x: 0, y: 0}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!114 &767548096
@@ -12387,7 +11885,7 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0, y: 0}
   m_AnchorMax: {x: 0, y: 0}
-  m_AnchoredPosition: {x: 85.62224, y: 0}
+  m_AnchoredPosition: {x: 77.32064, y: 0}
   m_SizeDelta: {x: 0, y: 0}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!114 &1031910512
@@ -16932,7 +16430,7 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0, y: 0}
   m_AnchorMax: {x: 0, y: 0}
-  m_AnchoredPosition: {x: 56.251823, y: 0}
+  m_AnchoredPosition: {x: 47.95022, y: 0}
   m_SizeDelta: {x: 0, y: 0}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!114 &1523931692
@@ -20988,7 +20486,7 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0, y: 0}
   m_AnchorMax: {x: 0, y: 0}
-  m_AnchoredPosition: {x: 82.459724, y: 0}
+  m_AnchoredPosition: {x: 93.92386, y: 0}
   m_SizeDelta: {x: 0, y: 0}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!114 &1928064482
@@ -22251,6 +21749,508 @@ RectTransform:
   m_AnchoredPosition: {x: 0, y: 0}
   m_SizeDelta: {x: 100, y: 100}
   m_Pivot: {x: 0.5, y: 0.5}
+--- !u!1 &2046306265
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 2046306267}
+  - component: {fileID: 2046306266}
+  m_Layer: 0
+  m_Name: DBManager
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!114 &2046306266
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 2046306265}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 86607c325ea95bc4097f9b28752f347e, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  nickName: 
+  chapter: 1
+  nextScene: 
+  currentGround: 0
+  currentRouteIdx: 2
+  currentChapter: 1
+  currentStage: 4
+  currentPlatform: 
+  isTutorial: 1
+  isCinemachine: 1
+  latency: 0
+  isJsonLoad: 0
+  gameSceneName: Game
+  stageArray:
+  - stage:
+    - name: "\uD29C\uD1A0\uB9AC\uC5BC"
+      starCount: 0
+      rank: 
+      score: 0
+      perfect: 0
+      great: 0
+      good: 0
+      miss: 0
+      bpm: 0
+      audio: {fileID: 8300000, guid: 3af82e794237f455893ec1eb45d5fc16, type: 3}
+  - stage:
+    - name: "\uB611\uAC19\uC740 \uC77C\uC0C1"
+      starCount: 0
+      rank: 
+      score: 0
+      perfect: 0
+      great: 0
+      good: 0
+      miss: 0
+      bpm: 120
+      audio: {fileID: 8300000, guid: 1cda5fb48dae7964fa2ec2c9ea082c15, type: 3}
+    - name: "\uC815\uC6D0"
+      starCount: 0
+      rank: 
+      score: 0
+      perfect: 0
+      great: 0
+      good: 0
+      miss: 0
+      bpm: 114
+      audio: {fileID: 8300000, guid: ce18281ac937bd44ba50f4c884b99451, type: 3}
+    - name: "\uACBD\uACC4\uC2EC \uB9CE\uC740 \uB3D9\uBB3C\uB4E4"
+      starCount: 0
+      rank: 
+      score: 0
+      perfect: 0
+      great: 0
+      good: 0
+      miss: 0
+      bpm: 128
+      audio: {fileID: 8300000, guid: 6b22b4e3030c6524c9f6e9338aa038ca, type: 3}
+    - name: "\uC694\uB9AC\uB97C \uD574\uC8FC\uC790"
+      starCount: 0
+      rank: 
+      score: 0
+      perfect: 0
+      great: 0
+      good: 0
+      miss: 0
+      bpm: 80
+      audio: {fileID: 8300000, guid: e2acaddab7df0cc4ab9d0a6bf52ee7cd, type: 3}
+    - name: "\uD568\uAED8 \uB180\uC790"
+      starCount: 0
+      rank: 
+      score: 0
+      perfect: 0
+      great: 0
+      good: 0
+      miss: 0
+      bpm: 69
+      audio: {fileID: 8300000, guid: b675263843f3ca243a6e80c98f9700d0, type: 3}
+    - name: "\uC990\uAC70\uC6B4 \uC77C\uC0C1"
+      starCount: 0
+      rank: 
+      score: 0
+      perfect: 0
+      great: 0
+      good: 0
+      miss: 0
+      bpm: 93
+      audio: {fileID: 8300000, guid: 763621f68877b7147acda66ab9e5a1e8, type: 3}
+  - stage:
+    - name: 
+      starCount: 0
+      rank: 
+      score: 0
+      perfect: 0
+      great: 0
+      good: 0
+      miss: 0
+      bpm: 0
+      audio: {fileID: 0}
+    - name: 
+      starCount: 0
+      rank: 
+      score: 0
+      perfect: 0
+      great: 0
+      good: 0
+      miss: 0
+      bpm: 0
+      audio: {fileID: 0}
+    - name: 
+      starCount: 0
+      rank: 
+      score: 0
+      perfect: 0
+      great: 0
+      good: 0
+      miss: 0
+      bpm: 0
+      audio: {fileID: 0}
+    - name: 
+      starCount: 0
+      rank: 
+      score: 0
+      perfect: 0
+      great: 0
+      good: 0
+      miss: 0
+      bpm: 0
+      audio: {fileID: 0}
+    - name: 
+      starCount: 0
+      rank: 
+      score: 0
+      perfect: 0
+      great: 0
+      good: 0
+      miss: 0
+      bpm: 0
+      audio: {fileID: 0}
+    - name: 
+      starCount: 0
+      rank: 
+      score: 0
+      perfect: 0
+      great: 0
+      good: 0
+      miss: 0
+      bpm: 0
+      audio: {fileID: 0}
+  - stage:
+    - name: 
+      starCount: 0
+      rank: 
+      score: 0
+      perfect: 0
+      great: 0
+      good: 0
+      miss: 0
+      bpm: 0
+      audio: {fileID: 0}
+    - name: 
+      starCount: 0
+      rank: 
+      score: 0
+      perfect: 0
+      great: 0
+      good: 0
+      miss: 0
+      bpm: 0
+      audio: {fileID: 0}
+    - name: 
+      starCount: 0
+      rank: 
+      score: 0
+      perfect: 0
+      great: 0
+      good: 0
+      miss: 0
+      bpm: 0
+      audio: {fileID: 0}
+    - name: 
+      starCount: 0
+      rank: 
+      score: 0
+      perfect: 0
+      great: 0
+      good: 0
+      miss: 0
+      bpm: 0
+      audio: {fileID: 0}
+    - name: 
+      starCount: 0
+      rank: 
+      score: 0
+      perfect: 0
+      great: 0
+      good: 0
+      miss: 0
+      bpm: 0
+      audio: {fileID: 0}
+    - name: 
+      starCount: 0
+      rank: 
+      score: 0
+      perfect: 0
+      great: 0
+      good: 0
+      miss: 0
+      bpm: 0
+      audio: {fileID: 0}
+  - stage:
+    - name: 
+      starCount: 0
+      rank: 
+      score: 0
+      perfect: 0
+      great: 0
+      good: 0
+      miss: 0
+      bpm: 0
+      audio: {fileID: 0}
+    - name: 
+      starCount: 0
+      rank: 
+      score: 0
+      perfect: 0
+      great: 0
+      good: 0
+      miss: 0
+      bpm: 0
+      audio: {fileID: 0}
+    - name: 
+      starCount: 0
+      rank: 
+      score: 0
+      perfect: 0
+      great: 0
+      good: 0
+      miss: 0
+      bpm: 0
+      audio: {fileID: 0}
+    - name: 
+      starCount: 0
+      rank: 
+      score: 0
+      perfect: 0
+      great: 0
+      good: 0
+      miss: 0
+      bpm: 0
+      audio: {fileID: 0}
+    - name: 
+      starCount: 0
+      rank: 
+      score: 0
+      perfect: 0
+      great: 0
+      good: 0
+      miss: 0
+      bpm: 0
+      audio: {fileID: 0}
+    - name: 
+      starCount: 0
+      rank: 
+      score: 0
+      perfect: 0
+      great: 0
+      good: 0
+      miss: 0
+      bpm: 0
+      audio: {fileID: 0}
+  - stage:
+    - name: 
+      starCount: 0
+      rank: 
+      score: 0
+      perfect: 0
+      great: 0
+      good: 0
+      miss: 0
+      bpm: 0
+      audio: {fileID: 0}
+    - name: 
+      starCount: 0
+      rank: 
+      score: 0
+      perfect: 0
+      great: 0
+      good: 0
+      miss: 0
+      bpm: 0
+      audio: {fileID: 0}
+    - name: 
+      starCount: 0
+      rank: 
+      score: 0
+      perfect: 0
+      great: 0
+      good: 0
+      miss: 0
+      bpm: 0
+      audio: {fileID: 0}
+    - name: 
+      starCount: 0
+      rank: 
+      score: 0
+      perfect: 0
+      great: 0
+      good: 0
+      miss: 0
+      bpm: 0
+      audio: {fileID: 0}
+    - name: 
+      starCount: 0
+      rank: 
+      score: 0
+      perfect: 0
+      great: 0
+      good: 0
+      miss: 0
+      bpm: 0
+      audio: {fileID: 0}
+    - name: 
+      starCount: 0
+      rank: 
+      score: 0
+      perfect: 0
+      great: 0
+      good: 0
+      miss: 0
+      bpm: 0
+      audio: {fileID: 0}
+  - stage:
+    - name: 
+      starCount: 0
+      rank: 
+      score: 0
+      perfect: 0
+      great: 0
+      good: 0
+      miss: 0
+      bpm: 0
+      audio: {fileID: 0}
+    - name: 
+      starCount: 0
+      rank: 
+      score: 0
+      perfect: 0
+      great: 0
+      good: 0
+      miss: 0
+      bpm: 0
+      audio: {fileID: 0}
+    - name: 
+      starCount: 0
+      rank: 
+      score: 0
+      perfect: 0
+      great: 0
+      good: 0
+      miss: 0
+      bpm: 0
+      audio: {fileID: 0}
+    - name: 
+      starCount: 0
+      rank: 
+      score: 0
+      perfect: 0
+      great: 0
+      good: 0
+      miss: 0
+      bpm: 0
+      audio: {fileID: 0}
+    - name: 
+      starCount: 0
+      rank: 
+      score: 0
+      perfect: 0
+      great: 0
+      good: 0
+      miss: 0
+      bpm: 0
+      audio: {fileID: 0}
+    - name: 
+      starCount: 0
+      rank: 
+      score: 0
+      perfect: 0
+      great: 0
+      good: 0
+      miss: 0
+      bpm: 0
+      audio: {fileID: 0}
+  - stage:
+    - name: 
+      starCount: 0
+      rank: 
+      score: 0
+      perfect: 0
+      great: 0
+      good: 0
+      miss: 0
+      bpm: 0
+      audio: {fileID: 0}
+    - name: 
+      starCount: 0
+      rank: 
+      score: 0
+      perfect: 0
+      great: 0
+      good: 0
+      miss: 0
+      bpm: 0
+      audio: {fileID: 0}
+    - name: 
+      starCount: 0
+      rank: 
+      score: 0
+      perfect: 0
+      great: 0
+      good: 0
+      miss: 0
+      bpm: 0
+      audio: {fileID: 0}
+    - name: 
+      starCount: 0
+      rank: 
+      score: 0
+      perfect: 0
+      great: 0
+      good: 0
+      miss: 0
+      bpm: 0
+      audio: {fileID: 0}
+    - name: 
+      starCount: 0
+      rank: 
+      score: 0
+      perfect: 0
+      great: 0
+      good: 0
+      miss: 0
+      bpm: 0
+      audio: {fileID: 0}
+    - name: 
+      starCount: 0
+      rank: 
+      score: 0
+      perfect: 0
+      great: 0
+      good: 0
+      miss: 0
+      bpm: 0
+      audio: {fileID: 0}
+  musicValue: 1
+  sfxValue: 1
+  isVibration: 1
+  language: 0
+  supportLanguageNum: 2
+  jsonPath: 
+--- !u!4 &2046306267
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 2046306265}
+  serializedVersion: 2
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_ConstrainProportionsScale: 0
+  m_Children: []
+  m_Father: {fileID: 0}
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1 &2051383799
 GameObject:
   m_ObjectHideFlags: 0
@@ -40700,4 +40700,4 @@ SceneRoots:
   - {fileID: 1783933448}
   - {fileID: 278038865}
   - {fileID: 1988459656}
-  - {fileID: 75968171}
+  - {fileID: 2046306267}
