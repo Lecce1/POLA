@@ -75,10 +75,4 @@ public class LatencyAudioManager : MonoBehaviour
     {
         audioSource.Play();
     }
-
-    public void StopAudio()
-    {
-        audioSource.Stop();
-        audioBGM.Stop();
-    }
 }

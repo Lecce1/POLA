@@ -488,6 +488,11 @@ public class GameManager : MonoBehaviour
         rankScore = ((perfectCount + greatCount * 0.3f + goodCount * 0.1f + missCount) / noteCount) * 100;
 
         int rankIdx;
+
+        if (maxCombo == 0)
+        {
+            maxCombo = currentCombo;
+        }
         
         if (playerController.isDead)
         {
