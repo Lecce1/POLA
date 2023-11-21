@@ -14,24 +14,30 @@ public class LatencyPlayerController : MonoBehaviour
     [FoldoutGroup("애니메이터")]
     public Animator animator;
     
-    [FoldoutGroup("변수")]
-    [Title("레이턴시")]
+    [FoldoutGroup("레이턴시")]
+    [Title("현재 레이턴시")]
     [SerializeField]
     private int latency;
-    [FoldoutGroup("변수")]
+    [FoldoutGroup("레이턴시")]
+    [Title("레이턴시 총합")]
     [SerializeField]
     private int latencySum;
-    [FoldoutGroup("변수")]
+    [FoldoutGroup("레이턴시")]
+    [Title("레이턴시 평균")]
     [SerializeField]
     private int latencyAvg;
-
+    
     [FoldoutGroup("변수")] 
     [Title("누른 횟수")] 
     [SerializeField]
     private int count;
-    [FoldoutGroup("변수")]
-    [Title("시작 시점")]
-    public int startTime;
+    [FoldoutGroup("변수")] 
+    [SerializeField]
+    private int passedBeat = 0;
+    [FoldoutGroup("변수")] 
+    [SerializeField]
+    private bool wasClickedThisTime = false;
+
 
     void Start()
     {
@@ -57,27 +63,39 @@ public class LatencyPlayerController : MonoBehaviour
 
     public void OnDown()
     {
-        if (LatencyManager.instance.startPanel.activeSelf)
+        if (LatencyManager.instance.startPanel.activeSelf || LatencyManager.instance.isFinish || wasClickedThisTime)
         {
-            return;
-        }
-        
-        if (!LatencyManager.instance.isFinish && count >= 20)
-        {
-            animator.SetBool("isReady", true);
-            latencyAvg = latencySum / count;
-            LatencyAudioManager.instance.audioBGM.Pause();
-            LatencyManager.instance.Finish(latencyAvg);
             return;
         }
         
         int latencyDelta = latency;
-        LatencyManager.instance.latencyNoteList[count % LatencyManager.instance.latencyNoteList.Length].transform.position += Vector3.forward * LatencyManager.instance.latencyNoteList.Length * 8;
-        count++;
-        latency = (int)(Time.time * 1000) - startTime - (int)(60000f / bpm) * count;
+        int sampledTime = LatencyAudioManager.instance.GetSampledTime();
+        latency = sampledTime % (int)(60000f / bpm);
+        Debug.Log(latency);
         latencyDelta -= latency;
         latencySum += latency;
         transform.position += transform.forward * (latencyDelta * bpm / 7500f);
+        count++;
+        wasClickedThisTime = true;
+    }
+
+    public void BeatUpdate()
+    {
+        if (LatencyManager.instance.isFinish)
+        {
+            return;
+        }
+
+        passedBeat++;
+        wasClickedThisTime = false;
+        
+        if (passedBeat > 20)
+        {
+            animator.SetBool("isReady", true);
+            latencyAvg = latencySum / count;
+            LatencyAudioManager.instance.audioBGM.Pause();
+            LatencyManager.instance.Finish(count, latencyAvg);
+        }
     }
     
     public void OnClick()

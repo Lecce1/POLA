@@ -75,4 +75,9 @@ public class LatencyAudioManager : MonoBehaviour
     {
         audioSource.Play();
     }
+
+    public int GetSampledTime()
+    {
+        return (int)(1000f * audioBGM.timeSamples / audioBGM.clip.frequency);
+    }
 }

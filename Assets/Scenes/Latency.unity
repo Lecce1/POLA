@@ -38,7 +38,7 @@ RenderSettings:
   m_ReflectionIntensity: 1
   m_CustomReflection: {fileID: 0}
   m_Sun: {fileID: 0}
-  m_IndirectSpecularColor: {r: 0.4439372, g: 0.49315345, b: 0.5721989, a: 1}
+  m_IndirectSpecularColor: {r: 0.44657898, g: 0.4964133, b: 0.5748178, a: 1}
   m_UseRadianceAmbientProbe: 0
 --- !u!157 &3
 LightmapSettings:
@@ -13894,7 +13894,8 @@ MonoBehaviour:
   latencySum: 0
   latencyAvg: 0
   count: 0
-  startTime: 0
+  passedBeat: 0
+  wasClickedThisTime: 0
 --- !u!1 &818388275
 GameObject:
   m_ObjectHideFlags: 0
@@ -23024,8 +23025,8 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0, y: 1}
   m_AnchorMax: {x: 0, y: 1}
-  m_AnchoredPosition: {x: 750, y: -156.92212}
-  m_SizeDelta: {x: 1500, y: 313.84424}
+  m_AnchoredPosition: {x: 750, y: -156.82812}
+  m_SizeDelta: {x: 1500, y: 313.65625}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!114 &1165011004
 MonoBehaviour:
@@ -26099,8 +26100,8 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0, y: 1}
   m_AnchorMax: {x: 0, y: 1}
-  m_AnchoredPosition: {x: 750, y: -306.92212}
-  m_SizeDelta: {x: 616.88446, y: 386.1558}
+  m_AnchoredPosition: {x: 750, y: -306.82812}
+  m_SizeDelta: {x: 618.1875, y: 386.34375}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!114 &1358982774
 MonoBehaviour:
@@ -28625,8 +28626,8 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0, y: 1}
   m_AnchorMax: {x: 0, y: 1}
-  m_AnchoredPosition: {x: 211.20604, y: -193.0779}
-  m_SizeDelta: {x: 422.41208, y: 386.1558}
+  m_AnchoredPosition: {x: 211.21875, y: -193.17188}
+  m_SizeDelta: {x: 422.4375, y: 386.34375}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!222 &1557121824
 CanvasRenderer:
@@ -29032,8 +29033,8 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0, y: 1}
   m_AnchorMax: {x: 0, y: 1}
-  m_AnchoredPosition: {x: 519.64825, y: -193.0779}
-  m_SizeDelta: {x: 194.47237, y: 386.1558}
+  m_AnchoredPosition: {x: 520.3125, y: -193.17188}
+  m_SizeDelta: {x: 195.75, y: 386.34375}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!114 &1589367939
 MonoBehaviour:
@@ -30935,7 +30936,7 @@ AudioSource:
   m_Enabled: 1
   serializedVersion: 4
   OutputAudioMixerGroup: {fileID: -907209298046329018, guid: fe7e550e177674e8bac853b46a810106, type: 2}
-  m_audioClip: {fileID: 8300000, guid: 1cda5fb48dae7964fa2ec2c9ea082c15, type: 3}
+  m_audioClip: {fileID: 8300000, guid: b675263843f3ca243a6e80c98f9700d0, type: 3}
   m_PlayOnAwake: 0
   m_Volume: 1
   m_Pitch: 1
@@ -31322,7 +31323,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   audioMixer: {fileID: 24100000, guid: fe7e550e177674e8bac853b46a810106, type: 2}
-  bpm: 120
+  bpm: 69
   audioSource: {fileID: 1759681886}
   audioBGM: {fileID: 1746885834}
   intervals:
@@ -31333,6 +31334,18 @@ MonoBehaviour:
         - m_Target: {fileID: 1759681887}
           m_TargetAssemblyTypeName: LatencyAudioManager, Assembly-CSharp
           m_MethodName: PlayBeatRepeatedly
+          m_Mode: 1
+          m_Arguments:
+            m_ObjectArgument: {fileID: 0}
+            m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+            m_IntArgument: 0
+            m_FloatArgument: 0
+            m_StringArgument: 
+            m_BoolArgument: 0
+          m_CallState: 2
+        - m_Target: {fileID: 814519252}
+          m_TargetAssemblyTypeName: LatencyPlayerController, Assembly-CSharp
+          m_MethodName: BeatUpdate
           m_Mode: 1
           m_Arguments:
             m_ObjectArgument: {fileID: 0}
@@ -35717,6 +35730,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   startPanel: {fileID: 323438962}
   result: {fileID: 976597719}
+  offsetText: {fileID: 1358982772}
   latencyText: {fileID: 1589367940}
   esc: {fileID: 1115729159}
   set: {fileID: 329275442}

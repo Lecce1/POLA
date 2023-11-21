@@ -15,6 +15,9 @@ public class LatencyManager : MonoBehaviour
     [Title("결과 패널")]
     public GameObject result;
     [FoldoutGroup("패널")] 
+    [Title("결과 오프셋 패널")] 
+    public GameObject offsetText;
+    [FoldoutGroup("패널")] 
     [Title("레이턴시 텍스트")]
     [SerializeField]
     private Text latencyText;
@@ -83,7 +86,7 @@ public class LatencyManager : MonoBehaviour
 
     void Start()
     {
-        StartCoroutine("Init");
+        StartCoroutine(nameof(Init));
     }
 
     IEnumerator Init()
@@ -127,7 +130,6 @@ public class LatencyManager : MonoBehaviour
                 startPanel.SetActive(false);
                 bottomPanel.SetActive(true);
                 latencyPlayerController.animator.SetBool("isReady", false);
-                latencyPlayerController.startTime = (int)(Time.time * 1000);
                 break;
             
             case "Esc":
@@ -278,14 +280,24 @@ public class LatencyManager : MonoBehaviour
         }
     }
 
-    public void Finish(int latencyAvg)
+    public void Finish(int count, int latencyAvg)
     {
         isFinish = true;
-        latencyText.text = latencyAvg + "ms";
         bottomPanel.SetActive(false);
-        result.SetActive(true);
         isResultPanelOpen = true;
-        StartCoroutine(Finish_Check(latencyAvg));
+        result.SetActive(true);
+        
+        if (count < 10)
+        {
+            Debug.Log("실패");
+            offsetText.SetActive(false);
+        }
+        else
+        {
+            Debug.Log("성공");
+            latencyText.text = latencyAvg + "ms";
+            StartCoroutine(Finish_Check(latencyAvg));
+        }
     }
     
     IEnumerator Finish_Check(int latencyAvg)
