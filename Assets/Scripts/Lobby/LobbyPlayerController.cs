@@ -370,10 +370,7 @@ public class LobbyPlayerController : MonoBehaviour
                             break;
                         
                         case "Latency":
-                            if (LobbyManager.instance.isJoinBtnOn)
-                            {
-                                LobbyManager.instance.Join_Btn_OnOff(false, false);
-                            }
+                            LobbyManager.instance.DoorInit("Latency", "Join");
                             break;
 
                         case "Play":

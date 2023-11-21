@@ -11,12 +11,9 @@ EditorBuildSettings:
   - enabled: 1
     path: Assets/Scenes/Loading.unity
     guid: 925dbe338a5b2614fb8536f72bf9f1eb
-  - enabled: 0
-    path: Assets/Scenes/Tutorial.unity
-    guid: 9f7efe7f70d474a1191b3ebd07dd56b3
-  - enabled: 0
-    path: Assets/Scenes/Track.unity
-    guid: ca1d921275f7642d0a1411d80ad852d9
+  - enabled: 1
+    path: Assets/Scenes/Latency.unity
+    guid: 9ef1c2a78004fa44a9a52ce184168fe4
   - enabled: 1
     path: Assets/Scenes/Game.unity
     guid: bd0fa299f51bf504482b7360cb028208

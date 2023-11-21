@@ -40,7 +40,7 @@ public class FadeManager : MonoBehaviour
             yield return null;
         }
 
-        if (DBManager.instance.nextScene == DBManager.instance.gameSceneName)
+        if (DBManager.instance.nextScene == DBManager.instance.gameSceneName || DBManager.instance.nextScene == DBManager.instance.latencySceneName)
         {
             SceneManager.LoadScene("Loading");
         }

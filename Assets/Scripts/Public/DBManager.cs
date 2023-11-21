@@ -82,6 +82,9 @@ public class DBManager : MonoBehaviour
     [Title("게임 씬 이름")]
     public string gameSceneName = "Game";
     [FoldoutGroup("게임 DB")] 
+    [Title("레이턴시 씬 이름")]
+    public string latencySceneName = "Latency";
+    [FoldoutGroup("게임 DB")] 
     [Title("스테이지 별 DB")]
     public StageArray[] stageArray = new StageArray[8];
     

@@ -371,6 +371,11 @@ public class LobbyManager : MonoBehaviour
                     }
                 }
                 break;
+            
+            case "Latency":
+                StartCoroutine(FadeManager.instance.FadeIn());
+                DBManager.instance.nextScene = DBManager.instance.latencySceneName;
+                break;
 
             case "Set":
                 if (!set.activeSelf)
