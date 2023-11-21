@@ -63,6 +63,12 @@ public class LatencyPlayerController : MonoBehaviour
             return;
         }
 
+        if (count == -1)
+        {
+            count++;
+            return;
+        }
+        
         int latencyDelta = latency;
         LatencyManager.instance.latencyNoteList[count % 10].transform.position += Vector3.forward * 80;
         count++;
