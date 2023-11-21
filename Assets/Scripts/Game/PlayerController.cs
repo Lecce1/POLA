@@ -94,7 +94,6 @@ public class PlayerController : MonoBehaviour
         input.actions.FindAction("Up").canceled += OnKeyUp;
         input.actions.FindAction("Down").canceled += OnKeyUp;
         longNoteTime = new WaitForSeconds(7.5f / bpm);
-        Debug.Log(bpm / 7500f * DBManager.instance.latency);
         transform.position = transform.forward * (DBManager.instance.latency * bpm / 7500f);
         isLoaded = true;
     }
@@ -296,8 +295,6 @@ public class PlayerController : MonoBehaviour
         targetInfo.wasInteracted = true;
         GameManager.instance.ShowVerdict(evaluation);
         VibrateMobile();
-        CameraManager.instance.VibrateForTime(0.1f);
-        
         anim.SetInteger("AttackCounter", attackCounter++);
         anim.SetBool("isAttacking", true);
         attackCounter %= 2;

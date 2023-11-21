@@ -244,7 +244,7 @@ public class GameManager : MonoBehaviour
         verdictPrefab.GetComponent<RectTransform>().localScale = new Vector3(1, 1, 1);
         var screenPos = Camera.main.WorldToScreenPoint(cameraInfo.transform.position - new Vector3(0, 1f, 0));
         RectTransformUtility.ScreenPointToLocalPointInRectangle(verdictCanvas.GetComponent<RectTransform>(), screenPos, Camera.main, out var localPos);
-        verdictPrefab.transform.localPosition = localPos;
+        verdictPrefab.transform.GetComponent<RectTransform>().localPosition = new Vector3(localPos.x + 50f, localPos.y, -50);
     }
 
     public void Button(string type)
