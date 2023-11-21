@@ -1,11 +1,20 @@
 using Sirenix.OdinInspector;
 using UnityEngine;
+using UnityEngine.UI;
 
 public class LatencyManager : MonoBehaviour
 {
     [FoldoutGroup("패널")] 
     [SerializeField]
     private GameObject startPanel;
+    [FoldoutGroup("패널")] 
+    public GameObject endPanel;
+    [FoldoutGroup("패널")] 
+    [SerializeField]
+    private GameObject keyPanel;
+    [FoldoutGroup("패널")] 
+    [SerializeField]
+    private Text latencyText;
     
     [FoldoutGroup("오브젝트")] 
     public GameObject[] latencyNoteList = new GameObject[10];
@@ -35,6 +44,8 @@ public class LatencyManager : MonoBehaviour
 
     private void Start()
     {
+        startPanel.SetActive(true);
+        
         for (int i = 1; i <= 10; i++)
         {
             var obj = Instantiate(latencyNote, latencyFolder.transform, true);
@@ -47,11 +58,16 @@ public class LatencyManager : MonoBehaviour
     {
         isStart = true;
         LatencyAudioManager.instance.audioBGM.Play();
+        startPanel.SetActive(false);
+        keyPanel.SetActive(true);
     }
 
-    public void ShowEndWindow()
+    public void ShowEndPanel(int latencyAvg)
     {
         isDone = true;
-        Debug.Log(DBManager.instance.latency);
+        latencyText.text = "기기 오프셋: " + latencyAvg + "ms";
+        endPanel.SetActive(true);
+        DBManager.instance.latency = latencyAvg;
+        keyPanel.SetActive(false);
     }
 }
