@@ -40,13 +40,11 @@ public class PlayerController : MonoBehaviour
     public Animator animator;
     [FoldoutGroup("일반")] 
     public PlayerTrails trails;
-
     [FoldoutGroup("일반")] 
     public Verdict verdict;
     [FoldoutGroup("일반")]
     public LayerMask ground;
 
-    private WaitForSeconds longNoteTime;
     private InputAction.CallbackContext callback = new ();
     
     void FixedUpdate()
@@ -56,7 +54,7 @@ public class PlayerController : MonoBehaviour
             return;
         }
         
-        if (GameManager.instance.isCountDown)
+        if (GameManager.instance.isCountDown && !GameManager.instance.isStart)
         {
             return;
         }
@@ -93,8 +91,7 @@ public class PlayerController : MonoBehaviour
         PlayerInput input = GetComponent<PlayerInput>();
         input.actions.FindAction("Up").canceled += OnKeyUp;
         input.actions.FindAction("Down").canceled += OnKeyUp;
-        longNoteTime = new WaitForSeconds(7.5f / bpm);
-        transform.position = transform.forward * (DBManager.instance.latency * bpm / 7500f);
+        transform.position += transform.forward * (DBManager.instance.latency * bpm / 7500f);
         isLoaded = true;
     }
     
@@ -206,11 +203,6 @@ public class PlayerController : MonoBehaviour
 
     public void OnUp()
     {
-        if (GameManager.instance.isCountDown)
-        {
-            return;
-        }
-        
         if (!verdict.isUp)
         {
             OnFlip();
@@ -221,11 +213,6 @@ public class PlayerController : MonoBehaviour
     
     public void OnDown()
     {
-        if (GameManager.instance.isCountDown)
-        {
-            return;
-        }
-        
         if (verdict.isUp)
         {
             OnFlip();
@@ -268,8 +255,6 @@ public class PlayerController : MonoBehaviour
             default: 
                 return;
         }
-        
-        GameManager.instance.maxCombo++;
     }
 
     IEnumerator LongNoteProcess(Obstacle obstacle, int evaluation)
@@ -283,7 +268,6 @@ public class PlayerController : MonoBehaviour
             {
                 longNote = obstacle.transform.GetChild(idx).GetChild(0).gameObject;
                 VibrateMobile();
-                GameManager.instance.maxCombo++;
                 GameManager.instance.ShowVerdict(idx == 1 ? evaluation : 0, obstacle);
             }
             else
@@ -454,7 +438,7 @@ public class PlayerController : MonoBehaviour
         if (obstacle == Verdict.GetObstacle(GameManager.instance.noteFolder.transform.GetChild(GameManager.instance.noteFolder.transform.childCount - 1).gameObject) && health > 0 && !GameManager.instance.isResultPanel && obstacle.wasInteracted)
         {
             GameManager.instance.isResultPanel = true;
-            GameManager.instance.Invoke("Finish", 2.0f);
+            GameManager.instance.Invoke(nameof(GameManager.Finish), 2.0f);
         }
     }
 }

@@ -34,7 +34,7 @@ public class CameraManager : MonoBehaviour
 
     void FixedUpdate()
     {
-        if (GameManager.instance.isCountDown)
+        if (GameManager.instance.isCountDown && !GameManager.instance.isStart)
         {
             return;
         }

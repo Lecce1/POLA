@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using Sirenix.OdinInspector;
 using UnityEngine;
 using UnityEngine.SceneManagement;
+using UnityEngine.Serialization;
 using UnityEngine.UI;
 
 public class LatencyManager : MonoBehaviour
@@ -61,7 +62,7 @@ public class LatencyManager : MonoBehaviour
     public bool isFinish;
     [FoldoutGroup("기타")] 
     [Title("결과 패널 활성화 여부")] 
-    public bool isResultPanel;
+    public bool isResultPanelOpen;
     [FoldoutGroup("기타")] 
     [Title("패널 열림 여부")] 
     [SerializeField]
@@ -101,7 +102,7 @@ public class LatencyManager : MonoBehaviour
         for (int i = 1; i <= 10; i++)
         {
             var obj = Instantiate(latencyNote, latencyFolder.transform, true);
-            obj.transform.position = transform.forward * 8 * i + transform.forward;
+            obj.transform.position = transform.forward * (8 * i) + transform.forward;
             latencyNoteList[i - 1] = obj;
         }
 
@@ -126,7 +127,7 @@ public class LatencyManager : MonoBehaviour
                 LatencyAudioManager.instance.audioBGM.Play();
                 startPanel.SetActive(false);
                 bottomPanel.SetActive(true);
-                latencyPlayerController.animator.SetBool("isCountDown", false);
+                latencyPlayerController.animator.SetBool("isReady", false);
                 latencyPlayerController.startTime = (int)(Time.time * 1000);
                 break;
             
@@ -282,18 +283,22 @@ public class LatencyManager : MonoBehaviour
     {
         isFinish = true;
         latencyText.text = "기기 오프셋: " + latencyAvg + "ms";
-        DBManager.instance.latency = latencyAvg;
+        
         bottomPanel.SetActive(false);
         result.SetActive(true);
-        StartCoroutine("Finish_Check");
+        isResultPanelOpen = true;
+        StartCoroutine(Finish_Check(latencyAvg));
     }
     
-    IEnumerator Finish_Check()
+    IEnumerator Finish_Check(int latencyAvg)
     {
+        yield return new WaitForSeconds(0.5f);
+        
         while (true)
         {
             if (Input.anyKey)
             {
+                DBManager.instance.latency = latencyAvg;
                 DBManager.instance.nextScene = "Lobby";
                 SceneManager.LoadScene("Loading");
             }

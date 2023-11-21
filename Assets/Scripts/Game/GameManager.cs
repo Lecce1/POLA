@@ -39,7 +39,7 @@ public class GameManager : MonoBehaviour
     public GameObject cameraInfo;
     [FoldoutGroup("패널")] 
     [Title("진행률 슬라이더")] 
-    public Slider progress;
+    public Slider progress; 
     [FoldoutGroup("패널")] 
     [Title("HP 리스트")]
     public List<Image> hpList;
@@ -88,6 +88,9 @@ public class GameManager : MonoBehaviour
     [Title("콤보")]
     public int maxCombo;
     [FoldoutGroup("정보")] 
+    [Title("콤보")]
+    public int currentCombo;
+    [FoldoutGroup("정보")] 
     [Title("Perfect 갯수")] 
     [SerializeField]
     private int perfectCount;
@@ -104,9 +107,11 @@ public class GameManager : MonoBehaviour
     [SerializeField]
     private int missCount;
     [FoldoutGroup("정보")] 
-    [Title("Latency 값")] 
-    [SerializeField]
-    private int latency;
+    [Title("첫 시작 여부 판단")] 
+    public bool isStart = true;
+    [FoldoutGroup("정보")] 
+    [Title("일시정지 판단")] 
+    public bool isKeyOnPause = false;
     
     [FoldoutGroup("결과 창")] 
     [Title("활성화 여부")] 
@@ -139,7 +144,7 @@ public class GameManager : MonoBehaviour
     // 뒤로가기 스택
     private Stack<GameObject> backStack;
     public static GameManager instance;
-    private WaitForSeconds waitForSeconds = new WaitForSeconds(1f);
+    private WaitForSeconds waitForBeat;
 
     private int noteCount = 0;
 
@@ -164,7 +169,7 @@ public class GameManager : MonoBehaviour
 
     void Start()
     {
-        StartCoroutine("Init");
+        StartCoroutine(nameof(Init));
     }
 
     IEnumerator Init()
@@ -192,12 +197,12 @@ public class GameManager : MonoBehaviour
         RenderSettings.skybox = chapter[DBManager.instance.currentChapter - 1].skybox[DBManager.instance.currentStage - 1];
         audioManager.audio.clip = chapter[DBManager.instance.currentChapter - 1].audio[DBManager.instance.currentStage - 1];
         audioManager.bpm = chapter[DBManager.instance.currentChapter - 1].bpm[DBManager.instance.currentStage - 1];
+        waitForBeat = new WaitForSeconds(60f / audioManager.bpm);
         GameObject temp = Instantiate(chapter[DBManager.instance.currentChapter - 1].stage[DBManager.instance.currentStage - 1]);
         noteFolder = temp;
         temp.transform.position = Vector3.zero;
         rankScore = 0;
         maxCombo = 0;
-        latency = DBManager.instance.latency;
         
         for (int i = 0; i < noteFolder.transform.childCount; i++)
         {
@@ -238,7 +243,17 @@ public class GameManager : MonoBehaviour
 
         if (idx != 3)
         {
+            currentCombo++;
             score += obstacle.scoreList[idx];
+        }
+        else
+        {
+            if (maxCombo < currentCombo)
+            {
+                maxCombo = currentCombo;
+            }
+
+            currentCombo = 0;
         }
 
         GameObject verdictPrefab = Instantiate(this.verdictPrefab, verdictCanvas.transform, true);
@@ -272,6 +287,7 @@ public class GameManager : MonoBehaviour
                     backStack.Push(esc);
                     isPanelOpen = true;
                     countDownPanel.SetActive(false);
+                    isKeyOnPause = true;
                 }
                 break;
             
@@ -418,42 +434,48 @@ public class GameManager : MonoBehaviour
         }
 
         isCountDown = true;
-        playerController.GetComponent<Animator>().SetBool("isCountDown", isCountDown);
+
+        if (!isStart)
+        {
+            playerController.GetComponent<Animator>().SetBool("isReady", isCountDown);
+        }
+        
         countDownPanel.gameObject.SetActive(true);
         audioManager.audio.Pause();
         playerController.GetComponent<PlayerInput>().enabled = false;
+        countDownPanel.transform.GetChild(0).GetComponent<Text>().text = "Ready";
 
-        int i = 4;
-        
-        while (i > 0)
+        for (int i = 0; i < 2; i++)
         {
-            if (i == 4)
-            {
-                countDownPanel.transform.GetChild(0).GetComponent<Text>().text = "Ready";
-            }
-            else
-            {
-                countDownPanel.transform.GetChild(0).GetComponent<Text>().text = i.ToString();
-            }
-
-            i--;
-            yield return waitForSeconds;
+            yield return waitForBeat;
+        }
+        
+        int j = 3;
+        
+        while (j > 0)
+        {
+            countDownPanel.transform.GetChild(0).GetComponent<Text>().text = j.ToString();
+            j--;
+            yield return waitForBeat;
         }
 
         countDownPanel.transform.GetChild(0).GetComponent<Text>().text = "GO!";
+        audioManager.audio.Play();
+        isCountDown = false;
+        playerController.GetComponent<Animator>().SetBool("isReady", isCountDown);
+        StartCoroutine(audioManager.Progress());
+        playerController.GetComponent<PlayerInput>().enabled = true;
+        isKeyOnPause = false;
+        isStart = false;
+        
         Invoke(nameof(CountDownDisable), 0.5f);
     }
 
     void CountDownDisable()
     {
-        if (playerController.enabled)
+        if (playerController.enabled && !isKeyOnPause)
         {
             countDownPanel.gameObject.SetActive(false);
-            isCountDown = false;
-            playerController.GetComponent<Animator>().SetBool("isCountDown", isCountDown);
-            audioManager.audio.Play();
-            StartCoroutine(audioManager.Progress());
-            playerController.GetComponent<PlayerInput>().enabled = true;
         }
     }
 
@@ -462,7 +484,7 @@ public class GameManager : MonoBehaviour
         int currentChapter = DBManager.instance.currentChapter;
         int currentStage = DBManager.instance.currentStage - 1;
         isCountDown = true;
-        playerController.GetComponent<Animator>().SetBool("isCountDown", isCountDown);
+        playerController.GetComponent<Animator>().SetBool("isReady", isCountDown);
         rankScore = ((perfectCount + greatCount * 0.3f + goodCount * 0.1f + missCount) / noteCount) * 100;
 
         int rankIdx;

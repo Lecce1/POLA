@@ -49,7 +49,7 @@ public class LatencyPlayerController : MonoBehaviour
     void Init()
     {
         animator = GetComponent<Animator>();
-        animator.SetBool("isCountDown", true);
+        animator.SetBool("isReady", true);
         Physics.gravity = new Vector3(0, -9.81f, 0);
         bpm = LatencyAudioManager.instance.bpm;
         latency = 0;
@@ -79,7 +79,7 @@ public class LatencyPlayerController : MonoBehaviour
         
         if (count > 20)
         {
-            animator.SetBool("isCountDown", true);
+            animator.SetBool("isReady", true);
             latencyAvg = latencySum / count;
             LatencyAudioManager.instance.audioBGM.Pause();
         }
@@ -116,7 +116,7 @@ public class LatencyPlayerController : MonoBehaviour
     
     public void OnCancel()
     {
-        if (!LatencyManager.instance.isResultPanel)
+        if (!LatencyManager.instance.isResultPanelOpen)
         {
             if (!LatencyManager.instance.isPanelOpen)
             {

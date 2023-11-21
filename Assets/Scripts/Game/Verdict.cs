@@ -97,7 +97,6 @@ public class Verdict : MonoBehaviour
     {
         obstacle.wasInteracted = true;
         DequeueUsedCollider(obstacle);
-        GameManager.instance.maxCombo = 0;
     }
 
     public int KeyUpOnLongInteract(out Obstacle obstacle)
@@ -137,7 +136,6 @@ public class Verdict : MonoBehaviour
                 break;
             }
 
-            GameManager.instance.maxCombo++;
             GameManager.instance.ShowVerdict(0, obstacle);
         }
 
