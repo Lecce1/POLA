@@ -30,7 +30,6 @@ public class Stage
 {
     public string name;
     public int starCount;
-    public string rank;
     public int score;
     public int perfect;
     public int great;
@@ -173,7 +172,6 @@ public class DBManager : MonoBehaviour
                         if (localData.stageArray[i] != null)
                         {   
                             stageArray[i].stage[j].starCount = localData.stageArray[i].stage[j].starCount;
-                            stageArray[i].stage[j].rank = localData.stageArray[i].stage[j].rank;
                             stageArray[i].stage[j].score =localData.stageArray[i].stage[j].score;
                             stageArray[i].stage[j].perfect= localData.stageArray[i].stage[j].perfect;
                             stageArray[i].stage[j].great= localData.stageArray[i].stage[j].great;
@@ -214,7 +212,6 @@ public class DBManager : MonoBehaviour
                 if (localData.stageArray[i] != null)
                 {
                     localData.stageArray[i].stage[j].starCount = stageArray[i].stage[j].starCount;
-                    localData.stageArray[i].stage[j].rank = stageArray[i].stage[j].rank;
                     localData.stageArray[i].stage[j].score = stageArray[i].stage[j].score;
                     localData.stageArray[i].stage[j].perfect = stageArray[i].stage[j].perfect;
                     localData.stageArray[i].stage[j].great = stageArray[i].stage[j].great;

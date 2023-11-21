@@ -116,9 +116,6 @@ public class GameManager : MonoBehaviour
     [Title("패널")] 
     public GameObject resultPanel;
     [FoldoutGroup("결과 창")] 
-    [Title("랭크 텍스트")] 
-    public Text rankText;
-    [FoldoutGroup("결과 창")] 
     [Title("Perfect 텍스트")] 
     public Text perfectText;
     [FoldoutGroup("결과 창")] 
@@ -468,63 +465,51 @@ public class GameManager : MonoBehaviour
         isCountDown = true;
         playerController.GetComponent<Animator>().SetBool("isCountDown", isCountDown);
         rankScore = ((perfectCount + greatCount * 0.3f + goodCount * 0.1f + missCount) / noteCount) * 100;
-        Debug.Log(rankScore);
 
         int rankIdx;
         
         if (playerController.isDead)
         {
-            rankText.text = "F";
             rankIdx = 0;
         }
         else
         {
             if (rankScore >= 96)
             {
-                rankText.text = "S+";
                 rankIdx = 4;
             }
             else if (rankScore >= 90 && rankScore <= 95)
             {
-                rankText.text = "S";
                 rankIdx = 3;
             }
             else if (rankScore >= 80 && rankScore <= 89)
             {
-                rankText.text = "A";
                 rankIdx = 2;
             }
             else if (rankScore >= 70 && rankScore <= 79)
             {
-                rankText.text = "B";
                 rankIdx = 1;
             }
             else if (rankScore >= 60 && rankScore <= 69)
             {
-                rankText.text = "C";
                 rankIdx = 1;
             }
             else if (rankScore >= 50 && rankScore <= 59)
             {
-                rankText.text = "D";
                 rankIdx = 1;
             }
             else
             {
-                rankText.text = "F";
                 rankIdx = 1;
             }
-
-            DBManager.instance.stageArray[currentChapter].stage[currentStage].starCount = rankIdx;
-            pressText.text = LocalizationSettings.StringDatabase.GetLocalizedString("Game", "Press_Home", LocalizationSettings.SelectedLocale);
         }
         
+        DBManager.instance.stageArray[currentChapter].stage[currentStage].starCount = rankIdx;
         perfectText.text = perfectCount.ToString();
         greatText.text = greatCount.ToString();
         goodText.text = goodCount.ToString();
         missText.text = missCount.ToString();
         comboText.text = maxCombo.ToString();
-        DBManager.instance.stageArray[currentChapter].stage[currentStage].rank = rankText.text;
         DBManager.instance.stageArray[currentChapter].stage[currentStage].score = score;
         DBManager.instance.stageArray[currentChapter].stage[currentStage].perfect = perfectCount;
         DBManager.instance.stageArray[currentChapter].stage[currentStage].great = greatCount;
@@ -536,7 +521,6 @@ public class GameManager : MonoBehaviour
             bottomPanel.SetActive(false);
         }
         
-        resultPanel.SetActive(true);
         resultPanel.GetComponent<Animator>().Play("Result");
 
         if (playerController.isDead)

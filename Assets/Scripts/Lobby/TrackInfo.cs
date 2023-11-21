@@ -37,7 +37,6 @@ public class TrackInfo : SerializedMonoBehaviour
         int currentStage = DBManager.instance.currentStage - 1;
         int currentStage2 = DBManager.instance.currentStage;
         title_Text.text = LocalizationSettings.StringDatabase.GetLocalizedString("Track", $"Chapter{currentChapter}_Stage{currentStage2}_Title", LocalizationSettings.SelectedLocale);
-        rank_Text.text = DBManager.instance.stageArray[currentChapter].stage[currentStage].rank;
         score_Text.text = DBManager.instance.stageArray[currentChapter].stage[currentStage].score.ToString();
         perfect_Text.text = DBManager.instance.stageArray[currentChapter].stage[currentStage].perfect.ToString();
         great_Text.text = DBManager.instance.stageArray[currentChapter].stage[currentStage].great.ToString();
