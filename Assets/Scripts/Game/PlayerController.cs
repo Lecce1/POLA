@@ -37,7 +37,7 @@ public class PlayerController : MonoBehaviour
     private GameObject camInfo;
     
     [FoldoutGroup("일반")] 
-    public Animator anim;
+    public Animator animator;
     [FoldoutGroup("일반")] 
     public PlayerTrails trails;
 
@@ -87,7 +87,7 @@ public class PlayerController : MonoBehaviour
     {
         Physics.gravity = new Vector3(0, -9.81f, 0);
         bpm = audioManager.bpm;
-        anim = GetComponent<Animator>();
+        animator = GetComponent<Animator>();
         isInvincibility = false;
         verdict = GetComponent<Verdict>();
         PlayerInput input = GetComponent<PlayerInput>();
@@ -307,8 +307,8 @@ public class PlayerController : MonoBehaviour
         obstacle.wasInteracted = true;
         GameManager.instance.ShowVerdict(evaluation, obstacle);
         VibrateMobile();
-        anim.SetInteger("AttackCounter", attackCounter++);
-        anim.SetBool("isAttacking", true);
+        animator.SetInteger("AttackCounter", attackCounter++);
+        animator.SetBool("isAttacking", true);
         attackCounter %= 2;
         
         if (obstacle.gameObject.name == GameManager.instance.noteFolder.transform.GetChild(GameManager.instance.noteFolder.transform.childCount - 1).gameObject.name && health > 0 && !GameManager.instance.isResultPanel)
@@ -341,7 +341,7 @@ public class PlayerController : MonoBehaviour
     /// </summary>
     public void OnAttackAnimationEnd()
     {
-        anim.SetBool("isAttacking", false);
+        animator.SetBool("isAttacking", false);
     }
 
     public void OnClick()
@@ -403,7 +403,7 @@ public class PlayerController : MonoBehaviour
             return;
         }
         
-        anim.SetTrigger("Die");
+        animator.SetTrigger("Die");
         isDead = true;
         GetComponent<PlayerInput>().enabled = false;
         audioManager.audio.Stop();

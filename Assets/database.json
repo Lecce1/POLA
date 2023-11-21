@@ -1,6 +1,6 @@
 {
     "chapter": 1,
-    "soundValue": 0.500499963760376,
+    "soundValue": 1.0,
     "sfxValue": 1.0,
     "supportLanguageNum": 2,
     "isVibration": true,
@@ -13,7 +13,6 @@
                 {
                     "name": "",
                     "starCount": 0,
-                    "rank": "",
                     "score": 0,
                     "perfect": 0,
                     "great": 0,
@@ -27,7 +26,6 @@
                 {
                     "name": "",
                     "starCount": 0,
-                    "rank": "",
                     "score": 0,
                     "perfect": 0,
                     "great": 0,
@@ -41,7 +39,6 @@
                 {
                     "name": "",
                     "starCount": 0,
-                    "rank": "",
                     "score": 0,
                     "perfect": 0,
                     "great": 0,
@@ -55,7 +52,6 @@
                 {
                     "name": "",
                     "starCount": 0,
-                    "rank": "",
                     "score": 0,
                     "perfect": 0,
                     "great": 0,
@@ -69,7 +65,6 @@
                 {
                     "name": "",
                     "starCount": 0,
-                    "rank": "",
                     "score": 0,
                     "perfect": 0,
                     "great": 0,
@@ -83,7 +78,6 @@
                 {
                     "name": "",
                     "starCount": 0,
-                    "rank": "",
                     "score": 0,
                     "perfect": 0,
                     "great": 0,
@@ -101,7 +95,58 @@
                 {
                     "name": "",
                     "starCount": 0,
-                    "rank": "",
+                    "score": 0,
+                    "perfect": 0,
+                    "great": 0,
+                    "good": 0,
+                    "miss": 0,
+                    "bpm": 0,
+                    "audio": {
+                        "instanceID": 0
+                    }
+                },
+                {
+                    "name": "",
+                    "starCount": 3,
+                    "score": 15325,
+                    "perfect": 145,
+                    "great": 14,
+                    "good": 5,
+                    "miss": 1,
+                    "bpm": 0,
+                    "audio": {
+                        "instanceID": 0
+                    }
+                },
+                {
+                    "name": "",
+                    "starCount": 1,
+                    "score": 21275,
+                    "perfect": 206,
+                    "great": 13,
+                    "good": 1,
+                    "miss": 1,
+                    "bpm": 0,
+                    "audio": {
+                        "instanceID": 0
+                    }
+                },
+                {
+                    "name": "",
+                    "starCount": 0,
+                    "score": 0,
+                    "perfect": 0,
+                    "great": 0,
+                    "good": 0,
+                    "miss": 3,
+                    "bpm": 0,
+                    "audio": {
+                        "instanceID": 0
+                    }
+                },
+                {
+                    "name": "",
+                    "starCount": 0,
                     "score": 0,
                     "perfect": 0,
                     "great": 0,
@@ -115,63 +160,6 @@
                 {
                     "name": "",
                     "starCount": 0,
-                    "rank": "",
-                    "score": 0,
-                    "perfect": 0,
-                    "great": 0,
-                    "good": 0,
-                    "miss": 0,
-                    "bpm": 0,
-                    "audio": {
-                        "instanceID": 0
-                    }
-                },
-                {
-                    "name": "",
-                    "starCount": 0,
-                    "rank": "",
-                    "score": 0,
-                    "perfect": 0,
-                    "great": 0,
-                    "good": 0,
-                    "miss": 0,
-                    "bpm": 0,
-                    "audio": {
-                        "instanceID": 0
-                    }
-                },
-                {
-                    "name": "",
-                    "starCount": 0,
-                    "rank": "",
-                    "score": 0,
-                    "perfect": 0,
-                    "great": 0,
-                    "good": 0,
-                    "miss": 0,
-                    "bpm": 0,
-                    "audio": {
-                        "instanceID": 0
-                    }
-                },
-                {
-                    "name": "",
-                    "starCount": 0,
-                    "rank": "",
-                    "score": 0,
-                    "perfect": 0,
-                    "great": 0,
-                    "good": 0,
-                    "miss": 0,
-                    "bpm": 0,
-                    "audio": {
-                        "instanceID": 0
-                    }
-                },
-                {
-                    "name": "",
-                    "starCount": 0,
-                    "rank": "",
                     "score": 0,
                     "perfect": 0,
                     "great": 0,
@@ -189,7 +177,6 @@
                 {
                     "name": "",
                     "starCount": 0,
-                    "rank": "",
                     "score": 0,
                     "perfect": 0,
                     "great": 0,
@@ -203,7 +190,6 @@
                 {
                     "name": "",
                     "starCount": 0,
-                    "rank": "",
                     "score": 0,
                     "perfect": 0,
                     "great": 0,
@@ -217,7 +203,6 @@
                 {
                     "name": "",
                     "starCount": 0,
-                    "rank": "",
                     "score": 0,
                     "perfect": 0,
                     "great": 0,
@@ -231,7 +216,6 @@
                 {
                     "name": "",
                     "starCount": 0,
-                    "rank": "",
                     "score": 0,
                     "perfect": 0,
                     "great": 0,
@@ -245,7 +229,6 @@
                 {
                     "name": "",
                     "starCount": 0,
-                    "rank": "",
                     "score": 0,
                     "perfect": 0,
                     "great": 0,
@@ -259,7 +242,6 @@
                 {
                     "name": "",
                     "starCount": 0,
-                    "rank": "",
                     "score": 0,
                     "perfect": 0,
                     "great": 0,
@@ -277,7 +259,6 @@
                 {
                     "name": "",
                     "starCount": 0,
-                    "rank": "",
                     "score": 0,
                     "perfect": 0,
                     "great": 0,
@@ -291,7 +272,6 @@
                 {
                     "name": "",
                     "starCount": 0,
-                    "rank": "",
                     "score": 0,
                     "perfect": 0,
                     "great": 0,
@@ -305,7 +285,6 @@
                 {
                     "name": "",
                     "starCount": 0,
-                    "rank": "",
                     "score": 0,
                     "perfect": 0,
                     "great": 0,
@@ -319,7 +298,6 @@
                 {
                     "name": "",
                     "starCount": 0,
-                    "rank": "",
                     "score": 0,
                     "perfect": 0,
                     "great": 0,
@@ -333,7 +311,6 @@
                 {
                     "name": "",
                     "starCount": 0,
-                    "rank": "",
                     "score": 0,
                     "perfect": 0,
                     "great": 0,
@@ -347,7 +324,6 @@
                 {
                     "name": "",
                     "starCount": 0,
-                    "rank": "",
                     "score": 0,
                     "perfect": 0,
                     "great": 0,
@@ -365,7 +341,6 @@
                 {
                     "name": "",
                     "starCount": 0,
-                    "rank": "",
                     "score": 0,
                     "perfect": 0,
                     "great": 0,
@@ -379,7 +354,6 @@
                 {
                     "name": "",
                     "starCount": 0,
-                    "rank": "",
                     "score": 0,
                     "perfect": 0,
                     "great": 0,
@@ -393,7 +367,6 @@
                 {
                     "name": "",
                     "starCount": 0,
-                    "rank": "",
                     "score": 0,
                     "perfect": 0,
                     "great": 0,
@@ -407,7 +380,6 @@
                 {
                     "name": "",
                     "starCount": 0,
-                    "rank": "",
                     "score": 0,
                     "perfect": 0,
                     "great": 0,
@@ -421,7 +393,6 @@
                 {
                     "name": "",
                     "starCount": 0,
-                    "rank": "",
                     "score": 0,
                     "perfect": 0,
                     "great": 0,
@@ -435,7 +406,6 @@
                 {
                     "name": "",
                     "starCount": 0,
-                    "rank": "",
                     "score": 0,
                     "perfect": 0,
                     "great": 0,
@@ -453,7 +423,6 @@
                 {
                     "name": "",
                     "starCount": 0,
-                    "rank": "",
                     "score": 0,
                     "perfect": 0,
                     "great": 0,
@@ -467,7 +436,6 @@
                 {
                     "name": "",
                     "starCount": 0,
-                    "rank": "",
                     "score": 0,
                     "perfect": 0,
                     "great": 0,
@@ -481,7 +449,6 @@
                 {
                     "name": "",
                     "starCount": 0,
-                    "rank": "",
                     "score": 0,
                     "perfect": 0,
                     "great": 0,
@@ -495,7 +462,6 @@
                 {
                     "name": "",
                     "starCount": 0,
-                    "rank": "",
                     "score": 0,
                     "perfect": 0,
                     "great": 0,
@@ -509,7 +475,6 @@
                 {
                     "name": "",
                     "starCount": 0,
-                    "rank": "",
                     "score": 0,
                     "perfect": 0,
                     "great": 0,
@@ -523,7 +488,6 @@
                 {
                     "name": "",
                     "starCount": 0,
-                    "rank": "",
                     "score": 0,
                     "perfect": 0,
                     "great": 0,
@@ -541,7 +505,6 @@
                 {
                     "name": "",
                     "starCount": 0,
-                    "rank": "",
                     "score": 0,
                     "perfect": 0,
                     "great": 0,
@@ -555,7 +518,6 @@
                 {
                     "name": "",
                     "starCount": 0,
-                    "rank": "",
                     "score": 0,
                     "perfect": 0,
                     "great": 0,
@@ -569,7 +531,6 @@
                 {
                     "name": "",
                     "starCount": 0,
-                    "rank": "",
                     "score": 0,
                     "perfect": 0,
                     "great": 0,
@@ -583,7 +544,6 @@
                 {
                     "name": "",
                     "starCount": 0,
-                    "rank": "",
                     "score": 0,
                     "perfect": 0,
                     "great": 0,
@@ -597,7 +557,6 @@
                 {
                     "name": "",
                     "starCount": 0,
-                    "rank": "",
                     "score": 0,
                     "perfect": 0,
                     "great": 0,
@@ -611,7 +570,6 @@
                 {
                     "name": "",
                     "starCount": 0,
-                    "rank": "",
                     "score": 0,
                     "perfect": 0,
                     "great": 0,
@@ -629,7 +587,6 @@
                 {
                     "name": "",
                     "starCount": 0,
-                    "rank": "",
                     "score": 0,
                     "perfect": 0,
                     "great": 0,
@@ -643,7 +600,6 @@
                 {
                     "name": "",
                     "starCount": 0,
-                    "rank": "",
                     "score": 0,
                     "perfect": 0,
                     "great": 0,
@@ -657,7 +613,6 @@
                 {
                     "name": "",
                     "starCount": 0,
-                    "rank": "",
                     "score": 0,
                     "perfect": 0,
                     "great": 0,
@@ -671,7 +626,6 @@
                 {
                     "name": "",
                     "starCount": 0,
-                    "rank": "",
                     "score": 0,
                     "perfect": 0,
                     "great": 0,
@@ -685,7 +639,6 @@
                 {
                     "name": "",
                     "starCount": 0,
-                    "rank": "",
                     "score": 0,
                     "perfect": 0,
                     "great": 0,
@@ -699,7 +652,6 @@
                 {
                     "name": "",
                     "starCount": 0,
-                    "rank": "",
                     "score": 0,
                     "perfect": 0,
                     "great": 0,

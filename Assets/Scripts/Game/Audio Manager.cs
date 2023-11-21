@@ -25,7 +25,7 @@ public class AudioManager : MonoBehaviour
     [FoldoutGroup("변수")] 
     [Title("로딩")] 
     [SerializeField]
-    private bool isLoaded = false;
+    private bool isLoaded;
 
     public static AudioManager instance;
 

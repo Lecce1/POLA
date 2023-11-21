@@ -1,8 +1,8 @@
+using System.Collections;
 using System.Collections.Generic;
 using Sirenix.OdinInspector;
 using UnityEngine;
 using UnityEngine.Audio;
-using UnityEngine.Serialization;
 
 public class LatencyAudioManager : MonoBehaviour
 {
@@ -13,15 +13,20 @@ public class LatencyAudioManager : MonoBehaviour
     [Title("BPM")]
     public int bpm;
     [FoldoutGroup("음악")]
-    [Title("박자")]
+    [Title("드럼 오디오 소스")]
     public AudioSource audioSource;
     [FoldoutGroup("음악")]
-    [Title("오디오")]
+    [Title("BGM 오디오 소스")]
     public AudioSource audioBGM;
     [FoldoutGroup("음악")]
     [Title("인터벌")]
     [TableList]
     public List<Intervals> intervals = new ();
+    
+    [FoldoutGroup("변수")] 
+    [Title("로딩")] 
+    [SerializeField]
+    private bool isLoaded;
 
     public static LatencyAudioManager instance;
 
@@ -33,19 +38,37 @@ public class LatencyAudioManager : MonoBehaviour
         }
     }
 
-    private void Start()
+    void Start()
     {
-        audioSource.clip.LoadAudioData();
-        audioBGM.clip.LoadAudioData();
+        StartCoroutine("Init");
     }
         
     void Update()
     {
+        if (!isLoaded)
+        {
+            return;
+        }
+        
         foreach (Intervals interval in intervals)
         {
             float sampledTime = audioBGM.timeSamples / (audioBGM.clip.frequency * interval.GetIntervalLength(bpm));
             interval.CheckForNewInterval(sampledTime);
         }
+    }
+    
+    IEnumerator Init()
+    {
+        while (!DBManager.instance.isJsonLoad)
+        {
+            yield return null;
+        }
+        
+        audioSource.clip.LoadAudioData();
+        audioBGM.clip.LoadAudioData();
+        audioMixer.SetFloat("Music", DBManager.instance.musicValue * 80 - 80);
+        audioMixer.SetFloat("FX", DBManager.instance.sfxValue * 80 - 80);
+        isLoaded = true;
     }
 
     public void PlayBeatRepeatedly()

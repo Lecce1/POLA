@@ -4655,7 +4655,7 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0, y: 0}
   m_AnchorMax: {x: 0, y: 0}
-  m_AnchoredPosition: {x: 413.27963, y: 0}
+  m_AnchoredPosition: {x: 427.1151, y: 0}
   m_SizeDelta: {x: 0, y: 0}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!114 &397725063
@@ -6251,7 +6251,7 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0, y: 0}
   m_AnchorMax: {x: 0, y: 0}
-  m_AnchoredPosition: {x: 38.345524, y: 0}
+  m_AnchoredPosition: {x: 38.945908, y: 0}
   m_SizeDelta: {x: 0, y: 0}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!114 &587312614
@@ -6964,7 +6964,7 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0, y: 0}
   m_AnchorMax: {x: 0, y: 0}
-  m_AnchoredPosition: {x: 19.37042, y: 0}
+  m_AnchoredPosition: {x: 20.970875, y: 0}
   m_SizeDelta: {x: 0, y: 0}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!114 &634375870
@@ -7974,7 +7974,7 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0, y: 0}
   m_AnchorMax: {x: 0, y: 0}
-  m_AnchoredPosition: {x: 133.45534, y: 0}
+  m_AnchoredPosition: {x: 135.33981, y: 0}
   m_SizeDelta: {x: 0, y: 0}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!114 &729095505
@@ -8515,7 +8515,7 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0, y: 0}
   m_AnchorMax: {x: 0, y: 0}
-  m_AnchoredPosition: {x: 212.03513, y: 0}
+  m_AnchoredPosition: {x: 220.80444, y: 0}
   m_SizeDelta: {x: 0, y: 0}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!114 &767548096
@@ -11546,7 +11546,7 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0, y: 0}
   m_AnchorMax: {x: 0, y: 0}
-  m_AnchoredPosition: {x: 77.32064, y: 0}
+  m_AnchoredPosition: {x: 81.4147, y: 0}
   m_SizeDelta: {x: 0, y: 0}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!114 &1031910512
@@ -15996,7 +15996,7 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0, y: 0}
   m_AnchorMax: {x: 0, y: 0}
-  m_AnchoredPosition: {x: 47.95022, y: 0}
+  m_AnchoredPosition: {x: 50.44383, y: 0}
   m_SizeDelta: {x: 0, y: 0}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!114 &1523931692
@@ -20044,7 +20044,7 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0, y: 0}
   m_AnchorMax: {x: 0, y: 0}
-  m_AnchoredPosition: {x: 93.92386, y: 0}
+  m_AnchoredPosition: {x: 99.38974, y: 0}
   m_SizeDelta: {x: 0, y: 0}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!114 &1928064482
@@ -21362,7 +21362,7 @@ MonoBehaviour:
       bpm: 0
       audio: {fileID: 8300000, guid: 3af82e794237f455893ec1eb45d5fc16, type: 3}
   - stage:
-    - name: "\uB611\uAC19\uC740 \uC77C\uC0C1"
+    - name: "\uC5EC\uD589\uC758 \uBB18\uBBF8, \uB9CC\uB0A8"
       starCount: 0
       score: 0
       perfect: 0
@@ -21371,7 +21371,7 @@ MonoBehaviour:
       miss: 0
       bpm: 120
       audio: {fileID: 8300000, guid: 1cda5fb48dae7964fa2ec2c9ea082c15, type: 3}
-    - name: "\uC815\uC6D0"
+    - name: "\uACF5\uC6D0"
       starCount: 0
       score: 0
       perfect: 0
@@ -21380,7 +21380,7 @@ MonoBehaviour:
       miss: 0
       bpm: 114
       audio: {fileID: 8300000, guid: ce18281ac937bd44ba50f4c884b99451, type: 3}
-    - name: "\uACBD\uACC4\uC2EC \uB9CE\uC740 \uB3D9\uBB3C\uB4E4"
+    - name: "\uB2E4\uB8E8\uB9C8\uC528\uAC00 \uB5A8\uC5B4\uC84C\uB2E4"
       starCount: 0
       score: 0
       perfect: 0
@@ -21389,7 +21389,7 @@ MonoBehaviour:
       miss: 0
       bpm: 128
       audio: {fileID: 8300000, guid: 6b22b4e3030c6524c9f6e9338aa038ca, type: 3}
-    - name: "\uC694\uB9AC\uB97C \uD574\uC8FC\uC790"
+    - name: "\uC694\uB9AC"
       starCount: 0
       score: 0
       perfect: 0
@@ -21398,7 +21398,7 @@ MonoBehaviour:
       miss: 0
       bpm: 80
       audio: {fileID: 8300000, guid: e2acaddab7df0cc4ab9d0a6bf52ee7cd, type: 3}
-    - name: "\uD568\uAED8 \uB180\uC790"
+    - name: "Let\u2019s play together!"
       starCount: 0
       score: 0
       perfect: 0
@@ -21407,7 +21407,7 @@ MonoBehaviour:
       miss: 0
       bpm: 69
       audio: {fileID: 8300000, guid: b675263843f3ca243a6e80c98f9700d0, type: 3}
-    - name: "\uC990\uAC70\uC6B4 \uC77C\uC0C1"
+    - name: "\uC720\uCF8C\uD55C \uC77C\uC0C1"
       starCount: 0
       score: 0
       perfect: 0
@@ -22548,7 +22548,7 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0, y: 0}
   m_AnchorMax: {x: 0, y: 0}
-  m_AnchoredPosition: {x: 17.789162, y: 0}
+  m_AnchoredPosition: {x: 19.472954, y: 0}
   m_SizeDelta: {x: 0, y: 0}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!114 &2108431739

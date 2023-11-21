@@ -1,6 +1,8 @@
-using System.Collections;
 using Sirenix.OdinInspector;
 using UnityEngine;
+using UnityEngine.EventSystems;
+using UnityEngine.InputSystem;
+using UnityEngine.UI;
 
 public class LatencyPlayerController : MonoBehaviour
 {
@@ -10,65 +12,57 @@ public class LatencyPlayerController : MonoBehaviour
     private float bpm;
     
     [FoldoutGroup("애니메이터")]
-    [SerializeField]
-    private Animator playerAnimator;
+    public Animator animator;
     
     [FoldoutGroup("변수")]
     [Title("레이턴시")]
     [SerializeField]
-    private int latency = 0;
+    private int latency;
     [FoldoutGroup("변수")]
     [SerializeField]
-    private int latencySum = 0;
+    private int latencySum;
     [FoldoutGroup("변수")]
     [SerializeField]
-    private int latencyAvg = 0;
-    [FoldoutGroup("변수")]
-    [Title("누른 횟수")]
+    private int latencyAvg;
+
+    [FoldoutGroup("변수")] 
+    [Title("누른 횟수")] 
     [SerializeField]
-    private int count = -1;
+    private int count;
     [FoldoutGroup("변수")]
     [Title("시작 시점")]
-    [SerializeField]
-    private int startTime = 0;
+    public int startTime;
 
     void Start()
     {
-        playerAnimator.SetBool("isCountDown", true);
-        Physics.gravity = new Vector3(0, -9.81f, 0);
-        bpm = LatencyAudioManager.instance.bpm;
-        latency = 0;
+        Init();
     }
-    
+
     void FixedUpdate()
     {
-        if (!LatencyManager.instance.isDone && LatencyManager.instance.isStart)
+        if (!LatencyManager.instance.isFinish && LatencyManager.instance.isStart)
         {
             transform.position += transform.forward * (bpm / 7.5f * Time.fixedDeltaTime);
         }
     }
-
-    void OnDown()
+    
+    void Init()
     {
-        if (LatencyManager.instance.isDone)
+        animator = GetComponent<Animator>();
+        animator.SetBool("isCountDown", true);
+        Physics.gravity = new Vector3(0, -9.81f, 0);
+        bpm = LatencyAudioManager.instance.bpm;
+        latency = 0;
+    }
+
+    public void OnDown()
+    {
+        if (!LatencyManager.instance.isFinish && count > 20)
         {
-            if (count > 20)
-            {
-                LatencyManager.instance.ShowEndPanel(latencyAvg);
-                Debug.Log("home");
-            }
+            LatencyManager.instance.Finish(latencyAvg);
             return;
         }
-        
-        if (!LatencyManager.instance.isStart && count == -1)
-        {
-            playerAnimator.SetBool("isCountDown", false);
-            LatencyManager.instance.LatencyStart();
-            startTime = (int)(Time.time * 1000);
-            count++;
-            return;
-        }
-        
+
         int latencyDelta = latency;
         LatencyManager.instance.latencyNoteList[count % 10].transform.position += Vector3.forward * 80;
         count++;
@@ -79,9 +73,53 @@ public class LatencyPlayerController : MonoBehaviour
         
         if (count > 20)
         {
-            playerAnimator.SetBool("isCountDown", true);
+            animator.SetBool("isCountDown", true);
             latencyAvg = latencySum / count;
-            LatencyAudioManager.instance.StopAudio();
+            LatencyAudioManager.instance.audioBGM.Pause();
+        }
+    }
+    
+    public void OnClick()
+    {
+        if (EventSystem.current.currentSelectedGameObject != null && (LatencyManager.instance.esc.activeSelf || LatencyManager.instance.set.activeSelf) && GetComponent<PlayerInput>().currentControlScheme != "MOBILE")
+        {
+            if (LatencyManager.instance.set.activeSelf)
+            {
+                switch (EventSystem.current.currentSelectedGameObject.name)
+                {
+                    case "Toggle":
+                        if (EventSystem.current.currentSelectedGameObject.GetComponent<Toggle>().isOn)
+                        {
+                            EventSystem.current.currentSelectedGameObject.GetComponent<Toggle>().isOn = false;
+                            DBManager.instance.isVibration = false;
+                        }
+                        else if (!EventSystem.current.currentSelectedGameObject.GetComponent<Toggle>().isOn)
+                        {
+                            EventSystem.current.currentSelectedGameObject.GetComponent<Toggle>().isOn = true;
+                            DBManager.instance.isVibration = true;
+                        }
+                        break;
+                }
+            }
+            else
+            {
+                EventSystem.current.currentSelectedGameObject.GetComponent<Button>().onClick.Invoke();
+            }
+        }
+    }
+    
+    public void OnCancel()
+    {
+        if (!LatencyManager.instance.isResultPanel)
+        {
+            if (!LatencyManager.instance.isPanelOpen)
+            {
+                LatencyManager.instance.Button("Esc");
+            }
+            else
+            {
+                LatencyManager.instance.Back();
+            }
         }
     }
 }

@@ -6,7 +6,6 @@ using UnityEngine;
 using UnityEngine.InputSystem;
 using UnityEngine.Localization.Settings;
 using UnityEngine.SceneManagement;
-using UnityEngine.Serialization;
 using UnityEngine.UI;
 
 public class GameManager : MonoBehaviour
@@ -59,7 +58,7 @@ public class GameManager : MonoBehaviour
     [Title("플랫폼")] 
     public PlatformManager platformManager;
     [FoldoutGroup("매니저")] 
-    [Title("사운드")] 
+    [Title("오디오")] 
     public AudioManager audioManager;
     
     [FoldoutGroup("기타")] 
@@ -324,6 +323,11 @@ public class GameManager : MonoBehaviour
                 AudioManager.instance.audioMixer.SetFloat("Music", DBManager.instance.musicValue * 80 - 80);
                 break;
             
+            case "Sfx":
+                DBManager.instance.sfxValue = set_Sfx_Slider.value;
+                AudioManager.instance.audioMixer.SetFloat("FX", DBManager.instance.sfxValue * 80 - 80);
+                break;
+            
             case "Vibration":
                 if (set_Vibration_Toggle.isOn)
                 {
@@ -333,11 +337,6 @@ public class GameManager : MonoBehaviour
                 {
                     DBManager.instance.isVibration = false;
                 }
-                break;
-            
-            case "Sfx":
-                DBManager.instance.sfxValue = set_Sfx_Slider.value;
-                AudioManager.instance.audioMixer.SetFloat("FX", DBManager.instance.sfxValue * 80 - 80);
                 break;
         }
     }
