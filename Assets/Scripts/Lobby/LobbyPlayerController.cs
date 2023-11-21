@@ -356,28 +356,35 @@ public class LobbyPlayerController : MonoBehaviour
     void Collider()
     {
         collider = Physics.OverlapBox(transform.position, new Vector3(1, 3, 1), transform.rotation);
-        bool isCheck = false;
-        
+
         if (rigidbody.velocity.magnitude <= 10)
         {
             foreach (var temp in collider)
             {
                 if (temp.CompareTag("Door"))
                 {
-                    isCheck = true;
-                
                     switch (temp.transform.GetComponent<DoorManager>().name)
                     {
-                        case "Set":
-                            LobbyManager.instance.DoorInit("Set", "Set");
-                            break;
-
                         case "Shop":
                             LobbyManager.instance.DoorInit("Shop", "Shop");
                             break;
+                        
+                        case "Latency":
+                            if (LobbyManager.instance.isJoinBtnOn)
+                            {
+                                LobbyManager.instance.Join_Btn_OnOff(false, false);
+                            }
+                            break;
 
-                        case "Story":
+                        case "Play":
                             LobbyManager.instance.DoorInit("Move", "Join");
+                            break;
+                        
+                        case "Genre":
+                            if (LobbyManager.instance.isJoinBtnOn)
+                            {
+                                LobbyManager.instance.Join_Btn_OnOff(false, false);
+                            }
                             break;
                         
                         case "Chapter":
@@ -387,7 +394,10 @@ public class LobbyPlayerController : MonoBehaviour
                             }
                             else
                             {
-                                LobbyManager.instance.Join_Btn_OnOff(false, false);
+                                if (LobbyManager.instance.isJoinBtnOn)
+                                {
+                                    LobbyManager.instance.Join_Btn_OnOff(false, false);
+                                }
                             }
                             
                             DBManager.instance.currentChapter = temp.GetComponent<DoorManager>().chapterNum;
@@ -404,23 +414,16 @@ public class LobbyPlayerController : MonoBehaviour
                         case "Back":
                             LobbyManager.instance.DoorInit("Back", "Join");
                             break;
+                        
+                        case "Center":
+                            if (LobbyManager.instance.isJoinBtnOn)
+                            {
+                                LobbyManager.instance.Join_Btn_OnOff(false, false);
+                            }
+                            break;
                     }
                 }
             }
-        }
-        
-        if (isCheck)
-        {
-            isDoor = true;
-        }
-        else
-        {
-            isDoor = false;
-        }
-        
-        if (LobbyManager.instance.isJoinBtnOn && !isDoor && !collider[0].transform.GetComponent<DoorManager>())
-        {
-            LobbyManager.instance.Join_Btn_OnOff(false, false);
         }
     }
 }
