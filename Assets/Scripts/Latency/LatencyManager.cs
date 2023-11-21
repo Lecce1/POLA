@@ -32,7 +32,7 @@ public class LatencyManager : MonoBehaviour
     public GameObject bottomPanel;
     
     [FoldoutGroup("오브젝트")] 
-    public GameObject[] latencyNoteList = new GameObject[10];
+    public GameObject[] latencyNoteList = new GameObject[30];
     [FoldoutGroup("오브젝트")] 
     [SerializeField]
     private GameObject latencyNote;
@@ -98,7 +98,7 @@ public class LatencyManager : MonoBehaviour
             bottomPanel.SetActive(false);
         }
         
-        for (int i = 1; i <= 10; i++)
+        for (int i = 1; i <= latencyNoteList.Length; i++)
         {
             var obj = Instantiate(latencyNote, latencyFolder.transform, true);
             obj.transform.position = transform.forward * (8 * i) + transform.forward;
@@ -281,8 +281,7 @@ public class LatencyManager : MonoBehaviour
     public void Finish(int latencyAvg)
     {
         isFinish = true;
-        latencyText.text = "기기 오프셋: " + latencyAvg + "ms";
-        
+        latencyText.text = latencyAvg + "ms";
         bottomPanel.SetActive(false);
         result.SetActive(true);
         isResultPanelOpen = true;

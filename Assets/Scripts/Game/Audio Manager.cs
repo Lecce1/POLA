@@ -70,7 +70,7 @@ public class AudioManager : MonoBehaviour
 
     public IEnumerator Progress()
     {
-        while (audio.time < audio.clip.length)
+        while (audio.time < audio.clip.length && !GameManager.instance.playerController.isDead)
         {
             GameManager.instance.progress.value = audio.time / audio.clip.length;
             yield return null;

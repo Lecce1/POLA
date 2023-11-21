@@ -72,7 +72,7 @@ public class LatencyPlayerController : MonoBehaviour
         }
         
         int latencyDelta = latency;
-        LatencyManager.instance.latencyNoteList[count % 10].transform.position += Vector3.forward * 80;
+        LatencyManager.instance.latencyNoteList[count % LatencyManager.instance.latencyNoteList.Length].transform.position += Vector3.forward * LatencyManager.instance.latencyNoteList.Length * 8;
         count++;
         latency = (int)(Time.time * 1000) - startTime - (int)(60000f / bpm) * count;
         latencyDelta -= latency;
