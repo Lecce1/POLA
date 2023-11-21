@@ -27,7 +27,14 @@ MonoBehaviour:
     m_Metadata:
       m_Items: []
   - m_Id: 6616031158272
-    m_Localized: The latency test is completed.
+    m_Localized: The latency test is completed
+    m_Metadata:
+      m_Items: []
+  - m_Id: 55895328284672
+    m_Localized: 'The latency test is failed
+
+
+      Please retry'
     m_Metadata:
       m_Items: []
   references:

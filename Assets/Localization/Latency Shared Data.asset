@@ -24,7 +24,11 @@ MonoBehaviour:
     m_Metadata:
       m_Items: []
   - m_Id: 6616031158272
-    m_Key: Latency_Complete
+    m_Key: Latency_Success
+    m_Metadata:
+      m_Items: []
+  - m_Id: 55895328284672
+    m_Key: Latency_Fail
     m_Metadata:
       m_Items: []
   m_Metadata:

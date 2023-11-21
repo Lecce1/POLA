@@ -87,11 +87,11 @@ MonoBehaviour:
     m_Metadata:
       m_Items: []
   - m_Id: 78397525975040
-    m_Localized: STAGE 1
+    m_Localized: Forest
     m_Metadata:
       m_Items: []
   - m_Id: 78589625098240
-    m_Localized: STAGE 2
+    m_Localized: Desert
     m_Metadata:
       m_Items: []
   - m_Id: 87497919946752
@@ -99,27 +99,27 @@ MonoBehaviour:
     m_Metadata:
       m_Items: []
   - m_Id: 460961151442944
-    m_Localized: STAGE 3
+    m_Localized: Jungle
     m_Metadata:
       m_Items: []
   - m_Id: 461022883209216
-    m_Localized: STAGE 4
+    m_Localized: Glacier
     m_Metadata:
       m_Items: []
   - m_Id: 461058669010944
-    m_Localized: STAGE 5
+    m_Localized: Ocean
     m_Metadata:
       m_Items: []
   - m_Id: 461088859611136
-    m_Localized: STAGE 6
+    m_Localized: Cave
     m_Metadata:
       m_Items: []
   - m_Id: 461127614980096
-    m_Localized: STAGE 7
+    m_Localized: Rose Garden
     m_Metadata:
       m_Items: []
   - m_Id: 461181209796608
-    m_Localized: STAGE 8
+    m_Localized: Heaven
     m_Metadata:
       m_Items: []
   - m_Id: 639558562603008
@@ -144,6 +144,10 @@ MonoBehaviour:
       m_Items: []
   - m_Id: 2951876277428224
     m_Localized: LATENCY
+    m_Metadata:
+      m_Items: []
+  - m_Id: 7298053902950400
+    m_Localized: CONTENTS
     m_Metadata:
       m_Items: []
   references:

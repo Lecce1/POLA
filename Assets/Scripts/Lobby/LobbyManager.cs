@@ -338,6 +338,8 @@ public class LobbyManager : MonoBehaviour
                         LobbyAudioManager.instance.bgmAudio.Play();
                     }
                 }
+                
+                LobbyPlayerController.instance.Collider();
                 break;
             
             case "Stage":

@@ -12,13 +12,16 @@ public class SkyboxManager : MonoBehaviour
     
     void Update ()
     {
-        degree += Time.deltaTime * speed;
-        
-        if (degree >= 360)
+        if (DBManager.instance.currentGround == 2)
         {
-            degree = 0;
-        }
+            degree += Time.deltaTime * speed;
         
-        RenderSettings.skybox.SetFloat("_Rotation", degree);
+            if (degree >= 360)
+            {
+                degree = 0;
+            }
+        
+            RenderSettings.skybox.SetFloat("_Rotation", degree);
+        }
     }
 }

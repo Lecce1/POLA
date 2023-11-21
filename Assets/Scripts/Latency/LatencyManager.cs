@@ -2,6 +2,7 @@ using System.Collections;
 using System.Collections.Generic;
 using Sirenix.OdinInspector;
 using UnityEngine;
+using UnityEngine.Localization.Settings;
 using UnityEngine.SceneManagement;
 using UnityEngine.Serialization;
 using UnityEngine.UI;
@@ -15,12 +16,19 @@ public class LatencyManager : MonoBehaviour
     [Title("결과 패널")]
     public GameObject result;
     [FoldoutGroup("패널")] 
-    [Title("결과 오프셋 패널")] 
-    public GameObject offsetText;
+    [Title("결과 오프셋 Title")]
+    public Text offsetTitleText;
+    [FoldoutGroup("패널")] 
+    [Title("결과 오프셋 Bottom 패널")] 
+    public GameObject offsetBottomPanel;
     [FoldoutGroup("패널")] 
     [Title("레이턴시 텍스트")]
     [SerializeField]
     private Text latencyText;
+    [FoldoutGroup("패널")] 
+    [Title("Press 텍스트")]
+    [SerializeField]
+    private Text pressText;
     [FoldoutGroup("패널")] 
     [Title("일시정지")] 
     public GameObject esc;
@@ -282,6 +290,7 @@ public class LatencyManager : MonoBehaviour
 
     public void Finish(int count, int latencyAvg)
     {
+        Debug.Log("test");
         isFinish = true;
         bottomPanel.SetActive(false);
         isResultPanelOpen = true;
@@ -289,18 +298,21 @@ public class LatencyManager : MonoBehaviour
         
         if (count < 10)
         {
-            Debug.Log("실패");
-            offsetText.SetActive(false);
+            offsetTitleText.text = LocalizationSettings.StringDatabase.GetLocalizedString("Latency", "Latency_Fail", LocalizationSettings.SelectedLocale);
+            pressText.text = LocalizationSettings.StringDatabase.GetLocalizedString("Game", "Press_Retry", LocalizationSettings.SelectedLocale);
+            offsetBottomPanel.SetActive(false);
         }
         else
         {
-            Debug.Log("성공");
+            offsetTitleText.text = LocalizationSettings.StringDatabase.GetLocalizedString("Latency", "Latency_Success", LocalizationSettings.SelectedLocale);
+            pressText.text = LocalizationSettings.StringDatabase.GetLocalizedString("Game", "Press_Home", LocalizationSettings.SelectedLocale);
             latencyText.text = latencyAvg + "ms";
-            StartCoroutine(Finish_Check(latencyAvg));
         }
+        
+        StartCoroutine(Finish_Check(latencyAvg, count));
     }
     
-    IEnumerator Finish_Check(int latencyAvg)
+    IEnumerator Finish_Check(int latencyAvg, int count)
     {
         yield return new WaitForSeconds(0.5f);
         
@@ -308,8 +320,17 @@ public class LatencyManager : MonoBehaviour
         {
             if (Input.anyKey)
             {
-                DBManager.instance.latency = latencyAvg;
-                DBManager.instance.nextScene = "Lobby";
+                if (count < 10)
+                {
+                    DBManager.instance.nextScene = DBManager.instance.latencySceneName;
+                }
+                else
+                {
+                    DBManager.instance.latency = latencyAvg;
+                    DBManager.instance.nextScene = DBManager.instance.lobbySceneName;
+
+                }
+                
                 SceneManager.LoadScene("Loading");
             }
             

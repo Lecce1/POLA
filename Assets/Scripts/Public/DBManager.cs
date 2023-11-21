@@ -79,6 +79,9 @@ public class DBManager : MonoBehaviour
     [Title("JSON 불러오기 여부")]
     public bool isJsonLoad = false;
     [FoldoutGroup("게임 DB")] 
+    [Title("레이턴시 씬 이름")]
+    public string lobbySceneName = "Lobby";
+    [FoldoutGroup("게임 DB")] 
     [Title("게임 씬 이름")]
     public string gameSceneName = "Game";
     [FoldoutGroup("게임 DB")] 

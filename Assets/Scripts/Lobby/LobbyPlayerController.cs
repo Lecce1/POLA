@@ -353,7 +353,7 @@ public class LobbyPlayerController : MonoBehaviour
         }
     }
 
-    void Collider()
+    public void Collider()
     {
         collider = Physics.OverlapBox(transform.position, new Vector3(1, 3, 1), transform.rotation);
 
@@ -377,7 +377,7 @@ public class LobbyPlayerController : MonoBehaviour
                             LobbyManager.instance.DoorInit("Move", "Join");
                             break;
                         
-                        case "Genre":
+                        case "Contents":
                             if (LobbyManager.instance.isJoinBtnOn)
                             {
                                 LobbyManager.instance.Join_Btn_OnOff(false, false);
