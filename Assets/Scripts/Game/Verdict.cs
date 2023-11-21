@@ -138,7 +138,7 @@ public class Verdict : MonoBehaviour
             }
 
             GameManager.instance.maxCombo++;
-            GameManager.instance.ShowVerdict(0);
+            GameManager.instance.ShowVerdict(0, obstacle);
         }
 
         obstacle.wasInteracted = true;

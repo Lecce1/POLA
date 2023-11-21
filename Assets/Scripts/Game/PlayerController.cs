@@ -106,9 +106,9 @@ public class PlayerController : MonoBehaviour
         transform.position += transform.forward * (bpm / 7.5f * Time.fixedDeltaTime);
     }
 
-    public void Hurt(Obstacle info, bool isMiss)
+    public void Hurt(Obstacle obstacle, bool isMiss)
     {
-        verdict.ComboReset(info);
+        verdict.ComboReset(obstacle);
 
         if (isInvincibility)
         {
@@ -117,10 +117,10 @@ public class PlayerController : MonoBehaviour
         
         if (isMiss)
         {
-            GameManager.instance.ShowVerdict(3);
+            GameManager.instance.ShowVerdict(3, obstacle);
         }
         
-        health -= info.damage;
+        health -= obstacle.damage;
         
         for (int i = 0; i < 3; i++)
         {
@@ -191,7 +191,7 @@ public class PlayerController : MonoBehaviour
             }
             else
             {
-                GameManager.instance.ShowVerdict(evaluation);
+                GameManager.instance.ShowVerdict(evaluation, obstacle);
             }
         }
         
@@ -236,33 +236,33 @@ public class PlayerController : MonoBehaviour
 
     void Interact()
     {
-        int evaluation = verdict.KeyDown(out Obstacle targetInfo);
+        int evaluation = verdict.KeyDown(out Obstacle obstacle);
 
-        if (targetInfo == null || evaluation == -1)
+        if (obstacle == null || evaluation == -1)
         {
             return;
         }
         
         if (evaluation == 3)
         {
-            Hurt(targetInfo, true);
+            Hurt(obstacle, true);
             return;
         }
         
-        switch (targetInfo.type)
+        switch (obstacle.type)
         {
             case NoteType.MoveNote:
                 break;
             
             case NoteType.NormalNote:
-                if (targetInfo.beatLength != 0)
+                if (obstacle.beatLength != 0)
                 {
                     verdict.isLongInteract = true;
-                    StartCoroutine(LongNoteProcess(targetInfo, evaluation));
+                    StartCoroutine(LongNoteProcess(obstacle, evaluation));
                     return;
                 }
                 
-                Attack(targetInfo, evaluation);
+                Attack(obstacle, evaluation);
                 break;
             
             default: 
@@ -284,7 +284,7 @@ public class PlayerController : MonoBehaviour
                 longNote = obstacle.transform.GetChild(idx).GetChild(0).gameObject;
                 VibrateMobile();
                 GameManager.instance.maxCombo++;
-                GameManager.instance.ShowVerdict(idx == 1 ? evaluation : 0);
+                GameManager.instance.ShowVerdict(idx == 1 ? evaluation : 0, obstacle);
             }
             else
             {
@@ -300,26 +300,25 @@ public class PlayerController : MonoBehaviour
 
             idx++;
         }
-        Debug.Log(idx);
     }
     
-    void Attack(Obstacle targetInfo, int evaluation)
+    void Attack(Obstacle obstacle, int evaluation)
     {
-        targetInfo.wasInteracted = true;
-        GameManager.instance.ShowVerdict(evaluation);
+        obstacle.wasInteracted = true;
+        GameManager.instance.ShowVerdict(evaluation, obstacle);
         VibrateMobile();
         anim.SetInteger("AttackCounter", attackCounter++);
         anim.SetBool("isAttacking", true);
         attackCounter %= 2;
         
-        if (targetInfo.gameObject.name == GameManager.instance.noteFolder.transform.GetChild(GameManager.instance.noteFolder.transform.childCount - 1).gameObject.name && health > 0 && !GameManager.instance.isResultPanel)
+        if (obstacle.gameObject.name == GameManager.instance.noteFolder.transform.GetChild(GameManager.instance.noteFolder.transform.childCount - 1).gameObject.name && health > 0 && !GameManager.instance.isResultPanel)
         {
             GameManager.instance.isResultPanel = true;
             GameManager.instance.Invoke("Finish", 2.0f);
         }
         
-        verdict.DequeueUsedCollider(targetInfo);
-        Destroy(targetInfo.gameObject);
+        verdict.DequeueUsedCollider(obstacle);
+        Destroy(obstacle.gameObject);
     }
 
     void VibrateMobile()
@@ -415,44 +414,44 @@ public class PlayerController : MonoBehaviour
 
     void OnTriggerEnter(Collider other)
     {
-        Obstacle obstacleInfo = Verdict.GetObstacle(other.gameObject);
+        Obstacle obstacle = Verdict.GetObstacle(other.gameObject);
         
-        if (obstacleInfo != null)
+        if (obstacle != null)
         {
-            if (obstacleInfo.type == NoteType.Wall && !obstacleInfo.wasInteracted && verdict.isUp == obstacleInfo.isUp)
+            if (obstacle.type == NoteType.Wall && !obstacle.wasInteracted && verdict.isUp == obstacle.isUp)
             {
-                Hurt(obstacleInfo, false);
+                Hurt(obstacle, false);
             }
-            else if (obstacleInfo.type == NoteType.Heart && verdict.isUp == obstacleInfo.isUp)
+            else if (obstacle.type == NoteType.Heart && verdict.isUp == obstacle.isUp)
             {
                 health++;
-                Destroy(obstacleInfo.gameObject);
+                Destroy(obstacle.gameObject);
             }
         }
     }
 
     void OnTriggerExit(Collider other)
     {
-        Obstacle obstacleInfo = Verdict.GetObstacle(other.gameObject);
+        Obstacle obstacle = Verdict.GetObstacle(other.gameObject);
         
-        if (obstacleInfo != null && obstacleInfo.type == NoteType.Wall)
+        if (obstacle != null && obstacle.type == NoteType.Wall)
         {
-            if (obstacleInfo.beatLength == 0)
+            if (obstacle.beatLength == 0)
             {
-                GameManager.instance.score += obstacleInfo.scoreList[0];
+                GameManager.instance.rankScore += obstacle.scoreList[0];
             }
             else
             {
-                int length = obstacleInfo.gameObject.transform.childCount;
+                int length = obstacle.gameObject.transform.childCount;
                 
-                if (other.transform.parent == obstacleInfo.gameObject.transform.GetChild(length - 1))
+                if (other.transform.parent == obstacle.gameObject.transform.GetChild(length - 1))
                 {
-                    GameManager.instance.score += obstacleInfo.scoreList[0];
+                    GameManager.instance.rankScore += obstacle.scoreList[0];
                 }
             }
         }
         
-        if (obstacleInfo == Verdict.GetObstacle(GameManager.instance.noteFolder.transform.GetChild(GameManager.instance.noteFolder.transform.childCount - 1).gameObject) && health > 0 && !GameManager.instance.isResultPanel && obstacleInfo.wasInteracted)
+        if (obstacle == Verdict.GetObstacle(GameManager.instance.noteFolder.transform.GetChild(GameManager.instance.noteFolder.transform.childCount - 1).gameObject) && health > 0 && !GameManager.instance.isResultPanel && obstacle.wasInteracted)
         {
             GameManager.instance.isResultPanel = true;
             GameManager.instance.Invoke("Finish", 2.0f);

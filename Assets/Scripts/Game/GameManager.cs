@@ -80,8 +80,11 @@ public class GameManager : MonoBehaviour
     [SerializeField]
     private Sprite[] verdictImage = new Sprite[4];
     [FoldoutGroup("정보")] 
-    [Title("스코어")] 
-    public float score;
+    [Title("랭크 점수")] 
+    public float rankScore;
+    [FoldoutGroup("정보")] 
+    [Title("점수")] 
+    public int score;
     [FoldoutGroup("정보")] 
     [Title("콤보")]
     public int maxCombo;
@@ -97,12 +100,10 @@ public class GameManager : MonoBehaviour
     [Title("Good 갯수")] 
     [SerializeField]
     private int goodCount;
-
     [FoldoutGroup("정보")] 
     [Title("Miss 갯수")] 
     [SerializeField]
     private int missCount;
-    
     [FoldoutGroup("정보")] 
     [Title("Latency 값")] 
     [SerializeField]
@@ -198,7 +199,7 @@ public class GameManager : MonoBehaviour
         GameObject temp = Instantiate(chapter[DBManager.instance.currentChapter - 1].stage[DBManager.instance.currentStage - 1]);
         noteFolder = temp;
         temp.transform.position = Vector3.zero;
-        score = 0;
+        rankScore = 0;
         maxCombo = 0;
         latency = DBManager.instance.latency;
         
@@ -218,7 +219,7 @@ public class GameManager : MonoBehaviour
         StartCoroutine(CountDown());
     }
 
-    public void ShowVerdict(int idx)
+    public void ShowVerdict(int idx, Obstacle obstacle)
     {
         switch (idx)
         {
@@ -238,7 +239,12 @@ public class GameManager : MonoBehaviour
                 missCount++;
                 break;
         }
-        
+
+        if (idx != 3)
+        {
+            score += obstacle.scoreList[idx];
+        }
+
         GameObject verdictPrefab = Instantiate(this.verdictPrefab, verdictCanvas.transform, true);
         verdictPrefab.GetComponent<Image>().sprite = verdictImage[idx];
         verdictPrefab.GetComponent<RectTransform>().localScale = new Vector3(1, 1, 1);
@@ -457,45 +463,59 @@ public class GameManager : MonoBehaviour
 
     public void Finish()
     {
+        int currentChapter = DBManager.instance.currentChapter;
+        int currentStage = DBManager.instance.currentStage - 1;
         isCountDown = true;
         playerController.GetComponent<Animator>().SetBool("isCountDown", isCountDown);
-        score = ((perfectCount + greatCount * 0.3f + goodCount * 0.1f + missCount) / noteCount) * 100;
+        rankScore = ((perfectCount + greatCount * 0.3f + goodCount * 0.1f + missCount) / noteCount) * 100;
+        Debug.Log(rankScore);
 
+        int rankIdx;
+        
         if (playerController.isDead)
         {
             rankText.text = "F";
+            rankIdx = 0;
         }
         else
         {
-            if (score >= 96 && score <= 100)
+            if (rankScore >= 96)
             {
                 rankText.text = "S+";
+                rankIdx = 4;
             }
-            else if (score >= 90 && score <= 95)
+            else if (rankScore >= 90 && rankScore <= 95)
             {
                 rankText.text = "S";
+                rankIdx = 3;
             }
-            else if (score >= 80 && score <= 89)
+            else if (rankScore >= 80 && rankScore <= 89)
             {
                 rankText.text = "A";
+                rankIdx = 2;
             }
-            else if (score >= 70 && score <= 79)
+            else if (rankScore >= 70 && rankScore <= 79)
             {
                 rankText.text = "B";
+                rankIdx = 1;
             }
-            else if (score >= 60 && score <= 69)
+            else if (rankScore >= 60 && rankScore <= 69)
             {
                 rankText.text = "C";
+                rankIdx = 1;
             }
-            else if (score >= 50 && score <= 59)
+            else if (rankScore >= 50 && rankScore <= 59)
             {
                 rankText.text = "D";
+                rankIdx = 1;
             }
             else
             {
                 rankText.text = "F";
+                rankIdx = 1;
             }
-            
+
+            DBManager.instance.stageArray[currentChapter].stage[currentStage].starCount = rankIdx;
             pressText.text = LocalizationSettings.StringDatabase.GetLocalizedString("Game", "Press_Home", LocalizationSettings.SelectedLocale);
         }
         
@@ -504,6 +524,12 @@ public class GameManager : MonoBehaviour
         goodText.text = goodCount.ToString();
         missText.text = missCount.ToString();
         comboText.text = maxCombo.ToString();
+        DBManager.instance.stageArray[currentChapter].stage[currentStage].rank = rankText.text;
+        DBManager.instance.stageArray[currentChapter].stage[currentStage].score = score;
+        DBManager.instance.stageArray[currentChapter].stage[currentStage].perfect = perfectCount;
+        DBManager.instance.stageArray[currentChapter].stage[currentStage].great = greatCount;
+        DBManager.instance.stageArray[currentChapter].stage[currentStage].good = goodCount;
+        DBManager.instance.stageArray[currentChapter].stage[currentStage].miss = missCount;
         
         if (bottomPanel.activeSelf)
         {
