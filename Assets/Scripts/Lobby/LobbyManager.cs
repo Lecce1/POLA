@@ -39,6 +39,12 @@ public class LobbyManager : MonoBehaviour
     [Title("땅 리스트")] 
     public List<GameObject> ground;
     [FoldoutGroup("땅")]
+    [Title("스테이지 땅 리스트")] 
+    public GameObject stageGround;
+    [FoldoutGroup("땅")]
+    [Title("스테이지 땅 머터리얼 리스트")] 
+    public List<Material> stageGroundMaterial;
+    [FoldoutGroup("땅")]
     [Title("스카이박스 리스트")] 
     public List<Material> stage_Skybox;
     
@@ -269,6 +275,11 @@ public class LobbyManager : MonoBehaviour
                     }
                     
                     RenderSettings.skybox = stage_Skybox[DBManager.instance.currentChapter];
+
+                    for (int i = 0; i < stageGround.transform.childCount; i++)
+                    {
+                        stageGround.transform.GetChild(i).GetComponent<MeshRenderer>().material = stageGroundMaterial[DBManager.instance.currentChapter];
+                    }
                     
                     if (LobbyAudioManager.instance.bgmAudio.isPlaying)
                     {
@@ -612,12 +623,6 @@ public class LobbyManager : MonoBehaviour
             if (join_Btn.activeSelf == false)
             {
                 join_Btn.SetActive(true);
-                
-                if (!LobbyPlayerController.instance.isDoor && isSetBtn == false)
-                {
-                    Join_Btn_OnOff(false, false);
-                }
-
                 isSetBtn = false;
             }
             

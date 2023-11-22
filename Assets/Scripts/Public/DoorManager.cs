@@ -23,6 +23,9 @@ public class DoorManager : MonoBehaviour
     public bool isLock;
 
     [FoldoutGroup("스테이지")] 
+    [Title("폴라로이드 머터리얼")]
+    public MeshRenderer polaroid;
+    [FoldoutGroup("스테이지")] 
     [Title("별 리스트")]
     public List<MeshRenderer> starList;
     [FoldoutGroup("스테이지")] 
@@ -80,6 +83,8 @@ public class DoorManager : MonoBehaviour
         switch (name)
         {
             case "Stage":
+                polaroid.material = DBManager.instance.stageArray[DBManager.instance.currentChapter]
+                    .stage[stageNum - 1].polaroid;
                 title_Text.text = DBManager.instance.stageArray[DBManager.instance.currentChapter]
                     .stage[stageNum - 1].name;
                 bpm_Text.text = DBManager.instance.stageArray[DBManager.instance.currentChapter]

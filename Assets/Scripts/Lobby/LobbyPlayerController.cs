@@ -36,9 +36,6 @@ public class LobbyPlayerController : MonoBehaviour
     [Title("움직임 가능 여부")] 
     [SerializeField] 
     public bool isMoveAvailable = true;
-    
-    [Title("문 충돌 여부")] 
-    public bool isDoor;
 
     public static LobbyPlayerController instance;
 

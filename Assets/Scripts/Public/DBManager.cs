@@ -38,6 +38,7 @@ public class Stage
     public int miss;
     public int bpm;
     public AudioClip audio;
+    public Material polaroid;
 }
 
 public class DBManager : MonoBehaviour

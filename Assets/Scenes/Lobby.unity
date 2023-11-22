@@ -1583,6 +1583,7 @@ MonoBehaviour:
       miss: 0
       bpm: 0
       audio: {fileID: 8300000, guid: 3af82e794237f455893ec1eb45d5fc16, type: 3}
+      polaroid: {fileID: 0}
   - stage:
     - name: "\uB611\uAC19\uC740 \uC77C\uC0C1"
       starCount: 0
@@ -1593,6 +1594,7 @@ MonoBehaviour:
       miss: 0
       bpm: 120
       audio: {fileID: 8300000, guid: 1cda5fb48dae7964fa2ec2c9ea082c15, type: 3}
+      polaroid: {fileID: 2100000, guid: 79c14e4fc887d47908ce04b70a2b0aa0, type: 2}
     - name: "\uC815\uC6D0"
       starCount: 0
       score: 0
@@ -1602,6 +1604,7 @@ MonoBehaviour:
       miss: 0
       bpm: 114
       audio: {fileID: 8300000, guid: ce18281ac937bd44ba50f4c884b99451, type: 3}
+      polaroid: {fileID: 2100000, guid: 59ad3c97a876347caafada8357aad33d, type: 2}
     - name: "\uACBD\uACC4\uC2EC \uB9CE\uC740 \uB3D9\uBB3C\uB4E4"
       starCount: 0
       score: 0
@@ -1611,6 +1614,7 @@ MonoBehaviour:
       miss: 0
       bpm: 128
       audio: {fileID: 8300000, guid: 6b22b4e3030c6524c9f6e9338aa038ca, type: 3}
+      polaroid: {fileID: 2100000, guid: 6c6af76801b654bbd935a43662e8368b, type: 2}
     - name: "\uC694\uB9AC\uB97C \uD574\uC8FC\uC790"
       starCount: 0
       score: 0
@@ -1620,6 +1624,7 @@ MonoBehaviour:
       miss: 0
       bpm: 80
       audio: {fileID: 8300000, guid: e2acaddab7df0cc4ab9d0a6bf52ee7cd, type: 3}
+      polaroid: {fileID: 2100000, guid: 61c91ac05539e4072a0fe3874ef2a2a7, type: 2}
     - name: "\uD568\uAED8 \uB180\uC790"
       starCount: 0
       score: 0
@@ -1629,6 +1634,7 @@ MonoBehaviour:
       miss: 0
       bpm: 69
       audio: {fileID: 8300000, guid: b675263843f3ca243a6e80c98f9700d0, type: 3}
+      polaroid: {fileID: 2100000, guid: 876e1fcc6051a4bb980d37eae6992af7, type: 2}
     - name: "\uC990\uAC70\uC6B4 \uC77C\uC0C1"
       starCount: 0
       score: 0
@@ -1638,6 +1644,7 @@ MonoBehaviour:
       miss: 0
       bpm: 93
       audio: {fileID: 8300000, guid: 763621f68877b7147acda66ab9e5a1e8, type: 3}
+      polaroid: {fileID: 2100000, guid: e0d692b2e8353453891432df23367ed6, type: 2}
   - stage:
     - name: 
       starCount: 0
@@ -1648,6 +1655,7 @@ MonoBehaviour:
       miss: 0
       bpm: 0
       audio: {fileID: 0}
+      polaroid: {fileID: 0}
     - name: 
       starCount: 0
       score: 0
@@ -1657,6 +1665,7 @@ MonoBehaviour:
       miss: 0
       bpm: 0
       audio: {fileID: 0}
+      polaroid: {fileID: 0}
     - name: 
       starCount: 0
       score: 0
@@ -1666,6 +1675,7 @@ MonoBehaviour:
       miss: 0
       bpm: 0
       audio: {fileID: 0}
+      polaroid: {fileID: 0}
     - name: 
       starCount: 0
       score: 0
@@ -1675,6 +1685,7 @@ MonoBehaviour:
       miss: 0
       bpm: 0
       audio: {fileID: 0}
+      polaroid: {fileID: 0}
     - name: 
       starCount: 0
       score: 0
@@ -1684,6 +1695,7 @@ MonoBehaviour:
       miss: 0
       bpm: 0
       audio: {fileID: 0}
+      polaroid: {fileID: 0}
     - name: 
       starCount: 0
       score: 0
@@ -1693,6 +1705,7 @@ MonoBehaviour:
       miss: 0
       bpm: 0
       audio: {fileID: 0}
+      polaroid: {fileID: 0}
   - stage:
     - name: 
       starCount: 0
@@ -1703,6 +1716,7 @@ MonoBehaviour:
       miss: 0
       bpm: 0
       audio: {fileID: 0}
+      polaroid: {fileID: 0}
     - name: 
       starCount: 0
       score: 0
@@ -1712,6 +1726,7 @@ MonoBehaviour:
       miss: 0
       bpm: 0
       audio: {fileID: 0}
+      polaroid: {fileID: 0}
     - name: 
       starCount: 0
       score: 0
@@ -1721,6 +1736,7 @@ MonoBehaviour:
       miss: 0
       bpm: 0
       audio: {fileID: 0}
+      polaroid: {fileID: 0}
     - name: 
       starCount: 0
       score: 0
@@ -1730,6 +1746,7 @@ MonoBehaviour:
       miss: 0
       bpm: 0
       audio: {fileID: 0}
+      polaroid: {fileID: 0}
     - name: 
       starCount: 0
       score: 0
@@ -1739,6 +1756,7 @@ MonoBehaviour:
       miss: 0
       bpm: 0
       audio: {fileID: 0}
+      polaroid: {fileID: 0}
     - name: 
       starCount: 0
       score: 0
@@ -1748,6 +1766,7 @@ MonoBehaviour:
       miss: 0
       bpm: 0
       audio: {fileID: 0}
+      polaroid: {fileID: 0}
   - stage:
     - name: 
       starCount: 0
@@ -1758,6 +1777,7 @@ MonoBehaviour:
       miss: 0
       bpm: 0
       audio: {fileID: 0}
+      polaroid: {fileID: 0}
     - name: 
       starCount: 0
       score: 0
@@ -1767,6 +1787,7 @@ MonoBehaviour:
       miss: 0
       bpm: 0
       audio: {fileID: 0}
+      polaroid: {fileID: 0}
     - name: 
       starCount: 0
       score: 0
@@ -1776,6 +1797,7 @@ MonoBehaviour:
       miss: 0
       bpm: 0
       audio: {fileID: 0}
+      polaroid: {fileID: 0}
     - name: 
       starCount: 0
       score: 0
@@ -1785,6 +1807,7 @@ MonoBehaviour:
       miss: 0
       bpm: 0
       audio: {fileID: 0}
+      polaroid: {fileID: 0}
     - name: 
       starCount: 0
       score: 0
@@ -1794,6 +1817,7 @@ MonoBehaviour:
       miss: 0
       bpm: 0
       audio: {fileID: 0}
+      polaroid: {fileID: 0}
     - name: 
       starCount: 0
       score: 0
@@ -1803,6 +1827,7 @@ MonoBehaviour:
       miss: 0
       bpm: 0
       audio: {fileID: 0}
+      polaroid: {fileID: 0}
   - stage:
     - name: 
       starCount: 0
@@ -1813,6 +1838,7 @@ MonoBehaviour:
       miss: 0
       bpm: 0
       audio: {fileID: 0}
+      polaroid: {fileID: 0}
     - name: 
       starCount: 0
       score: 0
@@ -1822,6 +1848,7 @@ MonoBehaviour:
       miss: 0
       bpm: 0
       audio: {fileID: 0}
+      polaroid: {fileID: 0}
     - name: 
       starCount: 0
       score: 0
@@ -1831,6 +1858,7 @@ MonoBehaviour:
       miss: 0
       bpm: 0
       audio: {fileID: 0}
+      polaroid: {fileID: 0}
     - name: 
       starCount: 0
       score: 0
@@ -1840,6 +1868,7 @@ MonoBehaviour:
       miss: 0
       bpm: 0
       audio: {fileID: 0}
+      polaroid: {fileID: 0}
     - name: 
       starCount: 0
       score: 0
@@ -1849,6 +1878,7 @@ MonoBehaviour:
       miss: 0
       bpm: 0
       audio: {fileID: 0}
+      polaroid: {fileID: 0}
     - name: 
       starCount: 0
       score: 0
@@ -1858,6 +1888,7 @@ MonoBehaviour:
       miss: 0
       bpm: 0
       audio: {fileID: 0}
+      polaroid: {fileID: 0}
   - stage:
     - name: 
       starCount: 0
@@ -1868,6 +1899,7 @@ MonoBehaviour:
       miss: 0
       bpm: 0
       audio: {fileID: 0}
+      polaroid: {fileID: 0}
     - name: 
       starCount: 0
       score: 0
@@ -1877,6 +1909,7 @@ MonoBehaviour:
       miss: 0
       bpm: 0
       audio: {fileID: 0}
+      polaroid: {fileID: 0}
     - name: 
       starCount: 0
       score: 0
@@ -1886,6 +1919,7 @@ MonoBehaviour:
       miss: 0
       bpm: 0
       audio: {fileID: 0}
+      polaroid: {fileID: 0}
     - name: 
       starCount: 0
       score: 0
@@ -1895,6 +1929,7 @@ MonoBehaviour:
       miss: 0
       bpm: 0
       audio: {fileID: 0}
+      polaroid: {fileID: 0}
     - name: 
       starCount: 0
       score: 0
@@ -1904,6 +1939,7 @@ MonoBehaviour:
       miss: 0
       bpm: 0
       audio: {fileID: 0}
+      polaroid: {fileID: 0}
     - name: 
       starCount: 0
       score: 0
@@ -1913,6 +1949,7 @@ MonoBehaviour:
       miss: 0
       bpm: 0
       audio: {fileID: 0}
+      polaroid: {fileID: 0}
   - stage:
     - name: 
       starCount: 0
@@ -1923,6 +1960,7 @@ MonoBehaviour:
       miss: 0
       bpm: 0
       audio: {fileID: 0}
+      polaroid: {fileID: 0}
     - name: 
       starCount: 0
       score: 0
@@ -1932,6 +1970,7 @@ MonoBehaviour:
       miss: 0
       bpm: 0
       audio: {fileID: 0}
+      polaroid: {fileID: 0}
     - name: 
       starCount: 0
       score: 0
@@ -1941,6 +1980,7 @@ MonoBehaviour:
       miss: 0
       bpm: 0
       audio: {fileID: 0}
+      polaroid: {fileID: 0}
     - name: 
       starCount: 0
       score: 0
@@ -1950,6 +1990,7 @@ MonoBehaviour:
       miss: 0
       bpm: 0
       audio: {fileID: 0}
+      polaroid: {fileID: 0}
     - name: 
       starCount: 0
       score: 0
@@ -1959,6 +2000,7 @@ MonoBehaviour:
       miss: 0
       bpm: 0
       audio: {fileID: 0}
+      polaroid: {fileID: 0}
     - name: 
       starCount: 0
       score: 0
@@ -1968,6 +2010,7 @@ MonoBehaviour:
       miss: 0
       bpm: 0
       audio: {fileID: 0}
+      polaroid: {fileID: 0}
   musicValue: 1
   sfxValue: 1
   isVibration: 1
@@ -2570,7 +2613,7 @@ MeshRenderer:
   m_RenderingLayerMask: 1
   m_RendererPriority: 0
   m_Materials:
-  - {fileID: 2100000, guid: 1c456f16e29e94b95b693ea6d1fc30e5, type: 2}
+  - {fileID: 2100000, guid: 6d966d8a16be74de499c069629efd1d9, type: 2}
   m_StaticBatchInfo:
     firstSubMesh: 0
     subMeshCount: 0
@@ -3734,6 +3777,7 @@ MonoBehaviour:
   stageNum: 0
   name: Center
   isLock: 0
+  polaroid: {fileID: 0}
   starList: []
   starOnMaterial: {fileID: 0}
   starOffMaterial: {fileID: 0}
@@ -3980,7 +4024,7 @@ Transform:
   m_GameObject: {fileID: 120696281}
   serializedVersion: 2
   m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
-  m_LocalPosition: {x: 0, y: 4.5, z: 0}
+  m_LocalPosition: {x: 0, y: 4.5, z: 1}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children: []
@@ -4074,6 +4118,7 @@ MonoBehaviour:
   stageNum: 0
   name: Back
   isLock: 0
+  polaroid: {fileID: 0}
   starList: []
   starOnMaterial: {fileID: 0}
   starOffMaterial: {fileID: 0}
@@ -5588,6 +5633,7 @@ MonoBehaviour:
   stageNum: 6
   name: Stage
   isLock: 0
+  polaroid: {fileID: 1751963033}
   starList:
   - {fileID: 1603824129}
   - {fileID: 1081762903}
@@ -29170,7 +29216,7 @@ MeshRenderer:
   m_RenderingLayerMask: 1
   m_RendererPriority: 0
   m_Materials:
-  - {fileID: 2100000, guid: 1c456f16e29e94b95b693ea6d1fc30e5, type: 2}
+  - {fileID: 2100000, guid: 79c14e4fc887d47908ce04b70a2b0aa0, type: 2}
   m_StaticBatchInfo:
     firstSubMesh: 0
     subMeshCount: 0
@@ -35201,7 +35247,7 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0, y: 0}
   m_AnchorMax: {x: 0, y: 0}
-  m_AnchoredPosition: {x: 95.13043, y: 0}
+  m_AnchoredPosition: {x: 113.838875, y: 0}
   m_SizeDelta: {x: 0, y: 0}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!114 &347786979
@@ -35895,6 +35941,7 @@ MonoBehaviour:
   stageNum: 5
   name: Stage
   isLock: 0
+  polaroid: {fileID: 1605612547}
   starList:
   - {fileID: 1344617259}
   - {fileID: 735104667}
@@ -42496,6 +42543,7 @@ MonoBehaviour:
   stageNum: 0
   name: Play
   isLock: 0
+  polaroid: {fileID: 0}
   starList: []
   starOnMaterial: {fileID: 0}
   starOffMaterial: {fileID: 0}
@@ -56010,7 +56058,7 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 575790304}
   serializedVersion: 2
-  m_LocalRotation: {x: -0, y: 6.938894e-18, z: 1.1858461e-20, w: 1}
+  m_LocalRotation: {x: -0, y: -1.235817e-14, z: -1.9962873e-17, w: 1}
   m_LocalPosition: {x: 0, y: 0, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
@@ -56992,6 +57040,7 @@ MonoBehaviour:
   stageNum: 4
   name: Stage
   isLock: 0
+  polaroid: {fileID: 305408120}
   starList:
   - {fileID: 1145242278}
   - {fileID: 189319016}
@@ -58070,6 +58119,7 @@ MonoBehaviour:
   stageNum: 3
   name: Stage
   isLock: 0
+  polaroid: {fileID: 1472155214}
   starList:
   - {fileID: 1263036455}
   - {fileID: 1605377186}
@@ -58205,6 +58255,7 @@ MonoBehaviour:
   stageNum: 0
   name: Chapter
   isLock: 0
+  polaroid: {fileID: 0}
   starList: []
   starOnMaterial: {fileID: 0}
   starOffMaterial: {fileID: 0}
@@ -59187,7 +59238,7 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0, y: 0}
   m_AnchorMax: {x: 0, y: 0}
-  m_AnchoredPosition: {x: 95.13043, y: 0}
+  m_AnchoredPosition: {x: 124.928925, y: 0}
   m_SizeDelta: {x: 0, y: 0}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!114 &655933088
@@ -60090,7 +60141,7 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: -0.678}
   m_AnchorMin: {x: 0, y: 0}
   m_AnchorMax: {x: 0, y: 0}
-  m_AnchoredPosition: {x: 24.41739, y: 0}
+  m_AnchoredPosition: {x: 25.592417, y: 0}
   m_SizeDelta: {x: 0, y: 0}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!114 &685551074
@@ -61689,6 +61740,7 @@ MonoBehaviour:
   stageNum: 0
   name: Latency
   isLock: 0
+  polaroid: {fileID: 0}
   starList: []
   starOnMaterial: {fileID: 0}
   starOffMaterial: {fileID: 0}
@@ -61729,7 +61781,7 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0, y: 0}
   m_AnchorMax: {x: 0, y: 0}
-  m_AnchoredPosition: {x: 128, y: 0}
+  m_AnchoredPosition: {x: 127.48815, y: 0}
   m_SizeDelta: {x: 0, y: 0}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!114 &743745764
@@ -62098,7 +62150,7 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0, y: 0}
   m_AnchorMax: {x: 0, y: 0}
-  m_AnchoredPosition: {x: 175.00653, y: 0}
+  m_AnchoredPosition: {x: 174.44905, y: 0}
   m_SizeDelta: {x: 0, y: 0}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!114 &764622558
@@ -67225,6 +67277,7 @@ MonoBehaviour:
   stageNum: 0
   name: Chapter
   isLock: 0
+  polaroid: {fileID: 0}
   starList: []
   starOnMaterial: {fileID: 0}
   starOffMaterial: {fileID: 0}
@@ -67386,7 +67439,7 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0, y: 0}
   m_AnchorMax: {x: 0, y: 0}
-  m_AnchoredPosition: {x: 47.895653, y: 0}
+  m_AnchoredPosition: {x: 47.77251, y: 0}
   m_SizeDelta: {x: 0, y: 0}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!114 &775980693
@@ -68199,7 +68252,7 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0, y: 0}
   m_AnchorMax: {x: 0, y: 0}
-  m_AnchoredPosition: {x: 68.55652, y: 0}
+  m_AnchoredPosition: {x: 67.393364, y: 0}
   m_SizeDelta: {x: 0, y: 0}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!114 &799558792
@@ -77259,7 +77312,7 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0, y: 0}
   m_AnchorMax: {x: 0, y: 0}
-  m_AnchoredPosition: {x: 60.713043, y: 0}
+  m_AnchoredPosition: {x: 78.24645, y: 0}
   m_SizeDelta: {x: 0, y: 0}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!114 &953984615
@@ -78031,7 +78084,7 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0, y: 0}
   m_AnchorMax: {x: 0, y: 0}
-  m_AnchoredPosition: {x: 169.32173, y: 0}
+  m_AnchoredPosition: {x: 166.72986, y: 0}
   m_SizeDelta: {x: 0, y: 0}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!114 &980456459
@@ -81912,7 +81965,7 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0, y: 0}
   m_AnchorMax: {x: 0, y: 0}
-  m_AnchoredPosition: {x: 24.41739, y: 0}
+  m_AnchoredPosition: {x: 25.59242, y: 0}
   m_SizeDelta: {x: 0, y: 0}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!114 &1088542951
@@ -82666,7 +82719,7 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0, y: 0}
   m_AnchorMax: {x: 0, y: 0}
-  m_AnchoredPosition: {x: 112.973915, y: 0}
+  m_AnchoredPosition: {x: 114.69194, y: 0}
   m_SizeDelta: {x: 0, y: 0}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!114 &1115164104
@@ -83432,7 +83485,7 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0, y: 0}
   m_AnchorMax: {x: 0, y: 0}
-  m_AnchoredPosition: {x: 232.13913, y: 0}
+  m_AnchoredPosition: {x: 295.8294, y: 0}
   m_SizeDelta: {x: 0, y: 0}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!114 &1148286082
@@ -84438,7 +84491,7 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0, y: 0}
   m_AnchorMax: {x: 0, y: 0}
-  m_AnchoredPosition: {x: 51.652176, y: 0}
+  m_AnchoredPosition: {x: 50.758293, y: 0}
   m_SizeDelta: {x: 0, y: 0}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!114 &1195470207
@@ -85388,6 +85441,7 @@ MonoBehaviour:
   stageNum: 0
   name: Chapter
   isLock: 0
+  polaroid: {fileID: 0}
   starList: []
   starOnMaterial: {fileID: 0}
   starOffMaterial: {fileID: 0}
@@ -91314,7 +91368,7 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: -0.678}
   m_AnchorMin: {x: 0, y: 0}
   m_AnchorMax: {x: 0, y: 0}
-  m_AnchoredPosition: {x: 45.078262, y: 0}
+  m_AnchoredPosition: {x: 46.06635, y: 0}
   m_SizeDelta: {x: 0, y: 0}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!114 &1245240505
@@ -97908,7 +97962,7 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0, y: 0}
   m_AnchorMax: {x: 0, y: 0}
-  m_AnchoredPosition: {x: 181.53043, y: 0}
+  m_AnchoredPosition: {x: 183.79146, y: 0}
   m_SizeDelta: {x: 0, y: 0}
   m_Pivot: {x: 1, y: 0.5}
 --- !u!114 &1276971754
@@ -111840,7 +111894,7 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0, y: 0}
   m_AnchorMax: {x: 0, y: 0}
-  m_AnchoredPosition: {x: 116.45217, y: 0}
+  m_AnchoredPosition: {x: 95.97156, y: 0}
   m_SizeDelta: {x: 0, y: 0}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!114 &1412945683
@@ -113360,7 +113414,7 @@ MeshRenderer:
   m_RenderingLayerMask: 1
   m_RendererPriority: 0
   m_Materials:
-  - {fileID: 2100000, guid: 1c456f16e29e94b95b693ea6d1fc30e5, type: 2}
+  - {fileID: 2100000, guid: 79c14e4fc887d47908ce04b70a2b0aa0, type: 2}
   m_StaticBatchInfo:
     firstSubMesh: 0
     subMeshCount: 0
@@ -113501,7 +113555,7 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1473644558}
   serializedVersion: 2
-  m_LocalRotation: {x: -0.0008076914, y: -3.360618e-11, z: -2.7143437e-14, w: 0.9999997}
+  m_LocalRotation: {x: -0.0008076914, y: -3.3596355e-11, z: -2.71355e-14, w: 0.9999997}
   m_LocalPosition: {x: 0, y: 0, z: -300}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
@@ -114065,6 +114119,7 @@ MonoBehaviour:
   stageNum: 0
   name: Chapter
   isLock: 0
+  polaroid: {fileID: 0}
   starList: []
   starOnMaterial: {fileID: 0}
   starOffMaterial: {fileID: 0}
@@ -114279,6 +114334,7 @@ MonoBehaviour:
   stageNum: 0
   name: Chapter
   isLock: 0
+  polaroid: {fileID: 0}
   starList: []
   starOnMaterial: {fileID: 0}
   starOffMaterial: {fileID: 0}
@@ -120410,7 +120466,7 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0, y: 0}
   m_AnchorMax: {x: 0, y: 0}
-  m_AnchoredPosition: {x: 517.50653, y: 0}
+  m_AnchoredPosition: {x: 516.94904, y: 0}
   m_SizeDelta: {x: 0, y: 0}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!114 &1523737000
@@ -121095,6 +121151,7 @@ MonoBehaviour:
   stageNum: 0
   name: Chapter
   isLock: 0
+  polaroid: {fileID: 0}
   starList: []
   starOnMaterial: {fileID: 0}
   starOffMaterial: {fileID: 0}
@@ -122694,7 +122751,7 @@ MeshRenderer:
   m_RenderingLayerMask: 1
   m_RendererPriority: 0
   m_Materials:
-  - {fileID: 2100000, guid: 1c456f16e29e94b95b693ea6d1fc30e5, type: 2}
+  - {fileID: 2100000, guid: 79c14e4fc887d47908ce04b70a2b0aa0, type: 2}
   m_StaticBatchInfo:
     firstSubMesh: 0
     subMeshCount: 0
@@ -122910,7 +122967,7 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0, y: 0}
   m_AnchorMax: {x: 0, y: 0}
-  m_AnchoredPosition: {x: 95.13043, y: 0}
+  m_AnchoredPosition: {x: 116.82464, y: 0}
   m_SizeDelta: {x: 0, y: 0}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!114 &1617106708
@@ -129277,7 +129334,7 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0, y: 0}
   m_AnchorMax: {x: 0, y: 0}
-  m_AnchoredPosition: {x: 179.70218, y: 0}
+  m_AnchoredPosition: {x: 179.56754, y: 0}
   m_SizeDelta: {x: 0, y: 0}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!114 &1674507917
@@ -129545,7 +129602,7 @@ MeshRenderer:
   m_RenderingLayerMask: 1
   m_RendererPriority: 0
   m_Materials:
-  - {fileID: 2100000, guid: 1c456f16e29e94b95b693ea6d1fc30e5, type: 2}
+  - {fileID: 2100000, guid: 79c14e4fc887d47908ce04b70a2b0aa0, type: 2}
   m_StaticBatchInfo:
     firstSubMesh: 0
     subMeshCount: 0
@@ -131116,6 +131173,7 @@ MonoBehaviour:
   stageNum: 0
   name: Contents
   isLock: 0
+  polaroid: {fileID: 0}
   starList: []
   starOnMaterial: {fileID: 0}
   starOffMaterial: {fileID: 0}
@@ -131197,7 +131255,7 @@ MeshRenderer:
   m_RenderingLayerMask: 1
   m_RendererPriority: 0
   m_Materials:
-  - {fileID: 2100000, guid: 1c456f16e29e94b95b693ea6d1fc30e5, type: 2}
+  - {fileID: 2100000, guid: 79c14e4fc887d47908ce04b70a2b0aa0, type: 2}
   m_StaticBatchInfo:
     firstSubMesh: 0
     subMeshCount: 0
@@ -131663,6 +131721,10 @@ MonoBehaviour:
   - {fileID: 1620551400}
   - {fileID: 1611089845}
   - {fileID: 997920949}
+  stageGround: {fileID: 1758576094}
+  stageGroundMaterial:
+  - {fileID: 2100000, guid: 54bed3df714fa43dab0818c19516bd7d, type: 2}
+  - {fileID: 2100000, guid: 58e8a0335e83d4682868d417a2c9bcb5, type: 2}
   stage_Skybox:
   - {fileID: 2100000, guid: ebf62c07b7f3c4287a1d31b462cf4918, type: 2}
   - {fileID: 2100000, guid: 661ddb39252af46968fa6d35f8eccce3, type: 2}
@@ -132677,6 +132739,7 @@ MonoBehaviour:
   stageNum: 0
   name: Chapter
   isLock: 0
+  polaroid: {fileID: 0}
   starList: []
   starOnMaterial: {fileID: 0}
   starOffMaterial: {fileID: 0}
@@ -137740,6 +137803,7 @@ MonoBehaviour:
   stageNum: 2
   name: Stage
   isLock: 0
+  polaroid: {fileID: 1684934162}
   starList:
   - {fileID: 151651712}
   - {fileID: 577657881}
@@ -137784,7 +137848,7 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0, y: 0}
   m_AnchorMax: {x: 0, y: 0}
-  m_AnchoredPosition: {x: 135.51305, y: 0}
+  m_AnchoredPosition: {x: 133.45972, y: 0}
   m_SizeDelta: {x: 0, y: 0}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!114 &1830750805
@@ -140538,7 +140602,7 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0, y: 0}
   m_AnchorMax: {x: 0, y: 0}
-  m_AnchoredPosition: {x: 522.20215, y: 0}
+  m_AnchoredPosition: {x: 522.0675, y: 0}
   m_SizeDelta: {x: 0, y: 0}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!114 &1943049889
@@ -141826,6 +141890,7 @@ MonoBehaviour:
   stageNum: 0
   name: Chapter
   isLock: 0
+  polaroid: {fileID: 0}
   starList: []
   starOnMaterial: {fileID: 0}
   starOffMaterial: {fileID: 0}
@@ -142146,7 +142211,7 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0, y: 0}
   m_AnchorMax: {x: 0, y: 0}
-  m_AnchoredPosition: {x: 24.41739, y: 0}
+  m_AnchoredPosition: {x: 25.59242, y: 0}
   m_SizeDelta: {x: 0, y: 0}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!114 &1991540392
@@ -142880,6 +142945,7 @@ MonoBehaviour:
   stageNum: 1
   name: Stage
   isLock: 0
+  polaroid: {fileID: 2029938683}
   starList:
   - {fileID: 1374342040}
   - {fileID: 380128570}
@@ -143152,7 +143218,7 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0, y: 0}
   m_AnchorMax: {x: 0, y: 0}
-  m_AnchoredPosition: {x: 40.38261, y: 0}
+  m_AnchoredPosition: {x: 41.374405, y: 0}
   m_SizeDelta: {x: 0, y: 0}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!114 &2021619172
@@ -143419,7 +143485,7 @@ MeshRenderer:
   m_RenderingLayerMask: 1
   m_RendererPriority: 0
   m_Materials:
-  - {fileID: 2100000, guid: 1c456f16e29e94b95b693ea6d1fc30e5, type: 2}
+  - {fileID: 2100000, guid: 79c14e4fc887d47908ce04b70a2b0aa0, type: 2}
   m_StaticBatchInfo:
     firstSubMesh: 0
     subMeshCount: 0
@@ -145177,7 +145243,7 @@ Transform:
   m_GameObject: {fileID: 2102324212}
   serializedVersion: 2
   m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
-  m_LocalPosition: {x: 0, y: 4.5, z: 0}
+  m_LocalPosition: {x: 0, y: 4.5, z: 1}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children: []
@@ -145271,6 +145337,7 @@ MonoBehaviour:
   stageNum: 0
   name: Back
   isLock: 0
+  polaroid: {fileID: 0}
   starList: []
   starOnMaterial: {fileID: 0}
   starOffMaterial: {fileID: 0}
@@ -145954,7 +146021,7 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0, y: 0}
   m_AnchorMax: {x: 0, y: 0}
-  m_AnchoredPosition: {x: 136.45218, y: 0}
+  m_AnchoredPosition: {x: 159.05212, y: 0}
   m_SizeDelta: {x: 0, y: 0}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!114 &2128184164
@@ -151031,6 +151098,7 @@ MonoBehaviour:
   stageNum: 0
   name: Shop
   isLock: 0
+  polaroid: {fileID: 0}
   starList: []
   starOnMaterial: {fileID: 0}
   starOffMaterial: {fileID: 0}
