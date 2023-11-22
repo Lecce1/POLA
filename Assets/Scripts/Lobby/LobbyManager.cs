@@ -623,6 +623,7 @@ public class LobbyManager : MonoBehaviour
             if (join_Btn.activeSelf == false)
             {
                 join_Btn.SetActive(true);
+                LobbyPlayerController.instance.Collider();
                 isSetBtn = false;
             }
             
