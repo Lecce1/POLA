@@ -183,7 +183,15 @@ public class PlatformManager : MonoBehaviour
                 if (mobileObjects[i] == null)
                     continue;
 
-                mobileObjects[i].SetActive(true);
+                if (type == Type.Lobby && mobileObjects[i].name == "Back" && DBManager.instance.currentGround == 0)
+                {
+                    mobileObjects[i].SetActive(false);
+                }
+                else
+                {
+                    mobileObjects[i].SetActive(true);
+                }
+
                 LayoutRebuilder.ForceRebuildLayoutImmediate(mobileObjects[i].GetComponentInParent<RectTransform>());
             }
         }

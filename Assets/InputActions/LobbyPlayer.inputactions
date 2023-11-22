@@ -85,6 +85,24 @@
                     "processors": "",
                     "interactions": "",
                     "initialStateCheck": false
+                },
+                {
+                    "name": "Back",
+                    "type": "Button",
+                    "id": "d20d1ea6-b67d-4856-bed6-a3cccfbb9f48",
+                    "expectedControlType": "Button",
+                    "processors": "",
+                    "interactions": "",
+                    "initialStateCheck": false
+                },
+                {
+                    "name": "ConsoleCancel",
+                    "type": "PassThrough",
+                    "id": "d8235eac-904a-4ae8-aa10-e2bed02599b9",
+                    "expectedControlType": "Button",
+                    "processors": "",
+                    "interactions": "",
+                    "initialStateCheck": true
                 }
             ],
             "bindings": [
@@ -250,6 +268,39 @@
                     "processors": "",
                     "groups": "CONSOLE",
                     "action": "Join",
+                    "isComposite": false,
+                    "isPartOfComposite": false
+                },
+                {
+                    "name": "",
+                    "id": "3541f0b5-979f-4c02-a6ec-046ba4c11dc7",
+                    "path": "<Keyboard>/downArrow",
+                    "interactions": "",
+                    "processors": "",
+                    "groups": "PC",
+                    "action": "Back",
+                    "isComposite": false,
+                    "isPartOfComposite": false
+                },
+                {
+                    "name": "",
+                    "id": "44ce754f-94eb-458f-bc2f-dead07e1169b",
+                    "path": "<XInputController>/buttonEast",
+                    "interactions": "",
+                    "processors": "",
+                    "groups": "CONSOLE",
+                    "action": "Back",
+                    "isComposite": false,
+                    "isPartOfComposite": false
+                },
+                {
+                    "name": "",
+                    "id": "fb5510b1-f6bd-446c-9f49-ee8483e7e0ad",
+                    "path": "<Gamepad>/start",
+                    "interactions": "Tap",
+                    "processors": "",
+                    "groups": "CONSOLE",
+                    "action": "ConsoleCancel",
                     "isComposite": false,
                     "isPartOfComposite": false
                 }
@@ -550,17 +601,6 @@
                 },
                 {
                     "name": "",
-                    "id": "2993ec24-5353-4dbf-85d6-9a089fffb08d",
-                    "path": "<Gamepad>/start",
-                    "interactions": "Tap",
-                    "processors": "",
-                    "groups": "CONSOLE",
-                    "action": "Cancel",
-                    "isComposite": false,
-                    "isPartOfComposite": false
-                },
-                {
-                    "name": "",
                     "id": "e1aa955a-bdb4-4493-8989-6a94b821ade7",
                     "path": "<Mouse>/scroll",
                     "interactions": "",
@@ -576,7 +616,7 @@
                     "path": "<Keyboard>/escape",
                     "interactions": "Tap",
                     "processors": "",
-                    "groups": "",
+                    "groups": "PC",
                     "action": "Cancel",
                     "isComposite": false,
                     "isPartOfComposite": false

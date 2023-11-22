@@ -442,7 +442,6 @@ public class GameManager : MonoBehaviour
         
         countDownPanel.gameObject.SetActive(true);
         audioManager.audio.Pause();
-        playerController.GetComponent<PlayerInput>().enabled = false;
         countDownPanel.transform.GetChild(0).GetComponent<Text>().text = "Ready";
 
         for (int i = 0; i < 2; i++)
@@ -464,7 +463,6 @@ public class GameManager : MonoBehaviour
         isCountDown = false;
         playerController.GetComponent<Animator>().SetBool("isReady", isCountDown);
         StartCoroutine(audioManager.Progress());
-        playerController.GetComponent<PlayerInput>().enabled = true;
         isKeyOnPause = false;
         isStart = false;
         

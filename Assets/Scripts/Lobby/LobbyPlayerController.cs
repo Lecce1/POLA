@@ -173,7 +173,15 @@ public class LobbyPlayerController : MonoBehaviour
             }
         }
     }
-    
+
+    public void OnBack()
+    {
+        if (DBManager.instance.currentGround != 0)
+        {
+            LobbyManager.instance.Button("Back");
+        }
+    }
+
     public void OnDpadLeft()
     {
         OnMove(true);
@@ -190,7 +198,7 @@ public class LobbyPlayerController : MonoBehaviour
         {
             LobbyManager.instance.Button(LobbyManager.instance.join_Btn_Type);
 
-            if (LobbyManager.instance.join_Btn_Type != "Move" && LobbyManager.instance.join_Btn_Type != "Back")
+            if (LobbyManager.instance.join_Btn_Type != "Move" && LobbyManager.instance.join_Btn_Type != "Stage")
             {
                 isMoveAvailable = false;
             }
@@ -280,7 +288,19 @@ public class LobbyPlayerController : MonoBehaviour
                     Collider();
                 }
             }
-            else if (!LobbyManager.instance.esc.activeSelf)
+            else if (!LobbyManager.instance.esc.activeSelf && DBManager.instance.currentPlatform == "PC")
+            {
+                LobbyManager.instance.Button("Esc");
+                isMoveAvailable = false;
+            }
+        }
+    }
+
+    public void OnConsoleCancel()
+    {
+        if (!LobbyManager.instance.isPanelOpen)
+        {
+            if (!LobbyManager.instance.esc.activeSelf)
             {
                 LobbyManager.instance.Button("Esc");
                 isMoveAvailable = false;
@@ -409,12 +429,8 @@ public class LobbyPlayerController : MonoBehaviour
                             }
                             break;
                         
-                        case "Back":
-                            LobbyManager.instance.DoorInit("Back", "Join");
-                            break;
-                        
                         case "Center":
-                            if (LobbyManager.instance.isJoinBtnOn)
+                            if (DBManager.instance.currentPlatform == "MOBILE" && LobbyManager.instance.join_Btn.activeSelf)
                             {
                                 LobbyManager.instance.Join_Btn_OnOff(false, false);
                             }

@@ -290,7 +290,6 @@ public class LatencyManager : MonoBehaviour
 
     public void Finish(int count, int latencyAvg)
     {
-        Debug.Log("test");
         isFinish = true;
         bottomPanel.SetActive(false);
         isResultPanelOpen = true;

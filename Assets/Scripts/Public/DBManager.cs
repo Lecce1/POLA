@@ -10,6 +10,7 @@ using UnityEngine.Serialization;
 class LocalData
 {
     public int chapter = 1;
+    public int currentChapter = 1;
     public float musicValue;
     public float sfxValue;
     public int supportLanguageNum = 2;
@@ -162,6 +163,7 @@ public class DBManager : MonoBehaviour
             {
                 isTutorial = localData.isTutorial;
                 chapter = localData.chapter;
+                currentChapter = localData.currentChapter;
                 musicValue = localData.musicValue;
                 sfxValue = localData.sfxValue;
                 isVibration = localData.isVibration;
@@ -196,6 +198,7 @@ public class DBManager : MonoBehaviour
         LocalData localData = new LocalData();
         localData.isTutorial = isTutorial;
         localData.chapter = chapter;
+        localData.currentChapter = currentChapter;
         localData.musicValue = musicValue;
         localData.sfxValue = sfxValue;
         localData.isVibration = isVibration;

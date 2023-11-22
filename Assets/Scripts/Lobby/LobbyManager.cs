@@ -31,9 +31,12 @@ public class LobbyManager : MonoBehaviour
     [Title("종료")] 
     public GameObject exit;
 
-    [FoldoutGroup("텍스트")] 
-    [Title("입장 버튼")] 
+    [FoldoutGroup("모바일")] 
+    [Title("입장 버튼 텍스트")] 
     public Text join_Btn_Text;
+    [FoldoutGroup("모바일")] 
+    [Title("뒤로가기 버튼")] 
+    public GameObject back_Btn;
     
     [FoldoutGroup("땅")]
     [Title("땅 리스트")] 
@@ -232,7 +235,7 @@ public class LobbyManager : MonoBehaviour
         }
     }
 
-    public void Button(string type)  //if (join_Btn.GetComponent<Animator>().GetCurrentAnimatorStateInfo(0).normalizedTime >= 0.9f)
+    public void Button(string type)
     {
         switch (type)
         {
@@ -257,9 +260,10 @@ public class LobbyManager : MonoBehaviour
                         }
                     }
                 }
-                
+
                 if (DBManager.instance.currentGround == 1)
                 {
+                    moveRoute[DBManager.instance.currentGround].defaultRouteIdx = DBManager.instance.currentChapter - 1;
                     RenderSettings.skybox = stage_Skybox[0];
 
                     if (LobbyAudioManager.instance.bgmAudio.clip != bgm[0])
@@ -295,6 +299,14 @@ public class LobbyManager : MonoBehaviour
                     LobbyAudioManager.instance.bgmAudio.clip = bgm[DBManager.instance.currentChapter];
                     LobbyAudioManager.instance.bgmAudio.Play();
                 }
+
+                if (DBManager.instance.currentPlatform == "MOBILE")
+                {
+                    if (!back_Btn.activeSelf)
+                    {
+                        back_Btn.SetActive(true);
+                    }
+                }
                 
                 DBManager.instance.currentRouteIdx = moveRoute[DBManager.instance.currentGround].defaultRouteIdx;
                 LobbyPlayerController.instance.transform.position = moveRoute[DBManager.instance.currentGround].routeList[moveRoute[DBManager.instance.currentGround].defaultRouteIdx].transform.position + offset;
@@ -302,62 +314,66 @@ public class LobbyManager : MonoBehaviour
                 break;
             
             case "Back":
-                DBManager.instance.currentGround--;
+                if (DBManager.instance.currentGround != 0)
+                {
+                    DBManager.instance.currentGround--;
                 
-                for (int i = 0; i < ground.Count; i++)
-                {
-                    if (i == DBManager.instance.currentGround)
+                    for (int i = 0; i < ground.Count; i++)
                     {
-                        if (!ground[i].activeSelf)
+                        if (i == DBManager.instance.currentGround)
                         {
-                            ground[i].SetActive(true);
+                            if (!ground[i].activeSelf)
+                            {
+                                ground[i].SetActive(true);
+                            }
+                        }
+                        else
+                        {
+                            if (ground[i].activeSelf)
+                            {
+                                ground[i].SetActive(false);
+                            }
                         }
                     }
-                    else
-                    {
-                        if (ground[i].activeSelf)
-                        {
-                            ground[i].SetActive(false);
-                        }
-                    }
-                }
 
-                if (DBManager.instance.currentGround == 1)
-                {
-                    if (DBManager.instance.currentChapter <= 4)
+                    if (DBManager.instance.currentGround == 0)
+                    {
+                        DBManager.instance.currentRouteIdx = 3;
+                        
+                        if (DBManager.instance.currentPlatform == "MOBILE")
+                        {
+                            if (back_Btn.activeSelf)
+                            {
+                                back_Btn.SetActive(false);
+                            }
+                        }
+                    }
+                    else if (DBManager.instance.currentGround == 1)
                     {
                         DBManager.instance.currentRouteIdx = DBManager.instance.currentChapter - 1;
                     }
-                    else
+
+                    LobbyPlayerController.instance.transform.position = moveRoute[DBManager.instance.currentGround].routeList[DBManager.instance.currentRouteIdx].transform.position + offset;
+
+                    if (DBManager.instance.currentGround == 1)
                     {
-                        DBManager.instance.currentRouteIdx = DBManager.instance.currentChapter;
+                        RenderSettings.skybox = stage_Skybox[0];
+                        
+                        if (LobbyAudioManager.instance.bgmAudio.isPlaying)
+                        {
+                            LobbyAudioManager.instance.bgmAudio.Stop();
+                        }
+
+                        if (LobbyAudioManager.instance.bgmAudio.clip != bgm[0])
+                        {
+                            LobbyAudioManager.instance.bgmAudio.clip = bgm[0];
+                            LobbyAudioManager.instance.bgmAudio.Play();
+                        }
                     }
-                }
-                else if (DBManager.instance.currentGround == 0)
-                {
-                    DBManager.instance.currentRouteIdx = 3;
-                }
-
-                LobbyPlayerController.instance.transform.position = moveRoute[DBManager.instance.currentGround].routeList[DBManager.instance.currentRouteIdx].transform.position + offset;
-
-                if (DBManager.instance.currentGround == 1)
-                {
-                    RenderSettings.skybox = stage_Skybox[0];
                     
-                    if (LobbyAudioManager.instance.bgmAudio.isPlaying)
-                    {
-                        LobbyAudioManager.instance.bgmAudio.Stop();
-                    }
-
-                    if (LobbyAudioManager.instance.bgmAudio.clip != bgm[0])
-                    {
-                        LobbyAudioManager.instance.bgmAudio.clip = bgm[0];
-                        LobbyAudioManager.instance.bgmAudio.Play();
-                    }
+                    LobbyPlayerController.instance.Collider();
+                    LobbyAudioManager.instance.PlayAudio("Button");
                 }
-                
-                LobbyPlayerController.instance.Collider();
-                LobbyAudioManager.instance.PlayAudio("Button");
                 break;
             
             case "Stage":

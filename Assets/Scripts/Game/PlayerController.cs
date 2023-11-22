@@ -369,7 +369,7 @@ public class PlayerController : MonoBehaviour
 
     public void OnCancel()
     {
-        if (!GameManager.instance.isResultPanel)
+        if (!GameManager.instance.isResultPanel && !GameManager.instance.isCountDown)
         {
             if (!GameManager.instance.isPanelOpen)
             {
