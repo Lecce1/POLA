@@ -20,6 +20,9 @@ public class LobbyAudioManager : MonoBehaviour
     [FoldoutGroup("오디오 클립")]
     [Title("UI-Button")]
     public AudioClip uiButtonClip;
+    [FoldoutGroup("오디오 클립")]
+    [Title("Player")]
+    public AudioClip playerClip;
 
     [FoldoutGroup("오디오 믹서")]
     [Title("오디오 믹서")]
@@ -64,6 +67,10 @@ public class LobbyAudioManager : MonoBehaviour
                 {
                     uiAudio.PlayOneShot(uiButtonClip);
                 }
+                break;
+            
+            case "Player":
+                effectAudio.PlayOneShot(playerClip);
                 break;
         }
     }

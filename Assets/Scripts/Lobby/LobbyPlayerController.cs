@@ -57,6 +57,8 @@ public class LobbyPlayerController : MonoBehaviour
 
     IEnumerator Move()
     {
+        LobbyAudioManager.instance.PlayAudio("Player");
+        
         while (transform.position.x != LobbyManager.instance.moveRoute[DBManager.instance.currentGround]
                    .routeList[DBManager.instance.currentRouteIdx]
                    .transform.position.x || transform.position.z != LobbyManager.instance.moveRoute[DBManager.instance.currentGround]

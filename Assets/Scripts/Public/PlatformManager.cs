@@ -1,3 +1,4 @@
+using System;
 using System.Collections.Generic;
 using Sirenix.OdinInspector;
 using UnityEditor;
@@ -8,6 +9,13 @@ using UnityEngine.SceneManagement;
 
 public class PlatformManager : MonoBehaviour
     {
+        enum Type
+        {
+            Lobby,
+            Game,
+            Latency
+        }
+        
         [Title("키보드 오브젝트")] 
         public List<GameObject> keyboardObjects = new List<GameObject>();
         [Title("게임패드 오브젝트")] 
@@ -16,6 +24,9 @@ public class PlatformManager : MonoBehaviour
         public List<GameObject> mobileObjects = new List<GameObject>();
         [Title("PlayerInput")] 
         public PlayerInput playerInput;
+        [Title("현재 씬 타입")] 
+        [SerializeField]
+        private Type type;
 
         void Start()
         {
@@ -69,7 +80,7 @@ public class PlatformManager : MonoBehaviour
                 DBManager.instance.currentPlatform = "PC";
             }
             
-            if (LobbyManager.instance.join_Btn.activeSelf)
+            if (type == Type.Lobby && LobbyManager.instance.join_Btn.activeSelf)
             {
                 LobbyManager.instance.join_Btn.SetActive(false);
             }
@@ -109,7 +120,7 @@ public class PlatformManager : MonoBehaviour
                 DBManager.instance.currentPlatform = "CONSOLE";
             }
             
-            if (LobbyManager.instance.join_Btn.activeSelf)
+            if (type == Type.Lobby && LobbyManager.instance.join_Btn.activeSelf)
             {
                 LobbyManager.instance.join_Btn.SetActive(false);
             }
@@ -146,7 +157,7 @@ public class PlatformManager : MonoBehaviour
                 DBManager.instance.currentPlatform = "MOBILE";
             }
             
-            if (!LobbyManager.instance.join_Btn.activeSelf)
+            if (type == Type.Lobby && !LobbyManager.instance.join_Btn.activeSelf)
             {
                 LobbyManager.instance.join_Btn.SetActive(true);
             }
