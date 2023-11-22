@@ -178,6 +178,11 @@ public class LobbyManager : MonoBehaviour
             
             RenderSettings.skybox = stage_Skybox[DBManager.instance.currentChapter];
             
+            for (int i = 0; i < stageGround.transform.childCount; i++)
+            {
+                stageGround.transform.GetChild(i).GetComponent<MeshRenderer>().material = stageGroundMaterial[DBManager.instance.currentChapter];
+            }
+            
             if (LobbyAudioManager.instance.bgmAudio.isPlaying)
             {
                 LobbyAudioManager.instance.bgmAudio.Stop();
@@ -232,6 +237,7 @@ public class LobbyManager : MonoBehaviour
         switch (type)
         {
             case "Move":
+                LobbyAudioManager.instance.PlayAudio("Button");
                 DBManager.instance.currentGround++;
                 
                 for (int i = 0; i < ground.Count; i++)
@@ -351,6 +357,7 @@ public class LobbyManager : MonoBehaviour
                 }
                 
                 LobbyPlayerController.instance.Collider();
+                LobbyAudioManager.instance.PlayAudio("Button");
                 break;
             
             case "Stage":
@@ -362,6 +369,8 @@ public class LobbyManager : MonoBehaviour
                 break;
             
             case "Info_Yes":
+                LobbyPlayerController.instance.isMoveAvailable = false;
+                LobbyAudioManager.instance.PlayAudio("Button");
                 StartCoroutine(FadeManager.instance.FadeIn());
                 DBManager.instance.nextScene = DBManager.instance.gameSceneName;
                 break;
@@ -382,10 +391,14 @@ public class LobbyManager : MonoBehaviour
                     {
                         keyBinding.SetActive(false);
                     }
+                    
+                    LobbyAudioManager.instance.PlayAudio("Button");
                 }
                 break;
             
             case "Latency":
+                LobbyPlayerController.instance.isMoveAvailable = false;
+                LobbyAudioManager.instance.PlayAudio("Button");
                 StartCoroutine(FadeManager.instance.FadeIn());
                 DBManager.instance.nextScene = DBManager.instance.latencySceneName;
                 break;
@@ -417,6 +430,8 @@ public class LobbyManager : MonoBehaviour
                     {
                         keyBinding.SetActive(false);
                     }
+                    
+                    LobbyAudioManager.instance.PlayAudio("Button");
                 }
                 break;
             
@@ -436,6 +451,8 @@ public class LobbyManager : MonoBehaviour
                     {
                         keyBinding.SetActive(false);
                     }
+                    
+                    LobbyAudioManager.instance.PlayAudio("Button");
                 }
                 break;
 
@@ -455,12 +472,15 @@ public class LobbyManager : MonoBehaviour
                     {
                         keyBinding.SetActive(false);
                     }
+                    
+                    LobbyAudioManager.instance.PlayAudio("Button");
                 }
                 break;
             
             case "Exit_Yes":
                 if (exit.activeSelf)
                 {
+                    LobbyAudioManager.instance.PlayAudio("Button");
                     Application.Quit();
                 }
                 break;
@@ -476,6 +496,8 @@ public class LobbyManager : MonoBehaviour
     
     public void Info_OnOff(bool isOn)
     {
+        LobbyAudioManager.instance.PlayAudio("Button");
+        
         if (isOn)
         {
             TrackInfo.instance.Init();
@@ -579,6 +601,7 @@ public class LobbyManager : MonoBehaviour
             return;
         }
 
+        LobbyAudioManager.instance.PlayAudio("Button");
         bool isCheck = false;
         
         switch (backStack.Pop().name)

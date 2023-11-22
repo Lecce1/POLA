@@ -69,6 +69,11 @@ public class PlatformManager : MonoBehaviour
                 DBManager.instance.currentPlatform = "PC";
             }
             
+            if (LobbyManager.instance.join_Btn.activeSelf)
+            {
+                LobbyManager.instance.join_Btn.SetActive(false);
+            }
+            
             for (int i = 0; i < gamepadObjects.Count; i++)
             {
                 if (gamepadObjects[i] == null)
@@ -104,6 +109,11 @@ public class PlatformManager : MonoBehaviour
                 DBManager.instance.currentPlatform = "CONSOLE";
             }
             
+            if (LobbyManager.instance.join_Btn.activeSelf)
+            {
+                LobbyManager.instance.join_Btn.SetActive(false);
+            }
+            
             for (int i = 0; i < keyboardObjects.Count; i++)
             {
                 if (keyboardObjects[i] == null)
@@ -134,6 +144,11 @@ public class PlatformManager : MonoBehaviour
             if (DBManager.instance != null)
             {
                 DBManager.instance.currentPlatform = "MOBILE";
+            }
+            
+            if (!LobbyManager.instance.join_Btn.activeSelf)
+            {
+                LobbyManager.instance.join_Btn.SetActive(true);
             }
             
             for (int i = 0; i < keyboardObjects.Count; i++)

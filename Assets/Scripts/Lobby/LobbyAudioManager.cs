@@ -2,6 +2,7 @@ using System.Collections;
 using Sirenix.OdinInspector;
 using UnityEngine;
 using UnityEngine.Audio;
+using UnityEngine.EventSystems;
 using UnityEngine.Serialization;
 
 public class LobbyAudioManager : MonoBehaviour
@@ -55,7 +56,14 @@ public class LobbyAudioManager : MonoBehaviour
         switch (type)
         {
             case "Button":
-                uiAudio.PlayOneShot(uiButtonClip);
+                if (LobbyManager.instance.set.activeSelf && DBManager.instance.currentPlatform == "MOBILE" && EventSystem.current.currentSelectedGameObject.name == "Slider")
+                {
+                    
+                }
+                else
+                {
+                    uiAudio.PlayOneShot(uiButtonClip);
+                }
                 break;
         }
     }

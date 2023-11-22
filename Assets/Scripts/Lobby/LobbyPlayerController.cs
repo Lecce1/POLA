@@ -1,4 +1,5 @@
 using System.Collections;
+using System.Runtime.CompilerServices;
 using UnityEngine;
 using Sirenix.OdinInspector;
 using UnityEngine.EventSystems;
@@ -274,6 +275,7 @@ public class LobbyPlayerController : MonoBehaviour
                 if (LobbyManager.instance.info.GetComponent<Animator>().GetCurrentAnimatorStateInfo(0).normalizedTime >= 1f)
                 {
                     LobbyManager.instance.Info_OnOff(false);
+                    Collider();
                 }
             }
             else if (!LobbyManager.instance.esc.activeSelf)
