@@ -38,7 +38,7 @@ RenderSettings:
   m_ReflectionIntensity: 1
   m_CustomReflection: {fileID: 0}
   m_Sun: {fileID: 0}
-  m_IndirectSpecularColor: {r: 0.75203055, g: 0.65534943, b: 0.5794519, a: 1}
+  m_IndirectSpecularColor: {r: 0.7519836, g: 0.6552457, b: 0.5793062, a: 1}
   m_UseRadianceAmbientProbe: 0
 --- !u!157 &3
 LightmapSettings:
@@ -1585,7 +1585,7 @@ MonoBehaviour:
       audio: {fileID: 8300000, guid: 3af82e794237f455893ec1eb45d5fc16, type: 3}
       polaroid: {fileID: 0}
   - stage:
-    - name: "\uB611\uAC19\uC740 \uC77C\uC0C1"
+    - name: "\uC5EC\uD589\uC758 \uBB18\uBBF8, \uB9CC\uB0A8"
       starCount: 0
       score: 0
       perfect: 0
@@ -1605,7 +1605,7 @@ MonoBehaviour:
       bpm: 114
       audio: {fileID: 8300000, guid: ce18281ac937bd44ba50f4c884b99451, type: 3}
       polaroid: {fileID: 2100000, guid: 59ad3c97a876347caafada8357aad33d, type: 2}
-    - name: "\uACBD\uACC4\uC2EC \uB9CE\uC740 \uB3D9\uBB3C\uB4E4"
+    - name: "\uB2E4\uB8E8\uB9C8\uC528\uAC00 \uB5A8\uC5B4\uC84C\uB2E4"
       starCount: 0
       score: 0
       perfect: 0
@@ -1615,7 +1615,7 @@ MonoBehaviour:
       bpm: 128
       audio: {fileID: 8300000, guid: 6b22b4e3030c6524c9f6e9338aa038ca, type: 3}
       polaroid: {fileID: 2100000, guid: 6c6af76801b654bbd935a43662e8368b, type: 2}
-    - name: "\uC694\uB9AC\uB97C \uD574\uC8FC\uC790"
+    - name: "\uC694\uB9AC"
       starCount: 0
       score: 0
       perfect: 0
@@ -1625,7 +1625,7 @@ MonoBehaviour:
       bpm: 80
       audio: {fileID: 8300000, guid: e2acaddab7df0cc4ab9d0a6bf52ee7cd, type: 3}
       polaroid: {fileID: 2100000, guid: 61c91ac05539e4072a0fe3874ef2a2a7, type: 2}
-    - name: "\uD568\uAED8 \uB180\uC790"
+    - name: "Let\u2019s play together!"
       starCount: 0
       score: 0
       perfect: 0
@@ -1635,7 +1635,7 @@ MonoBehaviour:
       bpm: 69
       audio: {fileID: 8300000, guid: b675263843f3ca243a6e80c98f9700d0, type: 3}
       polaroid: {fileID: 2100000, guid: 876e1fcc6051a4bb980d37eae6992af7, type: 2}
-    - name: "\uC990\uAC70\uC6B4 \uC77C\uC0C1"
+    - name: "\uC720\uCF8C\uD55C \uC77C\uC0C1"
       starCount: 0
       score: 0
       perfect: 0
@@ -35247,7 +35247,7 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0, y: 0}
   m_AnchorMax: {x: 0, y: 0}
-  m_AnchoredPosition: {x: 98.483406, y: 0}
+  m_AnchoredPosition: {x: 113.838875, y: 0}
   m_SizeDelta: {x: 0, y: 0}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!114 &347786979
@@ -43656,6 +43656,7 @@ MonoBehaviour:
   bgmAudio: {fileID: 1958917273}
   uiAudio: {fileID: 1883065151}
   effectAudio: {fileID: 13394082}
+  uiButtonClip: {fileID: 0}
   audioMixer: {fileID: 24100000, guid: fe7e550e177674e8bac853b46a810106, type: 2}
 --- !u!1 &479211884
 GameObject:
@@ -56058,7 +56059,7 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 575790304}
   serializedVersion: 2
-  m_LocalRotation: {x: -0, y: -6.938894e-18, z: -1.0164395e-20, w: 1}
+  m_LocalRotation: {x: -0, y: 2.0122792e-16, z: 3.2526065e-19, w: 1}
   m_LocalPosition: {x: 0, y: 0, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
@@ -58673,8 +58674,8 @@ MonoBehaviour:
   m_faceColor:
     serializedVersion: 2
     rgba: 4294967295
-  m_fontSize: 1.5
-  m_fontSizeBase: 1.5
+  m_fontSize: 1.3
+  m_fontSizeBase: 1.3
   m_fontWeight: 400
   m_enableAutoSizing: 0
   m_fontSizeMin: 18
@@ -59238,7 +59239,7 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0, y: 0}
   m_AnchorMax: {x: 0, y: 0}
-  m_AnchoredPosition: {x: 98.483406, y: 0}
+  m_AnchoredPosition: {x: 124.928925, y: 0}
   m_SizeDelta: {x: 0, y: 0}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!114 &655933088
@@ -77312,7 +77313,7 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0, y: 0}
   m_AnchorMax: {x: 0, y: 0}
-  m_AnchoredPosition: {x: 62.89099, y: 0}
+  m_AnchoredPosition: {x: 78.24645, y: 0}
   m_SizeDelta: {x: 0, y: 0}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!114 &953984615
@@ -79343,8 +79344,8 @@ MonoBehaviour:
   m_faceColor:
     serializedVersion: 2
     rgba: 4294967295
-  m_fontSize: 1.5
-  m_fontSizeBase: 1.5
+  m_fontSize: 1.3
+  m_fontSizeBase: 1.3
   m_fontWeight: 400
   m_enableAutoSizing: 0
   m_fontSizeMin: 18
@@ -83485,7 +83486,7 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0, y: 0}
   m_AnchorMax: {x: 0, y: 0}
-  m_AnchoredPosition: {x: 238.67297, y: 0}
+  m_AnchoredPosition: {x: 295.8294, y: 0}
   m_SizeDelta: {x: 0, y: 0}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!114 &1148286082
@@ -98699,8 +98700,8 @@ MonoBehaviour:
   m_faceColor:
     serializedVersion: 2
     rgba: 4294967295
-  m_fontSize: 1.5
-  m_fontSizeBase: 1.5
+  m_fontSize: 1.3
+  m_fontSizeBase: 1.3
   m_fontWeight: 400
   m_enableAutoSizing: 0
   m_fontSizeMin: 18
@@ -111789,7 +111790,7 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0, y: 0}
   m_AnchorMax: {x: 0, y: 0}
-  m_AnchoredPosition: {x: 120.7109, y: 0}
+  m_AnchoredPosition: {x: 95.97156, y: 0}
   m_SizeDelta: {x: 0, y: 0}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!114 &1412945683
@@ -113450,7 +113451,7 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1473644558}
   serializedVersion: 2
-  m_LocalRotation: {x: -0.0008076914, y: -3.3606194e-11, z: -2.7143447e-14, w: 0.9999997}
+  m_LocalRotation: {x: -0.0008076914, y: 3.3606035e-11, z: 2.7143318e-14, w: 0.9999997}
   m_LocalPosition: {x: 0, y: 0, z: -300}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
@@ -121972,8 +121973,8 @@ MonoBehaviour:
   m_faceColor:
     serializedVersion: 2
     rgba: 4294967295
-  m_fontSize: 1.5
-  m_fontSizeBase: 1.5
+  m_fontSize: 1.3
+  m_fontSizeBase: 1.3
   m_fontWeight: 400
   m_enableAutoSizing: 0
   m_fontSizeMin: 18
@@ -122757,7 +122758,7 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0, y: 0}
   m_AnchorMax: {x: 0, y: 0}
-  m_AnchoredPosition: {x: 98.483406, y: 0}
+  m_AnchoredPosition: {x: 116.82464, y: 0}
   m_SizeDelta: {x: 0, y: 0}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!114 &1617106708
@@ -140831,8 +140832,8 @@ MonoBehaviour:
   m_faceColor:
     serializedVersion: 2
     rgba: 4294967295
-  m_fontSize: 1.5
-  m_fontSizeBase: 1.5
+  m_fontSize: 1.3
+  m_fontSizeBase: 1.3
   m_fontWeight: 400
   m_enableAutoSizing: 0
   m_fontSizeMin: 18
@@ -145872,7 +145873,7 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0, y: 0}
   m_AnchorMax: {x: 0, y: 0}
-  m_AnchoredPosition: {x: 139.43127, y: 0}
+  m_AnchoredPosition: {x: 159.05212, y: 0}
   m_SizeDelta: {x: 0, y: 0}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!114 &2128184164
@@ -146397,8 +146398,8 @@ MonoBehaviour:
   m_faceColor:
     serializedVersion: 2
     rgba: 4294967295
-  m_fontSize: 1.5
-  m_fontSizeBase: 1.5
+  m_fontSize: 1.3
+  m_fontSizeBase: 1.3
   m_fontWeight: 400
   m_enableAutoSizing: 0
   m_fontSizeMin: 18

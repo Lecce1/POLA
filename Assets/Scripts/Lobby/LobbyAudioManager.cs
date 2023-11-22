@@ -16,7 +16,11 @@ public class LobbyAudioManager : MonoBehaviour
     [Title("Effect")]
     public AudioSource effectAudio;
     
-    [FoldoutGroup("음악")]
+    [FoldoutGroup("오디오 클립")]
+    [Title("UI-Button")]
+    public AudioClip uiButtonClip;
+
+    [FoldoutGroup("오디오 믹서")]
     [Title("오디오 믹서")]
     public AudioMixer audioMixer;
     
@@ -44,5 +48,15 @@ public class LobbyAudioManager : MonoBehaviour
         
         audioMixer.SetFloat("Music", DBManager.instance.musicValue * 80 - 80);
         audioMixer.SetFloat("FX", DBManager.instance.sfxValue * 80 - 80);
+    }
+
+    public void PlayAudio(string type)
+    {
+        switch (type)
+        {
+            case "Button":
+                uiAudio.PlayOneShot(uiButtonClip);
+                break;
+        }
     }
 }

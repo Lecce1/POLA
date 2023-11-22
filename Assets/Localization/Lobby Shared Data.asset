@@ -15,14 +15,6 @@ MonoBehaviour:
   m_TableCollectionName: Lobby
   m_TableCollectionNameGuidString: 7f9536f2d7d5a428d929ea22630ad923
   m_Entries:
-  - m_Id: 5598339072
-    m_Key: Notice
-    m_Metadata:
-      m_Items: []
-  - m_Id: 252135333888
-    m_Key: Notice_Content
-    m_Metadata:
-      m_Items: []
   - m_Id: 587071479808
     m_Key: Close
     m_Metadata:

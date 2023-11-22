@@ -18,14 +18,6 @@ MonoBehaviour:
   m_Metadata:
     m_Items: []
   m_TableData:
-  - m_Id: 5598339072
-    m_Localized: NOTICE
-    m_Metadata:
-      m_Items: []
-  - m_Id: 252135333888
-    m_Localized: There's nothing here ~
-    m_Metadata:
-      m_Items: []
   - m_Id: 587071479808
     m_Localized: CLOSE
     m_Metadata:
