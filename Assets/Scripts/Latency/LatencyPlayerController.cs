@@ -71,10 +71,9 @@ public class LatencyPlayerController : MonoBehaviour
         int latencyDelta = latency;
         int sampledTime = LatencyAudioManager.instance.GetSampledTime();
         latency = sampledTime % (int)(60000f / bpm);
-        Debug.Log(latency);
         latencyDelta -= latency;
         latencySum += latency;
-        transform.position -= transform.forward * (latencyDelta * bpm / 7500f);
+        transform.position += transform.forward * (latencyDelta * bpm / 7500f);
         count++;
         wasClickedThisTime = true;
     }

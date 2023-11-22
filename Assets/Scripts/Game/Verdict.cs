@@ -44,7 +44,7 @@ public class Verdict : MonoBehaviour
         var scale = obj.transform.localScale;
         scale.y = y;
         obj.transform.localScale = scale;
-        obj.transform.position = transform.position + transform.forward + transform.up * (y / 2);
+        obj.transform.position = transform.position + transform.forward * 2 + transform.up * (y / 2);
     }
 
     public static Obstacle GetObstacle(GameObject obj)
