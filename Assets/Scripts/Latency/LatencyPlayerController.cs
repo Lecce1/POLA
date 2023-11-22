@@ -74,7 +74,7 @@ public class LatencyPlayerController : MonoBehaviour
         Debug.Log(latency);
         latencyDelta -= latency;
         latencySum += latency;
-        transform.position += transform.forward * (latencyDelta * bpm / 7500f);
+        transform.position -= transform.forward * (latencyDelta * bpm / 7500f);
         count++;
         wasClickedThisTime = true;
     }

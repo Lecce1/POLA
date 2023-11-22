@@ -91,7 +91,7 @@ public class PlayerController : MonoBehaviour
         PlayerInput input = GetComponent<PlayerInput>();
         input.actions.FindAction("Up").canceled += OnKeyUp;
         input.actions.FindAction("Down").canceled += OnKeyUp;
-        transform.position += transform.forward * (DBManager.instance.latency * bpm / 7500f);
+        transform.position -= transform.forward * (DBManager.instance.latency * bpm / 7500f);
         isLoaded = true;
     }
     
