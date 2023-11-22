@@ -76,6 +76,7 @@ public class LatencyPlayerController : MonoBehaviour
         transform.position += transform.forward * (latencyDelta * bpm / 7500f);
         count++;
         wasClickedThisTime = true;
+        Debug.Log(latency);
     }
 
     public void BeatUpdate()

@@ -173,7 +173,7 @@ public class PlayerController : MonoBehaviour
     /// </summary>
     void OnKeyUp(InputAction.CallbackContext context)
     {
-        if (!verdict.isLongInteract)
+        if (!isLoaded || !verdict.isLongInteract)
         {
             return;
         }
@@ -203,6 +203,11 @@ public class PlayerController : MonoBehaviour
 
     public void OnUp()
     {
+        if (!isLoaded)
+        {
+            return;
+        }
+        
         if (!verdict.isUp)
         {
             OnFlip();
@@ -213,6 +218,11 @@ public class PlayerController : MonoBehaviour
     
     public void OnDown()
     {
+        if (!isLoaded)
+        {
+            return;
+        }
+        
         if (verdict.isUp)
         {
             OnFlip();
