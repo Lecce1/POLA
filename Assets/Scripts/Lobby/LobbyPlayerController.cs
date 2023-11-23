@@ -178,7 +178,21 @@ public class LobbyPlayerController : MonoBehaviour
     {
         if (DBManager.instance.currentGround != 0)
         {
-            LobbyManager.instance.Button("Back");
+            if (DBManager.instance.currentGround == 2 && LobbyManager.instance.isInfoPanelOn)
+            {
+                if (LobbyManager.instance.info.GetComponent<Animator>().GetCurrentAnimatorStateInfo(0).IsName("InfoOn"))
+                {
+                    if (LobbyManager.instance.info.GetComponent<Animator>().GetCurrentAnimatorStateInfo(0).normalizedTime >= 1f)
+                    {
+                        LobbyManager.instance.Info_OnOff(false);
+                        Collider();
+                    }
+                }
+            }
+            else
+            {
+                LobbyManager.instance.Button("Back");
+            }
         }
     }
 
@@ -196,8 +210,15 @@ public class LobbyPlayerController : MonoBehaviour
     {
         if (!LobbyManager.instance.isPanelOpen && LobbyManager.instance.isJoinBtnOn)
         {
-            LobbyManager.instance.Button(LobbyManager.instance.join_Btn_Type);
-
+            if (LobbyManager.instance.info.GetComponent<Animator>().GetCurrentAnimatorStateInfo(0).IsName("InfoOn") && LobbyManager.instance.info.GetComponent<Animator>().GetCurrentAnimatorStateInfo(0).normalizedTime >= 0.9f)
+            {
+                LobbyManager.instance.Button($"Info_Yes");
+            }
+            else
+            {
+                LobbyManager.instance.Button(LobbyManager.instance.join_Btn_Type);
+            }
+            
             if (LobbyManager.instance.join_Btn_Type != "Move" && LobbyManager.instance.join_Btn_Type != "Stage")
             {
                 isMoveAvailable = false;
@@ -209,14 +230,7 @@ public class LobbyPlayerController : MonoBehaviour
     {
         if (transform.GetComponent<PlayerInput>().currentControlScheme != "MOBILE")
         {
-            if (!LobbyManager.instance.isPanelOpen && LobbyManager.instance.isJoinBtnOn)
-            {
-                if (LobbyManager.instance.info.GetComponent<Animator>().GetCurrentAnimatorStateInfo(0).IsName("InfoOn") && LobbyManager.instance.info.GetComponent<Animator>().GetCurrentAnimatorStateInfo(0).normalizedTime >= 0.9f)
-                {
-                    LobbyManager.instance.Button($"Info_Yes");
-                }
-            }
-            else if (LobbyManager.instance.set.activeSelf)
+            if (LobbyManager.instance.set.activeSelf)
             {
                 switch (EventSystem.current.currentSelectedGameObject.name)
                 {
@@ -280,15 +294,7 @@ public class LobbyPlayerController : MonoBehaviour
         }
         else if (!LobbyManager.instance.isPanelOpen)
         {
-            if (LobbyManager.instance.info.GetComponent<Animator>().GetCurrentAnimatorStateInfo(0).IsName("InfoOn"))
-            {
-                if (LobbyManager.instance.info.GetComponent<Animator>().GetCurrentAnimatorStateInfo(0).normalizedTime >= 1f)
-                {
-                    LobbyManager.instance.Info_OnOff(false);
-                    Collider();
-                }
-            }
-            else if (!LobbyManager.instance.esc.activeSelf && DBManager.instance.currentPlatform == "PC")
+            if (!LobbyManager.instance.esc.activeSelf && DBManager.instance.currentPlatform == "PC")
             {
                 LobbyManager.instance.Button("Esc");
                 isMoveAvailable = false;
