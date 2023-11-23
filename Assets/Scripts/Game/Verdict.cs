@@ -28,16 +28,6 @@ public class Verdict : MonoBehaviour
         verdictBarList[2].onTriggerExitEvent += HandleGoodVerdictExit;
     }
 
-    private void FixedUpdate()
-    {
-        SetTransform(verdictBar);
-    }
-    
-    void SetTransform(GameObject obj)
-    {
-        obj.transform.position = transform.position + transform.forward * 2;
-    }
-
     public static Obstacle GetObstacle(GameObject obj)
     {
         if (obj == null)

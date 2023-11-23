@@ -43,9 +43,12 @@ public class PlayerController : MonoBehaviour
     public Verdict verdict;
     [FoldoutGroup("일반")]
     public LayerMask ground;
-
     [FoldoutGroup("일반")] 
+    [SerializeField]
     private Obstacle keyUpCheckObstacle;
+    [FoldoutGroup("일반")] 
+    [SerializeField]
+    private PlayerParticle playerParticle;
 
     private InputAction.CallbackContext callback = new ();
     
@@ -239,6 +242,7 @@ public class PlayerController : MonoBehaviour
             {
                 var longNote = obstacle.transform.GetChild(0).GetChild(0).gameObject;
                 verdict.DequeueUsedCollider(longNote.gameObject);
+                playerParticle.AttackParticle();
                 Destroy(longNote.transform.parent.gameObject);
                 
                 VibrateMobile();
@@ -266,8 +270,8 @@ public class PlayerController : MonoBehaviour
         animator.SetInteger("AttackCounter", attackCounter++);
         animator.SetBool("isAttacking", true);
         attackCounter %= 2;
-        
         verdict.DequeueUsedCollider(obstacle);
+        playerParticle.AttackParticle();
         Destroy(obstacle.gameObject);
     }
 
