@@ -30,7 +30,6 @@ public class VerdictBar : MonoBehaviour
         
         if (other.gameObject == lastObject && !GameManager.instance.isResultPanel)
         {
-            Debug.Log("test");
             GameManager.instance.Invoke(nameof(GameManager.Finish), 2.0f);
             GameManager.instance.isResultPanel = true;
         }

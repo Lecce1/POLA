@@ -566,9 +566,9 @@ public class LobbyManager : MonoBehaviour
     {
         if (isOn)
         {
-            float temp = -4.5f;
+            float temp = -5f;
         
-            while (virtualCamera.GetCinemachineComponent<CinemachineTransposer>().m_FollowOffset.z < -3.5f)
+            while (virtualCamera.GetCinemachineComponent<CinemachineTransposer>().m_FollowOffset.z < -4f)
             {
                 temp += Time.deltaTime;
                 virtualCamera.GetCinemachineComponent<CinemachineTransposer>().m_FollowOffset = new Vector3(0, 1.5f, temp);
@@ -577,9 +577,9 @@ public class LobbyManager : MonoBehaviour
         }
         else if (!isOn)
         {
-            float temp = -3.5f;
+            float temp = -4f;
         
-            while (virtualCamera.GetCinemachineComponent<CinemachineTransposer>().m_FollowOffset.z > -4.5f)
+            while (virtualCamera.GetCinemachineComponent<CinemachineTransposer>().m_FollowOffset.z > -5f)
             {
                 temp -= Time.deltaTime;
                 virtualCamera.GetCinemachineComponent<CinemachineTransposer>().m_FollowOffset = new Vector3(0, 1.5f, temp);

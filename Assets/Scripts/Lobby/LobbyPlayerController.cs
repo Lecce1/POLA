@@ -178,7 +178,7 @@ public class LobbyPlayerController : MonoBehaviour
     {
         if (DBManager.instance.currentGround != 0)
         {
-            if (DBManager.instance.currentGround == 2 && LobbyManager.instance.isInfoPanelOn)
+            if (DBManager.instance.currentGround == 2 && !LobbyManager.instance.isPanelOpen && LobbyManager.instance.isInfoPanelOn)
             {
                 if (LobbyManager.instance.info.GetComponent<Animator>().GetCurrentAnimatorStateInfo(0).IsName("InfoOn"))
                 {
@@ -189,7 +189,7 @@ public class LobbyPlayerController : MonoBehaviour
                     }
                 }
             }
-            else
+            else if(!LobbyManager.instance.isPanelOpen && !LobbyManager.instance.isInfoPanelOn)
             {
                 LobbyManager.instance.Button("Back");
             }
@@ -289,7 +289,11 @@ public class LobbyPlayerController : MonoBehaviour
             if (!LobbyManager.instance.exit.activeSelf)
             {
                 LobbyManager.instance.Back();
-                isMoveAvailable = true;
+                
+                if (!LobbyManager.instance.isInfoPanelOn)
+                {
+                    isMoveAvailable = true;
+                }
             }
         }
         else if (!LobbyManager.instance.isPanelOpen)
