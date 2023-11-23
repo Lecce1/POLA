@@ -76,15 +76,9 @@ public class MapCreator : MonoBehaviour
             Quaternion q = Quaternion.AngleAxis(0, progressDirection);
             Vector3 pos = new Vector3(n.noteTime * 8f + defaultOffset, 0.5f, 0);
             
-            if (n.isUp)
+            if (!n.isUp)
             {
-                Ray ray = new Ray(pos, Vector3.up);
-                
-                if (Physics.Raycast(ray, out RaycastHit hitInfo, Mathf.Infinity, ground))
-                {
-                    pos = hitInfo.point;
-                    q = Quaternion.AngleAxis(180, progressDirection);
-                }
+                q = Quaternion.AngleAxis(180, progressDirection);
             }
             
             GameObject obj = null;

@@ -10,9 +10,7 @@ public class Verdict : MonoBehaviour
     [FoldoutGroup("오브젝트")] 
     [SerializeField]
     private GameObject lastPassedObject;
-
-    [FoldoutGroup("변수")] 
-    public float groundGap;
+    
     [FoldoutGroup("변수")] 
     public bool isUp;
     [FoldoutGroup("변수")] 
@@ -26,25 +24,18 @@ public class Verdict : MonoBehaviour
     
     void Start()
     {
-        isUp = false;
+        isUp = true;
         verdictBarList[2].onTriggerExitEvent += HandleGoodVerdictExit;
     }
 
     private void FixedUpdate()
     {
-        SetTransform(verdictBar, groundGap);
-        var scale = verdictBar.transform.localScale;
-        scale.y = groundGap;
-        playerVerdict.transform.localScale = scale;
-        playerVerdict.transform.position = transform.position + transform.up * groundGap / 2;
+        SetTransform(verdictBar);
     }
     
-    void SetTransform(GameObject obj, float y)
+    void SetTransform(GameObject obj)
     {
-        var scale = obj.transform.localScale;
-        scale.y = y;
-        obj.transform.localScale = scale;
-        obj.transform.position = transform.position + transform.forward * 2 + transform.up * (y / 2);
+        obj.transform.position = transform.position + transform.forward * 2;
     }
 
     public static Obstacle GetObstacle(GameObject obj)

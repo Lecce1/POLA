@@ -1,5 +1,6 @@
 using System.Collections;
 using Sirenix.OdinInspector;
+using UnityEditor.Localization.Platform.iOS;
 using UnityEngine;
 using UnityEngine.EventSystems;
 using UnityEngine.InputSystem;
@@ -17,8 +18,6 @@ public class PlayerController : MonoBehaviour
 
     [FoldoutGroup("변수")] 
     public bool isGrounded;
-    [FoldoutGroup("변수")] 
-    public float groundGap;
     [FoldoutGroup("변수")] 
     public int health;
     [FoldoutGroup("변수")] 
@@ -66,22 +65,8 @@ public class PlayerController : MonoBehaviour
         {
             Move();
         }
-        
-        RaycastHit hitInfo1, hitInfo2;
-        
-        if (!Physics.Raycast(new Ray(transform.position + transform.up, transform.up), out hitInfo1, 10, ground))
-        {
-            hitInfo1.point = transform.position + transform.up * 10f;
-        }
-        
-        if(!Physics.Raycast(new Ray(transform.position + transform.up, -transform.up), out hitInfo2, 10, ground))
-        {
-            hitInfo2.point = transform.position - transform.up * 10f;
-        }
-        
-        camInfo.transform.position = new Vector3((hitInfo1.point.x + hitInfo2.point.x) / 2f, (hitInfo1.point.y + hitInfo2.point.y) / 2f, 0);
-        groundGap = (hitInfo1.point - hitInfo2.point).magnitude;
-        verdict.groundGap = groundGap;
+
+        camInfo.transform.position = new Vector3(transform.position.x, 0, 0);
     }
 
     public void Init()
@@ -149,21 +134,8 @@ public class PlayerController : MonoBehaviour
     /// </summary>
     public void OnFlip()
     {
-        Ray ray = new Ray(transform.position, transform.up);
-        
-        if (Physics.Raycast(ray, out RaycastHit hitInfo, 20f, ground))
-        {
-            if (verdict.isLongInteract)
-            {
-                OnKeyUp(callback);
-            }
-            
-            Physics.gravity *= -1;
-            verdict.isUp = !verdict.isUp;
-            StartCoroutine(trails.Trails());
-            transform.position = hitInfo.point;
-            transform.Rotate(transform.right, 180f);
-        }
+        verdict.isUp = !verdict.isUp;
+        transform.Rotate(transform.right, 180f);
     }
     
     public void OnKeyUp()
