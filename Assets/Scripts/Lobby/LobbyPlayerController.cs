@@ -219,7 +219,7 @@ public class LobbyPlayerController : MonoBehaviour
                 LobbyManager.instance.Button(LobbyManager.instance.join_Btn_Type);
             }
             
-            if (LobbyManager.instance.join_Btn_Type != "Move" && LobbyManager.instance.join_Btn_Type != "Stage")
+            if (LobbyManager.instance.join_Btn_Type != "Move" && LobbyManager.instance.join_Btn_Type != "Stage" && LobbyManager.instance.join_Btn_Type != "Shop")
             {
                 isMoveAvailable = false;
             }
@@ -311,30 +311,6 @@ public class LobbyPlayerController : MonoBehaviour
                 LobbyManager.instance.Button("Esc");
                 isMoveAvailable = false;
             }
-        }
-    }
-
-    public void OnTab()
-    {
-        if (LobbyManager.instance.shop.activeSelf)
-        {
-            LobbyShopManager.instance.Tab();
-        }
-    }
-
-    public void OnLeftTab()
-    {
-        if (LobbyManager.instance.shop.activeSelf)
-        {
-            LobbyShopManager.instance.Prev();
-        }
-    }
-    
-    public void OnRightTab()
-    {
-        if (LobbyManager.instance.shop.activeSelf)
-        {
-            LobbyShopManager.instance.Next();
         }
     }
 

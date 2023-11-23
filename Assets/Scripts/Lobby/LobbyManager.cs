@@ -13,9 +13,6 @@ public class LobbyManager : MonoBehaviour
     [Title("설정")] 
     public GameObject set;
     [FoldoutGroup("패널")] 
-    [Title("상점")] 
-    public GameObject shop;
-    [FoldoutGroup("패널")] 
     [Title("입장 버튼")] 
     public GameObject join_Btn;
     [FoldoutGroup("패널")] 
@@ -313,28 +310,50 @@ public class LobbyManager : MonoBehaviour
                 LobbyPlayerController.instance.StartCoroutine("Move");
                 break;
             
-            case "Back":
-                if (DBManager.instance.currentGround != 0)
-                {
-                    DBManager.instance.currentGround--;
+            case "Shop":
+                LobbyAudioManager.instance.PlayAudio("Button");
+                DBManager.instance.currentGround = 3;
                 
-                    for (int i = 0; i < ground.Count; i++)
+                for (int i = 0; i < ground.Count; i++)
+                {
+                    if (i == DBManager.instance.currentGround)
                     {
-                        if (i == DBManager.instance.currentGround)
+                        if (!ground[i].activeSelf)
                         {
-                            if (!ground[i].activeSelf)
-                            {
-                                ground[i].SetActive(true);
-                            }
-                        }
-                        else
-                        {
-                            if (ground[i].activeSelf)
-                            {
-                                ground[i].SetActive(false);
-                            }
+                            ground[i].SetActive(true);
                         }
                     }
+                    else
+                    {
+                        if (ground[i].activeSelf)
+                        {
+                            ground[i].SetActive(false);
+                        }
+                    }
+                }
+                
+                if (DBManager.instance.currentPlatform == "MOBILE")
+                {
+                    if (!back_Btn.activeSelf)
+                    {
+                        back_Btn.SetActive(true);
+                    }
+                }
+                
+                DBManager.instance.currentRouteIdx = moveRoute[DBManager.instance.currentGround].defaultRouteIdx;
+                LobbyPlayerController.instance.transform.position = moveRoute[DBManager.instance.currentGround].routeList[moveRoute[DBManager.instance.currentGround].defaultRouteIdx].transform.position + offset;
+                LobbyPlayerController.instance.StartCoroutine("Move");
+                break;
+            
+            case "Back":
+                if (DBManager.instance.currentGround == 3)
+                {
+                    DBManager.instance.currentGround = 0;
+                    DBManager.instance.currentRouteIdx = 0;
+                }
+                else if (DBManager.instance.currentGround != 0)
+                {
+                    DBManager.instance.currentGround--;
 
                     if (DBManager.instance.currentGround == 0)
                     {
@@ -352,28 +371,46 @@ public class LobbyManager : MonoBehaviour
                     {
                         DBManager.instance.currentRouteIdx = DBManager.instance.currentChapter - 1;
                     }
-
-                    LobbyPlayerController.instance.transform.position = moveRoute[DBManager.instance.currentGround].routeList[DBManager.instance.currentRouteIdx].transform.position + offset;
-
-                    if (DBManager.instance.currentGround == 1)
+                }
+                
+                for (int i = 0; i < ground.Count; i++)
+                {
+                    if (i == DBManager.instance.currentGround)
                     {
-                        RenderSettings.skybox = stage_Skybox[0];
-                        
-                        if (LobbyAudioManager.instance.bgmAudio.isPlaying)
+                        if (!ground[i].activeSelf)
                         {
-                            LobbyAudioManager.instance.bgmAudio.Stop();
-                        }
-
-                        if (LobbyAudioManager.instance.bgmAudio.clip != bgm[0])
-                        {
-                            LobbyAudioManager.instance.bgmAudio.clip = bgm[0];
-                            LobbyAudioManager.instance.bgmAudio.Play();
+                            ground[i].SetActive(true);
                         }
                     }
-                    
-                    LobbyPlayerController.instance.Collider();
-                    LobbyAudioManager.instance.PlayAudio("Button");
+                    else
+                    {
+                        if (ground[i].activeSelf)
+                        {
+                            ground[i].SetActive(false);
+                        }
+                    }
                 }
+                
+                LobbyPlayerController.instance.transform.position = moveRoute[DBManager.instance.currentGround].routeList[DBManager.instance.currentRouteIdx].transform.position + offset;
+
+                if (DBManager.instance.currentGround == 1)
+                {
+                    RenderSettings.skybox = stage_Skybox[0];
+                        
+                    if (LobbyAudioManager.instance.bgmAudio.isPlaying)
+                    {
+                        LobbyAudioManager.instance.bgmAudio.Stop();
+                    }
+
+                    if (LobbyAudioManager.instance.bgmAudio.clip != bgm[0])
+                    {
+                        LobbyAudioManager.instance.bgmAudio.clip = bgm[0];
+                        LobbyAudioManager.instance.bgmAudio.Play();
+                    }
+                }
+                    
+                LobbyPlayerController.instance.Collider();
+                LobbyAudioManager.instance.PlayAudio("Button");
                 break;
             
             case "Stage":
@@ -442,27 +479,6 @@ public class LobbyManager : MonoBehaviour
                         join_Btn.SetActive(false);
                     }
 
-                    if (keyBinding.activeSelf)
-                    {
-                        keyBinding.SetActive(false);
-                    }
-                    
-                    LobbyAudioManager.instance.PlayAudio("Button");
-                }
-                break;
-            
-            case "Shop":
-                if (!shop.activeSelf)
-                {
-                    shop.SetActive(true);
-                    backStack.Push(shop);
-                    isPanelOpen = true;
-                    
-                    if (join_Btn.activeSelf)
-                    {
-                        join_Btn.SetActive(false);
-                    }
-                        
                     if (keyBinding.activeSelf)
                     {
                         keyBinding.SetActive(false);
@@ -642,14 +658,6 @@ public class LobbyManager : MonoBehaviour
                 if (exit.activeSelf)
                 {
                     exit.SetActive(false);
-                    isCheck = true;
-                }
-                break;
-            
-            case "Shop":
-                if (shop.activeSelf)
-                {
-                    shop.SetActive(false);
                     isCheck = true;
                 }
                 break;
