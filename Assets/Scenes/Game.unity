@@ -6457,7 +6457,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   target: {fileID: 457495187}
-  offset: {x: -1, y: 0, z: -9}
+  offset: {x: -1, y: 0.5, z: -9}
   shakeAmount: 0.03
   shakeTime: 0
 --- !u!1 &596179208
@@ -13578,7 +13578,7 @@ GameObject:
   - component: {fileID: 1285337213}
   - component: {fileID: 1285337212}
   - component: {fileID: 1285337211}
-  m_Layer: 0
+  m_Layer: 6
   m_Name: Ground
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -37847,7 +37847,7 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 2636929640549425249}
   serializedVersion: 2
-  m_LocalRotation: {x: -0, y: 0.7071068, z: -0, w: 0.7071068}
+  m_LocalRotation: {x: 0, y: 0.7071068, z: 0, w: 0.7071068}
   m_LocalPosition: {x: -41, y: 0.5, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0

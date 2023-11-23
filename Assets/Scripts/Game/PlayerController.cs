@@ -134,7 +134,10 @@ public class PlayerController : MonoBehaviour
     /// </summary>
     public void OnFlip()
     {
+        RaycastHit hit = new RaycastHit();
+        Physics.Raycast(new Ray(transform.position + (transform.up * -5), transform.up), out hit, 10, ground);
         verdict.isUp = !verdict.isUp;
+        transform.position = hit.point;
         transform.Rotate(transform.right, 180f);
     }
     
