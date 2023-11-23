@@ -84,12 +84,6 @@ public class Verdict : MonoBehaviour
             {
                 ComboReset(obstacleInfo);
             }
-            
-            if (obstacleInfo == GetObstacle(GameManager.instance.noteFolder.transform.GetChild(GameManager.instance.noteFolder.transform.childCount - 1).GetChild(0).gameObject) && !GameManager.instance.isResultPanel)
-            {
-                GameManager.instance.isResultPanel = true;
-                GameManager.instance.Invoke(nameof(GameManager.Finish), 2.0f);
-            }
         }
     }
     
@@ -99,48 +93,9 @@ public class Verdict : MonoBehaviour
         DequeueUsedCollider(obstacle);
     }
 
-    public int KeyUpOnLongInteract(out Obstacle obstacle)
+    public void KeyUpOnLongInteract()
     {
-        int i = isUp ? 1 : 0;
-        GameObject target;
-        obstacle = null;
-        
-        if (verdictBarList[3].contacts[i].Count != 0 && verdictBarList[3].contacts[i].Peek() != null)
-        {
-            target = verdictBarList[3].contacts[i].Peek().gameObject;
-        }
-        else
-        {
-            return -1;
-        }
-
-        obstacle = GetObstacle(target);
-        
-        if (obstacle == null || obstacle.isUp != isUp || !isLongInteract)
-        {
-            return -1;
-        }
-
         isLongInteract = false;
-        int evaluation = GetVerdict(obstacle.transform.GetChild(obstacle.transform.childCount - 1).GetChild(0).gameObject, obstacle);
-        
-        if (evaluation == -1)
-        {
-            evaluation = 3;
-        }
-
-        foreach (var item in verdictBarList[2].contacts[i])
-        {
-            if (obstacle != GetObstacle(item.gameObject))
-            {
-                break;
-            }
-
-            GameManager.instance.ShowVerdict(0, obstacle);
-        }
-
-        obstacle.wasInteracted = true;
-        return evaluation;
     }
     
     int GetVerdict(GameObject target, Obstacle targetInfo)
@@ -216,12 +171,41 @@ public class Verdict : MonoBehaviour
             playerVerdict.contacts[i].Dequeue();
         }
     }
+    
+    public void DequeueUsedCollider(GameObject target) {
+        int i = isUp ? 1 : 0;
+
+        if (target == null)
+        {
+            return;
+        }
+
+        Obstacle obstacle = GetObstacle(target);
+        
+        if (obstacle == null)
+        {
+            return;
+        } 
+        
+        for (int idx = 0; idx < 4; idx++)
+        {
+            if (verdictBarList[idx].contacts[i].Count != 0 && target == verdictBarList[idx].contacts[i].Peek().gameObject)
+            {
+                verdictBarList[idx].contacts[i].Dequeue();
+            }
+        }
+        
+        while (playerVerdict.contacts[i].Count != 0 && target == playerVerdict.contacts[i].Peek().gameObject)
+        {
+            playerVerdict.contacts[i].Dequeue();
+        }
+    }
 
     public bool CheckNextObject(GameObject target)
     {
         int i = isUp ? 1 : 0;
-        
-        if (verdictBarList[2].contacts[i].Count != 0 && target == verdictBarList[2].contacts[i].Peek().gameObject)
+
+        if (verdictBarList[0].contacts[i].Count != 0 && target == verdictBarList[0].contacts[i].Peek().gameObject)
         {
             return true;
         }

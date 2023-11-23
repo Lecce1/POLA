@@ -45,6 +45,9 @@ public class PlayerController : MonoBehaviour
     [FoldoutGroup("일반")]
     public LayerMask ground;
 
+    [FoldoutGroup("일반")] 
+    private Obstacle keyUpCheckObstacle;
+
     private InputAction.CallbackContext callback = new ();
     
     void FixedUpdate()
@@ -177,28 +180,12 @@ public class PlayerController : MonoBehaviour
         {
             return;
         }
-        
-        int evaluation = verdict.KeyUpOnLongInteract(out Obstacle obstacle);
-        
-        if (obstacle != null)
+
+        if (keyUpCheckObstacle != null && keyUpCheckObstacle.transform.childCount != 0)
         {
-            if (evaluation == 3)
-            {
-                Hurt(obstacle, true);
-            }
-            else
-            {
-                GameManager.instance.ShowVerdict(evaluation, obstacle);
-            }
+            Hurt(keyUpCheckObstacle, true);
         }
-        
-        if (obstacle == Verdict.GetObstacle(GameManager.instance.noteFolder.transform.GetChild(GameManager.instance.noteFolder.transform.childCount - 1).GetChild(0).gameObject) && health > 0 && !GameManager.instance.isResultPanel)
-        {
-            GameManager.instance.isResultPanel = true;
-            GameManager.instance.Invoke(nameof(GameManager.Finish), 2.0f);
-        }
-        
-        verdict.DequeueUsedCollider(obstacle);
+        verdict.KeyUpOnLongInteract();
     }
 
     public void OnUp()
@@ -235,7 +222,7 @@ public class PlayerController : MonoBehaviour
     {
         int evaluation = verdict.KeyDown(out Obstacle obstacle);
 
-        if (obstacle == null || evaluation == -1)
+        if (obstacle == null || evaluation == -1 || obstacle.wasInteracted)
         {
             return;
         }
@@ -269,30 +256,30 @@ public class PlayerController : MonoBehaviour
 
     IEnumerator LongNoteProcess(Obstacle obstacle, int evaluation)
     {
-        int idx = 0;
-        GameObject longNote = obstacle.transform.GetChild(idx).GetChild(0).gameObject;
-        
+        bool isFirst = true;
+
         while (verdict.isLongInteract)
         {
-            if (idx < obstacle.transform.childCount)
+            if (obstacle.transform.childCount != 0)
             {
-                longNote = obstacle.transform.GetChild(idx).GetChild(0).gameObject;
+                var longNote = obstacle.transform.GetChild(0).GetChild(0).gameObject;
+                verdict.DequeueUsedCollider(longNote.gameObject);
+                Destroy(longNote.transform.parent.gameObject);
+                
                 VibrateMobile();
-                GameManager.instance.ShowVerdict(idx == 1 ? evaluation : 0, obstacle);
+                GameManager.instance.ShowVerdict(isFirst ? evaluation : 0, obstacle);
+                isFirst = false;
+                
+                while (obstacle.transform.childCount != 0 && !verdict.CheckNextObject(obstacle.transform.GetChild(0).GetChild(0).gameObject))
+                {
+                    yield return null;
+                }
             }
             else
             {
-                Hurt(obstacle, true);
                 OnKeyUp(callback);
                 yield break;
             }
-            
-            while (!verdict.CheckNextObject(longNote) && verdict.isLongInteract)
-            {
-                yield return null;
-            }
-
-            idx++;
         }
     }
     
@@ -304,12 +291,6 @@ public class PlayerController : MonoBehaviour
         animator.SetInteger("AttackCounter", attackCounter++);
         animator.SetBool("isAttacking", true);
         attackCounter %= 2;
-        
-        if (obstacle.gameObject.name == GameManager.instance.noteFolder.transform.GetChild(GameManager.instance.noteFolder.transform.childCount - 1).gameObject.name && health > 0 && !GameManager.instance.isResultPanel)
-        {
-            GameManager.instance.isResultPanel = true;
-            GameManager.instance.Invoke("Finish", 2.0f);
-        }
         
         verdict.DequeueUsedCollider(obstacle);
         Destroy(obstacle.gameObject);
@@ -443,12 +424,6 @@ public class PlayerController : MonoBehaviour
                     GameManager.instance.rankScore += obstacle.scoreList[0];
                 }
             }
-        }
-        
-        if (obstacle == Verdict.GetObstacle(GameManager.instance.noteFolder.transform.GetChild(GameManager.instance.noteFolder.transform.childCount - 1).gameObject) && health > 0 && !GameManager.instance.isResultPanel && obstacle.wasInteracted)
-        {
-            GameManager.instance.isResultPanel = true;
-            GameManager.instance.Invoke(nameof(GameManager.Finish), 2.0f);
         }
     }
 }

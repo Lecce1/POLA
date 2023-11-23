@@ -137,7 +137,7 @@ public class NoteMake : MonoBehaviour
             
             for (int i = 0; i < noteTime.Count; i++)
             {
-                var note = Instantiate(noteBar, new Vector3(noteTime[i] * 4f + 1f, 0, 0), Quaternion.identity);
+                var note = Instantiate(noteBar, new Vector3(noteTime[i] * 8f + 1f, 0, 0), Quaternion.identity);
                 note.name = "note" + i;
                 bars.Add(note);
                 note.transform.GetChild(0).GetComponent<TextMesh>().text = i.ToString();
