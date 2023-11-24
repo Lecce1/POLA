@@ -1,12 +1,13 @@
 {
     "chapter": 1,
-    "soundValue": 1.0,
-    "sfxValue": 1.0,
+    "currentChapter": 1,
+    "musicValue": 0.6003999710083008,
+    "sfxValue": 0.8000199794769287,
     "supportLanguageNum": 2,
     "isVibration": true,
     "language": 1,
     "isTutorial": true,
-    "latency": 0,
+    "latency": 146,
     "stageArray": [
         {
             "stage": [
@@ -21,18 +22,8 @@
                     "bpm": 0,
                     "audio": {
                         "instanceID": 0
-                    }
-                },
-                {
-                    "name": "",
-                    "starCount": 0,
-                    "score": 0,
-                    "perfect": 0,
-                    "great": 0,
-                    "good": 0,
-                    "miss": 0,
-                    "bpm": 0,
-                    "audio": {
+                    },
+                    "polaroid": {
                         "instanceID": 0
                     }
                 },
@@ -47,18 +38,8 @@
                     "bpm": 0,
                     "audio": {
                         "instanceID": 0
-                    }
-                },
-                {
-                    "name": "",
-                    "starCount": 0,
-                    "score": 0,
-                    "perfect": 0,
-                    "great": 0,
-                    "good": 0,
-                    "miss": 0,
-                    "bpm": 0,
-                    "audio": {
+                    },
+                    "polaroid": {
                         "instanceID": 0
                     }
                 },
@@ -73,6 +54,9 @@
                     "bpm": 0,
                     "audio": {
                         "instanceID": 0
+                    },
+                    "polaroid": {
+                        "instanceID": 0
                     }
                 },
                 {
@@ -85,6 +69,41 @@
                     "miss": 0,
                     "bpm": 0,
                     "audio": {
+                        "instanceID": 0
+                    },
+                    "polaroid": {
+                        "instanceID": 0
+                    }
+                },
+                {
+                    "name": "",
+                    "starCount": 0,
+                    "score": 0,
+                    "perfect": 0,
+                    "great": 0,
+                    "good": 0,
+                    "miss": 0,
+                    "bpm": 0,
+                    "audio": {
+                        "instanceID": 0
+                    },
+                    "polaroid": {
+                        "instanceID": 0
+                    }
+                },
+                {
+                    "name": "",
+                    "starCount": 0,
+                    "score": 0,
+                    "perfect": 0,
+                    "great": 0,
+                    "good": 0,
+                    "miss": 0,
+                    "bpm": 0,
+                    "audio": {
+                        "instanceID": 0
+                    },
+                    "polaroid": {
                         "instanceID": 0
                     }
                 }
@@ -94,40 +113,81 @@
             "stage": [
                 {
                     "name": "",
-                    "starCount": 0,
-                    "score": 0,
-                    "perfect": 0,
-                    "great": 0,
+                    "starCount": 4,
+                    "score": 14050,
+                    "perfect": 139,
+                    "great": 3,
                     "good": 0,
                     "miss": 0,
                     "bpm": 0,
                     "audio": {
+                        "instanceID": 0
+                    },
+                    "polaroid": {
                         "instanceID": 0
                     }
                 },
                 {
                     "name": "",
                     "starCount": 3,
-                    "score": 15325,
-                    "perfect": 145,
-                    "great": 14,
-                    "good": 5,
-                    "miss": 1,
+                    "score": 15875,
+                    "perfect": 153,
+                    "great": 11,
+                    "good": 1,
+                    "miss": 0,
                     "bpm": 0,
                     "audio": {
+                        "instanceID": 0
+                    },
+                    "polaroid": {
                         "instanceID": 0
                     }
                 },
                 {
                     "name": "",
                     "starCount": 1,
-                    "score": 21275,
-                    "perfect": 206,
-                    "great": 13,
-                    "good": 1,
+                    "score": 17600,
+                    "perfect": 140,
+                    "great": 64,
+                    "good": 16,
+                    "miss": 2,
+                    "bpm": 0,
+                    "audio": {
+                        "instanceID": 0
+                    },
+                    "polaroid": {
+                        "instanceID": 0
+                    }
+                },
+                {
+                    "name": "",
+                    "starCount": 1,
+                    "score": 30400,
+                    "perfect": 218,
+                    "great": 4,
+                    "good": 0,
                     "miss": 1,
                     "bpm": 0,
                     "audio": {
+                        "instanceID": 0
+                    },
+                    "polaroid": {
+                        "instanceID": 0
+                    }
+                },
+                {
+                    "name": "",
+                    "starCount": 4,
+                    "score": 30050,
+                    "perfect": 231,
+                    "great": 11,
+                    "good": 0,
+                    "miss": 0,
+                    "bpm": 0,
+                    "audio": {
+                        "instanceID": 0
+                    },
+                    "polaroid": {
                         "instanceID": 0
                     }
                 },
@@ -142,18 +202,28 @@
                     "bpm": 0,
                     "audio": {
                         "instanceID": 0
+                    },
+                    "polaroid": {
+                        "instanceID": 0
                     }
-                },
+                }
+            ]
+        },
+        {
+            "stage": [
                 {
                     "name": "",
-                    "starCount": 0,
-                    "score": 0,
-                    "perfect": 0,
-                    "great": 0,
+                    "starCount": 1,
+                    "score": 16100,
+                    "perfect": 114,
+                    "great": 2,
                     "good": 0,
-                    "miss": 0,
+                    "miss": 29,
                     "bpm": 0,
                     "audio": {
+                        "instanceID": 0
+                    },
+                    "polaroid": {
                         "instanceID": 0
                     }
                 },
@@ -167,6 +237,73 @@
                     "miss": 0,
                     "bpm": 0,
                     "audio": {
+                        "instanceID": 0
+                    },
+                    "polaroid": {
+                        "instanceID": 0
+                    }
+                },
+                {
+                    "name": "",
+                    "starCount": 0,
+                    "score": 0,
+                    "perfect": 0,
+                    "great": 0,
+                    "good": 0,
+                    "miss": 0,
+                    "bpm": 0,
+                    "audio": {
+                        "instanceID": 0
+                    },
+                    "polaroid": {
+                        "instanceID": 0
+                    }
+                },
+                {
+                    "name": "",
+                    "starCount": 0,
+                    "score": 0,
+                    "perfect": 0,
+                    "great": 0,
+                    "good": 0,
+                    "miss": 0,
+                    "bpm": 0,
+                    "audio": {
+                        "instanceID": 0
+                    },
+                    "polaroid": {
+                        "instanceID": 0
+                    }
+                },
+                {
+                    "name": "",
+                    "starCount": 0,
+                    "score": 0,
+                    "perfect": 0,
+                    "great": 0,
+                    "good": 0,
+                    "miss": 0,
+                    "bpm": 0,
+                    "audio": {
+                        "instanceID": 0
+                    },
+                    "polaroid": {
+                        "instanceID": 0
+                    }
+                },
+                {
+                    "name": "",
+                    "starCount": 0,
+                    "score": 0,
+                    "perfect": 0,
+                    "great": 0,
+                    "good": 0,
+                    "miss": 0,
+                    "bpm": 0,
+                    "audio": {
+                        "instanceID": 0
+                    },
+                    "polaroid": {
                         "instanceID": 0
                     }
                 }
@@ -185,18 +322,8 @@
                     "bpm": 0,
                     "audio": {
                         "instanceID": 0
-                    }
-                },
-                {
-                    "name": "",
-                    "starCount": 0,
-                    "score": 0,
-                    "perfect": 0,
-                    "great": 0,
-                    "good": 0,
-                    "miss": 0,
-                    "bpm": 0,
-                    "audio": {
+                    },
+                    "polaroid": {
                         "instanceID": 0
                     }
                 },
@@ -211,18 +338,8 @@
                     "bpm": 0,
                     "audio": {
                         "instanceID": 0
-                    }
-                },
-                {
-                    "name": "",
-                    "starCount": 0,
-                    "score": 0,
-                    "perfect": 0,
-                    "great": 0,
-                    "good": 0,
-                    "miss": 0,
-                    "bpm": 0,
-                    "audio": {
+                    },
+                    "polaroid": {
                         "instanceID": 0
                     }
                 },
@@ -237,6 +354,9 @@
                     "bpm": 0,
                     "audio": {
                         "instanceID": 0
+                    },
+                    "polaroid": {
+                        "instanceID": 0
                     }
                 },
                 {
@@ -249,6 +369,41 @@
                     "miss": 0,
                     "bpm": 0,
                     "audio": {
+                        "instanceID": 0
+                    },
+                    "polaroid": {
+                        "instanceID": 0
+                    }
+                },
+                {
+                    "name": "",
+                    "starCount": 0,
+                    "score": 0,
+                    "perfect": 0,
+                    "great": 0,
+                    "good": 0,
+                    "miss": 0,
+                    "bpm": 0,
+                    "audio": {
+                        "instanceID": 0
+                    },
+                    "polaroid": {
+                        "instanceID": 0
+                    }
+                },
+                {
+                    "name": "",
+                    "starCount": 0,
+                    "score": 0,
+                    "perfect": 0,
+                    "great": 0,
+                    "good": 0,
+                    "miss": 0,
+                    "bpm": 0,
+                    "audio": {
+                        "instanceID": 0
+                    },
+                    "polaroid": {
                         "instanceID": 0
                     }
                 }
@@ -267,18 +422,8 @@
                     "bpm": 0,
                     "audio": {
                         "instanceID": 0
-                    }
-                },
-                {
-                    "name": "",
-                    "starCount": 0,
-                    "score": 0,
-                    "perfect": 0,
-                    "great": 0,
-                    "good": 0,
-                    "miss": 0,
-                    "bpm": 0,
-                    "audio": {
+                    },
+                    "polaroid": {
                         "instanceID": 0
                     }
                 },
@@ -293,18 +438,8 @@
                     "bpm": 0,
                     "audio": {
                         "instanceID": 0
-                    }
-                },
-                {
-                    "name": "",
-                    "starCount": 0,
-                    "score": 0,
-                    "perfect": 0,
-                    "great": 0,
-                    "good": 0,
-                    "miss": 0,
-                    "bpm": 0,
-                    "audio": {
+                    },
+                    "polaroid": {
                         "instanceID": 0
                     }
                 },
@@ -319,6 +454,9 @@
                     "bpm": 0,
                     "audio": {
                         "instanceID": 0
+                    },
+                    "polaroid": {
+                        "instanceID": 0
                     }
                 },
                 {
@@ -331,6 +469,41 @@
                     "miss": 0,
                     "bpm": 0,
                     "audio": {
+                        "instanceID": 0
+                    },
+                    "polaroid": {
+                        "instanceID": 0
+                    }
+                },
+                {
+                    "name": "",
+                    "starCount": 0,
+                    "score": 0,
+                    "perfect": 0,
+                    "great": 0,
+                    "good": 0,
+                    "miss": 0,
+                    "bpm": 0,
+                    "audio": {
+                        "instanceID": 0
+                    },
+                    "polaroid": {
+                        "instanceID": 0
+                    }
+                },
+                {
+                    "name": "",
+                    "starCount": 0,
+                    "score": 0,
+                    "perfect": 0,
+                    "great": 0,
+                    "good": 0,
+                    "miss": 0,
+                    "bpm": 0,
+                    "audio": {
+                        "instanceID": 0
+                    },
+                    "polaroid": {
                         "instanceID": 0
                     }
                 }
@@ -349,18 +522,8 @@
                     "bpm": 0,
                     "audio": {
                         "instanceID": 0
-                    }
-                },
-                {
-                    "name": "",
-                    "starCount": 0,
-                    "score": 0,
-                    "perfect": 0,
-                    "great": 0,
-                    "good": 0,
-                    "miss": 0,
-                    "bpm": 0,
-                    "audio": {
+                    },
+                    "polaroid": {
                         "instanceID": 0
                     }
                 },
@@ -375,18 +538,8 @@
                     "bpm": 0,
                     "audio": {
                         "instanceID": 0
-                    }
-                },
-                {
-                    "name": "",
-                    "starCount": 0,
-                    "score": 0,
-                    "perfect": 0,
-                    "great": 0,
-                    "good": 0,
-                    "miss": 0,
-                    "bpm": 0,
-                    "audio": {
+                    },
+                    "polaroid": {
                         "instanceID": 0
                     }
                 },
@@ -401,6 +554,9 @@
                     "bpm": 0,
                     "audio": {
                         "instanceID": 0
+                    },
+                    "polaroid": {
+                        "instanceID": 0
                     }
                 },
                 {
@@ -413,6 +569,41 @@
                     "miss": 0,
                     "bpm": 0,
                     "audio": {
+                        "instanceID": 0
+                    },
+                    "polaroid": {
+                        "instanceID": 0
+                    }
+                },
+                {
+                    "name": "",
+                    "starCount": 0,
+                    "score": 0,
+                    "perfect": 0,
+                    "great": 0,
+                    "good": 0,
+                    "miss": 0,
+                    "bpm": 0,
+                    "audio": {
+                        "instanceID": 0
+                    },
+                    "polaroid": {
+                        "instanceID": 0
+                    }
+                },
+                {
+                    "name": "",
+                    "starCount": 0,
+                    "score": 0,
+                    "perfect": 0,
+                    "great": 0,
+                    "good": 0,
+                    "miss": 0,
+                    "bpm": 0,
+                    "audio": {
+                        "instanceID": 0
+                    },
+                    "polaroid": {
                         "instanceID": 0
                     }
                 }
@@ -431,18 +622,8 @@
                     "bpm": 0,
                     "audio": {
                         "instanceID": 0
-                    }
-                },
-                {
-                    "name": "",
-                    "starCount": 0,
-                    "score": 0,
-                    "perfect": 0,
-                    "great": 0,
-                    "good": 0,
-                    "miss": 0,
-                    "bpm": 0,
-                    "audio": {
+                    },
+                    "polaroid": {
                         "instanceID": 0
                     }
                 },
@@ -457,18 +638,8 @@
                     "bpm": 0,
                     "audio": {
                         "instanceID": 0
-                    }
-                },
-                {
-                    "name": "",
-                    "starCount": 0,
-                    "score": 0,
-                    "perfect": 0,
-                    "great": 0,
-                    "good": 0,
-                    "miss": 0,
-                    "bpm": 0,
-                    "audio": {
+                    },
+                    "polaroid": {
                         "instanceID": 0
                     }
                 },
@@ -483,6 +654,9 @@
                     "bpm": 0,
                     "audio": {
                         "instanceID": 0
+                    },
+                    "polaroid": {
+                        "instanceID": 0
                     }
                 },
                 {
@@ -495,6 +669,41 @@
                     "miss": 0,
                     "bpm": 0,
                     "audio": {
+                        "instanceID": 0
+                    },
+                    "polaroid": {
+                        "instanceID": 0
+                    }
+                },
+                {
+                    "name": "",
+                    "starCount": 0,
+                    "score": 0,
+                    "perfect": 0,
+                    "great": 0,
+                    "good": 0,
+                    "miss": 0,
+                    "bpm": 0,
+                    "audio": {
+                        "instanceID": 0
+                    },
+                    "polaroid": {
+                        "instanceID": 0
+                    }
+                },
+                {
+                    "name": "",
+                    "starCount": 0,
+                    "score": 0,
+                    "perfect": 0,
+                    "great": 0,
+                    "good": 0,
+                    "miss": 0,
+                    "bpm": 0,
+                    "audio": {
+                        "instanceID": 0
+                    },
+                    "polaroid": {
                         "instanceID": 0
                     }
                 }
@@ -513,18 +722,8 @@
                     "bpm": 0,
                     "audio": {
                         "instanceID": 0
-                    }
-                },
-                {
-                    "name": "",
-                    "starCount": 0,
-                    "score": 0,
-                    "perfect": 0,
-                    "great": 0,
-                    "good": 0,
-                    "miss": 0,
-                    "bpm": 0,
-                    "audio": {
+                    },
+                    "polaroid": {
                         "instanceID": 0
                     }
                 },
@@ -539,18 +738,8 @@
                     "bpm": 0,
                     "audio": {
                         "instanceID": 0
-                    }
-                },
-                {
-                    "name": "",
-                    "starCount": 0,
-                    "score": 0,
-                    "perfect": 0,
-                    "great": 0,
-                    "good": 0,
-                    "miss": 0,
-                    "bpm": 0,
-                    "audio": {
+                    },
+                    "polaroid": {
                         "instanceID": 0
                     }
                 },
@@ -565,35 +754,8 @@
                     "bpm": 0,
                     "audio": {
                         "instanceID": 0
-                    }
-                },
-                {
-                    "name": "",
-                    "starCount": 0,
-                    "score": 0,
-                    "perfect": 0,
-                    "great": 0,
-                    "good": 0,
-                    "miss": 0,
-                    "bpm": 0,
-                    "audio": {
-                        "instanceID": 0
-                    }
-                }
-            ]
-        },
-        {
-            "stage": [
-                {
-                    "name": "",
-                    "starCount": 0,
-                    "score": 0,
-                    "perfect": 0,
-                    "great": 0,
-                    "good": 0,
-                    "miss": 0,
-                    "bpm": 0,
-                    "audio": {
+                    },
+                    "polaroid": {
                         "instanceID": 0
                     }
                 },
@@ -608,18 +770,8 @@
                     "bpm": 0,
                     "audio": {
                         "instanceID": 0
-                    }
-                },
-                {
-                    "name": "",
-                    "starCount": 0,
-                    "score": 0,
-                    "perfect": 0,
-                    "great": 0,
-                    "good": 0,
-                    "miss": 0,
-                    "bpm": 0,
-                    "audio": {
+                    },
+                    "polaroid": {
                         "instanceID": 0
                     }
                 },
@@ -634,18 +786,8 @@
                     "bpm": 0,
                     "audio": {
                         "instanceID": 0
-                    }
-                },
-                {
-                    "name": "",
-                    "starCount": 0,
-                    "score": 0,
-                    "perfect": 0,
-                    "great": 0,
-                    "good": 0,
-                    "miss": 0,
-                    "bpm": 0,
-                    "audio": {
+                    },
+                    "polaroid": {
                         "instanceID": 0
                     }
                 },
@@ -659,6 +801,9 @@
                     "miss": 0,
                     "bpm": 0,
                     "audio": {
+                        "instanceID": 0
+                    },
+                    "polaroid": {
                         "instanceID": 0
                     }
                 }

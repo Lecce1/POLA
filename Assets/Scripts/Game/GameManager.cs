@@ -135,7 +135,11 @@ public class GameManager : MonoBehaviour
     public Text comboText;
     [FoldoutGroup("결과 창")] 
     [Title("Press 텍스트")] 
-    public Text pressText;
+    public Text pressText;    
+    [FoldoutGroup("결과 창")] 
+    [Title("노트 갯수")] 
+    [SerializeField]
+    private int noteCount = 0;
     
     [FoldoutGroup("트랙 별 DB")] 
     public Stage[] chapter = new Stage[8];
@@ -144,8 +148,6 @@ public class GameManager : MonoBehaviour
     private Stack<GameObject> backStack;
     public static GameManager instance;
     private WaitForSeconds waitForBeat;
-
-    private int noteCount = 0;
 
     [Serializable]
     public class Stage
@@ -216,7 +218,7 @@ public class GameManager : MonoBehaviour
         }
         
         VerdictBar.lastObject = noteFolder.transform.GetChild(noteFolder.transform.childCount - 1).gameObject;
-        VerdictBar.lastObject = Verdict.GetObstacle(VerdictBar.lastObject).beatLength != 0 ? VerdictBar.lastObject.transform.GetChild(VerdictBar.lastObject.transform.childCount - 1).GetChild(0).gameObject : VerdictBar.lastObject.transform.GetChild(0).gameObject;
+        VerdictBar.lastObject = Verdict.GetObstacle(VerdictBar.lastObject).beatLength != 0 ? VerdictBar.lastObject.transform.GetChild(VerdictBar.lastObject.transform.childCount - 1).GetChild(0).gameObject : VerdictBar.lastObject.transform.gameObject;
         playerController.Init();
         StartCoroutine(CountDown());
     }
@@ -486,7 +488,6 @@ public class GameManager : MonoBehaviour
         isCountDown = true;
         playerController.GetComponent<Animator>().SetBool("isReady", isCountDown);
         rankScore = ((perfectCount + greatCount * 0.3f + goodCount * 0.1f + missCount) / noteCount) * 100;
-
         int rankIdx;
 
         if (maxCombo == 0)
@@ -541,7 +542,7 @@ public class GameManager : MonoBehaviour
         DBManager.instance.stageArray[currentChapter].stage[currentStage].great = greatCount;
         DBManager.instance.stageArray[currentChapter].stage[currentStage].good = goodCount;
         DBManager.instance.stageArray[currentChapter].stage[currentStage].miss = missCount;
-        
+
         if (bottomPanel.activeSelf)
         {
             bottomPanel.SetActive(false);
