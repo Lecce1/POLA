@@ -22709,7 +22709,7 @@ MonoBehaviour:
   currentGround: 0
   currentRouteIdx: 2
   currentChapter: 1
-  currentStage: 4
+  currentStage: 2
   currentPlatform: 
   isTutorial: 1
   isCinemachine: 1

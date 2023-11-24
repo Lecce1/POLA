@@ -32,6 +32,9 @@ public class LobbyManager : MonoBehaviour
     [Title("입장 버튼 텍스트")] 
     public Text join_Btn_Text;
     [FoldoutGroup("모바일")] 
+    [Title("탑 패널")] 
+    public GameObject top_Panel;
+    [FoldoutGroup("모바일")] 
     [Title("뒤로가기 버튼")] 
     public GameObject back_Btn;
     
@@ -543,6 +546,11 @@ public class LobbyManager : MonoBehaviour
         
         if (isOn)
         {
+            if (DBManager.instance.currentPlatform == "MOBILE" && top_Panel.activeSelf)
+            {
+                top_Panel.SetActive(false);
+            }
+            
             TrackInfo.instance.Init();
             
             if (LobbyAudioManager.instance.bgmAudio.isPlaying)
@@ -559,6 +567,11 @@ public class LobbyManager : MonoBehaviour
         }
         else if (!isOn)
         {
+            if (DBManager.instance.currentPlatform == "MOBILE" && !top_Panel.activeSelf)
+            {
+                top_Panel.SetActive(true);
+            }
+            
             if (LobbyAudioManager.instance.bgmAudio.isPlaying)
             {
                 LobbyAudioManager.instance.bgmAudio.Stop();
