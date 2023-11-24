@@ -428,6 +428,17 @@ public class LobbyManager : MonoBehaviour
                 DBManager.instance.nextScene = DBManager.instance.gameSceneName;
                 break;
             
+            case "Info_No":
+                if (info.GetComponent<Animator>().GetCurrentAnimatorStateInfo(0).IsName("InfoOn"))
+                {
+                    if (info.GetComponent<Animator>().GetCurrentAnimatorStateInfo(0).normalizedTime >= 1f)
+                    {
+                        Info_OnOff(false);
+                        LobbyPlayerController.instance.Collider();
+                    }
+                }
+                break;
+            
             case "Esc":
                 if (!esc.activeSelf)
                 {

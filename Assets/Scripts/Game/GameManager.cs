@@ -3,7 +3,6 @@ using System.Collections;
 using System.Collections.Generic;
 using Sirenix.OdinInspector;
 using UnityEngine;
-using UnityEngine.InputSystem;
 using UnityEngine.Localization.Settings;
 using UnityEngine.SceneManagement;
 using UnityEngine.UI;
@@ -259,11 +258,12 @@ public class GameManager : MonoBehaviour
         }
 
         GameObject verdictPrefab = Instantiate(this.verdictPrefab, verdictCanvas.transform, true);
+        verdictPrefab.GetComponent<VerdictPrefab>().isUp = playerController.verdict.isUp;
         verdictPrefab.GetComponent<Image>().sprite = verdictImage[idx];
         verdictPrefab.GetComponent<RectTransform>().localScale = new Vector3(1, 1, 1);
-        var screenPos = Camera.main.WorldToScreenPoint(cameraInfo.transform.position - new Vector3(0, 1f, 0));
+        Vector3 screenPos = Camera.main.WorldToScreenPoint(playerController.transform.position + new Vector3(1.5f, playerController.transform.up.y, 0));
         RectTransformUtility.ScreenPointToLocalPointInRectangle(verdictCanvas.GetComponent<RectTransform>(), screenPos, Camera.main, out var localPos);
-        verdictPrefab.transform.GetComponent<RectTransform>().localPosition = new Vector3(localPos.x + 50f, localPos.y, -50);
+        verdictPrefab.transform.GetComponent<RectTransform>().localPosition = new Vector3(localPos.x + 50f, localPos.y, -200);
     }
 
     public void Button(string type)

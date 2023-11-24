@@ -4,6 +4,8 @@ using UnityEngine.UI;
 public class VerdictPrefab : MonoBehaviour
 {
     private float alpha = 1f;
+    public bool isUp;
+    
     void Start()
     {
         Invoke("Destroy", 0.5f);
@@ -12,7 +14,17 @@ public class VerdictPrefab : MonoBehaviour
     void Update()
     {
         alpha -= Time.deltaTime * 2;
-        transform.position += Vector3.up * Time.deltaTime * 2.5f;
+        
+        if (isUp)
+        {
+            transform.position += Vector3.up * (Time.deltaTime * 2.5f);
+
+        }
+        else
+        {
+            transform.position += Vector3.up * (Time.deltaTime * -2.5f);
+        }
+        
         GetComponent<Image>().color = new Color(1, 1, 1, alpha);
     }
 

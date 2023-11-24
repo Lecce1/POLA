@@ -2161,7 +2161,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 0
+  m_IsActive: 1
 --- !u!224 &209374385
 RectTransform:
   m_ObjectHideFlags: 0
@@ -2176,11 +2176,11 @@ RectTransform:
   m_Children: []
   m_Father: {fileID: 1572987885}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
-  m_AnchorMin: {x: 1, y: 0.5}
-  m_AnchorMax: {x: 1, y: 0.5}
-  m_AnchoredPosition: {x: -75, y: 0}
+  m_AnchorMin: {x: 0, y: 0.5}
+  m_AnchorMax: {x: 0, y: 0.5}
+  m_AnchoredPosition: {x: 75, y: 0}
   m_SizeDelta: {x: 52, y: 69}
-  m_Pivot: {x: 1, y: 0.5}
+  m_Pivot: {x: 0, y: 0.5}
 --- !u!114 &209374386
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -3427,12 +3427,12 @@ MonoBehaviour:
   pressText: {fileID: 746689855}
   chapter:
   - stage:
-    - {fileID: 7984874790219358808, guid: c87d9a5f8fed14d27a6634b02bb64ee5, type: 3}
-    - {fileID: 9117599808195784537, guid: e8c5e3f6b219a4a4fb55f31cdcb801d8, type: 3}
-    - {fileID: 8315574794153902456, guid: 355aaf29e91c94ad983d364a93c1caee, type: 3}
-    - {fileID: 2504470507939198284, guid: 764ba74005be6454a8a3d6d8d06918e8, type: 3}
-    - {fileID: 3753538559975239586, guid: 7a7d189c1c758400783b333efe8536ca, type: 3}
-    - {fileID: 2461229562430290506, guid: b79ca861c80594379b4ef11f832f3bb2, type: 3}
+    - {fileID: 656870318325825293, guid: 8bf8c9ca14fe244418643fa0204829a0, type: 3}
+    - {fileID: 9101657897143803412, guid: ae9a27f854cae4bdd9ef98751001c219, type: 3}
+    - {fileID: 6910343465368920492, guid: 015a693fd19e0447d804d9ff69592280, type: 3}
+    - {fileID: 8498170616844715361, guid: 0e26a6beb939340a89d192fa558301f9, type: 3}
+    - {fileID: 5504527107237476303, guid: bec6375a1117e45919b57dee5412ebbe, type: 3}
+    - {fileID: 76125922877916148, guid: 13be0064adbbc494eb244485ec55ade4, type: 3}
     audio:
     - {fileID: 8300000, guid: 1cda5fb48dae7964fa2ec2c9ea082c15, type: 3}
     - {fileID: 8300000, guid: ce18281ac937bd44ba50f4c884b99451, type: 3}
@@ -3449,27 +3449,27 @@ MonoBehaviour:
     - {fileID: 2100000, guid: e52049d52315c425c8bd314d1d186e45, type: 2}
     bpm: 78000000720000008000000050000000450000005d000000
   - stage:
-    - {fileID: 7984874790219358808, guid: c87d9a5f8fed14d27a6634b02bb64ee5, type: 3}
+    - {fileID: 8498170616844715361, guid: 0e26a6beb939340a89d192fa558301f9, type: 3}
     - {fileID: 0}
     - {fileID: 0}
     - {fileID: 0}
     - {fileID: 0}
     - {fileID: 0}
     audio:
-    - {fileID: 8300000, guid: 1cda5fb48dae7964fa2ec2c9ea082c15, type: 3}
+    - {fileID: 8300000, guid: e2acaddab7df0cc4ab9d0a6bf52ee7cd, type: 3}
     - {fileID: 0}
     - {fileID: 0}
     - {fileID: 0}
     - {fileID: 0}
     - {fileID: 0}
     skybox:
-    - {fileID: 2100000, guid: 661ddb39252af46968fa6d35f8eccce3, type: 2}
+    - {fileID: 2100000, guid: b48f3fcae3a3c465fa0ba0a09f20db1f, type: 2}
     - {fileID: 0}
     - {fileID: 0}
     - {fileID: 0}
     - {fileID: 0}
     - {fileID: 0}
-    bpm: 78000000
+    bpm: 50000000
   - stage:
     - {fileID: 0}
     - {fileID: 0}
@@ -4622,7 +4622,7 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0, y: 0}
   m_AnchorMax: {x: 0, y: 0}
-  m_AnchoredPosition: {x: 0, y: 0}
+  m_AnchoredPosition: {x: 425.11847, y: 0}
   m_SizeDelta: {x: 0, y: 0}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!114 &397725063
@@ -5667,7 +5667,7 @@ MeshRenderer:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 524452261}
-  m_Enabled: 1
+  m_Enabled: 0
   m_CastShadows: 1
   m_ReceiveShadows: 1
   m_DynamicOccludee: 1
@@ -5845,7 +5845,6 @@ RectTransform:
   m_Children:
   - {fileID: 1983077189}
   - {fileID: 2051383800}
-  - {fileID: 1807594327}
   m_Father: {fileID: 1636338770}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0, y: 0}
@@ -6301,7 +6300,7 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0, y: 0}
   m_AnchorMax: {x: 0, y: 0}
-  m_AnchoredPosition: {x: 0, y: 0}
+  m_AnchoredPosition: {x: 40.094784, y: 0}
   m_SizeDelta: {x: 0, y: 0}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!114 &587312614
@@ -6438,7 +6437,7 @@ Transform:
   m_GameObject: {fileID: 588745672}
   serializedVersion: 2
   m_LocalRotation: {x: 0, y: 0.2164396, z: 0, w: 0.97629607}
-  m_LocalPosition: {x: 2, y: 4, z: -10}
+  m_LocalPosition: {x: -42, y: 0.75, z: -9}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children: []
@@ -6457,8 +6456,8 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   target: {fileID: 457495187}
-  offset: {x: -1, y: 0.5, z: -9}
-  shakeAmount: 0.03
+  offset: {x: -1, y: 0.75, z: -9}
+  shakeAmount: 0.1
   shakeTime: 0
 --- !u!1 &596179208
 GameObject:
@@ -7014,7 +7013,7 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0, y: 0}
   m_AnchorMax: {x: 0, y: 0}
-  m_AnchoredPosition: {x: 0, y: 0}
+  m_AnchoredPosition: {x: 20.473932, y: 0}
   m_SizeDelta: {x: 0, y: 0}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!114 &634375870
@@ -8024,7 +8023,7 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0, y: 0}
   m_AnchorMax: {x: 0, y: 0}
-  m_AnchoredPosition: {x: 0, y: 0}
+  m_AnchoredPosition: {x: 138.15166, y: 0}
   m_SizeDelta: {x: 0, y: 0}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!114 &729095505
@@ -8565,7 +8564,7 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0, y: 0}
   m_AnchorMax: {x: 0, y: 0}
-  m_AnchoredPosition: {x: 0, y: 0}
+  m_AnchoredPosition: {x: 218.19904, y: 0}
   m_SizeDelta: {x: 0, y: 0}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!114 &767548096
@@ -11594,7 +11593,7 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0, y: 0}
   m_AnchorMax: {x: 0, y: 0}
-  m_AnchoredPosition: {x: 0, y: 0}
+  m_AnchoredPosition: {x: 80.14218, y: 0}
   m_SizeDelta: {x: 0, y: 0}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!114 &1031910512
@@ -12640,7 +12639,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   m_Material: {fileID: 0}
   m_Color: {r: 1, g: 1, b: 1, a: 1}
-  m_RaycastTarget: 1
+  m_RaycastTarget: 0
   m_RaycastPadding: {x: 0, y: 0, z: 0, w: 0}
   m_Maskable: 1
   m_OnCullStateChanged:
@@ -13626,7 +13625,7 @@ MeshRenderer:
   m_RenderingLayerMask: 1
   m_RendererPriority: 0
   m_Materials:
-  - {fileID: 10303, guid: 0000000000000000f000000000000000, type: 0}
+  - {fileID: 2100000, guid: 74ef6925ae6bbb344aa7c78f893aaa76, type: 2}
   m_StaticBatchInfo:
     firstSubMesh: 0
     subMeshCount: 0
@@ -15741,7 +15740,6 @@ Transform:
   m_LocalScale: {x: 2, y: 2, z: 2}
   m_ConstrainProportionsScale: 0
   m_Children:
-  - {fileID: 6203253127104602863}
   - {fileID: 8165598909600854273}
   - {fileID: 841024578909097166}
   - {fileID: 2840478025060582421}
@@ -16147,7 +16145,7 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0, y: 0}
   m_AnchorMax: {x: 0, y: 0}
-  m_AnchoredPosition: {x: 0, y: 0}
+  m_AnchoredPosition: {x: 49.668243, y: 0}
   m_SizeDelta: {x: 0, y: 0}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!114 &1523931692
@@ -16741,6 +16739,7 @@ RectTransform:
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children:
+  - {fileID: 1807594327}
   - {fileID: 209374385}
   m_Father: {fileID: 2014244583}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
@@ -18362,7 +18361,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   normalNotes:
-  - {fileID: 3462105356793660747, guid: eb500cdcd224b3b47b4068743f17bc50, type: 3}
+  - {fileID: 100010, guid: 494893b7ceb208e4292aba99e6a514ff, type: 3}
   - {fileID: 3462105356793660747, guid: 2e4d6905cbf169d449d429e0c2ac6e07, type: 3}
   moveNotes:
   - {fileID: 3462105356793660747, guid: 374e5f11571088348a18f0f9ff304c42, type: 3}
@@ -18372,750 +18371,1450 @@ MonoBehaviour:
   indexObject: {fileID: 5915041538683237611, guid: c502e6c673784ac4a8468df7698d4d7d, type: 3}
   notes:
   - type: 0
-    isUp: 0
-    noteTime: 0.02
+    isUp: 1
+    noteTime: 1
     length: 0
     objectType: 0
   - type: 0
     isUp: 0
-    noteTime: 2.02
+    noteTime: 1.25
+    length: 0
+    objectType: 0
+  - type: 0
+    isUp: 1
+    noteTime: 1.5
     length: 0
     objectType: 0
   - type: 0
     isUp: 0
-    noteTime: 4.02
+    noteTime: 1.75
+    length: 0
+    objectType: 0
+  - type: 0
+    isUp: 1
+    noteTime: 2
     length: 0
     objectType: 0
   - type: 0
     isUp: 0
-    noteTime: 6.02
+    noteTime: 2.5
     length: 0
     objectType: 0
   - type: 0
     isUp: 1
-    noteTime: 8.02
-    length: 0
-    objectType: 0
-  - type: 0
-    isUp: 1
-    noteTime: 8.27
+    noteTime: 3
     length: 0
     objectType: 0
   - type: 0
     isUp: 0
-    noteTime: 8.52
+    noteTime: 3.5
+    length: 0
+    objectType: 0
+  - type: 0
+    isUp: 1
+    noteTime: 3.75
     length: 0
     objectType: 0
   - type: 0
     isUp: 0
-    noteTime: 8.77
+    noteTime: 4.25
     length: 0
     objectType: 0
   - type: 0
     isUp: 1
-    noteTime: 9.02
-    length: 0
-    objectType: 0
-  - type: 0
-    isUp: 1
-    noteTime: 9.52
+    noteTime: 4.5
     length: 0
     objectType: 0
   - type: 0
     isUp: 0
-    noteTime: 9.77
-    length: 0
-    objectType: 0
-  - type: 0
-    isUp: 1
-    noteTime: 10.02
+    noteTime: 5
     length: 0
     objectType: 0
   - type: 0
     isUp: 0
-    noteTime: 10.52
-    length: 0
-    objectType: 0
-  - type: 0
-    isUp: 1
-    noteTime: 11.02
-    length: 0
-    objectType: 0
-  - type: 0
-    isUp: 1
-    noteTime: 12.27
+    noteTime: 6
     length: 0
     objectType: 0
   - type: 0
     isUp: 0
-    noteTime: 12.52
+    noteTime: 7
     length: 0
     objectType: 0
   - type: 0
     isUp: 0
-    noteTime: 12.77
+    noteTime: 8
     length: 0
     objectType: 0
   - type: 0
     isUp: 1
-    noteTime: 13.02
-    length: 0
-    objectType: 0
-  - type: 0
-    isUp: 1
-    noteTime: 13.52
+    noteTime: 9
     length: 0
     objectType: 0
   - type: 0
     isUp: 0
-    noteTime: 13.77
+    noteTime: 9.25
     length: 0
     objectType: 0
   - type: 0
     isUp: 1
-    noteTime: 14.02
+    noteTime: 9.5
     length: 0
     objectType: 0
   - type: 0
     isUp: 0
-    noteTime: 14.52
+    noteTime: 9.75
     length: 0
     objectType: 0
   - type: 0
     isUp: 1
-    noteTime: 15.02
-    length: 0
-    objectType: 0
-  - type: 0
-    isUp: 1
-    noteTime: 16.27
+    noteTime: 10
     length: 0
     objectType: 0
   - type: 0
     isUp: 0
-    noteTime: 16.52
+    noteTime: 10.5
+    length: 0
+    objectType: 0
+  - type: 0
+    isUp: 1
+    noteTime: 11
     length: 0
     objectType: 0
   - type: 0
     isUp: 0
-    noteTime: 16.77
+    noteTime: 11.5
     length: 0
     objectType: 0
   - type: 0
     isUp: 1
-    noteTime: 17.02
-    length: 0
-    objectType: 0
-  - type: 0
-    isUp: 1
-    noteTime: 17.52
+    noteTime: 11.75
     length: 0
     objectType: 0
   - type: 0
     isUp: 0
-    noteTime: 17.77
+    noteTime: 12.25
     length: 0
     objectType: 0
   - type: 0
     isUp: 1
-    noteTime: 18.02
+    noteTime: 12.5
     length: 0
     objectType: 0
   - type: 0
     isUp: 0
-    noteTime: 18.52
-    length: 0
-    objectType: 0
-  - type: 0
-    isUp: 1
-    noteTime: 19.02
-    length: 0
-    objectType: 0
-  - type: 0
-    isUp: 1
-    noteTime: 20.27
+    noteTime: 13
     length: 0
     objectType: 0
   - type: 0
     isUp: 0
-    noteTime: 20.52
+    noteTime: 14
     length: 0
     objectType: 0
   - type: 0
     isUp: 0
-    noteTime: 20.77
-    length: 0
-    objectType: 0
-  - type: 0
-    isUp: 1
-    noteTime: 21.02
-    length: 0
-    objectType: 0
-  - type: 0
-    isUp: 1
-    noteTime: 21.52
+    noteTime: 15
     length: 0
     objectType: 0
   - type: 0
     isUp: 0
-    noteTime: 21.77
-    length: 0
-    objectType: 0
-  - type: 0
-    isUp: 1
-    noteTime: 22.02
+    noteTime: 16
     length: 0
     objectType: 0
   - type: 0
     isUp: 0
-    noteTime: 22.52
+    noteTime: 17
     length: 0
     objectType: 0
   - type: 0
     isUp: 1
-    noteTime: 23.02
+    noteTime: 17.25
     length: 0
     objectType: 0
   - type: 0
     isUp: 0
-    noteTime: 24.02
+    noteTime: 17.5
+    length: 0
+    objectType: 0
+  - type: 0
+    isUp: 1
+    noteTime: 17.75
     length: 0
     objectType: 0
   - type: 0
     isUp: 0
-    noteTime: 24.52
+    noteTime: 18
+    length: 0
+    objectType: 0
+  - type: 0
+    isUp: 1
+    noteTime: 18.5
     length: 0
     objectType: 0
   - type: 0
     isUp: 0
-    noteTime: 25.02
+    noteTime: 19
     length: 0
     objectType: 0
   - type: 0
     isUp: 1
-    noteTime: 26.02
-    length: 0
-    objectType: 0
-  - type: 0
-    isUp: 1
-    noteTime: 26.52
+    noteTime: 19.5
     length: 0
     objectType: 0
   - type: 0
     isUp: 0
-    noteTime: 27.02
+    noteTime: 19.75
     length: 0
     objectType: 0
   - type: 0
     isUp: 1
-    noteTime: 27.27
+    noteTime: 20.25
     length: 0
     objectType: 0
   - type: 0
     isUp: 0
-    noteTime: 27.52
+    noteTime: 20.5
     length: 0
     objectType: 0
   - type: 0
     isUp: 1
-    noteTime: 27.77
-    length: 2.25
-    objectType: 1
+    noteTime: 21
+    length: 0
+    objectType: 0
   - type: 0
     isUp: 1
-    noteTime: 32.27
+    noteTime: 22
+    length: 0
+    objectType: 0
+  - type: 0
+    isUp: 1
+    noteTime: 23
+    length: 0
+    objectType: 0
+  - type: 0
+    isUp: 1
+    noteTime: 24
+    length: 0
+    objectType: 0
+  - type: 0
+    isUp: 1
+    noteTime: 25
     length: 0
     objectType: 0
   - type: 0
     isUp: 0
-    noteTime: 32.52
+    noteTime: 25.25
     length: 0
     objectType: 0
   - type: 0
     isUp: 1
-    noteTime: 32.77
+    noteTime: 25.5
+    length: 0
+    objectType: 0
+  - type: 0
+    isUp: 1
+    noteTime: 26
+    length: 0
+    objectType: 0
+  - type: 0
+    isUp: 1
+    noteTime: 26.25
+    length: 0
+    objectType: 0
+  - type: 0
+    isUp: 1
+    noteTime: 27
     length: 0
     objectType: 0
   - type: 0
     isUp: 0
-    noteTime: 33.02
-    length: 0.5
-    objectType: 1
-  - type: 0
-    isUp: 1
-    noteTime: 33.77
+    noteTime: 27.25
     length: 0
     objectType: 0
   - type: 0
     isUp: 1
-    noteTime: 34.02
+    noteTime: 27.5
     length: 0
     objectType: 0
   - type: 0
     isUp: 0
-    noteTime: 34.52
+    noteTime: 28
     length: 0
     objectType: 0
   - type: 0
     isUp: 1
-    noteTime: 35.02
-    length: 0
-    objectType: 0
-  - type: 0
-    isUp: 1
-    noteTime: 36.27
+    noteTime: 28.25
     length: 0
     objectType: 0
   - type: 0
     isUp: 0
-    noteTime: 36.52
+    noteTime: 28.5
     length: 0
     objectType: 0
   - type: 0
     isUp: 1
-    noteTime: 36.77
+    noteTime: 28.75
     length: 0
     objectType: 0
   - type: 0
     isUp: 0
-    noteTime: 37.02
-    length: 0.5
-    objectType: 1
-  - type: 0
-    isUp: 1
-    noteTime: 37.77
+    noteTime: 29
     length: 0
     objectType: 0
   - type: 0
     isUp: 1
-    noteTime: 38.02
+    noteTime: 30
     length: 0
     objectType: 0
   - type: 0
     isUp: 0
-    noteTime: 38.52
+    noteTime: 31
     length: 0
     objectType: 0
   - type: 0
     isUp: 1
-    noteTime: 39.02
+    noteTime: 33
     length: 0
     objectType: 0
   - type: 0
     isUp: 1
-    noteTime: 40.27
+    noteTime: 34
+    length: 0
+    objectType: 0
+  - type: 0
+    isUp: 1
+    noteTime: 35
+    length: 0
+    objectType: 0
+  - type: 0
+    isUp: 1
+    noteTime: 36
+    length: 0
+    objectType: 0
+  - type: 0
+    isUp: 1
+    noteTime: 37
+    length: 0
+    objectType: 0
+  - type: 0
+    isUp: 1
+    noteTime: 38
+    length: 0
+    objectType: 0
+  - type: 0
+    isUp: 1
+    noteTime: 39
     length: 0
     objectType: 0
   - type: 0
     isUp: 0
-    noteTime: 40.52
+    noteTime: 39.5
     length: 0
     objectType: 0
   - type: 0
     isUp: 1
-    noteTime: 40.77
+    noteTime: 39.75
     length: 0
     objectType: 0
   - type: 0
     isUp: 0
-    noteTime: 41.02
-    length: 0.5
-    objectType: 1
-  - type: 0
-    isUp: 1
-    noteTime: 41.77
+    noteTime: 40
     length: 0
     objectType: 0
   - type: 0
     isUp: 1
-    noteTime: 42.02
+    noteTime: 40.25
     length: 0
     objectType: 0
   - type: 0
     isUp: 0
-    noteTime: 42.52
-    length: 0
-    objectType: 0
-  - type: 0
-    isUp: 1
-    noteTime: 43.02
-    length: 0
-    objectType: 0
-  - type: 0
-    isUp: 1
-    noteTime: 44.27
+    noteTime: 41
     length: 0
     objectType: 0
   - type: 0
     isUp: 0
-    noteTime: 44.52
-    length: 0
-    objectType: 0
-  - type: 0
-    isUp: 1
-    noteTime: 44.77
+    noteTime: 42
     length: 0
     objectType: 0
   - type: 0
     isUp: 0
-    noteTime: 45.02
-    length: 0.5
-    objectType: 1
-  - type: 0
-    isUp: 1
-    noteTime: 45.77
-    length: 0
-    objectType: 0
-  - type: 0
-    isUp: 1
-    noteTime: 46.02
+    noteTime: 43
     length: 0
     objectType: 0
   - type: 0
     isUp: 0
-    noteTime: 46.52
-    length: 0
-    objectType: 0
-  - type: 0
-    isUp: 1
-    noteTime: 47.02
-    length: 0
-    objectType: 0
-  - type: 0
-    isUp: 1
-    noteTime: 48.02
-    length: 0
-    objectType: 0
-  - type: 0
-    isUp: 1
-    noteTime: 48.52
-    length: 0
-    objectType: 0
-  - type: 0
-    isUp: 1
-    noteTime: 49.02
+    noteTime: 44
     length: 0
     objectType: 0
   - type: 0
     isUp: 0
-    noteTime: 50.02
+    noteTime: 45
     length: 0
     objectType: 0
   - type: 0
     isUp: 0
-    noteTime: 50.52
+    noteTime: 46
     length: 0
     objectType: 0
   - type: 0
     isUp: 1
-    noteTime: 51.02
+    noteTime: 47
     length: 0
     objectType: 0
   - type: 0
     isUp: 0
-    noteTime: 51.27
+    noteTime: 48
     length: 0
     objectType: 0
   - type: 0
     isUp: 1
-    noteTime: 51.52
+    noteTime: 48.25
     length: 0
     objectType: 0
   - type: 0
     isUp: 0
-    noteTime: 51.77
-    length: 2.25
-    objectType: 1
-  - type: 0
-    isUp: 0
-    noteTime: 55.52
+    noteTime: 48.5
     length: 0
     objectType: 0
   - type: 0
     isUp: 1
-    noteTime: 55.77
-    length: 0
-    objectType: 0
-  - type: 0
-    isUp: 1
-    noteTime: 56.02
+    noteTime: 48.75
     length: 0
     objectType: 0
   - type: 0
     isUp: 0
-    noteTime: 56.52
+    noteTime: 49
     length: 0
     objectType: 0
   - type: 0
     isUp: 1
-    noteTime: 57.02
-    length: 0
-    objectType: 0
-  - type: 0
-    isUp: 1
-    noteTime: 57.52
+    noteTime: 49.5
     length: 0
     objectType: 0
   - type: 0
     isUp: 0
-    noteTime: 58.02
+    noteTime: 50
+    length: 0
+    objectType: 0
+  - type: 0
+    isUp: 1
+    noteTime: 50.25
     length: 0
     objectType: 0
   - type: 0
     isUp: 0
-    noteTime: 58.77
+    noteTime: 51
     length: 0
     objectType: 0
   - type: 0
     isUp: 1
-    noteTime: 59.27
+    noteTime: 51.5
     length: 0
     objectType: 0
   - type: 0
     isUp: 0
-    noteTime: 59.52
+    noteTime: 52
+    length: 0
+    objectType: 0
+  - type: 0
+    isUp: 1
+    noteTime: 52.25
     length: 0
     objectType: 0
   - type: 0
     isUp: 0
-    noteTime: 59.77
+    noteTime: 52.75
     length: 0
     objectType: 0
   - type: 0
     isUp: 1
-    noteTime: 60.02
+    noteTime: 53
     length: 0
     objectType: 0
   - type: 0
     isUp: 0
-    noteTime: 60.52
+    noteTime: 53.5
     length: 0
     objectType: 0
   - type: 0
     isUp: 1
-    noteTime: 61.02
+    noteTime: 54
     length: 0
     objectType: 0
   - type: 0
     isUp: 0
-    noteTime: 61.52
+    noteTime: 54.5
     length: 0
     objectType: 0
   - type: 0
     isUp: 1
-    noteTime: 62.02
+    noteTime: 54.75
     length: 0
     objectType: 0
   - type: 0
     isUp: 1
-    noteTime: 62.77
-    length: 0
-    objectType: 0
-  - type: 0
-    isUp: 1
-    noteTime: 63.27
+    noteTime: 56.25
     length: 0
     objectType: 0
   - type: 0
     isUp: 0
-    noteTime: 63.52
+    noteTime: 56.5
+    length: 0
+    objectType: 0
+  - type: 0
+    isUp: 1
+    noteTime: 56.75
     length: 0
     objectType: 0
   - type: 0
     isUp: 0
-    noteTime: 63.77
+    noteTime: 57
     length: 0
     objectType: 0
   - type: 0
     isUp: 1
-    noteTime: 64.02
+    noteTime: 57.5
     length: 0
     objectType: 0
   - type: 0
     isUp: 0
-    noteTime: 64.52
+    noteTime: 58
+    length: 0
+    objectType: 0
+  - type: 0
+    isUp: 1
+    noteTime: 58.25
     length: 0
     objectType: 0
   - type: 0
     isUp: 0
-    noteTime: 65.02
+    noteTime: 59
     length: 0
     objectType: 0
   - type: 0
     isUp: 1
-    noteTime: 65.52
-    length: 0
-    objectType: 0
-  - type: 0
-    isUp: 1
-    noteTime: 66.02
-    length: 0
-    objectType: 0
-  - type: 0
-    isUp: 1
-    noteTime: 66.77
+    noteTime: 59.5
     length: 0
     objectType: 0
   - type: 0
     isUp: 0
-    noteTime: 67.27
+    noteTime: 60
     length: 0
     objectType: 0
   - type: 0
     isUp: 1
-    noteTime: 67.52
+    noteTime: 60.25
     length: 0
     objectType: 0
   - type: 0
     isUp: 0
-    noteTime: 67.77
+    noteTime: 60.75
     length: 0
     objectType: 0
   - type: 0
     isUp: 1
-    noteTime: 68.02
+    noteTime: 61
+    length: 0
+    objectType: 0
+  - type: 0
+    isUp: 0
+    noteTime: 61.5
+    length: 0
+    objectType: 0
+  - type: 0
+    isUp: 1
+    noteTime: 62
+    length: 0
+    objectType: 0
+  - type: 0
+    isUp: 0
+    noteTime: 62.5
+    length: 0
+    objectType: 0
+  - type: 0
+    isUp: 1
+    noteTime: 62.75
+    length: 0
+    objectType: 0
+  - type: 0
+    isUp: 1
+    noteTime: 64
+    length: 0
+    objectType: 0
+  - type: 0
+    isUp: 0
+    noteTime: 64.25
+    length: 0
+    objectType: 0
+  - type: 0
+    isUp: 1
+    noteTime: 64.5
+    length: 0
+    objectType: 0
+  - type: 0
+    isUp: 0
+    noteTime: 64.75
+    length: 0
+    objectType: 0
+  - type: 0
+    isUp: 1
+    noteTime: 65
+    length: 0
+    objectType: 0
+  - type: 0
+    isUp: 0
+    noteTime: 65.5
+    length: 0
+    objectType: 0
+  - type: 0
+    isUp: 1
+    noteTime: 66
+    length: 0
+    objectType: 0
+  - type: 0
+    isUp: 0
+    noteTime: 66.25
+    length: 0
+    objectType: 0
+  - type: 0
+    isUp: 1
+    noteTime: 66.75
+    length: 0
+    objectType: 0
+  - type: 0
+    isUp: 1
+    noteTime: 67.5
+    length: 0
+    objectType: 0
+  - type: 0
+    isUp: 1
+    noteTime: 68
+    length: 0
+    objectType: 0
+  - type: 0
+    isUp: 0
+    noteTime: 68.25
+    length: 0
+    objectType: 0
+  - type: 0
+    isUp: 1
+    noteTime: 68.75
+    length: 0
+    objectType: 0
+  - type: 0
+    isUp: 0
+    noteTime: 69
+    length: 0
+    objectType: 0
+  - type: 0
+    isUp: 1
+    noteTime: 69.5
+    length: 0
+    objectType: 0
+  - type: 0
+    isUp: 0
+    noteTime: 70
+    length: 0
+    objectType: 0
+  - type: 0
+    isUp: 1
+    noteTime: 70.5
+    length: 0
+    objectType: 0
+  - type: 0
+    isUp: 0
+    noteTime: 70.75
+    length: 0
+    objectType: 0
+  - type: 0
+    isUp: 1
+    noteTime: 72.25
+    length: 0
+    objectType: 0
+  - type: 0
+    isUp: 0
+    noteTime: 72.5
+    length: 0
+    objectType: 0
+  - type: 0
+    isUp: 1
+    noteTime: 72.75
+    length: 0
+    objectType: 0
+  - type: 0
+    isUp: 0
+    noteTime: 73
+    length: 0
+    objectType: 0
+  - type: 0
+    isUp: 1
+    noteTime: 73.5
+    length: 0
+    objectType: 0
+  - type: 0
+    isUp: 0
+    noteTime: 74
+    length: 0
+    objectType: 0
+  - type: 0
+    isUp: 1
+    noteTime: 74.5
+    length: 0
+    objectType: 0
+  - type: 0
+    isUp: 0
+    noteTime: 75
+    length: 0
+    objectType: 0
+  - type: 0
+    isUp: 1
+    noteTime: 75.25
+    length: 0
+    objectType: 0
+  - type: 0
+    isUp: 0
+    noteTime: 75.5
+    length: 0
+    objectType: 0
+  - type: 0
+    isUp: 1
+    noteTime: 76
+    length: 0
+    objectType: 0
+  - type: 0
+    isUp: 0
+    noteTime: 76.5
+    length: 0
+    objectType: 0
+  - type: 0
+    isUp: 1
+    noteTime: 77
     length: 2
     objectType: 1
   - type: 0
     isUp: 1
-    noteTime: 71.02
+    noteTime: 81
     length: 0
     objectType: 0
   - type: 0
     isUp: 0
-    noteTime: 71.52
+    noteTime: 81.25
     length: 0
     objectType: 0
   - type: 0
     isUp: 1
-    noteTime: 71.77
+    noteTime: 81.5
     length: 0
     objectType: 0
   - type: 0
     isUp: 0
-    noteTime: 72.02
+    noteTime: 81.75
     length: 0
     objectType: 0
   - type: 0
     isUp: 1
-    noteTime: 72.52
-    length: 0
-    objectType: 0
-  - type: 0
-    isUp: 1
-    noteTime: 73.02
-    length: 0
-    objectType: 0
-  - type: 0
-    isUp: 1
-    noteTime: 73.52
-    length: 0
-    objectType: 0
-  - type: 0
-    isUp: 1
-    noteTime: 74.02
+    noteTime: 82
     length: 0
     objectType: 0
   - type: 0
     isUp: 0
-    noteTime: 74.77
+    noteTime: 82.5
     length: 0
     objectType: 0
   - type: 0
     isUp: 1
-    noteTime: 75.27
+    noteTime: 83
     length: 0
     objectType: 0
   - type: 0
     isUp: 0
-    noteTime: 75.52
+    noteTime: 83.5
+    length: 0
+    objectType: 0
+  - type: 0
+    isUp: 1
+    noteTime: 83.75
     length: 0
     objectType: 0
   - type: 0
     isUp: 0
-    noteTime: 75.77
+    noteTime: 84.25
     length: 0
     objectType: 0
   - type: 0
     isUp: 1
-    noteTime: 76.02
-    length: 0
-    objectType: 0
-  - type: 0
-    isUp: 1
-    noteTime: 76.52
-    length: 0
-    objectType: 0
-  - type: 0
-    isUp: 1
-    noteTime: 77.02
-    length: 0
-    objectType: 0
-  - type: 0
-    isUp: 1
-    noteTime: 77.52
-    length: 0
-    objectType: 0
-  - type: 0
-    isUp: 1
-    noteTime: 78.02
+    noteTime: 84.5
     length: 0
     objectType: 0
   - type: 0
     isUp: 0
-    noteTime: 78.77
-    length: 0
-    objectType: 0
-  - type: 0
-    isUp: 1
-    noteTime: 79.27
+    noteTime: 85
     length: 0
     objectType: 0
   - type: 0
     isUp: 0
-    noteTime: 79.52
+    noteTime: 86
     length: 0
     objectType: 0
   - type: 0
     isUp: 0
-    noteTime: 79.77
-    length: 0
-    objectType: 0
-  - type: 0
-    isUp: 1
-    noteTime: 80.02
-    length: 0
-    objectType: 0
-  - type: 0
-    isUp: 1
-    noteTime: 80.52
-    length: 0
-    objectType: 0
-  - type: 0
-    isUp: 1
-    noteTime: 81.02
-    length: 0
-    objectType: 0
-  - type: 0
-    isUp: 1
-    noteTime: 81.52
-    length: 0
-    objectType: 0
-  - type: 0
-    isUp: 1
-    noteTime: 82.02
+    noteTime: 87
     length: 0
     objectType: 0
   - type: 0
     isUp: 0
-    noteTime: 83.02
+    noteTime: 88
+    length: 0
+    objectType: 0
+  - type: 0
+    isUp: 0
+    noteTime: 89
     length: 0
     objectType: 0
   - type: 0
     isUp: 1
-    noteTime: 84.02
-    length: 2
-    objectType: 1
+    noteTime: 89.25
+    length: 0
+    objectType: 0
+  - type: 0
+    isUp: 0
+    noteTime: 89.5
+    length: 0
+    objectType: 0
+  - type: 0
+    isUp: 1
+    noteTime: 89.75
+    length: 0
+    objectType: 0
+  - type: 0
+    isUp: 0
+    noteTime: 90
+    length: 0
+    objectType: 0
+  - type: 0
+    isUp: 1
+    noteTime: 90.5
+    length: 0
+    objectType: 0
+  - type: 0
+    isUp: 0
+    noteTime: 91
+    length: 0
+    objectType: 0
+  - type: 0
+    isUp: 1
+    noteTime: 91.5
+    length: 0
+    objectType: 0
+  - type: 0
+    isUp: 0
+    noteTime: 91.75
+    length: 0
+    objectType: 0
+  - type: 0
+    isUp: 1
+    noteTime: 92.25
+    length: 0
+    objectType: 0
+  - type: 0
+    isUp: 0
+    noteTime: 92.5
+    length: 0
+    objectType: 0
+  - type: 0
+    isUp: 1
+    noteTime: 93
+    length: 0
+    objectType: 0
+  - type: 0
+    isUp: 1
+    noteTime: 94
+    length: 0
+    objectType: 0
+  - type: 0
+    isUp: 1
+    noteTime: 95
+    length: 0
+    objectType: 0
+  - type: 0
+    isUp: 1
+    noteTime: 96
+    length: 0
+    objectType: 0
+  - type: 0
+    isUp: 1
+    noteTime: 97
+    length: 0
+    objectType: 0
+  - type: 0
+    isUp: 0
+    noteTime: 97.25
+    length: 0
+    objectType: 0
+  - type: 0
+    isUp: 1
+    noteTime: 97.5
+    length: 0
+    objectType: 0
+  - type: 0
+    isUp: 0
+    noteTime: 97.75
+    length: 0
+    objectType: 0
+  - type: 0
+    isUp: 1
+    noteTime: 98
+    length: 0
+    objectType: 0
+  - type: 0
+    isUp: 0
+    noteTime: 98.5
+    length: 0
+    objectType: 0
+  - type: 0
+    isUp: 1
+    noteTime: 99
+    length: 0
+    objectType: 0
+  - type: 0
+    isUp: 0
+    noteTime: 99.5
+    length: 0
+    objectType: 0
+  - type: 0
+    isUp: 1
+    noteTime: 99.75
+    length: 0
+    objectType: 0
+  - type: 0
+    isUp: 0
+    noteTime: 100.25
+    length: 0
+    objectType: 0
+  - type: 0
+    isUp: 1
+    noteTime: 100.5
+    length: 0
+    objectType: 0
+  - type: 0
+    isUp: 0
+    noteTime: 101
+    length: 0
+    objectType: 0
+  - type: 0
+    isUp: 0
+    noteTime: 102
+    length: 0
+    objectType: 0
+  - type: 0
+    isUp: 0
+    noteTime: 103
+    length: 0
+    objectType: 0
+  - type: 0
+    isUp: 0
+    noteTime: 104
+    length: 0
+    objectType: 0
+  - type: 0
+    isUp: 0
+    noteTime: 105
+    length: 0
+    objectType: 0
+  - type: 0
+    isUp: 1
+    noteTime: 105.25
+    length: 0
+    objectType: 0
+  - type: 0
+    isUp: 0
+    noteTime: 105.5
+    length: 0
+    objectType: 0
+  - type: 0
+    isUp: 1
+    noteTime: 106
+    length: 0
+    objectType: 0
+  - type: 0
+    isUp: 1
+    noteTime: 106.25
+    length: 0
+    objectType: 0
+  - type: 0
+    isUp: 0
+    noteTime: 106.75
+    length: 0
+    objectType: 0
+  - type: 0
+    isUp: 1
+    noteTime: 107.25
+    length: 0
+    objectType: 0
+  - type: 0
+    isUp: 0
+    noteTime: 107.5
+    length: 0
+    objectType: 0
+  - type: 0
+    isUp: 1
+    noteTime: 108
+    length: 0
+    objectType: 0
+  - type: 0
+    isUp: 0
+    noteTime: 108.25
+    length: 0
+    objectType: 0
+  - type: 0
+    isUp: 1
+    noteTime: 108.5
+    length: 0
+    objectType: 0
+  - type: 0
+    isUp: 0
+    noteTime: 108.75
+    length: 0
+    objectType: 0
+  - type: 0
+    isUp: 1
+    noteTime: 109
+    length: 0
+    objectType: 0
+  - type: 0
+    isUp: 0
+    noteTime: 110
+    length: 0
+    objectType: 0
+  - type: 0
+    isUp: 0
+    noteTime: 111
+    length: 0
+    objectType: 0
+  - type: 0
+    isUp: 0
+    noteTime: 112.5
+    length: 0
+    objectType: 0
+  - type: 0
+    isUp: 0
+    noteTime: 113
+    length: 0
+    objectType: 0
+  - type: 0
+    isUp: 1
+    noteTime: 114
+    length: 0
+    objectType: 0
+  - type: 0
+    isUp: 1
+    noteTime: 115
+    length: 0
+    objectType: 0
+  - type: 0
+    isUp: 1
+    noteTime: 116
+    length: 0
+    objectType: 0
+  - type: 0
+    isUp: 1
+    noteTime: 117
+    length: 0
+    objectType: 0
+  - type: 0
+    isUp: 1
+    noteTime: 118
+    length: 0
+    objectType: 0
+  - type: 0
+    isUp: 1
+    noteTime: 119
+    length: 0
+    objectType: 0
+  - type: 0
+    isUp: 0
+    noteTime: 119.5
+    length: 0
+    objectType: 0
+  - type: 0
+    isUp: 1
+    noteTime: 119.75
+    length: 0
+    objectType: 0
+  - type: 0
+    isUp: 0
+    noteTime: 120
+    length: 0
+    objectType: 0
+  - type: 0
+    isUp: 1
+    noteTime: 120.25
+    length: 0
+    objectType: 0
+  - type: 0
+    isUp: 0
+    noteTime: 121
+    length: 0
+    objectType: 0
+  - type: 0
+    isUp: 0
+    noteTime: 122
+    length: 0
+    objectType: 0
+  - type: 0
+    isUp: 0
+    noteTime: 123
+    length: 0
+    objectType: 0
+  - type: 0
+    isUp: 0
+    noteTime: 124
+    length: 0
+    objectType: 0
+  - type: 0
+    isUp: 0
+    noteTime: 125
+    length: 0
+    objectType: 0
+  - type: 0
+    isUp: 0
+    noteTime: 126
+    length: 0
+    objectType: 0
+  - type: 0
+    isUp: 0
+    noteTime: 127
+    length: 0
+    objectType: 0
+  - type: 0
+    isUp: 1
+    noteTime: 128
+    length: 0
+    objectType: 0
+  - type: 0
+    isUp: 0
+    noteTime: 128.25
+    length: 0
+    objectType: 0
+  - type: 0
+    isUp: 1
+    noteTime: 128.5
+    length: 0
+    objectType: 0
+  - type: 0
+    isUp: 0
+    noteTime: 128.75
+    length: 0
+    objectType: 0
+  - type: 0
+    isUp: 1
+    noteTime: 129
+    length: 0
+    objectType: 0
+  - type: 0
+    isUp: 0
+    noteTime: 129.5
+    length: 0
+    objectType: 0
+  - type: 0
+    isUp: 1
+    noteTime: 130
+    length: 0
+    objectType: 0
+  - type: 0
+    isUp: 0
+    noteTime: 130.25
+    length: 0
+    objectType: 0
+  - type: 0
+    isUp: 1
+    noteTime: 131
+    length: 0
+    objectType: 0
+  - type: 0
+    isUp: 0
+    noteTime: 131.5
+    length: 0
+    objectType: 0
+  - type: 0
+    isUp: 1
+    noteTime: 132
+    length: 0
+    objectType: 0
+  - type: 0
+    isUp: 0
+    noteTime: 132.25
+    length: 0
+    objectType: 0
+  - type: 0
+    isUp: 1
+    noteTime: 132.75
+    length: 0
+    objectType: 0
+  - type: 0
+    isUp: 0
+    noteTime: 133
+    length: 0
+    objectType: 0
+  - type: 0
+    isUp: 1
+    noteTime: 133.5
+    length: 0
+    objectType: 0
+  - type: 0
+    isUp: 0
+    noteTime: 134
+    length: 0
+    objectType: 0
+  - type: 0
+    isUp: 1
+    noteTime: 134.5
+    length: 0
+    objectType: 0
+  - type: 0
+    isUp: 0
+    noteTime: 134.75
+    length: 0
+    objectType: 0
+  - type: 0
+    isUp: 1
+    noteTime: 136.25
+    length: 0
+    objectType: 0
+  - type: 0
+    isUp: 0
+    noteTime: 136.5
+    length: 0
+    objectType: 0
+  - type: 0
+    isUp: 1
+    noteTime: 136.75
+    length: 0
+    objectType: 0
+  - type: 0
+    isUp: 0
+    noteTime: 137
+    length: 0
+    objectType: 0
+  - type: 0
+    isUp: 1
+    noteTime: 137.5
+    length: 0
+    objectType: 0
+  - type: 0
+    isUp: 0
+    noteTime: 138
+    length: 0
+    objectType: 0
+  - type: 0
+    isUp: 1
+    noteTime: 138.25
+    length: 0
+    objectType: 0
+  - type: 0
+    isUp: 0
+    noteTime: 138.75
+    length: 0
+    objectType: 0
+  - type: 0
+    isUp: 1
+    noteTime: 139.5
+    length: 0
+    objectType: 0
+  - type: 0
+    isUp: 0
+    noteTime: 140
+    length: 0
+    objectType: 0
+  - type: 0
+    isUp: 1
+    noteTime: 140.25
+    length: 0
+    objectType: 0
+  - type: 0
+    isUp: 0
+    noteTime: 140.75
+    length: 0
+    objectType: 0
+  - type: 0
+    isUp: 1
+    noteTime: 141
+    length: 0
+    objectType: 0
+  - type: 0
+    isUp: 0
+    noteTime: 141.5
+    length: 0
+    objectType: 0
+  - type: 0
+    isUp: 1
+    noteTime: 142
+    length: 0
+    objectType: 0
+  - type: 0
+    isUp: 0
+    noteTime: 142.5
+    length: 0
+    objectType: 0
+  - type: 0
+    isUp: 1
+    noteTime: 142.75
+    length: 0
+    objectType: 0
+  - type: 0
+    isUp: 1
+    noteTime: 144
+    length: 0
+    objectType: 0
+  - type: 0
+    isUp: 0
+    noteTime: 144.25
+    length: 0
+    objectType: 0
+  - type: 0
+    isUp: 1
+    noteTime: 144.5
+    length: 0
+    objectType: 0
+  - type: 0
+    isUp: 0
+    noteTime: 144.75
+    length: 0
+    objectType: 0
+  - type: 0
+    isUp: 1
+    noteTime: 145
+    length: 0
+    objectType: 0
+  - type: 0
+    isUp: 0
+    noteTime: 145.5
+    length: 0
+    objectType: 0
+  - type: 0
+    isUp: 1
+    noteTime: 146
+    length: 0
+    objectType: 0
+  - type: 0
+    isUp: 0
+    noteTime: 146.25
+    length: 0
+    objectType: 0
+  - type: 0
+    isUp: 1
+    noteTime: 147
+    length: 0
+    objectType: 0
+  - type: 0
+    isUp: 0
+    noteTime: 147.5
+    length: 0
+    objectType: 0
+  - type: 0
+    isUp: 1
+    noteTime: 148
+    length: 0
+    objectType: 0
+  - type: 0
+    isUp: 0
+    noteTime: 148.25
+    length: 0
+    objectType: 0
+  - type: 0
+    isUp: 1
+    noteTime: 148.75
+    length: 0
+    objectType: 0
+  - type: 0
+    isUp: 0
+    noteTime: 149
+    length: 0
+    objectType: 0
+  - type: 0
+    isUp: 1
+    noteTime: 149.5
+    length: 0
+    objectType: 0
+  - type: 0
+    isUp: 0
+    noteTime: 150
+    length: 0
+    objectType: 0
+  - type: 0
+    isUp: 1
+    noteTime: 150.5
+    length: 0
+    objectType: 0
+  - type: 0
+    isUp: 0
+    noteTime: 150.75
+    length: 0
+    objectType: 0
+  - type: 0
+    isUp: 1
+    noteTime: 152.25
+    length: 0
+    objectType: 0
+  - type: 0
+    isUp: 0
+    noteTime: 152.5
+    length: 0
+    objectType: 0
+  - type: 0
+    isUp: 1
+    noteTime: 152.75
+    length: 0
+    objectType: 0
+  - type: 0
+    isUp: 0
+    noteTime: 153
+    length: 0
+    objectType: 0
+  - type: 0
+    isUp: 1
+    noteTime: 153.5
+    length: 0
+    objectType: 0
+  - type: 0
+    isUp: 0
+    noteTime: 154
+    length: 0
+    objectType: 0
+  - type: 0
+    isUp: 1
+    noteTime: 154.5
+    length: 0
+    objectType: 0
+  - type: 0
+    isUp: 0
+    noteTime: 154.75
+    length: 0
+    objectType: 0
+  - type: 0
+    isUp: 1
+    noteTime: 155.25
+    length: 0
+    objectType: 0
+  - type: 0
+    isUp: 0
+    noteTime: 155.5
+    length: 0
+    objectType: 0
+  - type: 0
+    isUp: 0
+    noteTime: 156
+    length: 0
+    objectType: 0
+  - type: 0
+    isUp: 1
+    noteTime: 156.5
+    length: 0
+    objectType: 0
+  - type: 0
+    isUp: 0
+    noteTime: 157
+    length: 0
+    objectType: 0
   ground:
     serializedVersion: 2
     m_Bits: 64
@@ -19235,7 +19934,7 @@ RectTransform:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1807594326}
-  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
   m_LocalPosition: {x: 0, y: 0, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
@@ -19243,13 +19942,13 @@ RectTransform:
   - {fileID: 384040613}
   - {fileID: 1462074595}
   - {fileID: 1414748049}
-  m_Father: {fileID: 556664429}
+  m_Father: {fileID: 1572987885}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
-  m_AnchorMin: {x: 0, y: 0}
+  m_AnchorMin: {x: 0, y: 1}
   m_AnchorMax: {x: 1, y: 1}
-  m_AnchoredPosition: {x: 0, y: 100}
-  m_SizeDelta: {x: 0, y: 200}
-  m_Pivot: {x: 0.5, y: 0.5}
+  m_AnchoredPosition: {x: 0, y: 0}
+  m_SizeDelta: {x: 0, y: 250}
+  m_Pivot: {x: 0.5, y: 1}
 --- !u!114 &1807594328
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -19665,7 +20364,7 @@ Transform:
   serializedVersion: 2
   m_LocalRotation: {x: -0, y: -0.7071068, z: -0, w: 0.7071068}
   m_LocalPosition: {x: -0, y: -0.5, z: 1}
-  m_LocalScale: {x: 2, y: 8, z: 1}
+  m_LocalScale: {x: 1.5, y: 8, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children:
   - {fileID: 898833155}
@@ -20711,7 +21410,7 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0, y: 0}
   m_AnchorMax: {x: 0, y: 0}
-  m_AnchoredPosition: {x: 0, y: 0}
+  m_AnchoredPosition: {x: 98.05687, y: 0}
   m_SizeDelta: {x: 0, y: 0}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!114 &1928064482
@@ -22010,7 +22709,7 @@ MonoBehaviour:
   currentGround: 0
   currentRouteIdx: 2
   currentChapter: 1
-  currentStage: 6
+  currentStage: 4
   currentPlatform: 
   isTutorial: 1
   isCinemachine: 1
@@ -23260,7 +23959,7 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0, y: 0}
   m_AnchorMax: {x: 0, y: 0}
-  m_AnchoredPosition: {x: 0, y: 0}
+  m_AnchoredPosition: {x: 19.194313, y: 0}
   m_SizeDelta: {x: 0, y: 0}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!114 &2108431739
@@ -30063,6 +30762,7 @@ MonoBehaviour:
     m_Bits: 64
   keyUpCheckObstacle: {fileID: 0}
   playerParticle: {fileID: 3250433607045033781}
+  playerMaterialList: []
 --- !u!4 &2263251406171693151
 Transform:
   m_ObjectHideFlags: 0
@@ -30294,22 +30994,6 @@ GameObject:
   - component: {fileID: 2267451271869783479}
   m_Layer: 0
   m_Name: Toes_L
-  m_TagString: Untagged
-  m_Icon: {fileID: 0}
-  m_NavMeshLayer: 0
-  m_StaticEditorFlags: 0
-  m_IsActive: 1
---- !u!1 &2456184303841361979
-GameObject:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  serializedVersion: 6
-  m_Component:
-  - component: {fileID: 6203253127104602863}
-  m_Layer: 0
-  m_Name: info
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -30600,7 +31284,6 @@ GameObject:
   - component: {fileID: 8560905408293964858}
   - component: {fileID: 3250433607045033781}
   - component: {fileID: 1484059197333581647}
-  - component: {fileID: 3938972737872289359}
   - component: {fileID: 3453110829778777154}
   - component: {fileID: 8560905408293964856}
   - component: {fileID: 8560905408293964857}
@@ -36334,48 +37017,6 @@ Transform:
   - {fileID: 320203565818548081}
   m_Father: {fileID: 2263251406171693151}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
---- !u!23 &3938972737872289359
-MeshRenderer:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 2636929640549425249}
-  m_Enabled: 1
-  m_CastShadows: 1
-  m_ReceiveShadows: 1
-  m_DynamicOccludee: 1
-  m_StaticShadowCaster: 0
-  m_MotionVectors: 1
-  m_LightProbeUsage: 1
-  m_ReflectionProbeUsage: 1
-  m_RayTracingMode: 2
-  m_RayTraceProcedural: 0
-  m_RenderingLayerMask: 1
-  m_RendererPriority: 0
-  m_Materials:
-  - {fileID: 10303, guid: 0000000000000000f000000000000000, type: 0}
-  m_StaticBatchInfo:
-    firstSubMesh: 0
-    subMeshCount: 0
-  m_StaticBatchRoot: {fileID: 0}
-  m_ProbeAnchor: {fileID: 0}
-  m_LightProbeVolumeOverride: {fileID: 0}
-  m_ScaleInLightmap: 1
-  m_ReceiveGI: 1
-  m_PreserveUVs: 0
-  m_IgnoreNormalsForChartDetection: 0
-  m_ImportantGI: 0
-  m_StitchLightmapSeams: 1
-  m_SelectedEditorRenderState: 3
-  m_MinimumChartSize: 4
-  m_AutoUVMaxDistance: 0.5
-  m_AutoUVMaxAngle: 89
-  m_LightmapParameters: {fileID: 0}
-  m_SortingLayerID: 0
-  m_SortingLayer: 0
-  m_SortingOrder: 0
-  m_AdditionalVertexStreams: {fileID: 0}
 --- !u!1 &3969376467027068044
 GameObject:
   m_ObjectHideFlags: 0
@@ -38374,21 +39015,6 @@ GameObject:
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
   m_IsActive: 1
---- !u!4 &6203253127104602863
-Transform:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 2456184303841361979}
-  serializedVersion: 2
-  m_LocalRotation: {x: 0.00000008141017, y: 0.035094567, z: -0.0000000028588154, w: 0.99938405}
-  m_LocalPosition: {x: 0, y: -0.049966574, z: 0}
-  m_LocalScale: {x: 1, y: 1, z: 1}
-  m_ConstrainProportionsScale: 0
-  m_Children: []
-  m_Father: {fileID: 1488548265}
-  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1 &6203353532886315693
 GameObject:
   m_ObjectHideFlags: 0

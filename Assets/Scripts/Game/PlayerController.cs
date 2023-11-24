@@ -1,6 +1,5 @@
 using System.Collections;
 using Sirenix.OdinInspector;
-using UnityEditor.Localization.Platform.iOS;
 using UnityEngine;
 using UnityEngine.EventSystems;
 using UnityEngine.InputSystem;
@@ -49,6 +48,9 @@ public class PlayerController : MonoBehaviour
     [FoldoutGroup("일반")] 
     [SerializeField]
     private PlayerParticle playerParticle;
+    [FoldoutGroup("일반")] 
+    [SerializeField]
+    SkinnedMeshRenderer[] playerMaterialList;
 
     private InputAction.CallbackContext callback = new ();
     
@@ -74,6 +76,7 @@ public class PlayerController : MonoBehaviour
 
     public void Init()
     {
+        playerMaterialList = GetComponentsInChildren<SkinnedMeshRenderer>();
         Physics.gravity = new Vector3(0, -9.81f, 0);
         bpm = audioManager.bpm;
         animator = GetComponent<Animator>();
@@ -96,6 +99,12 @@ public class PlayerController : MonoBehaviour
 
     public void Hurt(Obstacle obstacle, bool isMiss)
     {
+        foreach(var temp in playerMaterialList)
+        {
+            temp.material.SetColor("_BaseColor", Color.red);
+        }
+        
+        CameraManager.instance.Vibrate(0.25f);
         verdict.ComboReset(obstacle);
 
         if (isInvincibility)
@@ -163,7 +172,9 @@ public class PlayerController : MonoBehaviour
         {
             Hurt(keyUpCheckObstacle, true);
         }
+        
         verdict.KeyUpOnLongInteract();
+        keyUpCheckObstacle = null;
     }
 
     public void OnUp()
@@ -235,6 +246,7 @@ public class PlayerController : MonoBehaviour
     IEnumerator LongNoteProcess(Obstacle obstacle, int evaluation)
     {
         bool isFirst = true;
+        keyUpCheckObstacle = obstacle;
 
         while (verdict.isLongInteract)
         {
@@ -345,6 +357,11 @@ public class PlayerController : MonoBehaviour
     void ReleaseInvincibility()
     {
         isInvincibility = false;
+        
+        foreach(var temp in playerMaterialList)
+        {
+            temp.material.SetColor("_BaseColor", Color.white);
+        }
     }
 
     /// <summary>

@@ -74,20 +74,37 @@ public class MapCreator : MonoBehaviour
         {
             Note n = notes[i];
             Quaternion q = Quaternion.AngleAxis(0, progressDirection);
-            Vector3 pos = new Vector3(n.noteTime * 8f + defaultOffset, 0.5f, 0);
+            Vector3 pos;
+            RaycastHit hit = new RaycastHit();
             
             if (!n.isUp)
             {
+                pos = new Vector3(n.noteTime * 8f + defaultOffset, -5f, 0);
+                Physics.Raycast(new Ray(pos, Vector3.up), out hit, 10, ground);
+                pos = hit.point;
                 q = Quaternion.AngleAxis(180, progressDirection);
             }
-            
+            else
+            {
+                pos = new Vector3(n.noteTime * 8f + defaultOffset, 5f, 0);
+                Physics.Raycast(new Ray(pos, Vector3.down), out hit, 10, ground);
+                pos = hit.point;
+            }
+
             GameObject obj = null;
             Obstacle obstacle = null;
             
             switch (n.type)
             {
                 case NoteType.NormalNote:
-                    obj = n.length == 0 ? Instantiate(normalNotes[n.objectType], pos, q) : new GameObject();
+                    obj = n.length == 0 ? Instantiate(normalNotes[n.objectType]) : new GameObject();
+                    obj.transform.position = pos;
+
+                    if (!n.isUp)
+                    {
+                        obj.transform.rotation *= q;
+                    }
+
                     obstacle = obj.AddComponent<Obstacle>();
                     obstacle.type = NoteType.NormalNote;
                     obstacle.canDestroy = true;

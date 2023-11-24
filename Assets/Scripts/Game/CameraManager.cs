@@ -42,13 +42,13 @@ public class CameraManager : MonoBehaviour
         transform.position = target.transform.position + offset;
     }
     
-    public void VibrateForTime(float time)
+    public void Vibrate(float time)
     {
         shakeTime = time;
-        StartCoroutine("Vibrate");
+        StartCoroutine("VibrateCoroutine");
     }
 
-    IEnumerator Vibrate()
+    IEnumerator VibrateCoroutine()
     {
         while (shakeTime > 0)
         {
