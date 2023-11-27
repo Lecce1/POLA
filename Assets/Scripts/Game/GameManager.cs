@@ -205,17 +205,18 @@ public class GameManager : MonoBehaviour
         rankScore = 0;
         maxCombo = 0;
         
-        for (int i = 0; i < noteFolder.transform.childCount; i++)
+        foreach (var item in noteFolder.GetComponentsInChildren<Obstacle>())
         {
-            if (noteFolder.transform.GetChild(i).childCount == 1)
+            if (item.beatLength == 0)
             {
                 noteCount++;
             }
-            else if (noteFolder.transform.GetChild(i).childCount > 1)
+            else
             {
-                noteCount += noteFolder.transform.GetChild(i).childCount;
+                noteCount += (int)(item.beatLength * 8f);
             }
         }
+        Debug.Log(noteCount);
         
         VerdictBar.lastObject = noteFolder.transform.GetChild(noteFolder.transform.childCount - 1).gameObject;
         VerdictBar.lastObject = Verdict.GetObstacle(VerdictBar.lastObject).beatLength != 0 ? VerdictBar.lastObject.transform.GetChild(VerdictBar.lastObject.transform.childCount - 1).GetChild(0).gameObject : VerdictBar.lastObject.transform.gameObject;
@@ -491,6 +492,11 @@ public class GameManager : MonoBehaviour
         int rankIdx;
 
         if (maxCombo == 0)
+        {
+            maxCombo = currentCombo;
+        }
+        
+        if (maxCombo < currentCombo)
         {
             maxCombo = currentCombo;
         }
