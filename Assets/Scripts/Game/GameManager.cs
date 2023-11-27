@@ -488,7 +488,7 @@ public class GameManager : MonoBehaviour
         int currentStage = DBManager.instance.currentStage - 1;
         isCountDown = true;
         playerController.GetComponent<Animator>().SetBool("isReady", isCountDown);
-        rankScore = ((perfectCount + greatCount * 0.3f + goodCount * 0.1f + missCount) / noteCount) * 100;
+        rankScore = (int)((perfectCount + greatCount * 0.3f + goodCount * 0.1f + missCount) / noteCount * 100);
         int rankIdx;
 
         if (maxCombo == 0)
