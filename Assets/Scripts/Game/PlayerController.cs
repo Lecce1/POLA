@@ -23,9 +23,6 @@ public class PlayerController : MonoBehaviour
     public bool isInvincibility;
     [FoldoutGroup("변수")] 
     public bool isDead;
-    [FoldoutGroup("변수")]
-    [SerializeField]
-    private int attackCounter;
     [FoldoutGroup("변수")] 
     [SerializeField]
     private bool isLoaded = false;
@@ -279,9 +276,7 @@ public class PlayerController : MonoBehaviour
         obstacle.wasInteracted = true;
         GameManager.instance.ShowVerdict(evaluation, obstacle);
         VibrateMobile();
-        animator.SetInteger("AttackCounter", attackCounter++);
-        animator.SetBool("isAttacking", true);
-        attackCounter %= 2;
+        animator.SetTrigger("Attack");
         verdict.DequeueUsedCollider(obstacle);
         playerParticle.AttackParticle();
         Destroy(obstacle.gameObject);
@@ -300,14 +295,6 @@ public class PlayerController : MonoBehaviour
                 
             }
         }
-    }
-    
-    /// <summary>
-    /// 어택 애니메이션 종료 시 발생하는 메서드
-    /// </summary>
-    public void OnAttackAnimationEnd()
-    {
-        animator.SetBool("isAttacking", false);
     }
 
     public void OnClick()
