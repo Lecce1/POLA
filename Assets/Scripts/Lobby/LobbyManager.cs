@@ -74,12 +74,12 @@ public class LobbyManager : MonoBehaviour
     [Title("언어 오른쪽 화살표")]
     public GameObject set_Language_RightArrow;
 
-    [FoldoutGroup("정보")] 
+    [FoldoutGroup("땅 정보")] 
     [Title("MoveRoute 클래스 리스트")]
     public MoveRoute[] moveRoute = new MoveRoute[3];
-    [FoldoutGroup("정보")] 
+    [FoldoutGroup("땅 정보")] 
     [Title("플레이어 이동 오프셋")]
-    public Vector3 offset = Vector3.up * 0.6f;
+    public Vector3 offset = Vector3.up * 0.5f;
     
     [FoldoutGroup("기타")] 
     [Title("입장 버튼 타입")]
@@ -100,9 +100,16 @@ public class LobbyManager : MonoBehaviour
     [FoldoutGroup("기타")] 
     [Title("Virtual Camera")]
     public CinemachineVirtualCamera virtualCamera;
+    [FoldoutGroup("기타")] 
+    [Title("플레이 버튼 Mesh Renderer")]
+    public MeshRenderer playBtnMeshRenderer;
     
-    [FoldoutGroup("챕터 별 BGM")] 
+    [FoldoutGroup("챕터")] 
+    [Title("BGM 리스트")]
     public AudioClip[] bgm = new AudioClip[9];
+    [FoldoutGroup("챕터")] 
+    [Title("스테이지 별 이미지 리스트")]
+    public List<Material> stageImageList = new List<Material>();
 
     // 뒤로가기 스택
     private Stack<GameObject> backStack;
@@ -154,7 +161,8 @@ public class LobbyManager : MonoBehaviour
                 }
             }
         }
-        
+
+        playBtnMeshRenderer.material = stageImageList[DBManager.instance.currentChapter - 1];
         LobbyPlayerController.instance.player.transform.position = moveRoute[DBManager.instance.currentGround].routeList[DBManager.instance.currentRouteIdx].transform.position + offset;
         
         if (DBManager.instance.currentGround == 0 || DBManager.instance.currentGround == 1)
@@ -360,6 +368,7 @@ public class LobbyManager : MonoBehaviour
 
                     if (DBManager.instance.currentGround == 0)
                     {
+                        playBtnMeshRenderer.material = stageImageList[DBManager.instance.currentChapter - 1];
                         DBManager.instance.currentRouteIdx = 3;
                         
                         if (DBManager.instance.currentPlatform == "MOBILE")
@@ -562,6 +571,7 @@ public class LobbyManager : MonoBehaviour
             LobbyAudioManager.instance.bgmAudio.Play();
             info.GetComponent<Animator>().Play("InfoOn");
             isInfoPanelOn = true;
+            keyBinding.SetActive(false);
             LobbyPlayerController.instance.isMoveAvailable = false;
             StartCoroutine("VirtualCameraOffset", true);
         }
@@ -581,6 +591,7 @@ public class LobbyManager : MonoBehaviour
             LobbyAudioManager.instance.bgmAudio.Play();
             info.GetComponent<Animator>().Play("InfoOff");
             isInfoPanelOn = false;
+            keyBinding.SetActive(true);
             LobbyPlayerController.instance.isMoveAvailable = true;
             StartCoroutine("VirtualCameraOffset", false);
         }

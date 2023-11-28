@@ -57,8 +57,6 @@ public class LobbyPlayerController : MonoBehaviour
 
     IEnumerator Move()
     {
-        LobbyAudioManager.instance.PlayAudio("Player");
-        
         while (transform.position.x != LobbyManager.instance.moveRoute[DBManager.instance.currentGround]
                    .routeList[DBManager.instance.currentRouteIdx]
                    .transform.position.x || transform.position.z != LobbyManager.instance.moveRoute[DBManager.instance.currentGround]
@@ -71,16 +69,7 @@ public class LobbyPlayerController : MonoBehaviour
             yield return null;
         } 
         
-        if (DBManager.instance.currentRouteIdx ==
-            LobbyManager.instance.moveRoute[DBManager.instance.currentGround].defaultRouteIdx)
-        {
-            body.transform.rotation = Quaternion.Euler(0, 180, 0);
-        }
-        else
-        {
-            body.transform.rotation = Quaternion.Euler(0, 0, 0);
-        }
-
+        body.transform.rotation = Quaternion.Euler(-90, 180, 0);
         isMove = false;
         anim.SetBool("isMove", isMove);
         Collider();
@@ -91,10 +80,11 @@ public class LobbyPlayerController : MonoBehaviour
         if (isMoveAvailable && isMove == false)
         {
             Vector2 vector = value.Get<Vector2>();
+            LobbyAudioManager.instance.PlayAudio("Player");
 
             if (vector.x < 0)
             {
-                body.transform.rotation = Quaternion.Euler(0, -90, 0);
+                body.transform.rotation = Quaternion.Euler(-90, -90, 0);
                 isMove = true;
                 anim.SetBool("isMove", isMove);
                 
@@ -112,7 +102,7 @@ public class LobbyPlayerController : MonoBehaviour
             }
             else if (vector.x > 0)
             {
-                body.transform.rotation = Quaternion.Euler(0, 90, 0);
+                body.transform.rotation = Quaternion.Euler(-90, 90, 0);
                 isMove = true;
                 anim.SetBool("isMove", isMove);
 
@@ -137,7 +127,7 @@ public class LobbyPlayerController : MonoBehaviour
         {
             if (isLeft)
             {
-                body.transform.rotation = Quaternion.Euler(0, -90, 0);
+                body.transform.rotation = Quaternion.Euler(-90, -90, 0);
                 isMove = true;
                 anim.SetBool("isMove", isMove);
                 
@@ -155,7 +145,7 @@ public class LobbyPlayerController : MonoBehaviour
             }
             else
             {
-                body.transform.rotation = Quaternion.Euler(0, 90, 0);
+                body.transform.rotation = Quaternion.Euler(-90, 90, 0);
                 isMove = true;
                 anim.SetBool("isMove", isMove);
 
@@ -416,7 +406,7 @@ public class LobbyPlayerController : MonoBehaviour
                             break;
                         
                         case "Center":
-                            if (DBManager.instance.currentPlatform == "MOBILE" && LobbyManager.instance.join_Btn.activeSelf)
+                            if (LobbyManager.instance.join_Btn.activeSelf)
                             {
                                 LobbyManager.instance.Join_Btn_OnOff(false, false);
                             }

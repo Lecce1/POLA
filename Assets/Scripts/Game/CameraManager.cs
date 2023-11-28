@@ -5,6 +5,16 @@ using UnityEngine.Serialization;
 
 public class CameraManager : MonoBehaviour
 {
+    enum Type
+    {
+        Game,
+        Latency
+    }
+    
+    [Title("타입")]
+    [SerializeField]
+    private Type type;
+    
     [FoldoutGroup("카메라")]
     [Title("타겟")]
     public GameObject target;
@@ -34,12 +44,19 @@ public class CameraManager : MonoBehaviour
 
     void FixedUpdate()
     {
-        if (GameManager.instance.isCountDown && !GameManager.instance.isStart)
+        if (type == Type.Game)
         {
-            return;
+            if (GameManager.instance.isCountDown && !GameManager.instance.isStart)
+            {
+                return;
+            }
+            
+            transform.position = target.transform.position + offset;
         }
-
-        transform.position = target.transform.position + offset;
+        else if (type == Type.Latency)
+        {
+            transform.position = target.transform.position + offset;
+        }
     }
     
     public void Vibrate(float time)
@@ -50,7 +67,7 @@ public class CameraManager : MonoBehaviour
 
     IEnumerator VibrateCoroutine()
     {
-        while (shakeTime > 0)
+        while (shakeTime > 0 && !GameManager.instance.isPanelOpen)
         {
             transform.position = Random.insideUnitSphere * shakeAmount + transform.position;
             shakeTime -= Time.deltaTime;
