@@ -1,3 +1,4 @@
+using System;
 using Sirenix.OdinInspector;
 using UnityEngine;
 using UnityEngine.EventSystems;
@@ -63,30 +64,28 @@ public class LatencyPlayerController : MonoBehaviour
 
     public void OnDown()
     {
-        if (LatencyManager.instance.startPanel.activeSelf || LatencyManager.instance.isFinish || wasClickedThisTime)
+        if (LatencyManager.instance.isFinish || wasClickedThisTime)
         {
             return;
         }
         
-        int latencyDelta = latency;
         int sampledTime = LatencyAudioManager.instance.GetSampledTime();
         latency = sampledTime % (int)(60000f / bpm);
-        latencyDelta -= latency;
         latencySum += latency;
-        transform.position += transform.forward * (latencyDelta * bpm / 7500f);
         count++;
         wasClickedThisTime = true;
-        Debug.Log(latency);
+        animator.SetTrigger("Attack");
     }
 
     public void BeatUpdate()
     {
-        if (LatencyManager.instance.isFinish)
+        if (LatencyManager.instance.isFinish || !LatencyManager.instance.isStart)
         {
             return;
         }
-
+        
         passedBeat++;
+        LatencyManager.instance.StartCoroutine(LatencyManager.instance.DestroyNote(passedBeat, latency / 1000f));
         wasClickedThisTime = false;
         
         if (passedBeat > 20)
@@ -102,7 +101,7 @@ public class LatencyPlayerController : MonoBehaviour
             LatencyManager.instance.Finish(count, latencyAvg);
         }
     }
-    
+
     public void OnClick()
     {
         if (EventSystem.current.currentSelectedGameObject != null && (LatencyManager.instance.esc.activeSelf || LatencyManager.instance.set.activeSelf) && GetComponent<PlayerInput>().currentControlScheme != "MOBILE")
@@ -136,7 +135,7 @@ public class LatencyPlayerController : MonoBehaviour
     {
         if (!LatencyManager.instance.isResultPanelOpen)
         {
-            if (!LatencyManager.instance.isPanelOpen)
+            if (!LatencyManager.instance.isPanelOpen && !LatencyManager.instance.startPanel.activeSelf)
             {
                 LatencyManager.instance.Button("Esc");
             }

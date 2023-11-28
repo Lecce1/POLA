@@ -4,7 +4,6 @@ using Sirenix.OdinInspector;
 using UnityEngine;
 using UnityEngine.Localization.Settings;
 using UnityEngine.SceneManagement;
-using UnityEngine.Serialization;
 using UnityEngine.UI;
 
 public class LatencyManager : MonoBehaviour
@@ -109,13 +108,19 @@ public class LatencyManager : MonoBehaviour
             bottomPanel.SetActive(false);
         }
         
-        for (int i = 1; i <= latencyNoteList.Length; i++)
+        for (int i = 0; i < latencyNoteList.Length; i++)
         {
             var obj = Instantiate(latencyNote, latencyFolder.transform, true);
-            obj.transform.position = transform.forward * (8 * i) + transform.forward;
-            latencyNoteList[i - 1] = obj;
+            obj.transform.position = transform.forward * (8 * i) + transform.forward + transform.up * 0.6f;
+            latencyNoteList[i] = obj;
         }
 
+        while (!LatencyAudioManager.instance.isLoaded)
+        {
+            yield return null;
+        }
+        
+        
         while (true)
         {
             if (Input.anyKey)
@@ -134,10 +139,10 @@ public class LatencyManager : MonoBehaviour
         {
             case "Start":
                 isStart = true;
-                LatencyAudioManager.instance.audioBGM.Play();
-                startPanel.SetActive(false);
                 bottomPanel.SetActive(true);
+                startPanel.SetActive(false);
                 latencyPlayerController.animator.SetBool("isReady", false);
+                Destroy(latencyNoteList[0]);
                 break;
             
             case "Esc":
@@ -198,6 +203,19 @@ public class LatencyManager : MonoBehaviour
                 SceneManager.LoadScene("Loading");
                 break;
         }
+    }
+
+    public IEnumerator DestroyNote(int index, float time)
+    {
+        float temp = 0;
+
+        while (temp < time)
+        {
+            temp += Time.deltaTime;        
+            yield return null;
+        }
+        
+        Destroy(latencyNoteList[index]);
     }
     
     public void Back()

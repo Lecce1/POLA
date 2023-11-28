@@ -19,7 +19,7 @@ MonoBehaviour:
     m_Items: []
   m_TableData:
   - m_Id: 5166325760
-    m_Localized: Press any key to start
+    m_Localized: Press the key to the beat
     m_Metadata:
       m_Items: []
   - m_Id: 6210970443776

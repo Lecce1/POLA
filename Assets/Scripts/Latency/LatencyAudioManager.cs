@@ -24,9 +24,8 @@ public class LatencyAudioManager : MonoBehaviour
     public List<Intervals> intervals = new ();
     
     [FoldoutGroup("변수")] 
-    [Title("로딩")] 
-    [SerializeField]
-    private bool isLoaded;
+    [Title("로딩")]
+    public bool isLoaded;
 
     public static LatencyAudioManager instance;
 
@@ -69,6 +68,7 @@ public class LatencyAudioManager : MonoBehaviour
         audioMixer.SetFloat("Music", DBManager.instance.musicValue * 80 - 80);
         audioMixer.SetFloat("FX", DBManager.instance.sfxValue * 80 - 80);
         isLoaded = true;
+        audioBGM.Play();
     }
 
     public void PlayBeatRepeatedly()

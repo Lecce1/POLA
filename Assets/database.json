@@ -1,13 +1,13 @@
 {
     "chapter": 1,
     "currentChapter": 1,
-    "musicValue": 0.6003999710083008,
-    "sfxValue": 0.8000199794769287,
+    "musicValue": 0.7002999782562256,
+    "sfxValue": 0.9000099897384644,
     "supportLanguageNum": 2,
     "isVibration": true,
     "language": 1,
     "isTutorial": true,
-    "latency": 146,
+    "latency": 225,
     "stageArray": [
         {
             "stage": [
@@ -129,12 +129,12 @@
                 },
                 {
                     "name": "",
-                    "starCount": 3,
-                    "score": 15875,
-                    "perfect": 153,
-                    "great": 11,
-                    "good": 1,
-                    "miss": 0,
+                    "starCount": 1,
+                    "score": 10925,
+                    "perfect": 105,
+                    "great": 6,
+                    "good": 5,
+                    "miss": 3,
                     "bpm": 0,
                     "audio": {
                         "instanceID": 0
