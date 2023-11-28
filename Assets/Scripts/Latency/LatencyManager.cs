@@ -321,16 +321,14 @@ public class LatencyManager : MonoBehaviour
             {
                 if (count < 10)
                 {
-                    DBManager.instance.nextScene = DBManager.instance.latencySceneName;
+                    SceneManager.LoadScene(DBManager.instance.latencySceneName);
                 }
                 else
                 {
                     DBManager.instance.latency = latencyAvg;
                     DBManager.instance.nextScene = DBManager.instance.lobbySceneName;
-
+                    SceneManager.LoadScene("Loading");
                 }
-                
-                SceneManager.LoadScene("Loading");
             }
             
             yield return null;

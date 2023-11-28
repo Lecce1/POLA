@@ -92,7 +92,12 @@ public class LatencyPlayerController : MonoBehaviour
         if (passedBeat > 20)
         {
             animator.SetBool("isReady", true);
-            latencyAvg = latencySum / count;
+
+            if (count != 0)
+            {
+                latencyAvg = latencySum / count;
+            }
+
             LatencyAudioManager.instance.audioBGM.Pause();
             LatencyManager.instance.Finish(count, latencyAvg);
         }

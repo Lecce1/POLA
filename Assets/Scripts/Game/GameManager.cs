@@ -216,8 +216,7 @@ public class GameManager : MonoBehaviour
                 noteCount += (int)(item.beatLength * 8f);
             }
         }
-        Debug.Log(noteCount);
-        
+
         VerdictBar.lastObject = noteFolder.transform.GetChild(noteFolder.transform.childCount - 1).gameObject;
         VerdictBar.lastObject = Verdict.GetObstacle(VerdictBar.lastObject).beatLength != 0 ? VerdictBar.lastObject.transform.GetChild(VerdictBar.lastObject.transform.childCount - 1).GetChild(0).gameObject : VerdictBar.lastObject.transform.gameObject;
         playerController.Init();
