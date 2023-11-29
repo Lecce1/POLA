@@ -1,16 +1,10 @@
+using System;
 using System.Collections;
 using Sirenix.OdinInspector;
 using UnityEngine;
 
 public class PlayerParticle : MonoBehaviour
 {
-    [FoldoutGroup("일반")]
-    [SerializeField]
-    private PlayerController player;
-
-    [FoldoutGroup("파티클")]
-    public ParticleSystem landDust;
-    
     [FoldoutGroup("파티클")]
     public ParticleSystem walkDust;
     
@@ -21,23 +15,19 @@ public class PlayerParticle : MonoBehaviour
     [Title("파티클 폴더")]
     public GameObject particleFolder;
     
-    void Start()
-    {
-        player = GetComponent<PlayerController>();
-    }
-    
     void Update() => WalkParticle();
     
     public void Play(GameObject effect)
     {
         GameObject temp = Instantiate(effect);
         temp.transform.parent = particleFolder.transform;
-        temp.transform.position = particleFolder.transform.position;
-        
+        temp.transform.position = particleFolder.transform.position + transform.up * 1.9f + transform.forward * 1.5f;
+
         if (!temp.GetComponent<ParticleSystem>().isPlaying)
         {
+            Debug.Log("Test");
             temp.GetComponent<ParticleSystem>().Play();
-            StartCoroutine("Check", temp);
+            StartCoroutine(nameof(Check), temp);
         }
     }
 
@@ -49,6 +39,14 @@ public class PlayerParticle : MonoBehaviour
         }
         
         Destroy(particle);
+    }
+
+    public void PlayWalk(ParticleSystem particle)
+    {
+        if (!particle.isPlaying)
+        {
+            particle.Play();
+        }
     }
     
     public void Stop(ParticleSystem particle, bool clear = false)
@@ -62,14 +60,14 @@ public class PlayerParticle : MonoBehaviour
     
     public void WalkParticle()
     {
-        /*if (player.isGrounded && !landDust.isPlaying)
+        if (!GameManager.instance.isCountDown)
         {
-            Play(walkDust);
+            PlayWalk(walkDust);    
         }
         else
         {
             Stop(walkDust);
-        }*/
+        }
     }
 
     public void AttackParticle()
