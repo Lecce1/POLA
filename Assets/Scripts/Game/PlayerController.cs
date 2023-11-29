@@ -113,18 +113,7 @@ public class PlayerController : MonoBehaviour
         }
         
         health -= obstacle.damage;
-        
-        for (int i = 0; i < 3; i++)
-        {
-            if (i <= health - 1)
-            {
-                GameManager.instance.hpList[i].enabled = true;
-            }
-            else
-            {
-                GameManager.instance.hpList[i].enabled = false;
-            }
-        }
+        GameManager.instance.hp.sprite = GameManager.instance.hpList[health];
 
         if (health <= 0)
         {
@@ -251,8 +240,13 @@ public class PlayerController : MonoBehaviour
                 verdict.DequeueUsedCollider(longNote.gameObject);
                 playerParticle.AttackParticle();
                 Destroy(longNote.transform.parent.gameObject);
+                audioManager.PlayAudio("Attack");
                 
-                VibrateMobile();
+                if(Application.platform == RuntimePlatform.Android || Application.platform == RuntimePlatform.IPhonePlayer) 
+                {
+                    VibrateMobile();
+                }
+                
                 GameManager.instance.ShowVerdict(isFirst ? evaluation : 0, obstacle);
                 isFirst = false;
                 
@@ -273,10 +267,16 @@ public class PlayerController : MonoBehaviour
     {
         obstacle.wasInteracted = true;
         GameManager.instance.ShowVerdict(evaluation, obstacle);
-        VibrateMobile();
         animator.SetTrigger("Attack");
         verdict.DequeueUsedCollider(obstacle);
         playerParticle.AttackParticle();
+        audioManager.PlayAudio("Attack");
+        
+        if(Application.platform == RuntimePlatform.Android || Application.platform == RuntimePlatform.IPhonePlayer) 
+        {
+            VibrateMobile();
+        }
+        
         Destroy(obstacle.gameObject);
     }
 
@@ -362,7 +362,6 @@ public class PlayerController : MonoBehaviour
         animator.SetTrigger("Die");
         isDead = true;
         GetComponent<PlayerInput>().enabled = false;
-        audioManager.audio.Stop();
         Destroy(gameObject.GetComponent<Rigidbody>());
         StopAllCoroutines();
         GameManager.instance.Finish();

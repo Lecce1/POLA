@@ -25,7 +25,6 @@ public class PlayerParticle : MonoBehaviour
 
         if (!temp.GetComponent<ParticleSystem>().isPlaying)
         {
-            Debug.Log("Test");
             temp.GetComponent<ParticleSystem>().Play();
             StartCoroutine(nameof(Check), temp);
         }

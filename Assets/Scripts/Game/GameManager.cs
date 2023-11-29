@@ -38,10 +38,14 @@ public class GameManager : MonoBehaviour
     public GameObject cameraInfo;
     [FoldoutGroup("패널")] 
     [Title("진행률 슬라이더")] 
-    public Slider progress; 
-    [FoldoutGroup("패널")] 
+    public Slider progress;
+
+    [FoldoutGroup("HP")] 
+    [Title("HP 이미지")] 
+    public Image hp;
+    [FoldoutGroup("HP")] 
     [Title("HP 리스트")]
-    public List<Image> hpList;
+    public List<Sprite> hpList;
 
     [FoldoutGroup("설정 패널")] 
     [Title("음악 Slider")]
@@ -563,7 +567,9 @@ public class GameManager : MonoBehaviour
         {
             pressText.text = LocalizationSettings.StringDatabase.GetLocalizedString("Game", "Press_Home", LocalizationSettings.SelectedLocale);
         }
-
+        
+        audioManager.audio.Stop();
+        audioManager.PlayAudio("Result");
         StartCoroutine(Finish_Check());
     }
 

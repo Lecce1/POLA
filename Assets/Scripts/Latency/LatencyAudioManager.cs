@@ -30,7 +30,7 @@ public class LatencyAudioManager : MonoBehaviour
     public AudioSource uiAudio;
     
     [FoldoutGroup("오디오 클립")]
-    [Title("UI-Button")]
+    [Title("UI 버튼")]
     public AudioClip uiButtonClip;
 
     [FoldoutGroup("변수")] 

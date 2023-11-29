@@ -5,6 +5,7 @@ using Sirenix.OdinInspector;
 using UnityEngine;
 using UnityEngine.Audio;
 using UnityEngine.Events;
+using UnityEngine.EventSystems;
 
 public class AudioManager : MonoBehaviour
 {
@@ -21,11 +22,38 @@ public class AudioManager : MonoBehaviour
     [Title("인터벌")]
     [TableList]
     public List<Intervals> intervals = new ();
+    
+    [FoldoutGroup("오디오 소스")]
+    [Title("Attack")]
+    public AudioSource attackAudio;
+    [FoldoutGroup("오디오 소스")]
+    [Title("SFX")]
+    public AudioSource sfxAudio;
+    [FoldoutGroup("오디오 소스")]
+    [Title("UI")]
+    public AudioSource uiAudio;
+    
+    [FoldoutGroup("오디오 클립")]
+    [Title("공격")]
+    public AudioClip attackClip;
+    [FoldoutGroup("오디오 클립")]
+    [Title("UI 버튼")]
+    public AudioClip uiButtonClip;
+    [FoldoutGroup("오디오 클립")]
+    [Title("결과 - 성공")]
+    public AudioClip successClip;
+    [FoldoutGroup("오디오 클립")]
+    [Title("결과 - 실패")]
+    public AudioClip failClip;
 
     [FoldoutGroup("변수")] 
     [Title("로딩")] 
     [SerializeField]
     private bool isLoaded;
+    
+    [FoldoutGroup("기타")] 
+    [Title("플레이어 컨트롤러")]
+    public PlayerController playerController;
 
     public static AudioManager instance;
 
@@ -66,6 +94,39 @@ public class AudioManager : MonoBehaviour
         audioMixer.SetFloat("Music", DBManager.instance.musicValue * 80 - 80);
         audioMixer.SetFloat("FX", DBManager.instance.sfxValue * 80 - 80);
         isLoaded = true;
+    }
+    
+    public void PlayAudio(string type)
+    {
+        switch (type)
+        {
+            case "Attack":
+                attackAudio.PlayOneShot(attackClip);
+                break;
+            
+            case "Result":
+                if (playerController.isDead)
+                {
+                    sfxAudio.PlayOneShot(failClip);
+                }
+                else
+                {
+                    sfxAudio.PlayOneShot(successClip);
+                }
+
+                break;
+            
+            case "Button":
+                if (GameManager.instance.set.activeSelf && DBManager.instance.currentPlatform == "MOBILE" && EventSystem.current.currentSelectedGameObject.name == "Slider")
+                {
+                    
+                }
+                else
+                {
+                    uiAudio.PlayOneShot(uiButtonClip);
+                }
+                break;
+        }
     }
 
     public IEnumerator Progress()
