@@ -14,9 +14,7 @@ public class PlayerController : MonoBehaviour
     [FoldoutGroup("음악")]
     [Title("오디오")]
     public AudioManager audioManager;
-
-    [FoldoutGroup("변수")] 
-    public bool isGrounded;
+    
     [FoldoutGroup("변수")] 
     public int health;
     [FoldoutGroup("변수")] 
