@@ -601,12 +601,12 @@ public class LobbyManager : MonoBehaviour
     {
         if (isOn)
         {
-            float temp = -5f;
+            float temp = -4.8f;
         
             while (virtualCamera.GetCinemachineComponent<CinemachineTransposer>().m_FollowOffset.z < -4f)
             {
                 temp += Time.deltaTime;
-                virtualCamera.GetCinemachineComponent<CinemachineTransposer>().m_FollowOffset = new Vector3(0, 1.5f, temp);
+                virtualCamera.GetCinemachineComponent<CinemachineTransposer>().m_FollowOffset = new Vector3(0, 1.8f, temp);
                 yield return null;
             }
         }
@@ -614,10 +614,10 @@ public class LobbyManager : MonoBehaviour
         {
             float temp = -4f;
         
-            while (virtualCamera.GetCinemachineComponent<CinemachineTransposer>().m_FollowOffset.z > -5f)
+            while (virtualCamera.GetCinemachineComponent<CinemachineTransposer>().m_FollowOffset.z > -4.8f)
             {
                 temp -= Time.deltaTime;
-                virtualCamera.GetCinemachineComponent<CinemachineTransposer>().m_FollowOffset = new Vector3(0, 1.5f, temp);
+                virtualCamera.GetCinemachineComponent<CinemachineTransposer>().m_FollowOffset = new Vector3(0, 1.8f, temp);
                 yield return null;
             }
         }
