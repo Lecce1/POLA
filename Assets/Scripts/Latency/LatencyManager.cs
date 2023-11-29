@@ -50,6 +50,13 @@ public class LatencyManager : MonoBehaviour
     [SerializeField]
     private GameObject latencyFolder;
     
+    [FoldoutGroup("스탯")] 
+    [Title("현재 값")]
+    public Text currentValueText;
+    [FoldoutGroup("스탯")] 
+    [Title("평균 값")]
+    public Text avgValueText;
+    
     [FoldoutGroup("설정 패널")] 
     [Title("음악 Slider")]
     public Slider set_Music_Slider;
@@ -107,6 +114,11 @@ public class LatencyManager : MonoBehaviour
         {
             bottomPanel.SetActive(false);
         }
+
+        if (topPanel.activeSelf)
+        {
+            topPanel.SetActive(false);
+        }
         
         for (int i = 0; i < latencyNoteList.Length; i++)
         {
@@ -143,6 +155,11 @@ public class LatencyManager : MonoBehaviour
                 startPanel.SetActive(false);
                 latencyPlayerController.animator.SetBool("isReady", false);
                 Destroy(latencyNoteList[0]);
+                
+                if (!topPanel.activeSelf)
+                {
+                    topPanel.SetActive(true);
+                }
                 break;
             
             case "Esc":
@@ -158,7 +175,8 @@ public class LatencyManager : MonoBehaviour
                         bottomPanel.SetActive(false);
                     }
                     
-                    LatencyAudioManager.instance.audioBGM.Pause();
+                    LatencyAudioManager.instance.bgmAudio.Pause();
+                    LatencyAudioManager.instance.PlayAudio("Button");
                     Time.timeScale = 0;
                     esc.SetActive(true);
                     backStack.Push(esc);
@@ -173,12 +191,13 @@ public class LatencyManager : MonoBehaviour
                     {
                         esc.SetActive(false);
                     }
-
+                    
                     set_Music_Slider.value = DBManager.instance.musicValue;
                     set_Sfx_Slider.value = DBManager.instance.sfxValue;
                     set_Vibration_Toggle.isOn = DBManager.instance.isVibration;
                     set.SetActive(true);
                     backStack.Push(set);
+                    LatencyAudioManager.instance.PlayAudio("Button");
 
                     if (bottomPanel.activeSelf)
                     {
@@ -247,7 +266,8 @@ public class LatencyManager : MonoBehaviour
                     }
 
                     Time.timeScale = 1;
-                    LatencyAudioManager.instance.audioBGM.Play();
+                    LatencyAudioManager.instance.bgmAudio.Play();
+                    LatencyAudioManager.instance.PlayAudio("Button");
                 }
                 break;
             
@@ -268,7 +288,8 @@ public class LatencyManager : MonoBehaviour
                     }
 
                     Time.timeScale = 1;
-                    LatencyAudioManager.instance.audioBGM.Play();
+                    LatencyAudioManager.instance.bgmAudio.Play();
+                    LatencyAudioManager.instance.PlayAudio("Button");
                 }
                 break;
         }

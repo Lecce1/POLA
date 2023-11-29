@@ -74,10 +74,18 @@ public class LatencyPlayerController : MonoBehaviour
         latency = sampledTime % (int)(60000f / bpm);
         latencySum += latency;
         latencyDelta -= latency;
+        LatencyManager.instance.currentValueText.text = $"{latency}ms";
+
         if (count != 0)
         {
             transform.position += transform.forward * (latencyDelta * bpm / 7500f);
+            LatencyManager.instance.avgValueText.text = $"{latencySum / count}ms";
         }
+        else
+        {
+            LatencyManager.instance.avgValueText.text = $"{latency}ms";
+        }
+        
         count++;
         wasClickedThisTime = true;
         animator.SetTrigger("Attack");
@@ -103,7 +111,7 @@ public class LatencyPlayerController : MonoBehaviour
                 latencyAvg = latencySum / count;
             }
 
-            LatencyAudioManager.instance.audioBGM.Pause();
+            LatencyAudioManager.instance.bgmAudio.Pause();
             LatencyManager.instance.Finish(count, latencyAvg);
         }
     }

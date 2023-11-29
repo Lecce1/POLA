@@ -609,6 +609,7 @@ GameObject:
   - component: {fileID: 36860323}
   - component: {fileID: 36860321}
   - component: {fileID: 36860322}
+  - component: {fileID: 36860326}
   m_Layer: 0
   m_Name: Set
   m_TagString: Untagged
@@ -769,6 +770,35 @@ RectTransform:
   m_AnchoredPosition: {x: -250, y: -100}
   m_SizeDelta: {x: 300, y: 300}
   m_Pivot: {x: 0.5, y: 0.5}
+--- !u!114 &36860326
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 36860320}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: d0b148fe25e99eb48b9724523833bab1, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  m_Delegates:
+  - eventID: 9
+    callback:
+      m_PersistentCalls:
+        m_Calls:
+        - m_Target: {fileID: 476419434}
+          m_TargetAssemblyTypeName: LobbyAudioManager, Assembly-CSharp
+          m_MethodName: PlayAudio
+          m_Mode: 5
+          m_Arguments:
+            m_ObjectArgument: {fileID: 0}
+            m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+            m_IntArgument: 0
+            m_FloatArgument: 0
+            m_StringArgument: Button
+            m_BoolArgument: 0
+          m_CallState: 2
 --- !u!1 &41258125
 GameObject:
   m_ObjectHideFlags: 0
@@ -1067,6 +1097,7 @@ GameObject:
   - component: {fileID: 42367208}
   - component: {fileID: 42367207}
   - component: {fileID: 42367206}
+  - component: {fileID: 42367210}
   m_Layer: 0
   m_Name: Yes
   m_TagString: Untagged
@@ -1200,6 +1231,35 @@ RectTransform:
   m_AnchoredPosition: {x: -250, y: -250}
   m_SizeDelta: {x: 250, y: 150}
   m_Pivot: {x: 0.5, y: 0.5}
+--- !u!114 &42367210
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 42367205}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: d0b148fe25e99eb48b9724523833bab1, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  m_Delegates:
+  - eventID: 9
+    callback:
+      m_PersistentCalls:
+        m_Calls:
+        - m_Target: {fileID: 476419434}
+          m_TargetAssemblyTypeName: LobbyAudioManager, Assembly-CSharp
+          m_MethodName: PlayAudio
+          m_Mode: 5
+          m_Arguments:
+            m_ObjectArgument: {fileID: 0}
+            m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+            m_IntArgument: 0
+            m_FloatArgument: 0
+            m_StringArgument: Button
+            m_BoolArgument: 0
+          m_CallState: 2
 --- !u!1 &47296221
 GameObject:
   m_ObjectHideFlags: 0
@@ -3054,6 +3114,7 @@ GameObject:
   - component: {fileID: 100385292}
   - component: {fileID: 100385291}
   - component: {fileID: 100385290}
+  - component: {fileID: 100385294}
   m_Layer: 0
   m_Name: Back
   m_TagString: Untagged
@@ -3214,6 +3275,35 @@ CanvasRenderer:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 100385288}
   m_CullTransparentMesh: 1
+--- !u!114 &100385294
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 100385288}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: d0b148fe25e99eb48b9724523833bab1, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  m_Delegates:
+  - eventID: 9
+    callback:
+      m_PersistentCalls:
+        m_Calls:
+        - m_Target: {fileID: 476419434}
+          m_TargetAssemblyTypeName: LobbyAudioManager, Assembly-CSharp
+          m_MethodName: PlayAudio
+          m_Mode: 5
+          m_Arguments:
+            m_ObjectArgument: {fileID: 0}
+            m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+            m_IntArgument: 0
+            m_FloatArgument: 0
+            m_StringArgument: Button
+            m_BoolArgument: 0
+          m_CallState: 2
 --- !u!1 &101463105
 GameObject:
   m_ObjectHideFlags: 0
@@ -4361,6 +4451,7 @@ GameObject:
   - component: {fileID: 139911181}
   - component: {fileID: 139911183}
   - component: {fileID: 139911182}
+  - component: {fileID: 139911184}
   m_Layer: 5
   m_Name: Slider
   m_TagString: Untagged
@@ -4473,6 +4564,35 @@ CanvasRenderer:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 139911180}
   m_CullTransparentMesh: 0
+--- !u!114 &139911184
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 139911180}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: d0b148fe25e99eb48b9724523833bab1, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  m_Delegates:
+  - eventID: 9
+    callback:
+      m_PersistentCalls:
+        m_Calls:
+        - m_Target: {fileID: 476419434}
+          m_TargetAssemblyTypeName: LobbyAudioManager, Assembly-CSharp
+          m_MethodName: PlayAudio
+          m_Mode: 5
+          m_Arguments:
+            m_ObjectArgument: {fileID: 0}
+            m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+            m_IntArgument: 0
+            m_FloatArgument: 0
+            m_StringArgument: Button
+            m_BoolArgument: 0
+          m_CallState: 2
 --- !u!1 &144577272
 GameObject:
   m_ObjectHideFlags: 0
@@ -4861,6 +4981,7 @@ GameObject:
   - component: {fileID: 160199989}
   - component: {fileID: 160199988}
   - component: {fileID: 160199987}
+  - component: {fileID: 160199990}
   m_Layer: 5
   m_Name: Dropdown
   m_TagString: Untagged
@@ -5010,6 +5131,35 @@ CanvasRenderer:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 160199985}
   m_CullTransparentMesh: 1
+--- !u!114 &160199990
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 160199985}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: d0b148fe25e99eb48b9724523833bab1, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  m_Delegates:
+  - eventID: 9
+    callback:
+      m_PersistentCalls:
+        m_Calls:
+        - m_Target: {fileID: 476419434}
+          m_TargetAssemblyTypeName: LobbyAudioManager, Assembly-CSharp
+          m_MethodName: PlayAudio
+          m_Mode: 5
+          m_Arguments:
+            m_ObjectArgument: {fileID: 0}
+            m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+            m_IntArgument: 0
+            m_FloatArgument: 0
+            m_StringArgument: Button
+            m_BoolArgument: 0
+          m_CallState: 2
 --- !u!1 &160339472
 GameObject:
   m_ObjectHideFlags: 0
@@ -14512,7 +14662,7 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0, y: 1}
   m_AnchorMax: {x: 0, y: 1}
-  m_AnchoredPosition: {x: 91.89551, y: -75}
+  m_AnchoredPosition: {x: 91.89574, y: -75}
   m_SizeDelta: {x: 183.79147, y: 150}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!114 &512791150
@@ -47471,6 +47621,7 @@ GameObject:
   - component: {fileID: 1360333567}
   - component: {fileID: 1360333569}
   - component: {fileID: 1360333568}
+  - component: {fileID: 1360333570}
   m_Layer: 5
   m_Name: Slider
   m_TagString: Untagged
@@ -47583,6 +47734,35 @@ CanvasRenderer:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1360333566}
   m_CullTransparentMesh: 0
+--- !u!114 &1360333570
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1360333566}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: d0b148fe25e99eb48b9724523833bab1, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  m_Delegates:
+  - eventID: 9
+    callback:
+      m_PersistentCalls:
+        m_Calls:
+        - m_Target: {fileID: 476419434}
+          m_TargetAssemblyTypeName: LobbyAudioManager, Assembly-CSharp
+          m_MethodName: PlayAudio
+          m_Mode: 5
+          m_Arguments:
+            m_ObjectArgument: {fileID: 0}
+            m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+            m_IntArgument: 0
+            m_FloatArgument: 0
+            m_StringArgument: Button
+            m_BoolArgument: 0
+          m_CallState: 2
 --- !u!1 &1372584277
 GameObject:
   m_ObjectHideFlags: 0
@@ -50805,7 +50985,7 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1473644558}
   serializedVersion: 2
-  m_LocalRotation: {x: -0.0008080907, y: -3.3606194e-11, z: -2.7156859e-14, w: 0.9999997}
+  m_LocalRotation: {x: -0.00080817816, y: -3.3606194e-11, z: -2.7159798e-14, w: 0.9999997}
   m_LocalPosition: {x: 0, y: 0, z: -300}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
@@ -61920,7 +62100,7 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0, y: 1}
   m_AnchorMax: {x: 0, y: 1}
-  m_AnchoredPosition: {x: 85.92432, y: -75}
+  m_AnchoredPosition: {x: 85.924194, y: -75}
   m_SizeDelta: {x: 171.84833, y: 150}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!114 &1861072830
@@ -62496,6 +62676,7 @@ GameObject:
   m_Component:
   - component: {fileID: 1877587983}
   - component: {fileID: 1877587984}
+  - component: {fileID: 1877587985}
   m_Layer: 5
   m_Name: Toggle
   m_TagString: Untagged
@@ -62595,6 +62776,35 @@ MonoBehaviour:
           m_BoolArgument: 0
         m_CallState: 2
   m_IsOn: 1
+--- !u!114 &1877587985
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1877587982}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: d0b148fe25e99eb48b9724523833bab1, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  m_Delegates:
+  - eventID: 9
+    callback:
+      m_PersistentCalls:
+        m_Calls:
+        - m_Target: {fileID: 476419434}
+          m_TargetAssemblyTypeName: LobbyAudioManager, Assembly-CSharp
+          m_MethodName: PlayAudio
+          m_Mode: 5
+          m_Arguments:
+            m_ObjectArgument: {fileID: 0}
+            m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+            m_IntArgument: 0
+            m_FloatArgument: 0
+            m_StringArgument: Button
+            m_BoolArgument: 0
+          m_CallState: 2
 --- !u!1 &1879036130
 GameObject:
   m_ObjectHideFlags: 0
@@ -65539,6 +65749,7 @@ GameObject:
   - component: {fileID: 1973535980}
   - component: {fileID: 1973535979}
   - component: {fileID: 1973535978}
+  - component: {fileID: 1973535981}
   m_Layer: 0
   m_Name: No
   m_TagString: Untagged
@@ -65672,6 +65883,35 @@ CanvasRenderer:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1973535976}
   m_CullTransparentMesh: 1
+--- !u!114 &1973535981
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1973535976}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: d0b148fe25e99eb48b9724523833bab1, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  m_Delegates:
+  - eventID: 9
+    callback:
+      m_PersistentCalls:
+        m_Calls:
+        - m_Target: {fileID: 476419434}
+          m_TargetAssemblyTypeName: LobbyAudioManager, Assembly-CSharp
+          m_MethodName: PlayAudio
+          m_Mode: 5
+          m_Arguments:
+            m_ObjectArgument: {fileID: 0}
+            m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+            m_IntArgument: 0
+            m_FloatArgument: 0
+            m_StringArgument: Button
+            m_BoolArgument: 0
+          m_CallState: 2
 --- !u!1 &1975078647
 GameObject:
   m_ObjectHideFlags: 0
