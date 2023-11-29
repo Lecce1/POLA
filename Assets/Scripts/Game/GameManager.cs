@@ -46,6 +46,10 @@ public class GameManager : MonoBehaviour
     [FoldoutGroup("HP")] 
     [Title("HP 리스트")]
     public List<Sprite> hpList;
+    
+    [FoldoutGroup("콤보")] 
+    [Title("콤보 텍스트")]
+    public Text currentComboText;
 
     [FoldoutGroup("설정 패널")] 
     [Title("음악 Slider")]
@@ -263,6 +267,7 @@ public class GameManager : MonoBehaviour
             currentCombo = 0;
         }
 
+        currentComboText.text = currentCombo.ToString();
         GameObject verdictPrefab = Instantiate(this.verdictPrefab, verdictCanvas.transform, true);
         verdictPrefab.GetComponent<VerdictPrefab>().isUp = playerController.verdict.isUp;
         verdictPrefab.GetComponent<Image>().sprite = verdictImage[idx];
