@@ -1,8 +1,8 @@
 {
-    "chapter": 1,
+    "chapter": 2,
     "currentChapter": 1,
     "musicValue": 0.7002999782562256,
-    "sfxValue": 0.9000099897384644,
+    "sfxValue": 0.7000299692153931,
     "supportLanguageNum": 2,
     "isVibration": true,
     "language": 1,
@@ -113,12 +113,12 @@
             "stage": [
                 {
                     "name": "",
-                    "starCount": 4,
-                    "score": 14050,
-                    "perfect": 139,
-                    "great": 3,
-                    "good": 0,
-                    "miss": 0,
+                    "starCount": 0,
+                    "score": 400,
+                    "perfect": 3,
+                    "great": 1,
+                    "good": 2,
+                    "miss": 3,
                     "bpm": 0,
                     "audio": {
                         "instanceID": 0
@@ -161,12 +161,12 @@
                 },
                 {
                     "name": "",
-                    "starCount": 1,
-                    "score": 30400,
-                    "perfect": 218,
-                    "great": 4,
+                    "starCount": 0,
+                    "score": 3750,
+                    "perfect": 36,
+                    "great": 3,
                     "good": 0,
-                    "miss": 1,
+                    "miss": 3,
                     "bpm": 0,
                     "audio": {
                         "instanceID": 0
@@ -213,12 +213,12 @@
             "stage": [
                 {
                     "name": "",
-                    "starCount": 1,
-                    "score": 16100,
-                    "perfect": 114,
-                    "great": 2,
-                    "good": 0,
-                    "miss": 29,
+                    "starCount": 2,
+                    "score": 38450,
+                    "perfect": 368,
+                    "great": 24,
+                    "good": 18,
+                    "miss": 20,
                     "bpm": 0,
                     "audio": {
                         "instanceID": 0

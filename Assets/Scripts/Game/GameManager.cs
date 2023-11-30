@@ -5,6 +5,7 @@ using Sirenix.OdinInspector;
 using UnityEngine;
 using UnityEngine.Localization.Settings;
 using UnityEngine.SceneManagement;
+using UnityEngine.Serialization;
 using UnityEngine.UI;
 
 public class GameManager : MonoBehaviour
@@ -19,11 +20,8 @@ public class GameManager : MonoBehaviour
     [Title("설정")] 
     public GameObject set;
     [FoldoutGroup("패널")] 
-    [Title("상단 패널")] 
-    public GameObject topPanel;
-    [FoldoutGroup("패널")] 
-    [Title("하단 패널")] 
-    public GameObject bottomPanel;
+    [Title("메인 패널")] 
+    public GameObject mainPanel;
     [FoldoutGroup("패널")] 
     [Title("카운트다운 패널")] 
     public GameObject countDownPanel;
@@ -33,9 +31,6 @@ public class GameManager : MonoBehaviour
     [FoldoutGroup("패널")] 
     [Title("노트 폴더")] 
     public GameObject noteFolder;
-    [FoldoutGroup("패널")] 
-    [Title("카메라 인포")] 
-    public GameObject cameraInfo;
     [FoldoutGroup("패널")] 
     [Title("진행률 슬라이더")] 
     public Slider progress;
@@ -284,16 +279,11 @@ public class GameManager : MonoBehaviour
             case "Esc":
                 if (!esc.activeSelf)
                 {
-                    if (topPanel.activeSelf)
+                    if (mainPanel.activeSelf)
                     {
-                        topPanel.SetActive(false);
+                        mainPanel.SetActive(false);
                     }
-                    
-                    if (bottomPanel.activeSelf)
-                    {
-                        bottomPanel.SetActive(false);
-                    }
-                    
+
                     audioManager.audio.Pause();
                     Time.timeScale = 0;
                     esc.SetActive(true);
@@ -317,11 +307,6 @@ public class GameManager : MonoBehaviour
                     set_Vibration_Toggle.isOn = DBManager.instance.isVibration;
                     set.SetActive(true);
                     backStack.Push(set);
-
-                    if (bottomPanel.activeSelf)
-                    {
-                        bottomPanel.SetActive(false);
-                    }
                 }
                 break;
             
@@ -388,14 +373,9 @@ public class GameManager : MonoBehaviour
                     esc.SetActive(false);
                     isCheck = true;
                     
-                    if (!topPanel.activeSelf)
+                    if (!mainPanel.activeSelf)
                     {
-                        topPanel.SetActive(true);
-                    }
-                    
-                    if (!bottomPanel.activeSelf)
-                    {
-                        bottomPanel.SetActive(true);
+                        mainPanel.SetActive(true);
                     }
 
                     if (!playerController.isDead)
@@ -413,14 +393,9 @@ public class GameManager : MonoBehaviour
                     set.SetActive(false);
                     isCheck = true;
                     
-                    if (!topPanel.activeSelf)
+                    if (!mainPanel.activeSelf)
                     {
-                        topPanel.SetActive(true);
-                    }
-                    
-                    if (!bottomPanel.activeSelf)
-                    {
-                        bottomPanel.SetActive(true);
+                        mainPanel.SetActive(true);
                     }
 
                     if (!playerController.isDead)
@@ -557,11 +532,11 @@ public class GameManager : MonoBehaviour
         DBManager.instance.stageArray[currentChapter].stage[currentStage].good = goodCount;
         DBManager.instance.stageArray[currentChapter].stage[currentStage].miss = missCount;
 
-        if (bottomPanel.activeSelf)
+        if (mainPanel.activeSelf)
         {
-            bottomPanel.SetActive(false);
+            mainPanel.SetActive(false);
         }
-        
+
         resultPanel.GetComponent<Animator>().Play("Result");
 
         if (playerController.isDead)

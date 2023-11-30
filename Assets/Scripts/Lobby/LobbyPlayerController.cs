@@ -401,7 +401,7 @@ public class LobbyPlayerController : MonoBehaviour
                             if (LobbyManager.instance.isInfoPanelOn == false)
                             {
                                 DBManager.instance.currentStage = temp.GetComponent<DoorManager>().stageNum;
-                                LobbyManager.instance.DoorInit("Stage", "Join");
+                                LobbyManager.instance.DoorInit("Stage", "Ready");
                             }
                             break;
                         
