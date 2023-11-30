@@ -238,7 +238,6 @@ public class PlayerController : MonoBehaviour
             {
                 var longNote = obstacle.transform.GetChild(0).GetChild(0).gameObject;
                 verdict.DequeueUsedCollider(longNote.gameObject);
-                animator.SetTrigger("Attack");
                 playerParticle.AttackParticle();
                 Destroy(longNote.transform.parent.gameObject);
                 audioManager.PlayAudio("Attack");
