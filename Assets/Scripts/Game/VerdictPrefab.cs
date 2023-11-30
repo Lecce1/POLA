@@ -3,6 +3,7 @@ using UnityEngine.UI;
 
 public class VerdictPrefab : MonoBehaviour
 {
+    private float delay = 0;
     private float alpha = 1f;
     public bool isUp;
     
@@ -13,16 +14,17 @@ public class VerdictPrefab : MonoBehaviour
     
     void Update()
     {
+        delay += Time.deltaTime * 50f;
         alpha -= Time.deltaTime * 2;
         
         if (isUp)
         {
-            transform.position += Vector3.up * (Time.deltaTime * 2.5f);
+            transform.GetComponent<RectTransform>().anchoredPosition = new Vector2(0, -250 + delay);
 
         }
         else
         {
-            transform.position += Vector3.up * (Time.deltaTime * -2.5f);
+            transform.GetComponent<RectTransform>().anchoredPosition = new Vector2(0, -250 - delay);
         }
         
         GetComponent<Image>().color = new Color(1, 1, 1, alpha);

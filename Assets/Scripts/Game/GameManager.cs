@@ -11,9 +11,6 @@ using UnityEngine.UI;
 public class GameManager : MonoBehaviour
 {
     [FoldoutGroup("패널")] 
-    [Title("판정 캔버스")] 
-    public GameObject verdictCanvas;
-    [FoldoutGroup("패널")] 
     [Title("일시정지")] 
     public GameObject esc;
     [FoldoutGroup("패널")] 
@@ -23,17 +20,23 @@ public class GameManager : MonoBehaviour
     [Title("메인 패널")] 
     public GameObject mainPanel;
     [FoldoutGroup("패널")] 
+    [Title("탑 패널")] 
+    public GameObject topPanel;
+    [FoldoutGroup("패널")] 
     [Title("카운트다운 패널")] 
     public GameObject countDownPanel;
     [FoldoutGroup("패널")] 
-    [Title("판정 프리팹")] 
-    public GameObject verdictPrefab;
+    [Title("판정 이미지")] 
+    public Image verdictImage;
     [FoldoutGroup("패널")] 
     [Title("노트 폴더")] 
     public GameObject noteFolder;
     [FoldoutGroup("패널")] 
     [Title("진행률 슬라이더")] 
     public Slider progress;
+    [FoldoutGroup("패널")] 
+    [Title("판정 프리팹")] 
+    public GameObject verdictPrefab;
 
     [FoldoutGroup("HP")] 
     [Title("HP 이미지")] 
@@ -75,11 +78,11 @@ public class GameManager : MonoBehaviour
     [FoldoutGroup("플레이어")] 
     [Title("플레이어")] 
     public PlayerController playerController;
-
+    
     [FoldoutGroup("정보")] 
     [Title("판정 이미지")] 
     [SerializeField]
-    private Sprite[] verdictImage = new Sprite[4];
+    private Sprite[] verdictImageList = new Sprite[4];
     [FoldoutGroup("정보")] 
     [Title("랭크 점수")] 
     public float rankScore;
@@ -262,14 +265,22 @@ public class GameManager : MonoBehaviour
             currentCombo = 0;
         }
 
+        if (currentCombo >= 3)
+        {
+            currentComboText.color = new Color(1, 1, 1, 1);
+        }
+        else
+        {
+            currentComboText.color = new Color(1, 1, 1, 0);
+        }
+        
         currentComboText.text = currentCombo.ToString();
-        GameObject verdictPrefab = Instantiate(this.verdictPrefab, verdictCanvas.transform, true);
+        verdictImage.sprite = verdictImageList[idx];
+        GameObject verdictPrefab = Instantiate(this.verdictPrefab, topPanel.transform, true);
         verdictPrefab.GetComponent<VerdictPrefab>().isUp = playerController.verdict.isUp;
-        verdictPrefab.GetComponent<Image>().sprite = verdictImage[idx];
+        verdictPrefab.GetComponent<Image>().sprite = verdictImageList[idx];
         verdictPrefab.GetComponent<RectTransform>().localScale = new Vector3(1, 1, 1);
-        Vector3 screenPos = Camera.main.WorldToScreenPoint(playerController.transform.position + new Vector3(1.5f, playerController.transform.up.y, 0));
-        RectTransformUtility.ScreenPointToLocalPointInRectangle(verdictCanvas.GetComponent<RectTransform>(), screenPos, Camera.main, out var localPos);
-        verdictPrefab.transform.GetComponent<RectTransform>().localPosition = new Vector3(localPos.x + 50f, localPos.y, -200);
+        verdictPrefab.transform.GetComponent<RectTransform>().anchoredPosition = new Vector2(0, -250);
     }
 
     public void Button(string type)
@@ -430,7 +441,7 @@ public class GameManager : MonoBehaviour
         
         countDownPanel.gameObject.SetActive(true);
         audioManager.audio.Pause();
-        countDownPanel.transform.GetChild(0).GetComponent<Text>().text = "Ready";
+        countDownPanel.transform.GetChild(0).GetComponent<Text>().text = "READY";
 
         for (int i = 0; i < 2; i++)
         {
@@ -446,7 +457,7 @@ public class GameManager : MonoBehaviour
             yield return waitForBeat;
         }
 
-        countDownPanel.transform.GetChild(0).GetComponent<Text>().text = "GO!";
+        countDownPanel.transform.GetChild(0).GetComponent<Text>().text = "GO!!";
         audioManager.audio.Play();
         isCountDown = false;
         playerController.GetComponent<Animator>().SetBool("isReady", isCountDown);
