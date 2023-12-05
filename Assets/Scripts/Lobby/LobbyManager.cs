@@ -245,8 +245,8 @@ public class LobbyManager : MonoBehaviour
 
     public void Button(string type)
     {
-        if (join_Btn.GetComponent<Animator>().GetCurrentAnimatorStateInfo(0).IsName("LobbyJoinOff") ||
-            join_Btn.GetComponent<Animator>().GetCurrentAnimatorStateInfo(0).normalizedTime < 1f)
+        if (DBManager.instance.currentPlatform == "MOBILE" && (join_Btn.GetComponent<Animator>().GetCurrentAnimatorStateInfo(0).IsName("LobbyJoinOff") ||
+            join_Btn.GetComponent<Animator>().GetCurrentAnimatorStateInfo(0).normalizedTime < 1f))
         {
             return;
         }
