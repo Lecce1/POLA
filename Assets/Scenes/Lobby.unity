@@ -38,7 +38,7 @@ RenderSettings:
   m_ReflectionIntensity: 1
   m_CustomReflection: {fileID: 0}
   m_Sun: {fileID: 0}
-  m_IndirectSpecularColor: {r: 0.75196934, g: 0.6552164, b: 0.5792768, a: 1}
+  m_IndirectSpecularColor: {r: 0.7519834, g: 0.65524566, b: 0.5793062, a: 1}
   m_UseRadianceAmbientProbe: 0
 --- !u!157 &3
 LightmapSettings:
@@ -1410,7 +1410,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   nickName: 
-  chapter: 1
+  chapter: 2
   nextScene: 
   currentGround: 0
   currentRouteIdx: 2
@@ -49955,7 +49955,7 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1473644558}
   serializedVersion: 2
-  m_LocalRotation: {x: -0.00080894533, y: -3.3606194e-11, z: -2.718558e-14, w: 0.9999997}
+  m_LocalRotation: {x: -0.0008090315, y: -3.3606194e-11, z: -2.7188475e-14, w: 0.9999997}
   m_LocalPosition: {x: 0, y: 0, z: -300}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0

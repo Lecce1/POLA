@@ -245,6 +245,12 @@ public class LobbyManager : MonoBehaviour
 
     public void Button(string type)
     {
+        if (join_Btn.GetComponent<Animator>().GetCurrentAnimatorStateInfo(0).IsName("LobbyJoinOff") ||
+            join_Btn.GetComponent<Animator>().GetCurrentAnimatorStateInfo(0).normalizedTime < 1f)
+        {
+            return;
+        }
+        
         switch (type)
         {
             case "Move":
@@ -421,7 +427,7 @@ public class LobbyManager : MonoBehaviour
                     }
                 }
                     
-                LobbyPlayerController.instance.Collider();
+                //LobbyPlayerController.instance.Collider();
                 LobbyAudioManager.instance.PlayAudio("Button");
                 break;
             
@@ -446,7 +452,7 @@ public class LobbyManager : MonoBehaviour
                     if (info.GetComponent<Animator>().GetCurrentAnimatorStateInfo(0).normalizedTime >= 1f)
                     {
                         Info_OnOff(false);
-                        LobbyPlayerController.instance.Collider();
+                        //LobbyPlayerController.instance.Collider();
                     }
                 }
                 break;
@@ -705,7 +711,7 @@ public class LobbyManager : MonoBehaviour
             if (join_Btn.activeSelf == false)
             {
                 join_Btn.SetActive(true);
-                LobbyPlayerController.instance.Collider();
+                //LobbyPlayerController.instance.Collider();
                 isSetBtn = false;
             }
             

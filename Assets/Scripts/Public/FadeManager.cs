@@ -31,6 +31,7 @@ public class FadeManager : MonoBehaviour
             fade = GetComponent<Image>();
         }
 
+        fade.raycastTarget = true;
         fade.color = new Color(0, 0, 0, 0);
         
         while (fade.color.a < 1)
@@ -55,6 +56,7 @@ public class FadeManager : MonoBehaviour
             fade = GetComponent<Image>();
         }
 
+        fade.raycastTarget = false;
         fade.color = new Color(0, 0, 0, 1);
         
         if (fade != null)

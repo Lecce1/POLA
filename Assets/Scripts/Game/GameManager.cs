@@ -37,6 +37,9 @@ public class GameManager : MonoBehaviour
     [FoldoutGroup("패널")] 
     [Title("판정 프리팹")] 
     public GameObject verdictPrefab;
+    [FoldoutGroup("패널")] 
+    [Title("일시정지 버튼")] 
+    public GameObject stopBtn;
 
     [FoldoutGroup("HP")] 
     [Title("HP 이미지")] 
@@ -427,6 +430,11 @@ public class GameManager : MonoBehaviour
     
     IEnumerator CountDown()
     {
+        if (stopBtn.activeSelf)
+        {
+            stopBtn.SetActive(false);
+        }
+        
         if (audioManager.audio.clip.loadState == AudioDataLoadState.Unloaded)
         {
             audioManager.audio.clip.LoadAudioData();
@@ -464,6 +472,11 @@ public class GameManager : MonoBehaviour
         StartCoroutine(audioManager.Progress());
         isKeyOnPause = false;
         isStart = false;
+        
+        if (!stopBtn.activeSelf)
+        {
+            stopBtn.SetActive(true);
+        }
         
         Invoke(nameof(CountDownDisable), 0.5f);
     }

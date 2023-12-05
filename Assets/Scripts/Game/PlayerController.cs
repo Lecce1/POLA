@@ -195,7 +195,7 @@ public class PlayerController : MonoBehaviour
     {
         int evaluation = verdict.KeyDown(out Obstacle obstacle);
 
-        if (obstacle == null || evaluation == -1 || obstacle.wasInteracted)
+        if (obstacle == null || evaluation == -1 || obstacle.wasInteracted || (GameManager.instance.isCountDown && !GameManager.instance.isStart))
         {
             return;
         }

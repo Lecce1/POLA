@@ -1,13 +1,13 @@
 {
-    "chapter": 2,
+    "chapter": 1,
     "currentChapter": 1,
-    "musicValue": 0.7002999782562256,
-    "sfxValue": 0.7000299692153931,
+    "musicValue": 0.8001999855041504,
+    "sfxValue": 0.20007991790771485,
     "supportLanguageNum": 2,
     "isVibration": true,
     "language": 1,
     "isTutorial": true,
-    "latency": 225,
+    "latency": 83,
     "stageArray": [
         {
             "stage": [
@@ -114,10 +114,10 @@
                 {
                     "name": "",
                     "starCount": 0,
-                    "score": 400,
-                    "perfect": 3,
-                    "great": 1,
-                    "good": 2,
+                    "score": 3875,
+                    "perfect": 36,
+                    "great": 4,
+                    "good": 3,
                     "miss": 3,
                     "bpm": 0,
                     "audio": {
@@ -161,12 +161,12 @@
                 },
                 {
                     "name": "",
-                    "starCount": 0,
-                    "score": 3750,
-                    "perfect": 36,
-                    "great": 3,
-                    "good": 0,
-                    "miss": 3,
+                    "starCount": 1,
+                    "score": 23700,
+                    "perfect": 171,
+                    "great": 4,
+                    "good": 8,
+                    "miss": 1,
                     "bpm": 0,
                     "audio": {
                         "instanceID": 0
@@ -213,12 +213,12 @@
             "stage": [
                 {
                     "name": "",
-                    "starCount": 2,
-                    "score": 38450,
-                    "perfect": 368,
-                    "great": 24,
-                    "good": 18,
-                    "miss": 20,
+                    "starCount": 1,
+                    "score": 37400,
+                    "perfect": 340,
+                    "great": 52,
+                    "good": 32,
+                    "miss": 21,
                     "bpm": 0,
                     "audio": {
                         "instanceID": 0

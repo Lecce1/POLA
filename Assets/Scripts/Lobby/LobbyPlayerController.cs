@@ -55,6 +55,11 @@ public class LobbyPlayerController : MonoBehaviour
         StartCoroutine("Move");
     }
 
+    void Update()
+    {
+        Collider();
+    }
+
     IEnumerator Move()
     {
         while (transform.position.x != LobbyManager.instance.moveRoute[DBManager.instance.currentGround]
@@ -72,7 +77,7 @@ public class LobbyPlayerController : MonoBehaviour
         body.transform.rotation = Quaternion.Euler(-90, 180, 0);
         isMove = false;
         anim.SetBool("isMove", isMove);
-        Collider();
+        //Collider();
     }
 
     public void OnMove(InputValue value)
@@ -175,7 +180,7 @@ public class LobbyPlayerController : MonoBehaviour
                     if (LobbyManager.instance.info.GetComponent<Animator>().GetCurrentAnimatorStateInfo(0).normalizedTime >= 1f)
                     {
                         LobbyManager.instance.Info_OnOff(false);
-                        Collider();
+                        //Collider();
                     }
                 }
             }
@@ -406,7 +411,7 @@ public class LobbyPlayerController : MonoBehaviour
                             break;
                         
                         case "Center":
-                            if (LobbyManager.instance.join_Btn.activeSelf)
+                            if (LobbyManager.instance.join_Btn.activeSelf && LobbyManager.instance.join_Btn.GetComponent<Animator>().GetCurrentAnimatorStateInfo(0).IsName("LobbyJoinOn") || LobbyManager.instance.join_Btn.GetComponent<Animator>().GetCurrentAnimatorStateInfo(0).normalizedTime >= 1f)
                             {
                                 LobbyManager.instance.Join_Btn_OnOff(false, false);
                             }
