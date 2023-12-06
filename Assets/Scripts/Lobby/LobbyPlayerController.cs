@@ -411,7 +411,7 @@ public class LobbyPlayerController : MonoBehaviour
                             break;
                         
                         case "Center":
-                            if (LobbyManager.instance.join_Btn.activeSelf && LobbyManager.instance.join_Btn.GetComponent<Animator>().GetCurrentAnimatorStateInfo(0).IsName("LobbyJoinOn") || LobbyManager.instance.join_Btn.GetComponent<Animator>().GetCurrentAnimatorStateInfo(0).normalizedTime >= 1f)
+                            if (LobbyManager.instance.join_Btn.activeSelf && LobbyManager.instance.join_Btn.GetComponent<RectTransform>().anchoredPosition.y > -200)
                             {
                                 LobbyManager.instance.Join_Btn_OnOff(false, false);
                             }

@@ -15,6 +15,15 @@
                     "initialStateCheck": true
                 },
                 {
+                    "name": "Back",
+                    "type": "Button",
+                    "id": "ea29004d-566a-456f-bb02-d7ac739352fa",
+                    "expectedControlType": "Button",
+                    "processors": "",
+                    "interactions": "",
+                    "initialStateCheck": true
+                },
+                {
                     "name": "Down",
                     "type": "Button",
                     "id": "749093a6-66ea-401a-a9f2-c51f4171e339",
@@ -68,6 +77,28 @@
                     "action": "Down",
                     "isComposite": false,
                     "isPartOfComposite": false
+                },
+                {
+                    "name": "",
+                    "id": "6b214d7a-de7d-46e7-8559-daa221d1fd13",
+                    "path": "<XInputController>/buttonEast",
+                    "interactions": "",
+                    "processors": "",
+                    "groups": "CONSOLE",
+                    "action": "Back",
+                    "isComposite": false,
+                    "isPartOfComposite": false
+                },
+                {
+                    "name": "",
+                    "id": "30795ca0-2ef9-4a72-acfd-6b08f97e0dab",
+                    "path": "<Keyboard>/escape",
+                    "interactions": "",
+                    "processors": "",
+                    "groups": "PC",
+                    "action": "Back",
+                    "isComposite": false,
+                    "isPartOfComposite": false
                 }
             ]
         },
@@ -95,7 +126,7 @@
                 },
                 {
                     "name": "Click",
-                    "type": "PassThrough",
+                    "type": "Button",
                     "id": "4ae8745a-5fb6-407f-8164-9c49806dbfaf",
                     "expectedControlType": "Button",
                     "processors": "",
@@ -104,7 +135,7 @@
                 },
                 {
                     "name": "Cancel",
-                    "type": "PassThrough",
+                    "type": "Button",
                     "id": "b71a8369-3ef0-4997-8ebd-04b188dd3578",
                     "expectedControlType": "Button",
                     "processors": "",
@@ -117,7 +148,7 @@
                     "name": "",
                     "id": "d58a2974-b036-4d0f-b946-889a03da562d",
                     "path": "<Gamepad>/start",
-                    "interactions": "Tap(duration=1,pressPoint=0.5)",
+                    "interactions": "",
                     "processors": "",
                     "groups": "CONSOLE",
                     "action": "Cancel",
@@ -128,7 +159,7 @@
                     "name": "",
                     "id": "44986028-09f8-4c87-a4a1-9dd65253a206",
                     "path": "<Keyboard>/escape",
-                    "interactions": "Tap",
+                    "interactions": "",
                     "processors": "",
                     "groups": "PC",
                     "action": "Cancel",

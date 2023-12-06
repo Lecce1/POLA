@@ -324,6 +324,17 @@ public class PlayerController : MonoBehaviour
             }
         }
     }
+    
+    public void OnBack()
+    {
+        if (!GameManager.instance.isResultPanel && !GameManager.instance.isCountDown)
+        {
+            if (GameManager.instance.isPanelOpen)
+            {
+                GameManager.instance.Back();
+            }
+        }
+    }
 
     public void OnCancel()
     {

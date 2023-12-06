@@ -426,8 +426,7 @@ public class LobbyManager : MonoBehaviour
                         LobbyAudioManager.instance.bgmAudio.Play();
                     }
                 }
-                    
-                //LobbyPlayerController.instance.Collider();
+                
                 LobbyAudioManager.instance.PlayAudio("Button");
                 break;
             
@@ -452,7 +451,6 @@ public class LobbyManager : MonoBehaviour
                     if (info.GetComponent<Animator>().GetCurrentAnimatorStateInfo(0).normalizedTime >= 1f)
                     {
                         Info_OnOff(false);
-                        //LobbyPlayerController.instance.Collider();
                     }
                 }
                 break;
@@ -711,7 +709,6 @@ public class LobbyManager : MonoBehaviour
             if (join_Btn.activeSelf == false)
             {
                 join_Btn.SetActive(true);
-                //LobbyPlayerController.instance.Collider();
                 isSetBtn = false;
             }
             

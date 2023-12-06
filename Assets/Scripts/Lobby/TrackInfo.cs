@@ -8,8 +8,6 @@ public class TrackInfo : SerializedMonoBehaviour
 {
     [Title("트랙 제목")]
     public Text title_Text;
-    [Title("랭크")]
-    public Text rank_Text;
     [Title("스코어")]
     public Text score_Text;
     [Title("Perfect")]

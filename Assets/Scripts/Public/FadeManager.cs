@@ -33,10 +33,12 @@ public class FadeManager : MonoBehaviour
 
         fade.raycastTarget = true;
         fade.color = new Color(0, 0, 0, 0);
-        
+
+        Debug.Log("1" + fade.color.a);
         while (fade.color.a < 1)
         {
-            count += 0.01f;
+            Debug.Log("2" + fade.color.a);
+            count += Time.deltaTime;
             fade.color = new Color(0, 0, 0, count);
             yield return null;
         }
@@ -63,7 +65,7 @@ public class FadeManager : MonoBehaviour
         {
             while (fade.color.a > 0)
             {
-                count -= 0.01f;
+                count -= Time.deltaTime;
                 fade.color = new Color(0, 0, 0, count);
                 yield return null;
             }

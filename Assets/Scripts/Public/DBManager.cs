@@ -1,10 +1,8 @@
 using System;
 using System.IO;
-using System.Linq;
 using Sirenix.OdinInspector;
 using UnityEngine;
 using UnityEngine.Localization.Settings;
-using UnityEngine.Serialization;
 
 [Serializable]
 class LocalData
@@ -236,7 +234,7 @@ public class DBManager : MonoBehaviour
     void Reset()
     {
         isTutorial = true;
-        chapter = 1;
+        chapter = 2;
         musicValue = 1;
         sfxValue = 1;
         isVibration = true;

@@ -97,7 +97,7 @@ public class LatencyPlayerController : MonoBehaviour
         {
             return;
         }
-        
+
         passedBeat++;
         LatencyManager.instance.StartCoroutine(LatencyManager.instance.DestroyNote(passedBeat, latency / 1000f));
         wasClickedThisTime = false;
@@ -152,6 +152,17 @@ public class LatencyPlayerController : MonoBehaviour
             if (!LatencyManager.instance.isPanelOpen && !LatencyManager.instance.startPanel.activeSelf)
             {
                 LatencyManager.instance.Button("Esc");
+            }
+        }
+    }
+
+    public void OnBack()
+    {
+        if (!LatencyManager.instance.isResultPanelOpen)
+        {
+            if (!LatencyManager.instance.isPanelOpen && !LatencyManager.instance.startPanel.activeSelf)
+            {
+                
             }
             else
             {

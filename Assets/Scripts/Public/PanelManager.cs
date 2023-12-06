@@ -20,9 +20,6 @@ public class PanelManager : MonoBehaviour
 
     void OnEnable()
     {
-        if (playerInput.currentControlScheme != "MOBILE")
-        {
-            EventSystem.current.SetSelectedGameObject(panel.selectedObject);
-        }
+        EventSystem.current.SetSelectedGameObject(panel.selectedObject);
     }
 }
