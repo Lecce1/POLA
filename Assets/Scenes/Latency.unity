@@ -38,7 +38,7 @@ RenderSettings:
   m_ReflectionIntensity: 1
   m_CustomReflection: {fileID: 0}
   m_Sun: {fileID: 0}
-  m_IndirectSpecularColor: {r: 0.5923183, g: 0.51149637, b: 0.44490325, a: 1}
+  m_IndirectSpecularColor: {r: 0.5922276, g: 0.5115645, b: 0.44486982, a: 1}
   m_UseRadianceAmbientProbe: 0
 --- !u!157 &3
 LightmapSettings:
@@ -3664,7 +3664,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 92c5c9debdd724bc9a58fe308bdfd0a5, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  playerInput: {fileID: 0}
+  playerInput: {fileID: 1377595720}
   panel:
     name: Set
     selectedObject: {fileID: 921755190}
@@ -10150,7 +10150,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 92c5c9debdd724bc9a58fe308bdfd0a5, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  playerInput: {fileID: 0}
+  playerInput: {fileID: 1377595720}
   panel:
     name: Set
     selectedObject: {fileID: 202129060}

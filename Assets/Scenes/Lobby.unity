@@ -38,7 +38,7 @@ RenderSettings:
   m_ReflectionIntensity: 1
   m_CustomReflection: {fileID: 0}
   m_Sun: {fileID: 0}
-  m_IndirectSpecularColor: {r: 0.7519834, g: 0.65524566, b: 0.5793062, a: 1}
+  m_IndirectSpecularColor: {r: 0.7517737, g: 0.6551915, b: 0.57915694, a: 1}
   m_UseRadianceAmbientProbe: 0
 --- !u!157 &3
 LightmapSettings:
@@ -1457,7 +1457,7 @@ MonoBehaviour:
       bpm: 114
       audio: {fileID: 8300000, guid: ce18281ac937bd44ba50f4c884b99451, type: 3}
       polaroid: {fileID: 2100000, guid: 59ad3c97a876347caafada8357aad33d, type: 2}
-    - name: "\uB2E4\uB8E8\uB9C8\uC528\uAC00 \uB5A8\uC5B4\uC84C\uB2E4"
+    - name: "\uB2E4\uB8E8\uB9C8\uC528\uAC00 \uB118\uC5B4\uC84C\uB2E4"
       starCount: 0
       score: 0
       perfect: 0
@@ -15708,7 +15708,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 92c5c9debdd724bc9a58fe308bdfd0a5, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  playerInput: {fileID: 0}
+  playerInput: {fileID: 5418614046662766274}
   panel:
     name: Set
     selectedObject: {fileID: 1360333566}
@@ -24193,7 +24193,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 92c5c9debdd724bc9a58fe308bdfd0a5, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  playerInput: {fileID: 0}
+  playerInput: {fileID: 5418614046662766274}
   panel:
     name: Esc
     selectedObject: {fileID: 36860320}
@@ -27409,7 +27409,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 92c5c9debdd724bc9a58fe308bdfd0a5, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  playerInput: {fileID: 0}
+  playerInput: {fileID: 5418614046662766274}
   panel:
     name: Exit
     selectedObject: {fileID: 42367205}
@@ -48092,7 +48092,7 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0, y: 0}
   m_AnchorMax: {x: 0, y: 0}
-  m_AnchoredPosition: {x: 95.97156, y: 0}
+  m_AnchoredPosition: {x: 120.7109, y: 0}
   m_SizeDelta: {x: 0, y: 0}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!114 &1412945683
@@ -49955,7 +49955,7 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1473644558}
   serializedVersion: 2
-  m_LocalRotation: {x: -0.0008090315, y: -3.3606194e-11, z: -2.7188475e-14, w: 0.9999997}
+  m_LocalRotation: {x: -0.00080906687, y: -3.3606194e-11, z: -2.7189664e-14, w: 0.9999997}
   m_LocalPosition: {x: 0, y: 0, z: -300}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
@@ -54744,7 +54744,7 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0, y: 0}
   m_AnchorMax: {x: 0, y: 0}
-  m_AnchoredPosition: {x: 124.502365, y: 0}
+  m_AnchoredPosition: {x: 106.16113, y: 0}
   m_SizeDelta: {x: 0, y: 0}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!114 &1617106708
@@ -68482,7 +68482,7 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0, y: 0}
   m_AnchorMax: {x: 0, y: 0}
-  m_AnchoredPosition: {x: 125.78198, y: 0}
+  m_AnchoredPosition: {x: 133.45972, y: 0}
   m_SizeDelta: {x: 0, y: 0}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!114 &2128184164
