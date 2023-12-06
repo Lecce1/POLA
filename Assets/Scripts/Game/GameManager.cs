@@ -41,7 +41,10 @@ public class GameManager : MonoBehaviour
     [FoldoutGroup("패널")] 
     [Title("일시정지 버튼")] 
     public GameObject stopBtn;
-
+    [FoldoutGroup("패널")] 
+    [Title("배경화면")]
+    public GameObject backgroundCanvas;
+    
     [FoldoutGroup("HP")] 
     [Title("HP 이미지")] 
     public Image hp;
@@ -154,6 +157,7 @@ public class GameManager : MonoBehaviour
     [FoldoutGroup("트랙 별 DB")] 
     public Stage[] chapter = new Stage[8];
     
+    
     // 뒤로가기 스택
     private Stack<GameObject> backStack;
     public static GameManager instance;
@@ -165,6 +169,7 @@ public class GameManager : MonoBehaviour
         public GameObject[] stage = new GameObject[6];
         public AudioClip[] audio = new AudioClip[6];
         public Material[] skybox = new Material[6];
+        public Sprite[] background = new Sprite[6];
         public int[] bpm = new int[6];
     }
 
@@ -206,6 +211,7 @@ public class GameManager : MonoBehaviour
         }
 
         RenderSettings.skybox = chapter[DBManager.instance.currentChapter - 1].skybox[DBManager.instance.currentStage - 1];
+        backgroundCanvas.GetComponent<BackGroundMover>().Init(chapter[DBManager.instance.currentChapter - 1].background[DBManager.instance.currentStage -1]);
         audioManager.audio.clip = chapter[DBManager.instance.currentChapter - 1].audio[DBManager.instance.currentStage - 1];
         audioManager.bpm = chapter[DBManager.instance.currentChapter - 1].bpm[DBManager.instance.currentStage - 1];
         waitForBeat = new WaitForSeconds(60f / audioManager.bpm);
