@@ -38,7 +38,7 @@ RenderSettings:
   m_ReflectionIntensity: 1
   m_CustomReflection: {fileID: 0}
   m_Sun: {fileID: 0}
-  m_IndirectSpecularColor: {r: 0.7518298, g: 0.65522707, b: 0.5791924, a: 1}
+  m_IndirectSpecularColor: {r: 0.7518532, g: 0.65523946, b: 0.5792093, a: 1}
   m_UseRadianceAmbientProbe: 0
 --- !u!157 &3
 LightmapSettings:
@@ -47722,7 +47722,7 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0, y: 0}
   m_AnchorMax: {x: 0, y: 0}
-  m_AnchoredPosition: {x: 118.19912, y: 0}
+  m_AnchoredPosition: {x: 92.89897, y: 0}
   m_SizeDelta: {x: 0, y: 0}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!114 &1412945683
@@ -48298,6 +48298,7 @@ MonoBehaviour:
   - {fileID: 688950038}
   playerInput: {fileID: 5418614046662766274}
   type: 0
+  isFirstKey: 0
 --- !u!4 &1430973777
 Transform:
   m_ObjectHideFlags: 0
@@ -49585,7 +49586,7 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1473644558}
   serializedVersion: 2
-  m_LocalRotation: {x: -0.00080925605, y: -3.3606194e-11, z: -2.7196022e-14, w: 0.9999997}
+  m_LocalRotation: {x: -0.00080925896, y: -3.3606194e-11, z: -2.7196119e-14, w: 0.9999997}
   m_LocalPosition: {x: 0, y: 0, z: -300}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
@@ -54374,7 +54375,7 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0, y: 0}
   m_AnchorMax: {x: 0, y: 0}
-  m_AnchoredPosition: {x: 105.388, y: 0}
+  m_AnchoredPosition: {x: 122.781845, y: 0}
   m_SizeDelta: {x: 0, y: 0}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!114 &1617106708
@@ -68038,7 +68039,7 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0, y: 0}
   m_AnchorMax: {x: 0, y: 0}
-  m_AnchoredPosition: {x: 132.26941, y: 0}
+  m_AnchoredPosition: {x: 123.96779, y: 0}
   m_SizeDelta: {x: 0, y: 0}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!114 &2128184164

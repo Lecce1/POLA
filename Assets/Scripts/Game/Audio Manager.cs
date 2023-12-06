@@ -32,6 +32,9 @@ public class AudioManager : MonoBehaviour
     [FoldoutGroup("오디오 소스")]
     [Title("UI")]
     public AudioSource uiAudio;
+    [FoldoutGroup("오디오 소스")]
+    [Title("Result")]
+    public AudioSource resultAudio;
     
     [FoldoutGroup("오디오 클립")]
     [Title("공격")]
@@ -107,11 +110,11 @@ public class AudioManager : MonoBehaviour
             case "Result":
                 if (playerController.isDead)
                 {
-                    sfxAudio.PlayOneShot(failClip);
+                    resultAudio.PlayOneShot(failClip);
                 }
                 else
                 {
-                    sfxAudio.PlayOneShot(successClip);
+                    resultAudio.PlayOneShot(successClip);
                 }
 
                 break;

@@ -434,8 +434,11 @@ public class LobbyManager : MonoBehaviour
             case "Stage":
                 if (!info.GetComponent<Animator>().GetCurrentAnimatorStateInfo(0).IsName("InfoOff") || info.GetComponent<Animator>().GetCurrentAnimatorStateInfo(0).normalizedTime >= 1f)
                 {
-                    Info_OnOff(true);
-                    Join_Btn_OnOff(false, true);
+                    if (!isInfoPanelOn)
+                    {
+                        Info_OnOff(true);
+                        Join_Btn_OnOff(false, true);
+                    }
                 }
                 break;
             
