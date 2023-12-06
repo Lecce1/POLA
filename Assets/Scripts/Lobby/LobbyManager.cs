@@ -130,6 +130,7 @@ public class LobbyManager : MonoBehaviour
         }
 
         backStack = new Stack<GameObject>();
+        Application.targetFrameRate = 240;
     }
 
     void Start()

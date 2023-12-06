@@ -260,18 +260,18 @@
                     "initialStateCheck": false
                 },
                 {
-                    "name": "Point",
+                    "name": "Click",
                     "type": "Button",
-                    "id": "3bb006b5-664f-450c-a412-57949861d92a",
+                    "id": "adbc3741-e65b-48ca-ab03-7ba4c7b6df8f",
                     "expectedControlType": "Button",
                     "processors": "",
                     "interactions": "",
                     "initialStateCheck": true
                 },
                 {
-                    "name": "Click",
+                    "name": "Point",
                     "type": "Button",
-                    "id": "f6725559-daf5-4d05-9fad-4cbb641468be",
+                    "id": "3bb006b5-664f-450c-a412-57949861d92a",
                     "expectedControlType": "Button",
                     "processors": "",
                     "interactions": "",
@@ -486,50 +486,6 @@
                 },
                 {
                     "name": "",
-                    "id": "5759348b-4e65-4e3a-8ac4-088ea4b894e7",
-                    "path": "<Mouse>/leftButton",
-                    "interactions": "",
-                    "processors": "",
-                    "groups": "PC",
-                    "action": "Click",
-                    "isComposite": false,
-                    "isPartOfComposite": false
-                },
-                {
-                    "name": "",
-                    "id": "411e7a4d-e3fc-41d9-a7dd-e45ed01d3698",
-                    "path": "<XInputController>/buttonSouth",
-                    "interactions": "Tap",
-                    "processors": "",
-                    "groups": "CONSOLE",
-                    "action": "Click",
-                    "isComposite": false,
-                    "isPartOfComposite": false
-                },
-                {
-                    "name": "",
-                    "id": "75eb98e1-528a-401a-9ee6-7cabccf4da02",
-                    "path": "<Keyboard>/a",
-                    "interactions": "Tap",
-                    "processors": "",
-                    "groups": "PC",
-                    "action": "Click",
-                    "isComposite": false,
-                    "isPartOfComposite": false
-                },
-                {
-                    "name": "",
-                    "id": "65f923ff-eedc-4451-907f-cd019329473c",
-                    "path": "<Touchscreen>/touch*/press",
-                    "interactions": "",
-                    "processors": "",
-                    "groups": "MOBILE",
-                    "action": "Click",
-                    "isComposite": false,
-                    "isPartOfComposite": false
-                },
-                {
-                    "name": "",
                     "id": "d58a2974-b036-4d0f-b946-889a03da562d",
                     "path": "<XInputController>/buttonEast",
                     "interactions": "",
@@ -558,6 +514,50 @@
                     "processors": "",
                     "groups": "PC",
                     "action": "Cancel",
+                    "isComposite": false,
+                    "isPartOfComposite": false
+                },
+                {
+                    "name": "",
+                    "id": "5c81292e-9d6d-4253-aa32-475a903349c4",
+                    "path": "<Mouse>/leftButton",
+                    "interactions": "",
+                    "processors": "",
+                    "groups": "PC",
+                    "action": "Click",
+                    "isComposite": false,
+                    "isPartOfComposite": false
+                },
+                {
+                    "name": "",
+                    "id": "5d6f4888-708a-4483-a939-5ead3a84454c",
+                    "path": "<XInputController>/buttonSouth",
+                    "interactions": "Tap",
+                    "processors": "",
+                    "groups": "CONSOLE",
+                    "action": "Click",
+                    "isComposite": false,
+                    "isPartOfComposite": false
+                },
+                {
+                    "name": "",
+                    "id": "96e39ef4-598c-44f4-9ca1-9a2d3c317525",
+                    "path": "<Keyboard>/a",
+                    "interactions": "Tap",
+                    "processors": "",
+                    "groups": "PC",
+                    "action": "Click",
+                    "isComposite": false,
+                    "isPartOfComposite": false
+                },
+                {
+                    "name": "",
+                    "id": "70df1743-c82c-43a0-afc2-c52cd87fb34d",
+                    "path": "<Touchscreen>/touch*/press",
+                    "interactions": "",
+                    "processors": "",
+                    "groups": "MOBILE",
+                    "action": "Click",
                     "isComposite": false,
                     "isPartOfComposite": false
                 }

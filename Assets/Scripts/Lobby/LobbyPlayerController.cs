@@ -77,11 +77,15 @@ public class LobbyPlayerController : MonoBehaviour
         body.transform.rotation = Quaternion.Euler(-90, 180, 0);
         isMove = false;
         anim.SetBool("isMove", isMove);
-        //Collider();
     }
 
     public void OnMove(InputValue value)
     {
+        if (!PlatformManager.instance.isFirstKey)
+        {
+            PlatformManager.instance.isFirstKey = true;
+        }
+        
         if (isMoveAvailable && isMove == false)
         {
             Vector2 vector = value.Get<Vector2>();
@@ -203,6 +207,11 @@ public class LobbyPlayerController : MonoBehaviour
 
     public void OnJoin()
     {
+        if (FadeManager.instance.fade.color.a != 1 && FadeManager.instance.fade.color.a != 0)
+        {
+            return;
+        }
+        
         if (!LobbyManager.instance.isPanelOpen && LobbyManager.instance.isJoinBtnOn)
         {
             if (LobbyManager.instance.info.GetComponent<Animator>().GetCurrentAnimatorStateInfo(0).IsName("InfoOn") && LobbyManager.instance.info.GetComponent<Animator>().GetCurrentAnimatorStateInfo(0).normalizedTime >= 0.9f)
@@ -214,7 +223,7 @@ public class LobbyPlayerController : MonoBehaviour
                 LobbyManager.instance.Button(LobbyManager.instance.join_Btn_Type);
             }
             
-            if (LobbyManager.instance.join_Btn_Type != "Move" && LobbyManager.instance.join_Btn_Type != "Stage" && LobbyManager.instance.join_Btn_Type != "Shop")
+            if (LobbyManager.instance.join_Btn_Type != "Move" && LobbyManager.instance.join_Btn_Type != "Stage" && LobbyManager.instance.join_Btn_Type != "Shop" && LobbyManager.instance.join_Btn_Type != "Center")
             {
                 isMoveAvailable = false;
             }
@@ -411,9 +420,11 @@ public class LobbyPlayerController : MonoBehaviour
                             break;
                         
                         case "Center":
+                            LobbyManager.instance.join_Btn_Type = "Center";
+                            
                             if (LobbyManager.instance.join_Btn.activeSelf && LobbyManager.instance.join_Btn.GetComponent<RectTransform>().anchoredPosition.y > -200)
                             {
-                                LobbyManager.instance.Join_Btn_OnOff(false, false);
+                                LobbyManager.instance.Join_Btn_OnOff(false, false); 
                             }
                             break;
                     }

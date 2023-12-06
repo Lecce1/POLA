@@ -6,6 +6,7 @@ using UnityEngine;
 using UnityEngine.UI;
 using UnityEngine.InputSystem;
 using UnityEngine.SceneManagement;
+using UnityEngine.Serialization;
 
 public class PlatformManager : MonoBehaviour
     {
@@ -27,6 +28,18 @@ public class PlatformManager : MonoBehaviour
         [Title("현재 씬 타입")] 
         [SerializeField]
         private Type type;
+        [Title("첫 번째 키 입력 여부")] 
+        public bool isFirstKey;
+        
+        public static PlatformManager instance;
+
+        void Awake()
+        {
+            if (instance == null)
+            {
+                instance = this;
+            }
+        }
 
         void Start()
         {
@@ -35,30 +48,56 @@ public class PlatformManager : MonoBehaviour
         
         void Update()
         {
-            if (SceneManager.GetActiveScene().name != DBManager.instance.gameSceneName)
+            if (Input.anyKey && isFirstKey == false)
             {
-                Switch();
+                isFirstKey = true;
             }
+            
+            Switch();
         }
         
         void Init()
         {
-            if (playerInput.currentControlScheme == "PC")
+            if (DBManager.instance.currentPlatform == "")
             {
-                SwitchToKeyboard();
+                if (playerInput.currentControlScheme == "PC")
+                {
+                    SwitchToKeyboard();
+                }
+                else if (playerInput.currentControlScheme == "CONSOLE")
+                { 
+                    SwitchToGamepad();
+                }
+                else if (playerInput.currentControlScheme == "MOBILE")
+                {
+                    SwitchToMobile();
+                }
             }
-            else if (playerInput.currentControlScheme == "CONSOLE")
-            { 
-                SwitchToGamepad();
-            }
-            else if (playerInput.currentControlScheme == "MOBILE")
+            else
             {
-                SwitchToMobile();
+                if (DBManager.instance.currentPlatform == "PC")
+                {
+                    SwitchToKeyboard();
+                }
+                else if (DBManager.instance.currentPlatform == "CONSOLE")
+                {
+                    SwitchToGamepad();
+                }
+                else if (DBManager.instance.currentPlatform == "MOBILE")
+                {
+                    SwitchToMobile();
+                }
             }
+
         }
 
         void Switch()
         {
+            if (isFirstKey == false)
+            {
+                return;
+            }
+            
             if (playerInput.currentControlScheme == "PC" && DBManager.instance.currentPlatform != "PC")
             {
                 SwitchToKeyboard();
