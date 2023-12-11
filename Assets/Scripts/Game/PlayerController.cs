@@ -195,6 +195,9 @@ public class PlayerController : MonoBehaviour
     {
         int evaluation = verdict.KeyDown(out Obstacle obstacle);
 
+        playerParticle.AttackParticle();
+        animator.SetTrigger("Attack");
+        
         if (obstacle == null || evaluation == -1 || obstacle.wasInteracted || (GameManager.instance.isCountDown && !GameManager.instance.isStart))
         {
             return;
@@ -238,10 +241,10 @@ public class PlayerController : MonoBehaviour
             {
                 var longNote = obstacle.transform.GetChild(0).GetChild(0).gameObject;
                 verdict.DequeueUsedCollider(longNote.gameObject);
+                Destroy(longNote.transform.parent.gameObject);
                 animator.SetTrigger("Attack");
                 playerParticle.AttackParticle();
-                Destroy(longNote.transform.parent.gameObject);
-                //audioManager.PlayAudio("Attack");
+                audioManager.PlayAudio("Attack");
                 
                 if(Application.platform == RuntimePlatform.Android || Application.platform == RuntimePlatform.IPhonePlayer) 
                 {
@@ -268,10 +271,11 @@ public class PlayerController : MonoBehaviour
     {
         obstacle.wasInteracted = true;
         GameManager.instance.ShowVerdict(evaluation, obstacle);
-        animator.SetTrigger("Attack");
+        
         verdict.DequeueUsedCollider(obstacle);
-        playerParticle.AttackParticle();
-        //audioManager.PlayAudio("Attack");
+        //animator.SetTrigger("Attack");
+        //playerParticle.AttackParticle();
+        audioManager.PlayAudio("Attack");
         
         if(Application.platform == RuntimePlatform.Android || Application.platform == RuntimePlatform.IPhonePlayer) 
         {

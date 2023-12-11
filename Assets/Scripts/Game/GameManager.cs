@@ -147,6 +147,9 @@ public class GameManager : MonoBehaviour
     [Title("Combo 텍스트")] 
     public Text comboText;
     [FoldoutGroup("결과 창")] 
+    [Title("Score 텍스트")] 
+    public Text scoreText;
+    [FoldoutGroup("결과 창")] 
     [Title("Press 텍스트")] 
     public Text pressText;    
     [FoldoutGroup("결과 창")] 
@@ -557,6 +560,7 @@ public class GameManager : MonoBehaviour
         goodText.text = goodCount.ToString();
         missText.text = missCount.ToString();
         comboText.text = maxCombo.ToString();
+        scoreText.text = score.ToString();
         DBManager.instance.stageArray[currentChapter].stage[currentStage].score = score;
         DBManager.instance.stageArray[currentChapter].stage[currentStage].perfect = perfectCount;
         DBManager.instance.stageArray[currentChapter].stage[currentStage].great = greatCount;
