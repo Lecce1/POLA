@@ -73,11 +73,6 @@ public class Verdict : MonoBehaviour
         obstacle.wasInteracted = true;
         DequeueUsedCollider(obstacle);
     }
-
-    public void KeyUpOnLongInteract()
-    {
-        isLongInteract = false;
-    }
     
     int GetVerdict(GameObject target, Obstacle targetInfo)
     {

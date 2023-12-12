@@ -286,7 +286,9 @@ public class GameManager : MonoBehaviour
         {
             currentComboText.color = new Color(1, 1, 1, 0);
         }
-        
+
+        currentComboText.GetComponent<Animation>().Stop();
+        currentComboText.GetComponent<Animation>().Play();
         currentComboText.text = currentCombo.ToString();
         verdictImage.sprite = verdictImageList[idx];
         GameObject verdictPrefab = Instantiate(this.verdictPrefab, topPanel.transform, true);

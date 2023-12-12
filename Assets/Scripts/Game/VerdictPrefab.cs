@@ -10,6 +10,7 @@ public class VerdictPrefab : MonoBehaviour
     void Start()
     {
         Invoke("Destroy", 0.5f);
+        GetComponent<Animation>().Play();
     }
     
     void Update()

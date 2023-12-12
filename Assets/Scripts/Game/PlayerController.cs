@@ -151,13 +151,13 @@ public class PlayerController : MonoBehaviour
         {
             return;
         }
-
+        
         if (keyUpCheckObstacle != null && keyUpCheckObstacle.transform.childCount != 0)
         {
             Hurt(keyUpCheckObstacle, true);
         }
         
-        verdict.KeyUpOnLongInteract();
+        verdict.isLongInteract = false;
         keyUpCheckObstacle = null;
     }
 
@@ -234,6 +234,7 @@ public class PlayerController : MonoBehaviour
     {
         bool isFirst = true;
         keyUpCheckObstacle = obstacle;
+        StartCoroutine(CameraManager.instance.ZoomInOnLongInteract());
 
         while (verdict.isLongInteract)
         {
@@ -242,6 +243,7 @@ public class PlayerController : MonoBehaviour
                 var longNote = obstacle.transform.GetChild(0).GetChild(0).gameObject;
                 verdict.DequeueUsedCollider(longNote.gameObject);
                 Destroy(longNote.transform.parent.gameObject);
+                
                 animator.SetTrigger("Attack");
                 playerParticle.AttackParticle();
                 playerParticle.DestroyPartice();

@@ -12,6 +12,7 @@ GameObject:
   - component: {fileID: 6075990994788416254}
   - component: {fileID: 8174604869535861830}
   - component: {fileID: 6651722854992034720}
+  - component: {fileID: 5709823046224763149}
   m_Layer: 0
   m_Name: Verdict
   m_TagString: Untagged
@@ -89,3 +90,19 @@ MonoBehaviour:
   m_FillOrigin: 0
   m_UseSpriteMesh: 0
   m_PixelsPerUnitMultiplier: 1
+--- !u!111 &5709823046224763149
+Animation:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 6950265177964033198}
+  m_Enabled: 1
+  serializedVersion: 3
+  m_Animation: {fileID: 7400000, guid: 97bf7968b8bac8940bb6c88c2c405e74, type: 2}
+  m_Animations:
+  - {fileID: 7400000, guid: 97bf7968b8bac8940bb6c88c2c405e74, type: 2}
+  m_WrapMode: 0
+  m_PlayAutomatically: 1
+  m_AnimatePhysics: 0
+  m_CullingType: 0
