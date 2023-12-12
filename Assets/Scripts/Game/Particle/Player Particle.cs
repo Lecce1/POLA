@@ -11,6 +11,9 @@ public class PlayerParticle : MonoBehaviour
     [FoldoutGroup("파티클")]
     public GameObject attack;
     
+    [FoldoutGroup("파티클")]
+    public GameObject destoyObstacle;
+    
     [FoldoutGroup("플레이어")]
     [Title("파티클 폴더")]
     public GameObject particleFolder;
@@ -21,8 +24,16 @@ public class PlayerParticle : MonoBehaviour
     {
         GameObject temp = Instantiate(effect);
         temp.transform.parent = particleFolder.transform;
-        temp.transform.position = particleFolder.transform.position + transform.up * 1.9f + transform.forward * 1.5f;
-
+        if (effect == attack)
+        {
+            temp.transform.position = particleFolder.transform.position + transform.up * 1.9f + transform.forward * 1.5f;    
+        }
+        else if (effect = destoyObstacle)
+        {
+            temp.transform.position = particleFolder.transform.position + transform.up * 1.25f + transform.forward * 2f;    
+        }
+        
+        
         if (!temp.GetComponent<ParticleSystem>().isPlaying)
         {
             temp.GetComponent<ParticleSystem>().Play();
@@ -72,5 +83,10 @@ public class PlayerParticle : MonoBehaviour
     public void AttackParticle()
     {
         Play(attack);
+    }
+
+    public void DestroyPartice()
+    {
+        Play(destoyObstacle);
     }
 }

@@ -244,6 +244,7 @@ public class PlayerController : MonoBehaviour
                 Destroy(longNote.transform.parent.gameObject);
                 animator.SetTrigger("Attack");
                 playerParticle.AttackParticle();
+                playerParticle.DestroyPartice();
                 audioManager.PlayAudio("Attack");
                 
                 if(Application.platform == RuntimePlatform.Android || Application.platform == RuntimePlatform.IPhonePlayer) 
@@ -276,6 +277,7 @@ public class PlayerController : MonoBehaviour
         //animator.SetTrigger("Attack");
         //playerParticle.AttackParticle();
         audioManager.PlayAudio("Attack");
+        playerParticle.DestroyPartice();
         
         if(Application.platform == RuntimePlatform.Android || Application.platform == RuntimePlatform.IPhonePlayer) 
         {

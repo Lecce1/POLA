@@ -460,22 +460,25 @@ public class GameManager : MonoBehaviour
         countDownPanel.gameObject.SetActive(true);
         audioManager.audio.Pause();
         countDownPanel.transform.GetChild(0).GetComponent<Text>().text = "READY";
-
+        audioManager.PlayAudio("Ready");
+        
         for (int i = 0; i < 2; i++)
         {
             yield return waitForBeat;
         }
         
-        int j = 3;
+        // int j = 3;
+        //
+        // while (j > 0)
+        // {
+        //     countDownPanel.transform.GetChild(0).GetComponent<Text>().text = j.ToString();
+        //     j--;
+        //     yield return waitForBeat;
+        // }
         
-        while (j > 0)
-        {
-            countDownPanel.transform.GetChild(0).GetComponent<Text>().text = j.ToString();
-            j--;
-            yield return waitForBeat;
-        }
-
         countDownPanel.transform.GetChild(0).GetComponent<Text>().text = "GO!!";
+        audioManager.PlayAudio("Go");
+        yield return waitForBeat;
         audioManager.audio.Play();
         isCountDown = false;
         playerController.GetComponent<Animator>().SetBool("isReady", isCountDown);

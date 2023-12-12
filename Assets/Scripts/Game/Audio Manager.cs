@@ -43,6 +43,12 @@ public class AudioManager : MonoBehaviour
     [Title("UI 버튼")]
     public AudioClip uiButtonClip;
     [FoldoutGroup("오디오 클립")]
+    [Title("시작 - 레디")]
+    public AudioClip readyClip;
+    [FoldoutGroup("오디오 클립")]
+    [Title("시작 - 고")]
+    public AudioClip goClip;
+    [FoldoutGroup("오디오 클립")]
     [Title("결과 - 성공")]
     public AudioClip successClip;
     [FoldoutGroup("오디오 클립")]
@@ -107,6 +113,14 @@ public class AudioManager : MonoBehaviour
                 attackAudio.PlayOneShot(attackClip);
                 break;
             
+            case "Ready":
+                sfxAudio.PlayOneShot(readyClip);
+                break;
+            
+            case "Go":
+                sfxAudio.PlayOneShot(goClip);
+                break;
+            
             case "Result":
                 if (playerController.isDead)
                 {
@@ -116,7 +130,6 @@ public class AudioManager : MonoBehaviour
                 {
                     resultAudio.PlayOneShot(successClip);
                 }
-
                 break;
             
             case "Button":
@@ -129,6 +142,7 @@ public class AudioManager : MonoBehaviour
                     uiAudio.PlayOneShot(uiButtonClip);
                 }
                 break;
+                
         }
     }
 
