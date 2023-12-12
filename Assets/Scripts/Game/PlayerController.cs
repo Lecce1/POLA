@@ -23,7 +23,7 @@ public class PlayerController : MonoBehaviour
     public bool isDead;
     [FoldoutGroup("변수")] 
     [SerializeField]
-    private bool isLoaded = false;
+    private bool isLoaded;
     
     [FoldoutGroup("오브젝트")] 
     [SerializeField] 
@@ -31,8 +31,6 @@ public class PlayerController : MonoBehaviour
     
     [FoldoutGroup("일반")] 
     public Animator animator;
-    [FoldoutGroup("일반")] 
-    public PlayerTrails trails;
     [FoldoutGroup("일반")] 
     public Verdict verdict;
     [FoldoutGroup("일반")]
@@ -48,7 +46,13 @@ public class PlayerController : MonoBehaviour
     SkinnedMeshRenderer[] playerMaterialList;
 
     private InputAction.CallbackContext callback = new ();
-    
+    private Gamepad gamepad;
+
+    void Start()
+    {
+        gamepad = Gamepad.current;
+    }
+
     void FixedUpdate()
     {
         if (!isLoaded)
@@ -253,6 +257,10 @@ public class PlayerController : MonoBehaviour
                 {
                     VibrateMobile();
                 }
+                else if(DBManager.instance.currentPlatform == "CONSOLE")
+                {
+
+                }
                 
                 GameManager.instance.ShowVerdict(isFirst ? evaluation : 0, obstacle);
                 isFirst = false;
@@ -276,14 +284,16 @@ public class PlayerController : MonoBehaviour
         GameManager.instance.ShowVerdict(evaluation, obstacle);
         
         verdict.DequeueUsedCollider(obstacle);
-        //animator.SetTrigger("Attack");
-        //playerParticle.AttackParticle();
         audioManager.PlayAudio("Attack");
         playerParticle.DestroyPartice();
         
         if(Application.platform == RuntimePlatform.Android || Application.platform == RuntimePlatform.IPhonePlayer) 
         {
             VibrateMobile();
+        }
+        else if(DBManager.instance.currentPlatform == "CONSOLE")
+        {
+            Gamepad.current.SetMotorSpeeds(0.123f, 0.234f);
         }
         
         Destroy(obstacle.gameObject);
