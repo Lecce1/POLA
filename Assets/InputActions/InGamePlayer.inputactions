@@ -47,6 +47,17 @@
                 },
                 {
                     "name": "",
+                    "id": "7e8abfa5-2a5b-407f-b2a4-8f48c3bf482b",
+                    "path": "<Gamepad>/leftTrigger",
+                    "interactions": "",
+                    "processors": "",
+                    "groups": "CONSOLE",
+                    "action": "Up",
+                    "isComposite": false,
+                    "isPartOfComposite": false
+                },
+                {
+                    "name": "",
                     "id": "c91376c2-5836-4129-ac6b-47d5550a8b4f",
                     "path": "<Keyboard>/f",
                     "interactions": "",
@@ -60,6 +71,17 @@
                     "name": "",
                     "id": "ce122243-ea26-4882-b6ad-068b6cddc774",
                     "path": "<XInputController>/rightShoulder",
+                    "interactions": "",
+                    "processors": "",
+                    "groups": "CONSOLE",
+                    "action": "Down",
+                    "isComposite": false,
+                    "isPartOfComposite": false
+                },
+                {
+                    "name": "",
+                    "id": "1365084e-56ef-4207-a479-c993ae334bf7",
+                    "path": "<Gamepad>/rightTrigger",
                     "interactions": "",
                     "processors": "",
                     "groups": "CONSOLE",
