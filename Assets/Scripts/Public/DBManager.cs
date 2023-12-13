@@ -2,6 +2,7 @@ using System;
 using System.IO;
 using Sirenix.OdinInspector;
 using UnityEngine;
+using UnityEngine.InputSystem;
 using UnityEngine.Localization.Settings;
 
 [Serializable]
@@ -259,6 +260,11 @@ public class DBManager : MonoBehaviour
 
     void OnApplicationQuit()
     {
+        if (currentPlatform == "CONSOLE")
+        {
+            Gamepad.current.SetMotorSpeeds(0, 0);
+        }
+
         JsonSave();
     }
 }

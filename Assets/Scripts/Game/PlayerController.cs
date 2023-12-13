@@ -155,6 +155,11 @@ public class PlayerController : MonoBehaviour
         {
             return;
         }
+
+        if (DBManager.instance.currentPlatform == "CONSOLE")
+        {
+            Invoke("VibrateStop", 0.2f);
+        }
         
         if (keyUpCheckObstacle != null && keyUpCheckObstacle.transform.childCount != 0)
         {
@@ -167,7 +172,7 @@ public class PlayerController : MonoBehaviour
 
     public void OnUp()
     {
-        if (!isLoaded)
+        if (!isLoaded || GameManager.instance.isPanelOpen)
         {
             return;
         }
@@ -182,7 +187,7 @@ public class PlayerController : MonoBehaviour
     
     public void OnDown()
     {
-        if (!isLoaded)
+        if (!isLoaded || GameManager.instance.isPanelOpen)
         {
             return;
         }
@@ -253,13 +258,16 @@ public class PlayerController : MonoBehaviour
                 playerParticle.DestroyPartice();
                 audioManager.PlayAudio("Attack");
                 
-                if(Application.platform == RuntimePlatform.Android || Application.platform == RuntimePlatform.IPhonePlayer) 
+                if (DBManager.instance.isVibration)
                 {
-                    VibrateMobile();
-                }
-                else if(DBManager.instance.currentPlatform == "CONSOLE")
-                {
-
+                    if(Application.platform == RuntimePlatform.Android || Application.platform == RuntimePlatform.IPhonePlayer) 
+                    {
+                        VibrateStop();
+                    }
+                    else if(DBManager.instance.currentPlatform == "CONSOLE")
+                    {
+                        Gamepad.current.SetMotorSpeeds(0.15f, 0.15f);
+                    }
                 }
                 
                 GameManager.instance.ShowVerdict(isFirst ? evaluation : 0, obstacle);
@@ -286,31 +294,42 @@ public class PlayerController : MonoBehaviour
         verdict.DequeueUsedCollider(obstacle);
         audioManager.PlayAudio("Attack");
         playerParticle.DestroyPartice();
-        
-        if(Application.platform == RuntimePlatform.Android || Application.platform == RuntimePlatform.IPhonePlayer) 
+
+        if (DBManager.instance.isVibration)
         {
-            VibrateMobile();
-        }
-        else if(DBManager.instance.currentPlatform == "CONSOLE")
-        {
-            Gamepad.current.SetMotorSpeeds(0.123f, 0.234f);
+            if(Application.platform == RuntimePlatform.Android || Application.platform == RuntimePlatform.IPhonePlayer) 
+            {
+                VibrateStop();
+            }
+            else if(DBManager.instance.currentPlatform == "CONSOLE")
+            {
+                Gamepad.current.SetMotorSpeeds(0.15f, 0.15f);
+
+                if (IsInvoking("VibrateStop"))
+                {
+                    CancelInvoke("VibrateStop");
+                }
+            
+                Invoke("VibrateStop", 0.25f);
+            }
         }
         
         Destroy(obstacle.gameObject);
     }
-
-    void VibrateMobile()
+    
+    void VibrateStop()
     {
-        if (DBManager.instance.isVibration)
+        if(Application.platform == RuntimePlatform.Android)
         {
-            if(Application.platform == RuntimePlatform.Android)
-            {
                 
-            }
-            else if(Application.platform == RuntimePlatform.IPhonePlayer)
-            {
+        }
+        else if(Application.platform == RuntimePlatform.IPhonePlayer)
+        {
                 
-            }
+        }
+        else if (DBManager.instance.currentPlatform == "CONSOLE")
+        {
+            Gamepad.current.SetMotorSpeeds(0, 0);
         }
     }
 
@@ -361,6 +380,7 @@ public class PlayerController : MonoBehaviour
             if (!GameManager.instance.isPanelOpen)
             {
                 GameManager.instance.Button("Esc");
+                VibrateStop();
             }
             else
             {
