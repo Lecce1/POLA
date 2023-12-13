@@ -256,8 +256,12 @@ public class PlayerController : MonoBehaviour
                 animator.SetTrigger("Attack");
                 playerParticle.AttackParticle();
                 playerParticle.DestroyPartice();
-                audioManager.PlayAudio("Attack");
-                
+
+                if (DBManager.instance.isKeysound)
+                {
+                    audioManager.PlayAudio("Attack");
+                }
+
                 if (DBManager.instance.isVibration)
                 {
                     if(Application.platform == RuntimePlatform.Android || Application.platform == RuntimePlatform.IPhonePlayer) 
@@ -292,7 +296,12 @@ public class PlayerController : MonoBehaviour
         GameManager.instance.ShowVerdict(evaluation, obstacle);
         
         verdict.DequeueUsedCollider(obstacle);
-        audioManager.PlayAudio("Attack");
+
+        if (DBManager.instance.isKeysound)
+        {
+            audioManager.PlayAudio("Attack");
+        }
+
         playerParticle.DestroyPartice();
 
         if (DBManager.instance.isVibration)
@@ -341,7 +350,7 @@ public class PlayerController : MonoBehaviour
             {
                 switch (EventSystem.current.currentSelectedGameObject.name)
                 {
-                    case "Toggle":
+                    case "Vibration_Toggle":
                         if (EventSystem.current.currentSelectedGameObject.GetComponent<Toggle>().isOn)
                         {
                             EventSystem.current.currentSelectedGameObject.GetComponent<Toggle>().isOn = false;
@@ -351,6 +360,19 @@ public class PlayerController : MonoBehaviour
                         {
                             EventSystem.current.currentSelectedGameObject.GetComponent<Toggle>().isOn = true;
                             DBManager.instance.isVibration = true;
+                        }
+                        break;
+                    
+                    case "Keysound_Toggle":
+                        if (EventSystem.current.currentSelectedGameObject.GetComponent<Toggle>().isOn)
+                        {
+                            EventSystem.current.currentSelectedGameObject.GetComponent<Toggle>().isOn = false;
+                            DBManager.instance.isKeysound = false;
+                        }
+                        else if (!EventSystem.current.currentSelectedGameObject.GetComponent<Toggle>().isOn)
+                        {
+                            EventSystem.current.currentSelectedGameObject.GetComponent<Toggle>().isOn = true;
+                            DBManager.instance.isKeysound = true;
                         }
                         break;
                 }

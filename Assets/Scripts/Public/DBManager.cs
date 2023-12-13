@@ -14,6 +14,7 @@ class LocalData
     public float sfxValue;
     public int supportLanguageNum = 2;
     public bool isVibration;
+    public bool isKeysound;
     public int language;
     public bool isTutorial;
     public int latency;
@@ -101,6 +102,9 @@ public class DBManager : MonoBehaviour
     [FoldoutGroup("설정 DB")]
     [Title("설정 진동 여부")]
     public bool isVibration = true;
+    [FoldoutGroup("설정 DB")]
+    [Title("설정 키음 여부")]
+    public bool isKeysound = true;
     [FoldoutGroup("설정 DB")] 
     [Title("언어")] 
     public int language;
@@ -166,6 +170,7 @@ public class DBManager : MonoBehaviour
                 musicValue = localData.musicValue;
                 sfxValue = localData.sfxValue;
                 isVibration = localData.isVibration;
+                isKeysound = localData.isKeysound;
                 language = localData.language;
                 supportLanguageNum = localData.supportLanguageNum;
                 latency = localData.latency;
@@ -201,6 +206,7 @@ public class DBManager : MonoBehaviour
         localData.musicValue = musicValue;
         localData.sfxValue = sfxValue;
         localData.isVibration = isVibration;
+        localData.isKeysound = isKeysound;
         localData.language = language;
         localData.supportLanguageNum = supportLanguageNum;
         localData.latency = latency;
@@ -239,6 +245,7 @@ public class DBManager : MonoBehaviour
         musicValue = 1;
         sfxValue = 1;
         isVibration = true;
+        isKeysound = true;
         latency = 0;
         SystemLanguage systemLanguage = Application.systemLanguage;
  

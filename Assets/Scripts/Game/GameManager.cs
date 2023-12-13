@@ -65,6 +65,9 @@ public class GameManager : MonoBehaviour
     [FoldoutGroup("설정 패널")] 
     [Title("진동 Toggle")]
     public Toggle set_Vibration_Toggle;
+    [FoldoutGroup("설정 패널")] 
+    [Title("키음 Toggle")]
+    public Toggle set_Keysound_Toggle;
     
     [FoldoutGroup("매니저")] 
     [Title("플랫폼")] 
@@ -331,6 +334,7 @@ public class GameManager : MonoBehaviour
                     set_Music_Slider.value = DBManager.instance.musicValue;
                     set_Sfx_Slider.value = DBManager.instance.sfxValue;
                     set_Vibration_Toggle.isOn = DBManager.instance.isVibration;
+                    set_Keysound_Toggle.isOn = DBManager.instance.isKeysound;
                     set.SetActive(true);
                     backStack.Push(set);
                 }
@@ -376,6 +380,17 @@ public class GameManager : MonoBehaviour
                 else if (!set_Vibration_Toggle.isOn)
                 {
                     DBManager.instance.isVibration = false;
+                }
+                break;
+            
+            case "Keysound":
+                if (set_Keysound_Toggle.isOn)
+                {
+                    DBManager.instance.isKeysound = true;
+                }
+                else if (!set_Keysound_Toggle.isOn)
+                {
+                    DBManager.instance.isKeysound = false;
                 }
                 break;
         }
@@ -468,16 +483,7 @@ public class GameManager : MonoBehaviour
         {
             yield return waitForBeat;
         }
-        
-        // int j = 3;
-        //
-        // while (j > 0)
-        // {
-        //     countDownPanel.transform.GetChild(0).GetComponent<Text>().text = j.ToString();
-        //     j--;
-        //     yield return waitForBeat;
-        // }
-        
+
         countDownPanel.transform.GetChild(0).GetComponent<Text>().text = "GO!!";
         audioManager.PlayAudio("Go");
         yield return waitForBeat;

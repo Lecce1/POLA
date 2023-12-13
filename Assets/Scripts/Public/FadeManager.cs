@@ -56,7 +56,7 @@ public class FadeManager : MonoBehaviour
         
         while (fade.color.a < 1)
         {
-            count += Time.deltaTime;
+            count += Time.deltaTime * 1.1f;
             fade.color = new Color(0, 0, 0, count);
             yield return null;
         }
@@ -83,7 +83,7 @@ public class FadeManager : MonoBehaviour
         
         while (fade.color.a > 0)
         {
-            count -= Time.deltaTime;
+            count -= Time.deltaTime * 1.1f;
             fade.color = new Color(0, 0, 0, count);
             yield return null;
         }
