@@ -222,7 +222,7 @@ public class DBManager : MonoBehaviour
             
             for (int j = 0; j < localData.stageArray[i].stage.Length; j++)
             {
-                if (localData.stageArray[i] != null)
+                if (localData.stageArray[i] != null && localData.stageArray[i].stage[j].score < stageArray[i].stage[j].score)
                 {
                     localData.stageArray[i].stage[j].starCount = stageArray[i].stage[j].starCount;
                     localData.stageArray[i].stage[j].score = stageArray[i].stage[j].score;

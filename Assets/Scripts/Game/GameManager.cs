@@ -135,6 +135,9 @@ public class GameManager : MonoBehaviour
     [Title("패널")] 
     public GameObject resultPanel;
     [FoldoutGroup("결과 창")] 
+    [Title("랭크 인덱스")] 
+    public int rankIdx;
+    [FoldoutGroup("결과 창")] 
     [Title("Perfect 텍스트")] 
     public Text perfectText;
     [FoldoutGroup("결과 창")] 
@@ -243,6 +246,53 @@ public class GameManager : MonoBehaviour
         VerdictBar.lastObject = Verdict.GetObstacle(VerdictBar.lastObject).beatLength != 0 ? VerdictBar.lastObject.transform.GetChild(VerdictBar.lastObject.transform.childCount - 1).gameObject : VerdictBar.lastObject.transform.gameObject;
         playerController.Init();
         StartCoroutine(CountDown());
+    }
+    
+    IEnumerator CountDown()
+    {
+        if (stopBtn.activeSelf)
+        {
+            stopBtn.SetActive(false);
+        }
+        
+        if (audioManager.audio.clip.loadState == AudioDataLoadState.Unloaded)
+        {
+            audioManager.audio.clip.LoadAudioData();
+        }
+
+        isCountDown = true;
+
+        if (!isStart)
+        {
+            playerController.GetComponent<Animator>().SetBool("isReady", isCountDown);
+        }
+        
+        countDownPanel.gameObject.SetActive(true);
+        audioManager.audio.Pause();
+        countDownPanel.transform.GetChild(0).GetComponent<Text>().text = "READY";
+        audioManager.PlayAudio("Ready");
+        
+        for (int i = 0; i < 2; i++)
+        {
+            yield return waitForBeat;
+        }
+
+        countDownPanel.transform.GetChild(0).GetComponent<Text>().text = "GO!!";
+        audioManager.PlayAudio("Go");
+        yield return waitForBeat;
+        audioManager.audio.Play();
+        isCountDown = false;
+        playerController.GetComponent<Animator>().SetBool("isReady", isCountDown);
+        StartCoroutine(audioManager.Progress());
+        isKeyOnPause = false;
+        isStart = false;
+        
+        if (DBManager.instance.currentPlatform == "MOBILE" && !stopBtn.activeSelf)
+        {
+            stopBtn.SetActive(true);
+        }
+        
+        Invoke(nameof(CountDownDisable), 0.5f);
     }
 
     public void ShowVerdict(int idx, Obstacle obstacle)
@@ -454,53 +504,6 @@ public class GameManager : MonoBehaviour
             isPanelOpen = false;
         }
     }
-    
-    IEnumerator CountDown()
-    {
-        if (stopBtn.activeSelf)
-        {
-            stopBtn.SetActive(false);
-        }
-        
-        if (audioManager.audio.clip.loadState == AudioDataLoadState.Unloaded)
-        {
-            audioManager.audio.clip.LoadAudioData();
-        }
-
-        isCountDown = true;
-
-        if (!isStart)
-        {
-            playerController.GetComponent<Animator>().SetBool("isReady", isCountDown);
-        }
-        
-        countDownPanel.gameObject.SetActive(true);
-        audioManager.audio.Pause();
-        countDownPanel.transform.GetChild(0).GetComponent<Text>().text = "READY";
-        audioManager.PlayAudio("Ready");
-        
-        for (int i = 0; i < 2; i++)
-        {
-            yield return waitForBeat;
-        }
-
-        countDownPanel.transform.GetChild(0).GetComponent<Text>().text = "GO!!";
-        audioManager.PlayAudio("Go");
-        yield return waitForBeat;
-        audioManager.audio.Play();
-        isCountDown = false;
-        playerController.GetComponent<Animator>().SetBool("isReady", isCountDown);
-        StartCoroutine(audioManager.Progress());
-        isKeyOnPause = false;
-        isStart = false;
-        
-        if (!stopBtn.activeSelf)
-        {
-            stopBtn.SetActive(true);
-        }
-        
-        Invoke(nameof(CountDownDisable), 0.5f);
-    }
 
     void CountDownDisable()
     {
@@ -517,8 +520,6 @@ public class GameManager : MonoBehaviour
         isCountDown = true;
         playerController.GetComponent<Animator>().SetBool("isReady", isCountDown);
         rankScore = (int)((perfectCount + greatCount * 0.3f + goodCount * 0.1f) / noteCount * 100);
-        Debug.Log(rankScore);
-        int rankIdx;
 
         if (maxCombo == 0)
         {
@@ -566,19 +567,23 @@ public class GameManager : MonoBehaviour
             }
         }
         
-        DBManager.instance.stageArray[currentChapter].stage[currentStage].starCount = rankIdx;
         perfectText.text = perfectCount.ToString();
         greatText.text = greatCount.ToString();
         goodText.text = goodCount.ToString();
         missText.text = missCount.ToString();
         comboText.text = maxCombo.ToString();
         scoreText.text = score.ToString();
-        DBManager.instance.stageArray[currentChapter].stage[currentStage].score = score;
-        DBManager.instance.stageArray[currentChapter].stage[currentStage].perfect = perfectCount;
-        DBManager.instance.stageArray[currentChapter].stage[currentStage].great = greatCount;
-        DBManager.instance.stageArray[currentChapter].stage[currentStage].good = goodCount;
-        DBManager.instance.stageArray[currentChapter].stage[currentStage].miss = missCount;
 
+        if (score > DBManager.instance.stageArray[currentChapter].stage[currentStage].score)
+        {
+            DBManager.instance.stageArray[currentChapter].stage[currentStage].starCount = rankIdx;
+            DBManager.instance.stageArray[currentChapter].stage[currentStage].score = score;
+            DBManager.instance.stageArray[currentChapter].stage[currentStage].perfect = perfectCount;
+            DBManager.instance.stageArray[currentChapter].stage[currentStage].great = greatCount;
+            DBManager.instance.stageArray[currentChapter].stage[currentStage].good = goodCount;
+            DBManager.instance.stageArray[currentChapter].stage[currentStage].miss = missCount;
+        }
+        
         if (mainPanel.activeSelf)
         {
             mainPanel.SetActive(false);

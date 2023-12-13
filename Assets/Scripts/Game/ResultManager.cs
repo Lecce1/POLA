@@ -11,8 +11,7 @@ public class ResultManager : MonoBehaviour
     
     public void Check1()
     {
-        if (DBManager.instance.stageArray[DBManager.instance.currentChapter].stage[DBManager.instance.currentStage - 1]
-                .starCount >= 1)
+        if (GameManager.instance.rankIdx >= 1)
         {
             starImage[0].sprite = starOn;
         }
@@ -24,8 +23,7 @@ public class ResultManager : MonoBehaviour
     
     public void Check2()
     {
-        if (DBManager.instance.stageArray[DBManager.instance.currentChapter].stage[DBManager.instance.currentStage - 1]
-                .starCount >= 2)
+        if (GameManager.instance.rankIdx >= 2)
         {
             starImage[1].sprite = starOn;
         }
@@ -37,8 +35,7 @@ public class ResultManager : MonoBehaviour
     
     public void Check3()
     {
-        if (DBManager.instance.stageArray[DBManager.instance.currentChapter].stage[DBManager.instance.currentStage - 1]
-                .starCount >= 3)
+        if (GameManager.instance.rankIdx >= 3)
         {
             starImage[2].sprite = starOn;
         }
@@ -50,8 +47,7 @@ public class ResultManager : MonoBehaviour
     
     public void Check4()
     {
-        if (DBManager.instance.stageArray[DBManager.instance.currentChapter].stage[DBManager.instance.currentStage - 1]
-                .starCount >= 4)
+        if (GameManager.instance.rankIdx >= 4)
         {
             starImage[3].sprite = starOn;
         }
