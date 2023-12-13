@@ -49,6 +49,28 @@
                 },
                 {
                     "name": "",
+                    "id": "349e03da-7eac-467c-a10d-80d6e977a592",
+                    "path": "<Gamepad>/leftTrigger",
+                    "interactions": "",
+                    "processors": "",
+                    "groups": "CONSOLE",
+                    "action": "Down",
+                    "isComposite": false,
+                    "isPartOfComposite": false
+                },
+                {
+                    "name": "",
+                    "id": "2185c868-22fe-4a2a-a6e5-8606a04858ed",
+                    "path": "<Gamepad>/rightTrigger",
+                    "interactions": "",
+                    "processors": "",
+                    "groups": "CONSOLE",
+                    "action": "Down",
+                    "isComposite": false,
+                    "isPartOfComposite": false
+                },
+                {
+                    "name": "",
                     "id": "01d88451-e56f-4b16-ad6c-a613f72272d2",
                     "path": "<Keyboard>/j",
                     "interactions": "",

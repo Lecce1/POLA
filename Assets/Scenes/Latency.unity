@@ -1298,8 +1298,8 @@ MonoBehaviour:
   onValueChanged:
     m_PersistentCalls:
       m_Calls:
-      - m_Target: {fileID: 0}
-        m_TargetAssemblyTypeName: GameManager, Assembly-CSharp
+      - m_Target: {fileID: 2127331157}
+        m_TargetAssemblyTypeName: LatencyManager, Assembly-CSharp
         m_MethodName: Set_Change
         m_Mode: 5
         m_Arguments:
@@ -3551,6 +3551,7 @@ MonoBehaviour:
   musicValue: 1
   sfxValue: 1
   isVibration: 1
+  isKeysound: 1
   language: 1
   supportLanguageNum: 1
   jsonPath: 
@@ -8046,8 +8047,8 @@ MonoBehaviour:
   m_OnValueChanged:
     m_PersistentCalls:
       m_Calls:
-      - m_Target: {fileID: 0}
-        m_TargetAssemblyTypeName: GameManager, Assembly-CSharp
+      - m_Target: {fileID: 2127331157}
+        m_TargetAssemblyTypeName: LatencyManager, Assembly-CSharp
         m_MethodName: Set_Change
         m_Mode: 5
         m_Arguments:
@@ -13696,8 +13697,8 @@ MonoBehaviour:
   m_OnValueChanged:
     m_PersistentCalls:
       m_Calls:
-      - m_Target: {fileID: 0}
-        m_TargetAssemblyTypeName: GameManager, Assembly-CSharp
+      - m_Target: {fileID: 2127331157}
+        m_TargetAssemblyTypeName: LatencyManager, Assembly-CSharp
         m_MethodName: Set_Change
         m_Mode: 5
         m_Arguments:
