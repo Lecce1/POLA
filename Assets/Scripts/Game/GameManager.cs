@@ -240,7 +240,7 @@ public class GameManager : MonoBehaviour
         }
 
         VerdictBar.lastObject = noteFolder.transform.GetChild(noteFolder.transform.childCount - 1).gameObject;
-        VerdictBar.lastObject = Verdict.GetObstacle(VerdictBar.lastObject).beatLength != 0 ? VerdictBar.lastObject.transform.GetChild(VerdictBar.lastObject.transform.childCount - 1).GetChild(0).gameObject : VerdictBar.lastObject.transform.gameObject;
+        VerdictBar.lastObject = Verdict.GetObstacle(VerdictBar.lastObject).beatLength != 0 ? VerdictBar.lastObject.transform.GetChild(VerdictBar.lastObject.transform.childCount - 1).gameObject : VerdictBar.lastObject.transform.gameObject;
         playerController.Init();
         StartCoroutine(CountDown());
     }
@@ -517,6 +517,7 @@ public class GameManager : MonoBehaviour
         isCountDown = true;
         playerController.GetComponent<Animator>().SetBool("isReady", isCountDown);
         rankScore = (int)((perfectCount + greatCount * 0.3f + goodCount * 0.1f) / noteCount * 100);
+        Debug.Log(rankScore);
         int rankIdx;
 
         if (maxCombo == 0)

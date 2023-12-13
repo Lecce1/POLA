@@ -249,9 +249,9 @@ public class PlayerController : MonoBehaviour
         {
             if (obstacle.transform.childCount != 0)
             {
-                var longNote = obstacle.transform.GetChild(0).GetChild(0).gameObject;
+                var longNote = obstacle.transform.GetChild(0).gameObject;
                 verdict.DequeueUsedCollider(longNote.gameObject);
-                Destroy(longNote.transform.parent.gameObject);
+                Destroy(longNote.transform.gameObject);
                 
                 animator.SetTrigger("Attack");
                 playerParticle.AttackParticle();
@@ -277,7 +277,7 @@ public class PlayerController : MonoBehaviour
                 GameManager.instance.ShowVerdict(isFirst ? evaluation : 0, obstacle);
                 isFirst = false;
                 
-                while (obstacle.transform.childCount != 0 && !verdict.CheckNextObject(obstacle.transform.GetChild(0).GetChild(0).gameObject))
+                while (obstacle.transform.childCount != 0 && !verdict.CheckNextObject(obstacle.transform.GetChild(0).gameObject))
                 {
                     yield return null;
                 }

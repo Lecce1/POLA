@@ -38,7 +38,7 @@ RenderSettings:
   m_ReflectionIntensity: 1
   m_CustomReflection: {fileID: 0}
   m_Sun: {fileID: 0}
-  m_IndirectSpecularColor: {r: 0.4439372, g: 0.49315345, b: 0.5721989, a: 1}
+  m_IndirectSpecularColor: {r: 0.44657898, g: 0.4964133, b: 0.5748178, a: 1}
   m_UseRadianceAmbientProbe: 0
 --- !u!157 &3
 LightmapSettings:
@@ -979,7 +979,7 @@ MonoBehaviour:
     m_Font: {fileID: 12800000, guid: 7745f9d1dde104138880c4e3731b15a0, type: 2}
     m_FontSize: 0
     m_FontStyle: 0
-    m_BestFit: 1
+    m_BestFit: 0
     m_MinSize: 0
     m_MaxSize: 35
     m_Alignment: 4
@@ -8502,7 +8502,7 @@ MonoBehaviour:
     m_Font: {fileID: 12800000, guid: 7745f9d1dde104138880c4e3731b15a0, type: 2}
     m_FontSize: 0
     m_FontStyle: 0
-    m_BestFit: 1
+    m_BestFit: 0
     m_MinSize: 0
     m_MaxSize: 35
     m_Alignment: 4
@@ -9016,14 +9016,14 @@ MonoBehaviour:
     bpm: 78000000720000008000000050000000450000005d000000
   - stage:
     - {fileID: 4892326555056767705, guid: bd8ebb7add3cf454f9ef1216a6758990, type: 3}
-    - {fileID: 2611982043839672301, guid: b6283fc63fd9e3047b703c537664b81c, type: 3}
+    - {fileID: 8802413738585420178, guid: 96e9b1a474ed50c48b1bff93fb1ddb59, type: 3}
     - {fileID: 0}
     - {fileID: 0}
     - {fileID: 0}
     - {fileID: 0}
     audio:
     - {fileID: 8300000, guid: 2337b3e9f12c4407085e99d5d9dc6596, type: 3}
-    - {fileID: 8300000, guid: 2337b3e9f12c4407085e99d5d9dc6596, type: 3}
+    - {fileID: 8300000, guid: e2acaddab7df0cc4ab9d0a6bf52ee7cd, type: 3}
     - {fileID: 0}
     - {fileID: 0}
     - {fileID: 0}
@@ -9042,7 +9042,7 @@ MonoBehaviour:
     - {fileID: 0}
     - {fileID: 0}
     - {fileID: 0}
-    bpm: 4d0000004d000000
+    bpm: 4d00000050000000
   - stage:
     - {fileID: 0}
     - {fileID: 0}
@@ -10430,7 +10430,7 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0, y: 0}
   m_AnchorMax: {x: 0, y: 0}
-  m_AnchoredPosition: {x: 0, y: 0}
+  m_AnchoredPosition: {x: 429.07715, y: 0}
   m_SizeDelta: {x: 0, y: 0}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!114 &397725063
@@ -12484,7 +12484,7 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0, y: 0}
   m_AnchorMax: {x: 0, y: 0}
-  m_AnchoredPosition: {x: 0, y: 0}
+  m_AnchoredPosition: {x: 39.86816, y: 0}
   m_SizeDelta: {x: 0, y: 0}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!114 &587312614
@@ -12920,7 +12920,7 @@ MonoBehaviour:
     m_Font: {fileID: 12800000, guid: 7745f9d1dde104138880c4e3731b15a0, type: 2}
     m_FontSize: 0
     m_FontStyle: 0
-    m_BestFit: 1
+    m_BestFit: 0
     m_MinSize: 0
     m_MaxSize: 35
     m_Alignment: 4
@@ -13407,7 +13407,7 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0, y: 0}
   m_AnchorMax: {x: 0, y: 0}
-  m_AnchoredPosition: {x: 0, y: 0}
+  m_AnchoredPosition: {x: 19.93408, y: 0}
   m_SizeDelta: {x: 0, y: 0}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!114 &634375870
@@ -13721,7 +13721,7 @@ MonoBehaviour:
     m_Font: {fileID: 12800000, guid: 7745f9d1dde104138880c4e3731b15a0, type: 2}
     m_FontSize: 0
     m_FontStyle: 0
-    m_BestFit: 1
+    m_BestFit: 0
     m_MinSize: 0
     m_MaxSize: 35
     m_Alignment: 4
@@ -14651,7 +14651,7 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0, y: 0}
   m_AnchorMax: {x: 0, y: 0}
-  m_AnchoredPosition: {x: 0, y: 0}
+  m_AnchoredPosition: {x: 126.78972, y: 0}
   m_SizeDelta: {x: 0, y: 0}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!114 &729095505
@@ -15288,7 +15288,7 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0, y: 0}
   m_AnchorMax: {x: 0, y: 0}
-  m_AnchoredPosition: {x: 0, y: 0}
+  m_AnchoredPosition: {x: 233.06525, y: 0}
   m_SizeDelta: {x: 0, y: 0}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!114 &767548096
@@ -23177,7 +23177,7 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0, y: 0}
   m_AnchorMax: {x: 0, y: 0}
-  m_AnchoredPosition: {x: 0, y: 0}
+  m_AnchoredPosition: {x: 86.921555, y: 0}
   m_SizeDelta: {x: 0, y: 0}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!114 &1031910512
@@ -23618,7 +23618,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   walkDust: {fileID: 265437863}
   attack: {fileID: 49768725713060378, guid: 185dfcaad71d21345a83f1d3d8c69299, type: 3}
-  destoyObstacle: {fileID: 2680697033467694725, guid: a1de129d5fe3f7c428d726f14968d1dc, type: 3}
+  destoyObstacle: {fileID: 8661255552402726007, guid: a37f55f1b766c7847b0d8d2b3ee8055e, type: 3}
   particleFolder: {fileID: 573991445}
 --- !u!114 &1053840932
 MonoBehaviour:
@@ -27178,7 +27178,7 @@ MonoBehaviour:
     m_Font: {fileID: 12800000, guid: 7745f9d1dde104138880c4e3731b15a0, type: 2}
     m_FontSize: 0
     m_FontStyle: 0
-    m_BestFit: 1
+    m_BestFit: 0
     m_MinSize: 0
     m_MaxSize: 35
     m_Alignment: 4
@@ -27653,7 +27653,7 @@ MonoBehaviour:
     m_Font: {fileID: 12800000, guid: 7745f9d1dde104138880c4e3731b15a0, type: 2}
     m_FontSize: 0
     m_FontStyle: 0
-    m_BestFit: 1
+    m_BestFit: 0
     m_MinSize: 0
     m_MaxSize: 35
     m_Alignment: 4
@@ -33842,7 +33842,7 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0, y: 0}
   m_AnchorMax: {x: 0, y: 0}
-  m_AnchoredPosition: {x: 0, y: 0}
+  m_AnchoredPosition: {x: 56.987473, y: 0}
   m_SizeDelta: {x: 0, y: 0}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!114 &1523931692
@@ -33967,7 +33967,7 @@ MonoBehaviour:
     m_Font: {fileID: 12800000, guid: 7745f9d1dde104138880c4e3731b15a0, type: 2}
     m_FontSize: 0
     m_FontStyle: 0
-    m_BestFit: 1
+    m_BestFit: 0
     m_MinSize: 0
     m_MaxSize: 35
     m_Alignment: 4
@@ -34067,7 +34067,7 @@ MonoBehaviour:
     m_Font: {fileID: 12800000, guid: 7745f9d1dde104138880c4e3731b15a0, type: 2}
     m_FontSize: 0
     m_FontStyle: 0
-    m_BestFit: 1
+    m_BestFit: 0
     m_MinSize: 0
     m_MaxSize: 35
     m_Alignment: 4
@@ -35441,7 +35441,7 @@ MonoBehaviour:
     m_Font: {fileID: 12800000, guid: 7745f9d1dde104138880c4e3731b15a0, type: 2}
     m_FontSize: 0
     m_FontStyle: 0
-    m_BestFit: 1
+    m_BestFit: 0
     m_MinSize: 0
     m_MaxSize: 35
     m_Alignment: 4
@@ -36356,8 +36356,39 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   normalNotes:
-  - {fileID: 100010, guid: 494893b7ceb208e4292aba99e6a514ff, type: 3}
-  - {fileID: 3462105356793660747, guid: 2e4d6905cbf169d449d429e0c2ac6e07, type: 3}
+  - {fileID: 5101016849609972262, guid: 457b675e34a662c42a50b645ead903e5, type: 3}
+  - {fileID: 5424188051856079153, guid: 4ec26dda6292c6b409881bdeacaec853, type: 3}
+  - {fileID: 2173147700913082479, guid: 033d2c8f43e632d479d4451f33123dc6, type: 3}
+  - {fileID: 6599230623227551840, guid: 84de4d2f0c07b2e44b5a18b5567c8d4b, type: 3}
+  - {fileID: 3910755597162451943, guid: 0df17ffed0d6f53438596667b14516fe, type: 3}
+  - {fileID: 4126731599121290304, guid: 07eda0bb3885e594fad0ecadb647c2bc, type: 3}
+  - {fileID: 2081198242724246554, guid: 0b1876fe9d5def6489a1305666cce031, type: 3}
+  - {fileID: 3264357563782671142, guid: 437137ca00cf2d641a91239e2875c085, type: 3}
+  - {fileID: 6077066961319249209, guid: f61882ecf82da344a962e7a1ee6c8446, type: 3}
+  - {fileID: 9136738662311338128, guid: c1a0c36d29058c6418840a4b81f0ea2f, type: 3}
+  - {fileID: 314294669625684448, guid: c1380f154f09e7c45b8300f437a4d517, type: 3}
+  - {fileID: 5193771157346419407, guid: 88038275db9d87d4aa1ee447461df20d, type: 3}
+  - {fileID: 8319439999942321184, guid: 0c0266d49e4652944b39e15fd474272f, type: 3}
+  - {fileID: 1411486004327391831, guid: e26ad53cc5299f44c9e208f7d54603fc, type: 3}
+  - {fileID: 1047389000854662363, guid: dc9efe354e3777a40827a697476ac8f0, type: 3}
+  - {fileID: 2027487708178209319, guid: 947524a3e8aea314783f499e931e6377, type: 3}
+  longNoteOffset:
+  - {x: 0, y: 0, z: 0}
+  - {x: -0.15, y: 0, z: 0}
+  - {x: -0.08, y: 0.05, z: 0}
+  - {x: -0.18, y: 0, z: 0}
+  - {x: 0.15, y: 0.16, z: 0}
+  - {x: 0, y: 0.16, z: 0}
+  - {x: 0, y: 0.2, z: 0}
+  - {x: -0.14, y: 0.16, z: 0}
+  - {x: 0.13, y: 0.2, z: 0}
+  - {x: 0, y: 0.2, z: 0}
+  - {x: 0.02, y: 0.16, z: 0}
+  - {x: -0.14, y: 0.15, z: 0}
+  - {x: 0.22, y: 0.34, z: 0}
+  - {x: 0.06, y: 0.36, z: 0}
+  - {x: 0.05, y: 0.3, z: 0}
+  - {x: -0.05, y: 0.28, z: 0}
   moveNotes:
   - {fileID: 3462105356793660747, guid: 374e5f11571088348a18f0f9ff304c42, type: 3}
   Walls:
@@ -36366,24 +36397,749 @@ MonoBehaviour:
   indexObject: {fileID: 5915041538683237611, guid: c502e6c673784ac4a8468df7698d4d7d, type: 3}
   notes:
   - type: 0
+    isUp: 0
+    noteTime: 0.02
+    length: 0
+    objectType: 0
+  - type: 0
+    isUp: 0
+    noteTime: 2.02
+    length: 0
+    objectType: 0
+  - type: 0
+    isUp: 0
+    noteTime: 4.02
+    length: 0
+    objectType: 0
+  - type: 0
+    isUp: 0
+    noteTime: 6.02
+    length: 0
+    objectType: 0
+  - type: 0
     isUp: 1
-    noteTime: 0
+    noteTime: 8.02
+    length: 0
+    objectType: 0
+  - type: 0
+    isUp: 1
+    noteTime: 8.27
+    length: 0
+    objectType: 0
+  - type: 0
+    isUp: 0
+    noteTime: 8.52
+    length: 0
+    objectType: 0
+  - type: 0
+    isUp: 0
+    noteTime: 8.77
+    length: 0
+    objectType: 0
+  - type: 0
+    isUp: 1
+    noteTime: 9.02
+    length: 0
+    objectType: 0
+  - type: 0
+    isUp: 1
+    noteTime: 9.52
+    length: 0
+    objectType: 0
+  - type: 0
+    isUp: 0
+    noteTime: 9.77
+    length: 0
+    objectType: 0
+  - type: 0
+    isUp: 1
+    noteTime: 10.02
+    length: 0
+    objectType: 0
+  - type: 0
+    isUp: 0
+    noteTime: 10.52
+    length: 0
+    objectType: 0
+  - type: 0
+    isUp: 1
+    noteTime: 11.02
+    length: 0
+    objectType: 0
+  - type: 0
+    isUp: 1
+    noteTime: 12.27
+    length: 0
+    objectType: 0
+  - type: 0
+    isUp: 0
+    noteTime: 12.52
+    length: 0
+    objectType: 0
+  - type: 0
+    isUp: 0
+    noteTime: 12.77
+    length: 0
+    objectType: 0
+  - type: 0
+    isUp: 1
+    noteTime: 13.02
+    length: 0
+    objectType: 0
+  - type: 0
+    isUp: 1
+    noteTime: 13.52
+    length: 0
+    objectType: 0
+  - type: 0
+    isUp: 0
+    noteTime: 13.77
+    length: 0
+    objectType: 0
+  - type: 0
+    isUp: 1
+    noteTime: 14.02
+    length: 0
+    objectType: 0
+  - type: 0
+    isUp: 0
+    noteTime: 14.52
+    length: 0
+    objectType: 0
+  - type: 0
+    isUp: 1
+    noteTime: 15.02
+    length: 0
+    objectType: 0
+  - type: 0
+    isUp: 1
+    noteTime: 16.27
+    length: 0
+    objectType: 0
+  - type: 0
+    isUp: 0
+    noteTime: 16.52
+    length: 0
+    objectType: 0
+  - type: 0
+    isUp: 0
+    noteTime: 16.77
+    length: 0
+    objectType: 0
+  - type: 0
+    isUp: 1
+    noteTime: 17.02
+    length: 0
+    objectType: 0
+  - type: 0
+    isUp: 1
+    noteTime: 17.52
+    length: 0
+    objectType: 0
+  - type: 0
+    isUp: 0
+    noteTime: 17.77
+    length: 0
+    objectType: 0
+  - type: 0
+    isUp: 1
+    noteTime: 18.02
+    length: 0
+    objectType: 0
+  - type: 0
+    isUp: 0
+    noteTime: 18.52
+    length: 0
+    objectType: 0
+  - type: 0
+    isUp: 1
+    noteTime: 19.02
+    length: 0
+    objectType: 0
+  - type: 0
+    isUp: 1
+    noteTime: 20.27
+    length: 0
+    objectType: 0
+  - type: 0
+    isUp: 0
+    noteTime: 20.52
+    length: 0
+    objectType: 0
+  - type: 0
+    isUp: 0
+    noteTime: 20.77
+    length: 0
+    objectType: 0
+  - type: 0
+    isUp: 1
+    noteTime: 21.02
+    length: 0
+    objectType: 0
+  - type: 0
+    isUp: 1
+    noteTime: 21.52
+    length: 0
+    objectType: 0
+  - type: 0
+    isUp: 0
+    noteTime: 21.77
+    length: 0
+    objectType: 0
+  - type: 0
+    isUp: 1
+    noteTime: 22.02
+    length: 0
+    objectType: 0
+  - type: 0
+    isUp: 0
+    noteTime: 22.52
+    length: 0
+    objectType: 0
+  - type: 0
+    isUp: 1
+    noteTime: 23.02
+    length: 0
+    objectType: 0
+  - type: 0
+    isUp: 0
+    noteTime: 24.02
+    length: 0
+    objectType: 0
+  - type: 0
+    isUp: 0
+    noteTime: 24.52
+    length: 0
+    objectType: 0
+  - type: 0
+    isUp: 0
+    noteTime: 25.02
+    length: 0
+    objectType: 0
+  - type: 0
+    isUp: 1
+    noteTime: 26.02
+    length: 0
+    objectType: 0
+  - type: 0
+    isUp: 1
+    noteTime: 26.52
+    length: 0
+    objectType: 0
+  - type: 0
+    isUp: 0
+    noteTime: 27.02
+    length: 0
+    objectType: 0
+  - type: 0
+    isUp: 1
+    noteTime: 27.27
+    length: 0
+    objectType: 0
+  - type: 0
+    isUp: 0
+    noteTime: 27.52
+    length: 0
+    objectType: 0
+  - type: 0
+    isUp: 1
+    noteTime: 27.77
+    length: 2.25
+    objectType: 1
+  - type: 0
+    isUp: 1
+    noteTime: 32.27
+    length: 0
+    objectType: 0
+  - type: 0
+    isUp: 0
+    noteTime: 32.52
+    length: 0
+    objectType: 0
+  - type: 0
+    isUp: 1
+    noteTime: 32.77
+    length: 0
+    objectType: 0
+  - type: 0
+    isUp: 0
+    noteTime: 33.02
     length: 0.5
     objectType: 1
   - type: 0
     isUp: 1
-    noteTime: 1
+    noteTime: 33.77
+    length: 0
+    objectType: 0
+  - type: 0
+    isUp: 1
+    noteTime: 34.02
+    length: 0
+    objectType: 0
+  - type: 0
+    isUp: 0
+    noteTime: 34.52
+    length: 0
+    objectType: 0
+  - type: 0
+    isUp: 1
+    noteTime: 35.02
+    length: 0
+    objectType: 0
+  - type: 0
+    isUp: 1
+    noteTime: 36.27
+    length: 0
+    objectType: 0
+  - type: 0
+    isUp: 0
+    noteTime: 36.52
+    length: 0
+    objectType: 0
+  - type: 0
+    isUp: 1
+    noteTime: 36.77
+    length: 0
+    objectType: 0
+  - type: 0
+    isUp: 0
+    noteTime: 37.02
     length: 0.5
     objectType: 1
   - type: 0
     isUp: 1
-    noteTime: 2
+    noteTime: 37.77
+    length: 0
+    objectType: 0
+  - type: 0
+    isUp: 1
+    noteTime: 38.02
+    length: 0
+    objectType: 0
+  - type: 0
+    isUp: 0
+    noteTime: 38.52
+    length: 0
+    objectType: 0
+  - type: 0
+    isUp: 1
+    noteTime: 39.02
+    length: 0
+    objectType: 0
+  - type: 0
+    isUp: 1
+    noteTime: 40.27
+    length: 0
+    objectType: 0
+  - type: 0
+    isUp: 0
+    noteTime: 40.52
+    length: 0
+    objectType: 0
+  - type: 0
+    isUp: 1
+    noteTime: 40.77
+    length: 0
+    objectType: 0
+  - type: 0
+    isUp: 0
+    noteTime: 41.02
     length: 0.5
     objectType: 1
   - type: 0
     isUp: 1
-    noteTime: 3
+    noteTime: 41.77
+    length: 0
+    objectType: 0
+  - type: 0
+    isUp: 1
+    noteTime: 42.02
+    length: 0
+    objectType: 0
+  - type: 0
+    isUp: 0
+    noteTime: 42.52
+    length: 0
+    objectType: 0
+  - type: 0
+    isUp: 1
+    noteTime: 43.02
+    length: 0
+    objectType: 0
+  - type: 0
+    isUp: 1
+    noteTime: 44.27
+    length: 0
+    objectType: 0
+  - type: 0
+    isUp: 0
+    noteTime: 44.52
+    length: 0
+    objectType: 0
+  - type: 0
+    isUp: 1
+    noteTime: 44.77
+    length: 0
+    objectType: 0
+  - type: 0
+    isUp: 0
+    noteTime: 45.02
     length: 0.5
+    objectType: 1
+  - type: 0
+    isUp: 1
+    noteTime: 45.77
+    length: 0
+    objectType: 0
+  - type: 0
+    isUp: 1
+    noteTime: 46.02
+    length: 0
+    objectType: 0
+  - type: 0
+    isUp: 0
+    noteTime: 46.52
+    length: 0
+    objectType: 0
+  - type: 0
+    isUp: 1
+    noteTime: 47.02
+    length: 0
+    objectType: 0
+  - type: 0
+    isUp: 1
+    noteTime: 48.02
+    length: 0
+    objectType: 0
+  - type: 0
+    isUp: 1
+    noteTime: 48.52
+    length: 0
+    objectType: 0
+  - type: 0
+    isUp: 1
+    noteTime: 49.02
+    length: 0
+    objectType: 0
+  - type: 0
+    isUp: 0
+    noteTime: 50.02
+    length: 0
+    objectType: 0
+  - type: 0
+    isUp: 0
+    noteTime: 50.52
+    length: 0
+    objectType: 0
+  - type: 0
+    isUp: 1
+    noteTime: 51.02
+    length: 0
+    objectType: 0
+  - type: 0
+    isUp: 0
+    noteTime: 51.27
+    length: 0
+    objectType: 0
+  - type: 0
+    isUp: 1
+    noteTime: 51.52
+    length: 0
+    objectType: 0
+  - type: 0
+    isUp: 0
+    noteTime: 51.77
+    length: 2.25
+    objectType: 1
+  - type: 0
+    isUp: 0
+    noteTime: 55.52
+    length: 0
+    objectType: 0
+  - type: 0
+    isUp: 1
+    noteTime: 55.77
+    length: 0
+    objectType: 0
+  - type: 0
+    isUp: 1
+    noteTime: 56.02
+    length: 0
+    objectType: 0
+  - type: 0
+    isUp: 0
+    noteTime: 56.52
+    length: 0
+    objectType: 0
+  - type: 0
+    isUp: 1
+    noteTime: 57.02
+    length: 0
+    objectType: 0
+  - type: 0
+    isUp: 1
+    noteTime: 57.52
+    length: 0
+    objectType: 0
+  - type: 0
+    isUp: 0
+    noteTime: 58.02
+    length: 0
+    objectType: 0
+  - type: 0
+    isUp: 0
+    noteTime: 58.77
+    length: 0
+    objectType: 0
+  - type: 0
+    isUp: 1
+    noteTime: 59.27
+    length: 0
+    objectType: 0
+  - type: 0
+    isUp: 0
+    noteTime: 59.52
+    length: 0
+    objectType: 0
+  - type: 0
+    isUp: 0
+    noteTime: 59.77
+    length: 0
+    objectType: 0
+  - type: 0
+    isUp: 1
+    noteTime: 60.02
+    length: 0
+    objectType: 0
+  - type: 0
+    isUp: 0
+    noteTime: 60.52
+    length: 0
+    objectType: 0
+  - type: 0
+    isUp: 1
+    noteTime: 61.02
+    length: 0
+    objectType: 0
+  - type: 0
+    isUp: 0
+    noteTime: 61.52
+    length: 0
+    objectType: 0
+  - type: 0
+    isUp: 1
+    noteTime: 62.02
+    length: 0
+    objectType: 0
+  - type: 0
+    isUp: 1
+    noteTime: 62.77
+    length: 0
+    objectType: 0
+  - type: 0
+    isUp: 1
+    noteTime: 63.27
+    length: 0
+    objectType: 0
+  - type: 0
+    isUp: 0
+    noteTime: 63.52
+    length: 0
+    objectType: 0
+  - type: 0
+    isUp: 0
+    noteTime: 63.77
+    length: 0
+    objectType: 0
+  - type: 0
+    isUp: 1
+    noteTime: 64.02
+    length: 0
+    objectType: 0
+  - type: 0
+    isUp: 0
+    noteTime: 64.52
+    length: 0
+    objectType: 0
+  - type: 0
+    isUp: 0
+    noteTime: 65.02
+    length: 0
+    objectType: 0
+  - type: 0
+    isUp: 1
+    noteTime: 65.52
+    length: 0
+    objectType: 0
+  - type: 0
+    isUp: 1
+    noteTime: 66.02
+    length: 0
+    objectType: 0
+  - type: 0
+    isUp: 1
+    noteTime: 66.77
+    length: 0
+    objectType: 0
+  - type: 0
+    isUp: 0
+    noteTime: 67.27
+    length: 0
+    objectType: 0
+  - type: 0
+    isUp: 1
+    noteTime: 67.52
+    length: 0
+    objectType: 0
+  - type: 0
+    isUp: 0
+    noteTime: 67.77
+    length: 0
+    objectType: 0
+  - type: 0
+    isUp: 1
+    noteTime: 68.02
+    length: 2
+    objectType: 1
+  - type: 0
+    isUp: 1
+    noteTime: 71.02
+    length: 0
+    objectType: 0
+  - type: 0
+    isUp: 0
+    noteTime: 71.52
+    length: 0
+    objectType: 0
+  - type: 0
+    isUp: 1
+    noteTime: 71.77
+    length: 0
+    objectType: 0
+  - type: 0
+    isUp: 0
+    noteTime: 72.02
+    length: 0
+    objectType: 0
+  - type: 0
+    isUp: 1
+    noteTime: 72.52
+    length: 0
+    objectType: 0
+  - type: 0
+    isUp: 1
+    noteTime: 73.02
+    length: 0
+    objectType: 0
+  - type: 0
+    isUp: 1
+    noteTime: 73.52
+    length: 0
+    objectType: 0
+  - type: 0
+    isUp: 1
+    noteTime: 74.02
+    length: 0
+    objectType: 0
+  - type: 0
+    isUp: 0
+    noteTime: 74.77
+    length: 0
+    objectType: 0
+  - type: 0
+    isUp: 1
+    noteTime: 75.27
+    length: 0
+    objectType: 0
+  - type: 0
+    isUp: 0
+    noteTime: 75.52
+    length: 0
+    objectType: 0
+  - type: 0
+    isUp: 0
+    noteTime: 75.77
+    length: 0
+    objectType: 0
+  - type: 0
+    isUp: 1
+    noteTime: 76.02
+    length: 0
+    objectType: 0
+  - type: 0
+    isUp: 1
+    noteTime: 76.52
+    length: 0
+    objectType: 0
+  - type: 0
+    isUp: 1
+    noteTime: 77.02
+    length: 0
+    objectType: 0
+  - type: 0
+    isUp: 1
+    noteTime: 77.52
+    length: 0
+    objectType: 0
+  - type: 0
+    isUp: 1
+    noteTime: 78.02
+    length: 0
+    objectType: 0
+  - type: 0
+    isUp: 0
+    noteTime: 78.77
+    length: 0
+    objectType: 0
+  - type: 0
+    isUp: 1
+    noteTime: 79.27
+    length: 0
+    objectType: 0
+  - type: 0
+    isUp: 0
+    noteTime: 79.52
+    length: 0
+    objectType: 0
+  - type: 0
+    isUp: 0
+    noteTime: 79.77
+    length: 0
+    objectType: 0
+  - type: 0
+    isUp: 1
+    noteTime: 80.02
+    length: 0
+    objectType: 0
+  - type: 0
+    isUp: 1
+    noteTime: 80.52
+    length: 0
+    objectType: 0
+  - type: 0
+    isUp: 1
+    noteTime: 81.02
+    length: 0
+    objectType: 0
+  - type: 0
+    isUp: 1
+    noteTime: 81.52
+    length: 0
+    objectType: 0
+  - type: 0
+    isUp: 1
+    noteTime: 82.02
+    length: 0
+    objectType: 0
+  - type: 0
+    isUp: 0
+    noteTime: 83.02
+    length: 0
+    objectType: 0
+  - type: 0
+    isUp: 1
+    noteTime: 84.02
+    length: 2
     objectType: 1
   ground:
     serializedVersion: 2
@@ -52617,7 +53373,7 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0, y: 0}
   m_AnchorMax: {x: 0, y: 0}
-  m_AnchoredPosition: {x: 0, y: 0}
+  m_AnchoredPosition: {x: 97.600525, y: 0}
   m_SizeDelta: {x: 0, y: 0}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!114 &1928064482
@@ -53848,7 +54604,7 @@ MonoBehaviour:
     m_Font: {fileID: 12800000, guid: 7745f9d1dde104138880c4e3731b15a0, type: 2}
     m_FontSize: 0
     m_FontStyle: 0
-    m_BestFit: 1
+    m_BestFit: 0
     m_MinSize: 0
     m_MaxSize: 35
     m_Alignment: 4
@@ -53967,8 +54723,8 @@ MonoBehaviour:
   nextScene: 
   currentGround: 0
   currentRouteIdx: 2
-  currentChapter: 1
-  currentStage: 4
+  currentChapter: 2
+  currentStage: 2
   currentPlatform: 
   isTutorial: 1
   isCinemachine: 1
@@ -59660,7 +60416,7 @@ MonoBehaviour:
     m_Font: {fileID: 12800000, guid: 7745f9d1dde104138880c4e3731b15a0, type: 2}
     m_FontSize: 0
     m_FontStyle: 0
-    m_BestFit: 1
+    m_BestFit: 0
     m_MinSize: 0
     m_MaxSize: 35
     m_Alignment: 4
@@ -59791,7 +60547,7 @@ MonoBehaviour:
     m_Font: {fileID: 12800000, guid: 7745f9d1dde104138880c4e3731b15a0, type: 2}
     m_FontSize: 0
     m_FontStyle: 0
-    m_BestFit: 1
+    m_BestFit: 0
     m_MinSize: 0
     m_MaxSize: 35
     m_Alignment: 4
@@ -60211,7 +60967,7 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0, y: 0}
   m_AnchorMax: {x: 0, y: 0}
-  m_AnchoredPosition: {x: 0, y: 0}
+  m_AnchoredPosition: {x: 18.510218, y: 0}
   m_SizeDelta: {x: 0, y: 0}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!114 &2108431739

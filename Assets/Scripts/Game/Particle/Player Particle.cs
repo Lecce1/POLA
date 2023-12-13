@@ -28,7 +28,7 @@ public class PlayerParticle : MonoBehaviour
         {
             temp.transform.position = particleFolder.transform.position + transform.up * 1.9f + transform.forward * 1.5f;    
         }
-        else if (effect = destoyObstacle)
+        else if (effect == destoyObstacle)
         {
             temp.transform.position = particleFolder.transform.position + transform.up * 1.25f + transform.forward * 2f;    
         }

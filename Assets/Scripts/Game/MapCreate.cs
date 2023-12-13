@@ -4,6 +4,7 @@ using System.IO;
 using Sirenix.OdinInspector;
 using UnityEngine;
 using UnityEngine.Serialization;
+using Random = UnityEngine.Random;
 
 
 [RequireComponent(typeof(NoteMake))]
@@ -24,6 +25,11 @@ public class MapCreator : MonoBehaviour
     [FoldoutGroup("오브젝트")] 
     [SerializeField]
     private GameObject[] normalNotes;
+
+    [FoldoutGroup("오브젝트")] 
+    [Title("롱노트 오프셋")]
+    [SerializeField]
+    private Vector3[] longNoteOffset;
     [FoldoutGroup("오브젝트")] 
     [SerializeField]
     private GameObject[] moveNotes;
@@ -55,6 +61,7 @@ public class MapCreator : MonoBehaviour
     [Title("토글 온오프")]
     private bool toggleIndex;
     
+    
     [Button("생성", ButtonSizes.Large)]
     [HorizontalGroup("Split1", 0.895f)]
     public void Create()
@@ -82,6 +89,7 @@ public class MapCreator : MonoBehaviour
                 pos = new Vector3(n.noteTime * 8f + defaultOffset, -5f, 0);
                 Physics.Raycast(new Ray(pos, Vector3.up), out hit, 10, ground);
                 pos = hit.point;
+                pos.y -= 1;
                 q = Quaternion.AngleAxis(180, progressDirection);
             }
             else
@@ -89,6 +97,7 @@ public class MapCreator : MonoBehaviour
                 pos = new Vector3(n.noteTime * 8f + defaultOffset, 5f, 0);
                 Physics.Raycast(new Ray(pos, Vector3.down), out hit, 10, ground);
                 pos = hit.point;
+                pos.y += 1;
             }
 
             GameObject obj = null;
@@ -97,7 +106,8 @@ public class MapCreator : MonoBehaviour
             switch (n.type)
             {
                 case NoteType.NormalNote:
-                    obj = n.length == 0 ? Instantiate(normalNotes[n.objectType]) : new GameObject();
+                    int rand = Random.Range(0, normalNotes.Length);
+                    obj = n.length == 0 ? Instantiate(normalNotes[rand]) : new GameObject();
                     obj.transform.position = pos;
 
                     if (!n.isUp)
@@ -111,6 +121,14 @@ public class MapCreator : MonoBehaviour
                     
                     if (n.length == 0)
                     {
+                        if (n.isUp)
+                        {
+                            obj.transform.rotation *= Quaternion.Euler(0, 0, 45);
+                        }
+                        else
+                        {
+                            obj.transform.rotation *= Quaternion.Euler(0, 0, -45);
+                        }
                         obstacle.perfectScore = 100;
                         obstacle.greatScore = 50;
                     }
@@ -122,8 +140,19 @@ public class MapCreator : MonoBehaviour
                         for (int j = 0; j < n.length * 8; j++)
                         {
                             Vector3 forwardVector = q * Vector3.right;
-                            GameObject inObj = Instantiate(normalNotes[n.objectType], pos + forwardVector * j, q);
+                            GameObject inObj;
+                            if (!n.isUp)
+                            {
+                                var reversedOffset = longNoteOffset[j % normalNotes.Length];
+                                reversedOffset.y *= -1;
+                                inObj = Instantiate(normalNotes[j % normalNotes.Length], pos + forwardVector * j + reversedOffset, q);
+                            }
+                            else
+                            {
+                                inObj = Instantiate(normalNotes[j % normalNotes.Length], pos + forwardVector * j + longNoteOffset[j % normalNotes.Length], q);
+                            }
                             inObj.transform.parent = obj.transform;
+                            inObj.transform.rotation *= Quaternion.Euler(-180, -90, -90);
                         }
                     }
                     
